@@ -20,4 +20,4 @@ original code more OO and make it express its intent.
 
 ### Chain falling from table
 
-- The origiinal [chain falling from table](https://www.youtube.com/watch?v=vXp1hW_t-bo) video
+- The original [chain falling from table](https://www.youtube.com/watch?v=vXp1hW_t-bo) video
