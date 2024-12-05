@@ -8,6 +8,8 @@ original code more OO and make it express its intent.
 
 ### Water Sprinkler
 
+![Sprinkler](https://rhettallain.com/wp-content/uploads/2019/11/sprinkler1.gif)
+
 - See [this code in action](https://trinket.io/glowscript/3ec01917098d) on [https://trinket.io](trinket)
 - The original [water sprinkler](https://rhettallain.com/2019/11/12/modeling-a-spinning-sprinkler/) blog post
 
