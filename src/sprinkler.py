@@ -40,7 +40,7 @@ class Sprinkler:
   def __init__(self, length = 0.1):
     self._length = length
 
-    self._tint = 0
+    self._clock_ticks = 0
     self._theta = 0 # Rotation angle of sprinkler
 
     self._stick = box(pos=origin, size=vector(length, .05 * length, .05 * length), color=color.yellow)
@@ -54,14 +54,14 @@ class Sprinkler:
     self._stick.rotate(angle=angle, axis=vector(0, 0, 1), origin=origin)
 
   def shed_water(self, dt):
-    if self._tint >= 1/f:
+    if self._clock_ticks >= 1/f:
       self._let_out_new_droplet()
-      self._tint = 0
+      self._clock_ticks = 0
 
     self._water_beams[0].update(dt, 3 * self._length)
     self._water_beams[1].update(dt, 3 * self._length)
 
-    self._tint += dt
+    self._clock_ticks += dt
 
   def _let_out_new_droplet(self):
     radius = 0.04 * self._length
