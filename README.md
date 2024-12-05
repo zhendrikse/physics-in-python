@@ -8,11 +8,12 @@ original code more OO and make it express its intent.
 
 ### Water Sprinkler
 
-- See [this code in action](https://trinket.io/glowscript/d7600bd4705a) on [https://trinket.io](trinket)
+- See [this code in action](https://trinket.io/glowscript/3ec01917098d) on [https://trinket.io](trinket)
 - The original [water sprinkler](https://rhettallain.com/2019/11/12/modeling-a-spinning-sprinkler/) blog post
 
 ### Elastic collision
 
+- See [this code in action](https://trinket.io/glowscript/d7600bd4705a) on [https://trinket.io](trinket)
 - The original [elastic collision](https://www.youtube.com/watch?v=g_p-5YfUSnw&t=11s) video
 
 ### Chain falling from table
