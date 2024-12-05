@@ -20,6 +20,7 @@ original code more OO and make it express its intent.
 
 ### Chain falling from table
 
+- See [this code in action](https://trinket.io/glowscript/c3e556761469) on [https://trinket.io](trinket)
 - The original [chain falling from table](https://www.youtube.com/watch?v=vXp1hW_t-bo) video
 
 ### Ball falling on spring
@@ -29,5 +30,5 @@ original code more OO and make it express its intent.
 
 ### Earth-moon orbit
 
-- See [this code in action](https://trinket.io/glowscript/3ec01917098d) on [https://trinket.io](trinket)
+- See [this code in action](https://trinket.io/glowscript/f09c6fe1de9f) on [https://trinket.io](trinket)
 - The original [earth-moon system]([https://www.youtube.com/watch?v=ExxDuRTIe0E](https://www.youtube.com/watch?v=2BisyQhNBFM)) video
