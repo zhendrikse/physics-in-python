@@ -5,9 +5,9 @@
 
 from vpython import vector, sphere, color, rate, cos, sin, box, pi, cross
 
-omega = 2 * pi / 2 # CHANGE THIS - rotation rate of sprinkler
-a = 1              # CHANGE THIS to -1 to make balls shoot IN 
-f = 15             # CHANGE THIS - water ball production rate per second
+omega = 2 * pi / 2   # CHANGE THIS - rotation rate of sprinkler
+shoot_outward = True # CHANGE THIS to false to make balls shoot IN 
+frequency = 15       # CHANGE THIS - water ball production rate per second
 water_velocity = .3
 
 dt = 0.01
@@ -54,7 +54,7 @@ class Sprinkler:
     self._stick.rotate(angle=angle, axis=vector(0, 0, 1), origin=origin)
 
   def shed_water(self, dt):
-    if self._clock_ticks >= 1/f:
+    if self._clock_ticks >= 1 / frequency:
       self._let_out_new_droplet()
       self._clock_ticks = 0
 
@@ -73,6 +73,7 @@ class Sprinkler:
     return [r, -r]
 
   def _endpoint_velocities(self):
+    a = 1 if shoot_outward else -1
     position_1 = self._endpoint_positions()[0]
     position_2 = self._endpoint_positions()[1]
     velocity_1 = -1 * cross(position_1, vector(0, 0, omega)) + a * water_velocity * position_1.hat
