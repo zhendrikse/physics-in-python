@@ -20,6 +20,7 @@ original code more OO and make it express its intent.
 
 ### Chain falling from table
 
+- See [this code in action](https://trinket.io/glowscript/c3e556761469) on [https://trinket.io](trinket)
 - The original [chain falling from table](https://www.youtube.com/watch?v=vXp1hW_t-bo) video
 
 ### Ball falling on spring
