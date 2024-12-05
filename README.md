@@ -29,5 +29,5 @@ original code more OO and make it express its intent.
 
 ### Earth-moon orbit
 
-- See [this code in action](https://trinket.io/glowscript/3ec01917098d) on [https://trinket.io](trinket)
+- See [this code in action](https://trinket.io/glowscript/f09c6fe1de9f) on [https://trinket.io](trinket)
 - The original [earth-moon system]([https://www.youtube.com/watch?v=ExxDuRTIe0E](https://www.youtube.com/watch?v=2BisyQhNBFM)) video
