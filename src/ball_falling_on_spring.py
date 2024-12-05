@@ -9,7 +9,7 @@ from vpython import vector, sphere, color, rate, mag, norm, helix, box, graph, g
 g1 = graph(title="Ball on spring",xtitle="Time",ytitle="Height",width=400, height=250)
 curve = gcurve(color=color.blue)
 
-g = vector(0, -9.8, 0)
+grav_force = vector(0, -9.8, 0)
 zero_force = vector(0, 0, 0)
 
 class Spring:
@@ -18,17 +18,19 @@ class Spring:
     self._spring_constant = 1000
     self._spring = helix(pos=floor_position, axis=vector(0, self._spring_size, 0), radius=0.07, thickness=0.04)
 
+  def _spring_is_compressed(self, distance_to_floor):
+    return mag(distance_to_floor) < self._spring_size
+
   def update(self, distance_to_floor):
-      if mag(distance_to_floor) < self._spring_size:
+      if self._spring_is_compressed(distance_to_floor):
         self._spring.axis = distance_to_floor
 
   def force(self, distance_to_floor):
-      r = distance_to_floor
-      if mag(r) >= self._spring_size:
-        return zero_force
+      if self._spring_is_compressed(distance_to_floor):
+        compression = self._spring_size - mag(distance_to_floor)
+        return self._spring_constant * compression * norm(distance_to_floor)
 
-      return self._spring_constant * (self._spring_size - mag(r)) * norm(r)
-
+      return zero_force
 
 class Ball:
   def __init__(self):
@@ -37,10 +39,10 @@ class Ball:
     self._ball.v = vector(0, 0, 0)
 
   def update(self, spring_force, dt):
-      force = self._mass * g + spring_force
+      force = self._mass * grav_force + spring_force
       acceleration = force / self._mass
       self._ball.v += acceleration * dt
-      self._ball.pos += self._ball.v*dt
+      self._ball.pos += self._ball.v * dt
 
   def position(self):
     return self._ball.pos
