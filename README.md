@@ -21,3 +21,8 @@ original code more OO and make it express its intent.
 ### Chain falling from table
 
 - The original [chain falling from table](https://www.youtube.com/watch?v=vXp1hW_t-bo) video
+
+### Ball falling on spring
+
+- See [this code in action](https://trinket.io/glowscript/92ffad53ab4d) on [https://trinket.io](trinket)
+- The original [ball falling on spring](https://www.youtube.com/watch?v=ExxDuRTIe0E) video
