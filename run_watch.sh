@@ -1,1 +1,1 @@
-PYTHONPATH=src poetry run ptw --runner "poetry run pytest"
+PYTHONPATH=src:test:. poetry run ptw --runner "poetry run pytest"
