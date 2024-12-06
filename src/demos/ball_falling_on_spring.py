@@ -9,7 +9,7 @@ from vpython import vector, rate, box, graph, gcurve, color
 from toolbox.ball import Ball
 from toolbox.spring import Spring 
 
-g1 = graph(title="Ball on spring",xtitle="Time",ytitle="Height",width=400, height=250)
+g1 = graph(title="Ball on spring", xtitle="Time", ytitle="Height", width=400, height=250)
 curve = gcurve(color=color.blue)
 
 floor = box(pos=vector(0, 0, 0), size=vector(2, 0.05, 1))
