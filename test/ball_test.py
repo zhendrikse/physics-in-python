@@ -39,7 +39,7 @@ class TestBall:
      ball_2 = BallTestDouble(position=vector(2 * ball_at_origin._ball.radius, 0.0, 0.0))
      assert_that(ball_at_origin.force_between(ball_2), equal_to(vector(0, 0, 0)))
 
-  def test_force_is_not_zero_between_non_colliding_balls(self, ball_at_origin):
+  def test_force_is_not_zero_between_colliding_balls(self, ball_at_origin):
      ball_2 = BallTestDouble(position=vector(2 * ball_at_origin._ball.radius -.001, 0.0, 0.0))
      assert_that(ball_at_origin.force_between(ball_2), is_not(vector(0, 0, 0)))
 
