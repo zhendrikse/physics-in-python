@@ -8,7 +8,6 @@ from vpython import vector, sphere, color, rate, mag, norm, box
 
 gravitational_force_vector = vector(0, -9.8, 0)
 
-
 class Chain:
     def __init__(self, amount_hanging_over_edge = 0.2):
         self._balls = []

@@ -5,7 +5,7 @@
 #
 
 from vpython import vector, color, rate
-from ball import Ball     
+from toolbox.ball import Ball     
 
 def main():
     sphere_A = Ball(0.1, vector(-.2, .02 ,0), vector(.2, 0 ,0), 0.05, color.yellow)

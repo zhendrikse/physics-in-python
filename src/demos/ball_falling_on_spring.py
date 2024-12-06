@@ -6,8 +6,8 @@
 
 from vpython import vector, rate, box, graph, gcurve, color
 
-from ball import Ball
-from spring import Spring 
+from toolbox.ball import Ball
+from toolbox.spring import Spring 
 
 g1 = graph(title="Ball on spring",xtitle="Time",ytitle="Height",width=400, height=250)
 curve = gcurve(color=color.blue)
@@ -26,4 +26,3 @@ def main():
 
 if __name__=="__main__":
     main()
-
