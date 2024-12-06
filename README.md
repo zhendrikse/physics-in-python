@@ -3,7 +3,7 @@
 Just for fun: [online electric circuit construction kit](https://phet.colorado.edu/sims/html/circuit-construction-kit-ac/latest/circuit-construction-kit-ac_all.html).
 Make sure to check it out, it simply is brilliant.
 
-# Python physics demos from Dot Physics
+# Python physics demos from [Dot Physics](https://www.youtube.com/channel/UCVxIDFY01y4n_c2lK1TB-KA)
 
 These demos are refactored versions of the originals, found 
 by the followling hyperlinks below. I have tried to make the
