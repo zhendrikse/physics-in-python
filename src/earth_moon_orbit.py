@@ -3,32 +3,13 @@
 # Refactored from Dot Physics
 # - https://www.youtube.com/watch?v=2BisyQhNBFM
 
-from vpython import vector, sphere, color, rate, mag, norm, graph, gcurve, textures, sqrt
+from vpython import vector, color, rate, graph, gcurve, textures, sqrt
+from celestial_object import CelestialObject, G
 
 g1 = graph(title="Earth moon",xtitle="t [s]",ytitle="Px [kg*m/s]",width=400, height=200)
 fm = gcurve(color=color.blue)
 fe = gcurve(color=color.red)
 ft = gcurve(color=color.green)
-
-G = 6.67e-11
-
-class CelestialObject:
-
-  def __init__(self, mass, position, velocity, radius, texture=textures.stucco):
-    self._body = sphere(pos=position, radius=radius * 3, texture=texture, make_trail = True)
-    self._mass = mass
-    self._velocity = velocity
-
-  def momentum(self):
-    return self._mass * self._velocity
-
-  def move_around(self, celestial_object, dt):
-    distance = self._body.pos - celestial_object._body.pos
-    force = -G * self._mass * celestial_object._mass * norm(distance) / mag(distance)**2
-    acceleration = force / self._mass
-
-    self._velocity += acceleration * dt
-    self._body.pos += self._velocity * dt
 
 mass_earth = 5.97e24
 mass_moon = 7.37e22
