@@ -1,5 +1,8 @@
 # Physics demos in Python
 
+Just for fun: [online electric circuit construction kit](https://phet.colorado.edu/sims/html/circuit-construction-kit-ac/latest/circuit-construction-kit-ac_all.html).
+Make sure to check it out, it simply is brilliant.
+
 ## Physics demos from Dot Physics
 
 These demos are refactored versions of the originals, found 
