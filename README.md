@@ -33,7 +33,7 @@ original code more object-oriented and make it [reval its intent](https://martin
 
 ## Three-body problem
 
-- See [my code in action](https://trinket.io/glowscript/9ece3648f0) on [https://trinket.io](trinket)
+- See [my code in action](https://trinket.io/glowscript/42acc05540ae) on [https://trinket.io](trinket)
 - Based on the original [three-body problem](https://www.youtube.com/watch?v=Ye2wIV8-SB8) video and the code presented therein
 
 ## Earth-moon orbit
