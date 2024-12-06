@@ -16,21 +16,21 @@ class BallTestDouble(Ball):
      self._ball = SphereTestDouble(mass, position, velocity, radius, color)
 
 class TestBall:
+  @pytest.fixture()
+  def ball_at_origin(self):
+    return BallTestDouble()
 
-  def test_distance_to_itself(self):
-      ball = BallTestDouble()
-      assert_that(ball.distance_to(ball), equal_to(vector(0, 0, 0)))
+  def test_distance_to_itself(self, ball_at_origin):
+      assert_that(ball_at_origin.distance_to(ball_at_origin), equal_to(vector(0, 0, 0)))
 
-  def test_distance_to_other(self):
-      ball = BallTestDouble()
-      assert_that(ball.distance_to(BallTestDouble(position=vector(1, 2, 3))), equal_to(vector(1, 2, 3)))
+  def test_distance_to_other(self, ball_at_origin):
+      ball_2 = BallTestDouble(position=vector(1, 2, 3))
+      assert_that(ball_at_origin.distance_to(ball_2), equal_to(vector(1, 2, 3)))
 
-  def test_no_collision(self):
-     ball_1 = BallTestDouble()
-     ball_2 = BallTestDouble(position=vector(2 * ball_1._ball.radius, 0.0, 0.0))
-     assert_that(ball_1.has_collided_with(ball_2), is_(False))
+  def test_no_collision(self, ball_at_origin):
+     ball_2 = BallTestDouble(position=vector(2 * ball_at_origin._ball.radius, 0.0, 0.0))
+     assert_that(ball_at_origin.has_collided_with(ball_2), is_(False))
 
-  def test_collision(self):
-     ball_1 = BallTestDouble()
-     ball_2 = BallTestDouble(position=vector(2 * ball_1._ball.radius - 0.001, 0, 0))
-     assert_that(ball_1.has_collided_with(ball_2), is_(True))
+  def test_collision(self, ball_at_origin):
+     ball_2 = BallTestDouble(position=vector(2 * ball_at_origin._ball.radius - 0.001, 0, 0))
+     assert_that(ball_at_origin.has_collided_with(ball_2), is_(True))
