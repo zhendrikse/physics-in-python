@@ -30,6 +30,9 @@ class Sphere:
      return mag(self.momentum())**2 / ( 2* self._sphere.mass)
   
   def force_between(self, other):
+      if not self.has_collided_with(other):
+        return zero_force
+
       k = 101
       r = self._distance_to(other)
       return k * (mag(r) - (self._sphere.radius + other._sphere.radius)) * norm(r)
@@ -42,10 +45,7 @@ print("initial K = " + str(sphere_A.kinetic_energy() + sphere_B.kinetic_energy()
 
 for timestep in range(0, 350):
   rate(100)
-  force_BA = zero_force
-  
-  if sphere_A.has_collided_with(sphere_B):
-    force_BA = sphere_A.force_between(sphere_B)
+  force_BA = sphere_A.force_between(sphere_B)
 
   sphere_A.move(force = force_BA, dt = 0.01)
   sphere_B.move(force = -force_BA, dt = 0.01)
