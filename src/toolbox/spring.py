@@ -3,9 +3,9 @@ from vpython import vector,  mag, norm, helix
 zero_force = vector(0, 0, 0)
 
 class Spring:
-  def __init__(self):
-    self._spring_size = 0.4
-    self._spring_constant = 1000
+  def __init__(self, spring_constant=1000, size=0.4):
+    self._spring_size = size
+    self._spring_constant = spring_constant
     self._spring = helix(pos=vector(0, 0, 0), axis=vector(0, self._spring_size, 0), radius=0.07, thickness=0.04)
 
   def _spring_is_compressed(self, ball_position):
