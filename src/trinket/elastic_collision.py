@@ -9,35 +9,33 @@ from vpython import vector, color, rate, sphere, mag, norm
 zero_force = vector(0, 0, 0)
 
 class Sphere:
-  def __init__(self, position, velocity, color, make_trail=True):
-     self._radius = 0.05
-     self._sphere = sphere(pos=position, radius=self._radius, color=color, make_trail=True)
-     self._sphere.m = 0.1
-     self._sphere.p = self._sphere.m * velocity
+  def __init__(self, mass, position, velocity, radius, color, make_trail=True):
+     self._sphere = sphere(mass=mass, pos=position, v=velocity, radius=radius, color=color, make_trail=True)
+     self._sphere.p = self._sphere.mass * velocity
 
   def _distance_to(self, other):
      return other._sphere.pos - self._sphere.pos
     
   def has_collided_with(self, other):
-    return mag(self._distance_to(other)) < (self._radius + other._radius)
+    return mag(self._distance_to(other)) < (self._sphere.radius + other._sphere.radius)
   
   def update_position_and_momentum(self, force, dt):
     self._sphere.p += force * dt
-    self._sphere.pos += self._sphere.p * dt / self._sphere.m
+    self._sphere.pos += self._sphere.p * dt / self._sphere.mass
 
   def momentum(self):
      return self._sphere.p
   
   def kinetic_energy(self):
-     return mag(self.momentum())**2 / (2* self._sphere.m)
+     return mag(self.momentum())**2 / (2* self._sphere.mass)
   
   def force_between(self, other):
       k = 101
       r = self._distance_to(other)
-      return k * (mag(r) - (self._radius + other._radius)) * norm(r)
+      return k * (mag(r) - (self._sphere.radius + other._sphere.radius)) * norm(r)
       
-sphere_A = Sphere(vector(-.2, .02 ,0), vector(.2, 0 ,0), color.yellow)
-sphere_B = Sphere(vector( .2, .0,  0), vector(0,  0 ,0), color.cyan)
+sphere_A = Sphere(0.1, vector(-.2, .02 ,0), vector(.2, 0 ,0), 0.05, color.yellow)
+sphere_B = Sphere(0.1, vector( .2, .0,  0), vector(0,  0 ,0), 0.05, color.cyan)
 
 print("initial momentum = " + str(sphere_A.momentum() + sphere_B.momentum()) + " kg*m/s")
 print("initial K = " + str(sphere_A.kinetic_energy() + sphere_B.kinetic_energy()) + " Joules")
