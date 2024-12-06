@@ -15,7 +15,7 @@ class BallTestDouble(Ball):
   def __init__(self, mass=1.5, position=vector(0, 0, 0), velocity=vector(0, 0, 0), radius=0.1, color=color.yellow):
      self._ball = SphereTestDouble(mass, position, velocity, radius, color)
 
-class Testphysics_demo:
+class TestBall:
 
   def test_distance_to_itself(self):
       ball = BallTestDouble()
