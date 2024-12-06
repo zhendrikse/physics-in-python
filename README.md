@@ -28,7 +28,12 @@ original code more OO and make it express its intent.
 - See [my code in action](https://trinket.io/glowscript/92ffad53ab4d) on [https://trinket.io](trinket)
 - Based on the original [ball falling on spring](https://www.youtube.com/watch?v=ExxDuRTIe0E) video and the code presented therein
 
+### Three-body problem
+
+- See [my code in action](https://trinket.io/glowscript/9ece3648f0) on [https://trinket.io](trinket)
+- Based on the original [three-body problem](https://www.youtube.com/watch?v=Ye2wIV8-SB8) video and the code presented therein
+
 ### Earth-moon orbit
 
-- See [my code in action](https://trinket.io/glowscript/f09c6fe1de9f) on [https://trinket.io](trinket)
+- See [my code in action](https://trinket.io/glowscript/42acc05540ae) on [https://trinket.io](trinket)
 - Based on the original [earth-moon system]([https://www.youtube.com/watch?v=ExxDuRTIe0E](https://www.youtube.com/watch?v=2BisyQhNBFM)) video and the code presented therein
