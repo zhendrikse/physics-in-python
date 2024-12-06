@@ -34,13 +34,13 @@ class Spring:
 
 class Ball:
   def __init__(self, mass = 1.5, position=vector(0, 0, 0), velocity=vector(0, 0, 0), radius=0.1, color=color.yellow):
-    self._ball = sphere(mass=mass, pos=position, radius=radius, color=color, v=velocity)
+    self._ball = sphere(mass=mass, pos=position, radius=radius, color=color, velocity=velocity)
 
   def update(self, spring_force, dt):
       force_vector = self._ball.mass * grav_force + spring_force
       acceleration_vector = force_vector / self._ball.mass
-      self._ball.v += acceleration_vector * dt
-      self._ball.pos += self._ball.v * dt
+      self._ball.velocity += acceleration_vector * dt
+      self._ball.pos += self._ball.velocity * dt
 
   def position(self):
     return self._ball.pos
