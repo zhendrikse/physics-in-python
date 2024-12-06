@@ -1,6 +1,6 @@
 import pytest
 from hamcrest import assert_that, equal_to, is_
-from vpython import vector, color
+from vpython import vector, color, mag
 from src.toolbox.ball import Ball
 
 class SphereTestDouble:
@@ -26,11 +26,11 @@ class TestBall:
       assert_that(ball.distance_to(BallTestDouble(position=vector(1, 2, 3))), equal_to(vector(1, 2, 3)))
 
   def test_no_collision(self):
-     ball_1 = BallTestDouble(position=vector(0, 0, 0))
+     ball_1 = BallTestDouble()
      ball_2 = BallTestDouble(position=vector(2 * ball_1._ball.radius, 0.0, 0.0))
      assert_that(ball_1.has_collided_with(ball_2), is_(False))
 
   def test_collision(self):
-     ball_1 = BallTestDouble(position=vector(0, 0, 0))
-     ball_2 = BallTestDouble(position=vector(ball_1._ball.radius, 0, 0))
+     ball_1 = BallTestDouble()
+     ball_2 = BallTestDouble(position=vector(2 * ball_1._ball.radius - 0.001, 0, 0))
      assert_that(ball_1.has_collided_with(ball_2), is_(True))
