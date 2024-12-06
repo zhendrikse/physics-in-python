@@ -5,9 +5,9 @@ Make sure to check it out, it simply is brilliant.
 
 # Python physics demos from [Dot Physics](https://www.youtube.com/channel/UCVxIDFY01y4n_c2lK1TB-KA)
 
-These demos are refactored versions of the originals, found 
+These demos are _refactored versions_ of the originals, found 
 by the followling hyperlinks below. I have tried to make the
-original code more OO and make it express its intent.
+original code more object-oriented and make it [reval its intent](https://martinfowler.com/bliki/BeckDesignRules.html).
 
 ## Water Sprinkler
 
