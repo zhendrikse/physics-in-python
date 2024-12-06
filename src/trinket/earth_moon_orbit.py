@@ -22,10 +22,10 @@ G = 6.67e-11
 class CelestialObject:
   
   def __init__(self, mass, position, velocity, radius, color=color.yellow, texture=textures.stucco):
-    self._body = sphere(mass=mass, pos=position, v=velocity, radius=radius, color=color, texture=texture, make_trail = True)
+    self._body = sphere(mass=mass, pos=position, velocity=velocity, radius=radius, color=color, texture=texture, make_trail = True)
     
   def momentum(self):
-    return self._body.mass * self._body.v
+    return self._body.mass * self._body.velocity
     
   def distance_to(self, other):
     return other._body.pos - self._body.pos
@@ -37,8 +37,8 @@ class CelestialObject:
     return force_vector
   
   def move(self, force, dt):
-    self._body.v += force / self._body.mass * dt
-    self._body.pos += self.momentum() * dt / self._body.mass 
+    self._body.velocity += force / self._body.mass * dt
+    self._body.pos += self._body.velocity * dt  
 
 mass_earth = 5.97e24
 mass_moon = 7.37e22

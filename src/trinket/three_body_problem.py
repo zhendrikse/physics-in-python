@@ -27,7 +27,7 @@ class CelestialObject:
   
   def move(self, force, dt):
     self._sphere.v += force / self._sphere.mass * dt
-    self._sphere.pos += self.momentum() * dt / self._sphere.mass 
+    self._sphere.pos += self._sphere.v * dt 
 
 mass = 1e30
 rA = 0.1 * astronomical_unit
