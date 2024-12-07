@@ -9,6 +9,8 @@ from vpython import vector, rate, box, graph, gcurve, color
 from toolbox.ball import Ball
 from toolbox.spring import Spring 
 
+gravitational_force_vector = vector(0, -9.8, 0)
+
 g1 = graph(title="Ball on spring", xtitle="Time", ytitle="Height", width=400, height=250)
 curve = gcurve(color=color.blue)
 
@@ -20,9 +22,10 @@ def main():
   dt = 0.01
   for i in range(0, 500):
     rate(100)
-    ball.update(dt, spring.force(ball.position()), has_gravitational_force=True)
-    spring.update(ball.position())
-    curve.plot(i * dt, ball.position().y)
+    gravitational_force = ball.mass * gravitational_force_vector
+    ball.move(spring.force(ball.position) + gravitational_force, dt)
+    spring.update(ball.position)
+    curve.plot(i * dt, ball.position.y)
 
 if __name__=="__main__":
     main()

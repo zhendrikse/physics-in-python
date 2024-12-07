@@ -21,6 +21,6 @@ for day in range(0, fifty_days, dt):
   moon.move(moon.force_between(earth), dt)
   earth.move(-moon.force_between(earth), dt)
   
-  moon_curve.plot(day, moon.momentum().y)
-  earth_curve.plot(day, earth.momentum().y)
-  sum_curve.plot(day, moon.momentum().y + earth.momentum().y)
+  moon_curve.plot(day, moon.momentum.y)
+  earth_curve.plot(day, earth.momentum.y)
+  sum_curve.plot(day, moon.momentum.y + earth.momentum.y)
