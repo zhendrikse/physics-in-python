@@ -16,8 +16,8 @@ EROS_MASS = ME = 6.7e15
 
 class CelestialObject:
   
-  def __init__(self, mass, position=vector(0, 0, 0), velocity=vector(0, 0, 0), radius=10, color=color.yellow, texture=textures.stucco):
-    self._body = sphere(mass=mass, pos=position, velocity=velocity, radius=radius, color=color, texture=texture, make_trail = True)
+  def __init__(self, mass, position=vector(0, 0, 0), velocity=vector(0, 0, 0), radius=10, color=color.yellow, texture=None, shininess=0.6):
+    self._body = sphere(mass=mass, pos=position, velocity=velocity, radius=radius, color=color, texture=texture, shininess=shininess, make_trail = True)
         
   def distance_to(self, other):
     return other.position - self.position
@@ -53,13 +53,13 @@ class CelestialObject:
 
 
 class Earth(CelestialObject):
-  def __init__(self):
-    super().__init__(EARTH_MASS, vector(EARTH_MOON_DISTANCE, 0, 0), EARTH_VELOCITY, EARTH_RADIUS, texture=textures.earth)
+  def __init__(self, position=vector(0, 0, 0), velocity=EARTH_VELOCITY, radius=EARTH_RADIUS, shininess=0.6):
+    super().__init__(EARTH_MASS, position=position, velocity=velocity, radius=EARTH_RADIUS, texture=textures.earth, shininess=shininess)
 
 class Moon(CelestialObject):
-  def __init__(self):
-    super().__init__(MOON_MASS, vector(0, 0, 0), MOON_VELOCITY, MOON_RADIUS)
+  def __init__(self, position=vector(0, 0, 0), velocity=MOON_VELOCITY, radius=MOON_RADIUS, shininess=0.6):
+    super().__init__(MOON_MASS, position=position, velocity=velocity, radius=MOON_RADIUS, shininess=shininess)
 
 class Eros(CelestialObject):
-  def __init__(self):
-    super().__init__(EROS_MASS, vector(0, 0, 0), vector(0, 0, 0), EROS_RADIUS)
+  def __init__(self, position=vector(0, 0, 0), velocity=EARTH_VELOCITY, radius=EROS_RADIUS, shininess=0.6):
+    super().__init__(EROS_MASS, position=position, velocity=velocity, radius=EROS_RADIUS, shininess=shininess)
