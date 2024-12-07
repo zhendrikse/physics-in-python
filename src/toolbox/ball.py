@@ -21,7 +21,7 @@ class Ball:
       return k * (mag(r) - (self._ball.radius + other_ball._ball.radius)) * norm(r)
   
   def distance_to(self, other):
-     return other._ball.pos - self._ball.pos
+     return other.position - self.position
     
   def has_collided_with(self, other):
     return mag(self.distance_to(other)) < (self._ball.radius + other._ball.radius)

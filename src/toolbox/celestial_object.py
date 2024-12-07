@@ -20,7 +20,7 @@ class CelestialObject:
     self._body = sphere(mass=mass, pos=position, velocity=velocity, radius=radius, color=color, texture=texture, make_trail = True)
         
   def distance_to(self, other):
-    return other._body.pos - self._body.pos
+    return other.position - self.position
     
   def force_between(self, other):
     radius = self.distance_to(other)

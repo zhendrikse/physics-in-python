@@ -24,7 +24,7 @@ ball = Ball(ball_mass, position=position_vector, velocity=velocity_vector, radiu
 t = 0
 while mag(ball.position) >= EROS_RADIUS:
   rate(1000)
-  r = ball.position - eros.position
+  r = eros.distance_to(ball)
 
   W = omega * rotation_axis
   force = -G * EROS_MASS * ball_mass * norm(r) / mag(r)**2 + ball_mass * cross(cross(W, r), W) - 2 * cross(W, ball.momentum)
@@ -38,7 +38,7 @@ ball_2 = Ball(ball_mass, position=position_vector, velocity=velocity_vector, rad
 
 while mag(ball_2.position) >= EROS_RADIUS:
   rate(1000)
-  r2 = ball_2.position - eros.position
+  r2 = eros.distance_to(ball_2)
   force = -G * EROS_MASS * ball_mass * norm(r2) / mag(r2)**2
   ball_2.move(force, dt)
   eros.rotate(angle = omega * dt)
