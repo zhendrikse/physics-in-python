@@ -24,7 +24,7 @@ class CelestialObject:
     
   def force_between(self, other):
     radius = self.distance_to(other)
-    force_magnitude = G * self._body.mass * other._body.mass / mag(radius)**2
+    force_magnitude = G * self.mass * other.mass / mag(radius)**2
     force_vector = force_magnitude * norm(radius)
     return force_vector
   
@@ -32,16 +32,24 @@ class CelestialObject:
     self._body.rotate(origin=origin, axis=axis, angle=angle)
   
   def move(self, force, dt):
-    self._body.velocity += force / self._body.mass * dt
-    self._body.pos += self._body.velocity * dt 
+    self._body.velocity += force / self.mass * dt
+    self._body.pos += self.velocity * dt 
 
   @property
   def momentum(self):
-    return self._body.mass * self._body.velocity
+    return self.mass * self.velocity
 
   @property
   def position(self):
     return self._body.pos
+  
+  @property
+  def mass(self):
+    return self._body.mass
+  
+  @property
+  def velocity(self):
+    return self._body.velocity
 
 
 class Earth(CelestialObject):
