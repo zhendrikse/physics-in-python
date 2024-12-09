@@ -2,7 +2,7 @@ from vpython import vector, rate, box, graph, gcurve, color, sphere, helix, mag,
 from toolbox.ball import Ball
 from toolbox.spring import Spring
 
-position_plot = graph(title="Ball on spring", xtitle="Time", ytitle="Height", width=400, height=250)
+position_plot = graph(title="Ball on spring", xtitle="Time", ytitle="Amplitude", width=400, height=250)
 curve_left = gcurve(color=color.blue)
 curve_right = gcurve(color=color.red)
 
