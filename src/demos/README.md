@@ -5,6 +5,8 @@ in the 'toolbox' directory.
 
 ## Running the demos
 
+![Harmonic oscillator](./images/harmonic_oscillator.png)
+
 Run the demos like so:
 
 ```bash
