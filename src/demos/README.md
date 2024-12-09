@@ -1,5 +1,7 @@
 # Demos using the generic toolbox
 
+![Particle in electric field](./images/particle_in_electric_field.png)
+
 This directory contains some demos done using the tools
 in the 'toolbox' directory.
 
