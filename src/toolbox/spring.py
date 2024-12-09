@@ -2,22 +2,27 @@ from vpython import vector,  mag, norm, helix
 
 zero_force = vector(0, 0, 0)
 
-class Spring:
-  def __init__(self, spring_constant=1000, size=0.4):
-    self._spring_size = size
-    self._spring_constant = spring_constant
-    self._spring = helix(pos=vector(0, 0, 0), axis=vector(0, self._spring_size, 0), radius=0.07, thickness=0.04)
+class Spring:  
+  def __init__(self, position=vector(0, 0, 0), axis=(1.0, 0, 0), spring_constant=1, equilibrium_size=1.0, radius=0.5, thickness=0.03):
+    self._equilibrium_size = equilibrium_size
+    self._spring = helix(pos=position, axis=axis, radius=radius, thickness=thickness, spring_constant=spring_constant)
+    self._attachment = None
 
-  def _spring_is_compressed(self, ball_position):
-    return mag(ball_position) < self._spring_size
+  def is_stretched_or_compressed(self):
+    return not mag(self._spring.axis) == self._equilibrium_size
     
-  def update(self, ball_position):
-      if self._spring_is_compressed(ball_position):
-        self._spring.axis = ball_position
-
-  def force(self, ball_position):
-      if self._spring_is_compressed(ball_position):
-        compression = self._spring_size - mag(ball_position)
-        return self._spring_constant * compression * norm(ball_position)
+  def update_position(self, position):
+    self._spring.axis = position
+  
+  @property
+  def force(self):
+      if self.is_stretched_or_compressed():
+        displacement = mag(self._spring.axis) - self._equilibrium_size
+        return -self._spring.spring_constant * displacement * norm(self._spring.axis)
       
       return zero_force
+  
+  @property
+  def axis(self):
+     return self._spring.axis
+  
