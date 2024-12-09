@@ -1,4 +1,15 @@
-# Physics demos in general
+# Physics demos
+
+This repository contains physics demos, mainly using VPython.
+
+- `src` directory contains the sources
+  - `demos` contains demos using the generic toolbox.
+  - `toolbox` contains tools such as springs, bolls, and chargers, with which demos can readily be created.
+  - `trinket` contains the original GlowScript code snippets that can be found on [Trinket](https://trinket.io/).
+    However, these snippets can also be executed stand-alone, i.e. independently of the Trinket environment.
+- `test` directory contains the tests of the components in the generic toolbox
+
+### References
 
 Just for fun: [online electric circuit construction kit](https://phet.colorado.edu/sims/html/circuit-construction-kit-ac/latest/circuit-construction-kit-ac_all.html).
 Make sure to check it out, it simply is brilliant.
