@@ -8,6 +8,7 @@ class Ball:
       acceleration_vector = force__vector / self._ball.mass
       self._ball.velocity += acceleration_vector * dt
       self._ball.pos += self._ball.velocity * dt
+      self._ball.velocity -= self._ball.velocity * 0.01 # Friction
 
   def position(self):
     return self._ball.pos
@@ -35,14 +36,14 @@ spring_size = 1.0
 spring_rest_position = vector(0, 0, 0)
 
 ceiling = box(pos=vector(0, 0, 0), size=vector(2, 0.05, 1), color=color.green)
-ball = Ball(mass=5.0, position=vector(0, -spring_size - 0.5, 0), color=color.red)
+ball = Ball(mass=5.0, position=vector(0, -spring_size - 0.75, 0), color=color.red)
 spring = Spring(axis=ball.position(), spring_constant=1000, equilibrium_size=spring_size, radius=0.07)#, thickness=0.04)
 
 gravitational_force = vector(0, -9.8 * ball.mass(), 0)
 
 def main():
   dt = 0.01
-  for i in range(0, 500):
+  for i in range(0, 700):
     rate(1 / (2 * dt))
     ball.move(spring.force() + gravitational_force, dt)
     spring.update(ball.position())

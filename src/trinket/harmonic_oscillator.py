@@ -8,6 +8,7 @@ class Ball:
       acceleration_vector = force__vector / self._ball.mass
       self._ball.velocity += acceleration_vector * dt
       self._ball.pos += self._ball.velocity * dt
+      self._ball.velocity -= self._ball.velocity * 0.001 # Friction
 
   def distance_to(self, other):
      return other.position() - self.position()
@@ -37,17 +38,17 @@ curve_right = gcurve(color=color.red)
 left_ball  = Ball(mass=1.0, position=vector(-0.75, 0, 0), radius=0.1, color=color.red)
 right_ball = Ball(mass=1.0, position=vector( 0.75, 0, 0), radius=0.1, color=color.blue)
 distance = left_ball.distance_to(right_ball)
-spring = Spring(position=-distance / 2, axis=distance, spring_constant=1.0, equilibrium_size=1.0, radius=0.05)
+spring = Spring(position=-distance / 2, axis=distance, spring_constant=1, equilibrium_size=1.0, radius=0.05)
 
 def main():
-  dt = 0.1
-  for t in range(0, 200):
-    rate(2/dt)
+  dt = 0.01
+  for t in range(0, 5000):
+    rate(3/dt)
     right_ball.move(spring.force(), dt)
     left_ball.move(-spring.force(), dt)
     distance = left_ball.distance_to(right_ball)
     spring.update(distance, -distance / 2)
-    curve_left.plot(t * dt, left_ball.position().x)
+    curve_left.plot(t * dt, 1.5 + left_ball.position().x)
     curve_right.plot(t * dt, right_ball.position().x)
 
   
