@@ -9,7 +9,7 @@ curve = gcurve(color=color.blue)
 spring_size = 1.0
 spring_rest_position = vector(0, 0, 0)
 
-floor = box(pos=vector(0, 0, 0), size=vector(2, 0.05, 1), color=color.green)
+ceiling = box(pos=vector(0, 0, 0), size=vector(2, 0.05, 1), color=color.green)
 ball = Ball(mass=5.0, position=vector(0, -spring_size - 0.5, 0), color=color.red)
 spring = Spring(axis=ball.position, spring_constant=1000, equilibrium_size=spring_size, radius=0.07)#, thickness=0.04)
 
