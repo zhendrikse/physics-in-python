@@ -1,5 +1,7 @@
 # Physics demos
 
+![Particle in electric field](./src/demos/images/particle_in_electric_field.png)
+
 This repository contains physics demos, mainly using VPython.
 
 - `src` directory contains the sources
