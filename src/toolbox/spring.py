@@ -3,7 +3,7 @@ from vpython import vector,  mag, norm, helix
 zero_force = vector(0, 0, 0)
 
 class Spring:  
-  def __init__(self, position=vector(0, 0, 0), axis=(1.0, 0, 0), spring_constant=1, equilibrium_size=1.0, radius=0.5, thickness=0.03):
+  def __init__(self, position=vector(0, 0, 0), axis=vector(1.0, 0, 0), spring_constant=1, equilibrium_size=1.0, radius=0.5, thickness=0.03):
     self._equilibrium_size = equilibrium_size
     self._spring = helix(pos=position, axis=axis, radius=radius, thickness=thickness, spring_constant=spring_constant)
     self._position = position

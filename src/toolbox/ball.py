@@ -1,6 +1,5 @@
 from vpython import vector, sphere, color, mag, norm
 
-#gravitational_force = vector(0, -9.8, 0)
 zero_force = vector(0, 0, 0)
 
 class Ball:
