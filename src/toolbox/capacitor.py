@@ -1,6 +1,6 @@
 from vpython import box, vec, color, mag, arrow, hat, exp
     
-from .charge import Charge, FieldArrow, k
+from .charge import Charge, FieldArrow, k, ec
 
 class Capacitor:
     def __init__(self, pos=vec(0, 1E-13, 0), size=vec(4E-13, 4E-16, 4E-13)):
@@ -15,7 +15,7 @@ class Capacitor:
                 for z in range(-20, 22, 2):
                     # positive charge and negative charge locate at top plate and down plate
                     mu = 1 if y > 0  else -1
-                    self._charges.append(Charge(position=vec(x*1E-14, y, z*1E-14), coulomb=mu))
+                    self._charges.append(Charge(position=vec(x*1E-14, y, z*1E-14), coulomb=mu * ec))
 
         # create field between plates
         field_arrows = []
