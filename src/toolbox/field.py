@@ -2,7 +2,7 @@ from vpython import vec, arrow, hat, exp, mag, sin, cos, pi
 from functools import reduce    
 
 class FieldArrow:
-    def __init__(self, position, field, point_charge=False, arrow_length= 3E-14):
+    def __init__(self, position, field, point_charge=False, arrow_length=3E-14):
         color = FieldArrow.color_mapping(field)
         colour = vec(color, 0, 1) if point_charge else vec(1, color, 0)
         arrow(pos=position, axis=hat(field) * arrow_length, color=colour)
@@ -11,29 +11,18 @@ class FieldArrow:
     def color_mapping(field):
         a = 1E-17
         return 1 - exp(-a * mag(field))
-
-class Field:
-    def __init__(self, charges=[]):
-        self._charges = charges
-        self._single_charge = len(charges) == 1
+    
+class PointChargeField:
+    def __init__(self, charge):
+        self._charge = charge
         self._field_arrows = []
 
-    def show_field(self, x_range=range(-9, 9, 4), y_range=range(-9, 9, 4), z_range=range(-9, 9, 4)):
-        self._field_arrows = self._radial_field() if self._single_charge else self._field()
-            
-    def _field(self, x_range=range(-9, 9, 4), y_range=range(-9, 9, 4), z_range=range(-9, 9, 4)):
-        for x in x_range:
-            for y in y_range:
-                for z in z_range:
-                    point = vec(x * 2E-14, y * 1E-14, z * 2E-14)
-                    self._field_arrows.append(FieldArrow(point, self.field_at(point)))
+    def show_field(self, r_range=range(1, 30, 5), theta_range=range(0, 6), phi_range=range(0, 6)):
+        self._field_arrows = [self._field_arrow(r, theta, phi) for r in r_range for theta in theta_range for phi in phi_range]
 
-    def _radial_field(self):
-        for r in range(1, 30, 5):
-            for theta in range(0, 6):
-                for phi in range(0, 6):
-                    xyz = Field.to_carthesian_coordinates(self._charges[0].radius * r, theta * pi/3, phi * pi/3)
-                    self._field_arrows.append(FieldArrow(xyz, self.field_at(xyz), True))
+    def _field_arrow(self, r, theta, phi):
+        xyz = PointChargeField.to_carthesian_coordinates(self._charge.radius * r, theta * pi/3, phi * pi/3)
+        return FieldArrow(xyz, self._charge.field_at(xyz), True)
 
     @staticmethod
     def to_carthesian_coordinates(r, theta, phi):
@@ -42,6 +31,21 @@ class Field:
         z = r * cos(theta)
         return vec(x, y, z)
 
+class Field:
+    def __init__(self, charges=[]):
+        self._charges = charges
+        self._field_arrows = []
+
+    def show_field(self, x_range, y_range, z_range):
+        self._field_arrows = [self._field_arrow(x, y, z) for x in x_range for y in y_range for z in z_range]
+
+    def _field_arrow(self, x, y, z):
+        point = vec(x, y, z) * self._charge_radius
+        return FieldArrow(point, self.field_at(point))
+
+    @property
+    def _charge_radius(self):
+        return self._charges[0].radius # Simply assuminging all charges in the field have same radius
 
     def field_at(self, position):
         return reduce(lambda x, y: x + y, [charge.field_at(position) for charge in self._charges])

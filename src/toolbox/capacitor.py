@@ -1,5 +1,5 @@
 from vpython import box, vec, color, mag, arrow, hat, exp
-from .charge import Charge, FieldArrow, k, ec
+from .charge import Charge, ec
 from .field import Field
 
 class Capacitor:
@@ -15,12 +15,12 @@ class Capacitor:
                 for z in range(-20, 22, 2):
                     # positive charge and negative charge locate at top plate and down plate
                     mu = 1 if y > 0  else -1
-                    charges.append(Charge(position=vec(x*1E-14, y, z*1E-14), coulomb=mu * ec))
+                    charges.append(Charge(position=vec(x*1E-14, y, z*1E-14), radius=1E-14, coulomb=mu * ec))
 
         self._field = Field(charges)
 
-    def show_field(self):
-        self._field.show_field()
+    def show_field(self, x_range, y_range, z_range):
+        self._field.show_field(x_range, y_range, z_range)
 
     def field_at(self, position):
         return self._field.field_at(position)
