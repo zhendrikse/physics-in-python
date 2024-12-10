@@ -34,7 +34,7 @@ class Charge:
         self._charge.visible = False
         del self._charge
     
-    def coulomb_force(self, electric_field):
+    def coulomb_force_in(self, electric_field):
         return electric_field * self._charge.coulomb
 
     def update(self, coulomb_force, dt):
