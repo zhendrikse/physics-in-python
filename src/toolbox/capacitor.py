@@ -1,18 +1,6 @@
 from vpython import box, vec, color, mag, arrow, hat, exp
     
-from .charge import Charge
-
-class FieldArrow:
-    def __init__(self, position, E):        
-        color = self._mapping(E)
-        arrow_length = 3E-14    # length of arrow
-        arrow(pos=position, axis=hat(E) * arrow_length, color=vec(1, color, 0))
-
-    def _mapping(self, E):
-        '''mapping from (Inf, 0) to (1, 0) as the rgb color value'''
-        a = 1E-17
-        return 1 - exp(-a * mag(E))
-
+from .charge import Charge, FieldArrow, k
 
 class Capacitor:
     def __init__(self, pos=vec(0, 1E-13, 0), size=vec(4E-13, 4E-16, 4E-13)):
@@ -27,7 +15,7 @@ class Capacitor:
                 for z in range(-20, 22, 2):
                     # positive charge and negative charge locate at top plate and down plate
                     mu = 1 if y > 0  else -1
-                    self._charges.append(Charge(position=vec(x*1E-14, y, z*1E-14), C=mu))
+                    self._charges.append(Charge(position=vec(x*1E-14, y, z*1E-14), coulomb=mu))
 
         # create field between plates
         field_arrows = []
@@ -39,7 +27,6 @@ class Capacitor:
 
     def field_at(self, position):
         electric_field = vec(0, 0, 0)
-        k = 9E9 # Coulomb constant
         # superposition quality
         for charge in self._charges:
             distance = position - charge.position
