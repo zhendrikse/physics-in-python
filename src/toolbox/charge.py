@@ -29,6 +29,11 @@ class Charge:
     def radius(self):
         return self._charge.radius
     
+    def delete(self):
+        self._charge.clear_trail()
+        self._charge.visible = False
+        del self._charge
+    
     def coulomb_force(self, electric_field):
         return electric_field * self._charge.coulomb
 
