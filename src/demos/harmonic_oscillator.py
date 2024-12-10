@@ -4,18 +4,17 @@ from toolbox.spring import Spring
 
 running = False
 
-def set_scene():
-    position_plot = graph(title="", xtitle="Time", ytitle="Amplitude")
-    scene = canvas(width=500, height=300, align='left')
-    b1 = button(text="Run", bind=Run, background=color.cyan)
-    # scene.camera.pos = vector(150, 75, 120)
-    # scene.camera.axis = vector(-115, -150, -190)
-
-def Run(r):
+def run(button_instance):
     global running
     running = not running
-    r.text = "Pause" if running else "Run"
+    button_instance.text = "Pause" if running else "Run"
 
+def set_scene():
+    position_plot = graph(title="", xtitle="Time", ytitle="Amplitude")
+    # scene = canvas(width=500, height=300, align='left')
+    b1 = button(text="run", bind=run, background=color.cyan)
+    # scene.camera.pos = vector(150, 75, 120)
+    # scene.camera.axis = vector(-115, -150, -190)
 
 class HarmonicOscillator:
     def __init__(self):
