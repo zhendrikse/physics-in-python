@@ -1,8 +1,8 @@
 # Physics demos
 
 <p align="center">
-  <img alt="Particle in electric field" width="75%" height="75%" src="./src/demos/images/point_charge.png"/></br>
-  Electric field of a point charge
+  <img alt="Particle in electric field" width="75%" height="75%" src="./demos/images/particle_in_electric_field.png"/></br>
+  Charged particle moving through charged plates
 </p>
 
 This repository contains physics demos, mainly using VPython.
