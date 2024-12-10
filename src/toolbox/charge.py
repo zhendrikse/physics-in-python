@@ -9,7 +9,8 @@ class FieldArrow:
         # create electric field using arrow
         color = FieldArrow.mapping(E)
         arrow_length = 3E-14    # length of arrow
-        arrow(pos=position, axis=hat(E) * arrow_length, color=vec(color, 0, 1) if point_charge else vec(1, color, 0))
+        colour = vec(color, 0, 1) if point_charge else vec(1, color, 0)
+        arrow(pos=position, axis=hat(E) * arrow_length, color=colour)
 
     # mapping from (Inf, 0) to (1, 0)
     @staticmethod
@@ -30,7 +31,7 @@ class Charge:
                 for phi in range(0, 6):
                     xyz = Charge.to_carthesian_coordinates(self._charge.radius * r, theta * pi/3, phi * pi/3)
                     E = k * self._charge.coulomb * (xyz - self._charge.pos) / mag(xyz - self._charge.pos)**3
-                    self._field.append(FieldArrow(xyz, E, True))
+                    self._field.append(FieldArrow(xyz, E, False))
 
     @staticmethod
     def to_carthesian_coordinates(r, theta, phi):
