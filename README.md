@@ -2,10 +2,10 @@
 
 <p align="center">
   <img alt="Particle in electric field" width="75%" height="75%" src="./src/demos/images/particle_in_electric_field.png"/></br>
-  Charged particle moving through charged plates
+  <a href="https://github.com/zhendrikse/physics-in-python/blob/main/src/demos/moving_charge.py">Charged particle moving through charged plates</a>
 </p>
 
-This repository contains physics demos, mainly using VPython.
+This repository contains physics demos, mainly using [VPython](https://vpython.org/).
 
 - `src` directory contains the sources
   - `demos` contains demos using the generic toolbox.
