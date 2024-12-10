@@ -1,4 +1,6 @@
-# 2020/1/12 Morris
+##
+# Original: https://github.com/Physics-Morris/Physics-Vpython/blob/master/7_Dipole.py
+#
 
 from vpython import canvas, vec, sphere, arrow, mag, hat, cos, sin, exp
 from toolbox.charge import Charge, ec

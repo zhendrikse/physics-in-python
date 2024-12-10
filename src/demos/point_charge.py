@@ -1,6 +1,6 @@
-# 2020/1/12 Morris
-
-# import package
+#
+# Original: https://github.com/Physics-Morris/Physics-Vpython/blob/master/6_Point_Charge.py
+#
 from vpython import canvas, vec
 
 from toolbox.charge import ec, Charge
