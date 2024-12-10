@@ -1,5 +1,5 @@
 from vpython import box, vec, color, mag, arrow, hat, exp
-    
+from functools import reduce    
 from .charge import Charge, FieldArrow, k, ec
 
 class Capacitor:
@@ -26,11 +26,4 @@ class Capacitor:
                     field_arrows.append(FieldArrow(point, self.field_at(point)))
 
     def field_at(self, position):
-        electric_field = vec(0, 0, 0)
-        # superposition quality
-        for charge in self._charges:
-            distance = position - charge.position
-            electric_field += k * charge.coulomb * distance / mag(distance)**3
-
-        return electric_field
-
+        return reduce(lambda x, y: x + y, [charge.field_at(position) for charge in self._charges])

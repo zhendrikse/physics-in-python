@@ -30,8 +30,10 @@ class Charge:
             for theta in range(0, 6):
                 for phi in range(0, 6):
                     xyz = Charge.to_carthesian_coordinates(self._charge.radius * r, theta * pi/3, phi * pi/3)
-                    E = k * self._charge.coulomb * (xyz - self._charge.pos) / mag(xyz - self._charge.pos)**3
-                    self._field.append(FieldArrow(xyz, E, True))
+                    self._field.append(FieldArrow(xyz, self.field_at(xyz), True))
+
+    def field_at(self, position):
+        return k * self._charge.coulomb * (position - self._charge.pos) / mag(position - self._charge.pos)**3
 
     @staticmethod
     def to_carthesian_coordinates(r, theta, phi):
