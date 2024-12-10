@@ -6,7 +6,10 @@ in the `toolbox` directory, such as `Charge`, `Spring`, `Field`,
 
 ## Running the demos
 
-![Harmonic oscillator](./images/harmonic_oscillator.png)
+<p align="center">
+  <img alt="Harmonic oscillator" width="50%" height="50%" src="./images/harmonic_oscillator.png"/></br>
+  An harmonic oscillator
+</p>
 
 Run the demos like so:
 
@@ -14,7 +17,7 @@ Run the demos like so:
 $ ./run_demo.sh harmonic_oscillator
 ``` 
 
-## Listing of available demos
+## List of available demos
 
 - [Ball falling on spring](ball_falling_on_spring.py) &rarr; `./run_demo.sh ball_falling_on_spring`
 - [Ball hanging on spring](ball_hanging_on_spring.py) &rarr; `./run_demo.sh ball_hanging_on_spring`
