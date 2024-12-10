@@ -5,18 +5,18 @@ ec = 1.6E-19            # electron charge
 k = 9E9                 # Coulomb constant
 
 class FieldArrow:
-    def __init__(self, position, E, point_charge=False):
+    def __init__(self, position, field, point_charge=False):
         # create electric field using arrow
-        color = FieldArrow.mapping(E)
+        color = FieldArrow.mapping(field)
         arrow_length = 3E-14    # length of arrow
         colour = vec(color, 0, 1) if point_charge else vec(1, color, 0)
-        arrow(pos=position, axis=hat(E) * arrow_length, color=colour)
+        arrow(pos=position, axis=hat(field) * arrow_length, color=colour)
 
     # mapping from (Inf, 0) to (1, 0)
     @staticmethod
-    def mapping(E):
+    def mapping(field):
         a = 1E-17
-        return 1 - exp(-a * mag(E))
+        return 1 - exp(-a * mag(field))
     
 class Charge:
     def __init__(self, mass=1.6E-27, position=vec(0, 0, 0), velocity=vec(0, 0, 0), radius=1.0, coulomb=ec, colour=None, make_trail=False):
