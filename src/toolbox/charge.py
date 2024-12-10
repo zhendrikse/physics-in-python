@@ -1,4 +1,5 @@
 from vpython import vec, sphere, color, mag, hat, arrow, exp, sin, cos, pi
+from .field import Field
 
 # parameter setting
 ec = 1.6E-19            # electron charge
@@ -21,24 +22,13 @@ class Charge:
     def __init__(self, mass=1.6E-27, position=vec(0, 0, 0), velocity=vec(0, 0, 0), radius=1.0, coulomb=ec, colour=None, make_trail=False):
         colour = colour if colour is not None else color.blue if coulomb > 0 else color.red
         self._charge = sphere(mass=mass, pos=position, v=velocity, radius=radius, coulomb=coulomb, color=colour, make_trail=make_trail)
-        self._field_arrows = []
+        self._field = Field([self])
 
     def show_field(self):
-        for r in range(1, 30, 5):
-            for theta in range(0, 6):
-                for phi in range(0, 6):
-                    xyz = Charge.to_carthesian_coordinates(self._charge.radius * r, theta * pi/3, phi * pi/3)
-                    self._field_arrows.append(FieldArrow(xyz, self.field_at(xyz), True))
+        self._field.show_field()        
 
     def field_at(self, position):
         return hat(position - self._charge.pos) * k * self._charge.coulomb / mag(position - self._charge.pos)**2
-
-    @staticmethod
-    def to_carthesian_coordinates(r, theta, phi):
-        x = r * sin(theta) * cos(phi)
-        y = r * sin(theta) * sin(phi)
-        z = r * cos(theta)
-        return vec(x, y, z)
 
     @property
     def coulomb(self):
@@ -47,6 +37,10 @@ class Charge:
     @property
     def position(self):
         return self._charge.pos
+    
+    @property
+    def radius(self):
+        return self._charge.radius
     
     def coulomb_force(self, electric_field):
         return electric_field * self._charge.coulomb
