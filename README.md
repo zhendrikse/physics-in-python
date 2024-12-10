@@ -7,12 +7,12 @@
 
 This repository contains physics demos, mainly using [VPython](https://vpython.org/).
 
-- `src` directory contains the sources
-  - `demos` contains demos using the generic toolbox.
-  - `toolbox` contains tools such as springs, bolls, and chargers, with which demos can readily be created.
-  - `trinket` contains the original GlowScript code snippets that can be found on [Trinket](https://trinket.io/).
+- **`src`** &rarr; contains the sources
+  - `demos` &rarr; demos using the generic toolbox.
+  - **`toolbox`** &rarr; tools such as springs, bolls, and chargers, with which demos can readily be created.
+  - **`trinket`** &rarr; the original GlowScript code snippets that can be found on [Trinket](https://trinket.io/).
     However, these snippets can also be executed stand-alone, i.e. independently of the Trinket environment.
-- `test` directory contains the tests of the components in the generic toolbox
+- **`test`** &rarr; the tests of the components in the generic toolbox
 
 ### References
 
