@@ -1,6 +1,6 @@
 # Physics demos
 
-![Particle in electric field](./src/demos/images/particle_in_electric_field.png)
+<img alt="Particle in electric field" width="75%" height="75%" src="./src/demos/images/point_charge.png"/>
 
 This repository contains physics demos, mainly using VPython.
 
