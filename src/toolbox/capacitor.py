@@ -20,7 +20,7 @@ class Capacitor:
         self._field = Field(charges)
 
     def show_field(self, x_range, y_range, z_range):
-        self._field.show_field(x_range, y_range, z_range)
+        self._field.show(x_range, y_range, z_range)
 
     def field_at(self, position):
         return self._field.field_at(position)

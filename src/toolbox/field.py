@@ -17,7 +17,7 @@ class PointChargeField:
         self._charge = charge
         self._field_arrows = []
 
-    def show_field(self, r_range=range(1, 30, 5), theta_range=range(0, 6), phi_range=range(0, 6)):
+    def show(self, r_range=range(1, 30, 5), theta_range=range(0, 6), phi_range=range(0, 6)):
         self._field_arrows = [self._field_arrow(r, theta, phi) for r in r_range for theta in theta_range for phi in phi_range]
 
     def _field_arrow(self, r, theta, phi):
@@ -36,7 +36,7 @@ class Field:
         self._charges = charges
         self._field_arrows = []
 
-    def show_field(self, x_range, y_range, z_range):
+    def show(self, x_range, y_range, z_range):
         self._field_arrows = [self._field_arrow(x, y, z) for x in x_range for y in y_range for z in z_range]
 
     def _field_arrow(self, x, y, z):

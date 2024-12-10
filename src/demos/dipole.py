@@ -15,7 +15,7 @@ def main():
     charges.append(Charge(position=vec(-10 * radius, 0, 0), radius=radius, coulomb=ec))
 
     field = Field(charges)
-    field.show_field(x_range=range(-22, 22, 5), y_range=range(-22, 22, 5), z_range=range(-12, 12, 5))
+    field.show(x_range=range(-22, 22, 5), y_range=range(-22, 22, 5), z_range=range(-12, 12, 5))
 
     while True:
         pass

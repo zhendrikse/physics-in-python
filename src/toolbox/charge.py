@@ -12,7 +12,7 @@ class Charge:
         self._field = PointChargeField(self)
 
     def show_field(self):
-        self._field.show_field()        
+        self._field.show()        
 
     def field_at(self, position):
         return hat(position - self._charge.pos) * k * self._charge.coulomb / mag(position - self._charge.pos)**2
