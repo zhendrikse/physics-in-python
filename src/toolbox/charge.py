@@ -6,9 +6,8 @@ k = 9E9                 # Coulomb constant
 
 class FieldArrow:
     def __init__(self, position, field, point_charge=False):
-        # create electric field using arrow
         color = FieldArrow.mapping(field)
-        arrow_length = 3E-14    # length of arrow
+        arrow_length = 3E-14 
         colour = vec(color, 0, 1) if point_charge else vec(1, color, 0)
         arrow(pos=position, axis=hat(field) * arrow_length, color=colour)
 
@@ -22,15 +21,14 @@ class Charge:
     def __init__(self, mass=1.6E-27, position=vec(0, 0, 0), velocity=vec(0, 0, 0), radius=1.0, coulomb=ec, colour=None, make_trail=False):
         colour = colour if colour is not None else color.blue if coulomb > 0 else color.red
         self._charge = sphere(mass=mass, pos=position, v=velocity, radius=radius, coulomb=coulomb, color=colour, make_trail=make_trail)
-        self._field = []              # store electric field arrow
+        self._field_arrows = []
 
     def show_field(self):
-        # generate electric field
         for r in range(1, 30, 5):
             for theta in range(0, 6):
                 for phi in range(0, 6):
                     xyz = Charge.to_carthesian_coordinates(self._charge.radius * r, theta * pi/3, phi * pi/3)
-                    self._field.append(FieldArrow(xyz, self.field_at(xyz), True))
+                    self._field_arrows.append(FieldArrow(xyz, self.field_at(xyz), True))
 
     def field_at(self, position):
         return hat(position - self._charge.pos) * k * self._charge.coulomb / mag(position - self._charge.pos)**2

@@ -17,13 +17,14 @@ class Capacitor:
                     mu = 1 if y > 0  else -1
                     self._charges.append(Charge(position=vec(x*1E-14, y, z*1E-14), coulomb=mu * ec))
 
-        # create field between plates
+    def show_field(self):
         field_arrows = []
         for x in range(-9, 9, 4):
             for y in range(-9, 9, 4):
                 for z in range(-9, 9, 4):
-                    point = vec(x*2E-14, y*1E-14, z*2E-14)
+                    point = vec(x * 2E-14, y * 1E-14, z * 2E-14)
                     field_arrows.append(FieldArrow(point, self.field_at(point)))
+
 
     def field_at(self, position):
         return reduce(lambda x, y: x + y, [charge.field_at(position) for charge in self._charges])
