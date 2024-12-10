@@ -33,7 +33,7 @@ class Charge:
                     self._field.append(FieldArrow(xyz, self.field_at(xyz), True))
 
     def field_at(self, position):
-        return k * self._charge.coulomb * (position - self._charge.pos) / mag(position - self._charge.pos)**3
+        return hat(position - self._charge.pos) * k * self._charge.coulomb / mag(position - self._charge.pos)**2
 
     @staticmethod
     def to_carthesian_coordinates(r, theta, phi):
