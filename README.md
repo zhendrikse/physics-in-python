@@ -16,8 +16,10 @@ This repository contains physics demos, mainly using [VPython](https://vpython.o
 
 ### References
 
-Just for fun: [online electric circuit construction kit](https://phet.colorado.edu/sims/html/circuit-construction-kit-ac/latest/circuit-construction-kit-ac_all.html).
+- Just for fun: [online electric circuit construction kit](https://phet.colorado.edu/sims/html/circuit-construction-kit-ac/latest/circuit-construction-kit-ac_all.html).
 Make sure to check it out, it simply is brilliant.
+
+- [Manim](https://github.com/3b1b/manim), an animation engine for explanatory math videos
 
 # Python physics demos from [Dot Physics](https://www.youtube.com/channel/UCVxIDFY01y4n_c2lK1TB-KA)
 
