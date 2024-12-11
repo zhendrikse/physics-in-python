@@ -14,13 +14,6 @@ This repository contains physics demos, mainly using [VPython](https://vpython.o
     However, these snippets can also be executed stand-alone, i.e. independently of the Trinket environment.
 - **`test`** &rarr; the tests of the components in the generic toolbox
 
-### References
-
-- Just for fun: [online electric circuit construction kit](https://phet.colorado.edu/sims/html/circuit-construction-kit-ac/latest/circuit-construction-kit-ac_all.html).
-Make sure to check it out, it simply is brilliant.
-
-- [Manim](https://github.com/3b1b/manim), an animation engine for explanatory math videos
-
 ## Glowscript demos on [Trinket](https://trinket.io)
 
 Click on the images to take a look at the associated Trinket code snippets.
@@ -80,3 +73,11 @@ original code more object-oriented and make it [reveal its intent](https://marti
 
 - See [my code in action](https://trinket.io/glowscript/42acc05540ae) on Trinket
 - Based on the original [earth-moon system]([https://www.youtube.com/watch?v=ExxDuRTIe0E](https://www.youtube.com/watch?v=2BisyQhNBFM)) video and the code presented therein
+
+
+## References
+
+- Just for fun: [online electric circuit construction kit](https://phet.colorado.edu/sims/html/circuit-construction-kit-ac/latest/circuit-construction-kit-ac_all.html).
+Make sure to check it out, it simply is brilliant.
+
+- [Manim](https://github.com/3b1b/manim), an animation engine for explanatory math videos
