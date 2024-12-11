@@ -10,11 +10,11 @@ class Spring:
     return -1 * 2000 * displacement * norm(self._spring.axis)
     
 class Ball:
-  def __init__(self, pos, color):
-    self._ball = sphere(pos=pos, velocity=vector(0, 0, 0), radius=0.30, color=color)
+  def __init__(self, pos, color, mass=200):
+    self._ball = sphere(mass=mass, pos=pos, velocity=vector(0, 0, 0), radius=0.30, color=color)
     
   def update(self, net_force, dt):
-    self._ball.velocity += dt * net_force / 200 
+    self._ball.velocity += dt * net_force / self._ball.mass 
     self._ball.pos += self._ball.velocity * dt  
     
   def shift(self, delta):
