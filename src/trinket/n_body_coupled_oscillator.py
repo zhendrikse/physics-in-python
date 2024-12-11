@@ -8,6 +8,10 @@ class Spring:
   def force(self):
     displacement = mag(self._spring.axis) - self._size
     return -1 * 2000 * displacement * norm(self._spring.axis)
+  
+  def update(self, delta, position=vector(0, 0, 0)):
+    self._spring.axis += delta
+    self._spring.pos += position
     
 class Ball:
   def __init__(self, pos, color, mass=200):
@@ -60,9 +64,8 @@ class Oscillator:
     self.update_ball_springs(ball_index, self._balls[ball_index]._ball.velocity * dt)  
 
   def update_ball_springs(self, ball_index, delta):
-    self._springs[ball_index]._spring.axis += delta
-    self._springs[ball_index + 1]._spring.axis -= delta 
-    self._springs[ball_index + 1]._spring.pos += delta
+    self._springs[ball_index].update(delta)
+    self._springs[ball_index + 1].update(-delta, delta) 
     
 
 balls = 4    
