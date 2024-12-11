@@ -21,7 +21,7 @@ Make sure to check it out, it simply is brilliant.
 
 - [Manim](https://github.com/3b1b/manim), an animation engine for explanatory math videos
 
-# N-body coupled oscillator
+## N-body coupled oscillator
 
 <p align="center">
   <img alt="N-body coupled oscillator" width="50%" height="50%" src="./src/demos/images/n_body_coupled_oscillator.png"/></br>
