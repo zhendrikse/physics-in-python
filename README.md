@@ -21,23 +21,23 @@ Make sure to check it out, it simply is brilliant.
 
 - [Manim](https://github.com/3b1b/manim), an animation engine for explanatory math videos
 
-# Glowscript demos on [https://trinket.io](trinket)
+## Glowscript demos on [Trinket](https://trinket.io)
 
-## N-body coupled oscillator
+Click on the images to take a look at the associated Trinket code snippets.
 
-<p align="center">
-  <img alt="N-body coupled oscillator" width="50%" height="50%" src="./src/demos/images/n_body_coupled_oscillator.png"/></br>
-  <a href="https://trinket.io/glowscript/5a852a2b7570">N-body coupled oscillator on Trinket</a>
-</p>
+### N-body coupled oscillator
 
-## Point charge
+<a href="https://trinket.io/glowscript/5a852a2b7570">
+<img alt="N-body coupled oscillator" width="50%" height="50%" src="./src/demos/images/n_body_coupled_oscillator.png"/>
+</a><br/>
 
-<p align="center">
-  <img alt="Electric field of point charge" width="50%" height="50%" src="./src/demos/images/point_charge.png"/></br>
-  <a href="https://trinket.io/glowscript/96da4eb68335?showInstructions=true">Electric field of point charge on Trinket</a>
-</p>
+### Electric field of point charge on Trinket
 
-# Glowscript demos from [Dot Physics](https://www.youtube.com/channel/UCVxIDFY01y4n_c2lK1TB-KA)
+<a href="https://trinket.io/glowscript/96da4eb68335?showInstructions=true">
+<img alt="Electric field of point charge" width="50%" height="50%" src="./src/demos/images/point_charge.png"/>
+</a><br/>
+
+## Glowscript demos from [Dot Physics](https://www.youtube.com/channel/UCVxIDFY01y4n_c2lK1TB-KA)
 
 These demos are _refactored versions_ of the originals, found 
 by the followling hyperlinks below. I have tried to make the
