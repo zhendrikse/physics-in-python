@@ -32,7 +32,7 @@ Make sure to check it out, it simply is brilliant.
 
 These demos are _refactored versions_ of the originals, found 
 by the followling hyperlinks below. I have tried to make the
-original code more object-oriented and make it [reval its intent](https://martinfowler.com/bliki/BeckDesignRules.html).
+original code more object-oriented and make it [reveal its intent](https://martinfowler.com/bliki/BeckDesignRules.html).
 
 ## Water Sprinkler
 
