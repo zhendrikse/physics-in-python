@@ -29,13 +29,19 @@ Click on the images to take a look at the associated Trinket code snippets.
 
 <a href="https://trinket.io/glowscript/5a852a2b7570">
 <img alt="N-body coupled oscillator" width="50%" height="50%" src="./src/demos/images/n_body_coupled_oscillator.png"/>
-</a><br/>
+</a>
 
 ### Electric field of point charge on Trinket
 
 <a href="https://trinket.io/glowscript/96da4eb68335?showInstructions=true">
 <img alt="Electric field of point charge" width="50%" height="50%" src="./src/demos/images/point_charge.png"/>
-</a><br/>
+</a>
+
+### Electric dipole field
+
+<a href="https://trinket.io/glowscript/a2b8b655fa07?showInstructions=true">
+<img alt="Electric field of a dipole" width="50%" height="50%" src="./src/demos/images/dipole_field.png"/>
+</a>
 
 ## Glowscript demos from [Dot Physics](https://www.youtube.com/channel/UCVxIDFY01y4n_c2lK1TB-KA)
 
