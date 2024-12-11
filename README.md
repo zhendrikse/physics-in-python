@@ -16,7 +16,7 @@ This repository contains physics demos, mainly using [VPython](https://vpython.o
 
 ## Glowscript demos on [Trinket](https://trinket.io)
 
-Click on the images to take a look at the associated Trinket code snippets.
+#### &darr; Click on the below images to take a look at the associated Trinket code snippets &darr;
 
 ### N-body coupled oscillator
 
