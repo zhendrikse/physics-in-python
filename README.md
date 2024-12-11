@@ -1,4 +1,4 @@
-# Physics demos
+# Physics in Python
 
 <p align="center">
   <img alt="Particle in electric field" width="75%" height="75%" src="./src/demos/images/particle_in_electric_field.png"/></br>
@@ -75,7 +75,7 @@ original code more object-oriented and make it [reveal its intent](https://marti
 - Based on the original [earth-moon system]([https://www.youtube.com/watch?v=ExxDuRTIe0E](https://www.youtube.com/watch?v=2BisyQhNBFM)) video and the code presented therein
 
 
-## References
+# References
 
 - Just for fun: [online electric circuit construction kit](https://phet.colorado.edu/sims/html/circuit-construction-kit-ac/latest/circuit-construction-kit-ac_all.html).
 Make sure to check it out, it simply is brilliant.
