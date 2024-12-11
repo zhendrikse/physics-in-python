@@ -21,6 +21,13 @@ Make sure to check it out, it simply is brilliant.
 
 - [Manim](https://github.com/3b1b/manim), an animation engine for explanatory math videos
 
+# N-body coupled oscillator
+
+<p align="center">
+  <img alt="N-body coupled oscillator" width="50%" height="50%" src="./src/demos/images/n_body_coupled_oscillator.png"/></br>
+  <a href="https://trinket.io/glowscript/5a852a2b7570">N-body coupled oscillator on Trinket</a>
+</p>
+
 # Python physics demos from [Dot Physics](https://www.youtube.com/channel/UCVxIDFY01y4n_c2lK1TB-KA)
 
 These demos are _refactored versions_ of the originals, found 
