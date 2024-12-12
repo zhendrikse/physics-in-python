@@ -18,8 +18,8 @@ def main():
                            make_trail=True)
     
     capacitor = Capacitor(pos=vec(0, 1E-13, 0), 
-                          size=vec(4E-13, 4E-16, 4E-13))
-    
+                          plate_size=vec(4E-13, 4E-16, 4E-13))
+    capacitor.charge()
     capacitor.show_field(x_range=range(-18, 18, 8), 
                          y_range=range(-9, 9, 4), 
                          z_range=range(-18, 18, 8))
