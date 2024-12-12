@@ -5,31 +5,29 @@ This repository contains physics demos, mainly using [VPython](https://vpython.o
 - [**`src`**](src) &rarr; contains the sources
 - [**`test`**](test) &rarr; the tests of the components in the generic toolbox
 
-## Glowscript demos on [Trinket](https://trinket.io)
+## [Glowscript](https://www.glowscript.org/) demos on [Trinket](https://trinket.io)
 
-#### &darr; Click on the below images to take a look at the associated Trinket code snippets &darr;
+### [Charged particle moving through electric field](https://trinket.io/glowscript/db4616ccd73c)
 
-### Charged particle moving through electric field
-
-<a href="https://trinket.io/glowscript/db4616ccd73c">
+<a href="https://zegerh-6085.trinket.io/sites/moving_charge">
   <img alt="Particle in electric field" width="50%" height="50%" src="./src/demos/images/particle_in_electric_field.png"/></br>
 </a>
 
-### N-body coupled oscillator
+### [N-body coupled oscillator](https://trinket.io/glowscript/5a852a2b7570)
 
-<a href="https://trinket.io/glowscript/5a852a2b7570">
+<a href="https://zegerh-6085.trinket.io/sites/moving_charge">
   <img alt="N-body coupled oscillator" width="50%" height="50%" src="./src/demos/images/n_body_coupled_oscillator.png"/>
 </a>
 
-### Electric field of point charge
+### [Electric field of point charge](https://trinket.io/glowscript/96da4eb68335?showInstructions=true)
 
-<a href="https://trinket.io/glowscript/96da4eb68335?showInstructions=true">
+<a href="https://zegerh-6085.trinket.io/sites/point_charge">
   <img alt="Electric field of point charge" width="50%" height="50%" src="./src/demos/images/point_charge.png"/>
 </a>
 
-### Electric dipole field
+### [Electric dipole field](https://trinket.io/glowscript/a2b8b655fa07?showInstructions=true)
 
-<a href="https://trinket.io/glowscript/a2b8b655fa07?showInstructions=true">
+<a href="https://zegerh-6085.trinket.io/sites/dipole">
   <img alt="Electric field of a dipole" width="50%" height="50%" src="./src/demos/images/dipole_field.png"/>
 </a>
 
