@@ -1,4 +1,7 @@
-from vpython import vector, cos, sin, cylinder, sphere, box, color, rate
+from vpython import vector, cos, sin, cylinder, sphere, box, color, rate, scene
+#
+# https://www.leonhostetler.com/blog/newtons-cradle-in-visual-python-201702/
+#
 #
 # https://www.leonhostetler.com/blog/newtons-cradle-in-visual-python-201702/
 #
@@ -6,36 +9,46 @@ from vpython import vector, cos, sin, cylinder, sphere, box, color, rate
 # Constants
 g = 9.80            # (m/s^2)
 L = 10              # Length of the pendulums (m)
-initialAngle = 1.2  # In radians
- 
+theta_0 = 1.2       # In radians
+        
+#scene = canvas(width=400, height=300, align='top')
+scene.caption = "\\( \\theta(t)=\\theta_0 \\cos \\bigg( \\sqrt{  \\dfrac {g} {L}} t \\bigg) \\)"
+MathJax.Hub.Queue(["Typeset", MathJax.Hub])
  
 # Create the pendulum bob and rod
-ceiling = box(pos=vector(0, 0, 0), size=vector(20, 1, 4), color=color.green)
-pend = sphere(pos=vector(L* sin(initialAngle), -L* cos(initialAngle), 0), radius=1, color=color.yellow)
-rod = cylinder(pos=vector(0, 0, 0), axis=vector(pend.pos.x, pend.pos.y, 0), radius=0.1)
-pend2 = sphere(pos=vector(-2, -L, 0), radius=1, color=color.red)
-rod2 = cylinder(pos=vector(-2, 0, 0), axis=vector(pend2.pos.x+2, pend2.pos.y, 0), radius=0.1)
- 
- 
+ceiling = box(pos=vector(-4, 0, 0), size=vector(20, 1, 4), color=color.green)
+
+balls = [sphere(pos=vector(0*-2 +L* sin(theta_0), -L* cos(theta_0), 0), radius=1, color=color.yellow)]
+rods = [cylinder(pos=vector(0*-2, 0, 0), axis=vector(balls[0].pos.x, balls[0].pos.y, 0), radius=0.1)]
+
+for i in range(1, 5):
+  balls.append(sphere(pos=vector(i*-2, -L, 0), radius=1, color=color.red))
+  rods.append(cylinder(pos=vector(i*-2, 0, 0), axis=vector(balls[i].pos.x+i*2,balls[i].pos.y, 0), radius=0.1))
+  
+  
 def position(right, t):
     """
     Only one of the pendulums is in motion at a given time. This function
     moves the moving pendulum to its new position. We use the equation:
         theta(t) = theta_0*cos(sqrt(g/L)*t)
     """
-    theta = initialAngle * cos((g/L)**(1/2)*t)
+    theta = theta_0 * cos(sqrt(g/L) * t)
  
     if right:
         # Update position of bob
-        pend.pos = vector(L * sin(theta), -L * cos(theta), 0)  
+        balls[0].pos = vector(L * sin(theta), -L * cos(theta), 0)
+        balls[0].color = color.yellow
+        balls[4].color = color.red
         # Update rod's position
-        rod.axis = vector(pend.pos.x, pend.pos.y, 0)  
+        rods[0].axis = vector(balls[0].pos.x, balls[0].pos.y, 0)  
         
     else:
         # Update position of bob
-        pend2.pos = vector(L * sin(theta) - 2, -L * cos(theta), 0)
-        # Update rod's position
-        rod2.axis = vector(pend2.pos.x + 2, pend2.pos.y, 0)  
+        balls[4].pos = vector(L * sin(theta) - 4 * 2, -L * cos(theta), 0)
+        balls[0].color = color.red
+        balls[4].color = color.yellow
+        # Update rod's posistion
+        rods[4].axis = vector(balls[4].pos.x + 4 * 2, balls[4].pos.y, 0)  
  
     # Once the moving pendulum reaches theta = 0, switch to the other one
     if theta <= 0:
@@ -43,10 +56,10 @@ def position(right, t):
     else:
         return True
  
-# Increment time
-i = 0
+t = 0
+dt = 0.01
 right = True  # The right pendulum is the first in motion
 while True:
     rate(200)
-    right = position(right, i)
-    i += 0.01
+    right = position(right, t)
+    t += dt
