@@ -66,6 +66,8 @@ class Dipole:
         return Field(charges=self._charges)
 
 scene = canvas(width=1000, height=600, align='top', range=3E-13)
+scene.caption = "Electric field \\( \\vec{E} ( \\vec{r} ) = -\\dfrac {1} {4\\pi\\epsilon_0} \\nabla \\bigg( \\dfrac{\\vec{r}  \\cdot \\vec{p}} {r^3} \\bigg) \\), where \\( \\vec{p}=+q(\\vec{r}_+) + -q(\\vec{r}_-) \\)"
+MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 dipole = Dipole()
 dipole.field().show(x_range=range(-22, 22, 5), y_range=range(-22, 22, 5), z_range=range(-12, 12, 5))

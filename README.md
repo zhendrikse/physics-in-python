@@ -33,6 +33,12 @@ This repository contains physics demos, mainly using [VPython](https://vpython.o
   <img alt="Electric field of a dipole" width="50%" height="50%" src="./src/demos/images/dipole_field.png"/>
 </a>
 
+### [Newton&apos;s pendulum](https://trinket.io/glowscript/1b74de8aeee8)
+
+<a href="https://zegerh-6085.trinket.io/sites/newtons_pendulum">
+  <img alt="Harmonic oscillator" width="50%" height="50%" src="./src/demos/images/newtons_pendulum.png"/>
+</a>
+
 ### [Harmonic oscillator](https://trinket.io/library/trinkets/e80e37600b06)
 
 <a href="https://zegerh-6085.trinket.io/sites/harmonic_oscillator">
