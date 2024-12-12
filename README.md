@@ -21,17 +21,24 @@ This repository contains physics demos, mainly using [VPython](https://vpython.o
   <img alt="N-body coupled oscillator" width="50%" height="50%" src="./src/demos/images/n_body_coupled_oscillator.png"/>
 </a>
 
-### [Electric field of point charge](https://trinket.io/glowscript/96da4eb68335?showInstructions=true)
+### [Electric field of point charge](https://trinket.io/glowscript/96da4eb68335)
 
 <a href="https://zegerh-6085.trinket.io/sites/point_charge">
   <img alt="Electric field of point charge" width="50%" height="50%" src="./src/demos/images/point_charge.png"/>
 </a>
 
-### [Electric dipole field](https://trinket.io/glowscript/a2b8b655fa07?showInstructions=true)
+### [Electric dipole field](https://trinket.io/glowscript/a2b8b655fa07)
 
 <a href="https://zegerh-6085.trinket.io/sites/dipole">
   <img alt="Electric field of a dipole" width="50%" height="50%" src="./src/demos/images/dipole_field.png"/>
 </a>
+
+### [Harmonic oscillator](https://trinket.io/library/trinkets/e80e37600b06)
+
+<a href="https://zegerh-6085.trinket.io/sites/harmonic_oscillator">
+  <img alt="Harmonic oscillator" width="50%" height="50%" src="./src/demos/images/harmonic_oscillator.png"/>
+</a>
+
 
 ## Glowscript demos from [Dot Physics](https://www.youtube.com/channel/UCVxIDFY01y4n_c2lK1TB-KA)
 
