@@ -1,4 +1,5 @@
 from vpython import arrow, vec, hat, sphere, color, sin, cos, pi, canvas, exp, mag
+from mathjax import MathJax
 
 ec = 1.6E-19            # electron charge
 k = 9E9                 # Coulomb constant
@@ -45,6 +46,9 @@ class Charge:
     def field_at(self, position):
         return hat(position - self._charge.pos) * k * self._charge.coulomb / mag(position - self._charge.pos)**2
         
-scene = canvas(width=1000, height=600, align='left', range=3E-13)
+scene = canvas(width=1000, height=600, align='top', range=3E-13)
+scene.caption = "Electric field \\( \\vec{E} ( \\vec{r} ) = \\dfrac {1} {4\\pi\\epsilon_0} \\dfrac {Q} {r^2} \\hat{r} \\), Electric force \\( \\vec{F}(\\vec{r}) = q \\vec{E} ( \\vec{r} ) =  \\dfrac {1} {4\\pi\\epsilon_0} \\dfrac {qQ} {r^2} \\hat{r} \\)"
+MathJax.Hub.Queue(["Typeset", MathJax.Hub])
+
 charge = Charge(position=vec(0, 0, 0), radius=1.2E-14, coulomb=1 * ec)
 charge.show_field()

@@ -10,7 +10,7 @@ class Dipole:
     def __init__(self, radius=1.2E-14):
         position = vec(10 * radius, 0, 0)
         self._charges = [Charge(position=position, radius=radius, coulomb=ec),
-                         Charge(position=-position, radius=radius, coulomb=ec)]
+                         Charge(position=-position, radius=radius, coulomb=-ec)]
 
     @property
     def field(self):

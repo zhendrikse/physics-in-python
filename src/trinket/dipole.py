@@ -43,15 +43,9 @@ class Field:
       return field
 
 class Charge:
-    def __init__(self, mass=1.6E-27, position=vec(0, 0, 0), velocity=vec(0, 0, 0), radius=1.0, coulomb=ec, color=color.red, make_trail=False):
-        colour = color 
-        if colour is None:
-          if coulomb > 0:
-            colour = color.blue 
-          else: 
-            colour = color.red
-          
-        self._charge = sphere(mass=mass, pos=position, v=velocity, radius=radius, coulomb=coulomb, color=color, make_trail=make_trail)
+    def __init__(self, mass=1.6E-27, position=vec(0, 0, 0), velocity=vec(0, 0, 0), radius=1.0, coulomb=ec, colour=color.red, make_trail=False):
+
+        self._charge = sphere(mass=mass, pos=position, v=velocity, radius=radius, coulomb=coulomb, color=colour, make_trail=make_trail)
         self._field_arrows = []
 
     def field_at(self, position):
@@ -65,15 +59,14 @@ class Dipole:
     def __init__(self, radius=1.2E-14):
          position = vec(10 * radius, 0, 0)
          self._charges = []
-         self._charges += [Charge(position=position, radius=radius, coulomb=ec)]
-         self._charges += [Charge(position=-position, radius=radius, coulomb=ec)]
+         self._charges += [Charge(position=position, radius=radius, coulomb=ec, colour=color.blue)]
+         self._charges += [Charge(position=-position, radius=radius, coulomb=-ec)]
 
     def field(self):
         return Field(charges=self._charges)
 
-scene = canvas(width=1000, height=600, align='left', range=3E-13)
+scene = canvas(width=1000, height=600, align='top', range=3E-13)
+
 dipole = Dipole()
 dipole.field().show(x_range=range(-22, 22, 5), y_range=range(-22, 22, 5), z_range=range(-12, 12, 5))
 
-# while True:
-#    pass
