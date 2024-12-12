@@ -1,10 +1,5 @@
 # Physics in Python
 
-<p align="center">
-  <img alt="Particle in electric field" width="75%" height="75%" src="./src/demos/images/particle_in_electric_field.png"/></br>
-  <a href="https://github.com/zhendrikse/physics-in-python/blob/main/src/demos/moving_charge.py">Charged particle moving through charged plates</a>
-</p>
-
 This repository contains physics demos, mainly using [VPython](https://vpython.org/).
 
 - **`src`** &rarr; contains the sources
@@ -18,22 +13,28 @@ This repository contains physics demos, mainly using [VPython](https://vpython.o
 
 #### &darr; Click on the below images to take a look at the associated Trinket code snippets &darr;
 
+### Charged particle moving through electric field
+
+<a href="https://trinket.io/glowscript/db4616ccd73c">
+  <img alt="Particle in electric field" width="50%" height="50%" src="./src/demos/images/particle_in_electric_field.png"/></br>
+</a>
+
 ### N-body coupled oscillator
 
 <a href="https://trinket.io/glowscript/5a852a2b7570">
-<img alt="N-body coupled oscillator" width="50%" height="50%" src="./src/demos/images/n_body_coupled_oscillator.png"/>
+  <img alt="N-body coupled oscillator" width="50%" height="50%" src="./src/demos/images/n_body_coupled_oscillator.png"/>
 </a>
 
 ### Electric field of point charge on Trinket
 
 <a href="https://trinket.io/glowscript/96da4eb68335?showInstructions=true">
-<img alt="Electric field of point charge" width="50%" height="50%" src="./src/demos/images/point_charge.png"/>
+  <img alt="Electric field of point charge" width="50%" height="50%" src="./src/demos/images/point_charge.png"/>
 </a>
 
 ### Electric dipole field
 
 <a href="https://trinket.io/glowscript/a2b8b655fa07?showInstructions=true">
-<img alt="Electric field of a dipole" width="50%" height="50%" src="./src/demos/images/dipole_field.png"/>
+  <img alt="Electric field of a dipole" width="50%" height="50%" src="./src/demos/images/dipole_field.png"/>
 </a>
 
 ## Glowscript demos from [Dot Physics](https://www.youtube.com/channel/UCVxIDFY01y4n_c2lK1TB-KA)
