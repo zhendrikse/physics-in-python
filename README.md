@@ -21,7 +21,7 @@ This repository contains physics demos, mainly using [VPython](https://vpython.o
   <img alt="N-body coupled oscillator" width="50%" height="50%" src="./src/demos/images/n_body_coupled_oscillator.png"/>
 </a>
 
-### Electric field of point charge on Trinket
+### Electric field of point charge
 
 <a href="https://trinket.io/glowscript/96da4eb68335?showInstructions=true">
   <img alt="Electric field of point charge" width="50%" height="50%" src="./src/demos/images/point_charge.png"/>
