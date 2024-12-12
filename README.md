@@ -80,6 +80,8 @@ original code more object-oriented and make it [reveal its intent](https://marti
 
 # References
 
+- [MyScript](https://webdemo.myscript.com/): enter text, equations, or diagrams by hand, and effortlessly convert it to MathML, LaTeX, etc!
+
 - Just for fun: [online electric circuit construction kit](https://phet.colorado.edu/sims/html/circuit-construction-kit-ac/latest/circuit-construction-kit-ac_all.html).
 Make sure to check it out, it simply is brilliant.
 
