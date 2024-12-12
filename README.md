@@ -7,7 +7,7 @@ This repository contains physics demos, mainly using [VPython](https://vpython.o
 
 ## [Glowscript](https://www.glowscript.org/) demos on [Trinket](https://trinket.io)
 
-#### &darr; Click on the below images to see animated versions.
+#### **&darr;** Click on the below images to see animated versions **&darr;**
 
 ### [Charged particle moving through electric field](https://trinket.io/glowscript/db4616ccd73c)
 
