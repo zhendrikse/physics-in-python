@@ -17,7 +17,7 @@ This repository contains physics demos, mainly using [VPython](https://vpython.o
 
 ### [N-body coupled oscillator](https://trinket.io/glowscript/5a852a2b7570)
 
-<a href="https://zegerh-6085.trinket.io/sites/moving_charge">
+<a href="https://zegerh-6085.trinket.io/sites/n_body_coupled_oscillator">
   <img alt="N-body coupled oscillator" width="50%" height="50%" src="./src/demos/images/n_body_coupled_oscillator.png"/>
 </a>
 
