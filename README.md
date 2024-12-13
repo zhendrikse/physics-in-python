@@ -91,6 +91,12 @@ original code more object-oriented and make it [reveal its intent](https://marti
   <img alt="Electric field of point charge" width="50%" height="50%" src="./src/demos/images/rubiks_cube.png"/>
 </a>
 
+### [Turtle graphics robot](https://trinket.io/library/trinkets/31a188264ef1)
+
+<a href="https://trinket.io/library/trinkets/31a188264ef1"> <!-- TODO: CHANGE THIS ONCE ROBOT HAS BEEN PUBLISHED -->
+  <img alt="Robot for turtle graphics" width="50%" height="50%" src="./src/demos/images/robot.png"/>
+</a>
+
 # References
 
 - [MyScript](https://webdemo.myscript.com/): enter text, equations, or diagrams by hand, and effortlessly convert it to MathML, LaTeX, etc!
