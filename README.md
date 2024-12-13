@@ -91,3 +91,9 @@ original code more object-oriented and make it [reveal its intent](https://marti
 Make sure to check it out, it simply is brilliant.
 
 - [Manim](https://github.com/3b1b/manim), an animation engine for explanatory math videos
+
+## VPython
+
+- [VPython Docs](https://www.beautifulmathuncensored.de/static/GlowScript/VPythonDocs/)
+
+- [Glowscript documentation](https://www.glowscript.org/docs/VPythonDocs/index.html)
