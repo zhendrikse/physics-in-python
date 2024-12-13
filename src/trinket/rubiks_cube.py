@@ -35,61 +35,70 @@ def make_lights():
     local_light(pos=vector(0, 12, 0), color=color.gray(0.4))
     # sphere(pos=(0, 15, 0), radius=0.5)
 
-def turn_face(key):
-    face_color, axis = faces[key.lower()]
-    angle = (pi / 2) if key.isupper() else (-1 * pi / 2)
-    r = 0
-    while r < abs(angle):
-        rate(fps * 6)
-        for sticker in stickers:
-            if dot(sticker.pos, axis) > 0.5:
-                sticker.rotate(angle=angle/fps, axis=axis, origin=zero_vec)    
-        r += abs(angle / fps)
-
-def put_sticker_on_face(x, y, face_color):
-    sticker = box(texture=textures.metal, color=face_color, pos=vector(x, y, 1.52), length=0.85, height=0.85, width=0.03)
-    cos_angle = dot(vector(0, 0, 1), axis)
-    pivot = (cross(vector(0, 0, 1), axis) if cos_angle == 0 else vector(1, 0, 0))
-    sticker.rotate(angle=acos(cos_angle), axis=pivot, origin=vector(0, 0, 0))
-    stickers.append(sticker)
-
-    back = box(color=color.gray(0.1), texture=textures.granite, pos=vector(x, y, 1), length=1, height=1, width=1)
-    back.rotate(angle=acos(cos_angle), axis=pivot, origin=vector(0, 0, 0))
-    stickers.append(back)
-
-def key_pressed(event):
-    key = event.key
-    if key.lower() in faces:
-        turn_face(key)
-
-def run_demo():
+def run_demo(cube):
   for key in "uuddllrrffbb":
-    turn_face(key)
+    cube.turn_face(key)
   for t in range(0, fps * 3):
     rate(fps)
   for key in "uuddllrrffbb":
-    turn_face(key)
+    cube.turn_face(key)
 
+class Cube:
+    def __init__(self):
+        # Map keyboard keys to respective faces.
+        self._faces = {}
+        self._faces['u'] = [vector(0.2, 0.2, 0.8), vector(0, 1, 0)] # blue
+        self._faces['d'] = [vector(0.2, 0.8, 0.2), vector(0, -1, 0)] # green
+        self._faces['r'] = [vector(1, 0, 0), vector(1, 0, 0)] # red
+        self._faces['l'] = [vector(1.0, 0.6, 0.4), vector(-1, 0, 0)] # orange
+        self._faces['b'] = [vector(1, 1, 0), vector(0, 0, -1)] # yellow
+        self._faces['f'] = [vector(1, 1, 1), vector(0, 0, 1)] # white
 
-# Map keyboard keys to respective faces.
-faces = {}
-faces['u'] = [vector(0.2, 0.2, 0.8), vector(0, 1, 0)] # blue
-faces['d'] = [vector(0.2, 0.8, 0.2), vector(0, -1, 0)] # green
-faces['r'] = [vector(1, 0, 0), vector(1, 0, 0)] # red
-faces['l'] = [vector(1.0, 0.6, 0.4), vector(-1, 0, 0)] # orange
-faces['b'] = [vector(1, 1, 0), vector(0, 0, -1)] # yellow
-faces['f'] = [vector(1, 1, 1), vector(0, 0, 1)] # white
+        # Create colored stickers on each face, one layer at a time.
+        self._stickers = []
+        for face_color, axis in self._faces.values():
+            for x in (-1, 0, 1):
+                for y in (-1, 0, 1):
+                    self._put_sticker_on_face(x, y, face_color, axis)
 
-# Create colored stickers on each face, one layer at a time.
-stickers = []
-for face_color, axis in faces.values():
-    for x in (-1, 0, 1):
-        for y in (-1, 0, 1):
-            put_sticker_on_face(x, y, face_color)
+    def turn_face(self, key):
+        if not key.lower() in self._faces:
+            return
+        
+        face_color, axis = self._faces[key.lower()]
+        angle = (pi / 2) if key.isupper() else (-1 * pi / 2)
+        r = 0
+        while r < abs(angle):
+            rate(fps * 6)
+            for sticker in self._stickers:
+                if dot(sticker.pos, axis) > 0.5:
+                    sticker.rotate(angle=angle/fps, axis=axis, origin=zero_vec)    
+            r += abs(angle / fps)
+
+    def _put_sticker_on_face(self, x, y, face_color, axis):
+        sticker = box(texture=textures.metal, color=face_color, pos=vector(x, y, 1.52), length=0.85, height=0.85, width=0.03)
+        cos_angle = dot(vector(0, 0, 1), axis)
+        pivot = (cross(vector(0, 0, 1), axis) if cos_angle == 0 else vector(1, 0, 0))
+        sticker.rotate(angle=acos(cos_angle), axis=pivot, origin=vector(0, 0, 0))
+        self._stickers.append(sticker)
+
+        back = box(color=color.gray(0.1), texture=textures.granite, pos=vector(x, y, 1), length=1, height=1, width=1)
+        back.rotate(angle=acos(cos_angle), axis=pivot, origin=vector(0, 0, 0))
+        self._stickers.append(back)
+        
+
+cube = Cube()
 
 make_walls()
 make_lights()
-run_demo()
+run_demo(cube)
 
-cube_scene.bind('keydown', key_pressed)
+def on_key_press(event):
+    key = event.key
+    cube.turn_face(key)
+
+cube_scene.bind('keydown', on_key_press)
 cube_scene.caption = 'Use upper and lower case u, d, l, r, f, b keys to rorate the sides'
+
+#while True:
+#    pass
