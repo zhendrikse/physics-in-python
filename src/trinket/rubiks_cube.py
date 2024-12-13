@@ -1,6 +1,6 @@
 #
-# Refactored from 
-# https://github.com/mtking2/VPython-Rubiks-Cube/blob/master/PyCube.py
+# Refactored from  https://github.com/mtking2/VPython-Rubiks-Cube/blob/master/PyCube.py
+# Please also take a look at my Git repo: https://github.com/zhendrikse/physics-in-python/
 #
 from vpython import canvas, box, color, dot, cross, acos, textures, vector, rate, pi, local_light, sphere
 
