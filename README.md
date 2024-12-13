@@ -83,6 +83,14 @@ original code more object-oriented and make it [reveal its intent](https://marti
 - See [my code in action](https://trinket.io/glowscript/42acc05540ae) on Trinket
 - Based on the original [earth-moon system]([https://www.youtube.com/watch?v=ExxDuRTIe0E](https://www.youtube.com/watch?v=2BisyQhNBFM)) video and the code presented therein
 
+# Fun stuff
+
+### [Rubik's cube](https://trinket.io/library/trinkets/00eb13fbcd14)
+
+<a href="https://zegerh-6085.trinket.io/sites/rubiks_cube">
+  <img alt="Electric field of point charge" width="50%" height="50%" src="./src/demos/images/rubiks_cube.png"/>
+</a>
+
 # References
 
 - [MyScript](https://webdemo.myscript.com/): enter text, equations, or diagrams by hand, and effortlessly convert it to MathML, LaTeX, etc!
