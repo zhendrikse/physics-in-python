@@ -5,7 +5,7 @@ This repository contains physics demos, mainly using [VPython](https://vpython.o
 - [**`src`**](src) &rarr; contains the sources
 - [**`test`**](test) &rarr; the tests of the components in the generic toolbox
 
-## [Glowscript](https://www.glowscript.org/) demos on [Trinket](https://trinket.io)
+## [Glowscript](https://www.glowscript.org/) demos on [Trinket](https://trinket.io/published)
 
 #### **&darr;** Click on the below images to see animated versions **&darr;**
 
