@@ -83,7 +83,7 @@ original code more object-oriented and make it [reveal its intent](https://marti
 - See [my code in action](https://trinket.io/glowscript/42acc05540ae) on Trinket
 - Based on the original [earth-moon system]([https://www.youtube.com/watch?v=ExxDuRTIe0E](https://www.youtube.com/watch?v=2BisyQhNBFM)) video and the code presented therein
 
-# Fun stuff
+# Fun stuff with [VPython](https://vpython.org/) 
 
 ### [Rubik's cube](https://trinket.io/library/trinkets/00eb13fbcd14)
 
