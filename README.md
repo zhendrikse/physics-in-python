@@ -51,6 +51,11 @@ This repository contains physics demos, mainly using [VPython](https://vpython.o
   <img alt="Harmonic oscillator" width="50%" height="50%" src="./src/demos/images/harmonic_oscillator.png"/>
 </a>
 
+### [Block rotation](https://trinket.io/library/trinkets/0e414ca766d1)
+<a href="https://trinket.io/library/trinkets/0e414ca766d1">
+  <img alt="Harmonic oscillator" width="50%" height="50%" src="./src/demos/images/block_rotation.png"/>
+</a>
+
 ## Glowscript demos from [Dot Physics](https://www.youtube.com/channel/UCVxIDFY01y4n_c2lK1TB-KA)
 
 These demos are _refactored versions_ of the originals, found 

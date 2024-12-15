@@ -1,3 +1,8 @@
+##
+# Original: https://github.com/Physics-Morris/Physics-Vpython/blob/master/1_Moving_Wedge.py
+# See also: https://github.com/zhendrikse/physics-in-python/
+#
+
 from vpython import radians, tan, sin,cos, mag, vec, canvas, button, winput, vertex, color, quad, triangle, textures, gdots, graph, rate, box, sphere
 from toolbox.wedge import Wedge
 from toolbox.timer import PhysTimer
