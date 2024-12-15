@@ -28,8 +28,8 @@ class Wedge:
 
     def update(self, dt):
         for i in range(0, len(self._apex)):
-            self._apex[i].v.x += self._apex[i].a.x * dt
-            self._apex[i].pos.x += self._apex[i].v.x * dt
+            self._apex[i].v += self._apex[i].a * dt
+            self._apex[i].pos += self._apex[i].v * dt
 
     def zero_acceleration(self):
         for i in range(0, len(self._apex)):

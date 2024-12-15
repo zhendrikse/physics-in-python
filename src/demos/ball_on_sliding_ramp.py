@@ -133,13 +133,11 @@ while True:
         else: tmp_M = wedge_mass_input_field.number
         if ball_mass_input_field.number == None: tmp_m = ball_mass
         else: tmp_m = ball_mass_input_field.number
-
         if ball_on_ramp():
             p = ball.v.x * tmp_m + wedge.velocity * tmp_M
-            plot_ball_velocity_x.plot(pos=(t, ball.v.x))
-            plot_wedge_velocity_x.plot(pos=(t, wedge.velocity))
-            # m_p.plot(pos=(t, m * ball.v.x))
-            # M_p.plot(pos=(t, s0.value * A.v.x))
+
+        plot_ball_velocity_x.plot(pos=(t, ball.v.x))
+        plot_wedge_velocity_x.plot(pos=(t, wedge.velocity))
 
         K = 0.5*tmp_m*(ball.v.x**2 + ball.v.y**2) + wedge.kinetic_energy
         U = tmp_m*grav_constant*(ball.pos.y - (ball.radius+floor.size.y/2))
