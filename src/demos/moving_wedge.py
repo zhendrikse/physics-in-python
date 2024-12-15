@@ -1,13 +1,7 @@
-from vpython import radians, tan, sin,cos, exp, vec, canvas, button, winput, vertex, color, quad, triangle, textures, gdots, graph, rate, box, sphere
+from vpython import radians, tan, sin,cos, mag, vec, canvas, button, winput, vertex, color, quad, triangle, textures, gdots, graph, rate, box, sphere
 from dataclasses import dataclass
 
 ball_mass, grav_constant, theta, friction_constant = 1.0, 9.8, 45, 0.0
-
-@dataclass
-class Accelerations:
-    acceleration_ball_x: float = 0.0
-    acceleration_ball_y: float = 0.0
-    acceleration_wedge_x: float = 0.0
 
 class Wedge:
     def __init__(self, mass=3.0, ball_mass=1.0, theta=45, friction_constant=0.0):
@@ -65,7 +59,6 @@ class Wedge:
         self._mass = mass_wedge
         self._theta = radians(theta)
         self._apex[0].pos, self._apex[1].pos, self._apex[2].pos, self._apex[3].pos, self._apex[4].pos, self._apex[5].pos = vec(0, 0, 0), vec(10/tan(radians(theta)), 0, 0), vec(10/tan(radians(theta)), 0, 10), vec(0, 0, 10), vec(0, 10, 10), vec(0, 10, 0)
-        self._apex[0].v,   self._apex[1].v,   self._apex[2].v,   self._apex[3].v,   self._apex[4].v,   self._apex[5].v = vec(0,0,0), vec(0,0,0), vec(0,0,0), vec(0,0,0), vec(0,0,0), vec(0,0,0)
 
         for i in range(0, len(self._apex)):
             self._apex[i].a.x = self._acceleration_x()
@@ -74,6 +67,10 @@ class Wedge:
     @property
     def velocity(self):
         return self._apex[0].v.x # all points of wedge move at equal velocity
+
+    @property
+    def kinetic_energy(self):
+        return 0.5 * self._mass * self.velocity * self.velocity    
     
     @property
     def mass(self):
@@ -105,13 +102,13 @@ def restart():
     running = False
     b1.text = "Run"
     t = 0
-    m_v.delete()
-    M_v.delete()
+    plot_ball_velocity_x.delete()
+    plot_wedge_velocity_x.delete()
     # m_p.delete()
     # M_p.delete()
-    total_E.delete()
-    m_E.delete()
-    M_E.delete()
+    plot_energy_total.delete()
+    plot_energy_ball.delete()
+    plot_energy_wedge.delete()
 
     wedge.with_new_parameters(theta_tmp, friction_tmp, M_tmp, m_tmp)   
     ball.v, ball.pos, ball.a.x, ball.a.y = vec(0,0,0), vec(1.5/sin(radians(theta_tmp)), 10, 5), wedge.acceleration_ball().x, wedge.acceleration_ball().y
@@ -174,13 +171,11 @@ g1 = graph(title='<b>Velocity (x direction), ball=red, wedge=green</b>',
 g2 = graph(title='<b>Energy, ball=blue, wedge=red, total=green<b>', xtitle='<b>time</b>', 
            ytitle='<b>E</b>', align='left', width=500, height=300)
 
-m_v = gdots(graph=g1, color=color.red)
-M_v = gdots(graph=g1, color=color.green)
-
-
-m_E = gdots(graph=g2, color=color.blue)
-M_E = gdots(graph=g2, color=color.red)
-total_E = gdots(graph=g2, color=color.green)
+plot_ball_velocity_x = gdots(graph=g1, color=color.red)
+plot_wedge_velocity_x = gdots(graph=g1, color=color.green)
+plot_energy_ball = gdots(graph=g2, color=color.blue)
+plot_energy_wedge = gdots(graph=g2, color=color.red)
+plot_energy_total = gdots(graph=g2, color=color.green)
 
 def ball_on_ramp():
     return ball.pos.y >= ball.radius+floor.size.y / 2
@@ -189,23 +184,18 @@ dt = 0.01
 t = 0
 while True:
     rate(1/dt)
-  
-    if ball.pos.x > 50:
-        running = False
+    running = running if ball.pos.x < 50 else False
 
     if running:
-        ball.v.x += ball.a.x * dt
-        ball.pos.x += ball.v.x * dt
-        ball.v.y += ball.a.y * dt
-        ball.pos.y += ball.v.y * dt
-
+        ball.v += ball.a * dt
+        ball.pos += ball.v * dt
         wedge.update(dt)
 
         if not ball_on_ramp():
-            ball.v.x = (ball.v.x**2 + ball.v.y**2)**0.5
-            ball.a.x, ball.a.y, ball.v.y = 0, 0, 0
+            ball.v = vec(mag(ball.v), 0, 0)
+            ball.a = vec(0, 0, 0)
             ball.up = vec(0, 1, 0)
-            ball.pos.x += ball.v.x * dt
+            ball.pos += ball.v * dt
 
             wedge.zero_acceleration()
             wedge.update(dt)
@@ -218,17 +208,16 @@ while True:
 
         if ball_on_ramp():
             p = ball.v.x * tmp_m + wedge.velocity * tmp_M
-            m_v.plot(pos=(t, ball.v.x))
-            M_v.plot(pos=(t, wedge.velocity))
-
+            plot_ball_velocity_x.plot(pos=(t, ball.v.x))
+            plot_wedge_velocity_x.plot(pos=(t, wedge.velocity))
             # m_p.plot(pos=(t, m * ball.v.x))
             # M_p.plot(pos=(t, s0.value * A.v.x))
 
-        K = 0.5*tmp_m*(ball.v.x**2 + ball.v.y**2) + 0.5*tmp_M* wedge.velocity **2
+        K = 0.5*tmp_m*(ball.v.x**2 + ball.v.y**2) + wedge.kinetic_energy
         U = tmp_m*grav_constant*(ball.pos.y - (ball.radius+floor.size.y/2))
 
-        m_E.plot(pos=(t, K))
-        M_E.plot(pos=(t, U))
-        total_E.plot(pos=(t, K+U))
+        plot_energy_ball.plot(pos=(t, K))
+        plot_energy_wedge.plot(pos=(t, U))
+        plot_energy_total.plot(pos=(t, K+U))
 
         t += dt
