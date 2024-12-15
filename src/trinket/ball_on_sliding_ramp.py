@@ -1,5 +1,6 @@
-from vpython import radians, tan, sin,cos, mag, vec, canvas, button, winput, vertex, color, quad, triangle, textures, gdots, graph, rate, box, sphere
-from dataclasses import dataclass
+##
+# Original: https://github.com/Physics-Morris/Physics-Vpython/blob/master/1_Moving_Wedge.py
+# See also: https://github.com/zhendrikse/physics-in-python/
 
 ball_mass, grav_constant, theta, friction_constant = 1.0, 9.8, 45, 0.0
 
@@ -42,7 +43,7 @@ class Wedge:
 
     def _acceleration_ball(self):
         total_mass = self._ball_mass + self._mass
-        return  grav_constant/(self.mass * (cos(self._theta)**2 + self._friction*sin(self._theta)*cos(self._theta))/(total_mass)/(sin(self._theta) - self._friction*cos(self._theta))+ sin(self._theta))
+        return  grav_constant/(self._mass * (cos(self._theta)**2 + self._friction*sin(self._theta)*cos(self._theta))/(total_mass)/(sin(self._theta) - self._friction*cos(self._theta))+ sin(self._theta))
 
     def _acceleration_x(self):
         total_mass = self._ball_mass + self._mass
@@ -64,15 +65,12 @@ class Wedge:
             self._apex[i].a.x = self._acceleration_x()
             self._apex[i].v = vec(0, 0, 0)
 
-    @property
     def velocity(self):
         return self._apex[0].v.x # all points of wedge move at equal velocity
 
-    @property
     def kinetic_energy(self):
-        return 0.5 * self._mass * self.velocity * self.velocity    
+        return 0.5 * self._mass * self.velocity() * self.velocity()   
     
-    @property
     def mass(self):
         return self._mass
 
@@ -94,7 +92,7 @@ def restart():
     theta_tmp, friction_tmp, M_tmp, m_tmp = theta_input_field.number, friction_input_field.number, wedge_mass_input_field.number, ball_mass_input_field.number
     if theta_tmp == None: theta_tmp = theta
     if friction_tmp == None: friction_tmp = friction_constant
-    if M_tmp == None: M_tmp = wedge.mass
+    if M_tmp == None: M_tmp = wedge.mass()
     if m_tmp == None: m_tmp = ball_mass
 
     global running
@@ -117,7 +115,7 @@ def get_parameter_values():
     theta_tmp, friction_tmp, M_tmp, m_tmp = theta_input_field.number, friction_input_field.number, wedge_mass_input_field.number, ball_mass_input_field.number
     if theta_tmp == None: theta_tmp = theta
     if friction_tmp == None: friction_tmp = friction_constant
-    if M_tmp == None: M_tmp = wedge.mass
+    if M_tmp == None: M_tmp = wedge.mass()
     if m_tmp == None: m_tmp = ball_mass
     if theta_tmp > 80 or theta_tmp < 10: theta_tmp = theta
     return theta_tmp, friction_tmp, M_tmp, m_tmp
@@ -177,9 +175,6 @@ plot_energy_ball = gdots(graph=g2, color=color.blue)
 plot_energy_wedge = gdots(graph=g2, color=color.red)
 plot_energy_total = gdots(graph=g2, color=color.green)
 
-def ball_on_ramp():
-    return ball.pos.y >= ball.radius+floor.size.y / 2
-
 dt = 0.01
 t = 0
 while True:
@@ -191,7 +186,8 @@ while True:
         ball.pos += ball.v * dt
         wedge.update(dt)
 
-        if not ball_on_ramp():
+        if ball.pos.y <= ball.radius+floor.size.y / 2:
+            # Ball has left ramp
             ball.v = vec(mag(ball.v), 0, 0)
             ball.a = vec(0, 0, 0)
             ball.up = vec(0, 1, 0)
@@ -201,19 +197,20 @@ while True:
             wedge.update(dt)
 
 
-        if wedge_mass_input_field.number == None: tmp_M = wedge.mass
+        if wedge_mass_input_field.number == None: tmp_M = wedge.mass()
         else: tmp_M = wedge_mass_input_field.number
         if ball_mass_input_field.number == None: tmp_m = ball_mass
         else: tmp_m = ball_mass_input_field.number
 
-        if ball_on_ramp():
-            p = ball.v.x * tmp_m + wedge.velocity * tmp_M
+        if ball.pos.y >= ball.radius+floor.size.y / 2:
+            # Ball on ramp
+            p = ball.v.x * tmp_m + wedge.velocity() * tmp_M
             plot_ball_velocity_x.plot(pos=(t, ball.v.x))
-            plot_wedge_velocity_x.plot(pos=(t, wedge.velocity))
+            plot_wedge_velocity_x.plot(pos=(t, wedge.velocity()))
             # m_p.plot(pos=(t, m * ball.v.x))
             # M_p.plot(pos=(t, s0.value * A.v.x))
 
-        K = 0.5*tmp_m*(ball.v.x**2 + ball.v.y**2) + wedge.kinetic_energy
+        K = 0.5*tmp_m*(ball.v.x**2 + ball.v.y**2) + wedge.kinetic_energy()
         U = tmp_m*grav_constant*(ball.pos.y - (ball.radius+floor.size.y/2))
 
         plot_energy_ball.plot(pos=(t, K))

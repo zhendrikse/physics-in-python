@@ -39,6 +39,12 @@ This repository contains physics demos, mainly using [VPython](https://vpython.o
   <img alt="Harmonic oscillator" width="50%" height="50%" src="./src/demos/images/newtons_pendulum.png"/>
 </a>
 
+### [Ball on sliding ramp](https://trinket.io/library/trinkets/0731c4e734f8)
+
+<a href="https://zegerh-6085.trinket.io/sites/ball_on_sliding_ramp">
+  <img alt="Ball on sliding ramp" width="50%" height="50%" src="./src/demos/images/ball_on_sliding_ramp.png"/>
+</a>
+
 ### [Harmonic oscillator](https://trinket.io/library/trinkets/e80e37600b06)
 
 <a href="https://zegerh-6085.trinket.io/sites/harmonic_oscillator">
