@@ -28,14 +28,6 @@ class Wedge:
         Q1 = quad(v0=F, v1=E, v2=D, v3=A)
         Q2 = quad(v0=F, v1=E, v2=C, v3=B)
         Q3 = quad(v0=A, v1=B, v2=C, v3=D)
-    
-    def reset(self, theta, accelerations):
-        self._apex[0].pos, self._apex[1].pos, self._apex[2].pos, self._apex[3].pos, self._apex[4].pos, self._apex[5].pos = vec(0, 0, 0), vec(10/tan(radians(theta)), 0, 0), vec(10/tan(radians(theta)), 0, 10), vec(0, 0, 10), vec(0, 10, 10), vec(0, 10, 0)
-        self._apex[0].v,   self._apex[1].v,   self._apex[2].v,   self._apex[3].v,   self._apex[4].v,   self._apex[5].v = vec(0,0,0), vec(0,0,0), vec(0,0,0), vec(0,0,0), vec(0,0,0), vec(0,0,0)
-
-        for i in range(0, len(self._apex)):
-            self._apex[i].v.x = 0
-            self._apex[i].a.x = accelerations.acceleration_wedge_x
 
     def update(self, dt):
         for i in range(0, len(self._apex)):
@@ -61,11 +53,14 @@ class Wedge:
             acceleration_wedge_x = -acceleration_wedge
 
         return Accelerations(acceleration_ball_x, acceleration_ball_y, acceleration_wedge_x)
-    
-    def with_new_parameters(self, new_theta, new_friction, new_mass, new_ball_mass):
-        acclerations = wedge.calculate_accelerations(new_theta, new_friction, new_mass, new_ball_mass)
-        for i in range(0,len(self._apex)):
-            wedge[i].a.x = acclerations.acceleration_wedge_x
+        
+    def with_new_parameters(self, theta, accelerations):
+        self._apex[0].pos, self._apex[1].pos, self._apex[2].pos, self._apex[3].pos, self._apex[4].pos, self._apex[5].pos = vec(0, 0, 0), vec(10/tan(radians(theta)), 0, 0), vec(10/tan(radians(theta)), 0, 10), vec(0, 0, 10), vec(0, 10, 10), vec(0, 10, 0)
+        self._apex[0].v,   self._apex[1].v,   self._apex[2].v,   self._apex[3].v,   self._apex[4].v,   self._apex[5].v = vec(0,0,0), vec(0,0,0), vec(0,0,0), vec(0,0,0), vec(0,0,0), vec(0,0,0)
+
+        for i in range(0, len(self._apex)):
+            self._apex[i].a.x = accelerations.acceleration_wedge_x
+            self._apex[i].v = vec(0, 0, 0)
 
     @property
     def velocity(self):
@@ -110,53 +105,24 @@ def restart():
     M_E.delete()
 
     accelerations = wedge.calculate_accelerations(theta_tmp, friction_tmp, M_tmp, m_tmp)
-    wedge.reset(theta_tmp, accelerations)
+    wedge.with_new_parameters(theta_tmp, accelerations)   
     ball.v, ball.pos, ball.a.x, ball.a.y = vec(0,0,0), vec(1.5/sin(radians(theta_tmp)), 10, 5), accelerations.acceleration_ball_x, accelerations.acceleration_ball_y
 
-def set_theta():
+def get_parameter_values():
     theta_tmp, friction_tmp, M_tmp, m_tmp = theta_input_field.number, friction_input_field.number, wedge_mass_input_field.number, ball_mass_input_field.number
     if theta_tmp == None: theta_tmp = theta
     if friction_tmp == None: friction_tmp = friction_constant
     if M_tmp == None: M_tmp = wedge.mass
     if m_tmp == None: m_tmp = ball_mass
     if theta_tmp > 80 or theta_tmp < 10: theta_tmp = theta
+    return theta_tmp, friction_tmp, M_tmp, m_tmp
 
-    acclerations = wedge.calculate_accelerations(theta_tmp, friction_tmp, M_tmp, m_tmp)
-
-    for i in range(1,3):
-        wedge[i].pos.x = 10/tan(radians(theta_tmp))
-
-    for i in range(0,len(wedge)):
-        wedge[i].a.x = acclerations.acceleration_wedge_x
-
+def new_parameter_value():
+    theta_tmp, friction_tmp, M_tmp, m_tmp = get_parameter_values()
+    accelerations = wedge.calculate_accelerations(theta_tmp, friction_tmp, M_tmp, m_tmp)
+    wedge.with_new_parameters(theta_tmp, accelerations)    
     ball.pos.x = 1.5/sin(radians(theta_tmp))
-    ball.a.x, ball.a.y = acclerations.acceleration_ball_x, acclerations.acceleration_ball_y
-
-def set_friction():
-    theta_tmp, friction_tmp, M_tmp, m_tmp = theta_input_field.number, friction_input_field.number, wedge_mass_input_field.number, ball_mass_input_field.number
-    if theta_tmp == None: theta_tmp = theta
-    if friction_tmp == None: friction_tmp = friction_constant
-    if M_tmp == None: M_tmp = wedge.mass
-    if m_tmp == None: m_tmp = ball_mass
-
-    acclerations = wedge.calculate_accelerations(theta_tmp, friction_tmp, M_tmp, m_tmp)
-
-    for i in range(0,len(wedge)):
-        wedge[i].a.x = acclerations.acceleration_wedge_x
-
-    ball.a.x, ball.a.y = acclerations.acceleration_ball_x, acclerations.acceleration_ball_y
-
-def set_mass():
-    theta_tmp, friction_tmp, M_tmp, m_tmp = theta_input_field.number, friction_input_field.number, wedge_mass_input_field.number, ball_mass_input_field.number
-    if theta_tmp == None: theta_tmp = theta
-    if friction_tmp == None: friction_tmp = friction_constant
-    if m_tmp == None: m_tmp = ball_mass
-    if M_tmp == None: M_tmp = wedge.mass
-
-    wedge.with_new_parameters(theta_tmp, friction_tmp, M_tmp, m_tmp)
-    
-    acclerations = wedge.calculate_accelerations(theta_tmp, friction_tmp, M_tmp, m_tmp)
-    ball.a.x, ball.a.y = acclerations.acceleration_ball_x, acclerations.acceleration_ball_y
+    ball.a.x, ball.a.y = accelerations.acceleration_ball_x, accelerations.acceleration_ball_y
 
 set_scene()
 
@@ -170,18 +136,18 @@ scene.append_to_caption('      ')
 b2 = button(text="Restart", bind=restart, background=color.cyan)
 
 scene.append_to_caption('\n\nM =     ')
-wedge_mass_input_field = winput(bind=set_mass, type='numeric')
+wedge_mass_input_field = winput(bind=new_parameter_value, type='numeric')
 
 scene.append_to_caption('\n\nm =     ')
-ball_mass_input_field = winput(bind=set_mass, type='numeric')
+ball_mass_input_field = winput(bind=new_parameter_value, type='numeric')
 
 scene.append_to_caption('\n\nAngle of wedge(10~80):')
-theta_input_field = winput(bind=set_theta, type='numeric')
+theta_input_field = winput(bind=new_parameter_value, type='numeric')
 
 scene.append_to_caption(' Degree\n')
 
 scene.append_to_caption('\n\nCoefficient of friction on the slope: ')      
-friction_input_field = winput(bind=set_friction, type='numeric')
+friction_input_field = winput(bind=new_parameter_value, type='numeric')
 
 scene.append_to_caption('<i>\n\n(Please press enter after setting each parameter, otherwise \n it will run on default parameter)</i>')
 scene.append_to_caption('\n\n\n\n\n')
@@ -194,11 +160,11 @@ ball = sphere(pos=vec(1.5/sin(radians(theta)), 10, 5), radius=1.5, v=vec(0, 0, 0
             a=vec(wedge.calculate_accelerations(theta, friction_constant, wedge.mass, ball_mass).acceleration_ball_x, wedge.calculate_accelerations(theta, friction_constant, wedge.mass, ball_mass).acceleration_ball_y, 0), 
             texture=textures.wood)
 
-g1 = graph(title='<b>Velocity (x direction)</b>', 
+g1 = graph(title='<b>Velocity (x direction), ball=red, wedge=green</b>', 
            xtitle='<b>time</b>', ytitle='<b>P</b>', 
            align='left', width=500, height=300)
 
-g2 = graph(title='<b>Energy<b>', xtitle='<b>time</b>', 
+g2 = graph(title='<b>Energy, ball=blue, wedge=red, total=green<b>', xtitle='<b>time</b>', 
            ytitle='<b>E</b>', align='left', width=500, height=300)
 
 m_v = gdots(graph=g1, color=color.red)
