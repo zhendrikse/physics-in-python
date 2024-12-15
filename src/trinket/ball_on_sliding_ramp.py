@@ -28,12 +28,12 @@ class Wedge:
 
     def update(self, dt):
         for i in range(0, len(self._apex)):
-            self._apex[i].v += self._apex[i].a * dt
-            self._apex[i].pos += self._apex[i].v * dt
+            self._apex[i].v.x += self._apex[i].a.x * dt
+            self._apex[i].pos.x += self._apex[i].v.x * dt
 
     def zero_acceleration(self):
         for i in range(0, len(self._apex)):
-            self._apex[i].a.x = 0
+            self._apex[i].a = vec(0, 0, 0)
 
     def acceleration_ball(self): 
         acceleration_ball_x = self._acceleration_ball() * cos(self._theta) + self._acceleration_x()
@@ -159,7 +159,7 @@ floor = box(pos=vec(0,0,0), size=vec(300, 1, 30), color=color.blue, v=vec(0, 0, 
             a=vec(0, 0, 0))
 
 ball = sphere(pos=vec(1.5/sin(radians(theta)), 10, 5), radius=1.5, v=vec(0, 0, 0),
-            a=vec(wedge.acceleration_ball().x, wedge.acceleration_ball().y, 0), 
+            a=wedge.acceleration_ball(), 
             texture=textures.wood)
 
 g1 = graph(title='<b>Velocity (x direction), ball=red, wedge=green</b>', 
@@ -205,10 +205,9 @@ while True:
         if ball.pos.y >= ball.radius+floor.size.y / 2:
             # Ball on ramp
             p = ball.v.x * tmp_m + wedge.velocity() * tmp_M
-            plot_ball_velocity_x.plot(pos=(t, ball.v.x))
-            plot_wedge_velocity_x.plot(pos=(t, wedge.velocity()))
-            # m_p.plot(pos=(t, m * ball.v.x))
-            # M_p.plot(pos=(t, s0.value * A.v.x))
+
+        plot_ball_velocity_x.plot(pos=(t, ball.v.x))
+        plot_wedge_velocity_x.plot(pos=(t, wedge.velocity()))
 
         K = 0.5*tmp_m*(ball.v.x**2 + ball.v.y**2) + wedge.kinetic_energy()
         U = tmp_m*grav_constant*(ball.pos.y - (ball.radius+floor.size.y/2))
