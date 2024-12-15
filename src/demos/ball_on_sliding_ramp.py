@@ -39,7 +39,9 @@ def restart():
     plot_energy_wedge.delete()
 
     wedge.with_new_parameters(theta_tmp, friction_tmp, M_tmp, m_tmp)   
-    ball.v, ball.pos, ball.a.x, ball.a.y = vec(0,0,0), vec(1.5/sin(radians(theta_tmp)), 10, 5), wedge.acceleration_ball().x, wedge.acceleration_ball().y
+    ball.v = vec(0, 0, 0)
+    ball.pos = vec(1.5/sin(radians(theta_tmp)), 10, 5)
+    ball.a = wedge.acceleration_ball()
 
 def get_parameter_values():
     theta_tmp, friction_tmp, M_tmp, m_tmp = theta_input_field.number, friction_input_field.number, wedge_mass_input_field.number, ball_mass_input_field.number
@@ -54,7 +56,7 @@ def new_parameter_value():
     theta_tmp, friction_tmp, M_tmp, m_tmp = get_parameter_values()
     wedge.with_new_parameters(theta_tmp, friction_tmp, M_tmp, m_tmp)    
     ball.pos.x = 1.5/sin(radians(theta_tmp))
-    ball.a.x, ball.a.y = wedge.acceleration_ball().x, wedge.acceleration_ball().y
+    ball.a = wedge.acceleration_ball()
 
 set_scene()
 
@@ -90,7 +92,7 @@ floor = box(pos=vec(0,0,0), size=vec(300, 1, 30), color=color.blue, v=vec(0, 0, 
             a=vec(0, 0, 0))
 
 ball = sphere(pos=vec(1.5/sin(radians(theta)), 10, 5), radius=1.5, v=vec(0, 0, 0),
-            a=vec(wedge.acceleration_ball().x, wedge.acceleration_ball().y, 0), 
+            a=wedge.acceleration_ball(), 
             texture=textures.wood)
 
 g1 = graph(title='<b>Velocity (x direction), ball=red, wedge=green</b>', 

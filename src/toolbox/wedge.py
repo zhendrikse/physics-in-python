@@ -43,7 +43,7 @@ class Wedge:
     def _acceleration_ball(self):
         theta = self._theta
         total_mass = self._ball_mass + self._mass
-        net_mass = self._mass * (cos(theta)*cos(theta) + self._friction*sin(theta)*cos(theta))/(total_mass)/(sin(theta) - self._friction*cos(theta))+ sin(theta)
+        net_mass = self._mass * (cos(theta)*cos(theta) + self._friction*sin(theta)*cos(theta))/(total_mass)/(sin(theta) - self._friction*cos(theta)) + sin(theta)
         return  grav_constant / net_mass
 
     def _acceleration_x(self):
