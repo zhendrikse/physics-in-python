@@ -1,6 +1,6 @@
 from vpython import radians, tan, sin,cos, mag, vec, canvas, button, winput, vertex, color, quad, triangle, textures, gdots, graph, rate, box, sphere
 from toolbox.wedge import Wedge
-from toolbox.physics_timer import PhysTimer
+from toolbox.timer import PhysTimer
 
 ball_mass, grav_constant, theta, friction_constant = 1.0, 9.8, 45, 0.0
 
