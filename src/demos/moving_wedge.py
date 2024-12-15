@@ -10,16 +10,18 @@ class Accelerations:
     acceleration_wedge_x: float = 0.0
 
 class Wedge:
-    def __init__(self, mass=3.0):
+    def __init__(self, mass=3.0, ball_mass=1.0, theta=45, friction_constant=0.0):
         self._mass = mass
+        self._theta = radians(theta)
+        self._ball_mass = ball_mass
+        self._friction = friction_constant
 
-        accelerations = self.calculate_accelerations(theta, friction_constant, mass, ball_mass)
-        A = vertex(pos=vec(0, 0, 0), color=color.orange, v=vec(0, 0, 0), a=vec(accelerations.acceleration_wedge_x, 0, 0))
-        B = vertex(pos=vec(10/tan(radians(theta)), 0, 0), color=color.purple, v=vec(0, 0, 0), a=vec(accelerations.acceleration_wedge_x, 0, 0))
-        C = vertex(pos=vec(10/tan(radians(theta)), 0, 10), color=color.green, v=vec(0, 0, 0), a=vec(accelerations.acceleration_wedge_x, 0, 0))
-        D = vertex(pos=vec(0, 0, 10), color=color.blue, v=vec(0, 0, 0), a=vec(accelerations.acceleration_wedge_x, 0, 0))
-        E = vertex(pos=vec(0, 10, 10), color=color.cyan, v=vec(0, 0, 0), a=vec(accelerations.acceleration_wedge_x, 0, 0))
-        F = vertex(pos=vec(0, 10, 0), color=color.red, v=vec(0, 0, 0), a=vec(accelerations.acceleration_wedge_x, 0, 0))
+        A = vertex(pos=vec(0, 0, 0), color=color.orange, v=vec(0, 0, 0), a=vec(self._acceleration_x(), 0, 0))
+        B = vertex(pos=vec(10/tan(radians(theta)), 0, 0), color=color.purple, v=vec(0, 0, 0), a=vec(self._acceleration_x(), 0, 0))
+        C = vertex(pos=vec(10/tan(radians(theta)), 0, 10), color=color.green, v=vec(0, 0, 0), a=vec(self._acceleration_x(), 0, 0))
+        D = vertex(pos=vec(0, 0, 10), color=color.blue, v=vec(0, 0, 0), a=vec(self._acceleration_x(), 0, 0))
+        E = vertex(pos=vec(0, 10, 10), color=color.cyan, v=vec(0, 0, 0), a=vec(self._acceleration_x(), 0, 0))
+        F = vertex(pos=vec(0, 10, 0), color=color.red, v=vec(0, 0, 0), a=vec(self._acceleration_x(), 0, 0))
 
         self._apex = [A, B, C, D, E, F]
 
@@ -38,28 +40,35 @@ class Wedge:
         for i in range(0, len(self._apex)):
             self._apex[i].a.x = 0
 
-    def calculate_accelerations(self, theta, friction, mass_wedge, mass_ball):
-        theta = radians(theta)
-        total_mass = mass_ball + mass_wedge
-        if friction >= tan(theta):
-            # too much friction to get the ball moving!
-            acceleration_ball, acceleration_wedge, acceleration_ball_x, acceleration_ball_y, acceleration_wedge_x = 0.0, 0.0, 0.0, 0.0, 0.0
-        else:
-            acceleration_ball = grav_constant/(mass_wedge * (cos(theta)**2 + friction*sin(theta)*cos(theta))/(total_mass)/(sin(theta) - friction*cos(theta))+ sin(theta))
-            acceleration_wedge = mass_ball * cos(theta) / (total_mass) * acceleration_ball
+    def acceleration_ball(self): 
+        acceleration_ball_x = self._acceleration_ball() * cos(self._theta) + self._acceleration_x()
+        acceleration_ball_y = -self._acceleration_ball() * sin(self._theta)
 
-            acceleration_ball_x = acceleration_ball * cos(theta) - acceleration_wedge
-            acceleration_ball_y = -acceleration_ball * sin(theta)
-            acceleration_wedge_x = -acceleration_wedge
+        return vec(acceleration_ball_x, acceleration_ball_y, 0)
 
-        return Accelerations(acceleration_ball_x, acceleration_ball_y, acceleration_wedge_x)
+    def _acceleration_ball(self):
+        total_mass = self._ball_mass + self._mass
+        return  grav_constant/(self.mass * (cos(self._theta)**2 + self._friction*sin(self._theta)*cos(self._theta))/(total_mass)/(sin(self._theta) - self._friction*cos(self._theta))+ sin(self._theta))
+
+    def _acceleration_x(self):
+        total_mass = self._ball_mass + self._mass
+
+        if self._friction >= tan(self._theta):
+            return 0.0
         
-    def with_new_parameters(self, theta, accelerations):
+        force_on_wedge = -self._acceleration_ball() * self._ball_mass * cos(self._theta)
+        return force_on_wedge / total_mass 
+        
+    def with_new_parameters(self, theta, friction, mass_wedge, mass_ball):
+        self._friction = friction
+        self._ball_mass = mass_ball
+        self._mass = mass_wedge
+        self._theta = radians(theta)
         self._apex[0].pos, self._apex[1].pos, self._apex[2].pos, self._apex[3].pos, self._apex[4].pos, self._apex[5].pos = vec(0, 0, 0), vec(10/tan(radians(theta)), 0, 0), vec(10/tan(radians(theta)), 0, 10), vec(0, 0, 10), vec(0, 10, 10), vec(0, 10, 0)
         self._apex[0].v,   self._apex[1].v,   self._apex[2].v,   self._apex[3].v,   self._apex[4].v,   self._apex[5].v = vec(0,0,0), vec(0,0,0), vec(0,0,0), vec(0,0,0), vec(0,0,0), vec(0,0,0)
 
         for i in range(0, len(self._apex)):
-            self._apex[i].a.x = accelerations.acceleration_wedge_x
+            self._apex[i].a.x = self._acceleration_x()
             self._apex[i].v = vec(0, 0, 0)
 
     @property
@@ -104,9 +113,8 @@ def restart():
     m_E.delete()
     M_E.delete()
 
-    accelerations = wedge.calculate_accelerations(theta_tmp, friction_tmp, M_tmp, m_tmp)
-    wedge.with_new_parameters(theta_tmp, accelerations)   
-    ball.v, ball.pos, ball.a.x, ball.a.y = vec(0,0,0), vec(1.5/sin(radians(theta_tmp)), 10, 5), accelerations.acceleration_ball_x, accelerations.acceleration_ball_y
+    wedge.with_new_parameters(theta_tmp, friction_tmp, M_tmp, m_tmp)   
+    ball.v, ball.pos, ball.a.x, ball.a.y = vec(0,0,0), vec(1.5/sin(radians(theta_tmp)), 10, 5), wedge.acceleration_ball().x, wedge.acceleration_ball().y
 
 def get_parameter_values():
     theta_tmp, friction_tmp, M_tmp, m_tmp = theta_input_field.number, friction_input_field.number, wedge_mass_input_field.number, ball_mass_input_field.number
@@ -119,10 +127,9 @@ def get_parameter_values():
 
 def new_parameter_value():
     theta_tmp, friction_tmp, M_tmp, m_tmp = get_parameter_values()
-    accelerations = wedge.calculate_accelerations(theta_tmp, friction_tmp, M_tmp, m_tmp)
-    wedge.with_new_parameters(theta_tmp, accelerations)    
+    wedge.with_new_parameters(theta_tmp, friction_tmp, M_tmp, m_tmp)    
     ball.pos.x = 1.5/sin(radians(theta_tmp))
-    ball.a.x, ball.a.y = accelerations.acceleration_ball_x, accelerations.acceleration_ball_y
+    ball.a.x, ball.a.y = wedge.acceleration_ball().x, wedge.acceleration_ball().y
 
 set_scene()
 
@@ -157,7 +164,7 @@ floor = box(pos=vec(0,0,0), size=vec(300, 1, 30), color=color.blue, v=vec(0, 0, 
             a=vec(0, 0, 0))
 
 ball = sphere(pos=vec(1.5/sin(radians(theta)), 10, 5), radius=1.5, v=vec(0, 0, 0),
-            a=vec(wedge.calculate_accelerations(theta, friction_constant, wedge.mass, ball_mass).acceleration_ball_x, wedge.calculate_accelerations(theta, friction_constant, wedge.mass, ball_mass).acceleration_ball_y, 0), 
+            a=vec(wedge.acceleration_ball().x, wedge.acceleration_ball().y, 0), 
             texture=textures.wood)
 
 g1 = graph(title='<b>Velocity (x direction), ball=red, wedge=green</b>', 
