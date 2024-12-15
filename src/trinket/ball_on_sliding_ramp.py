@@ -42,9 +42,11 @@ class Wedge:
         return vec(acceleration_ball_x, acceleration_ball_y, 0)
 
     def _acceleration_ball(self):
+        theta = self._theta
         total_mass = self._ball_mass + self._mass
-        return  grav_constant/(self._mass * (cos(self._theta)**2 + self._friction*sin(self._theta)*cos(self._theta))/(total_mass)/(sin(self._theta) - self._friction*cos(self._theta))+ sin(self._theta))
-
+        net_mass = self._mass * (cos(theta)*cos(theta) + self._friction*sin(theta)*cos(theta))/(total_mass)/(sin(theta) - self._friction*cos(theta))+ sin(theta)
+        return  grav_constant / net_mass
+    
     def _acceleration_x(self):
         total_mass = self._ball_mass + self._mass
 
@@ -201,10 +203,6 @@ while True:
         else: tmp_M = wedge_mass_input_field.number
         if ball_mass_input_field.number == None: tmp_m = ball_mass
         else: tmp_m = ball_mass_input_field.number
-
-        if ball.pos.y >= ball.radius+floor.size.y / 2:
-            # Ball on ramp
-            p = ball.v.x * tmp_m + wedge.velocity() * tmp_M
 
         plot_ball_velocity_x.plot(pos=(t, ball.v.x))
         plot_wedge_velocity_x.plot(pos=(t, wedge.velocity()))
