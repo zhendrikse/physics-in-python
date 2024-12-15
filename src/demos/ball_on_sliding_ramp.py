@@ -1,5 +1,6 @@
 from vpython import radians, tan, sin,cos, mag, vec, canvas, button, winput, vertex, color, quad, triangle, textures, gdots, graph, rate, box, sphere
 from toolbox.wedge import Wedge
+from toolbox.physics_timer import PhysTimer
 
 ball_mass, grav_constant, theta, friction_constant = 1.0, 9.8, 45, 0.0
 
@@ -59,6 +60,7 @@ set_scene()
 
 running = False
 wedge = Wedge()
+timer = PhysTimer(0, -12)
 
 scene.append_to_caption('      ')
 b1 = button(text="Run", bind=Run, background=color.cyan)
@@ -111,6 +113,7 @@ dt = 0.01
 t = 0
 while True:
     rate(1/dt)
+    timer.update(t)
     running = running if ball.pos.x < 50 else False
 
     if running:
