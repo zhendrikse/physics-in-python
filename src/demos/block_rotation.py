@@ -1,6 +1,6 @@
 # Morris H. 12/7
 
-from vpython import canvas, vec, sphere, box, sin, cos, radians, random, color, winput, button, graph, gdots, rate, degrees, diff_angle
+from vpython import canvas, vec, box, sin, cos, radians, random, color, winput, button, graph, gdots, rate
 from toolbox.ball import Ball
 from toolbox.building import Building
 from toolbox.timer import PhysTimer
@@ -20,7 +20,7 @@ set_scene()
 
 ball = [] # enable mutlple shots
 ball_counter = 0
-def gen_ball(velocity):
+def create_ball(velocity):
     global ball_counter
     a = Ball(mass=1, position=vec(100, 105, 0), radius=5, color=vec(random(), random(), random()), velocity=velocity, elasticity=e)
     ball.append(a)
@@ -29,33 +29,31 @@ def gen_ball(velocity):
 # set theta
 def set_theta(t):
     global e, v0, theta
-    e, v0, theta = test_none(ipt_e.number, ipt_v0.number, ipt_theta.number)
+    e, v0, theta = get_input_parameters(elasticity_input_field.number, initial_velocity_input_field.number, theta_input_field.number)
     return 0
     
 # set v0
-def set_v0(v):
+def set_initial_velocity(v):
     global e, v0, theta
-    e, v0, theta = test_none(ipt_e.number, ipt_v0.number, ipt_theta.number)
+    e, v0, theta = get_input_parameters(elasticity_input_field.number, initial_velocity_input_field.number, theta_input_field.number)
     return 0
 
 # shoot
 def shoot():
-    gen_ball(v0 * vec(-cos(radians(theta)), sin(radians(theta)), 0))
+    create_ball(v0 * vec(-cos(radians(theta)), sin(radians(theta)), 0))
 
 # set e
-def set_e(g):
+def set_elasticity(g):
     global e, v0, theta
-    e, v0, theta = test_none(ipt_e.number, ipt_v0.number, ipt_theta.number)
+    e, v0, theta = get_input_parameters(elasticity_input_field.number, initial_velocity_input_field.number, theta_input_field.number)
     return 0
 
 
 building = Building()
-gen_ball(v0 * vec(-cos(radians(theta)), sin(radians(theta)), 0))
+create_ball(v0 * vec(-cos(radians(theta)), sin(radians(theta)), 0))
 
-# clean all ball
-def clc_ball():
+def clean_all_balls():
     global t
-    # print(len(ball))
     if len(ball) != 0:
         for j in range(len(ball)):
             ball[j]._ball.visible = False
@@ -67,7 +65,7 @@ def clc_ball():
     w.delete()
     t = 0
 
-def test_none(e_tmp, v0_tmp, theta_tmp):
+def get_input_parameters(e_tmp, v0_tmp, theta_tmp):
     if e_tmp == None: e_ans = e 
     elif (e_tmp > 1 or e_tmp < 0): e_ans = e
     else: e_ans = e_tmp
@@ -81,25 +79,24 @@ def test_none(e_tmp, v0_tmp, theta_tmp):
     return e_ans, v0_ans, theta_ans
 
 scene.append_to_caption('0 < e <= 1: ')
-ipt_e = winput(bind=set_e, type='numeric')
+elasticity_input_field = winput(bind=set_elasticity, type='numeric')
 scene.append_to_caption(' \n\n\n')
 
 scene.append_to_caption('      Angle: ')
-ipt_theta = winput(bind=set_theta, type='numeric')
+theta_input_field = winput(bind=set_theta, type='numeric')
 scene.append_to_caption(' (Degree)\n\n\n')
 
 scene.append_to_caption('      V0:')
-ipt_v0 = winput(bind=set_v0, type='numeric')
+initial_velocity_input_field = winput(bind=set_initial_velocity, type='numeric')
 scene.append_to_caption('                                    ')
 
 b1 = button(text="Shoot", bind=shoot, 
             background=color.purple)
 
-b2 = button(text="Restart", bind=clc_ball, 
+b2 = button(text="Restart", bind=clean_all_balls, 
             background=color.purple)
 
 scene.append_to_caption('\n\n')
-
 scene.append_to_caption('<i>\n\n(Please press enter after setting each parameter, otherwise \n it will run on default parameter)</i>')
 
 # determine the boundary of block
