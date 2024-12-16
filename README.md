@@ -51,14 +51,14 @@ This repository contains physics demos, mainly using [VPython](https://vpython.o
   <img alt="Harmonic oscillator" width="50%" height="50%" src="./src/demos/images/harmonic_oscillator.png"/>
 </a>
 
-### [Block rotation](https://trinket.io/library/trinkets/0e414ca766d1)
+### [Ball hitting block](https://trinket.io/library/trinkets/0e414ca766d1)
 <a href="https://zegerh-6085.trinket.io/sites/block_rotation">
   <img alt="Block rotation" width="50%" height="50%" src="./src/demos/images/block_rotation.png"/>
 </a>
 
 ### [Floating block](https://trinket.io/library/trinkets/94ed363f8b25)
 <a href="https://zegerh-6085.trinket.io/sites/floating_block">
-  <img alt="Block rotation" width="50%" height="50%" src="./src/demos/images/buoyancy.png"/>
+  <img alt="Block rotation" width="50%" height="50%" src="./src/demos/images/floating_block.png"/>
 </a>
 
 
