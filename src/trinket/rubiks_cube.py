@@ -9,7 +9,6 @@ fps = 10
 
 cube_scene = canvas(title="PyCube by Michael King, updated by Zeger Hendrikse", pos=zero_vec, width=750, height=550, center=zero_vec, background=zero_vec)
 
-
 def make_walls():
     # length_wall
     box(texture=textures.wood, pos=vector(0, 0, -25), length=55, height=25, width=5)
@@ -19,7 +18,6 @@ def make_walls():
 
     # width_wall
     box(texture=textures.wood, pos=vector(-25, 0, 0), length=5, height=25, width=55)
-
 
 def make_lights():
     cube_scene.lights = []
@@ -37,13 +35,12 @@ def make_lights():
 
 def run_demo(cube):
   for i in range(0, 2):
-    for key in "uuddllrrffbb": cube.turn_face(key)
     for t in range(0, fps * 3): rate(fps)
+    for key in "uuddllrrffbb": cube.turn_face(key)
 
   for i in range(0, 3):
-    for key in "FbrLuDFb": cube.turn_face(key)  
     for t in range(0, fps * 3): rate(fps)
-    
+    for key in "FbrLuDFb": cube.turn_face(key)      
 
 class Cube:
     def __init__(self):
