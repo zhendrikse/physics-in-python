@@ -6,32 +6,25 @@ from toolbox.building import Building
 from toolbox.timer import PhysTimer
 
 # initial perimeter setting
-m, M, theta, v0, e = 1, 10, 45, 100, 0.9
-
+theta, v0, e = 45, 100, 0.9
 
 # scene setting
 def set_scene():
     global scene
     scene = canvas(width=1000, height=600, background=vec(0, 0.6, 0.6), align='left', range=200)
     floor = box(pos=vec(0, 0, 0), size=vec(1000, 1, 1000), color=color.blue)
-    building1 = box(pos=vec(100, 50, 0), size=vec(10, 100, 10), color=color.cyan, 
-                    up=vec(0,1,0))
+    shooting_tower = box(pos=vec(100, 50, 0), size=vec(10, 100, 10), color=color.cyan, up=vec(0,1,0))
     scene.camera.pos = vec(0, 60, 200)
 
 set_scene()
-    
-building2 = Building()
 
-# generate ball
-ball = []
-i = 0
-def gen_ball():
-    global i
-    a = Ball(mass=1, position=vec(100, 105, 0), radius=5, color=vec(random(), random(), random()), 
-               velocity=vec(-v0*cos(radians(theta)), v0*sin(radians(theta)), 0), elasticity=e)
+ball = [] # enable mutlple shots
+ball_counter = 0
+def gen_ball(velocity):
+    global ball_counter
+    a = Ball(mass=1, position=vec(100, 105, 0), radius=5, color=vec(random(), random(), random()), velocity=velocity, elasticity=e)
     ball.append(a)
-    i += 1
-gen_ball()
+    ball_counter += 1
 
 # set theta
 def set_theta(t):
@@ -47,15 +40,17 @@ def set_v0(v):
 
 # shoot
 def shoot():
-    gen_ball()
-    # ball[i].v = vec(-v0*cos(radians(theta)), 
-    #                   v0*sin(radians(theta)), 0)
+    gen_ball(v0 * vec(-cos(radians(theta)), sin(radians(theta)), 0))
 
 # set e
 def set_e(g):
     global e, v0, theta
     e, v0, theta = test_none(ipt_e.number, ipt_v0.number, ipt_theta.number)
     return 0
+
+
+building = Building()
+gen_ball(v0 * vec(-cos(radians(theta)), sin(radians(theta)), 0))
 
 # clean all ball
 def clc_ball():
@@ -65,10 +60,10 @@ def clc_ball():
         for j in range(len(ball)):
             ball[j]._ball.visible = False
         ball[:] = []
-    building2._building.pos = vec(-100, 50.5, 0) 
-    building2._building.up=vec(0, 1, 0)
-    building2._building.velocity=vec(0, 0, 0)
-    building2._building.w=0
+    building._building.pos = vec(-100, 50.5, 0) 
+    building._building.up=vec(0, 1, 0)
+    building._building.velocity=vec(0, 0, 0)
+    building._building.w=0
     w.delete()
     t = 0
 
@@ -85,9 +80,7 @@ def test_none(e_tmp, v0_tmp, theta_tmp):
 
     return e_ans, v0_ans, theta_ans
 
-# create widgets
-
-scene.append_to_caption('      e: ')
+scene.append_to_caption('0 < e <= 1: ')
 ipt_e = winput(bind=set_e, type='numeric')
 scene.append_to_caption(' \n\n\n')
 
@@ -126,26 +119,22 @@ while True:
     timer.update(t)
     for j in range(len(ball)):
 
-        # motion when hit thte ground
         if ball[j].is_on_ground() and ball[j].position.x >= -85:
             ball[j].bounce_from_ground(dt)
+            building.update(dt)
 
-        # motion when hit the block
-        elif ball[j].hits_building(building2._building):
-            building2.collide_with(ball[j], dt)
-            ball[j].collide_with(building2)
+        elif ball[j].hits_building(building._building):
+            building.collide_with(ball[j], dt)
+            ball[j].collide_with(building)
             ball[j].move(vec(0, -98, 0) * ball[j].mass, dt)
-        
-        # motion when in the air
+
         else:
+            # motion when in the air
             ball[j].move(vec(0, -98, 0) * ball[j].mass, dt)
-            building2.update(dt)
-
+            building.update(dt)
 
     t += dt
-
-    # plot
-    w.plot(pos=(t, building2._building.w))
+    w.plot(pos=(t, building._building.w))
 
 
 

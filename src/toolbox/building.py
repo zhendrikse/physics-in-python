@@ -23,9 +23,6 @@ class Building:
         radius = ball.position.y - 0.5
         angular_velocity = velocity / radius
         self._building.w = angular_velocity
-        self.update_omega(angular_velocity, dt)
-
-    def update_omega(self, angular_velocity, dt):
         dtheta = -self._building.w * dt
         self.rotate(dtheta) 
 
@@ -79,5 +76,5 @@ class Building:
     
     @property
     def omega(self):
-        return self._building
+        return self._building.w
         
