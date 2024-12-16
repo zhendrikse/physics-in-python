@@ -133,7 +133,7 @@ while True:
             building.update(dt)
 
     t += dt
-    w.plot(pos=(t, building._building.w))
+    w.plot(pos=(t, building.omega))
 
 
 
