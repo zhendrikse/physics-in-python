@@ -56,6 +56,12 @@ This repository contains physics demos, mainly using [VPython](https://vpython.o
   <img alt="Block rotation" width="50%" height="50%" src="./src/demos/images/block_rotation.png"/>
 </a>
 
+### [Floating block](https://trinket.io/library/trinkets/94ed363f8b25)
+<a href="https://zegerh-6085.trinket.io/sites/floating_block">
+  <img alt="Block rotation" width="50%" height="50%" src="./src/demos/images/buoyancy.png"/>
+</a>
+
+
 ## Glowscript demos from [Dot Physics](https://www.youtube.com/channel/UCVxIDFY01y4n_c2lK1TB-KA)
 
 These demos are _refactored versions_ of the originals, found 
