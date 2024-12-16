@@ -32,13 +32,12 @@ class Ball:
     return self.position.y - self.radius <= 0.5
   
   def bounce_from_ground(self, dt):
-    self.velocity.y *= - self._ball.elasticity
+    self._ball.velocity.y *= - self.elasticity
     self._ball.pos += self._ball.velocity * dt
 
     # if the velocity is too slow, stay on the ground
     if self._ball.velocity.y <= 0.1:
-        self.position.y = self.radius + self.radius / 10
-        self.velocity.y = 0
+        self._ball.pos.y = self.radius + self.radius / 10
 
   def hits_building(self, building):
       building_frontside = building.position.x + building.length
