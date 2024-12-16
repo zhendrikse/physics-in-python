@@ -28,6 +28,7 @@ class Building:
     def update(self, dt):
         self._building.w += self._angular_acceleration() * dt
         dtheta = -self._building.w * dt
+        self.rotate(origin=vec(self._position_in_rest.x - self.length() / 2, 0, 0), axis=vec(0, 0, 1), angle=dtheta)
 
         rotate_max = degrees(diff_angle(vec(0,1,0), self._building.up))
 
@@ -42,7 +43,6 @@ class Building:
             # building.pos = vec(-160, 10.5, 0)
             self._building.up = vec(-1, 0, 0)
 
-        self.rotate(origin=vec(self._position_in_rest.x - self.length() / 2, 0, 0), axis=vec(0, 0, 1), angle=dtheta)
 
     def mass(self):
         return self._building.mass

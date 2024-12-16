@@ -17,10 +17,12 @@ while True:
     force = vec(0, -9.8, 0) * ball.mass
     ball.move(force, dt)
     if ball.is_on_ground():
-        ball.bounce_from_ground(dt)
+        if abs(ball.velocity.y) > 0.1:
+            ball.bounce_from_ground(dt)
+        else:
+            ball._ball.velocity.x = 0
 
     curve.plot(t * dt, ball.position.y)
     t += dt
 
-    if ball.velocity.y < 0.1 and ball.is_on_ground():
-        ball._ball.velocity.x = 0
+ 
