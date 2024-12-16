@@ -5,6 +5,7 @@
 
 from vpython import canvas, box, vec, cos, sin, sphere, radians, random, winput, color, button, graph, rate, gdots, degrees, diff_angle
 from toolbox.building import Building, g
+from toolbox.timer import PhysTimer
 
 # initial perimeter setting
 theta, v0, elasticity = 1, 100, 1
@@ -154,9 +155,12 @@ g1 = graph(title='<b>Angular Velocity (for block)</b>',
 
 w = gdots(graph=g1)
 
+timer = PhysTimer(0, -25)
+
 t, dt = 0, 0.01
 while True:
     rate(1/dt)
+    timer.update(t)
     for j in range(len(ball)):
 
         if ball[j].hits_ground():
