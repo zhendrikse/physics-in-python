@@ -31,7 +31,7 @@ class Ball:
   def is_on_ground(self):
       return self.position.y - self.radius <= 0
   
-  def bounce_on_ground(self, dt):
+  def bounce_from_ground(self, dt):
     self.velocity.y *= - self._ball.elasticity
     self._ball.pos += self._ball.velocity * dt
 
