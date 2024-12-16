@@ -41,10 +41,9 @@ class Ball:
         self.velocity.y = 0
 
   def hits_building(self, building):
-      return self.position.x <= -85 and self.velocity.x <= 0 and self.position.y <= 100 and self.position.x >= -115 and building.up == vector(0, 1, 0)
-      #building_frontside = building.position().x + building.length()
-      #building_backside = building.position().x - building.length()
-      #return self._ball.pos.x <= (building_frontside - self._ball.radius) and self._ball.pos.x <= 0 and self._ball.pos.y <= building.height() and self._ball.pos.x >= (building_backside + self._ball.radius) and building._building.up == vector(0, 1, 0) 
+      building_frontside = building.position.x + building.length
+      building_backside = building.position.x - building.length
+      return self.position.x <= (building_frontside - self.radius) and self.position.x <= 0 and self.position.y <= building.height and self.position.x >= (building_backside + self.radius) and building._building.up == vector(0, 1, 0) 
 
   def collide_with(self, building):
     self._ball.velocity.x = (self.mass * self.velocity.x + building.mass * building.velocity.x + self.elasticity * building.mass * (building.velocity.x - self.velocity.x))/(self.mass + building.mass)
