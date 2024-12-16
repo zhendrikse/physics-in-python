@@ -1,4 +1,7 @@
-# Morris H. 12/7
+##
+# Original: https://github.com/Physics-Morris/Physics-Vpython/blob/master/3_Block_Rotation.py
+# See also: https://github.com/zhendrikse/physics-in-python/
+#
 
 from vpython import canvas, vec, box, sin, cos, radians, random, color, winput, button, graph, gdots, rate
 from toolbox.ball import Ball
