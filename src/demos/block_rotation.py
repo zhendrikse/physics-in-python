@@ -26,29 +26,37 @@ def create_ball(velocity):
     ball.append(a)
     ball_counter += 1
 
-# set theta
 def set_theta(t):
     global e, v0, theta
     e, v0, theta = get_input_parameters(elasticity_input_field.number, initial_velocity_input_field.number, theta_input_field.number)
     return 0
     
-# set v0
 def set_initial_velocity(v):
     global e, v0, theta
     e, v0, theta = get_input_parameters(elasticity_input_field.number, initial_velocity_input_field.number, theta_input_field.number)
     return 0
 
-# shoot
 def shoot():
     create_ball(v0 * vec(-cos(radians(theta)), sin(radians(theta)), 0))
 
-# set e
 def set_elasticity(g):
     global e, v0, theta
     e, v0, theta = get_input_parameters(elasticity_input_field.number, initial_velocity_input_field.number, theta_input_field.number)
     return 0
 
+def get_input_parameters(e_tmp, v0_tmp, theta_tmp):
+    if e_tmp == None: e_ans = e 
+    elif (e_tmp > 1 or e_tmp < 0): e_ans = e
+    else: e_ans = e_tmp
 
+    if v0_tmp == None: v0_ans = v0
+    else: v0_ans = v0_tmp
+
+    if theta_tmp == None: theta_ans = theta
+    else: theta_ans = theta_tmp
+
+    return e_ans, v0_ans, theta_ans
+    
 building = Building()
 create_ball(v0 * vec(-cos(radians(theta)), sin(radians(theta)), 0))
 
@@ -65,18 +73,6 @@ def clean_all_balls():
     w.delete()
     t = 0
 
-def get_input_parameters(e_tmp, v0_tmp, theta_tmp):
-    if e_tmp == None: e_ans = e 
-    elif (e_tmp > 1 or e_tmp < 0): e_ans = e
-    else: e_ans = e_tmp
-
-    if v0_tmp == None: v0_ans = v0
-    else: v0_ans = v0_tmp
-
-    if theta_tmp == None: theta_ans = theta
-    else: theta_ans = theta_tmp
-
-    return e_ans, v0_ans, theta_ans
 
 scene.append_to_caption('0 < e <= 1: ')
 elasticity_input_field = winput(bind=set_elasticity, type='numeric')
