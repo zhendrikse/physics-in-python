@@ -29,7 +29,7 @@ class Ball:
     self._ball.rotate(origin=origin, axis=axis, angle=angle)
 
   def is_on_ground(self):
-      return self.position.y - self.radius <= 0
+    return self.position.y - self.radius <= 0.5
   
   def bounce_from_ground(self, dt):
     self.velocity.y *= - self._ball.elasticity
@@ -37,13 +37,14 @@ class Ball:
 
     # if the velocity is too slow, stay on the ground
     if self._ball.velocity.y <= 0.1:
-        self.position.y = self.radius
+        self.position.y = self.radius + self.radius / 10
         self.velocity.y = 0
 
   def hits_building(self, building):
-      building_frontside = building.position().x + building.length()
-      building_backside = building.position().x - building.length()
-      return self._ball.pos.x <= (building_frontside - self._ball.radius) and self._ball.pos.x <= 0 and self._ball.pos.y <= building.height() and self._ball.pos.x >= (building_backside + self._ball.radius) and building._building.up == vector(0, 1, 0) 
+      return self.position.x <= -85 and self.velocity.x <= 0 and self.position.y <= 100 and self.position.x >= -115 and building.up == vector(0, 1, 0)
+      #building_frontside = building.position().x + building.length()
+      #building_backside = building.position().x - building.length()
+      #return self._ball.pos.x <= (building_frontside - self._ball.radius) and self._ball.pos.x <= 0 and self._ball.pos.y <= building.height() and self._ball.pos.x >= (building_backside + self._ball.radius) and building._building.up == vector(0, 1, 0) 
 
   def _collision_with(self, building):
       momentum_ball = self._ball.mass * self.velocity.x
@@ -91,3 +92,7 @@ class Ball:
   @property
   def radius(self):
      return self._ball.radius
+  
+  @property
+  def elasticity(self):
+     return self._ball.elasticity

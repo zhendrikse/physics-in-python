@@ -1,16 +1,12 @@
-##
-# Original: https://github.com/Physics-Morris/Physics-Vpython/blob/master/3_Block_Rotation.py
-# See also: https://github.com/zhendrikse/physics-in-python/
-#
-
-from vpython import canvas, box, vec, cos, sin, sphere, radians, random, winput, color, button, graph, rate, gdots, degrees, diff_angle
 # Morris H. 12/7
 
-from vpython import *
-
+from vpython import canvas, vec, sphere, box, sin, cos, radians, random, color, winput, button, graph, gdots, rate, degrees, diff_angle
+from toolbox.ball import Ball
+from toolbox.building import Building
+from toolbox.timer import PhysTimer
 
 # initial perimeter setting
-m, M, theta, v0, e, g = 1, 10, 45, 100, 1, 98
+m, M, theta, v0, e = 1, 10, 45, 100, 0.9
 
 
 # scene setting
@@ -23,17 +19,16 @@ def set_scene():
     scene.camera.pos = vec(0, 60, 200)
 
 set_scene()
-building2 = box(pos=vec(-100, 50.5, 0), size=vec(20, 100, 50), color=color.orange, 
-    up=vec(0,1,0,), v=vec(0, 0, 0), w=0)
-
+    
+building2 = Building()
 
 # generate ball
 ball = []
 i = 0
 def gen_ball():
     global i
-    a = sphere(pos=vec(100, 105, 0), radius=5, color=vec(random(), random(), random()), 
-               v=vec(-v0*cos(radians(theta)), v0*sin(radians(theta)), 0), a=vec(0, -g, 0))
+    a = Ball(mass=1, position=vec(100, 105, 0), radius=5, color=vec(random(), random(), random()), 
+               velocity=vec(-v0*cos(radians(theta)), v0*sin(radians(theta)), 0), elasticity=e)
     ball.append(a)
     i += 1
 gen_ball()
@@ -68,12 +63,12 @@ def clc_ball():
     # print(len(ball))
     if len(ball) != 0:
         for j in range(len(ball)):
-            ball[j].visible = False
+            ball[j]._ball.visible = False
         ball[:] = []
-    building2.pos = vec(-100, 50.5, 0) 
-    building2.up=vec(0, 1, 0)
-    building2.v=vec(0, 0, 0)
-    building2.w=0
+    building2._building.pos = vec(-100, 50.5, 0) 
+    building2._building.up=vec(0, 1, 0)
+    building2._building.velocity=vec(0, 0, 0)
+    building2._building.w=0
     w.delete()
     t = 0
 
@@ -125,23 +120,6 @@ def collide(m, M, v1, v2):
 # def boundary():
     # b1 = -85 - y*sin(theta)
 
-# calculate angular acc
-def angular_acc():
-    center = building2.pos.x
-    r = abs(-110-building2.pos.x)
-    I = (M*(20**2+100**2)/12 + M*(10**2+50**2))
-    if -100-center <= 10:
-        return M*g*r/I
-    elif -100-center > 10:
-        return -M*g*r/I
-    else:
-        return 0
-
-def angular_v(vx, r):
-    return vx/r
-
-
-# plot
 g1 = graph(title='<b>Angular Velocity (for block)</b>', 
            xtitle='<b>time</b>', ytitle='<b>Angular Velocity</b>', align='right', 
            width=500, height=300)
@@ -149,73 +127,39 @@ g1 = graph(title='<b>Angular Velocity (for block)</b>',
 w = gdots(graph=g1)
 
 t, dt = 0, 0.01
+timer = PhysTimer(0, -25)
 while True:
     rate(1/dt)
+    timer.update(t)
     for j in range(len(ball)):
 
         # motion when hit thte ground
-        if ball[j].pos.y <= 5.5  and ball[j].pos.x >= -85:
-            ball[j].v.y *= -e
-            ball[j].v += ball[j].a*dt
-            ball[j].pos += ball[j].v*dt
-
-            # if the velocity is too slow, stay on the ground
-            if ball[j].v.y <= 0.1:
-                ball[j].pos.y = 5.5
+        if ball[j].is_on_ground() and ball[j].position.x >= -85:
+            ball[j].bounce_from_ground(dt)
 
         # motion when hit the block
-        elif ball[j].pos.x <= -85 and ball[j].v.x <= 0 and ball[j].pos.y <= 100 and ball[j].pos.x >= -115 and building2.up == vec(0, 1, 0):
-            
-            v1f, v2f = collide(m, M, ball[j].v.x, building2.v.x)
+        elif ball[j].hits_building(building2._building):
+            v1f, v2f = collide(ball[j].mass, building2.mass, ball[j].velocity.x, building2._building.velocity.x)
 
             # motion of ball
-            ball[j].v.x = v1f
-            ball[j].v += ball[j].a*dt
-            ball[j].pos += ball[j].v*dt
+            ball[j]._ball.velocity.x = v1f
+            ball[j].move(vec(0, -98, 0) * ball[j].mass, dt)
 
             # motion of block
-            building2.w = angular_v(v2f, ball[j].pos.y-0.5)
-            dtheta = -building2.w*dt
-            building2.rotate(origin=vec(-110, 0, 0), axis=vec(0, 0, 1), 
-                             angle=dtheta)
-            
-
+            radius = ball[j].position.y - 0.5
+            angular_velocity = v2f / radius
+            building2.update_omega(angular_velocity, dt)
         
         # motion when in the air
         else:
-            ball[j].v += ball[j].a*dt
-            ball[j].pos += ball[j].v*dt
+            ball[j].move(vec(0, -98, 0) * ball[j].mass, dt)
+            building2.update(dt)
 
-            
-            building2.w += angular_acc()*dt
-            dtheta = -building2.w*dt
-
-            rotate_max = degrees(diff_angle(vec(0,1,0), building2.up))
-
-            # prevent over turn
-            if dtheta > rotate_max:
-                dtheta = rotate_max
-            
-            # when the block hit the ground
-            if building2.pos.y <= 10.5:
-                building2.w = 0
-                # building2.pos = vec(-160, 10.5, 0)
-                building2.up = vec(-1, 0, 0)
-                dtheta = 0
-
-            if building2.pos.x > -100:
-                # building2.pos = vec(-100, 50.5, 0) 
-                building2.up = vec(0, 1, 0)
-                building2.w = 0
-                dtheta = 0
-
-            building2.rotate(origin=vec(-110, 0, 0), axis=vec(0, 0, 1), 
-                             angle=dtheta)
 
     t += dt
 
     # plot
-    w.plot(pos=(t, building2.w))
+    w.plot(pos=(t, building2._building.w))
 
 
 

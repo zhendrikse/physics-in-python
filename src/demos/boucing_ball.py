@@ -3,7 +3,7 @@ from toolbox.ball import Ball
 from toolbox.timer import PhysTimer
 
 ball = Ball(position=vec(0, 20, 0), velocity=vec(1, 0, 0), radius=2, elasticity=0.9, color=color.red)
-floor = box(pos=vec(25, -.5, 0), length=50, height=1, width=10, color=color.green)
+floor = box(pos=vec(25, 0, 0), length=50, height=1, width=10, color=color.green)
 position_plot = graph(title="Bouncing ball", xtitle="Time", ytitle="Height", width=400, height=250)
 curve = gcurve(color=color.red)
 timer = PhysTimer(-10, 0)
