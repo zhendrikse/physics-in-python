@@ -36,12 +36,14 @@ def make_lights():
     # sphere(pos=(0, 15, 0), radius=0.5)
 
 def run_demo(cube):
-  for key in "uuddllrrffbb":
-    cube.turn_face(key)
-  for t in range(0, fps * 3):
-    rate(fps)
-  for key in "uuddllrrffbb":
-    cube.turn_face(key)
+  for i in range(0, 2):
+    for key in "uuddllrrffbb": cube.turn_face(key)
+    for t in range(0, fps * 3): rate(fps)
+
+  for i in range(0, 3):
+    for key in "FbrLuDFb": cube.turn_face(key)  
+    for t in range(0, fps * 3): rate(fps)
+    
 
 class Cube:
     def __init__(self):
@@ -99,6 +101,3 @@ def on_key_press(event):
 
 cube_scene.bind('keydown', on_key_press)
 cube_scene.caption = 'Use upper and lower case u, d, l, r, f, b keys to rorate the sides'
-
-#while True:
-#    pass
