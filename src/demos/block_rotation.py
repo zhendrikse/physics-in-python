@@ -109,13 +109,6 @@ scene.append_to_caption('\n\n')
 
 scene.append_to_caption('<i>\n\n(Please press enter after setting each parameter, otherwise \n it will run on default parameter)</i>')
 
-
-# calculate collide speed
-def collide(m, M, v1, v2):
-    v1f = (m*v1 + M*v2 + e*M*(v2 - v1))/(m + M)
-    v2f = (m*v1 + M*v2 + e*m*(v1 - v2))/(m + M)
-    return v1f, v2f
-
 # determine the boundary of block
 # def boundary():
     # b1 = -85 - y*sin(theta)
@@ -139,16 +132,9 @@ while True:
 
         # motion when hit the block
         elif ball[j].hits_building(building2._building):
-            v1f, v2f = collide(ball[j].mass, building2.mass, ball[j].velocity.x, building2._building.velocity.x)
-
-            # motion of ball
-            ball[j]._ball.velocity.x = v1f
+            building2.collide_with(ball[j], dt)
+            ball[j].collide_with(building2)
             ball[j].move(vec(0, -98, 0) * ball[j].mass, dt)
-
-            # motion of block
-            radius = ball[j].position.y - 0.5
-            angular_velocity = v2f / radius
-            building2.update_omega(angular_velocity, dt)
         
         # motion when in the air
         else:

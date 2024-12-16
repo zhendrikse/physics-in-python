@@ -46,28 +46,8 @@ class Ball:
       #building_backside = building.position().x - building.length()
       #return self._ball.pos.x <= (building_frontside - self._ball.radius) and self._ball.pos.x <= 0 and self._ball.pos.y <= building.height() and self._ball.pos.x >= (building_backside + self._ball.radius) and building._building.up == vector(0, 1, 0) 
 
-  def _collision_with(self, building):
-      momentum_ball = self._ball.mass * self.velocity.x
-      momentum_building = building.mass() * building.velocity().x
-      velocity_difference = building.velocity().x - self.velocity.x
-      total_momentum = momentum_ball + momentum_building
-      total_mass = self._ball.mass + building.mass()
-      speed_ball = (total_momentum + self._ball.elasticity * building.mass() * velocity_difference) / total_mass
-      speed_building = (total_momentum - self._ball.elasticity * self._ball.mass * velocity_difference) / total_mass
-      return speed_ball, speed_building
-
-  def collides_with_building(self, building, dt):
-      velocity_ball, velocity_building = self._collision_with(building)
-
-      # motion of ball
-      self._ball.velocity.x = velocity_ball
-      self.move(dt=dt)
-
-      # motion of block
-      angular_velocity = velocity_building / (self._ball.pos.y - 0.5)
-      building._building.w = angular_velocity
-      dtheta = -building._building.w * dt
-      building.rotate(origin=vector(-110, 0, 0), axis=vector(0, 0, 1), angle=dtheta)        
+  def collide_with(self, building):
+    self._ball.velocity.x = (self.mass * self.velocity.x + building.mass * building.velocity.x + self.elasticity * building.mass * (building.velocity.x - self.velocity.x))/(self.mass + building.mass)
   
   @property
   def momentum(self):

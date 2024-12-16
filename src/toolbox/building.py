@@ -18,6 +18,17 @@ class Building:
         else:
             return 0
         
+    def collide_with(self, ball, dt):
+        velocity = (ball.mass * ball.velocity.x + self.mass * self.velocity.x + ball.elasticity * ball.mass * (ball.velocity.x - self.velocity.x))/(ball.mass + self.mass)
+        radius = ball.position.y - 0.5
+        angular_velocity = velocity / radius
+        self._building.w = angular_velocity
+        self.update_omega(angular_velocity, dt)
+
+    def update_omega(self, angular_velocity, dt):
+        dtheta = -self._building.w * dt
+        self.rotate(dtheta) 
+
     def update(self, dt):
         self._building.w += self._angular_acceleration() * dt
         dtheta = -self._building.w * dt
@@ -43,11 +54,6 @@ class Building:
 
         self.rotate(dtheta) 
 
-    def update_omega(self, angular_velocity, dt):
-        self._building.w = angular_velocity
-        dtheta = -self._building.w * dt
-        self.rotate(dtheta) 
-
     def rotate(self, dtheta):    
         self._building.rotate(origin=vec(-self.length / 2 - self.height, 0, 0), axis=vec(0, 0, 1), angle=dtheta)
        
@@ -70,3 +76,8 @@ class Building:
     @property
     def length(self):
         return self._building.length
+    
+    @property
+    def omega(self):
+        return self._building
+        
