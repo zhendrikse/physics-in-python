@@ -8,7 +8,7 @@ from toolbox.building import Building, g
 from toolbox.timer import PhysTimer
 
 # initial perimeter setting
-theta, v0, elasticity = 1, 100, 1
+theta, v0, elasticity = 1, 100, .3
 
 # scene setting
 def set_scene():
@@ -127,7 +127,7 @@ def get_input_parameters(e_tmp, v0_tmp, theta_tmp):
     return e_ans, v0_ans, theta_ans
 
 # create widgets
-scene.append_to_caption('      0 < elasticity < 1: ')
+scene.append_to_caption('      0 < elasticity <= 1: ')
 elasticity_input_field = winput(bind=set_ball_elasticity, type='numeric')
 scene.append_to_caption(' \n\n\n')
 

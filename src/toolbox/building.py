@@ -8,7 +8,7 @@ class Building:
         self._position_in_rest = pos
 
     def _angular_acceleration(self):
-        if self._position_in_rest.x - self.position().x <= self.length() / 2:
+        if self._position_in_rest.x - self.position().x <= 0:
             return 0 #self._building.mass * g * r / I
 
         r = abs(-self._position_in_rest.x - self.length() / 2 - self._building.pos.x)
@@ -42,7 +42,7 @@ class Building:
             # building.pos = vec(-160, 10.5, 0)
             self._building.up = vec(-1, 0, 0)
 
-        self.rotate(origin=vec(-110, 0, 0), axis=vec(0, 0, 1), angle=dtheta)
+        self.rotate(origin=vec(self._position_in_rest.x - self.length() / 2, 0, 0), axis=vec(0, 0, 1), angle=dtheta)
 
     def mass(self):
         return self._building.mass
