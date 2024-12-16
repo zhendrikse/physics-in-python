@@ -24,7 +24,7 @@ class Ball:
         self._ball = sphere(mass=mass, pos=pos, radius=radius, color=color, v=v, a=a)
 
     def hits_ground(self):
-        return self._ball.pos.y <= 5.5  and self._ball.pos.x >= -85
+        return self._ball.pos.y <= self._ball.radius + .5  and self._ball.pos.x >= -85 # 85 is (building front side - ball radius) -> why cant the ball hit the ground?
 
     def hits_building(self, building):
         building_frontside = building.position().x + building.length()
