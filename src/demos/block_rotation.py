@@ -26,7 +26,9 @@ class Ball:
         return self._ball.pos.y <= 5.5  and self._ball.pos.x >= -85
 
     def hits_building(self, building):
-        return self._ball.pos.x <= -85 and self._ball.pos.x <= 0 and self._ball.pos.y <= building.height() and self._ball.pos.x >= -115 and building._building.up == vec(0, 1, 0)
+        building_frontside = building.position().x + building.length()
+        building_backside = building.position().x - building.length()
+        return self._ball.pos.x <= (building_frontside - self._ball.radius) and self._ball.pos.x <= 0 and self._ball.pos.y <= building.height() and self._ball.pos.x >= (building_backside + self._ball.radius) and building._building.up == vec(0, 1, 0)
 
     def bounce_on_ground(self, dt):
         self._ball.v.y *= -elasticity
@@ -34,7 +36,7 @@ class Ball:
 
         # if the velocity is too slow, stay on the ground
         if self._ball.v.y <= 0.1:
-            self._ball.pos.y = 5.5
+            self._ball.pos.y = self._ball.radius + .5
 
     def _collision(self, building):
         momentum_ball = self._ball.mass * self._ball.v.x

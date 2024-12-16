@@ -69,6 +69,15 @@ class Building:
     def velocity(self):
         return self._building.v
 
+    def height(self):
+        return self._building.height
+    
+    def position(self):
+        return self._building.pos
+    
+    def length(self):
+        return self._building.length
+
 class Ball:
     def __init__(self, mass=10, pos=vec(100, 105, 0), radius=5, color=vec(random(), random(), random()), v=vec(-v0*cos(radians(theta)), v0*sin(radians(theta)), 0), a=vec(0, -g, 0)):
         self._ball = sphere(mass=mass, pos=pos, radius=radius, color=color, v=v, a=a)
@@ -77,7 +86,10 @@ class Ball:
         return self._ball.pos.y <= 5.5  and self._ball.pos.x >= -85
 
     def hits_building(self, building):
-        return self._ball.pos.x <= -85 and self._ball.pos.x <= 0 and self._ball.pos.y <= 100 and self._ball.pos.x >= -115 and building._building.up == vec(0, 1, 0)
+        building_frontside = building.position().x + building.length()
+        building_backside = building.position().x - building.length()
+        return self._ball.pos.x <= (building_frontside - self._ball.radius) and self._ball.pos.x <= 0 and self._ball.pos.y <= building.height() and self._ball.pos.x >= (building_backside + self._ball.radius) and building._building.up == vec(0, 1, 0)
+
 
     def bounce_on_ground(self, dt):
         self._ball.v.y *= -elasticity

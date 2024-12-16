@@ -1,6 +1,6 @@
 from vpython import box, vec, color, degrees, diff_angle
 
-g=98
+g = 98
 
 class Building:
     def __init__(self, mass=45, pos=vec(-100, 50.5, 0), length=20, height=100, width=50, color=color.orange, up=vec(0,1,0,), v=vec(0, 0, 0), w=0):
@@ -56,3 +56,9 @@ class Building:
 
     def height(self):
         return self._building.height
+    
+    def position(self):
+        return self._building.pos
+    
+    def length(self):
+        return self._building.length
