@@ -3,8 +3,8 @@ from vpython import vector, sphere, color, mag, norm
 zero_force = vector(0, 0, 0)
 
 class Ball:
-  def __init__(self, mass=1.5, position=vector(0, 0, 0), velocity=vector(0, 0, 0), radius=0.1, color=color.yellow, make_trail=False):
-    self._ball = sphere(pos=position, radius=radius, color=color, velocity=velocity, mass=mass, make_trail=make_trail)
+  def __init__(self, mass=1.5, position=vector(0, 0, 0), velocity=vector(0, 0, 0), radius=0.1, color=color.yellow, elasticity=1.0, make_trail=False):
+    self._ball = sphere(pos=position, radius=radius, color=color, velocity=velocity, mass=mass, elasticity=elasticity, make_trail=make_trail)
 
   def move(self, force__vector, dt):
       acceleration_vector = force__vector / self._ball.mass
@@ -17,7 +17,7 @@ class Ball:
       
       k = 101
       r = self.distance_to(other_ball)
-      return k * (mag(r) - (self._ball.radius + other_ball._ball.radius)) * norm(r)
+      return k * (mag(r) - (self.radius + other_ball.radius)) * norm(r)
   
   def distance_to(self, other):
      return other.position - self.position
@@ -28,18 +28,37 @@ class Ball:
   def rotate(self, angle, origin=vector(0, 0, 0), axis=vector(0, 1, 0)):
     self._ball.rotate(origin=origin, axis=axis, angle=angle)
 
+  def is_on_ground(self):
+      return self.position.y - self.radius <= 0
+  
+  def bounce_on_ground(self, dt):
+    self.velocity.y *= - self._ball.elasticity
+    self._ball.pos += self._ball.velocity * dt
+
+    # if the velocity is too slow, stay on the ground
+    if self._ball.velocity.y <= 0.1:
+        self.position.y = self.radius 
+  
   @property
   def momentum(self):
-     return self._ball.velocity * self._ball.mass
+     return self.velocity * self.mass
   
   @property
   def kinetic_energy(self):
-     return mag(self.momentum)**2 / (2 * self._ball.mass)
+     return mag(self.momentum) * mag(self.momentum) / (2 * self.mass)
   
   @property
   def position(self):
     return self._ball.pos
   
   @property
+  def velocity(self):
+    return self._ball.velocity
+  
+  @property
   def mass(self):
      return self._ball.mass
+  
+  @property
+  def radius(self):
+     return self._ball.radius
