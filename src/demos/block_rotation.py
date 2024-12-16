@@ -4,9 +4,10 @@
 #
 
 from vpython import canvas, box, vec, cos, sin, sphere, radians, random, winput, color, button, graph, rate, gdots, degrees, diff_angle
+from toolbox.building import Building, g
 
 # initial perimeter setting
-theta, v0, elasticity, g = 1, 100, 1, 98
+theta, v0, elasticity = 1, 100, 1
 
 # scene setting
 def set_scene():
@@ -17,58 +18,6 @@ def set_scene():
                     up=vec(0,1,0))
     scene.camera.pos = vec(0, 60, 200)
 
-class Building:
-    def __init__(self, mass=45, pos=vec(-100, 50.5, 0), length=20, height=100, width=50, color=color.orange, up=vec(0,1,0,), v=vec(0, 0, 0), w=0):
-        self._building = box(mass=mass, pos=pos, length=length, height=height, width=width, color=color, up=up, v=v, w=w)
-
-    def _angular_acceleration(self):
-        center = self._building.pos.x
-        r = abs(-110 - self._building.pos.x)
-        length_squared = self._building.length * self._building.length
-        height_squared = self._building.height * self._building.height
-        width_squared = self._building.width * self._building.width
-        I = (self._building.mass * (length_squared + height_squared) / 12 + self._building.mass * (10 * 10 + width_squared))
-        if -100-center <= 10:
-            return self._building.mass * g * r / I
-        elif -100-center > 10:
-            return -self._building.mass * g * r / I
-        else:
-            return 0
-    
-    def rotate(self, angle, origin, axis):
-        self._building.rotate(origin=origin, axis=axis, angle=angle)
-
-    def update(self, dt):
-        self._building.w += self._angular_acceleration() * dt
-        dtheta = -self._building.w * dt
-
-        rotate_max = degrees(diff_angle(vec(0,1,0), self._building.up))
-
-        # prevent over turn
-        if dtheta > rotate_max:
-            dtheta = rotate_max
-        
-        # when the block hit the ground
-        if self._building.pos.y <= 10.5:
-            self._building.w = 0
-            # building.pos = vec(-160, 10.5, 0)
-            self._building.up = vec(-1, 0, 0)
-            dtheta = 0
-
-        if self._building.pos.x > -100:
-            # building.pos = vec(-100, 50.5, 0) 
-            self._building.up = vec(0, 1, 0)
-            self._building.w = 0
-            dtheta = 0
-
-        self.rotate(origin=vec(-110, 0, 0), axis=vec(0, 0, 1), angle=dtheta)
-
-    def mass(self):
-        return self._building.mass
-    
-    def velocity(self):
-        return self._building.v
-
 class Ball:
     def __init__(self, mass=10, pos=vec(100, 105, 0), radius=5, color=vec(random(), random(), random()), v=vec(-v0*cos(radians(theta)), v0*sin(radians(theta)), 0), a=vec(0, -g, 0)):
         self._ball = sphere(mass=mass, pos=pos, radius=radius, color=color, v=v, a=a)
@@ -77,7 +26,7 @@ class Ball:
         return self._ball.pos.y <= 5.5  and self._ball.pos.x >= -85
 
     def hits_building(self, building):
-        return self._ball.pos.x <= -85 and self._ball.pos.x <= 0 and self._ball.pos.y <= 100 and self._ball.pos.x >= -115 and building._building.up == vec(0, 1, 0)
+        return self._ball.pos.x <= -85 and self._ball.pos.x <= 0 and self._ball.pos.y <= building.height() and self._ball.pos.x >= -115 and building._building.up == vec(0, 1, 0)
 
     def bounce_on_ground(self, dt):
         self._ball.v.y *= -elasticity
@@ -97,7 +46,7 @@ class Ball:
         speed_building = (total_momentum - elasticity * self._ball.mass * velocity_difference) / total_mass
         return speed_ball, speed_building
 
-    def collides_with_building(self, building, dt):
+    def collides_with_buildiing(self, building, dt):
         velocity_ball, velocity_building = self._collision(building)
 
         # motion of ball
@@ -212,7 +161,7 @@ while True:
             ball[j].bounce_on_ground(dt)
 
         elif ball[j].hits_building(building2):
-            ball[j].collides_with_building(building2, dt)
+            ball[j].collides_with_buildiing(building2, dt)
         
         else:
             ball[j].move(dt)
