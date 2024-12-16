@@ -121,7 +121,6 @@ while True:
 
         if ball[j].is_on_ground() and ball[j].position.x >= -85:
             ball[j].bounce_from_ground(dt)
-            building.update(dt)
 
         elif ball[j].hits_building(building._building):
             building.collide_with(ball[j], dt)
