@@ -10,7 +10,7 @@ class Building:
     def _angular_acceleration(self):
         center = self._building.pos.x
         r = abs(-110 - self._building.pos.x)
-        I = (self.mass * (20*20 + 100* 100)/12 + self.mass * (10 * 10 + 50 * 50))
+        I = (self.mass * (self.length * self.length + self.height * self.height)/12 + self.mass * (self.length * self.length / 4 + self.width * self.width))
         if -self.height - center <= 10:
             return self.mass * g * r / I
         elif -self.height - center > 10:
@@ -77,4 +77,7 @@ class Building:
     @property
     def omega(self):
         return self._building.w
-        
+
+    @property 
+    def width(self):
+        return self._building.width
