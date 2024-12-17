@@ -10,10 +10,10 @@ class Building:
     def _angular_acceleration(self):
         center = self._building.pos.x
         r = abs(-110 - self._building.pos.x)
-        I = (self.mass * (self.length * self.length + self.height * self.height)/12 + self.mass * (self.length * self.length / 4 + self.width * self.width))
-        if -self.height - center <= 10:
+        I = self.mass * ((self.L * self.L + self.H * self.H)/ 12 + (self.L * self.L / 4 + self.W * self.W))
+        if -self.H - center <= 10:
             return self.mass * g * r / I
-        elif -self.height - center > 10:
+        elif -self.H - center > 10:
             return -self.mass * g * r / I
         else:
             return 0
@@ -29,7 +29,7 @@ class Building:
         self._building.w += self._angular_acceleration() * dt
         dtheta = -self._building.w * dt
 
-        rotate_max = degrees(diff_angle(vec(0,1,0), self._building.up))
+        rotate_max = degrees(diff_angle(vec(0, 1, 0), self._building.up))
 
         # prevent over turn
         if dtheta > rotate_max:
@@ -51,7 +51,7 @@ class Building:
         self.rotate(dtheta) 
 
     def rotate(self, dtheta):    
-        self._building.rotate(origin=vec(-self.length / 2 - self.height, 0, 0), axis=vec(0, 0, 1), angle=dtheta)
+        self._building.rotate(origin=vec(-self.L / 2 - self.H, 0, 0), axis=vec(0, 0, 1), angle=dtheta)
        
     @property
     def mass(self):
@@ -62,7 +62,7 @@ class Building:
         return self._building.velocity
 
     @property
-    def height(self):
+    def H(self):
         return self._building.height
     
     @property
@@ -70,7 +70,7 @@ class Building:
         return self._building.pos
     
     @property
-    def length(self):
+    def L(self):
         return self._building.length
     
     @property
@@ -78,5 +78,5 @@ class Building:
         return self._building.w
 
     @property 
-    def width(self):
+    def W(self):
         return self._building.width
