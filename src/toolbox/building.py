@@ -10,11 +10,12 @@ class Building:
     def _angular_acceleration(self):
         center = self._building.pos.x
         r = abs(-110 - self._building.pos.x)
-        I = self.mass * ((self.L * self.L + self.H * self.H)/ 12 + (self.L * self.L / 4 + self.W * self.W))
+        # I_block = m / 12 * (H * H + L * L), see https://kids.kiddle.co/Moment_of_inertia
+        I = self.mass / 12 * (self.H * self.H + self.L * self.L)
         if -self.H - center <= 10:
-            return self.mass * g * r / I
+            return g * r / I
         elif -self.H - center > 10:
-            return -self.mass * g * r / I
+            return -g * r / I
         else:
             return 0
         

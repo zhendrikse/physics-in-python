@@ -5,7 +5,7 @@
 
 from vpython import canvas, vec, box, sin, cos, radians, random, color, winput, button, graph, gdots, rate
 from toolbox.ball import Ball
-from toolbox.building import Building
+from toolbox.building import Building, g
 from toolbox.timer import PhysTimer
 
 # initial perimeter setting
@@ -116,12 +116,12 @@ def increment_time_for(ball, dt):
         building.collide_with(ball)
         ball.collide_with(building)
 
-        ball.move(vec(0, -98, 0) * ball.mass, dt)
+        ball.move(vec(0, -g, 0) * ball.mass, dt)
         building.rotate(-building.omega * dt) 
 
     else:
         # motion when in the air
-        ball.move(vec(0, -98, 0) * ball.mass, dt)
+        ball.move(vec(0, -g, 0) * ball.mass, dt)
         building.update(dt)
 
 
