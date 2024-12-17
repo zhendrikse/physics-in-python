@@ -98,7 +98,12 @@ original code more object-oriented and make it [reveal its intent](https://marti
 ### Earth-moon orbit
 
 - See [my code in action](https://trinket.io/glowscript/42acc05540ae) on Trinket
-- Based on the original [earth-moon system]([https://www.youtube.com/watch?v=ExxDuRTIe0E](https://www.youtube.com/watch?v=2BisyQhNBFM)) video and the code presented therein
+- Based on the original [earth-moon system](https://www.youtube.com/watch?v=2BisyQhNBFM) video and the code presented therein
+
+### Slinky drop
+
+- See [my code in action](https://trinket.io/library/trinkets/9c6757b113dc) on Trinket
+- Based on the original [slinky drop](https://rhettallain.com/2019/02/06/modeling-a-falling-slinky/) blog post and [the code presented therein](https://trinket.io/glowscript/e5f14ebee1)
 
 # Fun stuff with [VPython](https://vpython.org/) 
 
