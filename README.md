@@ -102,6 +102,8 @@ original code more object-oriented and make it [reveal its intent](https://marti
 
 ### Slinky drop
 
+[![Slinky drop](./src/demos/images/slinky_drop.png)](https://zegerh-6085.trinket.io/sites/slinkydrop)
+
 - See [my code in action](https://trinket.io/library/trinkets/9c6757b113dc) on Trinket
 - Based on the original [slinky drop](https://rhettallain.com/2019/02/06/modeling-a-falling-slinky/) blog post and [the code presented therein](https://trinket.io/glowscript/e5f14ebee1)
 
