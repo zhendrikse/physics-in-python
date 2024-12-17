@@ -3,7 +3,7 @@
 # See also: https://github.com/zhendrikse/physics-in-python/
 #
 
-from vpython import canvas, box, vec, cos, sin, sphere, radians, random, winput, color, button, graph, rate, gdots, degrees, diff_angle
+# from vpython import canvas, box, vec, cos, sin, sphere, radians, random, winput, color, button, graph, rate, gdots, degrees, diff_angle
 
 # initial perimeter setting
 theta, v0, elasticity, g = 1, 100, 1, 98
@@ -26,8 +26,7 @@ class Building:
         r = abs(-110 - self._building.pos.x)
         length_squared = self._building.length * self._building.length
         height_squared = self._building.height * self._building.height
-        width_squared = self._building.width * self._building.width
-        I = (self._building.mass * (length_squared + height_squared) / 12 + self._building.mass * (10 * 10 + width_squared))
+        I = self._building.mass / 12 * (height_squared + length_squared)
         if -100-center <= 10:
             return self._building.mass * g * r / I
         elif -100-center > 10:
@@ -77,6 +76,9 @@ class Building:
     
     def length(self):
         return self._building.length
+        
+    def omega(self):
+        return self._building.w
 
 class Ball:
     def __init__(self, mass=10, pos=vec(100, 105, 0), radius=5, color=vec(random(), random(), random()), v=vec(-v0*cos(radians(theta)), v0*sin(radians(theta)), 0), a=vec(0, -g, 0)):
@@ -214,22 +216,22 @@ g1 = graph(title='<b>Angular Velocity (for block)</b>',
            width=500, height=300)
 
 w = gdots(graph=g1)
+def increment_time_for(ball, dt):
+      if ball.hits_ground():
+          ball.bounce_on_ground(dt)
+
+      elif ball.hits_building(building2):
+          ball.collides_with_building(building2, dt)
+      
+      else:
+          ball.move(dt)
+          building2.update(dt)            
 
 t, dt = 0, 0.01
 while True:
     rate(1/dt)
-    for j in range(len(ball)):
-
-        if ball[j].hits_ground():
-            ball[j].bounce_on_ground(dt)
-
-        elif ball[j].hits_building(building2):
-            ball[j].collides_with_building(building2, dt)
-        
-        else:
-            ball[j].move(dt)
-            building2.update(dt)            
-
+    for a_ball in ball:
+        increment_time_for(a_ball, dt)
     t += dt
-    w.plot(pos=(t, building2._building.w))
+    w.plot(pos=(t, building2.omega()))
             
