@@ -12,10 +12,10 @@ class Building:
         r = abs(-110 - self._building.pos.x)
         # I_block = m / 12 * (H * H + L * L), see https://kids.kiddle.co/Moment_of_inertia
         I = self.mass / 12 * (self.H * self.H + self.L * self.L)
-        if -self.H - center <= 10:
-            return g * r / I
-        elif -self.H - center > 10:
-            return -g * r / I
+        if -self.H - center > 10:
+            return -g * r / I # backward_rotation
+        elif -self.H - center <= 10:
+            return g * r / I # forward rotation
         else:
             return 0
         
@@ -37,13 +37,14 @@ class Building:
             dtheta = rotate_max
         
         # when the block hit the ground
-        if self._building.pos.y <= 10.5:
+        if self._building.pos.y <= self.L / 2 +.5:
             self._building.w = 0
             # self._building.pos = vec(-160, 10.5, 0)
             self._building.up = vec(-1, 0, 0)
             dtheta = 0
 
-        if self._building.pos.x > -100:
+        # disable forward rotation
+        if self._building.pos.x > self._position_in_rest.x:
             # self._building.pos = vec(-100, 50.5, 0) 
             self._building.up = vec(0, 1, 0)
             self._building.w = 0
