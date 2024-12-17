@@ -1,8 +1,14 @@
+from vpython import *
+
+from toolbox.ball import Ball
+#from toolbox.spring import Spring
+
 class Spring:
-  def __init__(self, pos, axis, radius=0.20, thickness=0.05):
-    self._spring = helix(pos=pos, axis=axis, radius=radius, thickness=thickness, color=color.yellow)
+  def __init__(self, position, axis, radius=0.20, thickness=0.05):
+    self._spring = helix(pos=position, axis=axis, radius=radius, thickness=thickness, color=color.yellow)
     self._size = mag(axis)
     
+  @property
   def force(self):
     displacement = mag(self._spring.axis) - self._size
     return -1 * 2000 * displacement * norm(self._spring.axis)
@@ -11,17 +17,6 @@ class Spring:
     self._spring.axis += delta
     self._spring.pos += position
     
-class Ball:
-  def __init__(self, pos, color, mass=200):
-    self._ball = sphere(mass=mass, pos=pos, velocity=vector(0, 0, 0), radius=0.30, color=color)
-    
-  def update(self, net_force, dt):
-    self._ball.velocity += dt * net_force / self._ball.mass 
-    self._ball.pos += self._ball.velocity * dt  
-    
-  def shift(self, delta):
-    self._ball.pos += delta
-
 class Oscillator:
   def __init__(self, number_of_balls=3):
     self._total_balls = number_of_balls
@@ -37,11 +32,11 @@ class Oscillator:
     
     self._springs = []
     for i in range(0, self._total_balls + 1):
-      self._springs += [Spring(pos=left + i * spring_size + i * vector(ball_radius, 0, 0), axis=spring_size)]
+      self._springs += [Spring(position=left + i * spring_size + i * vector(ball_radius, 0, 0), axis=spring_size)] #, spring_constant=2000, equilibrium_size=mag(spring_size))]
     
     self._balls = []
     for i in range(1, self._total_balls + 1):
-      self._balls += [Ball(pos=left + i * spring_size + (i - 0.5) * vector(ball_radius, 0, 0), color=color.red)]
+      self._balls += [Ball(mass=100.0, position=left + i * spring_size + (i - 0.5) * vector(ball_radius, 0, 0), radius=ball_radius, color=color.red)]
 
   def ball_position(self, ball_index):
     return self._balls[ball_index]._ball.pos
@@ -52,13 +47,13 @@ class Oscillator:
     
   def update(self, dt):
     for ball_i in range(0, self._total_balls):
-      net_force = self._springs[ball_i].force() - self._springs[ball_i + 1].force()
-      self._balls[ball_i].update(net_force, dt)
+      net_force = self._springs[ball_i].force - self._springs[ball_i + 1].force
+      self._balls[ball_i].move(net_force, dt)
       self.update_ball_springs(ball_i, self._balls[ball_i]._ball.velocity * dt)  
     
   def update_ball(self, ball_index, dt):
-    net_force = self._springs[ball_index].force() - self._springs[ball_index + 1].force()
-    self._balls[ball_index].update(net_force, dt)
+    net_force = self._springs[ball_index].force - self._springs[ball_index + 1].force
+    self._balls[ball_index].move(net_force, dt)
     self.update_ball_springs(ball_index, self._balls[ball_index]._ball.velocity * dt)  
 
   def update_ball_springs(self, ball_index, delta):

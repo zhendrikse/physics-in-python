@@ -22,4 +22,12 @@ class Spring:
         return -self._spring.spring_constant * displacement * norm(self._spring.axis)
       
       return zero_force
+  
+  @property
+  def axis(self):
+    return self._spring.axis
+  
+  @property
+  def position(self):
+    return self._position
 

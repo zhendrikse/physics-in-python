@@ -10,6 +10,9 @@ class Ball:
       acceleration_vector = force__vector / self._ball.mass
       self._ball.velocity += acceleration_vector * dt
       self._ball.pos += self._ball.velocity * dt
+    
+  def shift(self, delta):
+    self._ball.pos += delta
   
   def force_between(self, other_ball):
       if not self.has_collided_with(other_ball):
