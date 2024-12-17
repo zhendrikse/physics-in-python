@@ -13,13 +13,11 @@ def set_scene():
     global scene
     scene = canvas(width=1000, height=600, background=vec(0, 0.6, 0.6), align='left', range=200)
     floor = box(pos=vec(0, 0, 0), size=vec(1000, 1, 1000), color=color.blue)
-    building1 = box(pos=vec(100, 50, 0), length=10, height=100, width=10, color=color.cyan, 
-                    up=vec(0,1,0))
     scene.camera.pos = vec(0, 60, 200)
 
 class Building:
-    def __init__(self, mass=45, pos=vec(-100, 50.5, 0), length=20, height=100, width=50, color=color.orange, up=vec(0,1,0,), v=vec(0, 0, 0), w=0):
-        self._building = box(mass=mass, pos=pos, length=length, height=height, width=width, color=color, up=up, v=v, w=w)
+    def __init__(self, mass=45, position=vec(-100, 50.5, 0), length=20, height=100, width=50, color=color.orange, up=vec(0,1,0,), v=vec(0, 0, 0), w=0):
+        self._building = box(mass=mass, pos=position, length=length, height=height, width=width, color=color, up=up, v=v, w=w)
 
     def _angular_acceleration(self):
         center = self._building.pos.x
@@ -87,11 +85,13 @@ class Ball:
     def hits_ground(self):
         return self._ball.pos.y <= 5.5  and self._ball.pos.x >= -85
 
-    def hits_building(self, building):
+    def hits(self, building):
         building_frontside = building.position().x + building.length()
         building_backside = building.position().x - building.length()
-        return self._ball.pos.x <= (building_frontside - self._ball.radius) and self._ball.pos.x <= 0 and self._ball.pos.y <= building.height() and self._ball.pos.x >= (building_backside + self._ball.radius) and building._building.up == vec(0, 1, 0)
-
+        front = self._ball.pos.x <= (building_frontside - self._ball.radius) and self._ball.pos.x <= 0 and self._ball.pos.y <= building.height() and self._ball.pos.x >= (building_backside + self._ball.radius) and building._building.up == vec(0, 1, 0)
+        
+        back= self._ball.pos.x >= 90  and self._ball.pos.y <= building.H
+        return front or back
 
     def bounce_on_ground(self, dt):
         self._ball.v.y *= -elasticity
@@ -111,7 +111,7 @@ class Ball:
         speed_building = (total_momentum - elasticity * self._ball.mass * velocity_difference) / total_mass
         return speed_ball, speed_building
 
-    def collides_with_building(self, building, dt):
+    def collide_with(self, building, dt):
         velocity_ball, velocity_building = self._collision(building)
 
         # motion of ball
@@ -130,8 +130,6 @@ class Ball:
 
 set_scene()
 
-building2 = Building()
-
 ball = [] # for each shot a new ball
 ball_counter = 0
 def create_ball():
@@ -139,6 +137,9 @@ def create_ball():
     new_ball = Ball()
     ball.append(new_ball)
     ball_counter += 1
+
+building2 = Building()
+shooting_tower = Building(mass=30, position=vec(100, 50, 0), length=10, height=100, width=10, color=color.cyan)
 create_ball()
 
 def set_theta(t):
@@ -220,8 +221,8 @@ def increment_time_for(ball, dt):
       if ball.hits_ground():
           ball.bounce_on_ground(dt)
 
-      elif ball.hits_building(building2):
-          ball.collides_with_building(building2, dt)
+      elif ball.hits(building2):
+          ball.collide_with(building2, dt)
       
       else:
           ball.move(dt)
