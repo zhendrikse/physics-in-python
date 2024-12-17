@@ -16,7 +16,6 @@ def set_scene():
     global scene
     scene = canvas(width=1000, height=600, background=vec(0, 0.6, 0.6), align='left', range=200)
     floor = box(pos=vec(0, 0, 0), size=vec(1000, 1, 1000), color=color.blue)
-    shooting_tower = Building(position=vec(100, 50, 0), length=10, height=100, width=10, color=color.cyan)
     scene.camera.pos = vec(0, 60, 200)
 
 set_scene()
@@ -60,7 +59,8 @@ def get_input_parameters(e_tmp, v0_tmp, theta_tmp):
 
     return e_ans, v0_ans, theta_ans
     
-building = Building()
+target_building = Building()
+shooting_tower = Building(mass=30, position=vec(100, 50, 0), length=10, height=100, width=10, color=color.cyan)
 create_ball(v0 * vec(-cos(radians(theta)), sin(radians(theta)), 0))
 
 def clean_all_balls():
@@ -69,10 +69,10 @@ def clean_all_balls():
         for j in range(len(balls)):
             balls[j]._ball.visible = False
         balls[:] = []
-    building._building.pos = vec(-100, 50.5, 0) 
-    building._building.up=vec(0, 1, 0)
-    building._building.velocity=vec(0, 0, 0)
-    building._building.w=0
+    target_building._building.pos = vec(-100, 50.5, 0) 
+    target_building._building.up=vec(0, 1, 0)
+    target_building._building.velocity=vec(0, 0, 0)
+    target_building._building.w=0
     w.delete()
     t = 0
 
@@ -109,20 +109,20 @@ g1 = graph(title='<b>Angular Velocity (for block)</b>',
 w = gdots(graph=g1)
 
 def increment_time_for(ball, dt):
-    if ball.is_on_ground() and ball.position.x >= -85:
+    if ball.is_on_ground():
         ball.bounce_from_ground(dt)
+        return
 
-    elif ball.hits_building(building):
-        building.collide_with(ball)
-        ball.collide_with(building)
-
-        ball.move(vec(0, -g, 0) * ball.mass, dt)
-        building.rotate(-building.omega * dt) 
-
+    if ball.hits(shooting_tower):
+        ball.collide_with(shooting_tower)
+    elif ball.hits(target_building):
+        ball.collide_with(target_building)
+        target_building.rotate(-target_building.omega * dt) 
     else:
-        # motion when in the air
-        ball.move(vec(0, -g, 0) * ball.mass, dt)
-        building.update(dt)
+        # ball travelling through the air
+        target_building.update(dt)
+
+    ball.move(vec(0, -g, 0) * ball.mass, dt)
 
 
 t, dt = 0, 0.01
@@ -133,7 +133,7 @@ while True:
     for ball in balls:
         increment_time_for(ball, dt)
     t += dt
-    w.plot(pos=(t, building.omega))
+    w.plot(pos=(t, target_building.omega))
 
 
 
