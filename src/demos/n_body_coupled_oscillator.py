@@ -1,4 +1,4 @@
-from vpython import *
+from vpython import mag, helix, vector, box, color, random, rate, gcurve, graph, norm
 
 from toolbox.ball import Ball
 #from toolbox.spring import Spring
@@ -36,7 +36,7 @@ class Oscillator:
     
     self._balls = []
     for i in range(1, self._total_balls + 1):
-      self._balls += [Ball(mass=100.0, position=left + i * spring_size + (i - 0.5) * vector(ball_radius, 0, 0), radius=ball_radius, color=color.red)]
+      self._balls += [Ball(mass=100.0, position=left + i * spring_size + (i - 0.5) * vector(ball_radius, 0, 0), radius=ball_radius, color=vector(random(), random(), random()))]
 
   def ball_position(self, ball_index):
     return self._balls[ball_index]._ball.pos
@@ -66,7 +66,7 @@ plot = graph(title=str(balls)+ "-body coupled oscillator",xtitle="Time",ytitle="
 oscillator = Oscillator(balls)
 curve = []
 for ball_i in range(0, balls):
-  curve += [gcurve(color=vec(random(), random(), random()))]
+  curve += [gcurve(color=oscillator._balls[ball_i]._ball.color)]
 
 # Initial displacement of balls
 oscillator.shift_ball(0, vector(1, 0, 0))
@@ -79,4 +79,4 @@ for i in range(0, 10000):
   rate(1/dt)
   oscillator.update(dt)
   for ball_i in range(0, balls):
-    curve[ball_i].plot(i * dt, oscillator.ball_position(ball_i).x - ball_i + balls)
+    curve[ball_i].plot(i * dt, oscillator.ball_position(ball_i).x - ball_i + balls / 2)
