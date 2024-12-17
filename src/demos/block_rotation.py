@@ -16,7 +16,7 @@ def set_scene():
     global scene
     scene = canvas(width=1000, height=600, background=vec(0, 0.6, 0.6), align='left', range=200)
     floor = box(pos=vec(0, 0, 0), size=vec(1000, 1, 1000), color=color.blue)
-    shooting_tower = box(pos=vec(100, 50, 0), size=vec(10, 100, 10), color=color.cyan, up=vec(0,1,0))
+    shooting_tower = Building(position=vec(100, 50, 0), length=10, height=100, width=10, color=color.cyan)
     scene.camera.pos = vec(0, 60, 200)
 
 set_scene()

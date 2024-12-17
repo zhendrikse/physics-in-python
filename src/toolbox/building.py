@@ -3,9 +3,9 @@ from vpython import box, vec, color, degrees, diff_angle
 g = 98
 
 class Building:
-    def __init__(self, mass=10, pos=vec(-100, 50.5, 0), length=20, height=100, width=50, color=color.orange, up=vec(0,1,0,), velocity=vec(0, 0, 0), w=0):
-        self._building = box(mass=mass, pos=pos, length=length, height=height, width=width, color=color, up=up, velocity=velocity, w=w)
-        self._position_in_rest = pos
+    def __init__(self, mass=10, position=vec(-100, 50.5, 0), length=20, height=100, width=50, color=color.orange, up=vec(0, 1, 0), velocity=vec(0, 0, 0), w=0):
+        self._building = box(mass=mass, pos=position, length=length, height=height, width=width, color=color, up=up, velocity=velocity, w=w)
+        self._position_in_rest = position
  
     def _angular_acceleration(self):
         center = self._building.pos.x
