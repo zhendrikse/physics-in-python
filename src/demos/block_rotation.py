@@ -113,11 +113,10 @@ def increment_time_for(ball, dt):
         ball.bounce_from_ground(dt)
 
     elif ball.hits_building(building):
-        omega = building.angular_velocity_after_collision_with(ball)
+        building.collide_with(ball)
         ball.collide_with(building)
 
         ball.move(vec(0, -98, 0) * ball.mass, dt)
-        building.update_omega(omega)
         building.rotate(-building.omega * dt) 
 
     else:
