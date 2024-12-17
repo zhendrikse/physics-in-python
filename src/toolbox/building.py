@@ -18,13 +18,13 @@ class Building:
         else:
             return 0
         
-    def collide_with(self, ball, dt):
+    def angular_velocity_after_collision_with(self, ball):
         velocity = (ball.mass * ball.velocity.x + self.mass * self.velocity.x + ball.elasticity * ball.mass * (ball.velocity.x - self.velocity.x))/(ball.mass + self.mass)
         radius = ball.position.y - 0.5
-        angular_velocity = velocity / radius
-        self._building.w = angular_velocity
-        dtheta = -self._building.w * dt
-        self.rotate(dtheta) 
+        return velocity / radius
+    
+    def update_omega(self, omega):
+        self._building.w = omega
 
     def update(self, dt):
         self._building.w += self._angular_acceleration() * dt
