@@ -22,8 +22,8 @@ class Ball:
   def distance_to(self, other):
      return other.position - self.position
     
-  def has_collided_with(self, other):
-    return mag(self.distance_to(other)) < (self.radius + other.radius)
+  def has_collided_with(self, other_ball):
+    return mag(self.distance_to(other_ball)) < (self.radius + other_ball.radius)
     
   def rotate(self, angle, origin=vector(0, 0, 0), axis=vector(0, 1, 0)):
     self._ball.rotate(origin=origin, axis=axis, angle=angle)
@@ -45,6 +45,7 @@ class Ball:
       return self.position.x <= (building_frontside - self.radius) and self.position.x <= 0 and self.position.y <= building.height and self.position.x >= (building_backside + self.radius) and building._building.up == vector(0, 1, 0) 
 
   def collide_with(self, building):
+    # set new velocity in x-direction after collision with building
     self._ball.velocity.x = (self.mass * self.velocity.x + building.mass * building.velocity.x + self.elasticity * building.mass * (building.velocity.x - self.velocity.x))/(self.mass + building.mass)
   
   @property
