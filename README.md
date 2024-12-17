@@ -70,7 +70,9 @@ original code more object-oriented and make it [reveal its intent](https://marti
 
 ### Water Sprinkler
 
-[![Sprinkler](https://rhettallain.com/wp-content/uploads/2019/11/sprinkler1.gif)](https://zegerh-6085.trinket.io/sites/sprinkler)
+<a href="https://zegerh-6085.trinket.io/sites/sprinkler">
+  <img alt="Water sprinkler" width="50%" height="50%" src="https://rhettallain.com/wp-content/uploads/2019/11/sprinkler1.gif"/>
+</a>
 
 - See [my code in action](https://trinket.io/glowscript/3ec01917098d) on Trinket
 - Based on the original [water sprinkler](https://rhettallain.com/2019/11/12/modeling-a-spinning-sprinkler/) blog post and the code presented therein
@@ -102,7 +104,9 @@ original code more object-oriented and make it [reveal its intent](https://marti
 
 ### Slinky drop
 
-[![Slinky drop](./src/demos/images/slinky_drop.png)](https://zegerh-6085.trinket.io/sites/slinkydrop)
+<a href="https://zegerh-6085.trinket.io/sites/slinkydrop">
+  <img alt="Slinky drop" width="50%" height="50%" src="./src/demos/images/slinky_drop.png"/>
+</a>
 
 - See [my code in action](https://trinket.io/library/trinkets/9c6757b113dc) on Trinket
 - Based on the original [slinky drop](https://rhettallain.com/2019/02/06/modeling-a-falling-slinky/) blog post and [the code presented therein](https://trinket.io/glowscript/e5f14ebee1)
@@ -112,12 +116,12 @@ original code more object-oriented and make it [reveal its intent](https://marti
 ### [Rubik's cube](https://trinket.io/library/trinkets/00eb13fbcd14)
 
 <a href="https://zegerh-6085.trinket.io/sites/rubiks_cube">
-  <img alt="Electric field of point charge" width="50%" height="50%" src="./src/demos/images/rubiks_cube.png"/>
+  <img alt="Rubiks cube" width="50%" height="50%" src="./src/demos/images/rubiks_cube.png"/>
 </a>
 
 ### [Turtle graphics robot](https://trinket.io/library/trinkets/31a188264ef1)
 
-<a href="https://trinket.io/library/trinkets/31a188264ef1"> <!-- TODO: CHANGE THIS ONCE ROBOT HAS BEEN PUBLISHED -->
+<a href="https://zegerh-6085.trinket.io/sites/vturtle">
   <img alt="Robot for turtle graphics" width="50%" height="50%" src="./src/demos/images/robot.png"/>
 </a>
 
