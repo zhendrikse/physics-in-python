@@ -105,7 +105,7 @@ original code more object-oriented and make it [reveal its intent](https://marti
 ### Slinky drop
 
 <a href="https://zegerh-6085.trinket.io/sites/slinkydrop">
-  <img alt="Slinky drop" width="50%" height="50%" src="./src/demos/images/slinky_drop.png"/>
+  <img alt="Slinky drop" width="60%" height="60%" src="./src/demos/images/slinky_drop.png"/>
 </a>
 
 - See [my code in action](https://trinket.io/library/trinkets/9c6757b113dc) on Trinket
