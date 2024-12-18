@@ -10,17 +10,14 @@ timer = PhysTimer(-10, 0)
 
 t = 0
 dt = 0.01
-while True:
+while ball.position.x < floor.length:
     rate(3/dt)
     timer.update(t/3)
 
     force = vec(0, -9.8, 0) * ball.mass
     ball.move(force, dt)
     if ball.is_on_ground():
-        if abs(ball.velocity.y) > 0.1:
-            ball.bounce_from_ground(dt)
-        else:
-            ball._ball.velocity.x = 0
+        ball.bounce_from_ground(dt)
 
     curve.plot(t * dt, ball.position.y)
     t += dt
