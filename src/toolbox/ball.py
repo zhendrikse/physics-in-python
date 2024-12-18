@@ -71,9 +71,9 @@ class Ball:
     self._draw()
 
   def hits(self, building):
-      building_frontside = building.position.x + building.L
-      building_backside = building.position.x - building.L
-      front = self.position.x <= (building_frontside - self.radius) and self.position.x <= 0 and self.position.y <= building.H and self.position.x >= (building_backside + self.radius) and building.up == vector(0, 1, 0) 
+      right_side = building.position.x + building.L
+      left_side = building.position.x - building.L
+      front = self.position.x <= (right_side - self.radius) and self.position.x <= 0 and self.position.y <= building.H and self.position.x >= (left_side + self.radius) and building.up == vector(0, 1, 0) 
       back  = self.position.x >= 90  and self.position.y <= building.H
       return front or back
   

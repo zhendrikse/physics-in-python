@@ -5,7 +5,7 @@ g = 98
 class Building:
     def __init__(self, 
                  mass=10, 
-                 position=vec(-100, 50.5, 0), 
+                 position=vec(0, 0, 0), 
                  length=20, 
                  height=100, 
                  width=50, 

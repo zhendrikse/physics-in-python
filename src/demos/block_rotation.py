@@ -59,7 +59,7 @@ def get_input_parameters(e_tmp, v0_tmp, theta_tmp):
 
     return e_ans, v0_ans, theta_ans
     
-target_building = Building()
+target_building = Building(mass=10, position=vec(-100, 50.5, 0))
 shooting_tower = Building(mass=30, position=vec(100, 50, 0), length=10, height=100, width=10, color=color.cyan)
 create_ball(v0 * vec(-cos(radians(theta)), sin(radians(theta)), 0))
 
