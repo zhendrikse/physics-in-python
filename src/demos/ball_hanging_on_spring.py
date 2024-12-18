@@ -19,7 +19,7 @@ spring_size = 1.0
 spring_rest_position = vector(0, 0, 0)
 ceiling = box(pos=vector(0, 0, 0), size=vector(2, 0.1, 1), color=color.green)
 ball = Ball(mass=5.0, position=vector(0, -spring_size - 0.5, 0), radius=0.2, color=color.red)
-spring = Spring(axis=ball.position, spring_constant=1000, equilibrium_size=spring_size, radius=0.1)#, thickness=0.04)
+spring = Spring(axis=ball.position, spring_constant=1000, equilibrium_size=spring_size, radius=0.1, coils=15)#, thickness=0.04)
 
 gravitational_force = vector(0, -9.8 * ball.mass, 0)
 
