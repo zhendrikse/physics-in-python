@@ -1,4 +1,5 @@
-Web VPython 3.2
+from vpython import * 
+
 class Spring:
   def __init__(self, pos, axis, radius=0.20, thickness=0.05):
     self._spring = helix(pos=pos, axis=axis, radius=radius, thickness=thickness, color=color.yellow)
@@ -56,11 +57,6 @@ class Oscillator:
       net_force = self._springs[ball_i].force() - self._springs[ball_i + 1].force()
       self._balls[ball_i].update(net_force, dt)
       self.update_ball_springs(ball_i, self._balls[ball_i]._ball.velocity * dt)  
-    
-  def update_ball(self, ball_index, dt):
-    net_force = self._springs[ball_index].force() - self._springs[ball_index + 1].force()
-    self._balls[ball_index].update(net_force, dt)
-    self.update_ball_springs(ball_index, self._balls[ball_index]._ball.velocity * dt)  
 
   def update_ball_springs(self, ball_index, delta):
     self._springs[ball_index].update(delta)
