@@ -39,7 +39,7 @@ jobs:
       - name: Physics in Python dependencies 
         working-directory: .
         run: poetry install --no-interaction 
-        name: Run tests in physics in Python
+      - name: Run tests in physics in Python
         working-directory: .
         run: ./run_tests.sh
         
