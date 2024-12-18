@@ -25,7 +25,7 @@ class Oscillator:
       self._balls += [Ball(mass=100.0, position=left + i * spring_size + (i - 0.5) * vector(ball_radius, 0, 0), radius=ball_radius, color=vector(random(), random(), random()))]
 
   def ball_position(self, ball_index):
-    return self._balls[ball_index]._ball.pos
+    return self._balls[ball_index].position
     
   def shift_ball(self, ball_index, delta):
     self.update_ball_springs(ball_index, delta)
