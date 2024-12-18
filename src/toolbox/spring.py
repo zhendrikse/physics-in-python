@@ -12,7 +12,14 @@ class Spring:
                thickness=0.03, 
                coils=10, 
                draw=True):
-    self._spring = helix(pos=position, axis=axis, radius=radius, thickness=thickness, spring_constant=spring_constant, coils=coils) if draw else None
+    spring = helix(pos=position, 
+                   axis=axis, 
+                   radius=radius, 
+                   thickness=thickness, 
+                   spring_constant=spring_constant, 
+                   coils=coils)
+    
+    self._spring = spring if draw else None
     self._position = position
     self._axis = axis
     self._spring_constant = spring_constant

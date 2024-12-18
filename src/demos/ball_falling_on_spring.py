@@ -36,8 +36,8 @@ def main():
     if running:
       rate(1/ (2 * dt))
       ball.move(spring.force + gravitational_force, dt)
-      new_spring_axis = ball.position if mag(ball.position) - spring_size < 0 else spring_rest_position
-      spring.update(new_spring_axis)
+      spring_axis = ball.position if mag(ball.position) - spring_size < 0 else spring_rest_position
+      spring.update(spring_axis)
 
       curve.plot(t * dt, ball.position.y)
       t += dt
