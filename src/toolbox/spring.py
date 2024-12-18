@@ -51,7 +51,7 @@ class Spring:
   
   @property
   def axis(self):
-    return self._spring.axis
+    return self._axis
   
   @property
   def position(self):
