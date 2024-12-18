@@ -21,11 +21,11 @@ class Spring:
   def _draw(self):
     if self._spring:
       self._spring.axis = self._axis
-      self._spring.position = self._position
+      self._spring.pos = self._position
     
   def update(self, axis, position=None):
     self._axis = axis
-    self._pos = position if position else self._position
+    self._position = position if position else self._position
     self._draw()
 
   def is_stretched_or_compressed(self):
