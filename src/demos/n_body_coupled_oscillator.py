@@ -1,22 +1,8 @@
 from vpython import mag, helix, vector, box, color, random, rate, gcurve, graph, norm
 
 from toolbox.ball import Ball
-#from toolbox.spring import Spring
-
-class Spring:
-  def __init__(self, position, axis, radius=0.20, thickness=0.05):
-    self._spring = helix(pos=position, axis=axis, radius=radius, thickness=thickness, color=color.yellow)
-    self._size = mag(axis)
-    
-  @property
-  def force(self):
-    displacement = mag(self._spring.axis) - self._size
-    return -1 * 2000 * displacement * norm(self._spring.axis)
-  
-  def update(self, delta, position=vector(0, 0, 0)):
-    self._spring.axis += delta
-    self._spring.pos += position
-    
+from toolbox.spring import Spring
+        
 class Oscillator:
   def __init__(self, number_of_balls=3):
     self._total_balls = number_of_balls
@@ -32,7 +18,7 @@ class Oscillator:
     
     self._springs = []
     for i in range(0, self._total_balls + 1):
-      self._springs += [Spring(position=left + i * spring_size + i * vector(ball_radius, 0, 0), axis=spring_size)] #, spring_constant=2000, equilibrium_size=mag(spring_size))]
+      self._springs += [Spring(position=left + i * spring_size + i * vector(ball_radius, 0, 0), axis=spring_size, spring_constant=2000, radius=0.2)] 
     
     self._balls = []
     for i in range(1, self._total_balls + 1):
@@ -52,8 +38,10 @@ class Oscillator:
       self.update_ball_springs(ball_i, self._balls[ball_i]._ball.velocity * dt)  
 
   def update_ball_springs(self, ball_index, delta):
-    self._springs[ball_index].update(delta)
-    self._springs[ball_index + 1].update(-delta, delta) 
+    spring_left = self._springs[ball_index] 
+    spring_right = self._springs[ball_index + 1]
+    spring_left.update(spring_left.axis + delta)
+    spring_right.update(spring_right.axis - delta, spring_right.position + delta) 
     
 
 balls = 4    
