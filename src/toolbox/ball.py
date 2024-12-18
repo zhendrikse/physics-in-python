@@ -70,12 +70,23 @@ class Ball:
     
     self._draw()
 
+  def _is_approaching_from_the_right(self, right_side):
+     return self.velocity.x < 0 and self.position.x > right_side
+
+  def _is_approaching_from_the_left(self, left_side):
+     return self.velocity.x > 0 and self.position.x < left_side
+
   def hits(self, building):
-      right_side = building.position.x + building.L
-      left_side = building.position.x - building.L
-      front = self.position.x <= (right_side - self.radius) and self.position.x <= 0 and self.position.y <= building.H and self.position.x >= (left_side + self.radius) and building.up == vector(0, 1, 0) 
-      back  = self.position.x >= 90  and self.position.y <= building.H
-      return front or back
+      right_side = building.position.x + building.L / 2
+      left_side = building.position.x - building.L / 2
+
+      if self._is_approaching_from_the_right(right_side):
+        return self.position.x <= right_side + self.radius and self.position.y <= building.H    
+      
+      if self._is_approaching_from_the_left(left_side):
+        return self.position.x >= left_side - self.radius and self.position.y <= building.H 
+      
+      return False
   
   def collide_with(self, building):
     building.collide_with(self)

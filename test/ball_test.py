@@ -46,12 +46,35 @@ class TestBall:
       assert_that(ball_at_origin.momentum, equal_to(dt * force))
       assert_that(ball_at_origin.position, equal_to(dt * dt * force / ball_at_origin.mass))
 
-   # def test_ball_with_zero_velocity_does_not_hit_building(self, ball_at_origin):
-   #    building = Building(position=vector(-10, 0, 0), draw=False)
-   #    assert_that(not ball_at_origin.hits(building))
+   def test_ball_with_zero_velocity_does_not_hit_building(self, ball_at_origin):
+      building = Building(position=vector(-10, 0, 0), draw=False)
+      assert_that(not ball_at_origin.hits(building))
 
-   # def test_moving_ball_hits_building_from_left(self):
-   #    ball = Ball(position=vector(3, 5, 0), velocity=vector(-1, 0, 0), radius=1, draw= False)
-   #    building = Building(length=4, width=2, height=10, draw=False)
-   #    assert_that(ball.hits(building))
+   def test_moving_ball_hits_building_from_left(self):
+      building = Building(length=4, width=2, height=10, draw=False)
+      radius = 1
+      collision_point = vector(building.position.x + building.L / 2 + radius, building.position.y, building.position.z)
+      ball = Ball(position=collision_point, velocity=vector(-1, 0, 0), radius=1, draw= False)
+      assert_that(ball.hits(building))
+
+   def test_moving_ball_hits_building_from_right(self):
+      building = Building(length=4, width=2, height=10, draw=False)
+      radius = 1
+      collision_point = vector(building.position.x - building.L / 2 - radius, building.position.y, building.position.z)
+      ball = Ball(position=collision_point, velocity=vector(1, 0, 0), radius=1, draw= False)
+      assert_that(ball.hits(building))
+
+   def test_moving_ball_flies_over_building_from_the_right(self):
+      building = Building(length=4, width=2, height=10, draw=False)
+      radius = 1
+      collision_point = vector(building.position.x - building.L / 2 - radius, building.H + 3, building.position.z)
+      ball = Ball(position=collision_point, velocity=vector(1, 0, 0), radius=1, draw= False)
+      assert_that(not ball.hits(building))
+
+   def test_moving_ball_flies_over_building_from_left(self):
+      building = Building(length=4, width=2, height=10, draw=False)
+      radius = 1
+      collision_point = vector(building.position.x + building.L / 2 + radius, building.H + 3, building.position.z)
+      ball = Ball(position=collision_point, velocity=vector(-1, 0, 0), radius=1, draw= False)
+      assert_that(not ball.hits(building))
      

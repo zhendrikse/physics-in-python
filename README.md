@@ -1,6 +1,8 @@
 # Physics in Python
 
-This repository contains physics demos, mainly using [VPython](https://vpython.org/).
+This repository contains physics demos, based on 
+[_testable_](https://medium.com/ns-techblog/tdd-or-how-i-learned-to-stop-worrying-and-love-writing-tests-ef7314470305) code! 
+The graphics library used is [VPython](https://vpython.org/).
 
 - [**`src`**](src) &rarr; contains the sources
 - [**`test`**](test) &rarr; the tests of the components in the generic toolbox
