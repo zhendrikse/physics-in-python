@@ -109,8 +109,8 @@ g1 = graph(title='<b>Angular Velocity (for block)</b>',
 w = gdots(graph=g1)
 
 def increment_time_for(ball, dt):
-    if ball.is_on_ground():
-        ball.bounce_from_ground(dt)
+    if ball.lies_on_floor():
+        ball.bounce_from_floor(dt)
         return
 
     if ball.hits(shooting_tower):

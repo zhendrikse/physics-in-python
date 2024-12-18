@@ -16,8 +16,8 @@ while ball.position.x < floor.length:
 
     force = vec(0, -9.8, 0) * ball.mass
     ball.move(force, dt)
-    if ball.is_on_ground():
-        ball.bounce_from_ground(dt)
+    if ball.lies_on_floor():
+        ball.bounce_from_floor(dt)
 
     curve.plot(t * dt, ball.position.y)
     t += dt

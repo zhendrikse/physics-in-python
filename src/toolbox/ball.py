@@ -57,10 +57,10 @@ class Ball:
   def rotate(self, angle, origin=vector(0, 0, 0), axis=vector(0, 1, 0)):
     self._ball.rotate(origin=origin, axis=axis, angle=angle)
 
-  def is_on_ground(self):
+  def lies_on_floor(self):
     return self.position.y - self.radius <= 0.5
   
-  def bounce_from_ground(self, dt):
+  def bounce_from_floor(self, dt):
     self._velocity.y *= -self.elasticity
     self._position   += self._velocity * dt
 
