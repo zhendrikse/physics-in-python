@@ -22,10 +22,10 @@ class CelestialObject:
   def distance_to(self, other):
     return other.position - self.position
     
-  def force_between(self, other):
-    radius = self.distance_to(other)
-    force_magnitude = G * self.mass * other.mass / mag(radius)**2
-    force_vector = force_magnitude * norm(radius)
+  def force_on(self, object, from_distance):
+    r_squared = mag(from_distance) * mag(from_distance)
+    force_magnitude = G * self.mass * object.mass / r_squared
+    force_vector = force_magnitude * norm(from_distance)
     return force_vector
   
   def rotate(self, angle, origin=vector(0, 0, 0), axis=vector(0, 1, 0)):
@@ -54,12 +54,12 @@ class CelestialObject:
 
 class Earth(CelestialObject):
   def __init__(self, position=vector(0, 0, 0), velocity=EARTH_VELOCITY, radius=EARTH_RADIUS, shininess=0.6):
-    super().__init__(EARTH_MASS, position=position, velocity=velocity, radius=EARTH_RADIUS, texture=textures.earth, shininess=shininess)
+    super().__init__(mass=EARTH_MASS, position=position, velocity=velocity, radius=EARTH_RADIUS, texture=textures.earth, shininess=shininess)
 
 class Moon(CelestialObject):
   def __init__(self, position=vector(0, 0, 0), velocity=MOON_VELOCITY, radius=MOON_RADIUS, shininess=0.6):
-    super().__init__(MOON_MASS, position=position, velocity=velocity, radius=MOON_RADIUS, shininess=shininess)
+    super().__init__(mass=MOON_MASS, position=position, velocity=velocity, radius=MOON_RADIUS, shininess=shininess)
 
 class Eros(CelestialObject):
   def __init__(self, position=vector(0, 0, 0), velocity=EARTH_VELOCITY, radius=EROS_RADIUS, shininess=0.6):
-    super().__init__(EROS_MASS, position=position, velocity=velocity, radius=EROS_RADIUS, shininess=shininess)
+    super().__init__(mass=EROS_MASS, position=position, velocity=velocity, radius=EROS_RADIUS, shininess=shininess, texture=textures.stucco)
