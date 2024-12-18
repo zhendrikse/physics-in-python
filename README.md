@@ -23,7 +23,7 @@ The graphics library used is [VPython](https://vpython.org/).
   <img alt="N-body coupled oscillator" width="50%" height="50%" src="./src/demos/images/n_body_coupled_oscillator.png"/>
 </a>
 
-### [Kepler's laws](https://trinket.io/library/trinkets/11c6cd8b5622)
+### [Kepler's laws](https://trinket.io/library/trinkets/11c6cd8b5622) of equal areas
 
 <a href="https://zegerh-6085.trinket.io/sites/keplers_law">
   <img alt="Keplers laws" width="50%" height="50%" src="./src/demos/images/keplers_law.png"/>
