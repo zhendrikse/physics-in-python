@@ -96,8 +96,7 @@ scene.append_to_caption('\n\n\n\n\n')
 floor = box(pos=vec(0,0,0), size=vec(300, 1, 30), color=color.blue, v=vec(0, 0, 0), 
             a=vec(0, 0, 0))
 
-ball = sphere(pos=vec(1.5/sin(radians(theta)), 10, 5), radius=1.5, v=vec(0, 0, 0),
-            a=wedge.acceleration_ball(), 
+ball = sphere(mass=1.0, pos=vec(1.5/sin(radians(theta)), 10, 5), radius=1.5, v=vec(0, 0, 0),
             texture=textures.wood)
 
 g1 = graph(title='<b>Velocity (x direction), ball=red, wedge=green</b>', 
@@ -118,18 +117,19 @@ def ball_on_ramp():
 
 dt = 0.01
 t = 0
+acceleration_ball = wedge.force_on(ball) / ball.mass
 while True:
     rate(1/dt)
     timer.update(t)
     running = running if ball.pos.x < 50 else False
 
     if running:
-        ball.v += ball.a * dt
+        ball.v += acceleration_ball * dt
         ball.pos += ball.v * dt
         wedge.update(dt)
 
         if not ball_on_ramp():
-            ball.a = vec(0, 0, 0)
+            acceleration_ball = vec(0, 0, 0)
             wedge.zero_acceleration()
 
             ball.v = vec(mag(ball.v), 0, 0)
