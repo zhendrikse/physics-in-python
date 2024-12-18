@@ -45,3 +45,7 @@ class TestBall:
      ball_at_origin.move(force, dt)
      assert_that(ball_at_origin.momentum, equal_to(dt * force))
      assert_that(ball_at_origin.position, equal_to(dt * dt * force / ball_at_origin.mass))
+
+#   def test_does_not_hit_building_with_zero_velocity(self, ball_at_origin):
+#      assert_that(ball_at_origin.hit_building(building))
+     

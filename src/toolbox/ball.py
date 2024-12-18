@@ -73,7 +73,7 @@ class Ball:
   def hits(self, building):
       building_frontside = building.position.x + building.L
       building_backside = building.position.x - building.L
-      front = self.position.x <= (building_frontside - self.radius) and self.position.x <= 0 and self.position.y <= building.H and self.position.x >= (building_backside + self.radius) and building._building.up == vector(0, 1, 0) 
+      front = self.position.x <= (building_frontside - self.radius) and self.position.x <= 0 and self.position.y <= building.H and self.position.x >= (building_backside + self.radius) and building.up == vector(0, 1, 0) 
       back  = self.position.x >= 90  and self.position.y <= building.H
       return front or back
   
