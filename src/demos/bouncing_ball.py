@@ -11,8 +11,8 @@ timer = PhysTimer(-10, 0)
 t = 0
 dt = 0.01
 while ball.position.x < floor.length:
-    rate(3/dt)
-    timer.update(t/3)
+    rate(3 / dt)
+    timer.update(t / 3)
 
     force = vec(0, -9.8, 0) * ball.mass
     ball.move(force, dt)
@@ -21,5 +21,3 @@ while ball.position.x < floor.length:
 
     curve.plot(t * dt, ball.position.y)
     t += dt
-
- 

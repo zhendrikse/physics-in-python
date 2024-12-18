@@ -5,24 +5,26 @@
 #
 
 from vpython import vector, color, rate
-from toolbox.ball import Ball     
+from toolbox.ball import Ball
+
 
 def main():
-    sphere_A = Ball(0.1, vector(-.2, .02 ,0), vector(.2, 0 ,0), 0.05, color.yellow, make_trail=True)
-    sphere_B = Ball(0.1, vector( .2, .0,  0), vector( 0, 0 ,0), 0.05, color.cyan, make_trail=True)
+    sphere_a = Ball(0.1, vector(-.2, .02, 0), vector(.2, 0, 0), 0.05, color.yellow, make_trail=True)
+    sphere_b = Ball(0.1, vector(.2, .0, 0), vector(0, 0, 0), 0.05, color.cyan, make_trail=True)
 
-    print("initial momentum = " + str(sphere_A.momentum + sphere_B.momentum) + " kg*m/s")
-    print("initial kinetic energy = " + str(sphere_A.kinetic_energy + sphere_B.kinetic_energy) + " Joules")
+    print("initial momentum = " + str(sphere_a.momentum + sphere_b.momentum) + " kg*m/s")
+    print("initial kinetic energy = " + str(sphere_a.kinetic_energy + sphere_b.kinetic_energy) + " Joules")
 
     dt = 0.01
     for timestep in range(0, 300):
-      rate(100) #  not do any more than 100 loops per second
-      force_BA = sphere_A.force_between(sphere_B)
-      sphere_A.move(force_BA, dt)
-      sphere_B.move(-force_BA, dt)
+        rate(100)  # not do any more than 100 loops per second
+        force_ba = sphere_a.force_between(sphere_b)
+        sphere_a.move(force_ba, dt)
+        sphere_b.move(-force_ba, dt)
 
-    print("final momentum = " + str(sphere_A.momentum + sphere_B.momentum) + " kg*m/s")
-    print("final kinetic energy = " + str(sphere_A.kinetic_energy + sphere_B.kinetic_energy) + " Joules")
+    print("final momentum = " + str(sphere_a.momentum + sphere_b.momentum) + " kg*m/s")
+    print("final kinetic energy = " + str(sphere_a.kinetic_energy + sphere_b.kinetic_energy) + " Joules")
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     main()

@@ -17,7 +17,7 @@ EROS_MASS = ME = 6.7e15
 
 class CelestialObject:
 
-    def __init__(self, mass, position=vector(0, 0, 0), velocity=vector(0, 0, 0), radius=10, color=color.yellow,
+    def __init__(self, mass, position=vector(0, 0, 0), velocity=vector(0, 0, 0), radius=10.0, color=color.yellow,
                  texture=None, shininess=0.6):
         self._body = sphere(mass=mass, pos=position, velocity=velocity, radius=radius, color=color, texture=texture,
                             shininess=shininess, make_trail=True)
@@ -29,6 +29,12 @@ class CelestialObject:
         r_squared = mag(from_distance) * mag(from_distance)
         force_magnitude = G * self.mass * other_object.mass / r_squared
         force_vector = force_magnitude * norm(from_distance)
+        return force_vector
+
+    def force_between(self, other_object):
+        radius = self.distance_to(other_object)
+        force_magnitude = G * self.mass * other_object.mass / mag(radius)**2
+        force_vector = force_magnitude * norm(radius)
         return force_vector
 
     def rotate(self, angle, origin=vector(0, 0, 0), axis=vector(0, 1, 0)):
@@ -56,17 +62,17 @@ class CelestialObject:
 
 
 class Earth(CelestialObject):
-    def __init__(self, position=vector(0, 0, 0), velocity=EARTH_VELOCITY, radius=EARTH_RADIUS, shininess=0.6):
+    def __init__(self, position=vector(0, 0, 0), velocity=EARTH_VELOCITY, shininess=0.6):
         super().__init__(mass=EARTH_MASS, position=position, velocity=velocity, radius=EARTH_RADIUS,
                          texture=textures.earth, shininess=shininess)
 
 
 class Moon(CelestialObject):
-    def __init__(self, position=vector(0, 0, 0), velocity=MOON_VELOCITY, radius=MOON_RADIUS, shininess=0.6):
+    def __init__(self, position=vector(0, 0, 0), velocity=MOON_VELOCITY, shininess=0.6):
         super().__init__(mass=MOON_MASS, position=position, velocity=velocity, radius=MOON_RADIUS, shininess=shininess)
 
 
 class Eros(CelestialObject):
-    def __init__(self, position=vector(0, 0, 0), velocity=EARTH_VELOCITY, radius=EROS_RADIUS, shininess=0.6):
+    def __init__(self, position=vector(0, 0, 0), velocity=EARTH_VELOCITY, shininess=0.6):
         super().__init__(mass=EROS_MASS, position=position, velocity=velocity, radius=EROS_RADIUS, shininess=shininess,
                          texture=textures.stucco)

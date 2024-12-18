@@ -7,14 +7,16 @@
 from vpython import vector, rate, box, graph, gcurve, color, mag, button
 
 from toolbox.ball import Ball
-from toolbox.spring import Spring 
+from toolbox.spring import Spring
 
 running = False
+
 
 def run(button_instance):
     global running
     running = not running
     button_instance.text = "Pause" if running else "Run"
+
 
 b1 = button(text="Run", bind=run, background=color.cyan)
 position_plot = graph(title="Ball on spring", xtitle="Time", ytitle="Height", width=400, height=250)
@@ -29,18 +31,20 @@ spring = Spring(axis=spring_rest_position, spring_constant=1000, radius=0.1, thi
 
 gravitational_force = vector(0, -9.8 * ball.mass, 0)
 
+
 def main():
-  dt = 0.01
-  t = 0
-  while True:
-    if running:
-      rate(1/ (2 * dt))
-      ball.move(spring.force + gravitational_force, dt)
-      spring_axis = ball.position if mag(ball.position) - spring_size < 0 else spring_rest_position
-      spring.update(spring_axis)
+    dt = 0.01
+    t = 0
+    while True:
+        if running:
+            rate(1 / (2 * dt))
+            ball.move(spring.force + gravitational_force, dt)
+            spring_axis = ball.position if mag(ball.position) - spring_size < 0 else spring_rest_position
+            spring.update(spring_axis)
 
-      curve.plot(t * dt, ball.position.y)
-      t += dt
+            curve.plot(t * dt, ball.position.y)
+            t += dt
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     main()

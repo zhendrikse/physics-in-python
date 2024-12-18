@@ -4,7 +4,7 @@
 # - https://www.youtube.com/watch?v=2BisyQhNBFM
 
 from vpython import vector, color, rate, graph, gcurve, textures, sqrt, mag, norm
-from toolbox.celestial_object import G, Earth, Moon, EARTH_MOON_DISTANCE
+from toolbox.celestial_object import Earth, Moon, EARTH_MOON_DISTANCE
 
 plot = graph(title="Earth moon",xtitle="t [s]",ytitle="Px [kg*m/s]",width=400, height=200)
 moon_curve = gcurve(color=color.blue)
