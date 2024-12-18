@@ -3,16 +3,42 @@ from vpython import vector, sphere, color, mag, norm
 zero_force = vector(0, 0, 0)
 
 class Ball:
-  def __init__(self, mass=1.5, position=vector(0, 0, 0), velocity=vector(0, 0, 0), radius=0.1, color=color.yellow, elasticity=1.0, make_trail=False):
-    self._ball = sphere(pos=position, radius=radius, color=color, velocity=velocity, mass=mass, elasticity=elasticity, make_trail=make_trail)
+  def __init__(self, 
+               mass=1.5, 
+               position=vector(0, 0, 0), 
+               velocity=vector(0, 0, 0), 
+               radius=0.1, 
+               color=color.yellow, 
+               elasticity=1.0, 
+               make_trail=False, 
+               draw=True):
+    
+    self._ball = self._vpython_ball(mass, position, velocity, radius, color, elasticity, make_trail) if draw else None
+    self._mass = mass
+    self._radius = radius
+    self._elasticity = elasticity
+    self._velocity = velocity
+    self._elasticity = elasticity
+    self._position = position
+
+  def _vpython_ball(self, mass, position, velocity, radius, color, elasticity, make_trail):
+      return sphere(pos=position, radius=radius, color=color, velocity=velocity, mass=mass, elasticity=elasticity, make_trail=make_trail)
+  
+  def _draw(self):
+      if self._ball:
+          self._ball.pos = self._position
+          self._ball.velocity = self._velocity
 
   def move(self, force__vector=vector(0, 0, 0), dt=0.01):
-      acceleration_vector = force__vector / self._ball.mass
-      self._ball.velocity += acceleration_vector * dt
-      self._ball.pos += self._ball.velocity * dt
+      # Newton's second law: F = m * a
+      acceleration_vector = force__vector / self.mass
+      self._velocity += acceleration_vector * dt
+      self._position += self._velocity * dt
+      self._draw()
     
   def shift(self, delta):
-    self._ball.pos += delta
+      self._position += delta
+      self._draw()
   
   def force_between(self, other_ball):
       if not self.has_collided_with(other_ball):
@@ -35,12 +61,14 @@ class Ball:
     return self.position.y - self.radius <= 0.5
   
   def bounce_from_ground(self, dt):
-    self._ball.velocity.y *= - self.elasticity
-    self._ball.pos += self._ball.velocity * dt
+    self._velocity.y *= -self.elasticity
+    self._position   += self._velocity * dt
 
     # if the velocity is too slow, stay on the ground
-    if self._ball.velocity.y <= 0.1:
-        self._ball.pos.y = self.radius + self.radius / 10
+    if self._velocity.y <= 0.1:
+        self._position.y = self.radius + self.radius / 10
+    
+    self._draw()
 
   def hits(self, building):
       building_frontside = building.position.x + building.L
@@ -52,7 +80,8 @@ class Ball:
   def collide_with(self, building):
     building.collide_with(self)
     # set new velocity in x-direction after collision with building
-    self._ball.velocity.x = (self.mass * self.velocity.x + building.mass * building.velocity.x + self.elasticity * building.mass * (building.velocity.x - self.velocity.x))/(self.mass + building.mass)
+    self._velocity.x = (self.mass * self.velocity.x + building.mass * building.velocity.x + self.elasticity * building.mass * (building.velocity.x - self.velocity.x))/(self.mass + building.mass)
+    self._draw()
   
   @property
   def momentum(self):
@@ -64,20 +93,20 @@ class Ball:
   
   @property
   def position(self):
-    return self._ball.pos
+    return self._position
   
   @property
   def velocity(self):
-    return self._ball.velocity
+    return self._velocity
   
   @property
   def mass(self):
-     return self._ball.mass
+     return self._mass
   
   @property
   def radius(self):
-     return self._ball.radius
+     return self._radius
   
   @property
   def elasticity(self):
-     return self._ball.elasticity
+     return self._elasticity

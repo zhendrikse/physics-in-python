@@ -12,18 +12,22 @@ class Spring:
                thickness=0.03, 
                coils=10, 
                draw=True):
-    spring = helix(pos=position, 
+    
+    self._spring = self._vpython_helix(position, axis, spring_constant, radius, thickness, coils) if draw else None
+    self._position = position
+    self._axis = axis
+    self._spring_constant = spring_constant
+    self._equilibrium_size = equilibrium_size if equilibrium_size else mag(axis)
+
+  def _vpython_helix(self, position, axis, spring_constant, radius, thickness, coils):
+      spring = helix(pos=position, 
                    axis=axis, 
                    radius=radius, 
                    thickness=thickness, 
                    spring_constant=spring_constant, 
                    coils=coils)
-    
-    self._spring = spring if draw else None
-    self._position = position
-    self._axis = axis
-    self._spring_constant = spring_constant
-    self._equilibrium_size = equilibrium_size if equilibrium_size else mag(axis)
+                     
+      return spring
 
   def _draw(self):
     if self._spring:
