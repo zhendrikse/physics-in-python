@@ -55,7 +55,8 @@ if velocity_wind != 0:
 source_label_text = "velocity=" + str(round(velocity_source, 2))
 velocity_source_label = label(pos=velocity_source_arrow.pos + nudge, text=source_label_text, color=source.color, box=1)
 receiver_label_text = "velocity=" + str(round(velocity_receiver, 2))
-velocity_receiver_label = label(pos=velocity_receiver_arrow.pos - nudgev, text=receiver_label_text, color=receiver.color)
+velocity_receiver_label = label(pos=velocity_receiver_arrow.pos - nudgev, text=receiver_label_text,
+                                color=receiver.color)
 
 if velocity_wind != 0:
     wind_label_text = "wind speed = " + str(round(velocity_wind, 2))
@@ -102,9 +103,9 @@ def on_mouse_click():
     if not newPick is None:
         #temp_color = newPick.color
         #newPick.color = color.yellow
-        # pick_r=newPick.x*4.
-        # string= "r=%7.5f" % pick_r
-        # label(pos=newPick.pos,text=string,xoffset=-5,yoffset=5)
+        pick_r = newPick.x * 4.
+        pick_label_text = "r=" + str(round(pick_r, 5))
+        label(pos=newPick, text=pick_label_text, xoffset=-5, yoffset=5)
 
         target = newPick
         step = (target - scene.center) / 20.
