@@ -7,9 +7,17 @@ The graphics library used is [VPython](https://vpython.org/).
 - [**`src`**](src) &rarr; contains the sources
 - [**`test`**](test) &rarr; the tests of the components in the generic toolbox
 
-## [Glowscript](https://www.glowscript.org/) demos on [Trinket](https://trinket.io/published)
+# [Glowscript](https://www.glowscript.org/) demos on [Trinket](https://trinket.io/published)
 
 #### **&darr;** Click on the below images to see animated versions **&darr;**
+
+## Electromagnetism
+
+### Visualizing [electromagnetic waves](https://trinket.io/library/trinkets/b8d62b38e852)
+
+<a href="https://zegerh-6085.trinket.io/sites/electromagnetic_wave">
+  <img alt="Particle in electric field" width="50%" height="50%" src="./src/demos/images/electromagnetic_wave.png"/></br>
+</a>
 
 ### [Charged particle moving through electric field](https://trinket.io/glowscript/db4616ccd73c)
 
@@ -17,28 +25,10 @@ The graphics library used is [VPython](https://vpython.org/).
   <img alt="Particle in electric field" width="50%" height="50%" src="./src/demos/images/particle_in_electric_field.png"/></br>
 </a>
 
-### [N-body coupled oscillator](https://trinket.io/glowscript/5a852a2b7570)
-
-<a href="https://zegerh-6085.trinket.io/sites/n_body_coupled_oscillator">
-  <img alt="N-body coupled oscillator" width="50%" height="50%" src="./src/demos/images/n_body_coupled_oscillator.png"/>
-</a>
-
 ### [Faraday's law](https://trinket.io/library/trinkets/d3934e117c2e) interactive visualization
 
 <a href="https://zegerh-6085.trinket.io/sites/faradays_law">
   <img alt="Keplers laws" width="50%" height="50%" src="./src/demos/images/faradays_law.png"/>
-</a>
-
-### [Kepler's laws](https://trinket.io/library/trinkets/11c6cd8b5622) of equal areas
-
-<a href="https://zegerh-6085.trinket.io/sites/keplers_law">
-  <img alt="Keplers laws" width="50%" height="50%" src="./src/demos/images/keplers_law.png"/>
-</a>
-
-### [Doppler effect](https://trinket.io/library/trinkets/9d869c1167ec)
-
-<a href="https://zegerh-6085.trinket.io/sites/doppler_effect">
-  <img alt="Keplers laws" width="50%" height="50%" src="./src/demos/images/doppler_effect.png"/>
 </a>
 
 ### [Electric field of point charge](https://trinket.io/glowscript/96da4eb68335)
@@ -51,6 +41,26 @@ The graphics library used is [VPython](https://vpython.org/).
 
 <a href="https://zegerh-6085.trinket.io/sites/dipole">
   <img alt="Electric field of a dipole" width="50%" height="50%" src="./src/demos/images/dipole_field.png"/>
+</a>
+
+## Kinematics
+
+### [N-body coupled oscillator](https://trinket.io/glowscript/5a852a2b7570)
+
+<a href="https://zegerh-6085.trinket.io/sites/n_body_coupled_oscillator">
+  <img alt="N-body coupled oscillator" width="50%" height="50%" src="./src/demos/images/n_body_coupled_oscillator.png"/>
+</a>
+
+### [Kepler's laws](https://trinket.io/library/trinkets/11c6cd8b5622) of equal areas
+
+<a href="https://zegerh-6085.trinket.io/sites/keplers_law">
+  <img alt="Keplers laws" width="50%" height="50%" src="./src/demos/images/keplers_law.png"/>
+</a>
+
+### [Doppler effect](https://trinket.io/library/trinkets/9d869c1167ec)
+
+<a href="https://zegerh-6085.trinket.io/sites/doppler_effect">
+  <img alt="Keplers laws" width="50%" height="50%" src="./src/demos/images/doppler_effect.png"/>
 </a>
 
 ### [Newton&apos;s pendulum](https://trinket.io/glowscript/1b74de8aeee8)
@@ -80,7 +90,6 @@ The graphics library used is [VPython](https://vpython.org/).
 <a href="https://zegerh-6085.trinket.io/sites/floating_block">
   <img alt="Block rotation" width="50%" height="50%" src="./src/demos/images/floating_block.png"/>
 </a>
-
 
 ## Glowscript demos from [Dot Physics](https://www.youtube.com/channel/UCVxIDFY01y4n_c2lK1TB-KA)
 
