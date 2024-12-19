@@ -34,7 +34,7 @@ scene.background = colorBackground[colorScheme]
 scene.background = color.black;
 Ecolor = [color.blue, vector(0, 0, .4), color.green]
 # scene.background=color.white; Ecolor=[color.blue,(0.9,0.9,0.9),color.yellow]
-scene.title = "FARADAY: Changing-Bs are associated with Curly-Es"
+scene.title = "FARADAY: Changing-Bs are associated with Curly-Es\nUse the space, n, d, z, and f keys for visualisation interaction"
 # scene.range = vector(2.5, 2.5, 2.5)
 # scene.forward = vector(-2.85804, -1.26038, -2.96742)
 
@@ -183,9 +183,7 @@ class KeyboardEventProcessor:
         self._color_scheme += 1
         return self._color_scheme % 2
 
-    @staticmethod
-    def on_key_press(event):
-        key = event.key
+    def on_key_press(self, key):
         if key == 'f':
             toggle_show_faraday(keyboard_event_processor.toggle_show_faraday())
         if key == 'd':
@@ -200,10 +198,12 @@ class KeyboardEventProcessor:
         if key == ' ':
             pause_animation()
 
-
 keyboard_event_processor = KeyboardEventProcessor()
-scene.bind('keydown', KeyboardEventProcessor.on_key_press)
 
+def key_pressed(event):
+  key = event.key
+  keyboard_event_processor.on_key_press(key)
+scene.bind('keydown', key_pressed)
 
 def on_mouse_click():
     # mouse_coordinates = scene.mouse(pick=sphere)
