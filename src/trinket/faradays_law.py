@@ -35,6 +35,9 @@ scene.background = color.black;
 Ecolor = [color.blue, vector(0, 0, .4), color.green]
 # scene.background=color.white; Ecolor=[color.blue,(0.9,0.9,0.9),color.yellow]
 scene.title = "FARADAY: Changing-Bs are associated with Curly-Es\nUse the space, n, d, z, and f keys for visualisation interaction"
+scene.caption = "\\( \\Phi_B = \\iint_{\\Sigma(t)} \\vec{B}(t) \\cdot d\\vec{A} \\),\n where \\(d\\vec{A}\\) is an element of area vector of the moving surface Σ(t), and \\(\\vec{B}\\) is the magnetic field."
+MathJax.Hub.Queue(["Typeset", MathJax.Hub])
+
 # scene.range = vector(2.5, 2.5, 2.5)
 # scene.forward = vector(-2.85804, -1.26038, -2.96742)
 

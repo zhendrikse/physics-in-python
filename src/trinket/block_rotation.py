@@ -14,6 +14,8 @@ def set_scene():
     scene = canvas(width=1000, height=600, background=vec(0, 0.6, 0.6), align='left', range=200)
     floor = box(pos=vec(0, 0, 0), size=vec(1000, 1, 1000), color=color.blue)
     scene.camera.pos = vec(0, 60, 200)
+    scene.caption = " Moment of intertia \\( I = \\dfrac{M} {12} (L^2 + H^2) \\),\n Angular momentum \\( \\omega=\\dfrac{L}{I}=\\dfrac{\\vec{F} \\times \\vec{r}}{I}=\\dfrac{M\\vec{a} \\times \\vec{r}}{I} \\)\n\n\n\n"
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 class Building:
     def __init__(self, mass=45, position=vec(-100, 50.5, 0), length=20, height=100, width=50, color=color.orange, up=vec(0,1,0,), v=vec(0, 0, 0), w=0):
