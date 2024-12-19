@@ -11,8 +11,9 @@
 from vpython import *
 from random import random
 
+max_steps = 20
 
-def month_step(time, offset=20, whole=1):  # mark the end of each "month"
+def radial_vector_color(time, offset=max_steps, whole=True):  # mark the end of each "month"
     global ccolor  # have to make it global, since label uses it before it is updated
     if whole:
         label_text = str(int(time * 2 + dt))  # end of 'month', printing twice time gives about 12 'months' in 'year'
@@ -36,20 +37,19 @@ while 1:
     velocity = -vector(0.7 + 0.5 * random(), 0, 0)  # gives a satisfactory range of eccentricities
     ##velocity = -vector(0.984,0,0)   # gives period of 12.0 "months"
     speed = mag(velocity)
-    steps = 20
-    dt = 0.5 / float(steps)
+    dt = 0.5 / float(max_steps)
     step = 0
     time = 0
     ccolor = color.white
     old_position = vector(planet.pos)
-    ccolor = month_step(time)
+    ccolor = radial_vector_color(time)
     curve(pos=[sun.pos, planet.pos], color=ccolor)
 
     while not (old_position.x > 0 > planet.pos.x):
 
-        rate(steps * 2)  # keep rate down so that development of orbit can be followed
+        rate(max_steps * 2)  # keep rate down so that development of orbit can be followed
         time += dt
-        old_position = vector(planet.pos)  # construction vector(planet.pos) makes oldpos a varible in its own right
+        old_position = vector(planet.pos)  # construction vector(planet.pos) makes oldpos a variable in its own right
         # old_position = planet.pos makes "oldposs" point to "planet.pos"
         # oldposs = planet.pos[:] does not work, because vector does not permit slicing
         denominator = mag(planet.pos) ** 3
@@ -60,9 +60,9 @@ while 1:
         curve(pos=[old_position, planet.pos], color=color.red)
 
         step += 1
-        if step == steps:
+        if step == max_steps:
             step = 0
-            ccolor = month_step(time)
+            ccolor = radial_vector_color(time)
             curve(pos=[sun.pos, planet.pos], color=color.white)
         else:
             # plot radius vector
@@ -74,7 +74,7 @@ while 1:
         #     duration = 'Duration: '
         #     break
 
-    month_step(time, 50, 0)
+    radial_vector_color(time, 50, whole=False)
     label(pos=vector(2.5, -2.5, 0), text='Click for another orbit')
     _ = scene.waitfor('click')
 
