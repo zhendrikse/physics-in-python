@@ -29,6 +29,12 @@ The graphics library used is [VPython](https://vpython.org/).
   <img alt="Keplers laws" width="50%" height="50%" src="./src/demos/images/keplers_law.png"/>
 </a>
 
+### [Doppler effect](https://trinket.io/library/trinkets/9d869c1167ec)
+
+<a href="https://zegerh-6085.trinket.io/sites/doppler_effect">
+  <img alt="Keplers laws" width="50%" height="50%" src="./src/demos/images/doppler_effect.png"/>
+</a>
+
 ### [Electric field of point charge](https://trinket.io/glowscript/96da4eb68335)
 
 <a href="https://zegerh-6085.trinket.io/sites/point_charge">
