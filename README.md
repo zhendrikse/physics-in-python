@@ -23,6 +23,12 @@ The graphics library used is [VPython](https://vpython.org/).
   <img alt="N-body coupled oscillator" width="50%" height="50%" src="./src/demos/images/n_body_coupled_oscillator.png"/>
 </a>
 
+### [Faraday's law](https://trinket.io/library/trinkets/d3934e117c2e) of equal areas
+
+<a href="https://zegerh-6085.trinket.io/sites/faradays_law">
+  <img alt="Keplers laws" width="50%" height="50%" src="./src/demos/images/faradays_law.png"/>
+</a>
+
 ### [Kepler's laws](https://trinket.io/library/trinkets/11c6cd8b5622) of equal areas
 
 <a href="https://zegerh-6085.trinket.io/sites/keplers_law">
