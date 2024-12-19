@@ -37,11 +37,12 @@ Ecolor = [color.blue, vector(0, 0, .4), color.green]
 scene.title = "FARADAY: Changing-Bs are associated with Curly-Es\nUse the space, n, d, z, and f keys for visualisation interaction"
 # scene.range = vector(2.5, 2.5, 2.5)
 # scene.forward = vector(-2.85804, -1.26038, -2.96742)
-
 # scene.forward=(0.089623,4.193811,0.983082)
-
 # scene.range=(1.5,1.5,1.5)
 # scene.forward=(2.102859,-3.185552,1.998194)
+
+#scene.camera.pos = vector(-2.85804, -1.26038, -2.96742)
+#scene.camera.axis = vector(2.5, 2.5, 2.5)
 
 showFaraday = 0
 dimFields = 0
@@ -104,9 +105,8 @@ for b in B:
                     fixedwidth=1, color=hcolor, shaftwidth=0.07, headwidth=0.14, visible=showFaraday))
 
 Eloop_rad = mag(E[0].pos)
-# x = Eloop_rad * cos(2. * pi * arange(40) / 40.)
-# FaradayLoop = curve(color=hcolor, x=Eloop_rad * cos(2. * pi * arange(40) / 40.),
-#                    y=Eloop_rad * sin(2. * pi * arange(40) / 40.), visible=showFaraday)
+pos = [Eloop_rad * vector(cos(2. * pi * n / 40.), sin(2. * pi * n / 40.), 0) for n in range(40)]
+FaradayLoop = curve(color=hcolor, pos=pos, visible=True)
 
 I=cylinder(radius=0.04,pos=vector(0,0,-2),axis=vector(0,0,4), color=color.yellow)
 chgpos=[]
