@@ -98,22 +98,22 @@ def meeting(t):
 
 
 def on_mouse_click():
-    # newPick = scene.mouse(pick=sphere)
-    newPick = scene.mouse.project(normal=vec(0, 1, 0), point=vec(0, 2, 0))
-    if not newPick is None:
-        #temp_color = newPick.color
-        #newPick.color = color.yellow
-        pick_r = newPick.x * 4.
+    # mouse_coordinates = scene.mouse(pick=sphere)
+    mouse_coordinates = scene.mouse.project(normal=vec(0, 1, 0), point=vec(0, 2, 0))
+    if not mouse_coordinates is None:
+        #temp_color = mouse_coordinates.color
+        #mouse_coordinates.color = color.yellow
+        pick_r = mouse_coordinates.x * 4.
         pick_label_text = "r=" + str(round(pick_r, 5))
-        label(pos=newPick, text=pick_label_text, xoffset=-5, yoffset=5)
+        label(pos=mouse_coordinates, text=pick_label_text, xoffset=-5, yoffset=5)
 
-        target = newPick
+        target = mouse_coordinates
         step = (target - scene.center) / 20.
         for i in arange(1, 20, 1):
             rate(10)
             scene.center += step
             scene.range /= 1.037  # (1.037**19=1.99)
-        #newPick.color = temp_color
+        #mouse_coordinates.color = temp_color
 
 
 scene.bind('click', on_mouse_click)
