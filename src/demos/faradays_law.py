@@ -1,10 +1,9 @@
-from vpython import *
-
-# needs a code clean-up (seems to now work on Python 2.4/VPython 3.2.9)
+from vpython import vector, canvas, color, arrow, arange, sin, cos, pi, box, mag, curve, cylinder, sphere, label, rate, vec, norm
 
 """
 Electromagnetism: Faraday Law (v2.76) 2008-02-29
 Rob Salgado (salgado@physics.syr.edu)
+Updated by Zeger Hendrikse
 
 Electric Field vectors are blue. Magnetic Field vectors are red.
 
@@ -34,7 +33,7 @@ scene.background = colorBackground[colorScheme]
 scene.background = color.black;
 Ecolor = [color.blue, vector(0, 0, .4), color.green]
 # scene.background=color.white; Ecolor=[color.blue,(0.9,0.9,0.9),color.yellow]
-scene.title = "FARADAY: Changing-Bs are associated with Curly-Es\nUse the space, n, d, z, and f keys for visualisation interaction"
+scene.title = "FARADAY: Changing-Bs are associated with Curly-Es\nUse the space, n, d, v, and f keys for visualisation interaction"
 # scene.range = vector(2.5, 2.5, 2.5)
 # scene.forward = vector(-2.85804, -1.26038, -2.96742)
 # scene.forward=(0.089623,4.193811,0.983082)
@@ -106,7 +105,7 @@ for b in B:
 
 Eloop_rad = mag(E[0].pos)
 pos = [Eloop_rad * vector(cos(2. * pi * n / 40.), sin(2. * pi * n / 40.), 0) for n in range(40)]
-FaradayLoop = curve(color=hcolor, pos=pos, visible=True)
+FaradayLoop = curve(color=hcolor, pos=pos, visible=False)
 
 I=cylinder(radius=0.04,pos=vector(0,0,-2),axis=vector(0,0,4), color=color.yellow)
 chgpos=[]
@@ -123,7 +122,7 @@ dt = 1
 
 
 def toggle_show_faraday(show=True):
-    # FaradayLoop.visible = show
+    FaradayLoop.visible = show
     for k in Bp:
         k.visible = show
 
@@ -190,7 +189,7 @@ class KeyboardEventProcessor:
             toggle_show_fields(keyboard_event_processor.toggle_show_fields())
         if key == 'n':
             toggle_color_scheme(keyboard_event_processor.toggle_color_schemes())
-        if key == 'z':
+        if key == 'v':
             print("scene.center=" + str(scene.center))
             print("scene.forward=" + str(scene.forward))
             print("scene.range=" + str(scene.range))
