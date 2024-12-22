@@ -198,9 +198,14 @@ FRONT2.visible = showWavefronts
 class ElectricField:
     def __init__(self, position):
         # 0 = color in color scheme 1, 1 = dim in color scheme 1, 2 = color in color scheme 2, 3 = color is dim in color scheme 2
-        self._colors = [color.orange, vec(.4, 0, .0), color.yellow, vec(0, 1, 0)]
+        self._colors = [color.orange, vec(0.4, 0, .0), color.yellow, vec(0, 1, 0)]
         self._arrow = arrow(pos=position, axis=vec(0, 0, 0), color=self._colors[0], shaftwidth=0.2, fixedwidth=1, nbw=0)
+        self._dim_toggle = False
 
+    def dim_toggle(self, color_scheme):
+        self._dim_toggle = not self._dim_toggle
+        color_index = color_scheme * 2
+        self._arrow.color = self._colors[color_index] if self._dim_toggle else self._colors[color_index + 1]
 
     def update(self, wave_number, t):
         ampere = Emax * sin(k * (wave_number % (2 * S) - S) - omega * t)
@@ -208,26 +213,34 @@ class ElectricField:
 
 class MagneticField:
     def __init__(self, position):
-        self._arrow = arrow(pos=position, axis=vec(0, 0, 0), color=Bcolor[dimFields], shaftwidth=0.2, fixedwidth=1, nbw=0)
+        # 0 = color in color scheme 1, 1 = dim in color scheme 1, 2 = color in color scheme 2, 3 = color is dim in color scheme 2
+        self._colors = [color.cyan, vec(0, 0, 0.4), color.magenta, vec(1, 0.0, 1.0)]
+        self._arrow = arrow(pos=position, axis=vec(0, 0, 0), color=self._colors[0], shaftwidth=0.2, fixedwidth=1, nbw=0)
+        self._dim_toggle = False
+
+    def dim_toggle(self, color_scheme):
+        self._dim_toggle = not self._dim_toggle
+        color_index = color_scheme * 2
+        self._arrow.color = self._colors[color_index] if self._dim_toggle else self._colors[color_index + 1]
 
     def update(self, wave_number, t):
         ampere = Emax * sin(k * (wave_number % (2 * S) - S) - omega * t)
         self._arrow.axis.y = ampere
 
 ## FIELDS
-EField = [ElectricField(vec(i, 0, 0))._arrow for i in range(-S, S)]
-BField = [MagneticField(vec(i, 0, 0))._arrow for i in range(-S, S)]
+EField = [ElectricField(vec(i, 0, 0)) for i in range(-S, S)]
+BField = [MagneticField(vec(i, 0, 0)) for i in range(-S, S)]
 
 if showNeighboringWaves >= 0:
-    EField += [ElectricField(vec(i, sep, 0))._arrow for i in range(-S, S)]
-    EField += [ElectricField(vec(i, -sep, 0))._arrow for i in range(-S, S)]
-    EField += [ElectricField(vec(i, 0, j * sep))._arrow for i in range(-S, S) for j in range(1, 3)]
-    EField += [ElectricField(vec(i, 0, j * -sep))._arrow for i in range(-S, S) for j in range(1, 3)]
+    EField += [ElectricField(vec(i, sep, 0)) for i in range(-S, S)]
+    EField += [ElectricField(vec(i, -sep, 0)) for i in range(-S, S)]
+    EField += [ElectricField(vec(i, 0, j * sep)) for i in range(-S, S) for j in range(1, 3)]
+    EField += [ElectricField(vec(i, 0, j * -sep)) for i in range(-S, S) for j in range(1, 3)]
 
-    BField += [MagneticField(vec(i, sep, 0))._arrow for i in range(-S, S)]
-    BField += [MagneticField(vec(i, -sep, 0))._arrow for i in range(-S, S)]
-    BField += [MagneticField(vec(i, 0, j * sep))._arrow for i in range(-S, S) for j in range(1, 3)]
-    BField += [MagneticField(vec(i, 0, j * -sep))._arrow for i in range(-S, S) for j in range(1, 3)]
+    BField += [MagneticField(vec(i, sep, 0)) for i in range(-S, S)]
+    BField += [MagneticField(vec(i, -sep, 0)) for i in range(-S, S)]
+    BField += [MagneticField(vec(i, 0, j * sep)) for i in range(-S, S) for j in range(1, 3)]
+    BField += [MagneticField(vec(i, 0, j * -sep)) for i in range(-S, S) for j in range(1, 3)]
 
 ######################################################################################################
 ######################################################################################################
@@ -418,11 +431,11 @@ def keyInput(evt):
             AmpereLoop.visible = dEdt.visible = showAmpere;
             dEdtlabel.visible = showAmpere * verbose
             if showAmpere == 1:
-                BField[S + fi - 1].color = ddtcolor[0]
-                BField[S + fi + 1].color = ddtcolor[0]
+                BField[S + fi - 1]._arrow.color = ddtcolor[0]
+                BField[S + fi + 1]._arrow.color = ddtcolor[0]
             else:
-                BField[S + fi - 1].color = Bcolor[dimFields]
-                BField[S + fi + 1].color = Bcolor[dimFields]
+                BField[S + fi - 1]._arrow.color = Bcolor[dimFields]
+                BField[S + fi + 1]._arrow.color = Bcolor[dimFields]
 
         if s == 'f':
             showFaraday += 1;
@@ -430,20 +443,22 @@ def keyInput(evt):
             FaradayLoop.visible = dBdt.visible = showFaraday;
             dBdtlabel.visible = showFaraday * verbose
             if showFaraday == 1:
-                EField[S + fi - 1].color = ddtcolor[1]
-                EField[S + fi + 1].color = ddtcolor[1]
+                EField[S + fi - 1]._arrow.color = ddtcolor[1]
+                EField[S + fi + 1]._arrow.color = ddtcolor[1]
             else:
-                EField[S + fi - 1].color = Ecolor[dimFields]
-                EField[S + fi + 1].color = Ecolor[dimFields]
+                EField[S + fi - 1]._arrow.color = Ecolor[dimFields]
+                EField[S + fi + 1]._arrow.color = Ecolor[dimFields]
 
         if s == 'd':
             dimFields += 1;
             dimFields %= 2;
 
-            for i in EField:
-                i.color = Ecolor[dimFields]
-            for i in BField:
-                i.color = Bcolor[dimFields]
+            #_ = [field.dim_toggle(colorScheme) for field in EField]
+            #_ = [field.dim_toggle(colorScheme) for field in BField]
+            for field in EField:
+                field._arrow.color = Ecolor[dimFields]
+            for field in BField:
+                field._arrow.color = Bcolor[dimFields]
 
         if s == 'e':
             showE += 1;
@@ -461,36 +476,36 @@ def keyInput(evt):
 
         if s == 's':
             for i in arange(0, len(EField)):
-                EField[i].visible = 1 - showNeighboringWaves * (EField[i].nbw % 2)
-                BField[i].visible = 1 - showNeighboringWaves * (BField[i].nbw % 2)
+                EField[i]._arrow.visible = 1 - showNeighboringWaves * (EField[i]._arrow.nbw % 2)
+                BField[i]._arrow.visible = 1 - showNeighboringWaves * (BField[i]._arrow.nbw % 2)
             showNeighboringWaves += 1;
             showNeighboringWaves %= 2;
 
         if s == 'v':
             verbose += 1;
             verbose %= len(prefixAmpere);
-            dBdtlabel.visible = showFaraday * min(verbose, 1);
+            dBdtlabel.visible = showFaraday * min(verbose, 1)
             dEdtlabel.visible = showAmpere * min(verbose, 1)
 
         if s == 'z':
-            labelFontSizeSelected += 1;
-            labelFontSizeSelected %= len(labelFontSizes);
+            labelFontSizeSelected += 1
+            labelFontSizeSelected %= len(labelFontSizes)
             dBdtlabel.height = labelFontSizes[labelFontSizeSelected]
             dEdtlabel.height = labelFontSizes[labelFontSizeSelected]
 
         if s == 'c':
-            calculus += 1;
-            calculus %= 2;
+            calculus += 1
+            calculus %= 2
 
         if s == 'w':
-            showWavefronts += 1;
-            showWavefronts %= 2;
+            showWavefronts += 1
+            showWavefronts %= 2
             FRONT.visible = showWavefronts
             FRONT2.visible = showWavefronts
 
         if s == 'g':
-            showGauss += 1;
-            showGauss %= 3;
+            showGauss += 1
+            showGauss %= 3
             for i in GYflux + GZflux:
                 i.visible = (showGauss == 1)
             for i in GSegFlux:
@@ -498,11 +513,11 @@ def keyInput(evt):
             for i in GXflux:
                 i.visible = (showGauss > 0)
             if showGauss == 1:
-                GXflux[0].pos = GXflux[0].pos1
-                GXflux[1].pos = GXflux[1].pos1
+                GXflux[0].pos = GXflux[0]._arrow.pos1
+                GXflux[1].pos = GXflux[1]._arrow.pos1
             else:
-                GXflux[0].pos = GXflux[0].pos2
-                GXflux[1].pos = GXflux[1].pos2
+                GXflux[0].pos = GXflux[0]._arrow.pos2
+                GXflux[1].pos = GXflux[1]._arrow.pos2
 
         if s == 'n':
             colorScheme = (colorScheme + 1) % 2  # TOGGLE colorScheme
@@ -535,19 +550,19 @@ def keyInput(evt):
             print("scene.range=", scene.range)
             print("t={}\n".format(t))
 
-        if showFaraday == 1: EField[S + fi - 1].color = EField[S + fi + 1].color = ddtcolor[0]
-        if showAmpere == 1:  BField[S + fi - 1].color = BField[S + fi + 1].color = ddtcolor[1]
+        if showFaraday == 1: EField[S + fi - 1]._arrow.color = EField[S + fi + 1]._arrow.color = ddtcolor[0]
+        if showAmpere == 1:  BField[S + fi - 1]._arrow.color = BField[S + fi + 1]._arrow.color = ddtcolor[1]
 
         if highlightField == 1:
             if showFaraday == 1:
-                BField[S + fi].color = Bcolor[0]
+                BField[S + fi]._arrow.color = Bcolor[0]
             else:
-                BField[S + fi].color = Bcolor[dimFields]
+                BField[S + fi]._arrow.color = Bcolor[dimFields]
 
             if showAmpere == 1:
-                EField[S + fi].color = Ecolor[0]
+                EField[S + fi]._arrow.color = Ecolor[0]
             else:
-                EField[S + fi].color = Ecolor[dimFields]
+                EField[S + fi]._arrow.color = Ecolor[dimFields]
 
 
 # scene.bind('keydown click', keyInput)
@@ -570,18 +585,18 @@ while 1:
 
     phase = k * (newfi - S) - omega * t
     if fi != newfi:  # MOVE THE LOOPS
-        EField[S + fi - 1].color = EField[S + fi + 1].color = Ecolor[dimFields]
-        BField[S + fi - 1].color = BField[S + fi + 1].color = Bcolor[dimFields]
+        EField[S + fi - 1]._arrow.color = EField[S + fi + 1]._arrow.color = Ecolor[dimFields]
+        BField[S + fi - 1]._arrow.color = BField[S + fi + 1]._arrow.color = Bcolor[dimFields]
 
         if highlightField == 1:
-            if showFaraday == 1: BField[S + fi].color = Bcolor[dimFields]
-            if showAmpere == 1:  EField[S + fi].color = Ecolor[dimFields]
+            if showFaraday == 1: BField[S + fi]._arrow.color = Bcolor[dimFields]
+            if showAmpere == 1:  EField[S + fi]._arrow.color = Ecolor[dimFields]
         fi = newfi
-        if showFaraday == 1: EField[S + fi - 1].color = EField[S + fi + 1].color = ddtcolor[0]
-        if showAmpere == 1:  BField[S + fi - 1].color = BField[S + fi + 1].color = ddtcolor[1]
+        if showFaraday == 1: EField[S + fi - 1]._arrow.color = EField[S + fi + 1]._arrow.color = ddtcolor[0]
+        if showAmpere == 1:  BField[S + fi - 1]._arrow.color = BField[S + fi + 1]._arrow.color = ddtcolor[1]
 
-        if highlightField == 1 and showFaraday == 1: BField[S + fi].color = Bcolor[0]
-        if highlightField == 1 and showAmpere == 1:  EField[S + fi].color = Ecolor[0]
+        if highlightField == 1 and showFaraday == 1: BField[S + fi]._arrow.color = Bcolor[0]
+        if highlightField == 1 and showAmpere == 1:  EField[S + fi]._arrow.color = Ecolor[0]
 
         FaradayLoop.modify(0, x=fi - 1)
         FaradayLoop.modify(1, x=fi - 1)
@@ -602,8 +617,8 @@ while 1:
     # UPDATE THE FIELDS
     for i in arange(0, len(EField)):
         amp = Emax * sin(k * (i % (2 * S) - S) - omega * t)
-        EField[i].axis.y = amp
-        BField[i].axis.z = amp
+        EField[i]._arrow.axis.y = amp
+        BField[i]._arrow.axis.z = amp
     #        print (i%(2*S)-S), EField[i].pos[0]
 
     # UPDATE THE FLUX
@@ -674,33 +689,33 @@ while 1:
 
     # UPDATE THE dB/dt
     dBdt.axis.z = magnify * omega * Emax * abs(cos(phase)) * -sign(
-        dot(EField[S + newfi + 1].axis - EField[S + newfi - 1].axis, vector(0, 1, 0)))
+        dot(EField[S + newfi + 1]._arrow.axis - EField[S + newfi - 1]._arrow.axis, vector(0, 1, 0)))
     dBdtlabel.text = prefixFaraday[verbose]
-    if dot(dBdt.axis, BField[S + newfi].axis) > 0:
+    if dot(dBdt.axis, BField[S + newfi]._arrow.axis) > 0:
         dBdtlabel.text += dBdtpos_text[calculus]
-        dBdt.pos = vector(newfi, 0, BField[S + newfi].axis.z) + 0 * label_epsV
-    elif dot(dBdt.axis, BField[S + newfi].axis) < 0:
+        dBdt.pos = vector(newfi, 0, BField[S + newfi]._arrow.axis.z) + 0 * label_epsV
+    elif dot(dBdt.axis, BField[S + newfi]._arrow.axis) < 0:
         dBdtlabel.text += dBdtneg_text[calculus]
-        dBdt.pos = vector(newfi, 0, BField[S + newfi].axis.z - dBdt.axis.z) + 0 * label_epsV
+        dBdt.pos = vector(newfi, 0, BField[S + newfi]._arrow.axis.z - dBdt.axis.z) + 0 * label_epsV
     else:
         dBdtlabel.text += dBdtzer_text[calculus]
-        dBdt.pos = vector(newfi, 0, BField[S + newfi].axis.z)
-    dBdtlabel.pos = BField[S + newfi].pos + BField[S + newfi].axis + 0 * label_epsV
+        dBdt.pos = vector(newfi, 0, BField[S + newfi]._arrow.axis.z)
+    dBdtlabel.pos = BField[S + newfi]._arrow.axis + BField[S + newfi]._arrow.axis + 0 * label_epsV
 
     # UPDATE THE dE/dt
     dEdt.axis.y = magnify * omega * Emax * abs(cos(phase)) * sign(
-        dot(BField[S + newfi + 1].axis - BField[S + newfi - 1].axis, vector(0, 0, -1)))
+        dot(BField[S + newfi + 1]._arrow.axis - BField[S + newfi - 1]._arrow.axis, vector(0, 0, -1)))
     dEdtlabel.text = prefixAmpere[verbose]
-    if dot(dEdt.axis, EField[S + newfi].axis) > 0:
+    if dot(dEdt.axis, EField[S + newfi]._arrow.axis) > 0:
         dEdtlabel.text += dEdtpos_text[calculus]
-        dEdt.pos = vector(newfi, EField[S + newfi].axis.y, 0)
-    elif dot(dEdt.axis, EField[S + newfi].axis) < 0:
+        dEdt.pos = vector(newfi, EField[S + newfi]._arrow.axis.y, 0)
+    elif dot(dEdt.axis, EField[S + newfi]._arrow.axis) < 0:
         dEdtlabel.text += dEdtneg_text[calculus]
-        dEdt.pos = vector(newfi, EField[S + newfi].axis.y - dEdt.axis.y, 0)
+        dEdt.pos = vector(newfi, EField[S + newfi]._arrow.axis.y - dEdt.axis.y, 0)
     else:
         dEdtlabel.text += dEdtzer_text[calculus]
-        dEdt.pos = vector(newfi, EField[S + newfi].axis.y, 0)
-    dEdtlabel.pos = EField[S + newfi].pos + EField[S + newfi].axis
+        dEdt.pos = vector(newfi, EField[S + newfi]._arrow.axis.y, 0)
+    dEdtlabel.pos = EField[S + newfi]._arrow.axis + EField[S + newfi]._arrow.axis
 
     if trun > 0:
         t += 0.1
