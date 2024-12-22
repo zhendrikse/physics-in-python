@@ -28,7 +28,7 @@ class Charge:
         self._field.show()
 
     def field_at(self, position):
-        return hat(position - self._ball.pos) * k * self._charge / mag(position - self._ball.pos) ** 2
+        return hat(position - self._position) * k * self._charge / mag(position - self._position) ** 2
 
     @property
     def coulomb(self):
@@ -56,7 +56,6 @@ class Charge:
         return electric_field * self._charge
 
     def update(self, coulomb_force, dt):
-        '''given a charge and position and update position'''
         self._velocity += coulomb_force / self._mass * dt
         self._position += self._velocity * dt
         self._draw()

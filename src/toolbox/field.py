@@ -3,7 +3,7 @@ from functools import reduce
 
 
 class FieldArrow:
-    def __init__(self, position, field, point_charge=False, arrow_length=3E-14):
+    def __init__(self, position, field, arrow_length, point_charge=False):
         color = FieldArrow.color_mapping(field)
         colour = vec(color, 0, 1) if point_charge else vec(1, color, 0)
         arrow(pos=position, axis=hat(field) * arrow_length, color=colour)
@@ -25,7 +25,7 @@ class PointChargeField:
 
     def _field_arrow(self, r, theta, phi):
         xyz = PointChargeField.to_cartesian_coordinates(self._charge.radius * r, theta * pi / 3, phi * pi / 3)
-        return FieldArrow(xyz, self._charge.field_at(xyz), True)
+        return FieldArrow(xyz, self._charge.field_at(xyz), self._charge.radius * 3,True)
 
     @staticmethod
     def to_cartesian_coordinates(r, theta, phi):
@@ -50,7 +50,7 @@ class Field:
 
     def _field_arrow(self, x, y, z):
         point = vec(x, y, z) * self._charge_radius
-        return FieldArrow(point, self.field_at(point))
+        return FieldArrow(point, self.field_at(point), 3e-11)
 
     @property
     def _charge_radius(self):
