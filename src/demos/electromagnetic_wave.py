@@ -138,10 +138,7 @@ ambient = [0.3, 0.7]
 scene.ambient = vec(.4, .4, .4)
 scene.background = colorBackground[colorScheme]
 
-EField = []
 EField2 = []
-
-BField = []
 BField2 = []
 Emax = 4.
 sep = 10.
@@ -200,7 +197,10 @@ FRONT2.visible = showWavefronts
 ######################################################################################################
 class ElectricField:
     def __init__(self, position):
-        self._arrow = arrow(pos=position, axis=vec(0, 0, 0), color=Ecolor[dimFields], shaftwidth=0.2, fixedwidth=1, nbw=0)
+        # 0 = color in color scheme 1, 1 = dim in color scheme 1, 2 = color in color scheme 2, 3 = color is dim in color scheme 2
+        self._colors = [color.orange, vec(.4, 0, .0), color.yellow, vec(0, 1, 0)]
+        self._arrow = arrow(pos=position, axis=vec(0, 0, 0), color=self._colors[0], shaftwidth=0.2, fixedwidth=1, nbw=0)
+
 
     def update(self, wave_number, t):
         ampere = Emax * sin(k * (wave_number % (2 * S) - S) - omega * t)
@@ -213,20 +213,6 @@ class MagneticField:
     def update(self, wave_number, t):
         ampere = Emax * sin(k * (wave_number % (2 * S) - S) - omega * t)
         self._arrow.axis.y = ampere
-
-#
-# ## FIELDS
-# EField = [ElectricField(vec(i, 0, 0)) for i in range(-S, S)]
-#
-# for i in arange(-S, S):
-#     Bv = arrow(pos=vec(i, 0, 0), axis=vec(0, 0, 0), color=Bcolor[dimFields], shaftwidth=0.2, fixedwidth=1, nbw=0)
-#     BField.append(Bv)
-#
-# if showNeighboringWaves >= 0:
-#     EField += [ElectricField(vec(i, sep, 0)) for i in range(-S, S)]
-#     EField += [ElectricField(vec(i, -sep, 0)) for i in range(-S, S)]
-#     EField += [ElectricField(vec(i, j * sep, 0)) for i in range(-S, S) for j in range(1, 3)]
-#     EField += [ElectricField(vec(i, j * -sep, 0)) for i in range(-S, S) for j in range(1, 3)]
 
 ## FIELDS
 EField = [ElectricField(vec(i, 0, 0))._arrow for i in range(-S, S)]
