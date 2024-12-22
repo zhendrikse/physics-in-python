@@ -1,6 +1,6 @@
-from vpython import sin, cos, vec, box, sphere, rate, color, pi, vector
+from vpython import vec, rate, vector
 
-from toolbox.charge import Electron, k, Q, electron_mass
+from toolbox.charge import Electron
 from toolbox.charged_ring import ChargedRing
 
 #

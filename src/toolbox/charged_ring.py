@@ -4,7 +4,7 @@ from toolbox.charge import Q, k
 
 class ChargedRing:
     def __init__(self, number_of_ring_segments=60, radius=0.5e-10, draw=True, charge=-Q):
-        self._segments = []  # array holding all the segments
+        self._segment_positions = []  # array holding all the segments
         self._radius = radius
         self._charge = charge
 
@@ -13,15 +13,16 @@ class ChargedRing:
             theta = i * (2 * pi / number_of_ring_segments)  # angular position on ring
             x = radius * cos(theta)
             y = radius * sin(theta)
+            self._segment_positions.append(vec(x, y, 0))
             if draw:
-                self._segments.append(box(pos=vec(x, y, 0), size=vec(dx, dx, dx), color=color.green))
-                self._segments[i].rotate(axis=vec(0, 0, 1), angle=theta)
+                a_box = box(pos=vec(x, y, 0), size=vec(dx, dx, dx), color=color.green)
+                a_box.rotate(axis=vec(0, 0, 1), angle=theta)
 
     def field_at(self, position):
-        dq = self._charge / len(self._segments)  # charge of ring segment
+        dq = self._charge / len(self._segment_positions)  # charge of ring segment
         E = vec(0, 0, 0)
-        for segment in self._segments:
-            r = segment.pos - position
+        for segment_position in self._segment_positions:
+            r = segment_position - position
             dE = k * dq * r.norm() / r.mag2
             E = E + dE
         return E
