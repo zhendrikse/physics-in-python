@@ -165,6 +165,8 @@ Make sure to check it out, it simply is brilliant.
 
 ## VPython
 
+- [Physics through Glowscript - An introductory course](https://bphilhour.trinket.io/physics-through-glowscript-an-introductory-course), an excellent tutorial!
+
 - [VPython Docs](https://www.beautifulmathuncensored.de/static/GlowScript/VPythonDocs/)
 
 - [Glowscript documentation](https://www.glowscript.org/docs/VPythonDocs/index.html)
