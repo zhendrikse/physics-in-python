@@ -1,11 +1,11 @@
 from vpython import sphere, mag, norm, textures, color, vector, sqrt
 
 G = 6.67e-11
-EARTH_RADIUS = 6.3e6
+EARTH_RADIUS = 6.356e6
 EARTH_MASS = 5.97e24
 
 MOON_MASS = 7.37e22
-MOON_RADIUS = 1.74e6
+MOON_RADIUS = 1.737e6
 
 EARTH_MOON_DISTANCE = 384.4e6
 MOON_VELOCITY = sqrt(G * EARTH_MASS / EARTH_MOON_DISTANCE) * vector(0, 1, 0)
@@ -68,8 +68,9 @@ class Earth(CelestialObject):
 
 
 class Moon(CelestialObject):
-    def __init__(self, position=vector(0, 0, 0), velocity=MOON_VELOCITY, shininess=0.6):
-        super().__init__(mass=MOON_MASS, position=position, velocity=velocity, radius=MOON_RADIUS, shininess=shininess)
+    def __init__(self, position=vector(EARTH_MOON_DISTANCE, 0, 0), velocity=MOON_VELOCITY, shininess=0.6):
+        super().__init__(mass=MOON_MASS, position=position, velocity=velocity, radius=MOON_RADIUS, shininess=shininess,
+                         texture={ 'file': "http://i.imgur.com/YPg4RPU.jpg"})
 
 
 class Eros(CelestialObject):

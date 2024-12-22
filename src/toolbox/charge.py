@@ -1,47 +1,74 @@
-from vpython import vec, sphere, color, mag, hat, arrow, exp, sin, cos, pi
+from vpython import vec, sphere, color, mag, hat
 from .field import PointChargeField
 
-# parameter setting
-ec = 1.6E-19  # electron charge
-k = 9E9  # Coulomb constant
+Q = 1.6E-19  # charge magnitude of electron
+k = 9E9  # Coulomb's law constant
+classic_electron_radius = 2.8179E-15
+electron_mass = 9.1093837E-31  # kilograms
 
 
 class Charge:
-    def __init__(self, mass=1.6E-27, position=vec(0, 0, 0), velocity=vec(0, 0, 0), radius=1E-14, coulomb=ec,
-                 colour=None, make_trail=False):
-        colour = colour if colour is not None else color.blue if coulomb > 0 else color.red
-        self._charge = sphere(mass=mass, pos=position, v=velocity, radius=radius, coulomb=coulomb, color=colour,
-                              make_trail=make_trail)
+    def __init__(self, mass=1.6E-27, position=vec(0, 0, 0), velocity=vec(0, 0, 0), radius=1E-14, charge=Q,
+                 colour=None, make_trail=False, retain=-1, draw=True):
+        colour = colour if colour is not None else color.blue if charge > 0 else color.red
+        self._ball = sphere(mass=mass, pos=position, radius=radius, color=colour,
+                            make_trail=make_trail, retain=retain) if draw else None
         self._field = PointChargeField(self)
+        self._velocity = velocity
+        self._position = position
+        self._radius = radius
+        self._charge = charge
+        self._mass = mass
+
+    def _draw(self):
+        if self._ball:
+            self._ball.pos = self._position
 
     def show_field(self):
         self._field.show()
 
     def field_at(self, position):
-        return hat(position - self._charge.pos) * k * self._charge.coulomb / mag(position - self._charge.pos) ** 2
+        return hat(position - self._ball.pos) * k * self._charge / mag(position - self._ball.pos) ** 2
 
     @property
     def coulomb(self):
-        return self._charge.coulomb
+        return self._charge
 
     @property
     def position(self):
-        return self._charge.pos
+        return self._position
 
     @property
     def radius(self):
-        return self._charge.radius
+        return self._radius
+
+    @property
+    def charge(self):
+        return self._charge
 
     def delete(self):
-        self._charge.clear_trail()
-        self._charge.visible = False
-        del self._charge
+        self._ball.clear_trail()
+        self._ball.visible = False
+        del self._ball
+        self._field.delete()
 
     def coulomb_force_in(self, electric_field):
-        return electric_field * self._charge.coulomb
+        return electric_field * self._charge
 
     def update(self, coulomb_force, dt):
         '''given a charge and position and update position'''
-        # use formula: s = v0*t + 1/2*a*t^2
-        self._charge.v += coulomb_force / self._charge.mass * dt
-        self._charge.pos += self._charge.v * dt
+        self._velocity += coulomb_force / self._mass * dt
+        self._position += self._velocity * dt
+        self._draw()
+
+
+class Electron(Charge):
+    def __init__(self, position=vec(0, 0, 0), velocity=vec(0, 0, 0), radius=classic_electron_radius, make_trail=False, retain=-1):
+        super().__init__(mass=electron_mass, position=position, velocity=velocity, radius=radius,
+                         charge=-Q, make_trail=make_trail, retain=retain)
+
+
+class Positron(Charge):
+    def __init__(self, position=vec(0, 0, 0), velocity=vec(0, 0, 0), radius=classic_electron_radius, make_trail=False, retain=-1):
+        super().__init__(mass=electron_mass, position=position, velocity=velocity, radius=radius,
+                         charge=-Q, make_trail=make_trail, retain=retain)

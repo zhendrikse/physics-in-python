@@ -24,16 +24,21 @@ class PointChargeField:
                               phi_range]
 
     def _field_arrow(self, r, theta, phi):
-        xyz = PointChargeField.to_carthesian_coordinates(self._charge.radius * r, theta * pi / 3, phi * pi / 3)
+        xyz = PointChargeField.to_cartesian_coordinates(self._charge.radius * r, theta * pi / 3, phi * pi / 3)
         return FieldArrow(xyz, self._charge.field_at(xyz), True)
 
     @staticmethod
-    def to_carthesian_coordinates(r, theta, phi):
+    def to_cartesian_coordinates(r, theta, phi):
         x = r * sin(theta) * cos(phi)
         y = r * sin(theta) * sin(phi)
         z = r * cos(theta)
         return vec(x, y, z)
 
+    def delete(self):
+        for an_arrow in self._field_arrows:
+            an_arrow.visible = False
+            del an_arrow
+        del self._field_arrows
 
 class Field:
     def __init__(self, charges=[]):

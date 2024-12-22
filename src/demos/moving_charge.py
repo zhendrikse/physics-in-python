@@ -3,7 +3,7 @@
 #
 from vpython import vec, color, rate, canvas, button
 from toolbox.capacitor import Capacitor
-from toolbox.charge import Charge, ec
+from toolbox.charge import Charge, Q
 
 scene = canvas(width=1000, height=600, align='left', range=3E-13)
 
@@ -13,7 +13,7 @@ def main():
     moving_charge = Charge(position=vec(-4E-13, 5E-14, 0),
                            velocity=vec(1.5E-13, 0, 0),
                            radius=1.2E-14,
-                           coulomb=5E-42 * ec,
+                           charge=5E-42 * Q,
                            colour=color.green,
                            make_trail=True)
 

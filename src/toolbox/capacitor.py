@@ -1,6 +1,6 @@
 from vpython import vector
 
-from .charge import Charge, ec
+from .charge import Charge, Q
 from .field import Field
 
 
@@ -19,11 +19,11 @@ class Capacitor:
         charges = [Charge(
             position=vector(x * self._scale, self._up_plate.y, z * self._scale),
             radius=self._scale,
-            coulomb=ec) for x in x_range for z in z_range]
+            charge=Q) for x in x_range for z in z_range]
         charges += [Charge(
             position=vector(x * self._scale, self._down_plate.y, z * self._scale),
             radius=1E-14,
-            coulomb=-ec) for x in x_range for z in z_range]
+            charge=-Q) for x in x_range for z in z_range]
         self._field = Field(charges)
 
     def show_field(self, x_range, y_range, z_range):

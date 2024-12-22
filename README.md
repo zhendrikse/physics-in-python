@@ -43,6 +43,12 @@ The graphics library used is [VPython](https://vpython.org/).
   <img alt="Electric field of a dipole" width="50%" height="50%" src="./src/demos/images/dipole_field.png"/>
 </a>
 
+### [Electron spinning around charged ring](https://trinket.io/library/trinkets/1983b9c1dc58)
+
+<a href="https://zegerh-6085.trinket.io/sites/electron_and_charged_ring">
+  <img alt="Electric field of point charge" width="50%" height="50%" src="./src/demos/images/electron_and_charged_ring.png"/>
+</a>
+
 ## Kinematics
 
 ### [N-body coupled oscillator](https://trinket.io/glowscript/5a852a2b7570)
