@@ -1,3 +1,6 @@
+GlowScript
+3.2
+VPython
 ##( 3.0 okay;  seems to hang in 3.1)
 
 
@@ -30,7 +33,7 @@
 ### v3.00 2021-04-10 converted to Glowscript 3.0
 ### v3.50 2022-04-05 revised color schemes
 
-from vpython import *
+from visual import *
 
 calculus = 1  # key c
 verbose = 1  # key v
@@ -54,7 +57,7 @@ highlightAmpere = 1
 highlightFaraday = 1
 highlightField = 1
 
-print("""
+instructions = """
 Electromagnetic Plane Wave visualization 
 (v3.00) 2021-04-09 RS  [ Glowscript 3.0 ] 
 (v2.80) 2015-10-31 RS  [ VPython 2.6] 
@@ -88,12 +91,15 @@ In other words, the pattern of the magnetic field moves to the RIGHT.
       TOGGLE: (a)mpere     (f)araday  (g)auss  (w)avefront
               (d)im-fields (s)how-neighboring-waves
               (c)alculus   (v)erbose  (n) color-scheme (z) fontSize
-[-- ---scroll up to read--- --]""")
+[-- ---scroll up to read--- --]"""
 
-scene = canvas(
+scene = display(
     width=1000, height=700,
     x=0, y=0,
     title="EM Wave v3.00 (Rob Salgado)")
+# scene.caption = "\\( \\bigg ( v^2\\nabla^2 - \\frac {\partial^2}{{\partial t}^2} \\bigg) \\vec{E} = 0, \\bigg ( v^2\\nabla^2 - \\frac {\partial^2}{{\partial t}^2} \\bigg) \\vec{B} = 0, v=\\dfrac {1} {\\sqrt {\mu \epsilon}} \\)\n where \\( v \\) is the speed of light (i.e. phase velocity) in a medium with permeability μ, and permittivity ε"
+# MathJax.Hub.Queue(["Typeset", MathJax.Hub])
+
 scene.autoscale = 0
 scene.range = 10
 scene.forward = vec(-1.0, -1.250, -4)  # modified below
@@ -307,7 +313,7 @@ for s in [1, -1]:
         GZfSeg.append([vertex(pos=vector(Ax, Ap, s * sep), color=Bcolor[0]),
                        vertex(pos=vector(Ax, Bp, s * sep), color=Bcolor[0])])
 
-sz = int(len(GYfSeg) / 2)
+sz = len(GYfSeg) / 2
 for s in [0, 1]:
     for i in range(1, sz):
         Q = quad(
@@ -411,7 +417,7 @@ def keyInput(evt):
     global showAmpere, AmpereLoop, dEdt, dEdtlabel, BField, fi, ddtcolor, dimFields
     global showFaraday, FaradayLoop, dBdt, dBdtLabel, Efield, labelFontSizes, labelFontSizeSelected
     global showE, showB, showNeighboringWaves
-    global verbose, calculus
+    global verbose, calculus,
     global showWavefronts, showGauss, GaussElements
     global colorScheme, gaussSurface, Gcolor_boundary
     global scene, colorBackground, Ecolor, Bcolor
