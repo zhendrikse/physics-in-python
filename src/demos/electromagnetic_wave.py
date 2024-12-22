@@ -198,51 +198,50 @@ FRONT2 = FRONT.clone(pos=vec(fi + wavelength, 0, 0))
 FRONT2.visible = showWavefronts
 
 ######################################################################################################
+class ElectricField:
+    def __init__(self, position):
+        self._arrow = arrow(pos=position, axis=vec(0, 0, 0), color=Ecolor[dimFields], shaftwidth=0.2, fixedwidth=1, nbw=0)
+
+    def update(self, wave_number, t):
+        ampere = Emax * sin(k * (wave_number % (2 * S) - S) - omega * t)
+        self._arrow.axis.y = ampere
+
+class MagneticField:
+    def __init__(self, position):
+        self._arrow = arrow(pos=position, axis=vec(0, 0, 0), color=Bcolor[dimFields], shaftwidth=0.2, fixedwidth=1, nbw=0)
+
+    def update(self, wave_number, t):
+        ampere = Emax * sin(k * (wave_number % (2 * S) - S) - omega * t)
+        self._arrow.axis.y = ampere
+
+#
+# ## FIELDS
+# EField = [ElectricField(vec(i, 0, 0)) for i in range(-S, S)]
+#
+# for i in arange(-S, S):
+#     Bv = arrow(pos=vec(i, 0, 0), axis=vec(0, 0, 0), color=Bcolor[dimFields], shaftwidth=0.2, fixedwidth=1, nbw=0)
+#     BField.append(Bv)
+#
+# if showNeighboringWaves >= 0:
+#     EField += [ElectricField(vec(i, sep, 0)) for i in range(-S, S)]
+#     EField += [ElectricField(vec(i, -sep, 0)) for i in range(-S, S)]
+#     EField += [ElectricField(vec(i, j * sep, 0)) for i in range(-S, S) for j in range(1, 3)]
+#     EField += [ElectricField(vec(i, j * -sep, 0)) for i in range(-S, S) for j in range(1, 3)]
 
 ## FIELDS
-EField = [arrow(pos=vec(i, 0, 0), axis=vec(0, 0, 0), color=Ecolor[dimFields], shaftwidth=0.2, fixedwidth=1, nbw=0) for i in range(-S, S)]
-
-for i in arange(-S, S):
-    Bv = arrow(pos=vec(i, 0, 0), axis=vec(0, 0, 0), color=Bcolor[dimFields], shaftwidth=0.2, fixedwidth=1, nbw=0)
-    BField.append(Bv)
+EField = [ElectricField(vec(i, 0, 0))._arrow for i in range(-S, S)]
+BField = [MagneticField(vec(i, 0, 0))._arrow for i in range(-S, S)]
 
 if showNeighboringWaves >= 0:
-    for i in arange(-S, S):
-        Ev = arrow(pos=vec(i, sep, 0), axis=vec(0, 0, 0), color=Ecolor[0], shaftwidth=0.2, fixedwidth=1, nbw=3,
-                   visible=showNeighboringWaves)
-        EField.append(Ev)
-    for i in arange(-S, S):
-        Bv = arrow(pos=vec(i, sep, 0), axis=vec(0, 0, 0), color=Bcolor[0], shaftwidth=0.2, fixedwidth=1, nbw=3,
-                   visible=showNeighboringWaves)
-        BField.append(Bv)
+    EField += [ElectricField(vec(i, sep, 0))._arrow for i in range(-S, S)]
+    EField += [ElectricField(vec(i, -sep, 0))._arrow for i in range(-S, S)]
+    EField += [ElectricField(vec(i, 0, j * sep))._arrow for i in range(-S, S) for j in range(1, 3)]
+    EField += [ElectricField(vec(i, 0, j * -sep))._arrow for i in range(-S, S) for j in range(1, 3)]
 
-    for i in arange(-S, S):
-        Ev = arrow(pos=vec(i, -sep, 0), axis=vec(0, 0, 0), color=Ecolor[0], shaftwidth=0.2, fixedwidth=1, nbw=3,
-                   visible=showNeighboringWaves)
-        EField.append(Ev)
-    for i in arange(-S, S):
-        Bv = arrow(pos=vec(i, -sep, 0), axis=vec(0, 0, 0), color=Bcolor[0], shaftwidth=0.2, fixedwidth=1, nbw=3,
-                   visible=showNeighboringWaves)
-        BField.append(Bv)
-
-    for j in arange(1, 3):
-        for i in arange(-S, S):
-            Ev = arrow(pos=vec(i, 0, j * sep), axis=vec(0, 0, 0), color=Ecolor[dimFields], shaftwidth=0.2, fixedwidth=1,
-                       nbw=1, visible=showNeighboringWaves)
-            EField.append(Ev)
-        for i in arange(-S, S):
-            Bv = arrow(pos=vec(i, 0, j * sep), axis=vec(0, 0, 0), color=Bcolor[dimFields], shaftwidth=0.2, fixedwidth=1,
-                       nbw=1, visible=showNeighboringWaves)
-            BField.append(Bv)
-
-        for i in arange(-S, S):
-            Ev = arrow(pos=vec(i, 0, -j * sep), axis=vec(0, 0, 0), color=Ecolor[dimFields], shaftwidth=0.2,
-                       fixedwidth=1, nbw=1, visible=showNeighboringWaves)
-            EField.append(Ev)
-        for i in arange(-S, S):
-            Bv = arrow(pos=vec(i, 0, -j * sep), axis=vec(0, 0, 0), color=Bcolor[dimFields], shaftwidth=0.2,
-                       fixedwidth=1, nbw=1, visible=showNeighboringWaves)
-            BField.append(Bv)
+    BField += [MagneticField(vec(i, sep, 0))._arrow for i in range(-S, S)]
+    BField += [MagneticField(vec(i, -sep, 0))._arrow for i in range(-S, S)]
+    BField += [MagneticField(vec(i, 0, j * sep))._arrow for i in range(-S, S) for j in range(1, 3)]
+    BField += [MagneticField(vec(i, 0, j * -sep))._arrow for i in range(-S, S) for j in range(1, 3)]
 
 ######################################################################################################
 ######################################################################################################
