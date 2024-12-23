@@ -230,7 +230,7 @@ class MagneticField:
 ## FIELDS
 EField = [ElectricField(vec(i, 0, 0)) for i in range(-S, S)]
 BField = [MagneticField(vec(i, 0, 0)) for i in range(-S, S)]
-
+cd src/
 if showNeighboringWaves >= 0:
     EField += [ElectricField(vec(i, sep, 0)) for i in range(-S, S)]
     EField += [ElectricField(vec(i, -sep, 0)) for i in range(-S, S)]
