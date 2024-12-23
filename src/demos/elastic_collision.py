@@ -5,7 +5,7 @@
 #
 
 from vpython import vector, color, rate
-from toolbox.ball import Ball
+from ..toolbox.ball import Ball
 
 
 def main():

@@ -1,6 +1,6 @@
 from vpython import vector, rate, graph, gcurve, color, button, mag, canvas
-from toolbox.ball import Ball
-from toolbox.spring import Spring
+from ..toolbox.ball import Ball
+from ..toolbox.spring import Spring
 
 running = False
 

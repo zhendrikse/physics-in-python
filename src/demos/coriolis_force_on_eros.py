@@ -5,8 +5,8 @@
 #
 
 from vpython import vector, rate, color, pi, mag, norm, cross
-from toolbox.celestial_object import G, Eros, EROS_RADIUS, EROS_MASS
-from toolbox.ball import Ball
+from ..toolbox.celestial_object import G, Eros, EROS_RADIUS, EROS_MASS
+from ..toolbox.ball import Ball
 
 T = 5  # hours
 omega = 2 * pi / (T * 60 * 60)

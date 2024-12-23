@@ -1,6 +1,6 @@
 from vpython import vec, color, pi, rate, scene, curve, label, vector, arrow
 
-from toolbox.wave import ElectromagneticWave
+from ..toolbox.wave import ElectromagneticWave
 
 scene.ambient = vec(.4, .4, .4)
 

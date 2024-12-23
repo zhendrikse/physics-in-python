@@ -5,7 +5,7 @@
 #
 
 from vpython import vector, random, color, pi, mag, norm, arrow, rate
-from toolbox.celestial_object import G, Earth, Moon, EARTH_MOON_DISTANCE, MOON_MASS, EARTH_RADIUS
+from ..toolbox.celestial_object import G, Earth, Moon, EARTH_MOON_DISTANCE, MOON_MASS, EARTH_RADIUS
 
 scale = 1e12
 moon_position_vector = vector(EARTH_MOON_DISTANCE, 0, 0)

@@ -1,9 +1,9 @@
 
 from vpython import vec, rate, graph, gcurve, color, scene, label, arrow
 
-from toolbox.physics_axis import PhysAxis
-from toolbox.timer import PhysTimer
-from toolbox.car import Car
+from ..toolbox.physics_axis import PhysAxis
+from ..toolbox.timer import PhysTimer
+from ..toolbox.car import Car
 
 green_car = Car(position=vec(-10, 0, -3), velocity=vec(1, 0, 0))
 red_car = Car(position=vec(0, 0, 3), colour=color.red)

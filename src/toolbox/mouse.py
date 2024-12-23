@@ -1,4 +1,4 @@
-from vpython import vec, color, arange, rate
+from vpython import vec, color, arange, rate, label
 
 def zoom_in_on(scene):
     selected_object = scene.mouse.pick
@@ -9,6 +9,10 @@ def zoom_in_on(scene):
     temp_color = vec(selected_object.color.x, selected_object.color.y, selected_object.color.z)
     selected_object.color = color.yellow
     target = selected_object.pos
+    # TODO extend function with parameter to show label below
+    #pick_r = target.x * 4.
+    #pick_label_text = "r=" + str(round(pick_r, 5))
+    #label(pos=target, text=pick_label_text, xoffset=-5, yoffset=5)
     step = (target - scene.center) / 20.0
     for _ in arange(1, 20, 1):
         rate(20)

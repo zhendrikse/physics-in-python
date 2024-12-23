@@ -10,7 +10,7 @@
 
 from vpython import *
 
-from toolbox.mouse import zoom_in_on
+from ..toolbox.mouse import zoom_in_on
 
 velocity_source = 0.20  # velocity of the source
 velocity_receiver = -0.30  # velocity of the receiver

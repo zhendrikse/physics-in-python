@@ -1,7 +1,7 @@
 from vpython import vector, canvas, color, arrow, arange, sin, cos, pi, box, mag, curve, cylinder, sphere, label, rate, \
     vec, norm
 
-from toolbox.mouse import zoom_in_on
+from ..toolbox.mouse import zoom_in_on
 
 """
 Electromagnetism: Faraday Law (v2.76) 2008-02-29
