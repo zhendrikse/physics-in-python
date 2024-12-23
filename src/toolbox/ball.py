@@ -18,7 +18,6 @@ class Ball:
                                         make_trail) if draw else None
         self._mass = mass
         self._radius = radius
-        self._elasticity = elasticity
         self._velocity = velocity
         self._elasticity = elasticity
         self._position = position

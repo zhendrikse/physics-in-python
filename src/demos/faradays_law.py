@@ -1,4 +1,7 @@
-from vpython import vector, canvas, color, arrow, arange, sin, cos, pi, box, mag, curve, cylinder, sphere, label, rate, vec, norm
+from vpython import vector, canvas, color, arrow, arange, sin, cos, pi, box, mag, curve, cylinder, sphere, label, rate, \
+    vec, norm
+
+from toolbox.mouse import zoom_in_on
 
 """
 Electromagnetism: Faraday Law (v2.76) 2008-02-29
@@ -40,8 +43,8 @@ scene.title = "FARADAY: Changing-Bs are associated with Curly-Es\nUse the space,
 # scene.range=(1.5,1.5,1.5)
 # scene.forward=(2.102859,-3.185552,1.998194)
 
-#scene.camera.pos = vector(-2.85804, -1.26038, -2.96742)
-#scene.camera.axis = vector(2.5, 2.5, 2.5)
+# scene.camera.pos = vector(-2.85804, -1.26038, -2.96742)
+# scene.camera.axis = vector(2.5, 2.5, 2.5)
 
 showFaraday = 0
 dimFields = 0
@@ -107,12 +110,12 @@ Eloop_rad = mag(E[0].pos)
 pos = [Eloop_rad * vector(cos(2. * pi * n / 40.), sin(2. * pi * n / 40.), 0) for n in range(40)]
 FaradayLoop = curve(color=hcolor, pos=pos, visible=False)
 
-I=cylinder(radius=0.04,pos=vector(0,0,-2),axis=vector(0,0,4), color=color.yellow)
-chgpos=[]
-chg=[]
-for i in arange(0,N):
-   chgpos.append(vector(I.pos+I.axis*i/N))
-   chg.append(sphere(pos=chgpos[-1],radius=0.05,color=I.color))
+I = cylinder(radius=0.04, pos=vector(0, 0, -2), axis=vector(0, 0, 4), color=color.yellow)
+chgpos = []
+chg = []
+for i in arange(0, N):
+    chgpos.append(vector(I.pos + I.axis * i / N))
+    chg.append(sphere(pos=chgpos[-1], radius=0.05, color=I.color))
 
 t = 9.50
 # t=10.0
@@ -182,7 +185,8 @@ class KeyboardEventProcessor:
         self._color_scheme += 1
         return self._color_scheme % 2
 
-    def on_key_press(self, key):
+    @staticmethod
+    def on_key_press(key):
         if key == 'f':
             toggle_show_faraday(keyboard_event_processor.toggle_show_faraday())
         if key == 'd':
@@ -197,36 +201,22 @@ class KeyboardEventProcessor:
         if key == ' ':
             pause_animation()
 
+
 keyboard_event_processor = KeyboardEventProcessor()
 
+
 def key_pressed(event):
-  key = event.key
-  keyboard_event_processor.on_key_press(key)
-scene.bind('keydown', key_pressed)
+    key = event.key
+    keyboard_event_processor.on_key_press(key)
+
 
 def on_mouse_click():
-    # mouse_coordinates = scene.mouse(pick=sphere)
-    mouse_coordinates = scene.mouse.project(normal=vec(0, 1, 0), point=vec(0, 2, 0))
-    if not mouse_coordinates is None:
-        # temp_color = mouse_coordinates.color
-        # mouse_coordinates.color = color.yellow
-        pick_r = mouse_coordinates.x * 4.
-        pick_label_text = "r=" + str(round(pick_r, 5))
-        label(pos=mouse_coordinates, text=pick_label_text, xoffset=-5, yoffset=5)
-
-        target = mouse_coordinates
-        step = (target - scene.center) / 20.
-        for i in arange(1, 20, 1):
-            rate(10)
-            scene.center += step
-            scene.range /= 1.037  # (1.037**19=1.99)
-        # mouse_coordinates.color = temp_color
+    zoom_in_on(scene)
 
 
+scene.bind('keydown', key_pressed)
 scene.bind('click', on_mouse_click)
 
-# Now... WHEN AN OBJECT IS PICKED,
-# TRANSLATE THE scene.center TO THE OBJECT'S POSITION
 while 1:
     rate(10)
     t += dt

@@ -1,4 +1,4 @@
-from vpython import vec, rate, box, color, graph, gcurve
+from vpython import vec, rate, box, color, graph, gcurve, scene
 from toolbox.ball import Ball
 from toolbox.timer import PhysTimer
 
@@ -7,6 +7,9 @@ floor = box(pos=vec(25, 0, 0), length=50, height=1, width=10, color=color.green)
 position_plot = graph(title="Bouncing ball", xtitle="Time", ytitle="Height", width=400, height=250)
 curve = gcurve(color=color.red)
 timer = PhysTimer(-10, 0)
+
+scene.title = "Click mouse button to drop ball"
+scene.waitfor('click')
 
 t = 0
 dt = 0.01
