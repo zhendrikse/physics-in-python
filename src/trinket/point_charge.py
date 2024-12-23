@@ -79,6 +79,8 @@ def on_mouse_click():
 scene = canvas(width=1000, height=600, align='top', range=3E-13)
 scene.title = 'Select object to zoom in'
 scene.bind('click', on_mouse_click)
+scene.forward = vec(-0.492668, -0.285952, -0.821894)
+
 scene.caption = "Electric field \\( \\vec{E} ( \\vec{r} ) = \\dfrac {1} {4\\pi\\epsilon_0} \\dfrac {Q} {r^2} \\hat{r} \\), Electric force \\( \\vec{F}(\\vec{r}) = q \\vec{E} ( \\vec{r} ) =  \\dfrac {1} {4\\pi\\epsilon_0} \\dfrac {qQ} {r^2} \\hat{r} \\)"
 MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 

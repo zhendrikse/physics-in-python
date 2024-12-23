@@ -25,3 +25,7 @@ class Car:
     @property
     def position(self):
         return self._position
+
+    @property
+    def velocity(self):
+        return self._velocity

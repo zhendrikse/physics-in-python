@@ -14,13 +14,13 @@ axis_red_car = PhysAxis(red_car._label, numLabels=0, length=20, startPos=vec(-10
 timer = PhysTimer(x=0, y=5)
 
 space_time_graph_red = graph(title="Space-time graph for red observer", xtitle="Position", ytitle="Time", ymax=20, xmin=-10, xmax=10)
-space_time_graph_green = graph(title="Space-time graph for green observer", xtitle="Position", ytitle="Time", ymax=20, xmin=-10, xmax=10)
-
 red_curve_green_car = gcurve(graph=space_time_graph_red, color=color.green)
 red_curve_red_car = gcurve(graph=space_time_graph_red, color=color.red)
 
+space_time_graph_green = graph(title="Space-time graph for green observer", xtitle="Position", ytitle="Time", ymax=20, xmin=-10, xmax=10)
 green_curve_green_car = gcurve(graph=space_time_graph_green, color=color.green)
 green_curve_red_car = gcurve(graph=space_time_graph_green, color=color.red)
+
 
 scene.forward = vec(0.00813912, -0.581035, -0.813838)
 # screen.forward = vec(-0.00101513, -0.770739, 0.637151)
@@ -41,10 +41,10 @@ while green_car.position.x <= 10:
 
     t += dt
 
-print("scene.center=", scene.center)
-print("scene.forward=", scene.forward)
-print("scene.range=", scene.range)
-print("t={}\n".format(t))
+# print("scene.center=", scene.center)
+# print("scene.forward=", scene.forward)
+# print("scene.range=", scene.range)
+# print("t={}\n".format(t))
 
 label(pos=vec(0, 6, 0), text="The transformation from one perspective to the other is a Galilean transformation", color=color.yellow)
 scene.waitfor('click')

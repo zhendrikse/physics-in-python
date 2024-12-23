@@ -13,9 +13,11 @@ def on_mouse_click():
 
 scene = canvas(width=1000, height=600, align='left', range=3E-13)
 scene.title = 'Select object to zoom in'
+scene.forward = vec(-0.492668, -0.285952, -0.821894)
 scene.bind('click', on_mouse_click)
 charge = Positron(position=vec(0, 0, 0), radius=1.2E-14)
 charge.show_field()
 
 while True:
+    rate(1)
     pass
