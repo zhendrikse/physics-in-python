@@ -1,4 +1,4 @@
-from vpython import vec, rate, vector, scene
+from vpython import vec, rate, vector, scene, arange
 
 from toolbox.charge import Electron
 from toolbox.charged_ring import ChargedRing
@@ -17,9 +17,9 @@ electron = Electron(position=vec(0, 0, radius) + 1.5 * radius * vector.random(),
 
 def on_key_press(event):
     if event.key == 's':
-        ring.show_field(x_range=range(-18, 18, 8),
-                        y_range=range(-9, 9, 4),
-                        z_range=range(-18, 18, 8))
+        ring.show_field(x_range=range(-9, 9, 4),
+                        y_range=range(-4, 4, 2),
+                        z_range=range(-9, 9, 4))
 
 scene.bind('keydown', on_key_press)
 
