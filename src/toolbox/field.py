@@ -50,7 +50,7 @@ class Field:
 
     def _field_arrow(self, x, y, z):
         point = vec(x, y, z) * self._charge_radius
-        return FieldArrow(point, self.field_at(point), 3e-11)
+        return FieldArrow(point, self.field_at(point), self._charge_radius * 3)
 
     @property
     def _charge_radius(self):
