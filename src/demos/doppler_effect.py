@@ -97,29 +97,29 @@ def meeting(t):
     source_receiver_distance_sign = 2
 
 
-def on_mouse_click():
-    # mouse_coordinates = scene.mouse(pick=sphere)
-    mouse_coordinates = scene.mouse.project(normal=vec(0, 1, 0), point=vec(0, 2, 0))
-    if not mouse_coordinates is None:
-        #temp_color = mouse_coordinates.color
-        #mouse_coordinates.color = color.yellow
-        pick_r = mouse_coordinates.x * 4.
-        pick_label_text = "r=" + str(round(pick_r, 5))
-        label(pos=mouse_coordinates, text=pick_label_text, xoffset=-5, yoffset=5)
+def zoom_in_on(selected_object):
+    if selected_object is None:
+        return
 
-        target = mouse_coordinates
-        step = (target - scene.center) / 20.
-        for i in arange(1, 20, 1):
-            rate(10)
-            scene.center += step
-            scene.range /= 1.037  # (1.037**19=1.99)
-        #mouse_coordinates.color = temp_color
+    ### ANIMATE TO SELECTED POSITION
+    temp_color = vec(selected_object.color.x, selected_object.color.y, selected_object.color.z)
+    selected_object.color = color.yellow
+    target = selected_object.pos
+    step = (target - scene.center) / 20.0
+    for _ in arange(1, 20, 1):
+        rate(10)
+        scene.center += step
+        scene.range /= 1.037  # (1.037**19=1.99)
+
+    selected_object.color = temp_color
+
+
+def on_mouse_click():
+    zoom_in_on(scene.mouse.pick)
 
 
 scene.bind('click', on_mouse_click)
 
-# Now... WHEN AN OBJECT IS PICKED,
-# TRANSLATE THE scene.center TO THE OBJECT'S POSITION, THEN ZOOM
 while True:
     rate(100)
     print("successive wavefronts received at time...")
