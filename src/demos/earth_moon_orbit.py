@@ -5,8 +5,15 @@
 
 from vpython import vector, color, rate, graph, gcurve, textures, sqrt, mag, norm, canvas
 from toolbox.celestial_object import Earth, Moon, EARTH_MOON_DISTANCE
+from toolbox.mouse import zoom_in_on
+
+def on_mouse_click():
+    zoom_in_on(scene)
+
 
 scene = canvas(title="Earth-moon orbit")
+scene.bind('click', on_mouse_click)
+
 plot = graph(title="Earth moon",xtitle="t [s]",ytitle="Px [kg*m/s]",width=400, height=200)
 moon_curve = gcurve(color=color.blue)
 earth_curve = gcurve(color=color.red)
