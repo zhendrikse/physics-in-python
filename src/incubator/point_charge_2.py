@@ -32,75 +32,70 @@ scene.autoscale = 1
 
 colorEdimmed = [vec(0.0, 0, 0.4), vec(0.96, 0.96, 0.8)]
 
-Ecolor = [color.orange, vec(0.5, 0.5, 1), color.magenta]
-Ecolor[1] = colorEdimmed[colorScheme]
-Bcolor = [color.cyan, vec(1, 0.5, 0.5), vec(1, 0.75, 0.0)]
-
-p = []
-sp = []
-
-theta = []
-phi = []
+electric_field_colors = [color.orange, vec(0.5, 0.5, 1), color.magenta]
+electric_field_colors[1] = colorEdimmed[colorScheme]
 
 N = 24
 
-for k in arange(0, N):
-    # print "k=",k,
-    h = -1 + 2 * k / (N - 1.)
-    # print "h=",h,
-    theta.append(acos(h))
-    if k == 0 or k == N - 1:
-        phi.append(0)
-        # print "q=0.00"
-    else:
-        phi_last = phi[-1]
+
+def arrow_positions():
+    positions = []
+    phi_last = 0
+    for i in range(0, N):
+        h = -1 + 2 * i / (N - 1.)
+        theta = acos(h)
+
         q = N * (1 - h * h)
-        # print "q=",q
-        phi.append(phi_last + 3.6 / sqrt(q))
+        phi = 0 if i == 0 or i == N - 1 else phi_last + 3.6 / sqrt(q)
+        phi_last = phi
 
-for i in range(0, N):
-    p.append(vector(cos(phi[i]) * sin(theta[i]), sin(phi[i]) * sin(theta[i]), cos(theta[i])))
-#    sp.append( sphere(pos=p[-1],radius=0.05) )
+        positions.append(vector(cos(phi) * sin(theta), sin(phi) * sin(theta), cos(theta)))
+        # sp.append( sphere(pos=p[-1],radius=0.05) )
 
-counter = 0
-countmax = 100
+    counter = 0
+    count_max = 100
 
-n = len(p)
+    n = len(positions)
+    while counter < count_max:
+        minp1 = 0
+        minp2 = 1
+        mind = mag2(positions[minp1] - positions[minp2])
+        maxd = mind
 
-while counter < countmax:
-    minp1 = 0
-    minp2 = 1
-    mind = mag2(p[minp1] - p[minp2])
-    maxd = mind
+        for i in arange(0, n - 1):
+            for j in arange(i + 1, n):
+                d = mag2(positions[i] - positions[j])
+                if d < mind:
+                    mind = d;
+                    minp1 = i
+                    minp2 = j
+                if d > maxd:
+                    maxd = d
+        p1 = positions[minp1]
+        p2 = positions[minp2]
 
-    for i in arange(0, n - 1):
-        for j in arange(i + 1, n):
-            d = mag2(p[i] - p[j])
-            if d < mind:
-                mind = d;
-                minp1 = i
-                minp2 = j
-            if d > maxd:
-                maxd = d
-    p1 = p[minp1]
-    p2 = p[minp2]
+        positions[minp2] = norm(p1 + 1.1 * (p2 - p1))
+        positions[minp1] = norm(p1 - 0.1 * (p2 - p1))
 
-    p[minp2] = norm(p1 + 1.1 * (p2 - p1))
-    p[minp1] = norm(p1 - 0.1 * (p2 - p1))
+        counter += 1
 
-    counter += 1
+    return positions
+
+
+def field_arrows_given_the(arrow_positions):
+    E = 0.5 * 1 / mag2(arrow_positions[0])
+    for arrow_pos in arrow_positions:
+        field_arrow = arrow(pos=arrow_pos, axis=E * arrow_pos, shaftwidth=0.04, fixedwidth=1, color=electric_field_colors[0])
+        box(pos=arrow_pos + field_arrow.axis / 4., axis=field_arrow.axis, length=mag(field_arrow.axis) / 2.,
+            height=0.04, width=0.04, color=electric_field_colors[0])
+        # Field at twice the distance is 4 times as small
+        field_arrow = arrow(pos=2 * arrow_pos, axis=E / 4. * arrow_pos, shaftwidth=0.04, fixedwidth=1, color=electric_field_colors[0])
+        box(pos=2 * arrow_pos + field_arrow.axis / 4., axis=field_arrow.axis, length=mag(field_arrow.axis) / 2.,
+            height=0.04, width=0.04, color=electric_field_colors[0])
+
 
 sphere(radius=0.04, color=color.cyan)
-
-E = 0.5 * 1 / mag2(p[0])
-for i in arange(0, N):
-    A = arrow(pos=p[i], axis=E * p[i], shaftwidth=0.04, fixedwidth=1, color=Ecolor[0])
-    box(pos=p[i] + A.axis / 4., axis=A.axis, length=mag(A.axis) / 2., height=0.04, width=0.04, color=Ecolor[0])
-
-E /= 4.
-for i in arange(0, N):
-    A = arrow(pos=2 * p[i], axis=E * p[i], shaftwidth=0.04, fixedwidth=1, color=Ecolor[0])
-    box(pos=2 * p[i] + A.axis / 4., axis=A.axis, length=mag(A.axis) / 2., height=0.04, width=0.04, color=Ecolor[0])
+field_arrows_given_the(arrow_positions())
 
 
 def on_key_press(event):
