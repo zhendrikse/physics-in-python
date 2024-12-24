@@ -46,7 +46,7 @@ MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 # scene.range=(1.5,1.5,1.5)
 # scene.forward=(2.102859,-3.185552,1.998194)
 
-showFaraday = 0
+showFaraday = 1
 dimFields = 0
 
 B = []
@@ -102,14 +102,11 @@ hcolor = Ecolor[2]
 
 Bp = []
 for b in B:
-    Bp.append(arrow(pos=b.pos + b.axis, axis=dBdt * norm(b.axis),
-                    # length=dBdt,
-                    fixedwidth=1, color=hcolor, shaftwidth=0.07, headwidth=0.14, visible=showFaraday))
+    Bp.append(arrow(pos=b.pos + b.axis, axis=dBdt * norm(b.axis), fixedwidth=1, color=hcolor, shaftwidth=0.07, headwidth=0.14, visible=showFaraday))
 
 Eloop_rad = mag(E[0].pos)
-# x = Eloop_rad * cos(2. * pi * arange(40) / 40.)
-# FaradayLoop = curve(color=hcolor, x=Eloop_rad * cos(2. * pi * arange(40) / 40.),
-#                    y=Eloop_rad * sin(2. * pi * arange(40) / 40.), visible=showFaraday)
+pos = [Eloop_rad * vector(cos(2. * pi * n / 40.), sin(2. * pi * n / 40.), 0) for n in range(40)]
+FaradayLoop = curve(color=hcolor, pos=pos, visible=False)
 
 I=cylinder(radius=0.04,pos=vector(0,0,-2),axis=vector(0,0,4), color=color.yellow)
 chgpos=[]
@@ -126,11 +123,11 @@ dt = 1
 
 
 def toggle_show_faraday(show=True):
-    # FaradayLoop.visible = show
+    FaradayLoop.visible = show
     for k in Bp:
         k.visible = show
 
-    if show == 1:
+    if show:
         for l in range(0, N):
             E[l].color = hcolor
             Ebox[l].color = hcolor
