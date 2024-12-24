@@ -1,4 +1,4 @@
-from vpython import vector, sin, cos, color, mag, arrow, sphere, rate, gcurve, canvas, box, graph, vec, pi
+from vpython import vector, sin, cos, color, mag, arrow, sphere, rate, gcurve, canvas, box, graph, vec, pi, arange, curve
 
 print('''2D-kinematics-with-vectors.py ( ver 09/25/2023;
 based on ver 10/27/2003 )
@@ -89,10 +89,10 @@ tracklength = 20
 track = box(pos=vec(tracklength / 2, -0.05, 0), axis=vec(1, 0, 0),
             length=tracklength, height=.1, width=2, color=color.orange)
 
-##tick marks on the track
-# c=[]
+#tick marks on the track
+c=[]
 # for x in arange(tracklength):
-#    cu = curve( z = arange(-1,2,1) ,color=(0.25,0.25,1.0))
+#    cu = curve( z = arange(-1,2,1) ,color=vec(0.25,0.25,1.0))
 #    c.append(cu)
 #    c[x].pos.y = 0.01
 #    c[x].pos.x = x
@@ -170,7 +170,7 @@ scene.waitfor("click")
 
 # let's allow the user to change the camera view point
 def changeView():  # define a new function by name
-    chosenObject = scene.mouse.pick()  # find out which object the user clicked on
+    chosenObject = scene.mouse.pick  # find out which object the user clicked on
     if not chosenObject is None:  # if it is a real object that they clicked on ...
         scene.camera.follow(chosenObject)  # .. then have the camera follow that object
 
@@ -231,7 +231,9 @@ while time <= 2 * vel_init.y / g + .2:  # run for 10 seconds
     time = time + dt
     counter += 1
 
-
+print("scene.center=", scene.center)
+print("scene.forward=", scene.forward)
+print("scene.range=", scene.range)
 # Now... WHEN AN OBJECT IS PICKED,
 # TRANSLATE THE scene.center TO THE OBJECT'S POSITION
 # while 1:
