@@ -49,7 +49,7 @@ The graphics library used is [VPython](https://vpython.org/).
   <img alt="Electron spinning around charged ring" width="50%" height="50%" src="./src/demos/images/electron_and_charged_ring.png"/>
 </a>
 
-## Special relativity - space-time visualization
+## Special relativity &mdash; space-time visualization
 
 ### [Galilean space-time](https://trinket.io/library/trinkets/6499b8e78c27)
 
