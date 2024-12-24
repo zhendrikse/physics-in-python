@@ -21,9 +21,7 @@ the direction of change of the magnetic field... OPPOSITE to your thumb.]
       TOGGLE: (f)araday
               (d)im-fields (n) color-scheme  (v)erbose"""
 
-scene = canvas(
-    width=800, height=600,
-    x=0, y=0)
+scene = canvas(width=800, height=600, x=0, y=0)
 
 colorScheme = 0  # key n (negative)
 colorBackground = [color.black, color.white]
@@ -35,16 +33,9 @@ Ecolor[1] = colorEdimmed[colorScheme]
 scene.background = colorBackground[colorScheme]
 scene.background = color.black;
 Ecolor = [color.blue, vector(0, 0, .4), color.green]
-# scene.background=color.white; Ecolor=[color.blue,(0.9,0.9,0.9),color.yellow]
-scene.title = "FARADAY: Changing-Bs are associated with Curly-Es\nUse the space, n, d, v, and f keys for visualisation interaction"
-# scene.range = vector(2.5, 2.5, 2.5)
-# scene.forward = vector(-2.85804, -1.26038, -2.96742)
-# scene.forward=(0.089623,4.193811,0.983082)
-# scene.range=(1.5,1.5,1.5)
-# scene.forward=(2.102859,-3.185552,1.998194)
 
-# scene.camera.pos = vector(-2.85804, -1.26038, -2.96742)
-# scene.camera.axis = vector(2.5, 2.5, 2.5)
+scene.title = "FARADAY: Changing-Bs are associated with Curly-Es\nUse the space, n, d, v, and f keys for visualisation interaction"
+
 
 showFaraday = 0
 dimFields = 0
@@ -187,6 +178,8 @@ class KeyboardEventProcessor:
 
     @staticmethod
     def on_key_press(key):
+        if key == 'c':
+            scene.capture("faradays_law", capture_labels=["aap", "noot"])
         if key == 'f':
             toggle_show_faraday(keyboard_event_processor.toggle_show_faraday())
         if key == 'd':
