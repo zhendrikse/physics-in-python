@@ -6,6 +6,7 @@ def obj_size(obj):
     elif type(obj) == sphere:
         return vector(obj.radius, obj.radius, obj.radius)
 
+
 class Axis:
 
     def __init__(self, attached_to, num_labels, axis_type="x", axis=vector(1, 0, 0), start_pos=None, length=None,
@@ -209,8 +210,8 @@ red_car = Car(position=vec(0, 0, 5), colour=color.red)
 red_car.hide_label()
 green_car.hide_axis()
 
-axis_green_car = Axis(green_car._car, num_labels=6, length=20, start_pos=vec(-10, 0, -5))
-axis_red_car = Axis(red_car._car, num_labels=6, length=20, start_pos=vec(-10, 0, 5))
+axis_green_car = Axis(green_car._car, num_labels=6, length=20, start_pos=vec(-10, 0, -5), label_orientation="down")
+axis_red_car = Axis(red_car._car, num_labels=6, length=20, start_pos=vec(-10, 0, 5), label_orientation="down")
 
 timer = PhysTimer(x=0, y=5)
 
@@ -224,10 +225,12 @@ space_time_graph_green = graph(width=350, height=150, title="Space-time for gree
 green_curve_green_car = gcurve(graph=space_time_graph_green, color=color.green)
 green_curve_red_car = gcurve(graph=space_time_graph_green, color=color.red)
 
-scene.title = "Relative motion"
+scene.title = "Relative motion: click on car to change camera"
 scene.center = vec(0, 0, 0)
 scene.forward = vec(0.0726397, -0.41687, -0.906058)
 scene.range = 11
+scene.caption = "Galilean transformation \\(  \\begin{pmatrix} x' \\\\ t'\\end{pmatrix} = \\begin{pmatrix} 1 & -v \\\\ 0 & 1 \\end{pmatrix} \\begin{pmatrix} x \\\\ t \\end{pmatrix} \\)"
+MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 
 def select_car_in(my_scene):
@@ -272,6 +275,6 @@ while green_car.position().x <= 10:
 
     t += dt
 
-label(pos=vec(0, 6, 0), text="The transformation from one perspective to the other is a Galilean transformation",
-      color=color.yellow)
+label(pos=vec(0, 7, 0), text="Galilean transformation: x'=x - vt", color=color.yellow)
 scene.waitfor('click')
+

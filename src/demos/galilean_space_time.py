@@ -79,6 +79,6 @@ print("scene.forward=", scene.forward)
 print("scene.range=", scene.range)
 print("t={}\n".format(t))
 
-label(pos=vec(0, 10, 0), text="Galilean transformation: x''=x - vt",
+label(pos=vec(0, 7, 0), text="Galilean transformation: x'=x - vt",
       color=color.yellow)
 scene.waitfor('click')
