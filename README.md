@@ -54,7 +54,7 @@ The graphics library used is [VPython](https://vpython.org/).
 ### [Galilean space-time](https://trinket.io/library/trinkets/6499b8e78c27)
 
 <a href="https://zegerh-6085.trinket.io/sites/galileo_space_time">
-  <img alt="Galilean space-time" width="50%" height="50%" src="./src/demos/images/galilean_space_time.png"/></br>
+  <img alt="Galilean space-time" width="50%" height="50%" src="./src/demos/images/galilean_space_time.png"/>
 </a>
 
 ## Thermodynamics
@@ -62,8 +62,11 @@ The graphics library used is [VPython](https://vpython.org/).
 ### Visualizing a [hard-sphere gas model](https://trinket.io/library/trinkets/554248a15bc4)
 
 <a href="https://zegerh-6085.trinket.io/sites/hard_sphere_gas">
-  <img alt="Hard sphere gas" width="50%" height="50%" src="./src/demos/images/hard_sphere_gas.png"/></br>
+  <img alt="Hard sphere gas" width="50%" height="50%" src="./src/demos/images/hard_sphere_gas.png"/>
 </a>
+
+### Coming soon: Ising spin model
+  <img alt="Ising spin model" width="50%" height="50%" src="./src/demos/images/ising_spin_model.png"/>
 
 ## Kinematics
 
