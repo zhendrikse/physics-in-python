@@ -1,4 +1,4 @@
-from vpython import vector, sin, cos, color, mag, arrow, sphere, rate, gcurve, canvas, box, graph, vec, pi, arange, curve
+from vpython import vector, sin, cos, color, mag, arrow, sphere, rate, gcurve, canvas, box, graph, vec, pi
 
 print('''2D-kinematics-with-vectors.py ( ver 09/25/2023;
 based on ver 10/27/2003 )
@@ -71,7 +71,7 @@ scene = canvas(
     background=bgcolor
 )
 ##scene.lights = [vector(0,0.,0.3) ]; scene.ambient = 0.7
-#scene.lights = [vector(0, 0., 0.3)]
+# scene.lights = [vector(0, 0., 0.3)]
 scene.ambient = 0.7 * vec(1, 1, 1)
 
 scene.forward = vector(0.0, 0, -10.)
@@ -82,15 +82,13 @@ sphere(radius=0.1)
 #
 # track
 #
-tracklength = 20
-##track = box(pos=(tracklength/2,-0.05,0), axis=( 1 , 0 ,0),
-##        length=tracklength, height=.1, width=2, color=color.orange)
+track_length = 20
 
-track = box(pos=vec(tracklength / 2, -0.05, 0), axis=vec(1, 0, 0),
-            length=tracklength, height=.1, width=2, color=color.orange)
+track = box(pos=vec(track_length / 2, -0.05, 0), axis=vec(1, 0, 0),
+            length=track_length, height=.1, width=2, color=color.orange)
 
-#tick marks on the track
-c=[]
+# tick marks on the track
+c = []
 # for x in arange(tracklength):
 #    cu = curve( z = arange(-1,2,1) ,color=vec(0.25,0.25,1.0))
 #    c.append(cu)
@@ -103,9 +101,9 @@ c=[]
 block_height = 0.25
 
 # setup initial POSITIONS (sit on track)
-pos_init.y = 0.;
+pos_init.y = 0.
 pos_init.z = -0.5
-pos2_init.y = 0;
+pos2_init.y = 0
 pos2_init.z = 0.5
 
 block = box(pos=pos_init, axis=track.axis,
@@ -123,23 +121,23 @@ scene.center = block.pos - vector(0, 1, 0)  # keep block in view
 #
 
 posx_graph = graph(width=250, height=150,
-                      title='x-Position vs. Time', xtitle='t(s)', ytitle='x (m)',
-                      xmax=20., xmin=0., ymax=20, ymin=-4,
-                      foreground=fgcolor, background=bgcolor)
+                   title='x-Position vs. Time', xtitle='t(s)', ytitle='x (m)',
+                   xmax=20., xmin=0., ymax=20, ymin=-4,
+                   foreground=fgcolor, background=bgcolor)
 posx_Plot = gcurve(color=b1color)
 pos2x_Plot = gcurve(color=b2color)
 
 velx_graph = graph(width=250, height=150,
-                      title='x-Velocity vs. Time', xtitle='t(s)', ytitle='vx (m/s)',
-                      xmax=20., xmin=0., ymax=2, ymin=-2,
-                      foreground=fgcolor, background=bgcolor)
+                   title='x-Velocity vs. Time', xtitle='t(s)', ytitle='vx (m/s)',
+                   xmax=20., xmin=0., ymax=2, ymin=-2,
+                   foreground=fgcolor, background=bgcolor)
 velx_Plot = gcurve(color=b1colorx)
 vel2x_Plot = gcurve(color=b2colorx)
 
 posy_graph = graph(width=250, height=150,
-                      title='y-Position vs. Time', xtitle='t(s)', ytitle='y (m)',
-                      xmax=20., xmin=0., ymax=8, ymin=-2.5,
-                      foreground=fgcolor, background=bgcolor)
+                   title='y-Position vs. Time', xtitle='t(s)', ytitle='y (m)',
+                   xmax=20., xmin=0., ymax=8, ymin=-2.5,
+                   foreground=fgcolor, background=bgcolor)
 posy_Plot = gcurve(color=b1color)
 pos2y_Plot = gcurve(color=b2color)
 
@@ -148,9 +146,9 @@ pos2y_Plot = gcurve(color=b2color)
 
 
 vely_graph = graph(width=250, height=150,
-                      title='y-Velocity vs. Time', xtitle='t(s)', ytitle='vy (m/s)',
-                      xmax=20., xmin=0., ymax=1, ymin=-1,
-                      foreground=fgcolor, background=bgcolor)
+                   title='y-Velocity vs. Time', xtitle='t(s)', ytitle='vy (m/s)',
+                   xmax=20., xmin=0., ymax=1, ymin=-1,
+                   foreground=fgcolor, background=bgcolor)
 vely_Plot = gcurve(color=b1colory)
 vel2y_Plot = gcurve(color=b2colory)
 
@@ -167,12 +165,12 @@ dt = 1. / count_tick
 scene.waitfor("click")
 
 
-
 # let's allow the user to change the camera view point
 def changeView():  # define a new function by name
     chosenObject = scene.mouse.pick  # find out which object the user clicked on
     if not chosenObject is None:  # if it is a real object that they clicked on ...
         scene.camera.follow(chosenObject)  # .. then have the camera follow that object
+
 
 scene.bind("mousedown", changeView)  # allow mouse clicks to call the changeView function
 

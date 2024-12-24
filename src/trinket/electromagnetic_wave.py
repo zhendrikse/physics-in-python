@@ -1,6 +1,3 @@
-GlowScript
-3.2
-VPython
 ##( 3.0 okay;  seems to hang in 3.1)
 
 
@@ -33,7 +30,7 @@ VPython
 ### v3.00 2021-04-10 converted to Glowscript 3.0
 ### v3.50 2022-04-05 revised color schemes
 
-from visual import *
+from vpython import *
 
 calculus = 1  # key c
 verbose = 1  # key v
