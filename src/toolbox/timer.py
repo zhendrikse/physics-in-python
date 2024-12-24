@@ -28,4 +28,4 @@ class PhysTimer:
                 frac = 0
                 secs = secs + 1
 
-            self.timerLabel.text = "{:02d}:".format(hours) + "{:02d}:".format(mins) + "{:02d}:".format(secs) + "{:02d}.".format(frac)
+            self.timerLabel.text = "{:02d}:".format(hours) + "{:02d}:".format(mins) + "{:02d}.".format(secs) + "{:02d}".format(frac)

@@ -1,4 +1,4 @@
-from vpython import vec, rate, graph, gcurve, color, scene, label, arrow
+from vpython import vec, rate, graph, gcurve, color, scene, label
 
 from ..toolbox.axis import Axis
 from ..toolbox.timer import PhysTimer

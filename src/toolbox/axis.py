@@ -1,11 +1,11 @@
 from vpython import vector, points, label, curve, color, box, pyramid, sphere
 
 
-# def obj_size(obj):
-#     if type(obj) == box or type(obj) == pyramid:
-#         return obj.size
-#     elif type(obj) == sphere:
-#         return vector(obj.radius, obj.radius, obj.radius)
+def obj_size(obj):
+    if type(obj) == box or type(obj) == pyramid:
+        return obj.size
+    elif type(obj) == sphere:
+        return vector(obj.radius, obj.radius, obj.radius)
 
 
 class Axis:
