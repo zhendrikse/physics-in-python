@@ -23,9 +23,9 @@ ball2.m = m
 
 ball3 = sphere(pos=ball2.pos + vector(L0, 0, 0), radius=ball2.radius)
 ball3.m = m
-ball1.p = vector(0, 0, 0)
-ball2.p = vector(0, 0, 0)
-ball3.p = vector(0, 0, 0)
+ball1.atom_momenta = vector(0, 0, 0)
+ball2.atom_momenta = vector(0, 0, 0)
+ball3.atom_momenta = vector(0, 0, 0)
 
 spring = helix(pos=ball1.pos, axis=ball2.pos - ball1.pos, radius=0.2, thickness=0.05, coils=15)
 
@@ -41,13 +41,13 @@ while t < 1.02:
     spring_force = -k * (mag(spring_length) - L0) * norm(spring_length)
     force_on_ball_2 = ball2.m * g + spring_force
     force_on_ball_1 = ball1.m * g - spring_force
-    ball1.p = ball1.p + force_on_ball_1 * dt
-    ball2.p = ball2.p + force_on_ball_2 * dt
-    ball3.p = ball3.p + ball3.m * g * dt
+    ball1.atom_momenta = ball1.atom_momenta + force_on_ball_1 * dt
+    ball2.atom_momenta = ball2.atom_momenta + force_on_ball_2 * dt
+    ball3.atom_momenta = ball3.atom_momenta + ball3.m * g * dt
 
-    ball1.pos = ball1.pos + ball1.p * dt / ball1.m
-    ball2.pos = ball2.pos + ball2.p * dt / ball2.m
-    ball3.pos = ball3.pos + ball3.p * dt / ball3.m
+    ball1.pos = ball1.pos + ball1.atom_momenta * dt / ball1.m
+    ball2.pos = ball2.pos + ball2.atom_momenta * dt / ball2.m
+    ball3.pos = ball3.pos + ball3.atom_momenta * dt / ball3.m
     spring.pos = ball1.pos
     spring.axis = spring_length
     t += dt

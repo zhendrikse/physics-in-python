@@ -82,9 +82,9 @@ vert2.append([vector(-d, -d, d), vector(-d, d, d)])
 vert3.append([vector(d, -d, d), vector(d, d, d)])
 vert4.append([vector(d, -d, -d), vector(d, d, -d)])
 
-Atoms = []
-p = []
-apos = []
+atoms = []
+atom_momenta = []
+atom_positions = []
 pavg = sqrt(2 * mass * 1.5 * k * T)  # average kinetic energy p**2/(2mass) = (3/2)kT
 
 for i in range(Natoms):
@@ -92,17 +92,17 @@ for i in range(Natoms):
     y = L * random() - L / 2
     z = L * random() - L / 2
     if i == 0:
-        Atoms.append(sphere(pos=vector(x, y, z), radius=Ratom, color=color.cyan, make_trail=True, retain=100,
+        atoms.append(sphere(pos=vector(x, y, z), radius=Ratom, color=color.cyan, make_trail=True, retain=100,
                             trail_radius=0.3 * Ratom))
     else:
-        Atoms.append(sphere(pos=vector(x, y, z), radius=Ratom, color=gray))
-    apos.append(vec(x, y, z))
+        atoms.append(sphere(pos=vector(x, y, z), radius=Ratom, color=gray))
+    atom_positions.append(vec(x, y, z))
     theta = pi * random()
     phi = 2 * pi * random()
     px = pavg * sin(theta) * cos(phi)
     py = pavg * sin(theta) * sin(phi)
     pz = pavg * cos(theta)
-    p.append(vector(px, py, pz))
+    atom_momenta.append(vector(px, py, pz))
 
 deltav = 100  # binning for v histogram
 
@@ -139,14 +139,14 @@ def interchange(v1, v2):  # remove from v1 bar, add to v2 bar
     histo[barx2] += 1
 
 
-def checkCollisions():
+def check_collisions():
     hitlist = []
     r2 = 2 * Ratom
     r2 *= r2
     for i in range(Natoms):
-        ai = apos[i]
+        ai = atom_positions[i]
         for j in range(i):
-            aj = apos[j]
+            aj = atom_positions[j]
             dr = ai - aj
             if mag2(dr) < r2: hitlist.append([i, j])
     return hitlist
@@ -172,20 +172,20 @@ while True:
     nhisto += 1
 
     # Update all positions
-    for i in range(Natoms): Atoms[i].pos = apos[i] = apos[i] + (p[i] / mass) * dt
+    for i in range(Natoms): atoms[i].pos = atom_positions[i] = atom_positions[i] + (atom_momenta[i] / mass) * dt
 
     # Check for collisions
-    hitlist = checkCollisions()
+    hitlist = check_collisions()
 
     # If any collisions took place, update momenta of the two atoms
     for ij in hitlist:
         i = ij[0]
         j = ij[1]
-        ptot = p[i] + p[j]
-        posi = apos[i]
-        posj = apos[j]
-        vi = p[i] / mass
-        vj = p[j] / mass
+        ptot = atom_momenta[i] + atom_momenta[j]
+        posi = atom_positions[i]
+        posj = atom_positions[j]
+        vi = atom_momenta[i] / mass
+        vj = atom_momenta[j] / mass
         vrel = vj - vi
         a = vrel.mag2
         if a == 0: continue;  # exactly same velocities
@@ -204,40 +204,40 @@ while True:
         posi = posi - vi * deltat  # back up to contact configuration
         posj = posj - vj * deltat
         mtot = 2 * mass
-        pcmi = p[i] - ptot * mass / mtot  # transform momenta to cm frame
-        pcmj = p[j] - ptot * mass / mtot
+        pcmi = atom_momenta[i] - ptot * mass / mtot  # transform momenta to cm frame
+        pcmj = atom_momenta[j] - ptot * mass / mtot
         rrel = norm(rrel)
         pcmi = pcmi - 2 * pcmi.dot(rrel) * rrel  # bounce in cm frame
         pcmj = pcmj - 2 * pcmj.dot(rrel) * rrel
-        p[i] = pcmi + ptot * mass / mtot  # transform momenta back to lab frame
-        p[j] = pcmj + ptot * mass / mtot
-        apos[i] = posi + (p[i] / mass) * deltat  # move forward deltat in time
-        apos[j] = posj + (p[j] / mass) * deltat
-        interchange(vi.mag, p[i].mag / mass)
-        interchange(vj.mag, p[j].mag / mass)
+        atom_momenta[i] = pcmi + ptot * mass / mtot  # transform momenta back to lab frame
+        atom_momenta[j] = pcmj + ptot * mass / mtot
+        atom_positions[i] = posi + (atom_momenta[i] / mass) * deltat  # move forward deltat in time
+        atom_positions[j] = posj + (atom_momenta[j] / mass) * deltat
+        interchange(vi.mag, atom_momenta[i].mag / mass)
+        interchange(vj.mag, atom_momenta[j].mag / mass)
 
     for i in range(Natoms):
-        loc = apos[i]
+        loc = atom_positions[i]
         if abs(loc.x) > L / 2:
             if loc.x < 0:
-                p[i].x = abs(p[i].x)
+                atom_momenta[i].x = abs(atom_momenta[i].x)
             else:
-                p[i].x = -abs(p[i].x)
-                hitcounter += abs(2 * p[i].x)
+                atom_momenta[i].x = -abs(atom_momenta[i].x)
+                hitcounter += abs(2 * atom_momenta[i].x)
 
         if abs(loc.y) > L / 2:
             if loc.y < 0:
-                p[i].y = abs(p[i].y)
+                atom_momenta[i].y = abs(atom_momenta[i].y)
             else:
-                p[i].y = -abs(p[i].y)
-                hitcounter += abs(2 * p[i].y)
+                atom_momenta[i].y = -abs(atom_momenta[i].y)
+                hitcounter += abs(2 * atom_momenta[i].y)
 
         if abs(loc.z) > L / 2:
             if loc.z < 0:
-                p[i].z = abs(p[i].z)
+                atom_momenta[i].z = abs(atom_momenta[i].z)
             else:
-                p[i].z = -abs(p[i].z)
-                hitcounter += abs(2 * p[i].z)
+                atom_momenta[i].z = -abs(atom_momenta[i].z)
+                hitcounter += abs(2 * atom_momenta[i].z)
 
     if (tcounter == tcountMax):
         #        P=(1/2)*(1/0.02242)*RS_NatomsFactor*(hitcounter/L**2)/(dt*tcountMax)
