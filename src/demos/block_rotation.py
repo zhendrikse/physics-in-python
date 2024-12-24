@@ -150,7 +150,7 @@ def increment_time_for(ball, dt):
 
 
 t, dt = 0, 0.01
-timer = Timer(0, -25)
+timer = Timer(position=vec(0, -25, 0))
 while True:
     rate(1 / dt)
     timer.update(t)

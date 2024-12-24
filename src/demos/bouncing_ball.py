@@ -6,7 +6,7 @@ ball = Ball(position=vec(0, 20, 0), velocity=vec(1, 0, 0), radius=2, elasticity=
 floor = box(pos=vec(25, 0, 0), length=50, height=1, width=10, color=color.green)
 position_plot = graph(title="Bouncing ball", xtitle="Time", ytitle="Height", width=400, height=250)
 curve = gcurve(color=color.red)
-timer = Timer(-10, 0)
+timer = Timer(position=vec(-10, 0, 0))
 
 scene.title = "Click mouse button to drop ball"
 scene.waitfor('click')

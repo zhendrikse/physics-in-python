@@ -38,12 +38,12 @@ class Wedge:
         self._acceleration = vec(0, 0, 0)
 
     def force_on(self, ball):
-        acceleration_ball_x = self._acceleration_ball(ball.mass) * cos(self._theta) + self._acceleration_x(ball.mass)
-        acceleration_ball_y = -self._acceleration_ball(ball.mass) * sin(self._theta)
+        acceleration_ball_x = self.acceleration_ball(ball.mass) * cos(self._theta) + self._acceleration_x(ball.mass)
+        acceleration_ball_y = -self.acceleration_ball(ball.mass) * sin(self._theta)
 
         return ball.mass * vec(acceleration_ball_x, acceleration_ball_y, 0)
 
-    def _acceleration_ball(self, ball_mass):
+    def acceleration_ball(self, ball_mass):
         theta = self._theta
         total_mass = ball_mass + self._mass
         net_mass = self._mass * (cos(theta) * cos(theta) + self._friction * sin(theta) * cos(theta)) / total_mass / (
@@ -56,7 +56,7 @@ class Wedge:
         if self._friction >= tan(self._theta):
             return 0.0
 
-        force_on_wedge = -self._acceleration_ball(ball_mass) * ball_mass * cos(self._theta)
+        force_on_wedge = -self.acceleration_ball(ball_mass) * ball_mass * cos(self._theta)
         return force_on_wedge / total_mass
 
     def with_new_parameters(self, theta, friction, mass_wedge, mass_ball):
