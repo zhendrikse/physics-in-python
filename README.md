@@ -11,12 +11,20 @@ The graphics library used is [VPython](https://vpython.org/).
 
 #### **&darr;** Click on the below images to see animated versions **&darr;**
 
+## Thermodynamics
+
+### Visualizing a [hard-sphere gas model](https://trinket.io/library/trinkets/554248a15bc4)
+
+<a href="https://zegerh-6085.trinket.io/sites/hard_sphere_gas">
+  <img alt="Hard sphere gas" width="50%" height="50%" src="./src/demos/images/hard_sphere_gas.png"/></br>
+</a>
+
 ## Electromagnetism
 
 ### Visualizing [electromagnetic waves](https://trinket.io/library/trinkets/b8d62b38e852)
 
 <a href="https://zegerh-6085.trinket.io/sites/electromagnetic_wave">
-  <img alt="Particle in electric field" width="50%" height="50%" src="./src/demos/images/electromagnetic_wave.png"/></br>
+  <img alt="Electromagnetic waves" width="50%" height="50%" src="./src/demos/images/electromagnetic_wave.png"/></br>
 </a>
 
 ### [Charged particle moving through electric field](https://trinket.io/glowscript/db4616ccd73c)
@@ -28,7 +36,7 @@ The graphics library used is [VPython](https://vpython.org/).
 ### [Faraday's law](https://trinket.io/library/trinkets/d3934e117c2e) interactive visualization
 
 <a href="https://zegerh-6085.trinket.io/sites/faradays_law">
-  <img alt="Keplers laws" width="50%" height="50%" src="./src/demos/images/faradays_law.png"/>
+  <img alt="Faradays law" width="50%" height="50%" src="./src/demos/images/faradays_law.png"/>
 </a>
 
 ### [Electric field of point charge](https://trinket.io/glowscript/96da4eb68335)
@@ -46,7 +54,7 @@ The graphics library used is [VPython](https://vpython.org/).
 ### [Electron spinning around charged ring](https://trinket.io/library/trinkets/1983b9c1dc58)
 
 <a href="https://zegerh-6085.trinket.io/sites/electron_and_charged_ring">
-  <img alt="Electric field of point charge" width="50%" height="50%" src="./src/demos/images/electron_and_charged_ring.png"/>
+  <img alt="Electron spinning around charged ring" width="50%" height="50%" src="./src/demos/images/electron_and_charged_ring.png"/>
 </a>
 
 ## Kinematics
@@ -66,13 +74,13 @@ The graphics library used is [VPython](https://vpython.org/).
 ### [Doppler effect](https://trinket.io/library/trinkets/9d869c1167ec)
 
 <a href="https://zegerh-6085.trinket.io/sites/doppler_effect">
-  <img alt="Keplers laws" width="50%" height="50%" src="./src/demos/images/doppler_effect.png"/>
+  <img alt="Doppler effect" width="50%" height="50%" src="./src/demos/images/doppler_effect.png"/>
 </a>
 
 ### [Newton&apos;s pendulum](https://trinket.io/glowscript/1b74de8aeee8)
 
 <a href="https://zegerh-6085.trinket.io/sites/newtons_pendulum">
-  <img alt="Harmonic oscillator" width="50%" height="50%" src="./src/demos/images/newtons_pendulum.png"/>
+  <img alt="Newtons pendulum" width="50%" height="50%" src="./src/demos/images/newtons_pendulum.png"/>
 </a>
 
 ### [Ball on sliding ramp](https://trinket.io/library/trinkets/0731c4e734f8)
@@ -94,7 +102,7 @@ The graphics library used is [VPython](https://vpython.org/).
 
 ### [Floating block](https://trinket.io/library/trinkets/94ed363f8b25)
 <a href="https://zegerh-6085.trinket.io/sites/floating_block">
-  <img alt="Block rotation" width="50%" height="50%" src="./src/demos/images/floating_block.png"/>
+  <img alt="Floating block" width="50%" height="50%" src="./src/demos/images/floating_block.png"/>
 </a>
 
 ## Glowscript demos from [Dot Physics](https://www.youtube.com/channel/UCVxIDFY01y4n_c2lK1TB-KA)
