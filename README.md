@@ -183,6 +183,10 @@ Make sure to check it out, it simply is brilliant.
 
 - [3D Modeling with VPython](https://rsehosting.reading.ac.uk/courses/py3d-basic/)
 
+- [VPython Applications for Teaching Physics](https://www.visualrelativity.com/vpython/)
+
+- [Programs by Bob Salgado](https://www.glowscript.org/#/user/Rob_Salgado/folder/My_Programs/)
+
 - [VPython Docs](https://www.beautifulmathuncensored.de/static/GlowScript/VPythonDocs/)
 
 - [Glowscript documentation](https://www.glowscript.org/docs/VPythonDocs/index.html)
