@@ -6,7 +6,7 @@
 from vpython import canvas, vec, box, sin, cos, radians, random, color, winput, button, graph, gdots, rate
 from ..toolbox.ball import Ball
 from ..toolbox.building import Building, g
-from ..toolbox.timer import PhysTimer
+from ..toolbox.timer import Timer
 
 # initial perimeter setting
 theta, v0, e = 45, 100, 0.9
@@ -150,7 +150,7 @@ def increment_time_for(ball, dt):
 
 
 t, dt = 0, 0.01
-timer = PhysTimer(0, -25)
+timer = Timer(0, -25)
 while True:
     rate(1 / dt)
     timer.update(t)

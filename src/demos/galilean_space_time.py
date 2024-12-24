@@ -1,7 +1,7 @@
 from vpython import vec, rate, graph, gcurve, color, scene, label
 
 from ..toolbox.axis import Axis
-from ..toolbox.timer import PhysTimer
+from ..toolbox.timer import Timer
 from ..toolbox.car import Car
 
 green_car = Car(position=vec(-10, 0, -5), velocity=vec(1, 0, 0))
@@ -12,7 +12,7 @@ green_car.hide_axis()
 axis_green_car = Axis(green_car._car, num_labels=6, length=20, start_pos=vec(-10, 0, -5), label_orientation="down")
 axis_red_car = Axis(red_car._car, num_labels=6, length=20, start_pos=vec(-10, 0, 5), label_orientation="down")
 
-timer = PhysTimer(x=0, y=5)
+timer = Timer(x=0, y=5)
 
 space_time_graph_red = graph(width=350, height=150, title="Space-time graph for red inertial frame", xtitle="Position",
                              ytitle="Time", ymax=20,

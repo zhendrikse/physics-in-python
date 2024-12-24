@@ -1,7 +1,7 @@
 from vpython import color, vector, label
 
 
-class PhysTimer:
+class Timer:
 
     def __init__(self, x, y, use_scientific=False, timer_color=color.white):
         # x,y - world coordinates for the timer location
