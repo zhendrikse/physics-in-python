@@ -11,14 +11,6 @@ The graphics library used is [VPython](https://vpython.org/).
 
 #### **&darr;** Click on the below images to see animated versions **&darr;**
 
-## Thermodynamics
-
-### Visualizing a [hard-sphere gas model](https://trinket.io/library/trinkets/554248a15bc4)
-
-<a href="https://zegerh-6085.trinket.io/sites/hard_sphere_gas">
-  <img alt="Hard sphere gas" width="50%" height="50%" src="./src/demos/images/hard_sphere_gas.png"/></br>
-</a>
-
 ## Electromagnetism
 
 ### Visualizing [electromagnetic waves](https://trinket.io/library/trinkets/b8d62b38e852)
@@ -55,6 +47,22 @@ The graphics library used is [VPython](https://vpython.org/).
 
 <a href="https://zegerh-6085.trinket.io/sites/electron_and_charged_ring">
   <img alt="Electron spinning around charged ring" width="50%" height="50%" src="./src/demos/images/electron_and_charged_ring.png"/>
+</a>
+
+## Special relativity - space-time visualization
+
+### [Galilean space-time](https://trinket.io/library/trinkets/6499b8e78c27)
+
+<a href="https://zegerh-6085.trinket.io/sites/galileo_space_time">
+  <img alt="Galilean space-time" width="50%" height="50%" src="./src/demos/images/galilean_space_time.png"/></br>
+</a>
+
+## Thermodynamics
+
+### Visualizing a [hard-sphere gas model](https://trinket.io/library/trinkets/554248a15bc4)
+
+<a href="https://zegerh-6085.trinket.io/sites/hard_sphere_gas">
+  <img alt="Hard sphere gas" width="50%" height="50%" src="./src/demos/images/hard_sphere_gas.png"/></br>
 </a>
 
 ## Kinematics
