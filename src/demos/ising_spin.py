@@ -1,3 +1,6 @@
+#
+# https://stackoverflow.com/questions/36585517/ising-model-in-python
+#
 from vpython import *
 
 N = 5
