@@ -1,118 +1,98 @@
-from vpython import vector, points, label, curve, color, box, pyramid, sphere
+from vpython import vector, vec, cylinder, arrow, points, label, curve, color, box, pyramid, sphere
+from dataclasses import dataclass
 
 
 def obj_size(obj):
-    if type(obj) == box or type(obj) == pyramid:
-        return obj.size
-    elif type(obj) == sphere:
-        return vector(obj.radius, obj.radius, obj.radius)
+    if type(obj) == Ball:
+        return vector(obj._ball.radius, obj._ball.radius, obj._ball.radius)
+    else:
+        raise TypeError("Implement the obj_size() function in the axis module for type " + str(type(obj)))
+
+
+@dataclass
+class Interval:
+    start: vector
+    end: vector
+
+    def distance(self):
+        return self.end - self.start
 
 
 class Axis:
+    def __init__(self, position=vec(0, 0, 0), axis_color=color.yellow, tick_marks_color=color.red, num_tick_marks=10,
+                 length=10, orientation="x", label_orientation="down", offset=0):
+        self._axis = vec(1, 0, 0) if orientation == "x" else vec(0, 1, 0)
+        self._num_tick_marks = num_tick_marks
+        self._length = length
+        self._offset = offset
+        self._label_shifts = {
+            "up": vector(0, -0.05 * self._length, 0),
+            "down": vector(0, 0.05 * self._length, 0),
+            "left": vector(-0.1 * self._length, 0, 0),
+            "right": vector(0.1 * self._length, 0, 0)}
 
-    def __init__(self, attached_to, num_labels, axis_type="x", axis=vector(1, 0, 0), start_pos=None, length=None,
-                 labels=None, label_orientation="down", axis_color=color.yellow, label_color=color.white):
-        # attached_to - Object which axis is oriented based on by default
-        # numLabels - number of labels on axis
-        # axisType - sets whether this is a default axis of x or y, or an arbitrary axis
-        # axis - unit vector defining the orientation of the axis to be created IF axisType = "arbitrary"
-        # startPos - start position for the axis - defaults to (-obj_size(obj).x/2,-4*obj_size(obj).y,0)
-        # length - length of the axis - defaults to obj_size(obj).x
-        # labelOrientation - how labels are placed relative to axis markers - "up", "down", "left", or "right"
+        self._axis_interval = Interval(-self._axis * length / 2 + position, self._axis * length / 2 + position)
 
-        self.interval_markers = []
-        self.interval_labels = []
-        self.labelText = labels
-        self.obj = attached_to
-        self.lastPos = vector(attached_to.pos.x, attached_to.pos.y, attached_to.pos.z)
-        self.numLabels = num_labels
-        self.axisType = axis_type
-        self.axis = axis if axis_type != "y" else vector(0, 1, 0)
-        self.length = length if (length is not None) else obj_size(attached_to).x
-        self.start_position = start_pos if (start_pos is not None) else vector(-obj_size(attached_to).x / 2,
-                                                                               -4 * obj_size(attached_to).y, 0)
-        self.axisColor = axis_color
-        self.labelColor = label_color
-
-        if label_orientation == "down":
-            self.labelShift = vector(0, -0.05 * self.length, 0)
-        elif label_orientation == "up":
-            self.labelShift = vector(0, 0.05 * self.length, 0)
+        self._label_shift = vector(0, -0.05 * self._length, 0)
+        if label_orientation == "up":
+            self._label_shift = vector(0, 0.05 * self._length, 0)
         elif label_orientation == "left":
-            self.labelShift = vector(-0.1 * self.length, 0, 0)
+            self._label_shift = vector(-0.1 * self._length, 0, 0)
         elif label_orientation == "right":
-            self.labelShift = vector(0.1 * self.length, 0, 0)
+            self._label_shift = vector(0.1 * self._length, 0, 0)
 
-        self.__reorient()
+        tick_positions = []
+        self._tick_labels = []
+        tick_increment = self._axis_interval.distance() / (self._num_tick_marks - 1)
+        for i in range(num_tick_marks):
+            tick_position = self._axis_interval.start + i * tick_increment
+            tick_positions += [tick_position]
+            label_value = offset + tick_position.x if orientation == "x" else tick_position.y
+            label_text = str(round(label_value, 2))
+            self._tick_labels += [label(pos=tick_position + self._label_shift, text=label_text, box=False)]
 
-    def update(self):
-        # Determine if reference obj. has shifted since last update, if so shift us too
-        if self.obj.pos != self.lastPos:
-            diff = self.obj.pos - self.lastPos
+        self._ticks = points(pos=tick_positions, radius=10, color=tick_marks_color)
+        self._cylinder = cylinder(pos=self._axis_interval.start, axis=self._axis_interval.distance(),
+                                  radius=self._ticks.radius / 100, color=axis_color)
 
-            for i in range(len(self.interval_markers)):
-                self.interval_markers.modify(i, pos = diff)
-                self.interval_labels[i].pos += diff
-            self.axisCurve.modify(0, pos=diff)
-            self.axisCurve.modify(1, pos=diff)
+        self._x_axis = arrow(pos=position, axis=vec(2, 0, 0), color=axis_color, shaftwidth=0.15)
+        self._y_axis = arrow(pos=position, axis=vec(0, 2, 0), color=axis_color, shaftwidth=0.15)
+        self._z_axis = arrow(pos=position, axis=vec(0, 0, 2), color=axis_color, shaftwidth=0.15)
+        self._x_axis_label = label(pos=vec(2, 0, 0), text="x", box=False, color=tick_marks_color)
+        self._y_axis_label = label(pos=vec(0, 2, 0), text="y", box=False, color=tick_marks_color)
+        self._z_axis_label = label(pos=vec(0, 0, 2), text="z", box=False, color=tick_marks_color)
 
-            #self.axisCurve.pos = [x + diff for x in self.axisCurve.pos]
+    def reorient_with(self, other_object):
+        other_objects_position = other_object.position
+        start = -self._axis * self._length / 2 + other_objects_position
+        end = self._axis * self._length / 2 + other_objects_position
+        self._axis_interval = Interval(start, end)
+        tick_increment = self._axis_interval.distance() / (self._num_tick_marks - 1)
+        for i in range(self._num_tick_marks):
+            tick_position = self._axis_interval.start + i * tick_increment
+            self._ticks.modify(i, pos=tick_position)
+            self._tick_labels[i].pos = tick_position + self._label_shift
 
-            self.lastPos = vector(self.obj.pos.x, self.obj.pos.y, self.obj.pos.z)
+        self._cylinder.pos = self._axis_interval.start
+        self._x_axis.pos = other_objects_position
+        self._y_axis.pos = other_objects_position
+        self._z_axis.pos = other_objects_position
+        self._x_axis_label.pos = other_objects_position + vec(2, 0, 0)
+        self._y_axis_label.pos = other_objects_position + vec(0, 2, 0)
+        self._z_axis_label.pos = other_objects_position + vec(0, 0, 2)
 
-    def reorient(self, axis=None, start_pos=None, length=None, labels=None, label_orientation=None):
-        # Determine which, if any, parameters are being modified
-        self.axis = axis if axis is not None else self.axis
-        self.start_position = start_pos if start_pos is not None else self.start_position
-        self.length = length if length is not None else self.length
-        self.labelText = labels if labels is not None else self.interval_labels
+    def show_unit_vectors(self):
+        self._x_axis.visible = True
+        self._y_axis.visible = True
+        self._z_axis.visible = True
+        self._x_axis_label.visible = True
+        self._y_axis_label.visible = True
+        self._z_axis_label.visible = True
 
-        # Re-do label orientation as well, if it has been set
-        if label_orientation == "down":
-            self.labelShift = vector(0, -0.05 * self.length, 0)
-        elif label_orientation == "up":
-            self.labelShift = vector(0, 0.05 * self.length, 0)
-        elif label_orientation == "left":
-            self.labelShift = vector(-0.1 * self.length, 0, 0)
-        elif label_orientation == "right":
-            self.labelShift = vector(0.1 * self.length, 0, 0)
-
-        self.__reorient()
-
-    def __reorient(self):
-        # Actual internal axis setup code... determines first whether we are creating or updating
-        updating = True if len(self.interval_markers) > 0 else False
-
-        # Then determines the endpoint of the axis and the interval
-        final = self.start_position + (self.length * self.axis)
-        interval = (self.length / (self.numLabels - 1)) * self.axis
-
-        # Loop for each interval marker, setting up or updating the markers and labels
-        i = 0
-        while i < self.numLabels:
-            interval_pos = self.start_position + (i * interval)
-
-            # Determine text for this label
-            if self.labelText is not None:
-                label_text = self.labelText[i]
-            elif self.axisType == "y":
-                label_text = str(round(interval_pos.y, 2))
-            else:
-                label_text = str(round(interval_pos.x, 2))
-
-            if updating:
-                self.interval_markers[i].pos = interval_pos
-                self.interval_labels[i].pos = interval_pos + self.labelShift
-                self.interval_labels[i].text = str(label_text)
-            else:
-                self.interval_markers.append(points(pos=interval_pos, color=self.axisColor, radius=5))
-                self.interval_labels.append(
-                    label(pos=interval_pos + self.labelShift, text=str(label_text), box=False, height=10,
-                          color=self.labelColor))
-            i = i + 1
-
-        # Finally, create / update the line itself!
-        if updating:
-            self.axisCurve.pos = [self.start_position, final]
-        else:
-            self.axisCurve = curve(pos=[self.start_position, final], color=self.axisColor)
+    def hide_unit_vectors(self):
+        self._x_axis.visible = False
+        self._y_axis.visible = False
+        self._z_axis.visible = False
+        self._x_axis_label.visible = False
+        self._y_axis_label.visible = False
+        self._z_axis_label.visible = False
