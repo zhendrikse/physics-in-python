@@ -142,10 +142,9 @@ def increment_time_for(ball, dt):
     elif ball.hits(target_building):
         ball.collide_with(target_building)
         target_building.rotate(-target_building.omega * dt)
-    else:
-        # ball travelling through the air
-        target_building.update(dt)
 
+    # ball travelling through the air
+    target_building.update(dt)
     ball.move(vec(0, -g, 0) * ball.mass, dt)
 
 

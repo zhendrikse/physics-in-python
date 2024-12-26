@@ -29,8 +29,8 @@ class Axis:
         self.axisType = axis_type
         self.axis = axis if axis_type != "y" else vector(0, 1, 0)
         self.length = length if (length is not None) else obj_size(attached_to).x
-        self.startPos = start_pos if (start_pos is not None) else vector(-obj_size(attached_to).x / 2,
-                                                                         -4 * obj_size(attached_to).y, 0)
+        self.start_position = start_pos if (start_pos is not None) else vector(-obj_size(attached_to).x / 2,
+                                                                               -4 * obj_size(attached_to).y, 0)
         self.axisColor = axis_color
         self.labelColor = label_color
 
@@ -51,18 +51,21 @@ class Axis:
             diff = self.obj.pos - self.lastPos
 
             for i in range(len(self.interval_markers)):
-                self.interval_markers[i].pos += diff
+                self.interval_markers.modify(i, pos = diff)
                 self.interval_labels[i].pos += diff
-            self.axisCurve.pos = [x + diff for x in self.axisCurve.pos]
+            self.axisCurve.modify(0, pos=diff)
+            self.axisCurve.modify(1, pos=diff)
+
+            #self.axisCurve.pos = [x + diff for x in self.axisCurve.pos]
 
             self.lastPos = vector(self.obj.pos.x, self.obj.pos.y, self.obj.pos.z)
 
     def reorient(self, axis=None, start_pos=None, length=None, labels=None, label_orientation=None):
         # Determine which, if any, parameters are being modified
         self.axis = axis if axis is not None else self.axis
-        self.startPos = start_pos if start_pos is not None else self.startPos
+        self.start_position = start_pos if start_pos is not None else self.start_position
         self.length = length if length is not None else self.length
-        self.labelText = labels if labels is not None else self.labels
+        self.labelText = labels if labels is not None else self.interval_labels
 
         # Re-do label orientation as well, if it has been set
         if label_orientation == "down":
@@ -81,13 +84,13 @@ class Axis:
         updating = True if len(self.interval_markers) > 0 else False
 
         # Then determines the endpoint of the axis and the interval
-        final = self.startPos + (self.length * self.axis)
+        final = self.start_position + (self.length * self.axis)
         interval = (self.length / (self.numLabels - 1)) * self.axis
 
         # Loop for each interval marker, setting up or updating the markers and labels
         i = 0
         while i < self.numLabels:
-            interval_pos = self.startPos + (i * interval)
+            interval_pos = self.start_position + (i * interval)
 
             # Determine text for this label
             if self.labelText is not None:
@@ -110,6 +113,6 @@ class Axis:
 
         # Finally, create / update the line itself!
         if updating:
-            self.axisCurve.pos = [self.startPos, final]
+            self.axisCurve.pos = [self.start_position, final]
         else:
-            self.axisCurve = curve(pos=[self.startPos, final], color=self.axisColor)
+            self.axisCurve = curve(pos=[self.start_position, final], color=self.axisColor)
