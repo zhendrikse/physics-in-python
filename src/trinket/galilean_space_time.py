@@ -1,167 +1,106 @@
-from vpython import vec, rate, graph, gcurve, color, scene, label, vector, points, curve, box, pyramid, sphere, arrow
+#Web VPython 3.2
 
-def obj_size(obj):
-    if type(obj) == box or type(obj) == pyramid:
-        return obj.size
-    elif type(obj) == sphere:
-        return vector(obj.radius, obj.radius, obj.radius)
+from vpython import vec, rate, graph, gcurve, color, label, vector, points, canvas, box, arrow, cylinder
 
+#
+# Zeger Hendrikse: https://github.com/zhendrikse
+#
+class Timer:
 
-class Axis:
-
-    def __init__(self, attached_to, num_labels, axis_type="x", axis=vector(1, 0, 0), start_pos=None, length=None,
-                 labels=None, label_orientation="down", axis_color=color.yellow, label_color=color.white):
-        # attached_to - Object which axis is oriented based on by default
-        # numLabels - number of labels on axis
-        # axisType - sets whether this is a default axis of x or y, or an arbitrary axis
-        # axis - unit vector defining the orientation of the axis to be created IF axisType = "arbitrary"
-        # startPos - start position for the axis - defaults to (-obj_size(obj).x/2,-4*obj_size(obj).y,0)
-        # length - length of the axis - defaults to obj_size(obj).x
-        # labelOrientation - how labels are placed relative to axis markers - "up", "down", "left", or "right"
-
-        self.interval_markers = []
-        self.interval_labels = []
-        self.labelText = labels
-        self.obj = attached_to
-        self.lastPos = vector(attached_to.pos.x, attached_to.pos.y, attached_to.pos.z)
-        self.numLabels = num_labels
-        self.axisType = axis_type
-        self.axis = axis if axis_type != "y" else vector(0, 1, 0)
-        self.length = length if (length is not None) else obj_size(attached_to).x
-        self.startPos = start_pos if (start_pos is not None) else vector(-obj_size(attached_to).x / 2,
-                                                                         -4 * obj_size(attached_to).y, 0)
-        self.axisColor = axis_color
-        self.labelColor = label_color
-
-        if label_orientation == "down":
-            self.labelShift = vector(0, -0.05 * self.length, 0)
-        elif label_orientation == "up":
-            self.labelShift = vector(0, 0.05 * self.length, 0)
-        elif label_orientation == "left":
-            self.labelShift = vector(-0.1 * self.length, 0, 0)
-        elif label_orientation == "right":
-            self.labelShift = vector(0.1 * self.length, 0, 0)
-
-        self.__reorient()
-
-    def update(self):
-        # Determine if reference obj. has shifted since last update, if so shift us too
-        if self.obj.pos != self.lastPos:
-            diff = self.obj.pos - self.lastPos
-
-            for i in range(len(self.interval_markers)):
-                self.interval_markers[i].pos += diff
-                self.interval_labels[i].pos += diff
-            self.axisCurve.pos = [x + diff for x in self.axisCurve.pos]
-
-            self.lastPos = vector(self.obj.pos.x, self.obj.pos.y, self.obj.pos.z)
-
-    def reorient(self, axis=None, start_pos=None, length=None, labels=None, label_orientation=None):
-        # Determine which, if any, parameters are being modified
-        self.axis = axis if axis is not None else self.axis
-        self.startPos = start_pos if start_pos is not None else self.startPos
-        self.length = length if length is not None else self.length
-        self.labelText = labels if labels is not None else self.labels
-
-        # Re-do label orientation as well, if it has been set
-        if label_orientation == "down":
-            self.labelShift = vector(0, -0.05 * self.length, 0)
-        elif label_orientation == "up":
-            self.labelShift = vector(0, 0.05 * self.length, 0)
-        elif label_orientation == "left":
-            self.labelShift = vector(-0.1 * self.length, 0, 0)
-        elif label_orientation == "right":
-            self.labelShift = vector(0.1 * self.length, 0, 0)
-
-        self.__reorient()
-
-    def __reorient(self):
-        # Actual internal axis setup code... determines first whether we are creating or updating
-        updating = True if len(self.interval_markers) > 0 else False
-
-        # Then determines the endpoint of the axis and the interval
-        final = self.startPos + (self.length * self.axis)
-        interval = (self.length / (self.numLabels - 1)) * self.axis
-
-        # Loop for each interval marker, setting up or updating the markers and labels
-        i = 0
-        while i < self.numLabels:
-            interval_pos = self.startPos + (i * interval)
-
-            # Determine text for this label
-            if self.labelText is not None:
-                label_text = self.labelText[i]
-            elif self.axisType == "y":
-                label_text = str(round(interval_pos.y, 2))
-            else:
-                label_text = str(round(interval_pos.x, 2))
-
-            if updating:
-                self.interval_markers[i].pos = interval_pos
-                self.interval_labels[i].pos = interval_pos + self.labelShift
-                self.interval_labels[i].text = str(label_text)
-            else:
-                self.interval_markers.append(points(pos=interval_pos, color=self.axisColor, radius=5))
-                self.interval_labels.append(
-                    label(pos=interval_pos + self.labelShift, text=str(label_text), box=False, height=10,
-                          color=self.labelColor))
-            i = i + 1
-
-        # Finally, create / update the line itself!
-        if updating:
-            self.axisCurve.pos = [self.startPos, final]
+    def __init__(self, position=vector(0, 0, 0), use_scientific=False, relative_to=None, timer_color=color.white):
+        self._use_scientific = use_scientific
+        self._relative_to = relative_to
+        self._distance_to_attached_object = relative_to.position - position if relative_to else 0
+        if use_scientific:
+            self._timer_label = label(pos=position, text='00E01', box=False, color=timer_color)
         else:
-            self.axisCurve = curve(pos=[self.startPos, final], color=self.axisColor)
-
-
-class PhysTimer:
-
-    def __init__(self, x, y, use_scientific=False, timer_color=color.white):
-        # x,y - world coordinates for the timer location
-        # use_scientific - bool to turn off/on scientific notation for time
-        # timer_color - attribute controlling the color of the text
-
-        self.use_scientific = use_scientific
-        self.timerColor = timer_color
-        if use_scientific is False:
-            self.timerLabel = label(pos=vector(x, y, 0), text='00:00:00.00', box=False)
-        else:
-            self.timerLabel = label(pos=vector(x, y, 0), text='00E01', box=False)
+            self._timer_label = label(pos=position, text='00:00:00.00', box=False, color=timer_color)
 
     def update(self, t):
         # Basically just use sprintf formatting according to either stopwatch or scientific notation
-        if self.use_scientific:
-            self.timerLabel.text = "%.4E" % t
-        else:
-            hours = int(t / 3600)
-            mins = int((t / 60) % 60)
-            secs = int(t % 60)
-            frac = int(round(100 * (t % 1)))
-            if frac == 100:
-                frac = 0
-                secs = secs + 1
-            self.timerLabel.text = "{:02d}:".format(hours) + "{:02d}:".format(mins) + "{:02d}.".format(
-                secs) + "{:02d}".format(frac)
+        if self._relative_to:
+            self._timer_label.pos = self._distance_to_attached_object + self._relative_to.position
+
+        if self._use_scientific:
+            self._timer_label.text = "%.4E".format(t)
+            return
+
+        hours = int(t / 3600)
+        minutes = int((t / 60) % 60)
+        secs = int(t % 60)
+        frac = int(round(100 * (t % 1)))
+        if frac == 100:
+            frac = 0
+            secs = secs + 1
+
+        self._timer_label.text = "{:02d}:".format(hours) + "{:02d}:".format(minutes) + "{:02d}.".format(
+            secs) + "{:02d}".format(frac)
 
 
-class Car:
-    def __init__(self, position=vec(0, 0, 0), velocity=vec(0, 0, 0), colour=color.green, draw=True):
-        self._position = position
-        self._velocity = velocity
-        self._car = box(pos=position, length=2.5, height=1, width=1, color=colour) if draw else None
-        self._label = label(pos=vec(position.x, position.y + 2, position.z), text="Select my perspective", color=colour,
-                            line=True) if draw else None
-        self._x_axis = arrow(pos=position, axis=vec(2, 0, 0), color=color.magenta, shaftwidth=0.15) if draw else None
-        self._x_axis_label = label(pos=vec(position.x + 2, position.y, position.z), text="x",
-                                   color=colour) if draw else None
-        self._y_axis = arrow(pos=position, axis=vec(0, 2, 0), color=color.magenta, shaftwidth=0.15) if draw else None
-        self._y_axis_label = label(pos=vec(position.x, position.y + 2, position.z), text="y",
-                                   color=colour) if draw else None
-        self._z_axis = arrow(pos=position, axis=vec(0, 0, 2), color=color.magenta, shaftwidth=0.15) if draw else None
-        self._z_axis_label = label(pos=vec(position.x, position.y, position.z + 2), text="z",
-                                   color=colour) if draw else None
+class Axis:
+    def __init__(self, position=vec(0, 0, 0), axis_color=color.yellow, tick_marks_color=color.red, num_tick_marks=11,
+                 length=10, orientation="x", label_orientation="down", offset=0):
+        self._axis = vec(1, 0, 0) if orientation == "x" else vec(0, 1, 0)
+        self._start = -self._axis * length / 2 + position
+        self._end = self._axis * length / 2 + position
 
-    def show_axis(self):
+        self._num_tick_marks = num_tick_marks
+        self._length = length
+        self._offset = offset
+        self._label_shifts = {
+            "up": vector(0, -0.05 * self._length, 0),
+            "down": vector(0, 0.05 * self._length, 0),
+            "left": vector(-0.1 * self._length, 0, 0),
+            "right": vector(0.1 * self._length, 0, 0)}
+
+        self._label_shift = vector(0, -0.05 * self._length, 0)
+        if label_orientation == "up":
+            self._label_shift = vector(0, 0.05 * self._length, 0)
+        elif label_orientation == "left":
+            self._label_shift = vector(-0.1 * self._length, 0, 0)
+        elif label_orientation == "right":
+            self._label_shift = vector(0.1 * self._length, 0, 0)
+
+        tick_positions = []
+        self._tick_labels = []
+        tick_increment = (self._end - self._start) / (num_tick_marks - 1)
+        for i in range(num_tick_marks):
+            tick_position = self._start + i * tick_increment
+            tick_positions += [tick_position]
+            label_value = offset + tick_position.x if orientation == "x" else tick_position.y
+            label_text = str(round(label_value, 2))
+            self._tick_labels += [label(pos=tick_position + self._label_shift, text=label_text, box=False)]
+
+        self._ticks = points(pos=tick_positions, radius=10, color=tick_marks_color)
+        self._cylinder = cylinder(pos=self._start, axis=self._end - self._start, radius=self._ticks.radius / 100,
+                                  color=axis_color)
+
+        self._x_axis = arrow(pos=position, axis=vec(2, 0, 0), color=axis_color, shaftwidth=0.15)
+        self._y_axis = arrow(pos=position, axis=vec(0, 2, 0), color=axis_color, shaftwidth=0.15)
+        self._z_axis = arrow(pos=position, axis=vec(0, 0, 2), color=axis_color, shaftwidth=0.15)
+        self._x_axis_label = label(pos=position + vec(2, 0, 0), text="x", box=False, color=tick_marks_color)
+        self._y_axis_label = label(pos=position + vec(0, 2, 0), text="y", box=False, color=tick_marks_color)
+        self._z_axis_label = label(pos=position + vec(0, 0, 2), text="z", box=False, color=tick_marks_color)
+
+    def reorient_with(self, other_object):
+        other_objects_position = other_object.position()
+        self._start = -self._axis * self._length / 2 + other_objects_position
+        self._end = self._axis * self._length / 2 + other_objects_position
+        tick_increment = (self._end - self._start) / (self._num_tick_marks - 1)
+        for i in range(self._num_tick_marks):
+            tick_position = self._start + i * tick_increment
+            self._ticks.modify(i, pos=tick_position)
+            self._tick_labels[i].pos = tick_position + self._label_shift
+
+        self._cylinder.pos = self._start
+        self._x_axis.pos = other_objects_position
+        self._y_axis.pos = other_objects_position
+        self._z_axis.pos = other_objects_position
+        self._x_axis_label.pos = other_objects_position + vec(2, 0, 0)
+        self._y_axis_label.pos = other_objects_position + vec(0, 2, 0)
+        self._z_axis_label.pos = other_objects_position + vec(0, 0, 2)
+
+    def show_unit_vectors(self):
         self._x_axis.visible = True
         self._y_axis.visible = True
         self._z_axis.visible = True
@@ -169,13 +108,22 @@ class Car:
         self._y_axis_label.visible = True
         self._z_axis_label.visible = True
 
-    def hide_axis(self):
+    def hide_unit_vectors(self):
         self._x_axis.visible = False
         self._y_axis.visible = False
         self._z_axis.visible = False
         self._x_axis_label.visible = False
         self._y_axis_label.visible = False
         self._z_axis_label.visible = False
+
+
+class Car:
+    def __init__(self, position=vec(0, 0, 0), velocity=vec(0, 0, 0), colour=color.green, draw=True):
+        self._position = position
+        self._velocity = velocity
+        self._car = box(pos=position, length=2.5, height=1, width=1, color=colour) if draw else None
+        self._label = label(pos=vec(position.x, position.y + 1.52, position.z), text="Select my perspective",
+                            color=colour, line=True) if draw else None
 
     def show_label(self):
         self._label.visible = True
@@ -186,13 +134,7 @@ class Car:
     def _draw(self):
         if self._label:
             self._car.pos = self._position
-            self._label.pos = vec(self._position.x, self._position.y + 2, self._position.z)
-            self._x_axis.pos = self._position
-            self._x_axis_label.pos = vec(self._position.x + 2, self._position.y, self._position.z)
-            self._y_axis.pos = self._position
-            self._y_axis_label.pos = vec(self._position.x, self._position.y + 2, self._position.z)
-            self._z_axis.pos = self._position
-            self._z_axis_label.pos = vec(self._position.x, self._position.y, self._position.z + 2)
+            self._label.pos = vec(self._position.x, self._position.y + 1.5, self._position.z)
 
     def move(self, dt):
         self._position += self._velocity * dt
@@ -205,32 +147,33 @@ class Car:
         return self._velocity
 
 
+animation_time = 15  # seconds
+
+scene = canvas(width="800", height="600")
+scene.title = "Relative motion"
+scene.center = vec(0, 0, 0)
+scene.forward = vec(0, -0.35, -1)
+scene.range = 11
+
 green_car = Car(position=vec(-10, 0, -5), velocity=vec(1, 0, 0))
 red_car = Car(position=vec(0, 0, 5), colour=color.red)
 red_car.hide_label()
-green_car.hide_axis()
 
-axis_green_car = Axis(green_car._car, num_labels=6, length=20, start_pos=vec(-10, 0, -5), label_orientation="down")
-axis_red_car = Axis(red_car._car, num_labels=6, length=20, start_pos=vec(-10, 0, 5), label_orientation="down")
-
-timer = PhysTimer(x=0, y=5)
+axis_green_car = Axis(num_tick_marks=11, length=30, position=vec(-10, 0, -5), offset=10)  # , label_orientation="down")
+axis_red_car = Axis(num_tick_marks=11, length=30, position=vec(0, 0, 5), offset=0)  # , label_orientation="down")
+axis_green_car.hide_unit_vectors()
 
 space_time_graph_red = graph(width=350, height=150, title="Space-time graph for red inertial frame", xtitle="Position",
-                             ytitle="Time", ymax=20, xmin=-10, xmax=10)
+                             ytitle="Time", ymax=2 * animation_time,
+                             xmin=-animation_time, xmax=animation_time)
 red_curve_green_car = gcurve(graph=space_time_graph_red, color=color.green)
 red_curve_red_car = gcurve(graph=space_time_graph_red, color=color.red)
 
 space_time_graph_green = graph(width=350, height=150, title="Space-time for green inertial frame", xtitle="Position",
-                               ytitle="Time", ymax=20, xmin=-10, xmax=10)
+                               ytitle="Time", ymax=2 * animation_time,
+                               xmin=-animation_time, xmax=animation_time)
 green_curve_green_car = gcurve(graph=space_time_graph_green, color=color.green)
 green_curve_red_car = gcurve(graph=space_time_graph_green, color=color.red)
-
-scene.title = "Relative motion: click on car to change camera"
-scene.center = vec(0, 0, 0)
-scene.forward = vec(0.0726397, -0.41687, -0.906058)
-scene.range = 11
-scene.caption = "Galilean transformation \\(  \\begin{pmatrix} x' \\\\ t'\\end{pmatrix} = \\begin{pmatrix} 1 & -v \\\\ 0 & 1 \\end{pmatrix} \\begin{pmatrix} x \\\\ t \\end{pmatrix} \\)"
-MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 
 def select_car_in(my_scene):
@@ -240,18 +183,18 @@ def select_car_in(my_scene):
     my_scene.camera.follow(selected_object)
     if selected_object.color == color.green:
         # scene.forward = vec(-0.00101513, -0.770739, 0.637151)
-        scene.range = 11
+        scene.range = 17
         green_car.hide_label()
-        green_car.show_axis()
         red_car.show_label()
-        red_car.hide_axis()
+        axis_green_car.show_unit_vectors()
+        axis_red_car.hide_unit_vectors()
     elif selected_object.color == color.red:
         # scene.forward = vec(0.00813912, -0.581035, -0.813838)
-        scene.range = 8
+        scene.range = 11
         red_car.hide_label()
-        red_car.show_axis()
         green_car.show_label()
-        green_car.hide_axis()
+        axis_red_car.show_unit_vectors()
+        axis_green_car.hide_unit_vectors()
 
 
 def on_mouse_click():
@@ -260,21 +203,28 @@ def on_mouse_click():
 
 scene.bind('click', on_mouse_click)
 
+timer = Timer(position=vec(0, 5, 0))
 dt = 0.01
 t = 0
-while green_car.position().x <= 10:
+while green_car.position().x <= animation_time:
     rate(1 / dt)
     green_car.move(dt)
     red_curve_green_car.plot(green_car.position().x, t)
     red_curve_red_car.plot(red_car.position().x, t)
 
     green_curve_red_car.plot(-green_car.position().x, t)
-    green_curve_green_car.plot(0, t)
+    green_curve_green_car.plot(-red_car.position().x, t)
 
     timer.update(t)
+    axis_green_car.reorient_with(green_car)
 
     t += dt
 
-label(pos=vec(0, 7, 0), text="Galilean transformation: x'=x - vt", color=color.yellow)
-scene.waitfor('click')
+print("scene.center=", scene.center)
+print("scene.forward=", scene.forward)
+print("scene.range=", scene.range)
+print("t={}\n".format(t))
 
+label(pos=vec(0, 7, 0), text="Galilean transformation: x'=x - vt",
+      color=color.yellow)
+scene.waitfor('click')

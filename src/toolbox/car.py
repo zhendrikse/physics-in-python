@@ -31,3 +31,6 @@ class Car:
     @property
     def velocity(self):
         return self._velocity
+
+class RelativisticCar(Car):
+    pass
