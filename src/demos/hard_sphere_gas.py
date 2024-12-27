@@ -117,6 +117,33 @@ class Gas:
         for i in range(len(self._atoms)):
             self._atoms[i].pos = self._atom_positions[i] = self._atom_positions[i] + (self._atom_momenta[i] / self._mass) * dt
 
+    def count_cube_wall_collisions(self, length):
+        hit_counter = 0
+        for index in range(len(self._atoms)):
+            loc = self._atom_positions[index]
+            if abs(loc.x) > length / 2:
+                if loc.x < 0:
+                    self._atom_momenta[index].x = abs(self._atom_momenta[index].x)
+                else:
+                    self._atom_momenta[index].x = -abs(self._atom_momenta[index].x)
+                    hit_counter += abs(2 * self._atom_momenta[index].x)
+
+            if abs(loc.y) > length / 2:
+                if loc.y < 0:
+                    self._atom_momenta[index].y = abs(self._atom_momenta[index].y)
+                else:
+                    self._atom_momenta[index].y = -abs(self._atom_momenta[index].y)
+                    hit_counter += abs(2 * self._atom_momenta[index].y)
+
+            if abs(loc.z) > length / 2:
+                if loc.z < 0:
+                    self._atom_momenta[index].z = abs(self._atom_momenta[index].z)
+                else:
+                    self._atom_momenta[index].z = -abs(self._atom_momenta[index].z)
+                    hit_counter += abs(2 * self._atom_momenta[index].z)
+
+        return hit_counter
+
     def _check_collisions(self):
         hitlist = []
         r2 = 2 * Ratom
@@ -233,29 +260,8 @@ while True:
 
     gas.update_with_timestep(dt)
     gas.update_momenta_of_colliding_atoms()
+    hitcounter += gas.count_cube_wall_collisions(L)
 
-    for i in range(Natoms):
-        loc = atom_positions[i]
-        if abs(loc.x) > L / 2:
-            if loc.x < 0:
-                atom_momenta[i].x = abs(atom_momenta[i].x)
-            else:
-                atom_momenta[i].x = -abs(atom_momenta[i].x)
-                hitcounter += abs(2 * atom_momenta[i].x)
-
-        if abs(loc.y) > L / 2:
-            if loc.y < 0:
-                atom_momenta[i].y = abs(atom_momenta[i].y)
-            else:
-                atom_momenta[i].y = -abs(atom_momenta[i].y)
-                hitcounter += abs(2 * atom_momenta[i].y)
-
-        if abs(loc.z) > L / 2:
-            if loc.z < 0:
-                atom_momenta[i].z = abs(atom_momenta[i].z)
-            else:
-                atom_momenta[i].z = -abs(atom_momenta[i].z)
-                hitcounter += abs(2 * atom_momenta[i].z)
 
     if (tcounter == tcountMax):
         #        P=(1/2)*(1/0.02242)*RS_NatomsFactor*(hitcounter/L**2)/(dt*tcountMax)
