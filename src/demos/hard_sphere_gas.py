@@ -55,20 +55,25 @@ s = """  Theoretical and averaged speed distributions (meters/sec).
 """
 animation.caption = s
 
-d = L / 2 + Ratom
-r = 0.005
-boxbottom = curve(color=gray, radius=r)
-boxbottom.append([vector(-d, -d, -d), vector(-d, -d, d), vector(d, -d, d), vector(d, -d, -d), vector(-d, -d, -d)])
-boxtop = curve(color=gray, radius=r)
-boxtop.append([vector(-d, d, -d), vector(-d, d, d), vector(d, d, d), vector(d, d, -d), vector(-d, d, -d)])
-vert1 = curve(color=gray, radius=r)
-vert2 = curve(color=gray, radius=r)
-vert3 = curve(color=gray, radius=r)
-vert4 = curve(color=gray, radius=r)
-vert1.append([vector(-d, -d, -d), vector(-d, d, -d)])
-vert2.append([vector(-d, -d, d), vector(-d, d, d)])
-vert3.append([vector(d, -d, d), vector(d, d, d)])
-vert4.append([vector(d, -d, -d), vector(d, d, -d)])
+class Box:
+    def __init__(self, length=L, gas_atom_radius=Ratom, vertex_radius = 0.005):
+        self._length = length
+        dist = length / 2 + gas_atom_radius
+        box_bottom = curve(color=gray, radius=vertex_radius)
+        box_bottom.append([vector(-dist, -dist, -dist), vector(-dist, -dist, dist), vector(dist, -dist, dist), vector(dist, -dist, -dist), vector(-dist, -dist, -dist)])
+        box_top = curve(color=gray, radius=vertex_radius)
+        box_top.append([vector(-dist, dist, -dist), vector(-dist, dist, dist), vector(dist, dist, dist), vector(dist, dist, -dist), vector(-dist, dist, -dist)])
+        vert1 = curve(color=gray, radius=vertex_radius)
+        vert2 = curve(color=gray, radius=vertex_radius)
+        vert3 = curve(color=gray, radius=vertex_radius)
+        vert4 = curve(color=gray, radius=vertex_radius)
+        vert1.append([vector(-dist, -dist, -dist), vector(-dist, dist, -dist)])
+        vert2.append([vector(-dist, -dist, dist), vector(-dist, dist, dist)])
+        vert3.append([vector(dist, -dist, dist), vector(dist, dist, dist)])
+        vert4.append([vector(dist, -dist, -dist), vector(dist, dist, -dist)])
+
+    def length(self):
+        return self._length
 
 class Gas:
     def __init__(self, atom_mass=mass, atom_radius = Ratom, number_of_atoms=Natoms):
@@ -106,25 +111,25 @@ class Gas:
         for i in range(len(self._atoms)):
             self._atoms[i].pos = self._atom_positions[i] = self._atom_positions[i] + (self._atom_momenta[i] / self._mass) * dt
 
-    def count_cube_wall_collisions(self, length):
+    def count_collisions_with(self, box):
         hit_counter = 0
         for index in range(len(self._atoms)):
             loc = self._atom_positions[index]
-            if abs(loc.x) > length / 2:
+            if abs(loc.x) > box.length() / 2:
                 if loc.x < 0:
                     self._atom_momenta[index].x = abs(self._atom_momenta[index].x)
                 else:
                     self._atom_momenta[index].x = -abs(self._atom_momenta[index].x)
                     hit_counter += abs(2 * self._atom_momenta[index].x)
 
-            if abs(loc.y) > length / 2:
+            if abs(loc.y) > box.length() / 2:
                 if loc.y < 0:
                     self._atom_momenta[index].y = abs(self._atom_momenta[index].y)
                 else:
                     self._atom_momenta[index].y = -abs(self._atom_momenta[index].y)
                     hit_counter += abs(2 * self._atom_momenta[index].y)
 
-            if abs(loc.z) > length / 2:
+            if abs(loc.z) > box.length() / 2:
                 if loc.z < 0:
                     self._atom_momenta[index].z = abs(self._atom_momenta[index].z)
                 else:
@@ -191,6 +196,7 @@ class Gas:
             self._collide(ij[0], ij[1])
 
 gas = Gas()
+box = Box()
 
 deltav = 100  # binning for v histogram
 
@@ -248,7 +254,7 @@ while True:
 
     gas.update_with_timestep(dt)
     gas.update_momenta_of_colliding_atoms()
-    hitcounter += gas.count_cube_wall_collisions(L)
+    hitcounter += gas.count_collisions_with(box)
 
 
     if (tcounter == tcountMax):
