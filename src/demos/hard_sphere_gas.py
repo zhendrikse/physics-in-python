@@ -82,27 +82,100 @@ vert2.append([vector(-d, -d, d), vector(-d, d, d)])
 vert3.append([vector(d, -d, d), vector(d, d, d)])
 vert4.append([vector(d, -d, -d), vector(d, d, -d)])
 
-atoms = []
-atom_momenta = []
-atom_positions = []
-pavg = sqrt(2 * mass * 1.5 * k * T)  # average kinetic energy p**2/(2mass) = (3/2)kT
+class Gas:
+    def __init__(self, atom_mass=mass, number_of_atoms=Natoms):
+        self._mass = atom_mass
+        self._atoms = []
+        self._atom_momenta = []
+        self._atom_positions = []
+        self._average_kinetic_energy = sqrt(2 * atom_mass * 1.5 * k * T)  # average kinetic energy p**2/(2mass) = (3/2)kT
 
-for i in range(Natoms):
-    x = L * random() - L / 2
-    y = L * random() - L / 2
-    z = L * random() - L / 2
-    if i == 0:
-        atoms.append(sphere(pos=vector(x, y, z), radius=Ratom, color=color.cyan, make_trail=True, retain=100,
-                            trail_radius=0.3 * Ratom))
-    else:
-        atoms.append(sphere(pos=vector(x, y, z), radius=Ratom, color=gray))
-    atom_positions.append(vec(x, y, z))
-    theta = pi * random()
-    phi = 2 * pi * random()
-    px = pavg * sin(theta) * cos(phi)
-    py = pavg * sin(theta) * sin(phi)
-    pz = pavg * cos(theta)
-    atom_momenta.append(vector(px, py, pz))
+        for i in range(number_of_atoms):
+            x = L * random() - L / 2
+            y = L * random() - L / 2
+            z = L * random() - L / 2
+            atom_position = vec(x, y, z)
+            self._atom_positions.append(atom_position)
+
+            if i == 0:
+                self._atoms.append(sphere(pos=atom_position, radius=Ratom, color=color.cyan, make_trail=True, retain=100,
+                                    trail_radius=0.3 * Ratom))
+            else:
+                self._atoms.append(sphere(pos=atom_position, radius=Ratom, color=gray))
+
+            theta = pi * random()
+            phi = 2 * pi * random()
+            p_x = self._average_kinetic_energy * sin(theta) * cos(phi)
+            p_y = self._average_kinetic_energy * sin(theta) * sin(phi)
+            p_z = self._average_kinetic_energy * cos(theta)
+            self._atom_momenta.append(vector(p_x, p_y, p_z))
+
+    def average_kinetic_energy(self):
+        return self._average_kinetic_energy
+
+    def update_with_timestep(self, dt):
+        for i in range(len(self._atoms)):
+            self._atoms[i].pos = self._atom_positions[i] = self._atom_positions[i] + (self._atom_momenta[i] / self._mass) * dt
+
+    def _check_collisions(self):
+        hitlist = []
+        r2 = 2 * Ratom
+        r2 *= r2
+        for i in range(len(self._atoms)):
+            ai = self._atom_positions[i]
+            for j in range(i):
+                aj = self._atom_positions[j]
+                dr = ai - aj
+                if mag2(dr) < r2: hitlist.append([i, j])
+        return hitlist
+
+    def _collide(self, atom_index_1, atom_index_2):
+        total_momentum = atom_momenta[atom_index_1] + atom_momenta[atom_index_2]
+        posi = atom_positions[atom_index_1]
+        posj = atom_positions[atom_index_2]
+        velocity_i = atom_momenta[atom_index_1] / mass
+        velocity_j = atom_momenta[atom_index_2] / mass
+        vrel = velocity_j - velocity_i
+        a = vrel.mag2
+        if a == 0: return;  # exactly same velocities
+        rrel = posi - posj
+        if rrel.mag > Ratom: return  # one atom went all the way through another
+
+        # theta is the angle between vrel and rrel:
+        dx = dot(rrel, vrel.hat)  # rrel.mag*cos(theta)
+        dy = cross(rrel, vrel.hat).mag  # rrel.mag*sin(theta)
+        # alpha is the angle of the triangle composed of rrel, path of atom j, and a line
+        #   from the center of atom i to the center of atom j where atome j hits atom i:
+        alpha = asin(dy / (2 * Ratom))
+        d = (2 * Ratom) * cos(alpha) - dx  # distance traveled into the atom from first contact
+        deltat = d / vrel.mag  # time spent moving from first contact to position inside atom
+
+        posi = posi - velocity_i * deltat  # back up to contact configuration
+        posj = posj - velocity_j * deltat
+        total_mass = 2 * mass
+        pcmi = atom_momenta[atom_index_1] - total_momentum * mass / total_mass  # transform momenta to cm frame
+        pcmj = atom_momenta[atom_index_2] - total_momentum * mass / total_mass
+        rrel = norm(rrel)
+        pcmi = pcmi - 2 * pcmi.dot(rrel) * rrel  # bounce in cm frame
+        pcmj = pcmj - 2 * pcmj.dot(rrel) * rrel
+        atom_momenta[atom_index_1] = pcmi + total_momentum * mass / total_mass  # transform momenta back to lab frame
+        atom_momenta[atom_index_2] = pcmj + total_momentum * mass / total_mass
+        atom_positions[atom_index_1] = posi + (atom_momenta[atom_index_1] / mass) * deltat  # move forward deltat in time
+        atom_positions[atom_index_2] = posj + (atom_momenta[atom_index_2] / mass) * deltat
+        interchange(velocity_i.mag, atom_momenta[atom_index_1].mag / mass)
+        interchange(velocity_j.mag, atom_momenta[atom_index_2].mag / mass)
+
+    def update_momenta_of_colliding_atoms(self):
+        for ij in self._check_collisions():
+            self._collide(ij[0], ij[1])
+
+gas = Gas()
+
+atoms = gas._atoms
+atom_momenta = gas._atom_momenta
+atom_positions = gas._atom_positions
+average_kinetic_energy = sqrt(2 * mass * 1.5 * k * T)  # average kinetic energy p**2/(2mass) = (3/2)kT
+
 
 deltav = 100  # binning for v histogram
 
@@ -114,7 +187,7 @@ def barx(v):
 nhisto = int(4500 / deltav)
 histo = []
 for i in range(nhisto): histo.append(0.0)
-histo[barx(pavg / mass)] = Natoms
+histo[barx(average_kinetic_energy / mass)] = Natoms
 
 gg = graph(width=win, height=0.4 * win, xmax=3000, align='left',
            xtitle='speed, m/s', ytitle='Number of atoms', ymax=Natoms * deltav / 1000)
@@ -139,19 +212,6 @@ def interchange(v1, v2):  # remove from v1 bar, add to v2 bar
     histo[barx2] += 1
 
 
-def check_collisions():
-    hitlist = []
-    r2 = 2 * Ratom
-    r2 *= r2
-    for i in range(Natoms):
-        ai = atom_positions[i]
-        for j in range(i):
-            aj = atom_positions[j]
-            dr = ai - aj
-            if mag2(dr) < r2: hitlist.append([i, j])
-    return hitlist
-
-
 nhisto = 0  # number of histogram snapshots to average
 
 tcounter = 0
@@ -171,50 +231,8 @@ while True:
         vdist.data = accum
     nhisto += 1
 
-    # Update all positions
-    for i in range(Natoms): atoms[i].pos = atom_positions[i] = atom_positions[i] + (atom_momenta[i] / mass) * dt
-
-    # Check for collisions
-    hitlist = check_collisions()
-
-    # If any collisions took place, update momenta of the two atoms
-    for ij in hitlist:
-        i = ij[0]
-        j = ij[1]
-        ptot = atom_momenta[i] + atom_momenta[j]
-        posi = atom_positions[i]
-        posj = atom_positions[j]
-        vi = atom_momenta[i] / mass
-        vj = atom_momenta[j] / mass
-        vrel = vj - vi
-        a = vrel.mag2
-        if a == 0: continue;  # exactly same velocities
-        rrel = posi - posj
-        if rrel.mag > Ratom: continue  # one atom went all the way through another
-
-        # theta is the angle between vrel and rrel:
-        dx = dot(rrel, vrel.hat)  # rrel.mag*cos(theta)
-        dy = cross(rrel, vrel.hat).mag  # rrel.mag*sin(theta)
-        # alpha is the angle of the triangle composed of rrel, path of atom j, and a line
-        #   from the center of atom i to the center of atom j where atome j hits atom i:
-        alpha = asin(dy / (2 * Ratom))
-        d = (2 * Ratom) * cos(alpha) - dx  # distance traveled into the atom from first contact
-        deltat = d / vrel.mag  # time spent moving from first contact to position inside atom
-
-        posi = posi - vi * deltat  # back up to contact configuration
-        posj = posj - vj * deltat
-        mtot = 2 * mass
-        pcmi = atom_momenta[i] - ptot * mass / mtot  # transform momenta to cm frame
-        pcmj = atom_momenta[j] - ptot * mass / mtot
-        rrel = norm(rrel)
-        pcmi = pcmi - 2 * pcmi.dot(rrel) * rrel  # bounce in cm frame
-        pcmj = pcmj - 2 * pcmj.dot(rrel) * rrel
-        atom_momenta[i] = pcmi + ptot * mass / mtot  # transform momenta back to lab frame
-        atom_momenta[j] = pcmj + ptot * mass / mtot
-        atom_positions[i] = posi + (atom_momenta[i] / mass) * deltat  # move forward deltat in time
-        atom_positions[j] = posj + (atom_momenta[j] / mass) * deltat
-        interchange(vi.mag, atom_momenta[i].mag / mass)
-        interchange(vj.mag, atom_momenta[j].mag / mass)
+    gas.update_with_timestep(dt)
+    gas.update_momenta_of_colliding_atoms()
 
     for i in range(Natoms):
         loc = atom_positions[i]
