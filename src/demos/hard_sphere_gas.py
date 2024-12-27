@@ -2,18 +2,17 @@ from vpython import canvas, color, vector, vec, curve, random, sqrt, pi, sphere,
     gvbars, dot, cross, norm, asin, exp
 
 # Hard-sphere gas.
-
 # Bruce Sherwood
 
 #######################
 ### Rob Salgado modifications to calculate the pressure, appropriately scaled to represent the expected quantities in the ideal gas law.
+### Zeger Hendrikse refactoring to gas class
 ###
 
-RS_CubeEdgeInMeters = 1
+cube_edge_in_meters = 1
 RS_atomicMassNumberInKilograms = 4E-3
-RS_TempK = 300
-
-RS_Natoms = 200
+room_temperature_in_kelvin = 300
+total_number_of_atoms = 200
 
 ###
 RS_NatomsForCubicMeter = 200  # So that 200 particles (the default value of Natoms) represents the "number of particles in 1 m^3"
@@ -27,13 +26,7 @@ RS_RoomK = 300
 RS_MolesInCubicMeterRoom = (RS_Atm * 1) / (RS_UniversalGasConstant * RS_RoomK)
 RS_NatomsFactor = RS_Nav * RS_MolesInCubicMeterRoom / RS_NatomsForCubicMeter
 
-###
-###
-#######################
-
-win = 500
-
-Natoms = RS_Natoms  # change this to have more or fewer atoms
+Natoms = total_number_of_atoms  # change this to have more or fewer atoms
 
 RS_NrealAtoms = Natoms * RS_NatomsFactor
 RS_NrealMoles = RS_NrealAtoms / RS_Nav
@@ -42,21 +35,16 @@ print(RS_MolesInCubicMeterRoom, "moles in 1 cubic meter")
 print(RS_NrealAtoms, "atoms in 1 cubic meter")
 
 # Typical values
-L = RS_CubeEdgeInMeters  # container is a cube L on a side
+L = cube_edge_in_meters  # container is a cube L on a side
 gray = color.gray(0.7)  # color of edges of container
-mass = 4E-3 / 6E23  # helium mass
 mass = RS_atomicMassNumberInKilograms / RS_Nav  # helium mass
 
 Ratom = 0.03  # wildly exaggerated size of helium atom
-k = 1.4E-23  # Boltzmann constant
-
 k = RS_BoltzmannK  # Boltzmann constant
-
-T = 300  # around room temperature
-T = RS_TempK
+T = room_temperature_in_kelvin
 dt = 1E-5
 
-animation = canvas(width=win, height=win, align='left')
+animation = canvas(width=500, height=500, align='left')
 animation.range = L
 animation.title = 'A "hard-sphere" gas'
 s = """  Theoretical and averaged speed distributions (meters/sec).
@@ -83,8 +71,9 @@ vert3.append([vector(d, -d, d), vector(d, d, d)])
 vert4.append([vector(d, -d, -d), vector(d, d, -d)])
 
 class Gas:
-    def __init__(self, atom_mass=mass, number_of_atoms=Natoms):
+    def __init__(self, atom_mass=mass, atom_radius = Ratom, number_of_atoms=Natoms):
         self._mass = atom_mass
+        self._atom_radius = atom_radius
         self._atoms = []
         self._atom_momenta = []
         self._atom_positions = []
@@ -98,10 +87,10 @@ class Gas:
             self._atom_positions.append(atom_position)
 
             if i == 0:
-                self._atoms.append(sphere(pos=atom_position, radius=Ratom, color=color.cyan, make_trail=True, retain=100,
-                                    trail_radius=0.3 * Ratom))
+                self._atoms.append(sphere(pos=atom_position, radius=atom_radius, color=color.cyan, make_trail=True, retain=100,
+                                    trail_radius=0.3 * atom_radius))
             else:
-                self._atoms.append(sphere(pos=atom_position, radius=Ratom, color=gray))
+                self._atoms.append(sphere(pos=atom_position, radius=atom_radius, color=gray))
 
             theta = pi * random()
             phi = 2 * pi * random()
@@ -145,64 +134,63 @@ class Gas:
         return hit_counter
 
     def _check_collisions(self):
-        hitlist = []
-        r2 = 2 * Ratom
+        hit_list = []
+        r2 = 2 * self._atom_radius
         r2 *= r2
-        for i in range(len(self._atoms)):
-            ai = self._atom_positions[i]
-            for j in range(i):
-                aj = self._atom_positions[j]
-                dr = ai - aj
-                if mag2(dr) < r2: hitlist.append([i, j])
-        return hitlist
+        for index in range(len(self._atoms)):
+            for j in range(index):
+                distance = self._atom_positions[index] - self._atom_positions[j]
+                if mag2(distance) < r2:
+                    hit_list.append([index, j])
+        return hit_list
 
     def _collide(self, atom_index_1, atom_index_2):
-        total_momentum = atom_momenta[atom_index_1] + atom_momenta[atom_index_2]
-        posi = atom_positions[atom_index_1]
-        posj = atom_positions[atom_index_2]
-        velocity_i = atom_momenta[atom_index_1] / mass
-        velocity_j = atom_momenta[atom_index_2] / mass
+        total_momentum = self._atom_momenta[atom_index_1] + self._atom_momenta[atom_index_2]
+        position_i = self._atom_positions[atom_index_1]
+        position_j = self._atom_positions[atom_index_2]
+        velocity_i = self._atom_momenta[atom_index_1] / mass
+        velocity_j = self._atom_momenta[atom_index_2] / mass
         vrel = velocity_j - velocity_i
         a = vrel.mag2
-        if a == 0: return;  # exactly same velocities
-        rrel = posi - posj
-        if rrel.mag > Ratom: return  # one atom went all the way through another
+        if a == 0:
+            return  # exactly same velocities
+        rrel = position_i - position_j
+        if rrel.mag > self._atom_radius:
+            return  # one atom went all the way through another
 
         # theta is the angle between vrel and rrel:
         dx = dot(rrel, vrel.hat)  # rrel.mag*cos(theta)
         dy = cross(rrel, vrel.hat).mag  # rrel.mag*sin(theta)
         # alpha is the angle of the triangle composed of rrel, path of atom j, and a line
         #   from the center of atom i to the center of atom j where atome j hits atom i:
-        alpha = asin(dy / (2 * Ratom))
-        d = (2 * Ratom) * cos(alpha) - dx  # distance traveled into the atom from first contact
+        alpha = asin(dy / (2 * self._atom_radius))
+        d = (2 * self._atom_radius) * cos(alpha) - dx  # distance traveled into the atom from first contact
         deltat = d / vrel.mag  # time spent moving from first contact to position inside atom
 
-        posi = posi - velocity_i * deltat  # back up to contact configuration
-        posj = posj - velocity_j * deltat
+        position_i = position_i - velocity_i * deltat  # back up to contact configuration
+        position_j = position_j - velocity_j * deltat
         total_mass = 2 * mass
-        pcmi = atom_momenta[atom_index_1] - total_momentum * mass / total_mass  # transform momenta to cm frame
-        pcmj = atom_momenta[atom_index_2] - total_momentum * mass / total_mass
+
+        # transform momenta to cm frame
+        pcmi = self._atom_momenta[atom_index_1] - total_momentum * mass / total_mass
+        pcmj = self._atom_momenta[atom_index_2] - total_momentum * mass / total_mass
         rrel = norm(rrel)
-        pcmi = pcmi - 2 * pcmi.dot(rrel) * rrel  # bounce in cm frame
+
+        # bounce in cm frame
+        pcmi = pcmi - 2 * pcmi.dot(rrel) * rrel
         pcmj = pcmj - 2 * pcmj.dot(rrel) * rrel
-        atom_momenta[atom_index_1] = pcmi + total_momentum * mass / total_mass  # transform momenta back to lab frame
-        atom_momenta[atom_index_2] = pcmj + total_momentum * mass / total_mass
-        atom_positions[atom_index_1] = posi + (atom_momenta[atom_index_1] / mass) * deltat  # move forward deltat in time
-        atom_positions[atom_index_2] = posj + (atom_momenta[atom_index_2] / mass) * deltat
-        interchange(velocity_i.mag, atom_momenta[atom_index_1].mag / mass)
-        interchange(velocity_j.mag, atom_momenta[atom_index_2].mag / mass)
+        self._atom_momenta[atom_index_1] = pcmi + total_momentum * mass / total_mass  # transform momenta back to lab frame
+        self._atom_momenta[atom_index_2] = pcmj + total_momentum * mass / total_mass
+        self._atom_positions[atom_index_1] = position_i + (self._atom_momenta[atom_index_1] / mass) * deltat  # move forward deltat in time
+        self._atom_positions[atom_index_2] = position_j + (self._atom_momenta[atom_index_2] / mass) * deltat
+        interchange(velocity_i.mag, self._atom_momenta[atom_index_1].mag / mass)
+        interchange(velocity_j.mag, self._atom_momenta[atom_index_2].mag / mass)
 
     def update_momenta_of_colliding_atoms(self):
         for ij in self._check_collisions():
             self._collide(ij[0], ij[1])
 
 gas = Gas()
-
-atoms = gas._atoms
-atom_momenta = gas._atom_momenta
-atom_positions = gas._atom_positions
-average_kinetic_energy = sqrt(2 * mass * 1.5 * k * T)  # average kinetic energy p**2/(2mass) = (3/2)kT
-
 
 deltav = 100  # binning for v histogram
 
@@ -216,7 +204,7 @@ histo = []
 for i in range(nhisto): histo.append(0.0)
 histo[barx(average_kinetic_energy / mass)] = Natoms
 
-gg = graph(width=win, height=0.4 * win, xmax=3000, align='left',
+gg = graph(width=500, height=0.4 * 500, xmax=3000, align='left',
            xtitle='speed, m/s', ytitle='Number of atoms', ymax=Natoms * deltav / 1000)
 
 theory = gcurve(color=color.blue, width=2)
