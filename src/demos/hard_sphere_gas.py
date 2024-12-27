@@ -207,7 +207,8 @@ def barx(v):
 
 nhisto = int(4500 / deltav)
 histo = []
-for i in range(nhisto): histo.append(0.0)
+for i in range(nhisto):
+    histo.append(0.0)
 histo[barx(gas.average_kinetic_energy() / mass)] = Natoms
 
 gg = graph(width=500, height=0.4 * 500, xmax=3000, align='left',
@@ -220,48 +221,50 @@ for v in range(0, 3001 + dv, dv):  # theoretical prediction
         -0.5 * mass * (v ** 2) / (k * T)) * (v ** 2) * dv)
 
 accum = []
-for i in range(int(3000 / deltav)): accum.append([deltav * (i + .5), 0])
+for i in range(int(3000 / deltav)):
+    accum.append([deltav * (i + .5), 0])
 vdist = gvbars(color=color.red, delta=deltav)
 
 
 def interchange(v1, v2):  # remove from v1 bar, add to v2 bar
     barx1 = barx(v1)
     barx2 = barx(v2)
-    if barx1 == barx2:  return
-    if barx1 >= len(histo) or barx2 >= len(histo): return
+    if barx1 == barx2:
+        return
+    if barx1 >= len(histo) or barx2 >= len(histo):
+        return
     histo[barx1] -= 1
     histo[barx2] += 1
 
 
 nhisto = 0  # number of histogram snapshots to average
-
-tcounter = 0
-tcountMax = 1000  ## sample size
-hitcounter = 0
+time_counter = 0
+sample_size = 1000
+hit_counter = 0
 
 print("N,T,V,P, PV/(NT)")
 
 while True:
     rate(300)
 
-    tcounter += 1
+    time_counter += 1
 
     # Accumulate and average histogram snapshots
-    for i in range(len(accum)): accum[i][1] = (nhisto * accum[i][1] + histo[i]) / (nhisto + 1)
+    for i in range(len(accum)):
+        accum[i][1] = (nhisto * accum[i][1] + histo[i]) / (nhisto + 1)
     if nhisto % 10 == 0:
         vdist.data = accum
     nhisto += 1
 
     gas.update_with_timestep(dt)
     gas.update_momenta_of_colliding_atoms()
-    hitcounter += gas.count_collisions_with(box)
+    hit_counter += gas.count_collisions_with(box)
 
-
-    if (tcounter == tcountMax):
+    if time_counter == sample_size:
         #        P=(1/2)*(1/0.02242)*RS_NatomsFactor*(hitcounter/L**2)/(dt*tcountMax)
-        P = (1 / 3) * RS_NatomsFactor * (hitcounter / L ** 2) / (dt * tcountMax)
-        tcounter = 0
-        hitcounter = 0
+        P = (1 / 3) * RS_NatomsFactor * (hit_counter / L ** 2) / (dt * sample_size)
+        time_counter = 0
+        hit_counter = 0
 
-        print("[", Natoms, "(", RS_NrealMoles, ")", ",", T, ",", L ** 3, ",", P, "(", P / RS_Atm, ")", ",",
+        print("[", Natoms, "(", round(RS_NrealMoles, 4), ")", ",", T, ",", L ** 3, ",", round(P, 4), "(", round(P / RS_Atm, 4), ")", ",",
               P * L ** 3 / (RS_NrealAtoms * T), "]")
