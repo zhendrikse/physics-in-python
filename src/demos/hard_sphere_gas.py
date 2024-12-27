@@ -202,7 +202,7 @@ def barx(v):
 nhisto = int(4500 / deltav)
 histo = []
 for i in range(nhisto): histo.append(0.0)
-histo[barx(average_kinetic_energy / mass)] = Natoms
+histo[barx(gas.average_kinetic_energy() / mass)] = Natoms
 
 gg = graph(width=500, height=0.4 * 500, xmax=3000, align='left',
            xtitle='speed, m/s', ytitle='Number of atoms', ymax=Natoms * deltav / 1000)
