@@ -74,7 +74,7 @@ class SpinLattice:
             for column in range(self._size):
                 energy += self.energy(row, column) / (self._size * self._size)
 
-        return sum([self.energy(i, j) / (self._size * self._size) for i in range(self._size) for j in range(self._size)])
+        return energy
 
     def reset(self):
         for row in range(self._size):
@@ -107,3 +107,4 @@ for temperature in arange(0.1, 5, 0.1):
         spins.reset()
 
     mag_curve.plot(temperature, sum(mag[RELAX_SWEEPS:]) / sweeps)
+
