@@ -1,6 +1,4 @@
-Web
-VPython
-3.2
+# Web VPython 3.2
 
 #
 # Original: https://bphilhour.trinket.io/physics-through-glowscript-an-introductory-course#/1-introduction-objects-parameters-and-the-3d-environment/optional-scale-models

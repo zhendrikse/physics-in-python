@@ -52,42 +52,18 @@ B.append(arrow(pos=vector(0, -0.25, -2), axis=vector(0, 0, 1e-3), shaftwidth=0.0
 
 N = 8
 dBdt = 0.2
-E = []
+electric_field_arrows = []
 Ebox = []
 
-for z in [0]:
-    for r in [0.5]:
+for z in [0, -0.5, 0.5, -1, 1]:
+    for r in [0.5, 1, 1.5]:
         for i in arange(0, N):
             theta = 2. * pi * i / N
             theta_hat = vector(-sin(theta), cos(theta), 0)
-            Efield = -dBdt * theta_hat / r
-            A = arrow(pos=vector(r * cos(theta), r * sin(theta), z), axis=Efield, shaftwidth=0.04, fixedwidth=1,
-                      color=color.blue)
-            E.append(A)
-            Ebox.append(box(pos=A.pos + A.axis / 4., axis=A.axis, length=mag(A.axis) / 2., height=0.04, width=0.04,
-                            color=color.blue))
-    for r in [1, 1.5]:
-        for i in arange(0, N):
-            theta = 2. * pi * i / N
-            theta_hat = vector(-sin(theta), cos(theta), 0)
-            Efield = -dBdt * theta_hat / r
-            A = arrow(pos=vector(r * cos(theta), r * sin(theta), z), axis=Efield, shaftwidth=0.04, fixedwidth=1,
-                      color=color.blue)
-            E.append(A)
-            Ebox.append(box(pos=A.pos + A.axis / 4., axis=A.axis, length=mag(A.axis) / 2., height=0.04, width=0.04,
-                            color=color.blue))
-
-for z in [-0.5, 0.5, -1, 1]:
-    for r in arange(.5, 1.5, .5):
-        for i in arange(0, N):
-            theta = 2. * pi * i / N
-            theta_hat = vector(-sin(theta), cos(theta), 0)
-            Efield = -dBdt * theta_hat / r
-            A = arrow(pos=vector(r * cos(theta), r * sin(theta), z), axis=Efield, shaftwidth=0.04, fixedwidth=1,
-                      color=color.blue)
-            E.append(A)
-            Ebox.append(box(pos=A.pos + A.axis / 4., axis=A.axis, length=mag(A.axis) / 2., height=0.04, width=0.04,
-                            color=color.blue))
+            electric_field = -dBdt * theta_hat / r
+            A = arrow(pos=vector(r * cos(theta), r * sin(theta), z), axis=electric_field, shaftwidth=0.04, fixedwidth=1, color=color.blue)
+            electric_field_arrows.append(A)
+            Ebox.append(box(pos=A.pos + A.axis / 4., axis=A.axis, length=mag(A.axis) / 2., height=0.04, width=0.04, color=color.blue))
 
 hcolor = Ecolor[2]
 
@@ -97,7 +73,7 @@ for b in B:
                     # length=dBdt,
                     fixedwidth=1, color=hcolor, shaftwidth=0.07, headwidth=0.14, visible=showFaraday))
 
-Eloop_rad = mag(E[0].pos)
+Eloop_rad = mag(electric_field_arrows[0].pos)
 pos = [Eloop_rad * vector(cos(2. * pi * n / 40.), sin(2. * pi * n / 40.), 0) for n in range(40)]
 FaradayLoop = curve(color=hcolor, pos=pos, visible=False)
 
@@ -122,20 +98,20 @@ def toggle_show_faraday(show=True):
 
     if show == 1:
         for l in range(0, N):
-            E[l].color = hcolor
+            electric_field_arrows[l].color = hcolor
             Ebox[l].color = hcolor
     else:
         for l in range(0, N):
-            E[l].color = color.blue
+            electric_field_arrows[l].color = color.blue
             Ebox[l].color = color.blue
 
 
 def toggle_show_fields(show=0):
-    for i in range(N, len(E)):
-        E[i].color = Ecolor[show]
+    for i in range(N, len(electric_field_arrows)):
+        electric_field_arrows[i].color = Ecolor[show]
         Ebox[i].color = Ecolor[show]
     for i in range(1, 4 * N + 1):
-        E[-i].visible = (1 - show)
+        electric_field_arrows[-i].visible = (1 - show)
         Ebox[-i].visible = (1 - show)
 
 
@@ -144,11 +120,11 @@ def toggle_color_scheme(color_scheme=0):
     Ecolor[1] = colorEdimmed[color_scheme]
     scene.background = colorBackground[color_scheme]
 
-    for i in range(N, len(E)):
-        E[i].color = Ecolor[dimFields]
+    for i in range(N, len(electric_field_arrows)):
+        electric_field_arrows[i].color = Ecolor[dimFields]
         Ebox[i].color = Ecolor[dimFields]
     for i in range(1, 4 * N + 1):
-        E[-i].visible = (1 - dimFields)
+        electric_field_arrows[-i].visible = (1 - dimFields)
         Ebox[-i].visible = (1 - dimFields)
 
 
@@ -178,8 +154,8 @@ class KeyboardEventProcessor:
 
     @staticmethod
     def on_key_press(key):
-        if key == 'c':
-            scene.capture("faradays_law", capture_labels=["aap", "noot"])
+        if key == 's':
+            scene.capture("faradays_law")
         if key == 'f':
             toggle_show_faraday(keyboard_event_processor.toggle_show_faraday())
         if key == 'd':

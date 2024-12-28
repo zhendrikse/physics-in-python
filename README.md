@@ -44,6 +44,20 @@ by click the mouse.
 - Code in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Pointchargefield)
 - Code base [on Trinket](https://trinket.io/glowscript/96da4eb68335)
 
+### Interactive visualization of Faraday's law
+
+This code visualizes Faraday's law by simulating an electric current (of electric charges)
+running through a wire. 
+
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Faradayslaw">
+  <img alt="Faradays law" width="50%" height="50%" src="./src/demos/images/faradays_law.png"/>
+</a>
+
+- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/faradays_law) 
+- Code in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Faradayslaw)
+- Code base [on Trinket](https://trinket.io/library/trinkets/d3934e117c2e)
+
+
 ### Visualizing [electromagnetic waves](https://trinket.io/library/trinkets/b8d62b38e852)
 
 <a href="https://zegerh-6085.trinket.io/sites/electromagnetic_wave">
@@ -54,12 +68,6 @@ by click the mouse.
 
 <a href="https://zegerh-6085.trinket.io/sites/moving_charge">
   <img alt="Particle in electric field" width="50%" height="50%" src="./src/demos/images/particle_in_electric_field.png"/></br>
-</a>
-
-### [Faraday's law](https://trinket.io/library/trinkets/d3934e117c2e) interactive visualization
-
-<a href="https://zegerh-6085.trinket.io/sites/faradays_law">
-  <img alt="Faradays law" width="50%" height="50%" src="./src/demos/images/faradays_law.png"/>
 </a>
 
 
