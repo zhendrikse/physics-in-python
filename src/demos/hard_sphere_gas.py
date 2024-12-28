@@ -1,48 +1,36 @@
 from vpython import canvas, color, vector, vec, curve, random, sqrt, pi, sphere, cos, sin, rate, mag2, graph, gcurve, \
     gvbars, dot, cross, norm, asin, exp
 
+#######################
 # Hard-sphere gas.
 # Bruce Sherwood
-
-#######################
 ### Rob Salgado modifications to calculate the pressure, appropriately scaled to represent the expected quantities in the ideal gas law.
 ### Zeger Hendrikse refactoring to gas class
 ###
 
-cube_edge_in_meters = 1
-RS_atomicMassNumberInKilograms = 4E-3
-room_temperature_in_kelvin = 300
+L = cube_edge_in_meters = 1
+atomic_mass = 4E-3
+T = room_temperature_in_kelvin = 300
 total_number_of_atoms = 200
+atoms_per_cubic_meter = 200  # So that 200 particles represents the "number of particles in 1 m^3"
 
-###
-RS_NatomsForCubicMeter = 200  # So that 200 particles (the default value of Natoms) represents the "number of particles in 1 m^3"
+avogadro_number = 6.022E23
+size_helium_atom = 101325
+universal_gas_constant = 8.314
+k = boltzmann_constant = 1.3806E-23  # Boltzmann constant
 
-RS_Nav = 6.022E23
-RS_Atm = 101325
-RS_UniversalGasConstant = 8.314
-RS_BoltzmannK = 1.3806E-23  # Boltzmann constant
-RS_RoomK = 300
+moles_per_cubic_meter_at_room_temp = (size_helium_atom * 1) / (universal_gas_constant * room_temperature_in_kelvin)
+conversion_factor_to_real_number_of_atoms = avogadro_number * moles_per_cubic_meter_at_room_temp / atoms_per_cubic_meter
 
-RS_MolesInCubicMeterRoom = (RS_Atm * 1) / (RS_UniversalGasConstant * RS_RoomK)
-RS_NatomsFactor = RS_Nav * RS_MolesInCubicMeterRoom / RS_NatomsForCubicMeter
+real_number_of_atoms = total_number_of_atoms * conversion_factor_to_real_number_of_atoms
+real_mole_amount = real_number_of_atoms / avogadro_number
 
-Natoms = total_number_of_atoms  # change this to have more or fewer atoms
-
-RS_NrealAtoms = Natoms * RS_NatomsFactor
-RS_NrealMoles = RS_NrealAtoms / RS_Nav
-
-print(RS_MolesInCubicMeterRoom, "moles in 1 cubic meter")
-print(RS_NrealAtoms, "atoms in 1 cubic meter")
+print(moles_per_cubic_meter_at_room_temp, "moles in 1 cubic meter")
+print(real_number_of_atoms, "atoms in 1 cubic meter")
 
 # Typical values
-L = cube_edge_in_meters  # container is a cube L on a side
 gray = color.gray(0.7)  # color of edges of container
-mass = RS_atomicMassNumberInKilograms / RS_Nav  # helium mass
-
-Ratom = 0.03  # wildly exaggerated size of helium atom
-k = RS_BoltzmannK  # Boltzmann constant
-T = room_temperature_in_kelvin
-dt = 1E-5
+mass = atomic_mass / avogadro_number  # helium mass
 
 animation = canvas(width=500, height=500, align='left')
 animation.range = L
@@ -55,14 +43,18 @@ s = """  Theoretical and averaged speed distributions (meters/sec).
 """
 animation.caption = s
 
+
 class Box:
-    def __init__(self, length=L, gas_atom_radius=Ratom, vertex_radius = 0.005):
+    def __init__(self, length=L, gas_atom_radius=0.03, vertex_radius=0.005):
         self._length = length
         dist = length / 2 + gas_atom_radius
         box_bottom = curve(color=gray, radius=vertex_radius)
-        box_bottom.append([vector(-dist, -dist, -dist), vector(-dist, -dist, dist), vector(dist, -dist, dist), vector(dist, -dist, -dist), vector(-dist, -dist, -dist)])
+        box_bottom.append([vector(-dist, -dist, -dist), vector(-dist, -dist, dist), vector(dist, -dist, dist),
+                           vector(dist, -dist, -dist), vector(-dist, -dist, -dist)])
         box_top = curve(color=gray, radius=vertex_radius)
-        box_top.append([vector(-dist, dist, -dist), vector(-dist, dist, dist), vector(dist, dist, dist), vector(dist, dist, -dist), vector(-dist, dist, -dist)])
+        box_top.append(
+            [vector(-dist, dist, -dist), vector(-dist, dist, dist), vector(dist, dist, dist), vector(dist, dist, -dist),
+             vector(-dist, dist, -dist)])
         vert1 = curve(color=gray, radius=vertex_radius)
         vert2 = curve(color=gray, radius=vertex_radius)
         vert3 = curve(color=gray, radius=vertex_radius)
@@ -75,27 +67,32 @@ class Box:
     def length(self):
         return self._length
 
+
 class Gas:
-    def __init__(self, atom_mass=mass, atom_radius = Ratom, number_of_atoms=Natoms):
+    def __init__(self, atom_mass=mass, atom_radius=0.03, number_of_atoms=200):
         self._mass = atom_mass
+        self._number_of_atoms = number_of_atoms
         self._atom_radius = atom_radius
         self._atoms = []
         self._atom_momenta = []
         self._atom_positions = []
-        self._average_kinetic_energy = sqrt(2 * atom_mass * 1.5 * k * T)  # average kinetic energy p**2/(2mass) = (3/2)kT
+        self._average_kinetic_energy = sqrt(
+            2 * atom_mass * 1.5 * k * T)  # average kinetic energy p**2/(2mass) = (3/2)kT
 
-        for i in range(number_of_atoms):
-            x = L * random() - L / 2
-            y = L * random() - L / 2
-            z = L * random() - L / 2
+    def is_confined_to_a(self, cube):
+        for i in range(self._number_of_atoms):
+            x = cube.length() * random() - cube.length() / 2
+            y = cube.length() * random() - cube.length() / 2
+            z = cube.length() * random() - cube.length() / 2
             atom_position = vec(x, y, z)
             self._atom_positions.append(atom_position)
 
             if i == 0:
-                self._atoms.append(sphere(pos=atom_position, radius=atom_radius, color=color.cyan, make_trail=True, retain=100,
-                                    trail_radius=0.3 * atom_radius))
+                self._atoms.append(
+                    sphere(pos=atom_position, radius=self._atom_radius, color=color.cyan, make_trail=True, retain=100,
+                           trail_radius=0.3 * self._atom_radius))
             else:
-                self._atoms.append(sphere(pos=atom_position, radius=atom_radius, color=gray))
+                self._atoms.append(sphere(pos=atom_position, radius=self._atom_radius, color=gray))
 
             theta = pi * random()
             phi = 2 * pi * random()
@@ -109,27 +106,28 @@ class Gas:
 
     def update_with_timestep(self, dt):
         for i in range(len(self._atoms)):
-            self._atoms[i].pos = self._atom_positions[i] = self._atom_positions[i] + (self._atom_momenta[i] / self._mass) * dt
+            self._atoms[i].pos = self._atom_positions[i] = self._atom_positions[i] + (
+                        self._atom_momenta[i] / self._mass) * dt
 
-    def count_collisions_with(self, box):
+    def count_collisions_with(self, cube):
         hit_counter = 0
         for index in range(len(self._atoms)):
             loc = self._atom_positions[index]
-            if abs(loc.x) > box.length() / 2:
+            if abs(loc.x) > cube.length() / 2:
                 if loc.x < 0:
                     self._atom_momenta[index].x = abs(self._atom_momenta[index].x)
                 else:
                     self._atom_momenta[index].x = -abs(self._atom_momenta[index].x)
                     hit_counter += abs(2 * self._atom_momenta[index].x)
 
-            if abs(loc.y) > box.length() / 2:
+            if abs(loc.y) > cube.length() / 2:
                 if loc.y < 0:
                     self._atom_momenta[index].y = abs(self._atom_momenta[index].y)
                 else:
                     self._atom_momenta[index].y = -abs(self._atom_momenta[index].y)
                     hit_counter += abs(2 * self._atom_momenta[index].y)
 
-            if abs(loc.z) > box.length() / 2:
+            if abs(loc.z) > cube.length() / 2:
                 if loc.z < 0:
                     self._atom_momenta[index].z = abs(self._atom_momenta[index].z)
                 else:
@@ -155,22 +153,23 @@ class Gas:
         position_j = self._atom_positions[atom_index_2]
         velocity_i = self._atom_momenta[atom_index_1] / mass
         velocity_j = self._atom_momenta[atom_index_2] / mass
-        vrel = velocity_j - velocity_i
-        a = vrel.mag2
-        if a == 0:
-            return  # exactly same velocities
-        rrel = position_i - position_j
-        if rrel.mag > self._atom_radius:
+
+        difference_in_velocity = velocity_j - velocity_i
+        if difference_in_velocity.mag2 == 0:
+            return
+
+        atoms_distance = position_i - position_j
+        if atoms_distance.mag > self._atom_radius:
             return  # one atom went all the way through another
 
-        # theta is the angle between vrel and rrel:
-        dx = dot(rrel, vrel.hat)  # rrel.mag*cos(theta)
-        dy = cross(rrel, vrel.hat).mag  # rrel.mag*sin(theta)
-        # alpha is the angle of the triangle composed of rrel, path of atom j, and a line
-        #   from the center of atom i to the center of atom j where atome j hits atom i:
+        # theta is the angle between difference_in_velocity and atoms_distance:
+        dx = dot(atoms_distance, difference_in_velocity.hat)  # atoms_distance.mag*cos(theta)
+        dy = cross(atoms_distance, difference_in_velocity.hat).mag  # atoms_distance.mag*sin(theta)
+        # alpha is the angle of the triangle composed of atoms_distance, path of atom j, and a line
+        #   from the center of atom i to the center of atom j where atoms_distance j hits atom i:
         alpha = asin(dy / (2 * self._atom_radius))
-        d = (2 * self._atom_radius) * cos(alpha) - dx  # distance traveled into the atom from first contact
-        deltat = d / vrel.mag  # time spent moving from first contact to position inside atom
+        d = (2 * self._atom_radius) * cos(alpha) - dx  # atoms_distance traveled into the atom from first contact
+        deltat = d / difference_in_velocity.mag  # time spent moving from first contact to position inside atom
 
         position_i = position_i - velocity_i * deltat  # back up to contact configuration
         position_j = position_j - velocity_j * deltat
@@ -179,70 +178,70 @@ class Gas:
         # transform momenta to cm frame
         pcmi = self._atom_momenta[atom_index_1] - total_momentum * mass / total_mass
         pcmj = self._atom_momenta[atom_index_2] - total_momentum * mass / total_mass
-        rrel = norm(rrel)
 
         # bounce in cm frame
-        pcmi = pcmi - 2 * pcmi.dot(rrel) * rrel
-        pcmj = pcmj - 2 * pcmj.dot(rrel) * rrel
-        self._atom_momenta[atom_index_1] = pcmi + total_momentum * mass / total_mass  # transform momenta back to lab frame
+        pcmi = pcmi - 2 * pcmi.dot(norm(atoms_distance)) * norm(atoms_distance)
+        pcmj = pcmj - 2 * pcmj.dot(norm(atoms_distance)) * norm(atoms_distance)
+        self._atom_momenta[
+            atom_index_1] = pcmi + total_momentum * mass / total_mass  # transform momenta back to lab frame
         self._atom_momenta[atom_index_2] = pcmj + total_momentum * mass / total_mass
-        self._atom_positions[atom_index_1] = position_i + (self._atom_momenta[atom_index_1] / mass) * deltat  # move forward deltat in time
+        self._atom_positions[atom_index_1] = position_i + (
+                    self._atom_momenta[atom_index_1] / mass) * deltat  # move forward deltat in time
         self._atom_positions[atom_index_2] = position_j + (self._atom_momenta[atom_index_2] / mass) * deltat
-        interchange(velocity_i.mag, self._atom_momenta[atom_index_1].mag / mass)
-        interchange(velocity_j.mag, self._atom_momenta[atom_index_2].mag / mass)
+        swap_between_bins(velocity_i.mag, self._atom_momenta[atom_index_1].mag / mass)
+        swap_between_bins(velocity_j.mag, self._atom_momenta[atom_index_2].mag / mass)
 
     def update_momenta_of_colliding_atoms(self):
         for ij in self._check_collisions():
             self._collide(ij[0], ij[1])
 
-gas = Gas()
+
 box = Box()
+gas = Gas(number_of_atoms=total_number_of_atoms)
+gas.is_confined_to_a(box)
 
-deltav = 100  # binning for v histogram
+velocity_binning = 100  # binning for velocity histogram
+def bin_number_of(velocity):
+    return int(velocity / velocity_binning)  # index into bars array
 
 
-def barx(v):
-    return int(v / deltav)  # index into bars array
-
-
-nhisto = int(4500 / deltav)
-histo = []
-for i in range(nhisto):
-    histo.append(0.0)
-histo[barx(gas.average_kinetic_energy() / mass)] = Natoms
+total_bins = int(4500 / velocity_binning)
+histogram = [0.0] * total_bins
+histogram[bin_number_of(gas.average_kinetic_energy() / mass)] = total_number_of_atoms
 
 gg = graph(width=500, height=0.4 * 500, xmax=3000, align='left',
-           xtitle='speed, m/s', ytitle='Number of atoms', ymax=Natoms * deltav / 1000)
+           xtitle='speed, m/s', ytitle='Number of atoms', ymax=total_number_of_atoms * velocity_binning / 1000)
 
-theory = gcurve(color=color.blue, width=2)
+theoretical_curve = gcurve(color=color.blue, width=2)
 dv = 10
 for v in range(0, 3001 + dv, dv):  # theoretical prediction
-    theory.plot(v, (deltav / dv) * Natoms * 4 * pi * ((mass / (2 * pi * k * T)) ** 1.5) * exp(
+    theoretical_curve.plot(v, (velocity_binning / dv) * total_number_of_atoms * 4 * pi * ((mass / (2 * pi * k * T)) ** 1.5) * exp(
         -0.5 * mass * (v ** 2) / (k * T)) * (v ** 2) * dv)
 
 accum = []
-for i in range(int(3000 / deltav)):
-    accum.append([deltav * (i + .5), 0])
-vdist = gvbars(color=color.red, delta=deltav)
+for i in range(int(3000 / velocity_binning)):
+    accum.append([velocity_binning * (i + .5), 0])
+vdist = gvbars(color=color.red, delta=velocity_binning)
 
 
-def interchange(v1, v2):  # remove from v1 bar, add to v2 bar
-    barx1 = barx(v1)
-    barx2 = barx(v2)
-    if barx1 == barx2:
+def swap_between_bins(velocity_1, velocity_2):  # remove from v1 bar, add to v2 bar
+    bin_1 = bin_number_of(velocity_1)
+    bin_2 = bin_number_of(velocity_2)
+    if bin_1 == bin_2:
         return
-    if barx1 >= len(histo) or barx2 >= len(histo):
+    if bin_1 >= len(histogram) or bin_2 >= len(histogram):
         return
-    histo[barx1] -= 1
-    histo[barx2] += 1
+    histogram[bin_1] -= 1
+    histogram[bin_2] += 1
 
 
-nhisto = 0  # number of histogram snapshots to average
+total_bins = 0  # number of histogram snapshots to average
 time_counter = 0
 sample_size = 1000
 hit_counter = 0
 
 print("N,T,V,P, PV/(NT)")
+dt = 1E-5
 
 while True:
     rate(300)
@@ -251,10 +250,10 @@ while True:
 
     # Accumulate and average histogram snapshots
     for i in range(len(accum)):
-        accum[i][1] = (nhisto * accum[i][1] + histo[i]) / (nhisto + 1)
-    if nhisto % 10 == 0:
+        accum[i][1] = (total_bins * accum[i][1] + histogram[i]) / (total_bins + 1)
+    if total_bins % 10 == 0:
         vdist.data = accum
-    nhisto += 1
+    total_bins += 1
 
     gas.update_with_timestep(dt)
     gas.update_momenta_of_colliding_atoms()
@@ -262,9 +261,10 @@ while True:
 
     if time_counter == sample_size:
         #        P=(1/2)*(1/0.02242)*RS_NatomsFactor*(hitcounter/L**2)/(dt*tcountMax)
-        P = (1 / 3) * RS_NatomsFactor * (hit_counter / L ** 2) / (dt * sample_size)
+        P = (1 / 3) * conversion_factor_to_real_number_of_atoms * (hit_counter / L ** 2) / (dt * sample_size)
         time_counter = 0
         hit_counter = 0
 
-        print("[", Natoms, "(", round(RS_NrealMoles, 4), ")", ",", T, ",", L ** 3, ",", round(P, 4), "(", round(P / RS_Atm, 4), ")", ",",
-              P * L ** 3 / (RS_NrealAtoms * T), "]")
+        print("[", total_number_of_atoms, "(", round(real_mole_amount, 4), ")", ",", T, ",", L ** 3, ",", round(P, 4), "(",
+              round(P / size_helium_atom, 4), ")", ",",
+              P * L ** 3 / (real_number_of_atoms * T), "]")
