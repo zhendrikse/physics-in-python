@@ -36,8 +36,6 @@ by click the mouse.
 This code visualizes the electric field around a dipole. You may zoom in at any point 
 by click the mouse.
 
-[Electric field of point charge]()
-
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Pointchargefield">
   <img alt="Electric field of point charge" width="50%" height="50%" src="./src/demos/images/point_charge.png"/>
 </a>
