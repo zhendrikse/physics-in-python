@@ -15,7 +15,7 @@ The graphics library used is [VPython](https://vpython.org/).
 
 The code pertaining to the demos in this section is available under the 
 [electromagnetism tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/)
-tab on [glowscript.org](https://glowscript.org).
+on [glowscript.org](https://glowscript.org).
 
 ### Electric field of a dipole
 
@@ -71,7 +71,6 @@ The charge that normally resides in the nucleus is evenly spread out across the 
 - Code in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedring)
 - Code base [on Trinket](https://trinket.io/library/trinkets/1983b9c1dc58)
 
-
 ### Visualizing [electromagnetic waves](https://trinket.io/library/trinkets/b8d62b38e852)
 
 <a href="https://zegerh-6085.trinket.io/sites/electromagnetic_wave">
@@ -87,11 +86,22 @@ The charge that normally resides in the nucleus is evenly spread out across the 
 
 ## Special relativity &mdash; space-time visualization
 
-### [Galilean space-time](https://trinket.io/library/trinkets/6499b8e78c27)
+The code pertaining to the demos in this section is available under the 
+[relativity tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Relativity/)
+on [glowscript.org](https://glowscript.org).
 
-<a href="https://zegerh-6085.trinket.io/sites/galileo_space_time">
+### Galilean transformation of relative motions in Euclidean plane
+
+Before diving into (special) relativity, let's first get acquainted with 
+the so-called Galilean transformation.
+
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Relativity/program/Glalileantransformation">
   <img alt="Galilean space-time" width="50%" height="50%" src="./src/demos/images/galilean_space_time.png"/>
 </a>
+
+- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/electron_and_charged_ring) 
+- Code in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Relativity/program/Glalileantransformation)
+- Code base [on Trinket](https://zegerh-6085.trinket.io/sites/galileo_space_time)
 
 ### Coming soon: Minkowski space-time
 

@@ -3,129 +3,159 @@ from vpython import vector, canvas, color, arrow, arange, sin, cos, pi, box, mag
 
 from ..toolbox.mouse import zoom_in_on
 
-"""
-Electromagnetism: Faraday Law (v2.76) 2008-02-29
+# Web VPython 3.2
+
+from vpython import canvas, color, vector, rate, arrow, pi, box, sphere, cos, sin, arange, curve, mag, cylinder, norm
+
+# needs a code clean-up (seems to now work on Python 2.4/VPython 3.2.9)
+
+title = """
+Faraday law: changing-Bs are associated with curly-Es
+
 Rob Salgado (salgado@physics.syr.edu)
-Updated by Zeger Hendrikse
+Zeger Hendrikse (github.com/zhendrikse)
 
-Electric Field vectors are blue. Magnetic Field vectors are red.
+  The thick green vector representing d|B|/dt, i.e. the rate of change of the magnitude 
+  of the magnetic field) is associated with the spatial arrangement of the electric field 
+  according to the Faraday Law (as evaluated on the green loop). The sense of circulation 
+  on the green loop (by the RightHandRule) determines the direction of change of the magnetic 
+  field, which is opposite to your thumb.
 
-  The thick green vector representing
-d|B|/dt ("time-rate-of-change-of-the-magnitude-of-the-magnetic-field")
-is associated with the spatial arrangement of the electric field according to
-the FARADAY Law (as evaluated on the green loop).
-[The sense of circulation on the green loop (by the RightHandRule) determines
-the direction of change of the magnetic field... OPPOSITE to your thumb.]
+    &lt;f&gt; &rarr; show Faraday loop
+    &lt;d&gt; &rarr; dim electric field 
+    &lt;n&gt; &rarr; change color-scheme  
+    &lt;v&gt; &rarr; verbose output
+    &lt;s&gt; &rarr; screenshot
+    &lt;space&gt; &rarr; pause animation
+    &lt;mouse click&gt; &rarr; zoom to selected point
+"""
 
-      CLICK the mouse to start and stop the animation
-      TOGGLE: (f)araday
-              (d)im-fields (n) color-scheme  (v)erbose"""
+color_scheme = 0  # key n (negative)
+background_color = [color.black, color.white]
+dimmed_colors_electric_field = [vector(0.0, 0, 0.4), vector(0.5, 0.5, 1)]
+electric_field_colors = [color.blue, (0.5, 0.5, 1), color.green]
+electric_field_colors[1] = dimmed_colors_electric_field[color_scheme]
+faraday_color = electric_field_colors[2]
 
-scene = canvas(width=800, height=600, x=0, y=0)
-
-colorScheme = 0  # key n (negative)
-colorBackground = [color.black, color.white]
-colorEdimmed = [vector(0.0, 0, 0.4), vector(0.5, 0.5, 1)]
-# scene.ambient = 0.4
-Ecolor = [color.blue, (0.5, 0.5, 1), color.green]
-Ecolor[1] = colorEdimmed[colorScheme]
-
-scene.background = colorBackground[colorScheme]
+scene = canvas(title=title, width=800, height=600, x=0, y=0)
+scene.background = background_color[color_scheme]
 scene.background = color.black;
-Ecolor = [color.blue, vector(0, 0, .4), color.green]
-
-scene.title = "FARADAY: Changing-Bs are associated with Curly-Es\nUse the space, n, d, v, and f keys for visualisation interaction"
-
+electric_field_colors = [color.blue, vector(0, 0, .4), color.green]
+scene.caption = "\\( \\Phi_B = \\iint_{\\Sigma(t)} \\vec{B}(t) \\cdot d\\vec{A} \\),\n where \\(d\\vec{A}\\) is an element of area vector of the moving surface Σ(t), and \\(\\vec{B}\\) is the magnetic field."
+# MathJax.Hub.Queue(["Typeset", MathJax.Hub])
+scene.forward = vector(-0.75, -0.10, -0.65)
+scene.range = 2.5
+# scene.ambient = color.gray(0.4)
 
 showFaraday = 0
 dimFields = 0
 
-B = []
-B.append(arrow(pos=vector(0.25, 0, 0), axis=vector(0, 0, 1e-3), shaftwidth=0.04, fixedwidth=1, color=color.red))
-B.append(arrow(pos=vector(-0.25, 0, 0), axis=vector(0, 0, 1e-3), shaftwidth=0.04, fixedwidth=1, color=color.red))
-B.append(arrow(pos=vector(0, 0.25, 0), axis=vector(0, 0, 1e-3), shaftwidth=0.04, fixedwidth=1, color=color.red))
-B.append(arrow(pos=vector(0, -0.25, 0), axis=vector(0, 0, 1e-3), shaftwidth=0.04, fixedwidth=1, color=color.red))
-B.append(arrow(pos=vector(0.25, 0, -2), axis=vector(0, 0, 1e-3), shaftwidth=0.04, fixedwidth=1, color=color.red))
-B.append(arrow(pos=vector(-0.25, 0, -2), axis=vector(0, 0, 1e-3), shaftwidth=0.04, fixedwidth=1, color=color.red))
-B.append(arrow(pos=vector(0, 0.25, -2), axis=vector(0, 0, 1e-3), shaftwidth=0.04, fixedwidth=1, color=color.red))
-B.append(arrow(pos=vector(0, -0.25, -2), axis=vector(0, 0, 1e-3), shaftwidth=0.04, fixedwidth=1, color=color.red))
+magnetic_field_vector_positions = [
+    vector(0.25, 0, 0),
+    vector(-0.25, 0, 0),
+    vector(0, 0.25, 0),
+    vector(0, -0.25, 0),
+    vector(0.25, 0, -2),
+    vector(-0.25, 0, -2),
+    vector(0, 0.25, -2),
+    vector(0, -0.25, -2)
+]
+magnetic_field_vectors = [arrow(pos=arrow_pos, axis=vector(0, 0, 1e-3), shaftwidth=0.04, fixedwidth=1, color=color.red)
+                          for arrow_pos in magnetic_field_vector_positions]
 
 N = 8
 dBdt = 0.2
-electric_field_arrows = []
-Ebox = []
 
-for z in [0, -0.5, 0.5, -1, 1]:
-    for r in [0.5, 1, 1.5]:
-        for i in arange(0, N):
-            theta = 2. * pi * i / N
-            theta_hat = vector(-sin(theta), cos(theta), 0)
-            electric_field = -dBdt * theta_hat / r
-            A = arrow(pos=vector(r * cos(theta), r * sin(theta), z), axis=electric_field, shaftwidth=0.04, fixedwidth=1, color=color.blue)
-            electric_field_arrows.append(A)
-            Ebox.append(box(pos=A.pos + A.axis / 4., axis=A.axis, length=mag(A.axis) / 2., height=0.04, width=0.04, color=color.blue))
 
-hcolor = Ecolor[2]
+def get_electric_field_vectors(count=N):
+    vectors = []
+    for z in [0, -0.5, 0.5, -1, 1]:
+        for r in [0.5, 1, 1.5]:
+            for index in arange(0, count):
+                theta = 2. * pi * index / count
+                theta_hat = vector(-sin(theta), cos(theta), 0)
+                electric_field = -dBdt * theta_hat / r
+                vectors.append(
+                    arrow(pos=vector(r * cos(theta), r * sin(theta), z), axis=electric_field, shaftwidth=0.04,
+                          fixedwidth=1,
+                          color=color.blue))
+    return vectors
 
-Bp = []
-for b in B:
-    Bp.append(arrow(pos=b.pos + b.axis, axis=dBdt * norm(b.axis),
-                    # length=dBdt,
-                    fixedwidth=1, color=hcolor, shaftwidth=0.07, headwidth=0.14, visible=showFaraday))
 
-Eloop_rad = mag(electric_field_arrows[0].pos)
-pos = [Eloop_rad * vector(cos(2. * pi * n / 40.), sin(2. * pi * n / 40.), 0) for n in range(40)]
-FaradayLoop = curve(color=hcolor, pos=pos, visible=False)
+def get_tails_for(electric_field_vector_array):
+    return [
+        box(pos=field_vec.pos + field_vec.axis / 4., axis=field_vec.axis, length=mag(field_vec.axis) / 2., height=0.04,
+            width=0.04,
+            color=color.blue) for field_vec in electric_field_vector_array]
 
-I = cylinder(radius=0.04, pos=vector(0, 0, -2), axis=vector(0, 0, 4), color=color.yellow)
-chgpos = []
-chg = []
-for i in arange(0, N):
-    chgpos.append(vector(I.pos + I.axis * i / N))
-    chg.append(sphere(pos=chgpos[-1], radius=0.05, color=I.color))
 
-t = 9.50
-# t=10.0
-# t=10.5
+def get_faraday_vectors_from(magnetic_field_vector_array):
+    faraday_vecs = []
+    for field_vec in magnetic_field_vectors:
+        faraday_vecs.append(
+            arrow(pos=field_vec.pos + field_vec.axis, axis=dBdt * norm(field_vec.axis), fixedwidth=1,
+                  color=faraday_color,
+                  shaftwidth=0.07, headwidth=0.14, visible=False))
+    return faraday_vecs
 
-dt = 1
+
+class Wire:
+    def __init__(self, charge_count=N):
+        self._wire = cylinder(radius=0.04, pos=vector(0, 0, -2), axis=vector(0, 0, 4), color=color.yellow)
+        self._charge_count = charge_count
+        self._charge_positions = [vector(self._wire.pos + self._wire.axis * i / N) for i in range(charge_count)]
+        self._charges = [sphere(pos=self._charge_positions[i], radius=0.05, color=self._wire.color) for i in
+                         range(charge_count)]
+
+    def update(self, t):
+        for i in arange(self._charge_count):
+            self._charges[i].pos = self._charge_positions[i] + (t % 4) * vector(0, 0, 0.125)
+
+
+electric_field_vectors = get_electric_field_vectors(N)
+electric_field_vector_tails = get_tails_for(electric_field_vectors)
+faraday_vectors = get_faraday_vectors_from(magnetic_field_vectors)
+faraday_loop_positions = [mag(electric_field_vectors[0].pos) * vector(cos(2. * pi * n / 40.), sin(2. * pi * n / 40.), 0)
+                          for n in range(40)]
+faraday_loop = curve(color=faraday_color, pos=faraday_loop_positions, visible=False)
+wire = Wire()
 
 
 def toggle_show_faraday(show=True):
-    FaradayLoop.visible = show
-    for k in Bp:
+    faraday_loop.visible = show
+    for k in faraday_vectors:
         k.visible = show
 
-    if show == 1:
+    if show:
         for l in range(0, N):
-            electric_field_arrows[l].color = hcolor
-            Ebox[l].color = hcolor
+            electric_field_vectors[l].color = faraday_color
+            electric_field_vector_tails[l].color = faraday_color
     else:
         for l in range(0, N):
-            electric_field_arrows[l].color = color.blue
-            Ebox[l].color = color.blue
+            electric_field_vectors[l].color = color.blue
+            electric_field_vector_tails[l].color = color.blue
 
 
 def toggle_show_fields(show=0):
-    for i in range(N, len(electric_field_arrows)):
-        electric_field_arrows[i].color = Ecolor[show]
-        Ebox[i].color = Ecolor[show]
+    for i in range(N, len(electric_field_vectors)):
+        electric_field_vectors[i].color = electric_field_colors[show]
+        electric_field_vector_tails[i].color = electric_field_colors[show]
     for i in range(1, 4 * N + 1):
-        electric_field_arrows[-i].visible = (1 - show)
-        Ebox[-i].visible = (1 - show)
+        electric_field_vectors[-i].visible = (1 - show)
+        electric_field_vector_tails[-i].visible = (1 - show)
 
 
 def toggle_color_scheme(color_scheme=0):
-    scene.background = colorBackground[color_scheme]
-    Ecolor[1] = colorEdimmed[color_scheme]
-    scene.background = colorBackground[color_scheme]
+    scene.background = background_color[color_scheme]
+    electric_field_colors[1] = dimmed_colors_electric_field[color_scheme]
+    scene.background = background_color[color_scheme]
 
-    for i in range(N, len(electric_field_arrows)):
-        electric_field_arrows[i].color = Ecolor[dimFields]
-        Ebox[i].color = Ecolor[dimFields]
+    for i in range(N, len(electric_field_vectors)):
+        electric_field_vectors[i].color = electric_field_colors[dimFields]
+        electric_field_vector_tails[i].color = electric_field_colors[dimFields]
     for i in range(1, 4 * N + 1):
-        electric_field_arrows[-i].visible = (1 - dimFields)
-        Ebox[-i].visible = (1 - dimFields)
+        electric_field_vectors[-i].visible = (1 - dimFields)
+        electric_field_vector_tails[-i].visible = (1 - dimFields)
 
 
 def pause_animation():
@@ -152,8 +182,7 @@ class KeyboardEventProcessor:
         self._color_scheme += 1
         return self._color_scheme % 2
 
-    @staticmethod
-    def on_key_press(key):
+    def on_key_press(self, key):
         if key == 's':
             scene.capture("faradays_law")
         if key == 'f':
@@ -179,20 +208,18 @@ def key_pressed(event):
     keyboard_event_processor.on_key_press(key)
 
 
-def on_mouse_click():
-    zoom_in_on(scene)
-
-
 scene.bind('keydown', key_pressed)
-scene.bind('click', on_mouse_click)
+scene.bind('click', zoom_in_on(scene))
 
+t = 9.50
+dt = 1
 while 1:
     rate(10)
     t += dt
-    ##    for i in arange(0,N):
-    ##        chg[i].pos = chgpos[i]+(t%4)*vector(0,0,.125)
-    bcount = 0
-    for b in B:
-        b.length = (t % 20) / 10. + 1e-3
-        Bp[bcount].pos = b.pos + b.axis
-        bcount += 1
+    wire.update(t)
+
+    count = 0
+    for mag_vector in magnetic_field_vectors:
+        mag_vector.length = (t % 20) / 10. + 1e-3
+        faraday_vectors[count].pos = mag_vector.pos + mag_vector.axis
+        count += 1

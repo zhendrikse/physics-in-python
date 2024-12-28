@@ -119,11 +119,14 @@ class Axis:
 
 class Car:
     def __init__(self, position=vec(0, 0, 0), velocity=vec(0, 0, 0), colour=color.green, draw=True):
-        self._position = position
+        self._position = self._start_position = position
         self._velocity = velocity
         self._car = box(pos=position, length=2.5, height=1, width=1, color=colour) if draw else None
         self._label = label(pos=vec(position.x, position.y + 1.52, position.z), text="Select my perspective",
                             color=colour, line=True) if draw else None
+
+    def reset(self):
+        self._position = self._start_position
 
     def show_label(self):
         self._label.visible = True
@@ -150,10 +153,12 @@ class Car:
 animation_time = 15  # seconds
 
 scene = canvas(width="800", height="600")
-scene.title = "Relative motion"
+scene.title = "Relative motion: click on car to change perspective!"
 scene.center = vec(0, 0, 0)
 scene.forward = vec(0, -0.35, -1)
 scene.range = 11
+scene.caption = "Galilean transformation \\(  \\begin{pmatrix} x' \\\\ t'\\end{pmatrix} = \\begin{pmatrix} 1 & -v \\\\ 0 & 1 \\end{pmatrix} \\begin{pmatrix} x \\\\ t \\end{pmatrix} \\)"
+#MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 green_car = Car(position=vec(-10, 0, -5), velocity=vec(1, 0, 0))
 red_car = Car(position=vec(0, 0, 5), colour=color.red)
@@ -200,31 +205,32 @@ def select_car_in(my_scene):
 def on_mouse_click():
     select_car_in(scene)
 
-
 scene.bind('click', on_mouse_click)
 
 timer = Timer(position=vec(0, 5, 0))
 dt = 0.01
-t = 0
-while green_car.position().x <= animation_time:
-    rate(1 / dt)
-    green_car.move(dt)
-    red_curve_green_car.plot(green_car.position().x, t)
-    red_curve_red_car.plot(red_car.position().x, t)
+while True:
+    t = 0
 
-    green_curve_red_car.plot(-green_car.position().x, t)
-    green_curve_green_car.plot(-red_car.position().x, t)
+    while green_car.position().x <= animation_time:
+        rate(1 / dt)
+        green_car.move(dt)
+        red_curve_green_car.plot(green_car.position().x, t)
+        red_curve_red_car.plot(red_car.position().x, t)
 
-    timer.update(t)
+        green_curve_red_car.plot(-green_car.position().x, t)
+        green_curve_green_car.plot(-red_car.position().x, t)
+
+        timer.update(t)
+        axis_green_car.reorient_with(green_car)
+
+        t += dt
+
+    label(pos=vec(0, 7, 0), text="Click mouse to restart", color=color.yellow)
+    scene.waitfor('click')
+    green_car.reset()
+    red_car.reset()
     axis_green_car.reorient_with(green_car)
+    axis_red_car.reorient_with(red_car)
 
-    t += dt
 
-print("scene.center=", scene.center)
-print("scene.forward=", scene.forward)
-print("scene.range=", scene.range)
-print("t={}\n".format(t))
-
-label(pos=vec(0, 7, 0), text="Galilean transformation: x'=x - vt",
-      color=color.yellow)
-scene.waitfor('click')
