@@ -67,7 +67,7 @@ class Electron:
     def position(self):
         return self._position
 
-scene.title = "Ising sping model"
+scene.title = "Electron spinning around a charged ring"
 scene.caption = "If it isn't doing anything interesting, either wait or run again to randomize start position."
 scene.forward=vec(-0.55, -0.65, -0.55)
 scene.range=1.0e-10
