@@ -108,9 +108,10 @@ while 1:
         spring.modify(axis=m2.pos - m1.pos)
         t += dt
     else:
+        mouse_clicked = False
         selected_level = spring.frame.mouse.pick
-        # if selected_level is None or not mouse_clicked:
-        #     continue
+        if selected_level is None or not type(selected_level) is cylinder:
+            continue
         print("Picked a level" + str(selected_level.pos))
         if selected_level in energy_levels:
             old_level = level

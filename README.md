@@ -106,11 +106,23 @@ set-up of the disk by adding a charged ring at each mouse click.
 </a>
 
 
-## Special relativity &mdash; space-time visualization
+## Special relativity &mdash; space-time visualizations and more
 
 The code pertaining to the demos in this section is available under the 
 [relativity tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Relativity/)
 on [glowscript.org](https://glowscript.org).
+
+### Electric field of a relativistically moving proton
+
+The code snippet below generates the electric field of a relativistically fast moving proton.
+
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Relativity/program/Relativisticproton">
+  <img alt="Relativistic proton" width="35%" height="35%" src="./src/demos/images/relativistic_proton.png"/>
+</a>
+
+- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/relativistic_proton) 
+- Code in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Relativity/program/Relativisticproton)
+- Code base [on Trinket](https://trinket.io/library/trinkets/2aaad6e82cc4)
 
 ### Galilean transformation of relative motions in Euclidean plane
 
@@ -121,9 +133,9 @@ the so-called Galilean transformation.
   <img alt="Galilean space-time" width="50%" height="50%" src="./src/demos/images/galilean_space_time.png"/>
 </a>
 
-- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/electron_and_charged_ring) 
+- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/galileo_space_time) 
 - Code in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Relativity/program/Glalileantransformation)
-- Code base [on Trinket](https://zegerh-6085.trinket.io/sites/galileo_space_time)
+- Code base [on Trinket](https://trinket.io/library/trinkets/6499b8e78c27)
 
 ### Coming soon: Minkowski space-time
 
