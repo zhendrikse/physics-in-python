@@ -1,7 +1,10 @@
 # Web VPython 3.2
 
+from vpython import pi, box, vec, color, sin, cos, rate, sphere, hat, mag, scene
+
 #
 # Original: https://bphilhour.trinket.io/physics-through-glowscript-an-introductory-course#/1-introduction-objects-parameters-and-the-3d-environment/optional-scale-models
+# See also: https://github.com/zhendrikse/physics-in-python/
 #
 
 Q = 1.6E-19  # charge magnitude of electron
@@ -25,12 +28,12 @@ class ChargedRing:
 
     def field_at(self, position):
         dq = self._charge / len(self._segments)  # charge of ring segment
-        E = vec(0, 0, 0)
+        electric_field = vec(0, 0, 0)
         for segment in self._segments:
             r = segment.pos - position
             dE = k * dq * r.norm() / r.mag2
-            E = E + dE
-        return E
+            electric_field += dE
+        return electric_field
 
 
 class Electron:
@@ -64,13 +67,14 @@ class Electron:
     def position(self):
         return self._position
 
-
-print(
-    "If it isn't doing anything interesting, either wait or run again to randomize start position. Two-finger drag to change perspective.")
+scene.title = "Ising sping model"
+scene.caption = "If it isn't doing anything interesting, either wait or run again to randomize start position."
+scene.forward=vec(-0.55, -0.65, -0.55)
+scene.range=1.0e-10
 
 radius = 0.5e-10
 ring = ChargedRing(radius=radius)
-electron = Electron(position=vec(0, 0, radius) + 1.5 * radius * vector.random(), radius=radius / 20, charge=-Q,
+electron = Electron(position=vec(0, 0, radius) + 1.5 * radius * vec.random(), radius=radius / 20, charge=-Q,
                     make_trail=True, retain=150)
 
 dt = 1e-18  # time step

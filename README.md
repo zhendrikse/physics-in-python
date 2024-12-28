@@ -58,6 +58,20 @@ running through a wire.
 - Code base [on Trinket](https://trinket.io/library/trinkets/d3934e117c2e)
 
 
+### Electron spinning around a charged ring
+
+This demo shows an electron spinning around a charged ring, as opposed to a point-like charged nucleus.
+The charge that normally resides in the nucleus is evenly spread out across the ring.
+
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedring">
+  <img alt="Electron spinning around charged ring" width="50%" height="50%" src="./src/demos/images/electron_and_charged_ring.png"/>
+</a>
+
+- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/electron_and_charged_ring) 
+- Code in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedring)
+- Code base [on Trinket](https://trinket.io/library/trinkets/1983b9c1dc58)
+
+
 ### Visualizing [electromagnetic waves](https://trinket.io/library/trinkets/b8d62b38e852)
 
 <a href="https://zegerh-6085.trinket.io/sites/electromagnetic_wave">
@@ -70,12 +84,6 @@ running through a wire.
   <img alt="Particle in electric field" width="50%" height="50%" src="./src/demos/images/particle_in_electric_field.png"/></br>
 </a>
 
-
-### [Electron spinning around charged ring](https://trinket.io/library/trinkets/1983b9c1dc58)
-
-<a href="https://zegerh-6085.trinket.io/sites/electron_and_charged_ring">
-  <img alt="Electron spinning around charged ring" width="50%" height="50%" src="./src/demos/images/electron_and_charged_ring.png"/>
-</a>
 
 ## Special relativity &mdash; space-time visualization
 
