@@ -1,12 +1,6 @@
+#Web VPython 3.2
 from vpython import canvas, color, vector, vec, curve, random, sqrt, pi, sphere, cos, sin, rate, mag2, graph, gcurve, \
     gvbars, dot, cross, norm, asin, exp
-
-#######################
-# Hard-sphere gas.
-# Bruce Sherwood
-### Rob Salgado modifications to calculate the pressure, appropriately scaled to represent the expected quantities in the ideal gas law.
-### Zeger Hendrikse refactoring to gas class, see also https://github.com/zhendrikse/physics-in-python/
-###
 
 L = cube_edge_in_meters = 1
 atomic_mass = 4E-3
@@ -34,15 +28,23 @@ mass = atomic_mass / avogadro_number  # helium mass
 
 animation = canvas(width=500, height=500, align='left')
 animation.range = L
-animation.title = 'A "hard-sphere" gas'
-s = """  Theoretical and averaged speed distributions (meters/sec).
+animation.title = """A "hard-sphere" gas, written by Bruce Sherwood, modified by Rob Salgado, updated by
+<a href="https://github.com/zhendrikse/">Zeger Hendrikse</a>, and maintained in the  <a href="https://github.com/zhendrikse/physics-in-python/">Physics in Python repository</a> on GitHub.
+
+"""
+s="""  Theoretical and averaged speed distributions (meters/sec).
   Initially all atoms have the same speed, but collisions
   change the speeds of the colliding atoms. One of the atoms is
   marked and leaves a trail so you can follow its path.
-
+  The theoretical probability function for the velocities in 
+  a tiny volume dV is given by the Maxwell-Boltzmann distribution
+  \\(  
+f(\\vec{v}) d^3\\vec{v} = \\bigg [ \dfrac{m}{2\\pi k_b T} \\bigg ]^{3/2} \\exp \\bigg (-\\dfrac{mv^2}{2 k_b T} \\bigg) d^3\\vec{v} \\) 
+  for a system containing a large number of identical non-interacting, 
+  non-relativistic classical particles in thermodynamic equilibrium.
 """
 animation.caption = s
-
+#MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 class Box:
     def __init__(self, length=L, gas_atom_radius=0.03, vertex_radius=0.005):

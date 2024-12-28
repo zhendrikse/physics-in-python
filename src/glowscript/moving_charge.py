@@ -1,11 +1,15 @@
-#Web VPython 3.2
-
-#
-# Original: https://github.com/Physics-Morris/Physics-Vpython/blob/master/8_Charge_Motion.py
-# Updated version now on: https://github.com/zhendrikse/physics-in-Python
-#
+# Web VPython 3.2
 
 from vpython import arrow, hat, vec, exp, mag, sphere, mag, color, box, canvas, rate
+
+title = """Moving charge through electric field between two plates 
+
+&#x2022; Based on <a href="https://github.com/Physics-Morris/Physics-Vpython/blob/master/8_Charge_Motion.py">8_Charge_Motion.py</a>
+&#x2022; Updated by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a>
+&#x2022; Located in the <a href="https://github.com/zhendrikse/physics-in-python/">Physics in Python GitHub repository</a>
+
+"""
+
 
 ec = 1.6E-19  # electron charge
 k = 9E9  # Coulomb constant
@@ -23,8 +27,7 @@ class FieldArrow:
 
 
 class Charge:
-    def __init__(self, mass=1.6E-27, position=vec(0, 0, 0), velocity=vec(0, 0, 0), radius=1.0, coulomb=ec,
-                 charge_color=None, make_trail=False):
+    def __init__(self, mass=1.6E-27, position=vec(0, 0, 0), velocity=vec(0, 0, 0), radius=1.0, coulomb=ec, charge_color=None, make_trail=False):
         colour = charge_color
         if colour is None:
             if coulomb > 0:
@@ -32,8 +35,7 @@ class Charge:
             else:
                 colour = color.red
 
-        self._charge = sphere(mass=mass, pos=position, v=velocity, radius=radius, coulomb=coulomb, color=colour,
-                              make_trail=make_trail)
+        self._charge = sphere(mass=mass, pos=position, v=velocity, radius=radius, coulomb=coulomb, color=colour, make_trail=make_trail)
 
     def field_at(self, position):
         return hat(position - self._charge.pos) * k * self._charge.coulomb / mag(position - self._charge.pos) ** 2
@@ -104,11 +106,10 @@ class Capacitor:
 
 scene = canvas(width=1000, height=600, align='left', range=3E-13)
 scene.forward = vec(0.35, -0.20, -0.9)
-
+scene.title = title
 capacitor = Capacitor(pos=vec(0, 1E-13, 0), size=vec(4E-13, 4E-16, 4E-13))
 capacitor.show_field(x_range=range(-18, 18, 8), y_range=range(-9, 9, 4), z_range=range(-18, 18, 8))
-moving_charge = Charge(position=vec(-4E-13, 5E-14, 0), velocity=vec(1.5E-13, 0, 0), radius=1.2E-14, coulomb=5E-42 * ec,
-                       charge_color=color.green, make_trail=True)
+moving_charge = Charge(position=vec(-4E-13, 5E-14, 0), velocity=vec(1.5E-13, 0, 0), radius=1.2E-14, coulomb=5E-42 * ec, charge_color=color.green, make_trail=True)
 
 dt = 0.01
 for t in range(0, 600):

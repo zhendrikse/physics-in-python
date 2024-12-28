@@ -1,8 +1,15 @@
-from vpython import arrow, vec, hat, sphere, color, sin, cos, pi, canvas, exp, mag, arange, rate
+#Web VPython 3.2
 
-#
-# Original: https://github.com/Physics-Morris/Physics-Vpython/blob/master/6_Point_Charge.py
-#
+from vpython import arrow, vec, hat, sphere, color, sin, cos, pi, canvas, exp, mag
+
+title = """Electric field of a point charge 
+
+&#x2022; Based on <a href="https://github.com/Physics-Morris/Physics-Vpython/blob/master/6_Point_Charge.py">6_Point_Charge.py</a>
+&#x2022; Updated by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a>
+&#x2022; Located in the <a href="https://github.com/zhendrikse/physics-in-python/">Physics in Python GitHub repository</a>
+&#x2022; Select an object with mouse to zoom in'
+
+"""
 
 ec = 1.6E-19  # electron charge
 k = 9E9  # Coulomb constant
@@ -20,8 +27,7 @@ class FieldArrow:
 
 
 class Charge:
-    def __init__(self, mass=1.6E-27, position=vec(0, 0, 0), velocity=vec(0, 0, 0), radius=1.0, coulomb=ec,
-                 color=color.red, make_trail=False):
+    def __init__(self, mass=1.6E-27, position=vec(0, 0, 0), velocity=vec(0, 0, 0), radius=1.0, coulomb=ec, color=color.red, make_trail=False):
         colour = color
         if colour is None:
             if coulomb > 0:
@@ -76,10 +82,10 @@ def on_mouse_click():
 
 
 scene = canvas(width=1000, height=600, align='top', range=3E-13)
-scene.title = 'Select object to zoom in'
+scene.title = title
 scene.bind('click', on_mouse_click)
 scene.forward = vec(-0.492668, -0.285952, -0.821894)
-
+#scene.background = color.white
 scene.caption = "Electric field \\( \\vec{E} ( \\vec{r} ) = \\dfrac {1} {4\\pi\\epsilon_0} \\dfrac {Q} {r^2} \\hat{r} \\), Electric force \\( \\vec{F}(\\vec{r}) = q \\vec{E} ( \\vec{r} ) =  \\dfrac {1} {4\\pi\\epsilon_0} \\dfrac {qQ} {r^2} \\hat{r} \\)"
 MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
