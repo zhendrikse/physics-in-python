@@ -19,16 +19,32 @@ tab on [glowscript.org](https://glowscript.org).
 
 ### Electric field of a dipole
 
-This visualizes the electric field around a dipole. You may zoom in at any point 
+This code visualizes the electric field around a dipole. You may zoom in at any point 
 by click the mouse.
+
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Electricdipolefield">
+  <img alt="Electric field of a dipole" width="50%" height="50%" src="./src/demos/images/dipole_field.png"/>
+</a>
 
 - Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/dipole) 
 - Code in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Electricdipolefield)
 - Code base [on Trinket](https://trinket.io/glowscript/a2b8b655fa07)
 
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Electricdipolefield">
-  <img alt="Electric field of a dipole" width="50%" height="50%" src="./src/demos/images/dipole_field.png"/>
+
+### Electric field of point charge]
+
+This code visualizes the electric field around a dipole. You may zoom in at any point 
+by click the mouse.
+
+[Electric field of point charge]()
+
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Pointchargefield">
+  <img alt="Electric field of point charge" width="50%" height="50%" src="./src/demos/images/point_charge.png"/>
 </a>
+
+- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/point_charge) 
+- Code in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Pointchargefield)
+- Code base [on Trinket](https://trinket.io/glowscript/96da4eb68335)
 
 ### Visualizing [electromagnetic waves](https://trinket.io/library/trinkets/b8d62b38e852)
 
@@ -48,11 +64,6 @@ by click the mouse.
   <img alt="Faradays law" width="50%" height="50%" src="./src/demos/images/faradays_law.png"/>
 </a>
 
-### [Electric field of point charge](https://trinket.io/glowscript/96da4eb68335)
-
-<a href="https://zegerh-6085.trinket.io/sites/point_charge">
-  <img alt="Electric field of point charge" width="50%" height="50%" src="./src/demos/images/point_charge.png"/>
-</a>
 
 ### [Electron spinning around charged ring](https://trinket.io/library/trinkets/1983b9c1dc58)
 
@@ -84,25 +95,25 @@ This model represents a Boltzmann gas (consisting of hard spheres) in a box, whe
 the velocity distribution of the colliding atoms eventually approaches the calculated 
 theoretical velocity distribution.
 
-- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/hard_sphere_gas) 
-- Code in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas)
-- Code base [on Trinket](https://trinket.io/library/trinkets/554248a15bc4)
-
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas">
   <img alt="Hard sphere gas" width="50%" height="50%" src="./src/demos/images/hard_sphere_gas.png"/>
 </a>
+
+- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/hard_sphere_gas) 
+- Code in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas)
+- Code base [on Trinket](https://trinket.io/library/trinkets/554248a15bc4)
 
 ### Two-dimensional Ising spin model
 
 This demo models the magnetization at various temperatures using a two-dimensional Ising spin lattice.
 
-- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/ising_spin_model) 
-- Code in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Isingspin)
-- Code base [on Trinket](https://trinket.io/library/trinkets/07404ee90b64)
-
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Isingspin">
   <img alt="Ising spin model" width="50%" height="50%" src="./src/demos/images/ising_spin_model.png"/>
 </a>
+
+- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/ising_spin_model) 
+- Code in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Isingspin)
+- Code base [on Trinket](https://trinket.io/library/trinkets/07404ee90b64)
 
 ## Kinematics
 

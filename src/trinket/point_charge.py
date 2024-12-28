@@ -1,5 +1,4 @@
 from vpython import arrow, vec, hat, sphere, color, sin, cos, pi, canvas, exp, mag
-from mathjax import MathJax
 
 #
 # Original: https://github.com/Physics-Morris/Physics-Vpython/blob/master/6_Point_Charge.py
