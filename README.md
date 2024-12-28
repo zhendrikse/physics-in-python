@@ -154,6 +154,19 @@ Play around with an arbitrary number of vibrating balls mutually coupled by spri
 - Code in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/N-bodycoupledoscillator)
 - Code base [on Trinket](https://trinket.io/glowscript/5a852a2b7570)
 
+
+### Simple Harmonic oscillator
+
+A simple harmonic oscillator is shown by letting two balls vibrate on a spring.
+
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Harmonicoscillator">
+  <img alt="Harmonic oscillator" width="50%" height="50%" src="./src/demos/images/harmonic_oscillator.png"/>
+</a>
+
+- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/harmonic_oscillator) 
+- Code in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Harmonicoscillator)
+- Code base [on Trinket](https://trinket.io/library/trinkets/e80e37600b06)
+
 ### [Kepler's laws](https://trinket.io/library/trinkets/11c6cd8b5622) of equal areas
 
 <a href="https://zegerh-6085.trinket.io/sites/keplers_law">
@@ -178,11 +191,6 @@ Play around with an arbitrary number of vibrating balls mutually coupled by spri
   <img alt="Ball on sliding ramp" width="50%" height="50%" src="./src/demos/images/ball_on_sliding_ramp.png"/>
 </a>
 
-### [Harmonic oscillator](https://trinket.io/library/trinkets/e80e37600b06)
-
-<a href="https://zegerh-6085.trinket.io/sites/harmonic_oscillator">
-  <img alt="Harmonic oscillator" width="50%" height="50%" src="./src/demos/images/harmonic_oscillator.png"/>
-</a>
 
 ### [Ball hitting block](https://trinket.io/library/trinkets/0e414ca766d1)
 <a href="https://zegerh-6085.trinket.io/sites/block_rotation">
