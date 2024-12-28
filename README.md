@@ -19,8 +19,7 @@ on [glowscript.org](https://glowscript.org).
 
 ### Electric field of a dipole
 
-This code visualizes the electric field around a dipole. You may zoom in at any point 
-by click the mouse.
+This code visualizes the electric field around a dipole. You may zoom in at any point by clicking your mouse button.
 
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Electricdipolefield">
   <img alt="Electric field of a dipole" width="50%" height="50%" src="./src/demos/images/dipole_field.png"/>
