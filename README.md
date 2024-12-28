@@ -13,6 +13,23 @@ The graphics library used is [VPython](https://vpython.org/).
 
 ## Electromagnetism
 
+The code pertaining to the demos in this section is available under the 
+[electromagnetism tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/)
+tab on [glowscript.org](https://glowscript.org).
+
+### Electric field of a dipole
+
+This visualizes the electric field around a dipole. You may zoom in at any point 
+by click the mouse.
+
+- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/dipole) 
+- Code in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Electricdipolefield)
+- Code base [on Trinket](https://trinket.io/glowscript/a2b8b655fa07)
+
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Electricdipolefield">
+  <img alt="Electric field of a dipole" width="50%" height="50%" src="./src/demos/images/dipole_field.png"/>
+</a>
+
 ### Visualizing [electromagnetic waves](https://trinket.io/library/trinkets/b8d62b38e852)
 
 <a href="https://zegerh-6085.trinket.io/sites/electromagnetic_wave">
@@ -35,12 +52,6 @@ The graphics library used is [VPython](https://vpython.org/).
 
 <a href="https://zegerh-6085.trinket.io/sites/point_charge">
   <img alt="Electric field of point charge" width="50%" height="50%" src="./src/demos/images/point_charge.png"/>
-</a>
-
-### [Electric dipole field](https://trinket.io/glowscript/a2b8b655fa07)
-
-<a href="https://zegerh-6085.trinket.io/sites/dipole">
-  <img alt="Electric field of a dipole" width="50%" height="50%" src="./src/demos/images/dipole_field.png"/>
 </a>
 
 ### [Electron spinning around charged ring](https://trinket.io/library/trinkets/1983b9c1dc58)
