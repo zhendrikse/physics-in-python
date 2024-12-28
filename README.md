@@ -207,10 +207,10 @@ number of vibrating beads coupled on both sides by springs!
 ### [Ball on sliding ramp](https://trinket.io/library/trinkets/0731c4e734f8) and [Ball hitting block](https://trinket.io/library/trinkets/0e414ca766d1)
 
 <a href="https://zegerh-6085.trinket.io/sites/ball_on_sliding_ramp">
-  <img alt="Ball on sliding ramp" width="50%" height="50%" src="./src/demos/images/ball_on_sliding_ramp.png"/>
+  <img alt="Ball on sliding ramp" width="48%" height="48%" src="./src/demos/images/ball_on_sliding_ramp.png"/>
 </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://zegerh-6085.trinket.io/sites/block_rotation">
-  <img alt="Block rotation" width="44%" height="44%" src="./src/demos/images/block_rotation.png"/>
+  <img alt="Block rotation" width="42%" height="42%" src="./src/demos/images/block_rotation.png"/>
 </a>
 
 ### [Kepler's laws](https://trinket.io/library/trinkets/11c6cd8b5622) of equal areas
