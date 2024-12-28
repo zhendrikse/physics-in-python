@@ -32,8 +32,7 @@ This code visualizes the electric field around a dipole. You may zoom in at any 
 
 ### Electric field of point charge]
 
-This code visualizes the electric field around a dipole. You may zoom in at any point 
-by click the mouse.
+This code visualizes the electric field around a dipole. You may zoom in at any point by clicking your mouse.
 
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Pointchargefield">
   <img alt="Electric field of point charge" width="50%" height="50%" src="./src/demos/images/point_charge.png"/>
@@ -45,8 +44,7 @@ by click the mouse.
 
 ### Interactive visualization of Faraday's law
 
-This code visualizes Faraday's law by simulating an electric current (of electric charges)
-running through a wire. 
+This code visualizes Faraday's law by simulating an electric current (of electric charges) running through a wire. 
 
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Faradayslaw">
   <img alt="Faradays law" width="50%" height="50%" src="./src/demos/images/faradays_law.png"/>
