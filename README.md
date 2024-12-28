@@ -117,7 +117,7 @@ on [glowscript.org](https://glowscript.org).
 The code snippet below generates the electric field of a relativistically fast moving proton.
 
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Relativity/program/Relativisticproton">
-  <img alt="Relativistic proton" width="35%" height="35%" src="./src/demos/images/relativistic_proton.png"/>
+  <img alt="Relativistic proton" width="40%" height="40%" src="./src/demos/images/relativistic_proton.png"/>
 </a>
 
 - Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/relativistic_proton) 
