@@ -173,6 +173,15 @@ This demo models the magnetization at various temperatures using a two-dimension
 - Code in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Isingspin)
 - Code base [on Trinket](https://trinket.io/library/trinkets/07404ee90b64)
 
+## Astrophysics
+
+### [Kepler's laws](https://trinket.io/library/trinkets/11c6cd8b5622) of equal areas
+
+<a href="https://zegerh-6085.trinket.io/sites/keplers_law">
+  <img alt="Kepler's laws" width="50%" height="50%" src="./src/demos/images/keplers_law.png"/>
+</a>
+
+
 ## Kinematics
 
 The code pertaining to the demos in this section is available under the 
@@ -211,12 +220,6 @@ number of vibrating beads coupled on both sides by springs!
 </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://zegerh-6085.trinket.io/sites/block_rotation">
   <img alt="Block rotation" width="42%" height="42%" src="./src/demos/images/block_rotation.png"/>
-</a>
-
-### [Kepler's laws](https://trinket.io/library/trinkets/11c6cd8b5622) of equal areas
-
-<a href="https://zegerh-6085.trinket.io/sites/keplers_law">
-  <img alt="Kepler's laws" width="50%" height="50%" src="./src/demos/images/keplers_law.png"/>
 </a>
 
 ### [Doppler effect](https://trinket.io/library/trinkets/9d869c1167ec)
