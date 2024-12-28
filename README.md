@@ -7,7 +7,7 @@ The graphics library used is [VPython](https://vpython.org/).
 - [**`src`**](src) &rarr; contains the sources
 - [**`test`**](test) &rarr; the tests of the components in the generic toolbox
 
-# [Glowscript](https://www.glowscript.org/) demos on [Trinket](https://trinket.io/published)
+# Physics demos [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/) and [on trinket.io](https://trinket.io/)
 
 #### **&darr;** Click on the below images to see animated versions **&darr;**
 
@@ -63,14 +63,33 @@ This is currently under construction
 
 ## Thermodynamics
 
-### Visualizing a [hard-sphere gas model](https://trinket.io/library/trinkets/554248a15bc4)
+The code pertaining to the demos in this section is available under the 
+[thermodynamics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/)
+tab on [glowscript.org](https://glowscript.org).
 
-<a href="https://zegerh-6085.trinket.io/sites/hard_sphere_gas">
+### Visualizing a hard sphere gas model
+
+This model represents a Boltzmann gas (consisting of hard spheres) in a box, where 
+the velocity distribution of the colliding atoms eventually approaches the calculated 
+theoretical velocity distribution.
+
+- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/hard_sphere_gas) 
+- Code in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas)
+- Code base [on Trinket](https://trinket.io/library/trinkets/554248a15bc4)
+
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas">
   <img alt="Hard sphere gas" width="50%" height="50%" src="./src/demos/images/hard_sphere_gas.png"/>
 </a>
 
-### [Ising spin model](https://trinket.io/library/trinkets/07404ee90b64)
-<a href="https://zegerh-6085.trinket.io/sites/ising_spin_model">
+### Two-dimensional Ising spin model
+
+This demo models the magnetization at various temperatures using a two-dimensional Ising spin lattice.
+
+- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/ising_spin_model) 
+- Code in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Isingspin)
+- Code base [on Trinket](https://trinket.io/library/trinkets/07404ee90b64)
+
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Isingspin">
   <img alt="Ising spin model" width="50%" height="50%" src="./src/demos/images/ising_spin_model.png"/>
 </a>
 

@@ -5,7 +5,7 @@ from vpython import canvas, color, vector, vec, curve, random, sqrt, pi, sphere,
 # Hard-sphere gas.
 # Bruce Sherwood
 ### Rob Salgado modifications to calculate the pressure, appropriately scaled to represent the expected quantities in the ideal gas law.
-### Zeger Hendrikse refactoring to gas class
+### Zeger Hendrikse refactoring to gas class, see also https://github.com/zhendrikse/physics-in-python/
 ###
 
 L = cube_edge_in_meters = 1
