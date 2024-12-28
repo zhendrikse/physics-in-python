@@ -175,9 +175,7 @@ The following two scripts visualize harmonic oscillations caused by beads connec
 
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Harmonicoscillator">
   <img alt="Harmonic oscillator" width="20%" height="20%" src="./src/demos/images/harmonic_oscillator.png"/>
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</a>&nbsp;&nbsp;&nbsp;
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/N-bodycoupledoscillator">
   <img alt="N-body coupled oscillator" width="60%" height="60%" src="./src/demos/images/n_body_coupled_oscillator.png"/>
 </a>
