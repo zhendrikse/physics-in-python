@@ -141,11 +141,21 @@ This demo models the magnetization at various temperatures using a two-dimension
 
 ## Kinematics
 
-### [N-body coupled oscillator](https://trinket.io/glowscript/5a852a2b7570)
+The code pertaining to the demos in this section is available under the 
+[relativity tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/)
+on [glowscript.org](https://glowscript.org).
 
-<a href="https://zegerh-6085.trinket.io/sites/n_body_coupled_oscillator">
+### [N-body coupled oscillator]()
+
+Play around with an arbitrary number of vibrating balls mutually coupled by springs!
+
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/N-bodycoupledoscillator">
   <img alt="N-body coupled oscillator" width="50%" height="50%" src="./src/demos/images/n_body_coupled_oscillator.png"/>
 </a>
+
+- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/n_body_coupled_oscillator) 
+- Code in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/N-bodycoupledoscillator)
+- Code base [on Trinket](https://trinket.io/glowscript/5a852a2b7570)
 
 ### [Kepler's laws](https://trinket.io/library/trinkets/11c6cd8b5622) of equal areas
 
