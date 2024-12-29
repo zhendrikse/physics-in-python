@@ -23,79 +23,69 @@ scene.range = 2.5
 scene.forward = vec(-0.162765, 0.013403, -0.986574)
 scene.autoscale = 1
 
-# based on
-#
-#   http://www.math.niu.edu/~rusin/known-math/97/spherefaq
-# then
-#   http://astronomy.swin.edu.au/~pbourke/geometry/spherepoints/source1.c
-#
-
 colorEdimmed = [vec(0.0, 0, 0.4), vec(0.96, 0.96, 0.8)]
 
 electric_field_colors = [color.orange, vec(0.5, 0.5, 1), color.magenta]
 electric_field_colors[1] = colorEdimmed[colorScheme]
 
-N = 24
+class ElectricField:
+    def __init__(self, arrow_count=24):
+        positions = []
+        phi_last = 0
+        for i in range(0, arrow_count):
+            h = -1 + 2 * i / (arrow_count - 1.)
+            theta = acos(h)
 
-# class ElectricField:
-#     def __init__(self):
+            q = arrow_count * (1 - h * h)
+            phi = 0 if i == 0 or i == arrow_count - 1 else phi_last + 3.6 / sqrt(q)
+            phi_last = phi
 
-def arrow_positions():
-    positions = []
-    phi_last = 0
-    for i in range(0, N):
-        h = -1 + 2 * i / (N - 1.)
-        theta = acos(h)
+            positions.append(vector(cos(phi) * sin(theta), sin(phi) * sin(theta), cos(theta)))
+            # sp.append( sphere(pos=p[-1],radius=0.05) )
 
-        q = N * (1 - h * h)
-        phi = 0 if i == 0 or i == N - 1 else phi_last + 3.6 / sqrt(q)
-        phi_last = phi
+        counter = 0
+        count_max = 100
+        while counter < count_max:
+            min_distance_positions = [positions[0], positions[1]]
+            min_distance = mag2(positions[0] - positions[1])
+            max_distance = min_distance
 
-        positions.append(vector(cos(phi) * sin(theta), sin(phi) * sin(theta), cos(theta)))
-        # sp.append( sphere(pos=p[-1],radius=0.05) )
+            for i in arange(0, len(positions) - 1):
+                for j in arange(i + 1, len(positions)):
+                    distance = mag2(positions[i] - positions[j])
+                    if distance < min_distance:
+                        min_distance = distance
+                        min_distance_positions = [positions[i], positions[j]]
+                    if distance > max_distance:
+                        max_distance = distance
 
-    counter = 0
-    count_max = 100
+            p1 = min_distance_positions[0]
+            p2 = min_distance_positions[1]
+            min_distance_positions[0] = norm(p1 + 1.1 * (p2 - p1))
+            min_distance_positions[1] = norm(p1 - 0.1 * (p2 - p1))
 
-    n = len(positions)
-    while counter < count_max:
-        min_distance_positions = [positions[0], positions[1]]
-        min_distance = mag2(positions[0] - positions[1])
-        max_distance = min_distance
+            counter += 1
 
-        for i in arange(0, n - 1):
-            for j in arange(i + 1, n):
-                distance = mag2(positions[i] - positions[j])
-                if distance < min_distance:
-                    min_distance = distance
-                    min_distance_positions = [positions[i], positions[j]]
-                if distance > max_distance:
-                    max_distance = distance
-
-        p1 = min_distance_positions[0]
-        p2 = min_distance_positions[1]
-        min_distance_positions[0] = norm(p1 + 1.1 * (p2 - p1))
-        min_distance_positions[1] = norm(p1 - 0.1 * (p2 - p1))
-
-        counter += 1
-
-    return positions
+        self._positions = positions
 
 
-def field_arrows_given_the(arrow_positions):
-    E = 0.5 * 1 / mag2(arrow_positions[0])
-    for arrow_pos in arrow_positions:
-        field_arrow = arrow(pos=arrow_pos, axis=E * arrow_pos, shaftwidth=0.04, fixedwidth=1, color=electric_field_colors[0])
-        box(pos=arrow_pos + field_arrow.axis / 4., axis=field_arrow.axis, length=mag(field_arrow.axis) / 2.,
-            height=0.04, width=0.04, color=electric_field_colors[0])
-        # Field at twice the distance is 4 times as small
-        field_arrow = arrow(pos=2 * arrow_pos, axis=E / 4. * arrow_pos, shaftwidth=0.04, fixedwidth=1, color=electric_field_colors[0])
-        box(pos=2 * arrow_pos + field_arrow.axis / 4., axis=field_arrow.axis, length=mag(field_arrow.axis) / 2.,
-            height=0.04, width=0.04, color=electric_field_colors[0])
+    def field_arrows(self):
+        E = 0.5 * 1 / mag2(self._positions[0])
+        for arrow_pos in self._positions:
+            field_arrow = arrow(pos=arrow_pos, axis=E * arrow_pos, shaftwidth=0.04, fixedwidth=1,
+                                color=electric_field_colors[0])
+            box(pos=arrow_pos + field_arrow.axis / 4., axis=field_arrow.axis, length=mag(field_arrow.axis) / 2.,
+                height=0.04, width=0.04, color=electric_field_colors[0])
+            # Field at twice the distance is 4 times as small
+            field_arrow = arrow(pos=2 * arrow_pos, axis=E / 4. * arrow_pos, shaftwidth=0.04, fixedwidth=1,
+                                color=electric_field_colors[0])
+            box(pos=2 * arrow_pos + field_arrow.axis / 4., axis=field_arrow.axis, length=mag(field_arrow.axis) / 2.,
+                height=0.04, width=0.04, color=electric_field_colors[0])
 
 
 sphere(radius=0.04, color=color.cyan)
-field_arrows_given_the(arrow_positions())
+field = ElectricField()
+field.field_arrows()
 
 
 def on_key_press(event):
