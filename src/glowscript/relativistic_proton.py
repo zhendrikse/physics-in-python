@@ -4,9 +4,8 @@ from vpython import *
 
 title="""Relativistic electric field around a moving proton
 
-&#x2022; Original by Ruth Chabay Spring 2001
-&#x2022; Updated by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a>
-&#x2022; Located in the <a href="https://github.com/zhendrikse/physics-in-python/">Physics in Python GitHub repository</a>
+&#x2022; Original <a href="https://lectdemo.github.io/virtual/scripts/20_E_fastmoving_proton.py">20_E-fastmoving_proton.py</a> by Ruth Chabay Spring 2001
+&#x2022; Maintained by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a> in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
 &#x2022; &lt;v&gt; &rarr; verbose output
 &#x2022; &lt;s&gt; &rarr; make screenshot
 &#x2022; &lt;space&gt; &rarr; toggle background color
