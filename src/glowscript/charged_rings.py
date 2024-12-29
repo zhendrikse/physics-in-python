@@ -1,3 +1,4 @@
+#Web VPython 3.2
 from vpython import scene, arange, pi, sphere, vector, sin, cos, ring, vec, arrow, color, mag, norm, rate
 
 
@@ -18,8 +19,7 @@ scale_factor = 2e-11
 L = 6e-3
 dL = 1e-3
 
-scalar = float  # a scale value (0.0 to 1.0)
-def hsv_to_rgb(hue: scalar, saturation: scalar, value: scalar, a: scalar) -> tuple:
+def hsv_to_rgb(hue, saturation, value):
     if saturation:
         if hue == 1.0: hue = 0.0
         i = int(hue * 6.0)
@@ -29,12 +29,12 @@ def hsv_to_rgb(hue: scalar, saturation: scalar, value: scalar, a: scalar) -> tup
         q = value * (1.0 - saturation * f)
         t = value * (1.0 - saturation * (1.0 - f))
 
-        if i == 0: return value, t, w, a
-        if i == 1: return q, value, w, a
-        if i == 2: return w, value, t, a
-        if i == 3: return w, q, value, a
-        if i == 4: return t, w, value, a
-        if i == 5: return value, w, q, a
+        if i == 0: return value, t, w
+        if i == 1: return q, value, w
+        if i == 2: return w, value, t
+        if i == 3: return w, q, value
+        if i == 4: return t, w, value
+        if i == 5: return value, w, q
     else:
         return value, value, value, a
 
@@ -55,7 +55,7 @@ class ChargedRing:
                 hue = (240 / 360)
             elif totalq == 0:
                 sat = 0
-            rgb = hsv_to_rgb(hue, saturation, 1.0, 1.0)
+            rgb = hsv_to_rgb(hue, saturation, 1.0)
             charge.color = vec(rgb[0], rgb[1], rgb[2])
             ring(pos=vector(xx, 0, 0), axis=vector(1, 0, 0), radius=ring_radius, thickness=ring_radius / 75., color=charge.color)
 
