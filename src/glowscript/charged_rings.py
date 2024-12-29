@@ -1,7 +1,20 @@
-from vpython import scene, arange, pi, sphere, vector, sin, cos, ring, vec, arrow, color, mag, norm
+from vpython import scene, arange, pi, sphere, vector, sin, cos, ring, vec, arrow, color, mag, norm, rate
 
-oof = 9e9
-sf = 2e-11
+
+title = """Electric field inside charged rings. 
+
+&#x2022; Original <a href="https://lectdemo.github.io/virtual/18-Erings.html">18-Erings.html</a>
+&#x2022; Updated by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a>
+&#x2022; Located in the <a href="https://github.com/zhendrikse/physics-in-python/">Physics in Python GitHub repository</a>
+&#x2022; &lt;f&gt; &rarr; toggle electric field arrows
+&#x2022; &lt;s&gt; &rarr; screenshot
+&#x2022; &lt;v&gt; &rarr; verbose output
+&#x2022; &lt;space&gt; &rarr; toggle background color
+&#x2022; &lt;mouse click&gt; &rarr; toggle display of ring charges
+
+"""
+
+scale_factor = 2e-11
 L = 6e-3
 dL = 1e-3
 
@@ -52,6 +65,7 @@ class ChargedRing:
 
     def electric_field_at(self, location):
         E = vector(0, 0, 0)
+        oof = 9e9
         for charge in self._charges:
             r = location - charge.pos
             E = E + (oof * charge.q / mag(r) ** 2) * norm(r)
@@ -59,30 +73,6 @@ class ChargedRing:
 
     def radius(self):
         return self._ring_radius
-
-
-rings = []
-dQ = 5e-10
-##print 'dQ=',dQ
-Q = -3 * dQ  ## charge of leftmost ring
-count = 0
-vis = 1
-##for x in arange (-L,1.1*L,dL):
-for x in arange(-2 * L, 2.5 * L, dL):
-    rings.append(ChargedRing(ring_radius=2e-3, point_charges_amount=20, totalq=Q, xx=x))
-    print('charge of ring #', count, "=", Q)
-    Q = Q + dQ
-    count += 1
-
-print('len(rings)=', len(rings))
-print("Click to see electric field")
-scene.width = 1024
-scene.height = 768
-scene.background = color.white
-
-scene.waitfor("click")
-for ring in rings:
-    ring.toggle_show_charges()
 
 class Field:
     def __init__(self, rings):
@@ -93,12 +83,31 @@ class Field:
                 E = vector(0, 0, 0)
                 for a_ring in rings:
                     E += a_ring.electric_field_at(location)
-                self._field_arrows += [arrow(pos=location, axis=E * sf, color=color.cyan, shaftwidth=rings[0].radius() / 20.)]
+                self._field_arrows += [arrow(pos=location, axis=E * scale_factor, color=color.cyan, shaftwidth=rings[0].radius() / 20.)]
 
     def toggle_show_field(self):
         for field_arrow in self._field_arrows:
             field_arrow.visible = not field_arrow.visible
 
+def create_rings(dQ=5e-10):
+    ##for x in arange (-L,1.1*L,dL):
+    count = 0
+    rings = []
+    total_charge = -3 * dQ # Charge of left ring
+    for x in arange(-2 * L, 2.5 * L, dL):
+        rings.append(ChargedRing(ring_radius=2e-3, point_charges_amount=20, totalq=total_charge, xx=x))
+        print('charge of ring #', count, "=", total_charge)
+        total_charge = total_charge + dQ
+        count += 1
+    return rings
+
+scene.width = 1024
+scene.height = 768
+scene.title = title
+scene.background = color.black
+scene.forward=vec(0.18, 0.35, -0.95)
+
+rings = create_rings()
 field = Field(rings)
 
 def toggle_background():
@@ -113,17 +122,21 @@ def on_key_press(event):
     if event.key == " ":
         toggle_background()
     if event.key == 's':
-        scene.capture("electric_field_of_charged_disk")
+        scene.capture("electric_field_of_charged_rings")
     if event.key == 'v':
         print("scene.center=" + str(scene.center))
         print("scene.forward=" + str(scene.forward))
         print("scene.range=" + str(scene.range))
 
-scene.bind("keydown", on_key_press)
-
-while 1:
-    scene.waitfor("click")
+def on_mouse_click():
     for ring in rings:
         ring.toggle_show_charges()
+
+
+scene.bind("keydown", on_key_press)
+scene.bind("click", on_mouse_click)
+
+while 1:
+    rate(50)
 
 
