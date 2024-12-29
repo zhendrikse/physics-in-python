@@ -85,7 +85,7 @@ set-up of the disk by adding a charged ring at each mouse click.
   <img alt="Charged disk" width="40%" height="40%" src="./src/demos/images/charged_disk.png" title="Click to animate"/>
 </a>
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargeddiskbuilder">
-  <img alt="Charged disk builder" width="50%" height="50%" src="./src/demos/images/charged_disk_builder.png title="Click to animate""/>
+  <img alt="Charged disk builder" width="50%" height="50%" src="./src/demos/images/charged_disk_builder.png" title="Click to animate"/>
 </a>
 
 - Charged disk in action [on Trinket](https://zegerh-6085.trinket.io/sites/charged_disk) 
