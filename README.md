@@ -114,7 +114,7 @@ the electromagnetic waves emanate from an antenna, in the second they are propag
 
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Antenna">
   <img alt="Antenna" width="45%" height="45%" src="./src/demos/images/antenna.png" title="Click to animate"/>
-</a>&nbsp;&nbsp;&nbsp;
+</a>
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Electromagneticwave">
   <img alt="Electromagnetic waves" width="50%" height="50%" src="./src/demos/images/electromagnetic_wave.png" title="Click to animate"/>
 </a>
