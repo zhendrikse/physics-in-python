@@ -118,10 +118,6 @@ amplitude = 1
 while 1:
     if (not mouse_clicked) and run:
         rate(200)
-        #oscillator.pull(Ampl)
-        #ball_2.pos = vector(Ampl * cos(omega * t), ball_2.pos.y, ball_2.pos.z)
-        oscillator.pull(amplitude * cos(omega * t))
-        # spring.modify(axis=ball_2.pos - ball_1.pos)
         oscillator.increment_by(dt)
         t += dt
     else:
@@ -129,22 +125,20 @@ while 1:
         selected_level = spring_frame.mouse.pick
         if selected_level is None or not type(selected_level) is cylinder:
             continue
-        print("Picked a level" + str(selected_level.pos))
         if selected_level in energy_levels:
-            print("Level is in energy levels")
             old_level = current_level
             current_level = selected_level
             current_level.color = color.red
             if old_level is not None:
                 old_level.color = color.white
-            amplitude = abs(current_level.pos.x) * .025
-            print("Pulling osc by ", amplitude * cos(omega * t))
+            amplitude = abs(current_level.pos.x)
             oscillator.pull(amplitude * cos(omega * t))
             vline1.pos = current_level.pos
             vline2.pos = current_level.pos + current_level.axis
             run = True
             mouse_clicked = False
         elif scene.mouse.pos.y > .5 * ks * 5.2 ** 2 + U0:
+            print("Wanneer kom ik hier?")
             run = False
             if current_level is not None:
                 current_level.color = color.white
