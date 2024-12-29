@@ -206,8 +206,6 @@ An N-body coupled harmonic oscillator lets you play around with an arbitrary
 number of vibrating beads coupled on both sides by springs!
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Harmonicoscillator">
   <img alt="Harmonic oscillator" width="20%" height="20%" src="./src/demos/images/harmonic_oscillator.png"/>
 </a>
