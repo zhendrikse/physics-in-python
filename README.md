@@ -175,12 +175,20 @@ This demo models the magnetization at various temperatures using a two-dimension
 
 ## Astrophysics
 
+The code pertaining to the demos in this section is available under the 
+[astrophysics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/)
+on [glowscript.org](https://glowscript.org).
+
+
 ### [Kepler's laws](https://trinket.io/library/trinkets/11c6cd8b5622) of equal areas
 
 <a href="https://zegerh-6085.trinket.io/sites/keplers_law">
   <img alt="Kepler's laws" width="50%" height="50%" src="./src/demos/images/keplers_law.png"/>
 </a>
 
+### Daylight variations &mdash; earth-sun-moon model
+
+Coming soon.
 
 ## Kinematics
 
