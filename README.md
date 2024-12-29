@@ -109,8 +109,8 @@ set-up of the disk by adding a charged ring at each mouse click.
 
 ## Visualizing [electromagnetic waves](https://trinket.io/library/trinkets/b8d62b38e852)
 
-Both simulations below visualize the propagation of electromagnetic waves. In the first demo,
-the waves are emitted from an antenna, in the second they are propagating through a vacuum.
+Both of the two dynamic simulations below visualize the propagation of electromagnetic waves. In the first demo,
+the electromagnetic waves emanate from an antenna, in the second they are propagating through a vacuum.
 
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Antenna">
   <img alt="Antenna" width="45%" height="45%" src="./src/demos/images/antenna.png" title="Click to animate"/>
