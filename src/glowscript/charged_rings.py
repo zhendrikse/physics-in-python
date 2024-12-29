@@ -36,7 +36,7 @@ def hsv_to_rgb(hue, saturation, value):
         if i == 4: return t, w, value
         if i == 5: return value, w, q
     else:
-        return value, value, value, a
+        return value, value, value
 
 class ChargedRing:
     def __init__(self, ring_radius=10., point_charges_amount=20, totalq=1e-9, xx=0.):
