@@ -1,10 +1,5 @@
 from vpython import *
 
-latitude = 52  # UK latitude, -38 for melbourne
-tilt = 23
-
-print("latitude=", latitude, "\ttilt", tilt)
-
 title = """<b>Not</b> to scale Earth-Sun-Moon simulator
 It does not include gravitational physics or Newtonian analysis &mdash; just circular motion
 
@@ -34,6 +29,17 @@ earth_moon_distance = earth_radius * 6  # note that the real value would be eart
 earth_orbit_rate = 1  # the Earth orbits the Sun at about 1 degree per day
 moon_orbit_rate = 13  # the Moon orbits the Earth at about 13 degrees per day
 
+sun = sphere(radius=sun_radius, opacity=0.7, emissive=True, texture="http://i.imgur.com/yoEzbtg.jpg")
+earth = sphere(radius=earth_radius, texture=textures.earth, flipx=False, shininess=0.9)
+moon = sphere(radius=moon_radius, texture="http://i.imgur.com/YPg4RPU.jpg", flipx=True, flipy=True, shininess=0.9)
+
+# stopped working
+# let's allow the user to change the camera view point
+def changeView():  # define a new function by name
+    chosenObject = scene.mouse.pick()  # find out which object the user clicked on
+    if chosenObject is not None:  # if it is a real object that they clicked on ...
+        scene.camera.follow(chosenObject)  # .. then have the camera follow that object
+
 # set up the scene
 # scene.caption.text("Use two-finger swipe to zoom. Use two-finger click/drag to rotate camera.\nClick on an object to change camera focus." +
 #                    "\n\nThis simulation is NOT TO ACCURATE SCALE - edit source to play with scale." +
@@ -45,37 +51,33 @@ scene.width = 1200  # width in pixels of the display on the screen
 scene.range = astronomical_unit / 4.
 scene.fov = radians(10)
 scene.title = title
-
-# create the Sun object
-sun = sphere(radius=sun_radius, opacity=0.7, emissive=True, texture="http://i.imgur.com/yoEzbtg.jpg")
+scene.camera.follow(sun)  # have the camera default to centering on the sun
+scene.bind("mousedown", changeView)  # allow mouse clicks to call the changeView function
 
 # place a few sources of light at the same position as the Sun to illuminate the Earth and Moon objects
 sunlight = local_light(pos=vec(0, 0, 0), color=color.white)
 more_sunlight = local_light(pos=vec(0, 0, 0), color=color.white)  # I found adding two lights was about right
 
-# create the Earth object
-earth = sphere(radius=earth_radius, texture=textures.earth, flipx=False, shininess=0.9)
-
-
 class EarthArrows:
-    def __init__(self, scale=0.5):
+    def __init__(self, scale=0.5, radius_earth=earth_radius, latitude=52, tilt=23):
         self._scale = scale
+
         axis = scale * vec(sin(radians(0 - (90 - latitude))), cos(radians(0 - (90 - latitude))), 0)
-        self._from_uk_up_arrow = arrow(shaftwidth=earth_radius / 5., axis=axis, color=color.red)
+        self._from_uk_up_arrow = arrow(shaftwidth=radius_earth / 5., axis=axis, color=color.red)
         # UK-arrow faces the sun (axisE points away from the sun)... in January
         self._from_uk_up_arrow.rotate(angle=radians(90), axis=vec(0, 1, 0))  # start at midnight
-
-        self._earth_sun_arrow = arrow(shaftwidth=earth_radius / 3, color=color.yellow)
+        # unit-vector on earth pointing to the sun
+        self._earth_sun_arrow = arrow(shaftwidth=radius_earth / 3, color=color.yellow)
 
         axis = scale * vec(sin(radians(tilt)), cos(radians(tilt)), 0)
-        self._earth_axis_arrow = arrow(shaftwidth=earth_radius / 5, axis=axis, color=color.cyan)
+        self._earth_axis_arrow = arrow(shaftwidth=radius_earth / 5, axis=axis, color=color.cyan)
 
     def update(self, position, rotation_angle):
         self._earth_axis_arrow.pos = position
         self._earth_sun_arrow.pos = position
         self._from_uk_up_arrow.pos = position
         self._from_uk_up_arrow.rotate(angle=rotation_angle, axis=vec(sin(radians(tilt)), cos(radians(tilt)), 0))
-        self._earth_sun_arrow.axis = -norm(earth.pos)  # unit-vector on earth pointing to the sun
+        self._earth_sun_arrow.axis = -norm(position)
 
     def sun_energy_transfer(self):
         ## arrows are unit-vectors (times scale factor), so dot product is cos(angle between)
@@ -84,23 +86,7 @@ class EarthArrows:
         energy_transfer = 0 if dot_product <= 0 else dot_product / self._scale
         return energy_transfer
 
-
-# create the Moon
-moon = sphere(radius=moon_radius, texture="http://i.imgur.com/YPg4RPU.jpg", flipx=True, flipy=True, shininess=0.9)
-scene.camera.follow(sun)  # have the camera default to centering on the sun
-
-
-# stopped working
-# let's allow the user to change the camera view point
-def changeView():  # define a new function by name
-    chosenObject = scene.mouse.pick()  # find out which object the user clicked on
-    if chosenObject is not None:  # if it is a real object that they clicked on ...
-        scene.camera.follow(chosenObject)  # .. then have the camera follow that object
-
-
-scene.bind("mousedown", changeView)  # allow mouse clicks to call the changeView function
-
-# set up a function that interacts with the slider that controls how fast the program animates
+earth_arrows = EarthArrows(latitude=52) # UK latitude, -38 for melbourne
 simulation_speed = min(simulation_speed, 1 / 24.)  ###RS
 program_speed = simulation_speed  # default setting
 
@@ -121,8 +107,6 @@ program_speed = simulation_speed  # default setting
 #     $("#speed_slider").slider(value=0.02, step=0.0005, min=0, max=0.05, range="min", slide=set_speed, change=set_speed)
 #
 # )
-
-earth_arrows = EarthArrows()
 
 list_of_months = ['January', 'February', 'March', 'April',
                   'May', 'June', 'July', 'August',
