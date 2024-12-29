@@ -4,7 +4,7 @@ from ..toolbox.spring import Spring
 
 
 class HarmonicOscillator:
-    def __init__(self, left_ball, right_ball, pos=vector(0, 0, 0), spring_constant=1.0, radius=20, coils=15,
+    def __init__(self, left_ball, right_ball, spring_constant=1.0, radius=20, coils=15,
                  thickness=3, colour=color.yellow, draw=True):
         self._left_ball = left_ball
         self._right_ball = right_ball
