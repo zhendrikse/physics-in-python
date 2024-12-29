@@ -38,20 +38,26 @@ You may zoom in at any particular point by clicking your mouse button.
   in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Electricdipolefield)
 - Dipole field code base [on Trinket](https://trinket.io/glowscript/a2b8b655fa07)
 
-## Interactive visualization of Faraday's law
+## Interactive visualization of electric and magnetic fields
 
-This code visualizes Faraday's law by simulating an electric current (of electric charges) running through a wire. 
+The first dynamic simulation illustrates Faraday's law by visualizing an electric current (of electric charges) running through a wire. 
+The second static simulation shows the electric field inside a series of charged rings.
 
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Faradayslaw">
   <img alt="Faraday's law" width="45%" height="45%" src="./src/demos/images/faradays_law.png" title="Click to animate"/>
 </a>
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/ChargedRings">
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedrings">
   <img alt="Charged rings" width="45%" height="45%" src="./src/demos/images/charged_rings.png" title="Click to animate"/>
 </a>
 
-- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/faradays_law) and
+- Faraday's law in action [on Trinket](https://zegerh-6085.trinket.io/sites/faradays_law) and
   in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Faradayslaw)
 - Code base [on Trinket](https://trinket.io/library/trinkets/d3934e117c2e)
+
+
+- Charged rings in action [on Trinket](https://zegerh-6085.trinket.io/sites/charged_rings) and
+  in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedrings)
+- Code base [on Trinket](https://trinket.io/library/trinkets/0a61629dcbdb)
 
 ## Electron spinning around a charged ring
 
