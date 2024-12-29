@@ -43,7 +43,7 @@ You may zoom in at any particular point by clicking your mouse button.
 This code visualizes Faraday's law by simulating an electric current (of electric charges) running through a wire. 
 
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Faradayslaw">
-  <img alt="Faraday's law" width="50%" height="50%" src="./src/demos/images/faradays_law.png title="Click to animate""/>
+  <img alt="Faraday's law" width="50%" height="50%" src="./src/demos/images/faradays_law.png" title="Click to animate"/>
 </a>
 
 - Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/faradays_law) and
