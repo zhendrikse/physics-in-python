@@ -198,15 +198,32 @@ The code pertaining to the demos in this section is available under the
 on [glowscript.org](https://glowscript.org).
 
 
-## [Kepler's laws](https://trinket.io/library/trinkets/11c6cd8b5622) of equal areas
+##  Kepler's law of equal areas
 
-<a href="https://zegerh-6085.trinket.io/sites/keplers_law">
+A dynamic visualization of Kepler's laws.
+
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw">
   <img alt="Kepler's laws" width="50%" height="50%" src="./src/demos/images/keplers_law.png"/>
 </a>
 
-## Daylight variations &mdash; earth-sun-moon model
+- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/keplers_law) 
+  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw)
+- Code base [on Trinket](https://trinket.io/library/trinkets/11c6cd8b5622)
 
-Coming soon.
+
+## Daylight variations &mdash; sun-earth-moon model
+
+A not accurate to scale sun-earth-moon model, but very detailed and instructive nonetheless! It shows the per day
+incoming energy from the sun (at a given latitude), as well as the variations in the length of
+the days per season. By clicking on the sun or earth, the camera perspective can be changed as well!
+
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Daylightvariations">
+  <img alt="Daylight variations" width="40%" height="40%" src="./src/demos/images/daylight_variations.png"/>
+</a>
+
+- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/daylight_variations) 
+  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Daylightvariations)
+- Code base [on Trinket](https://trinket.io/library/trinkets/d218d43e551a)
 
 # Kinematics
 

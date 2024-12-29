@@ -1,6 +1,6 @@
 #Web VPython 3.2
 
-from vpython import arrow, vec, hat, sphere, color, sin, cos, pi, canvas, exp, mag
+from vpython import arrow, vec, hat, sphere, color, sin, cos, pi, canvas, exp, mag, arange, rate
 
 title = """Electric field of a point charge 
 
