@@ -82,7 +82,7 @@ omega = sqrt(ks / ball_2.mass)
 oscillator = HarmonicOscillator(ball_1, ball_2, spring_constant=ks, radius=0.40, coils=10,
                                 thickness=0.2, colour=vector(.7, .5, 0))
 
-eqpos = cylinder(pos=vector(0, U0, 0), axis=vector(0, 18, 0), radius=0.05, color=vector(.6, .6, .6))
+equilibrium_position = cylinder(pos=vector(0, U0, 0), axis=vector(0, 18, 0), radius=0.1, color=color.green)
 
 curve_positions = [vector(xx, .5 * ks * xx ** 2 + U0, 0) for xx in arange(-5.8, 5.3, 0.1)]
 well = curve(radius=0.2, pos=curve_positions, color=vector(.7, .7, .7))
@@ -101,10 +101,7 @@ for Ux in arange(0.5 * dU, 7.51 * dU, dU):
     energy_levels.append(l1)
 
 mouse_clicked = False
-
-
 def on_mouse_click():
-    print("Mouse clicked")
     global mouse_clicked
     mouse_clicked = True
 
@@ -114,16 +111,16 @@ spring_frame.bind("click", on_mouse_click)
 t = 0.0
 dt = 0.003
 old_level = None
-level = None
-RUN = 0
-Ampl = 1
+current_level = None
+run = False
+amplitude = 1
 
 while 1:
-    if not mouse_clicked and RUN:
-        rate(20)
+    if (not mouse_clicked) and run:
+        rate(200)
         #oscillator.pull(Ampl)
         #ball_2.pos = vector(Ampl * cos(omega * t), ball_2.pos.y, ball_2.pos.z)
-        oscillator.pull(Ampl * cos(omega * t))
+        oscillator.pull(amplitude * cos(omega * t))
         # spring.modify(axis=ball_2.pos - ball_1.pos)
         oscillator.increment_by(dt)
         t += dt
@@ -134,19 +131,23 @@ while 1:
             continue
         print("Picked a level" + str(selected_level.pos))
         if selected_level in energy_levels:
-            old_level = level
-            level = selected_level
-            level.color = color.red
+            print("Level is in energy levels")
+            old_level = current_level
+            current_level = selected_level
+            current_level.color = color.red
             if old_level is not None:
                 old_level.color = color.white
-            Ampl = abs(level.pos.x)
-            vline1.pos = level.pos
-            vline2.pos = level.pos + level.axis
-            RUN = 1
+            amplitude = abs(current_level.pos.x) * .025
+            print("Pulling osc by ", amplitude * cos(omega * t))
+            oscillator.pull(amplitude * cos(omega * t))
+            vline1.pos = current_level.pos
+            vline2.pos = current_level.pos + current_level.axis
+            run = True
+            mouse_clicked = False
         elif scene.mouse.pos.y > .5 * ks * 5.2 ** 2 + U0:
-            RUN = 0
-            if level is not None:
-                level.color = color.white
+            run = False
+            if current_level is not None:
+                current_level.color = color.white
             while ball_2.position.x < 2 * L0:
                 rate(200)
                 #ball_2.position.x += L0 / 100
