@@ -4,9 +4,8 @@ from vpython import scene, curve, color, vector, arrow, arange, ring, pi, vec, l
 
 title = """Add electric field of concentric rings to get E of disk on axis
 
-&#x2022; Original by Ruth Chabay 2004
-&#x2022; Updated by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a>
-&#x2022; Located in the <a href="https://github.com/zhendrikse/physics-in-python/">Physics in Python GitHub repository</a>
+&#x2022; Original <a href="https://lectdemo.github.io/virtual/15_E_disk_add_rings.html">15_E_disk_add_rings.py</a> by Ruth Chabay 2004
+&#x2022; Maintained by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a> in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
 &#x2022; &lt;s&gt; &rarr; screenshot
 &#x2022; &lt;v&gt; &rarr; verbose output
 &#x2022; &lt;space&gt; &rarr; toggle background color

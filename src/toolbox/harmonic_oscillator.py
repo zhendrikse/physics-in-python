@@ -8,17 +8,16 @@ class HarmonicOscillator:
                  thickness=3, colour=color.yellow, draw=True):
         self._left_ball = left_ball
         self._right_ball = right_ball
-        distance = self._left_ball.distance_to(self._right_ball)
-        self._axis = distance
-        self._spring = Spring(position=pos - distance / 2 - vector(left_ball.radius, 0, 0), axis=distance,
+        self._axis = self._left_ball.distance_to(self._right_ball)
+        self._spring = Spring(position=left_ball.position, axis=self._axis,
                               spring_constant=spring_constant, radius=radius, thickness=thickness, colour=colour,
                               coils=coils, draw=draw)
 
     def increment_by(self, dt):
         self._right_ball.move(self._spring.force, dt)
         self._left_ball.move(-self._spring.force, dt)
-        distance = self._left_ball.distance_to(self._right_ball)
-        self._spring.update(distance, -distance / 2 - vector(self._left_ball.radius, 0, 0))
+        self._axis = self._left_ball.distance_to(self._right_ball)
+        self._spring.update(self._axis, position=self._left_ball.position)
 
     def pull(self, delta):
         self._left_ball.shift(delta * hat(self._axis))
