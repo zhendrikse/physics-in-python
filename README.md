@@ -172,7 +172,7 @@ the velocity distribution of the colliding atoms eventually approaches the calcu
 theoretical velocity distribution.
 
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas">
-  <img alt="Hard sphere gas" width="50%" height="50%" src="./src/demos/images/hard_sphere_gas.png"/>
+  <img alt="Hard sphere gas" width="40%" height="40%" src="./src/demos/images/hard_sphere_gas.png"/>
 </a>
 
 - Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/hard_sphere_gas) 
@@ -184,7 +184,7 @@ theoretical velocity distribution.
 This demo models the magnetization at various temperatures using a two-dimensional Ising spin lattice.
 
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Isingspin">
-  <img alt="Ising spin model" width="50%" height="50%" src="./src/demos/images/ising_spin_model.png"/>
+  <img alt="Ising spin model" width="40%" height="40%" src="./src/demos/images/ising_spin_model.png"/>
 </a>
 
 - Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/ising_spin_model) 
