@@ -37,6 +37,8 @@ electric_field_colors[1] = colorEdimmed[colorScheme]
 
 N = 24
 
+# class ElectricField:
+#     def __init__(self):
 
 def arrow_positions():
     positions = []
@@ -57,25 +59,23 @@ def arrow_positions():
 
     n = len(positions)
     while counter < count_max:
-        minp1 = 0
-        minp2 = 1
-        mind = mag2(positions[minp1] - positions[minp2])
-        maxd = mind
+        min_distance_positions = [positions[0], positions[1]]
+        min_distance = mag2(positions[0] - positions[1])
+        max_distance = min_distance
 
         for i in arange(0, n - 1):
             for j in arange(i + 1, n):
-                d = mag2(positions[i] - positions[j])
-                if d < mind:
-                    mind = d;
-                    minp1 = i
-                    minp2 = j
-                if d > maxd:
-                    maxd = d
-        p1 = positions[minp1]
-        p2 = positions[minp2]
+                distance = mag2(positions[i] - positions[j])
+                if distance < min_distance:
+                    min_distance = distance
+                    min_distance_positions = [positions[i], positions[j]]
+                if distance > max_distance:
+                    max_distance = distance
 
-        positions[minp2] = norm(p1 + 1.1 * (p2 - p1))
-        positions[minp1] = norm(p1 - 0.1 * (p2 - p1))
+        p1 = min_distance_positions[0]
+        p2 = min_distance_positions[1]
+        min_distance_positions[0] = norm(p1 + 1.1 * (p2 - p1))
+        min_distance_positions[1] = norm(p1 - 0.1 * (p2 - p1))
 
         counter += 1
 
