@@ -223,7 +223,7 @@ incoming energy from the sun (at a given latitude), as well as the variations in
 the days per season. By clicking on the sun or earth, the camera perspective can be changed as well!
 
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Daylightvariations">
-  <img alt="Daylight variations" width="40%" height="40%" src="./src/demos/images/daylight_variations.png title="Click to animate""/>
+  <img alt="Daylight variations" width="40%" height="40%" src="./src/demos/images/daylight_variations.png" title="Click to animate"/>
 </a>
 
 - Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/daylight_variations) 
