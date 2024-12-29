@@ -1,4 +1,4 @@
-from vpython import vector, mag, norm, helix
+from vpython import vector, mag, norm, helix, color
 
 zero_force = vector(0, 0, 0)
 
@@ -12,20 +12,22 @@ class Spring:
                  radius=0.5,
                  thickness=0.03,
                  coils=10,
+                 colour = color.yellow,
                  draw=True):
-        self._spring = self._vpython_helix(position, axis, spring_constant, radius, thickness, coils) if draw else None
+        self._spring = self._vpython_helix(position, axis, spring_constant, radius, thickness, coils, colour) if draw else None
         self._position = position
         self._axis = axis
         self._spring_constant = spring_constant
         self._equilibrium_size = equilibrium_size if equilibrium_size else mag(axis)
 
     @staticmethod
-    def _vpython_helix(position, axis, spring_constant, radius, thickness, coils):
+    def _vpython_helix(position, axis, spring_constant, radius, thickness, coils, colour):
         spring = helix(pos=position,
                        axis=axis,
                        radius=radius,
                        thickness=thickness,
                        spring_constant=spring_constant,
+                       color=colour,
                        coils=coils)
 
         return spring
