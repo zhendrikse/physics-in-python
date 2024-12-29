@@ -2,27 +2,24 @@
 
 from vpython import canvas, color, vector, rate, arrow, pi, box, sphere, cos, sin, arange, curve, mag, cylinder, norm
 
-# needs a code clean-up (seems to now work on Python 2.4/VPython 3.2.9)
+title = """Faraday law: changing-Bs are associated with curly-Es
+&#x2022; Rob Salgado (salgado@physics.syr.edu)
+&#x2022; Maintained by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a> in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
 
-title = """
-Faraday law: changing-Bs are associated with curly-Es
+The thick green vector representing d|B|/dt, i.e. the rate of change of the magnitude 
+of the magnetic field) is associated with the spatial arrangement of the electric field 
+according to the Faraday Law (as evaluated on the green loop). The sense of circulation 
+on the green loop (by the RightHandRule) determines the direction of change of the magnetic 
+field, which is opposite to your thumb.
 
-Rob Salgado (salgado@physics.syr.edu)
-Zeger Hendrikse (github.com/zhendrikse)
+&#x2022; &lt;f&gt; &rarr; show Faraday loop 
+&#x2022; &lt;d&gt; &rarr; dim electric field 
+&#x2022; &lt;n&gt; &rarr; change color-scheme  
+&#x2022; &lt;v&gt; &rarr; verbose output 
+&#x2022; &lt;s&gt; &rarr; screenshot 
+&#x2022; &lt;space&gt; &rarr; pause animation
+&#x2022; &lt;mouse click&gt; &rarr; zoom to selected point
 
-  The thick green vector representing d|B|/dt, i.e. the rate of change of the magnitude 
-  of the magnetic field) is associated with the spatial arrangement of the electric field 
-  according to the Faraday Law (as evaluated on the green loop). The sense of circulation 
-  on the green loop (by the RightHandRule) determines the direction of change of the magnetic 
-  field, which is opposite to your thumb.
-
-    &lt;f&gt; &rarr; show Faraday loop
-    &lt;d&gt; &rarr; dim electric field 
-    &lt;n&gt; &rarr; change color-scheme  
-    &lt;v&gt; &rarr; verbose output
-    &lt;s&gt; &rarr; screenshot
-    &lt;space&gt; &rarr; pause animation
-    &lt;mouse click&gt; &rarr; zoom to selected point
 """
 
 color_scheme = 0  # key n (negative)
@@ -37,7 +34,7 @@ scene.background = background_color[color_scheme]
 scene.background = color.black;
 electric_field_colors = [color.blue, vector(0, 0, .4), color.green]
 scene.caption = "\\( \\Phi_B = \\iint_{\\Sigma(t)} \\vec{B}(t) \\cdot d\\vec{A} \\),\n where \\(d\\vec{A}\\) is an element of area vector of the moving surface Σ(t), and \\(\\vec{B}\\) is the magnetic field."
-# MathJax.Hub.Queue(["Typeset", MathJax.Hub])
+MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 scene.forward = vector(-0.75, -0.10, -0.65)
 scene.range = 2.5
 # scene.ambient = color.gray(0.4)
@@ -55,8 +52,7 @@ magnetic_field_vector_positions = [
     vector(0, 0.25, -2),
     vector(0, -0.25, -2)
 ]
-magnetic_field_vectors = [arrow(pos=arrow_pos, axis=vector(0, 0, 1e-3), shaftwidth=0.04, fixedwidth=1, color=color.red)
-                          for arrow_pos in magnetic_field_vector_positions]
+magnetic_field_vectors = [arrow(pos=arrow_pos, axis=vector(0, 0, 1e-3), shaftwidth=0.04, fixedwidth=1, color=color.red) for arrow_pos in magnetic_field_vector_positions]
 
 N = 8
 dBdt = 0.2
@@ -110,8 +106,7 @@ class Wire:
 electric_field_vectors = get_electric_field_vectors(N)
 electric_field_vector_tails = get_tails_for(electric_field_vectors)
 faraday_vectors = get_faraday_vectors_from(magnetic_field_vectors)
-faraday_loop_positions = [mag(electric_field_vectors[0].pos) * vector(cos(2. * pi * n / 40.), sin(2. * pi * n / 40.), 0)
-                          for n in range(40)]
+faraday_loop_positions = [mag(electric_field_vectors[0].pos) * vector(cos(2. * pi * n / 40.), sin(2. * pi * n / 40.), 0) for n in range(40)]
 faraday_loop = curve(color=faraday_color, pos=faraday_loop_positions, visible=False)
 wire = Wire()
 

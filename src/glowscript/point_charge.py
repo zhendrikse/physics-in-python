@@ -5,8 +5,7 @@ from vpython import arrow, vec, hat, sphere, color, sin, cos, pi, canvas, exp, m
 title = """Electric field of a point charge 
 
 &#x2022; Based on <a href="https://github.com/Physics-Morris/Physics-Vpython/blob/master/6_Point_Charge.py">6_Point_Charge.py</a>
-&#x2022; Updated by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a>
-&#x2022; Located in the <a href="https://github.com/zhendrikse/physics-in-python/">Physics in Python GitHub repository</a>
+&#x2022; Maintained by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a> in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
 &#x2022; Select an object with mouse to zoom in'
 
 """

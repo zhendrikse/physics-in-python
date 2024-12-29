@@ -1,12 +1,18 @@
-##
-# Original: https://github.com/Physics-Morris/Physics-Vpython/blob/master/7_Dipole.py
-# Adapted by Zeger Hendrikse, https://github.com/zhendrikse
-##
+#Web VPython 3.2
+
+title = """Electric field of a dipole 
+
+    &#x2022; Based on <a href="https://github.com/Physics-Morris/Physics-Vpython/blob/master/7_Dipole.py">7_Dipole.py</a>
+    &#x2022; Maintained by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a> in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
+    &#x2022; Select an object with mouse to zoom in'
+
+    """
 
 ec = 1.6E-19  # electron charge
 k = 9E9  # Coulomb constant
 
 from vpython import *
+
 
 class FieldArrow:
     def __init__(self, position, field):
@@ -92,7 +98,8 @@ def on_mouse_click():
 
 
 scene = canvas(width=1000, height=600, align='top', range=3E-13)
-scene.title = "Electric dipole field, click mouse to zoom in"
+scene.title = title
+# scene.background = color.white
 scene.caption = "Electric field \\( \\vec{E} ( \\vec{r} ) = -\\dfrac {1} {4\\pi\\epsilon_0} \\nabla \\bigg( \\dfrac{\\vec{r}  \\cdot \\vec{p}} {r^3} \\bigg) \\), where \\( \\vec{p}=+q(\\vec{r}_+) + -q(\\vec{r}_-) \\)"
 MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 scene.bind('click', on_mouse_click)

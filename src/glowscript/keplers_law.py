@@ -1,16 +1,17 @@
-# Kepler's Laws.py
+Web VPython 3.2
 
-# plots the orbit of a planet in an eccentric orbit to illustrate
-# the sweeping out of equal areas in equal times, with sun at focus
-# The eccentricity of the orbit is random and determined by the initial velocity
-# program uses normalised units (G =1)
+title="""Kepler's law of equal areas
+Plots the orbit of a planet in an eccentric orbit to illustrate
+the sweeping out of equal areas in equal times, with sun at focus.
+The eccentricity of the orbit is random and determined by the 
+initial velocity. The program uses normalised units (G =1).
 
-# program by Peter Borcherds, University of Birmingham, England
-# Updated by Zeger Hendrikse: https://github.com/zhendrikse/physics-in-python
+&#x2022; Original by program by Peter Borcherds, University of Birmingham, England
+&#x2022; Maintained by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a> in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
+
+"""
 
 from vpython import *
-from random import random
-
 
 def month_step(time, offset=20, whole=1):  # mark the end of each "month"
     global ccolor  # have to make it global, since label uses it before it is updated
@@ -25,7 +26,8 @@ def month_step(time, offset=20, whole=1):  # mark the end of each "month"
     return ccolor
 
 
-scene = canvas(title="Kepler's law of equal areas", width=1000, height=1000, range=3.2)
+scene = canvas(title=title, width=1000, height=1000, range=3.2)
+#scene.background = color.white
 duration = 'Period: '
 sun = sphere(color=color.yellow, radius=0.1)  # motion of sun is ignored (or centre of mass coordinates)
 scale = 1.0
