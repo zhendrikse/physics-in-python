@@ -25,7 +25,6 @@ graph_width = 480
 new_graph_interval = 30
 alignment = graph(width=graph_width, height=graph_height, title='sunlight vs t (days)', xmax=new_graph_interval, ymin=-0.1, ymax=1)  # xmax=365
 alignmentGraph = gcurve(graph=alignment, interval=1)
-t = 0
 
 # constants - use these to change the scale and initial positions of everything
 # the basic issue here is that realistic size scales would be impossible to see, 
@@ -65,7 +64,7 @@ earth = sphere(radius=earthRadius, texture=textures.earth, flipx=False, shinines
 uk_arrow_up = arrow(shaftwidth=earthRadius / 5., axis=vec(sin(radians(0 - (90 - latitude))), cos(radians(0 - (90 - latitude))), 0),
                     color=color.red)
 ## UK-arrow faces the sun (axisE points away from the sun)... in January
-uk_arrow_up.rotate(angle=90 * DEG, axis=vec(0, 1, 0))  # start at midnight
+uk_arrow_up.rotate(angle=radians(90), axis=vec(0, 1, 0))  # start at midnight
 axis_sun_earth = arrow(shaftwidth=earthRadius / 3, color=color.yellow)
 axis_earth = arrow(shaftwidth=earthRadius / 5, axis=vec(sin(radians(tilt)), cos(radians(tilt)), 0), color=color.cyan)
 
@@ -108,19 +107,17 @@ programSpeed = simspeed  # default setting
 # )
 
 # below is the main loop of the program - everything above is "setup" and now we are in the main "loop" where all the action occurs
-t = 0
-tt = 0
+month_counter = 0
+hours_counter = 0
 accum = 0
-while -earthAngle <= 365:  # this will make it NO LONGER loop forever --- IT STOPS AFTER ONE YEAR
+while -earthAngle <= 365:  # stop after one year
 
     rate(100)  # this limits the animation rate so that it won't depend on computer/browser processor speed
+    hours_counter += 1
 
     # update the position of the Earth and Moon by using basic circle trigonometry
     earth.pos = vec(astronomicalUnit * cos(radians(earthAngle)), 0, astronomicalUnit * sin(radians(earthAngle)))
     moon.pos = earth.pos + vec(earthMoonDistance * cos(radians(moonAngle)), 0, earthMoonDistance * sin(radians(moonAngle)))
-
-    ## RS
-    tt += 1
     axis_earth.pos = earth.pos
     axis_sun_earth.pos = earth.pos
     uk_arrow_up.pos = earth.pos
@@ -132,13 +129,12 @@ while -earthAngle <= 365:  # this will make it NO LONGER loop forever --- IT STO
     else:
         alignmentGraph.plot(-earthAngle, 0)  # nighttime... no energy transfer
 
-    if -earthAngle > (t + 1) * new_graph_interval:  # new graph
-        t = t + 1
-        print("t=", t, "\t accum=", accum, " from tt=", tt, "accum/tt=", accum / tt)
-        alignment = graph(width=graph_width, height=graph_height, xmin=t * new_graph_interval, xmax=(t + 1) * new_graph_interval, ymin=-0.1,
+    if -earthAngle > (month_counter + 1) * new_graph_interval:  # new month, new graph
+        month_counter += 1
+        print("t=", month_counter, "\t accum=", accum, " from day=", round(hours_counter / 24), "accum/hours=", accum / hours_counter)
+        alignment = graph(width=graph_width, height=graph_height, xmin=month_counter * new_graph_interval, xmax=(month_counter + 1) * new_graph_interval, ymin=-0.1,
                           ymax=1)  # xmax=365
         alignmentGraph = gcurve(graph=alignment, interval=1)
-    ## RS
 
     # Calculate the amount by which the position of the Earth and Moon change each loop cycle
     earthAngle -= earthOrbitRate * programSpeed  # -= means subtract the following  - we subtract to make counterclockwise orbits seen from above
@@ -155,4 +151,4 @@ while -earthAngle <= 365:  # this will make it NO LONGER loop forever --- IT STO
     sun.rotate(angle=radians(programSpeed * 16), axis=vec(0, 1, 0))  
     
 
-print("t=", t, "\t accum=", accum, " from tt=", tt, "accum/tt=", accum / tt)
+print("t=", month_counter, "\t accum=", accum, " from day=", round(hours_counter) / 24, "accum/hours=", accum / hours_counter)

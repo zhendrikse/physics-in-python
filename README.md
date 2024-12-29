@@ -308,6 +308,12 @@ original code more object-oriented and make it [reveal its intent](https://marti
   <img alt="Robot for turtle graphics" width="45%" height="50%" src="./src/demos/images/robot.png"/>
 </a>
 
+# Acknowledgements
+
+- [Ruth Chabay and Bruce Sherwood](https://www.aapt.org/aboutaapt/Chabay_Sherwood_2014-Halliday-Resnick-Award.cfm)
+- [Rhett Allain](https://en.wikipedia.org/wiki/Rhett_Allain)
+- [Rob Salgado](https://www.linkedin.com/in/robertobsalgado)
+
 # References
 
 - [MyScript](https://webdemo.myscript.com/): enter text, equations, or diagrams by hand, and effortlessly convert 
@@ -318,7 +324,7 @@ Make sure to check it out, it simply is brilliant.
 
 - [Manim](https://github.com/3b1b/manim), an animation engine for explanatory math videos
 
-## VPython
+## Other VPython resources
 
 - [Physics through Glowscript - An introductory course](https://bphilhour.trinket.io/physics-through-glowscript-an-introductory-course), an excellent tutorial!
 
