@@ -107,7 +107,7 @@ set-up of the disk by adding a charged ring at each mouse click.
 - Charged disk builder code base [on Trinket](https://trinket.io/library/trinkets/3456b49e462d)
 
 
-## Visualizing [electromagnetic waves](https://trinket.io/library/trinkets/b8d62b38e852)
+## Visualization of electromagnetic waves
 
 Both of the two dynamic simulations below visualize the propagation of electromagnetic waves. In the first demo,
 the electromagnetic waves emanate from an antenna, in the second they are propagating through a vacuum.
@@ -128,6 +128,17 @@ the electromagnetic waves emanate from an antenna, in the second they are propag
   and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Electromagneticwave)
 - Electromagnetic waves code [on Trinket](https://trinket.io/library/trinkets/b8d62b38e852)
 
+## Symmetry planes within a cubic lattice
+
+This simple visualization allows the viewer to alternate between some planes of symmetry within a cubic crystal.
+
+<a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes ">
+  <img alt="Symmetry planes" width="40%" height="40%" src="./src/demos/images/crystal_planes.png" title="Click to animate"/>
+</a>
+
+- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/relativistic_proton) 
+  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes)
+- Code base [on Trinket](https://trinket.io/library/trinkets/78efbf3b2a97)
 
 # Special relativity &mdash; space-time visualizations and more
 
