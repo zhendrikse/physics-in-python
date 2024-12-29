@@ -5,8 +5,7 @@ from vpython import scene, arange, pi, sphere, vector, sin, cos, ring, vec, arro
 title = """Electric field inside charged rings. 
 
 &#x2022; Original <a href="https://lectdemo.github.io/virtual/18-Erings.html">18-Erings.html</a>
-&#x2022; Updated by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a>
-&#x2022; Located in the <a href="https://github.com/zhendrikse/physics-in-python/">Physics in Python GitHub repository</a>
+&#x2022; Maintained by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a> in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
 &#x2022; &lt;f&gt; &rarr; toggle electric field arrows
 &#x2022; &lt;s&gt; &rarr; screenshot
 &#x2022; &lt;v&gt; &rarr; verbose output

@@ -5,8 +5,7 @@ It does not include gravitational physics or Newtonian analysis &mdash; just cir
 
 &#x2022; Based on the <a href="https://trinket.io/embed/glowscript/575a4ed5d362597041cd6f84">Sun-Earth-Moon model by B. Philhour</a>
 &#x2022; Modified by Rob Salgado to model the sunshine seen by the United Kingdom
-&#x2022; Updated by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a>
-&#x2022; Maintained in the <a href="https://github.com/zhendrikse/physics-in-python/">Physics in Python</a> GitHub repository
+&#x2022; Maintained by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a> in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
 
 &#x2022; The red arrow points "upward from the UK" (at 52 degrees latitude [from the equator])
 &#x2022; The cyan arrow is the rotational axis of the earth, tilted at 23 degrees from vertical
@@ -61,7 +60,7 @@ more_sunlight = local_light(pos=vec(0, 0, 0), color=color.white)  # I found addi
 class EarthArrows:
     def __init__(self, scale=0.5, radius_earth=earth_radius, latitude=52, tilt=23):
         self._scale = scale
-        self._rotation_axis = vec(sin(radians(tilt)), cos(radians(tilt)), 0)
+        self._rotation_axis = scale * vec(sin(radians(tilt)), cos(radians(tilt)), 0)
         axis = scale * vec(sin(radians(0 - (90 - latitude))), cos(radians(0 - (90 - latitude))), 0)
         self._from_uk_up_arrow = arrow(shaftwidth=radius_earth / 5., axis=axis, color=color.red)
         # UK-arrow faces the sun (axisE points away from the sun)... in January
@@ -69,7 +68,6 @@ class EarthArrows:
         # unit-vector on earth pointing to the sun
         self._earth_sun_arrow = arrow(shaftwidth=radius_earth / 3, color=color.yellow)
 
-        axis = scale * vec(sin(radians(tilt)), cos(radians(tilt)), 0)
         self._earth_axis_arrow = arrow(shaftwidth=radius_earth / 5, axis=axis, color=color.cyan)
 
     def update(self, position, rotation_angle):
@@ -111,25 +109,20 @@ program_speed = simulation_speed  # default setting
 #
 # )
 
-graph_height = 70
-graph_width = 480
-daylight_graph = graph(width=graph_width, height=graph_height * 4, title="Hours daylight",
-                  xmax=365, ymin=8, ymax=16)
-daylight_curve = gcurve(graph=daylight_graph, color=color.red)
-equator_curve = gcurve(graph=daylight_graph, color=color.cyan)
-_ = [equator_curve.plot(day, 12) for day in range(365)]
-energy_curve = gcurve()
-
-new_graph_interval = 30
 list_of_months = ['January', 'February', 'March', 'April',
                   'May', 'June', 'July', 'August',
                   'September', 'October', 'November', 'December']
+graph_height = 70
+graph_width = 480
+new_graph_interval = 30
+alignment = graph(width=graph_width, height=graph_height, title="Sunlight in " + list_of_months[0],
+                  xmax=new_graph_interval, ymin=-0.1, ymax=1)  # xmax=365
+alignment_graph = gcurve(graph=alignment, interval=1)
 
 # below is the main loop of the program - everything above is "setup" and now we are in the main "loop" where all the action occurs
 month_counter = 0
 hours_counter = 0
 accum = 0
-daylight = 0
 while -earth_angle <= 365:  # stop after one year
 
     rate(100)  # this limits the animation rate so that it won't depend on computer/browser processor speed
@@ -138,25 +131,21 @@ while -earth_angle <= 365:  # stop after one year
     # update the position of the Earth and Moon by using basic circle trigonometry
     earth.pos = astronomical_unit * vec(cos(radians(earth_angle)), 0, sin(radians(earth_angle)))
     moon.pos = earth.pos + earth_moon_distance * vec(cos(radians(moon_angle)), 0, sin(radians(moon_angle)))
-    earth_arrows.update(earth.pos, radians(program_speed * 365))
 
+    earth_arrows.update(earth.pos, radians(program_speed * 365))
     sun_energy_transfer = earth_arrows.sun_energy_transfer()
     accum += sun_energy_transfer
-    daylight += sun_energy_transfer
-    if hours_counter % 24 == 0:
-        daylight_curve.plot(int(hours_counter / 24), daylight + 7.2)
-        daylight =0
 
-    if -earth_angle > month_counter * new_graph_interval:  # new month, new graph
-        print(list_of_months[month_counter%12], "\t accum=", accum, " from days=", round(hours_counter / 24),
-              "accum/hours=", accum / hours_counter)
-        energy_graph = graph(title="Sunlight in " + list_of_months[month_counter%12], width=graph_width, height=graph_height,
-                             xmin=month_counter * new_graph_interval, xmax=(month_counter + 1) * new_graph_interval,
-                             ymin=-0.1,
-                             ymax=1)
-        energy_curve = gcurve(graph=energy_graph, interval=1)
+    alignment_graph.plot(-earth_angle, sun_energy_transfer)
+    if -earth_angle > (month_counter + 1) * new_graph_interval:  # new month, new graph
         month_counter += 1
-    energy_curve.plot(-earth_angle, sun_energy_transfer)
+        print(list_of_months[month_counter-1], "\t accum=", accum, " from days=", round(hours_counter / 24),
+              "accum/hours=", accum / hours_counter)
+        alignment = graph(title="Sunlight in " + list_of_months[month_counter-1], width=graph_width, height=graph_height,
+                          xmin=month_counter * new_graph_interval, xmax=(month_counter + 1) * new_graph_interval,
+                          ymin=-0.1,
+                          ymax=1)  # xmax=365
+        alignment_graph = gcurve(graph=alignment, interval=1)
 
     # Calculate the amount by which the position of the Earth and Moon change each loop cycle
     earth_angle -= earth_orbit_rate * program_speed  # -= means subtract the following  - we subtract to make counterclockwise orbits seen from above
@@ -171,5 +160,5 @@ while -earth_angle <= 365:  # stop after one year
     # Rotate the Sun with a period of about 22 days
     sun.rotate(angle=radians(program_speed * 16), axis=vec(0, 1, 0))
 
-print(list_of_months[month_counter % 12], "\t accum=", accum, " from days=", round(hours_counter) / 24, "accum/hours=",
+print(list_of_months[month_counter-1], "\t accum=", accum, " from days=", round(hours_counter) / 24, "accum/hours=",
       accum / hours_counter)
