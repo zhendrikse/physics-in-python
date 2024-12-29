@@ -19,7 +19,7 @@ It does not include gravitational physics or Newtonian analysis &mdash; just cir
 &#x2022; The yellow arrow points from the earth to the sun.
 """
 
-simulation_speed = 0.5
+simspeed = 0.5
 graph_height = 70
 graph_width = 480
 new_graph_interval = 30
@@ -85,8 +85,8 @@ def changeView():  # define a new function by name
 scene.bind("mousedown", changeView)  # allow mouse clicks to call the changeView function
 
 # set up a function that interacts with the slider that controls how fast the program animates
-simulation_speed = min(simulation_speed, 1 / 24.)  ###RS
-programSpeed = simulation_speed  # default setting
+simspeed = min(simspeed, 1 / 24.)  ###RS
+programSpeed = simspeed  # default setting
 
 
 # def setspeed():
