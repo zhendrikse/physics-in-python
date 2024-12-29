@@ -193,7 +193,7 @@ Coming soon.
 ## Kinematics
 
 The code pertaining to the demos in this section is available under the 
-[relativity tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/)
+[kinematics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/)
 on [glowscript.org](https://glowscript.org).
 
 ### Simple Harmonic oscillator
