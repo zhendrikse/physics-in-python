@@ -209,6 +209,7 @@ A simple harmonic oscillator is shown by letting two balls vibrate on a spring.
 
 An N-body coupled harmonic oscillator lets you play around with an arbitrary 
 number of vibrating beads coupled on both sides by springs!
+
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/N-bodycoupledoscillator">
   <img alt="N-body coupled oscillator" width="60%" height="60%" src="./src/demos/images/n_body_coupled_oscillator.png"/>
 </a>
