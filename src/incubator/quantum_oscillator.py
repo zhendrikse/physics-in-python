@@ -79,7 +79,7 @@ omega = sqrt(ks / ball_2.mass)
 # spring = helix(pos=ball_1.pos, axis=vector(ball_2.pos - ball_1.pos), radius=0.40, coils=10,
 #               thickness=0.2, color=vector(.7, .5, 0))
 
-oscillator = HarmonicOscillator(ball_1, ball_2, ball_1.position, spring_constant=ks, radius=0.40, coils=10,
+oscillator = HarmonicOscillator(ball_1, ball_2, spring_constant=ks, radius=0.40, coils=10,
                                 thickness=0.2, colour=vector(.7, .5, 0))
 
 eqpos = cylinder(pos=vector(0, U0, 0), axis=vector(0, 18, 0), radius=0.05, color=vector(.6, .6, .6))
@@ -149,7 +149,8 @@ while 1:
                 level.color = color.white
             while ball_2.position.x < 2 * L0:
                 rate(200)
-                ball_2.position.x += L0 / 100
+                #ball_2.position.x += L0 / 100
+                oscillator.pull(L0 / 100)
             continue
         else:
             continue
