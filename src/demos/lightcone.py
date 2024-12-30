@@ -17,15 +17,17 @@ title = """Photon moving in space-time
 axis = Base(mesh=True, axis_labels=["x", "ct", "y"], tick_mark_labels=False)
 axis.toggle_xy_mesh()
 
-light_cone_top = cone(pos=vec(0, 10, 0), radius=10, opacity=0.4, axis=vec(0, -10, 0))
+light_cone_top = cone(pos=vec(0, 0, 0), radius=0, opacity=0.4, axis=vec(0, -1, 0))
 light_cone_bottom = cone(pos=vec(0, -10, 0), radius=10, opacity=0.4, axis=vec(0, 10, 0))
-spaceship = label(text="Spaceship", color=color.cyan, box=False)
-photon = label(text="Photon", color=color.yellow, box=False)
+spaceship = label(pos=vec(-3, 0, 0), text="Spaceship", color=color.cyan, box=False)
+photon = label(pos=vec(0, 1, 0), text="Photon", color=color.yellow, box=False)
+
 
 def on_mouse_click():
     pause_animation()
 
 
+dt = 1
 def pause_animation():
     global dt
     dt += 1
@@ -38,7 +40,7 @@ def on_key_press(event):
     if event.key == "t":
         axis.toggle_xy_mesh()
     if event.key == 's':
-        scene.capture("electric_field_of_charged_rings")
+        scene.capture("lightcone_animation")
     if event.key == 'v':
         print("scene.center=" + str(scene.center))
         print("scene.forward=" + str(scene.forward))
@@ -51,9 +53,19 @@ scene.title = title
 scene.forward = vec(-0.25, -0.48, -0.83)
 scene.range = 14
 
+height = 0
+while height <= 11:
+    rate (10)
+    light_cone_top.pos = vec(0, height, 0)
+    light_cone_top.radius = height
+    light_cone_top.axis = vec(0, -height, 0)
+
+    height += dt / 5
+
 t = 0
-dt = 1
 while t < 7:
+    rate(5)
+
     # Update photon
     points(pos=[vec(t * 1.5, t * 1.5, 0)], radius=5, color=color.yellow)
     photon.pos = vec(t * 1.5 + 1, t * 1.5, 0)
@@ -62,7 +74,6 @@ while t < 7:
     points(pos=[vec(-t * .5, t * 1.5, 0)], radius=3, color=color.cyan)
     spaceship.pos = vec(-t * .3 - 3, t * 1.5, 0)
 
-    rate(2)
     t += dt / 5
 
 while True:
