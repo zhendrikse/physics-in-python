@@ -1,6 +1,5 @@
 from vpython import vec, rate, graph, gcurve, color, canvas, label, curve
 
-from ..toolbox.axis import x_hat
 from ..toolbox.timer import Timer
 from ..toolbox.car import Car
 

@@ -1,4 +1,5 @@
-from vpython import vector, vec, cylinder, arrow, points, label, radians, color
+from vpython import vector, vec, cylinder, arrow, points, label, curve, color
+
 from ..toolbox.ball import Ball
 
 x_hat = vector(1, 0, 0)
@@ -33,9 +34,9 @@ class UnitVectors:
 
 
 class Base:
-    def __init__(self, position=vec(0, 0, 0), axis_color=color.yellow, tick_marks_color=color.red, length=10):
+    def __init__(self, position=vec(0, 0, 0), axis_color=color.yellow, tick_marks_color=color.red, length=20, num_tick_marks=None, labels=True, mesh=False):
 
-        num_tick_marks = 9
+        num_tick_marks = length - 1 if not num_tick_marks else num_tick_marks
         tick_increment = length / (num_tick_marks - 1)
         radius = length / 200
         self._axis = []
@@ -59,9 +60,15 @@ class Base:
                 positions.append(pos)
                 label_value = pos.x - position.x if i == 0 else pos.y - position.y if i == 1 else pos.z - position.z
                 label_value = "" if int(num_tick_marks / 2) == j else str(int(label_value))
-                marker = label(pos=pos + offset[i], text=label_value, color=color.gray(0.5), box=False)
+                marker = label(pos=pos + offset[i], text=label_value, color=color.gray(0.5), box=False, visible=labels)
                 self._tick_labels.append(marker)
-        self._tick_marks = points(pos=positions, color=tick_marks_color, radius=radius * 100)
+        self._tick_marks = points(pos=positions, color=tick_marks_color, radius=radius * 50)
+
+        for j in range(num_tick_marks):
+            self._xy_mesh = cylinder(pos=vec(position.x - length / 2, position.y + j * tick_increment - length /2, position.z), axis=x_hat * length, color=color.gray(.5), radius=radius/2, visible=mesh)
+            self._yx_mesh = cylinder(pos=vec(position.x - length / 2 + j * tick_increment, position.y - length /2, position.z), axis=y_hat * length, color=color.gray(.5), radius=radius/2, visible=mesh)
+            self._xz_mesh = cylinder(pos=vec(position.x - length / 2 + j * tick_increment, position.y, position.z - length / 2), axis=z_hat * length, color=color.gray(0.4), radius=radius/2, visible=mesh)
+            self._zx_mesh = cylinder(pos=vec(position.x - length / 2, position.y, position.z - length / 2 + j * tick_increment), axis=x_hat * length, color=color.gray(0.4), radius=radius/2, visible=mesh)
 
 
     def reorient_with(self, other_object):
@@ -78,3 +85,7 @@ class Base:
             self._tick_labels[i].pos += shift
             self._tick_marks.modify(i, pos=self._tick_marks.point(i)["pos"] + shift)
 
+axis=Base(mesh=True)
+
+while True:
+    pass
