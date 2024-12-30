@@ -293,11 +293,20 @@ number of vibrating beads coupled by springs on both sides!
   <img alt="N-body coupled oscillator" width="60%" height="60%" src="./src/demos/images/n_body_coupled_oscillator.png" title="Click to animate"/>
 </a>
 
-
-
 - N-body coupled oscillator code in action [on Trinket](https://zegerh-6085.trinket.io/sites/n_body_coupled_oscillator) 
   and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/N-bodycoupledoscillator)
 - N-body coupled oscillator code base [on Trinket](https://trinket.io/glowscript/5a852a2b7570)
+
+## Newton&apos;s pendulum 
+
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Newtonspendulum">
+  <img alt="Newton's pendulum" width="50%" height="50%" src="./src/demos/images/newtons_pendulum.png" title="Click to animate"/>
+</a>
+
+- Pendulum in action [on Trinket](https://zegerh-6085.trinket.io/sites/newtons_pendulum) 
+  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Newtonspendulum)
+- Pendulum code base [on Trinket](https://trinket.io/glowscript/1b74de8aeee8)
+
 
 ## [Ball on sliding ramp](https://trinket.io/library/trinkets/0731c4e734f8) and [Ball hitting block](https://trinket.io/library/trinkets/0e414ca766d1)
 
@@ -312,12 +321,6 @@ number of vibrating beads coupled by springs on both sides!
 
 <a href="https://zegerh-6085.trinket.io/sites/doppler_effect">
   <img alt="Doppler effect" width="50%" height="50%" src="./src/demos/images/doppler_effect.png" title="Click to animate"/>
-</a>
-
-## [Newton&apos;s pendulum](https://trinket.io/glowscript/1b74de8aeee8)
-
-<a href="https://zegerh-6085.trinket.io/sites/newtons_pendulum">
-  <img alt="Newton's pendulum" width="50%" height="50%" src="./src/demos/images/newtons_pendulum.png" title="Click to animate"/>
 </a>
 
 ## [Floating block](https://trinket.io/library/trinkets/94ed363f8b25)

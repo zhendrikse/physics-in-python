@@ -1,10 +1,12 @@
-from vpython import vector, cos, sin, cylinder, sphere, box, color, rate, scene
-#
-# https://www.leonhostetler.com/blog/newtons-cradle-in-visual-python-201702/
-#
-#
-# https://www.leonhostetler.com/blog/newtons-cradle-in-visual-python-201702/
-#
+Web VPython 3.2
+
+from vpython import vector, cos, sin, cylinder, sphere, box, color, rate, scene, sqrt
+
+title="""Newton's pendulum
+&#x2022; original <a href="https://www.leonhostetler.com/blog/newtons-cradle-in-visual-python-201702/">written by Leon Hostetler</a>
+&#x2022; Maintained by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a> in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
+
+"""
 
 # Constants
 g = 9.80            # (m/s^2)
@@ -12,6 +14,7 @@ L = 10              # Length of the pendulums (m)
 theta_0 = 1.2       # In radians
         
 #scene = canvas(width=400, height=300, align='top')
+scene.title = title
 scene.caption = "\\( \\theta(t)=\\theta_0 \\cos \\bigg( \\sqrt{  \\dfrac {g} {L}} t \\bigg) \\)"
 MathJax.Hub.Queue(["Typeset", MathJax.Hub])
  
