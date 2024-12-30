@@ -1,37 +1,23 @@
-from vpython import vector, vec, cylinder, arrow, points, label, color
+from vpython import points, vec, color, rate, cone, scene, label, arrow, cylinder
 
-from ..toolbox.ball import Ball
+title = """Photon moving in space-time
 
-x_hat = vector(1, 0, 0)
-y_hat = vector(0, 1, 0)
-z_hat = vector(0, 0, 1)
+&#x2022; Written by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a> 
+&#x2022; The code resides in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
+
+&lt;t&gt; &rarr; toggle visibility of xy-mesh  
+&lt;v&gt; &rarr; verbose output
+&lt;s&gt; &rarr; screenshot
+&lt;space&gt; &rarr; change color-scheme 
+&lt;mouse click&gt; &rarr; pause animation
+
+"""
+
+x_hat = vec(1, 0, 0)
+y_hat = vec(0, 1, 0)
+z_hat = vec(0, 0, 1)
 base = [x_hat, y_hat, z_hat]
 label_text = ("x", "y", "z")
-
-def obj_size(obj):
-    if type(obj) == Ball:
-        return vector(obj.radius, obj.radius, obj.radius)
-    else:
-        raise TypeError("Implement the obj_size() function in the axis module for type " + str(type(obj)))
-
-class UnitVectors:
-    def __init__(self, position=vec(0, 0, 0), base_color=color.yellow, scale=1):
-        self._arrows = []
-        self._arrow_labels = []
-        self._position = position
-        for i in range(len(base)):
-            self._arrows += [arrow(pos=position, axis=base[i] * scale, color=base_color)]
-            self._arrow_labels.append(label(pos=position + base[i] * scale, text=label_text[i], color=base_color, box=False))
-
-    def reorient_with(self, other_object):
-        other_objects_position = other_object.position
-        shift = other_objects_position - self._position
-        self._position = other_objects_position
-
-        for i in range(len(self._arrows)):
-            self._arrows[i].pos += shift
-            self._arrow_labels[i].pos += shift
-
 
 class Base:
     def __init__(self, position=vec(0, 0, 0), axis_color=color.yellow, tick_marks_color=color.red, length=20, num_tick_marks=None, axis_labels=label_text, tick_mark_labels=True, mesh=False):
@@ -77,16 +63,57 @@ class Base:
         self._xz_mesh.visible = not self._xz_mesh.visible
         self._zx_mesh.visible = not self._zx_mesh.visible
 
-    def reorient_with(self, other_object):
-        other_objects_position = other_object.position
-        shift = other_objects_position - self._position
-        self._position = other_objects_position
 
-        for i in range(len(self._axis)):
-            self._axis[i].pos += shift
-            self._arrows[i].pos += shift
-            self._arrow_labels[i].pos += shift
+axis = Base(mesh=True, axis_labels=["x", "ct", "y"], tick_mark_labels=False)
+axis.toggle_xy_mesh()
 
-        for i in range(len(self._tick_labels)):
-            self._tick_labels[i].pos += shift
-            self._tick_marks.modify(i, pos=self._tick_marks.point(i)["pos"] + shift)
+light_cone_top = cone(pos=vec(0, 10, 0), radius=10, opacity=0.4, axis=vec(0, -10, 0))
+light_cone_bottom = cone(pos=vec(0, -10, 0), radius=10, opacity=0.4, axis=vec(0, 10, 0))
+spaceship = label(text="Spaceship", color=color.cyan, box=False)
+photon = label(text="Photon", color=color.yellow, box=False)
+
+def on_mouse_click():
+    pause_animation()
+
+
+def pause_animation():
+    global dt
+    dt += 1
+    dt %= 2
+
+
+def on_key_press(event):
+    if event.key == " ":
+        scene.background = color.white if scene.background == color.black else color.black
+    if event.key == "t":
+        axis.toggle_xy_mesh()
+    if event.key == 's':
+        scene.capture("electric_field_of_charged_rings")
+    if event.key == 'v':
+        print("scene.center=" + str(scene.center))
+        print("scene.forward=" + str(scene.forward))
+        print("scene.range=" + str(scene.range))
+
+
+scene.bind("keydown", on_key_press)
+scene.bind("click", on_mouse_click)
+scene.title = title
+scene.forward = vec(-0.25, -0.48, -0.83)
+scene.range = 14
+
+t = 0
+dt = 1
+while t < 7:
+    # Update photon
+    points(pos=[vec(t * 1.5, t * 1.5, 0)], radius=5, color=color.yellow)
+    photon.pos = vec(t * 1.5 + 1, t * 1.5, 0)
+
+    # Update spaceship
+    points(pos=[vec(-t * .5, t * 1.5, 0)], radius=3, color=color.cyan)
+    spaceship.pos = vec(-t * .3 - 3, t * 1.5, 0)
+
+    rate(2)
+    t += dt / 5
+
+while True:
+    rate(100)

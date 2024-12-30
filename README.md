@@ -146,17 +146,29 @@ The code pertaining to the demos in this section is available under the
 [relativity tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Relativity/)
 on [glowscript.org](https://glowscript.org).
 
-## Electric field of a relativistically moving proton
+## Lightcone animation and electric field of a fast moving proton
 
-The code snippet below generates the electric field of a relativistically fast moving proton.
+A three-dimensional lightcone is animated by simultaneously 
+sending off both a photon and a spaceship from the origin.
 
+The other code snippet visualizes an electric field of a
+fast moving (relativistic) proton.
+
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Relativity/program/Lightcone">
+  <img alt="Light cone" width="35%" height="35%" src="./src/demos/images/lightcone.png" title="Click to animate"/>
+</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Relativity/program/Relativisticproton">
   <img alt="Relativistic proton" width="30%" height="30%" src="./src/demos/images/relativistic_proton.png" title="Click to animate"/>
 </a>
 
-- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/relativistic_proton) 
+- Moving proton in action [on Trinket](https://zegerh-6085.trinket.io/sites/relativistic_proton) 
   and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Relativity/program/Relativisticproton)
-- Code base [on Trinket](https://trinket.io/library/trinkets/2aaad6e82cc4)
+- Proton code base [on Trinket](https://trinket.io/library/trinkets/2aaad6e82cc4)
+
+
+- Lightcone animation [on Trinket](https://zegerh-6085.trinket.io/sites/lightcone) 
+  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Relativity/program/Lightcone)
+- Lightcocne code base [on Trinket](https://trinket.io/library/trinkets/2afb9d937b95)
 
 ## Galilean transformation of relative motions in Euclidean plane
 
