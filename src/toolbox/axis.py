@@ -74,8 +74,9 @@ class Base:
             self._yx_mesh[i].visible = not self._yx_mesh[i].visible
 
     def toggle_xz_mesh(self):
-        self._xz_mesh.visible = not self._xz_mesh.visible
-        self._zx_mesh.visible = not self._zx_mesh.visible
+        for i in range(len(self._xz_mesh)):
+            self._xz_mesh[i].visible = not self._xz_mesh[i].visible
+            self._zx_mesh[i].visible = not self._zx_mesh[i].visible
 
     def reorient_with(self, other_object):
         other_objects_position = other_object.position
