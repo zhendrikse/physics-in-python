@@ -1,4 +1,4 @@
-from vpython import vector, vec, cylinder, arrow, points, label, curve, color
+from vpython import vector, vec, cylinder, arrow, points, label, color
 
 from ..toolbox.ball import Ball
 
@@ -84,8 +84,3 @@ class Base:
         for i in range(len(self._tick_labels)):
             self._tick_labels[i].pos += shift
             self._tick_marks.modify(i, pos=self._tick_marks.point(i)["pos"] + shift)
-
-axis=Base(mesh=True)
-
-while True:
-    pass
