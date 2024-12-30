@@ -1,23 +1,42 @@
-from vpython import vec, rate, graph, gcurve, color, canvas, label, curve
+from vpython import vec, rate, graph, gcurve, color, canvas, label, box, cylinder
 
 from ..toolbox.timer import Timer
 from ..toolbox.car import Car
+from ..toolbox.axis import x_hat, z_hat
 
 animation_time = 15  # seconds
 
 scene = canvas(width="800", height="600")
 scene.title = "Relative motion"
-scene.center = vec(0, 0, 0)
-scene.forward = vec(0, -0.35, -1)
-scene.range = 11
+scene.center = vec(0, 0, -5)
+scene.forward = vec(-1, -0.45, -0.04)
+scene.range = 12.5
+
+class Mesh:
+    def __init__(self, position=vec(0, 0, 0), length = 20, num_tick_marks=None):
+        num_tick_marks = length - 1 if not num_tick_marks else num_tick_marks
+        tick_increment = length / (num_tick_marks - 1)
+        radius = length / 200
+        self._zx_mesh, self._xz_mesh = [], []
+        for j in range(num_tick_marks):
+            self._xz_mesh += [
+                cylinder(pos=vec(position.x - length / 2 + j * tick_increment, position.y, position.z - length / 2),
+                         axis=z_hat * length, color=color.gray(0.4), radius=radius / 2, visible=True)]
+            self._zx_mesh += [
+                cylinder(pos=vec(position.x - length / 2, position.y, position.z - length / 2 + j * tick_increment),
+                         axis=x_hat * length, color=color.gray(0.4), radius=radius / 2, visible=True)]
+
+    def shift_by(self, a_shift):
+        for j in range(len(self._xz_mesh)):
+            self._xz_mesh[j].pos += a_shift
+            self._zx_mesh[j].pos += a_shift
+
 
 green_car = Car(position=vec(-animation_time, 0, -5), velocity=vec(1, 0, 0))
 red_car = Car(position=vec(0, 0, 5), colour=color.red)
 red_car.hide_label()
 
-
-road_green_car = curve(pos=[vec(-animation_time, 0, -5), vec(0, 0, -5)])
-road_red_car = curve(pos=[vec(0, 0, 5), vec(animation_time, 0, 5)])
+mesh = Mesh(position=vec(-animation_time / 2, -1, 0), length = 2 * animation_time)
 
 space_time_graph_red = graph(width=350, height=150, title="Space-time graph for red inertial frame", xtitle="Position",
                              ytitle="Time", ymax=2 * animation_time,
@@ -34,23 +53,15 @@ green_curve_red_car = gcurve(graph=space_time_graph_green, color=color.red)
 
 def select_car_in(my_scene):
     selected_object = my_scene.mouse.pick
-    if selected_object is None:
+    if selected_object is None or type(selected_object) is cylinder:
         return
     my_scene.camera.follow(selected_object)
     if selected_object.color == color.green:
-        # scene.forward = vec(-0.00101513, -0.770739, 0.637151)
-        scene.range = 17
         green_car.hide_label()
         red_car.show_label()
-        #axis_green_car.show()
-        #axis_red_car.hide()
     elif selected_object.color == color.red:
-        # scene.forward = vec(0.00813912, -0.581035, -0.813838)
-        scene.range = 11
         red_car.hide_label()
         green_car.show_label()
-        #axis_red_car.show()
-        #axis_green_car.hide()
 
 
 def on_mouse_click():
@@ -58,17 +69,15 @@ def on_mouse_click():
 
 
 scene.bind('click', on_mouse_click)
+#scene.waitfor("click")
 
 timer = Timer(position=vec(0, 5, 0))
 dt = 0.01
 t = 0
-scene.waitfor("click")
 while green_car.position.x <= animation_time:
     rate(1 / dt)
     green_car.move(dt)
-    for i in [0, 1]:
-        road_green_car.modify(i, pos=road_green_car.point(i)["pos"] + dt * green_car.velocity / 2)
-        road_red_car.modify(i, pos=road_red_car.point(i)["pos"] - dt * green_car.velocity / 2)
+    mesh.shift_by(x_hat * dt / 2)
 
     red_curve_green_car.plot(green_car.position.x, t)
     red_curve_red_car.plot(red_car.position.x, t)
@@ -79,11 +88,4 @@ while green_car.position.x <= animation_time:
     timer.update(t)
     t += dt
 
-print("scene.center=", scene.center)
-print("scene.forward=", scene.forward)
-print("scene.range=", scene.range)
-print("t={}\n".format(t))
-
-label(pos=vec(0, 7, 0), text="Galilean transformation: x'=x - vt",
-      color=color.yellow)
-scene.waitfor('click')
+label(pos=vec(0, 7, 0), text="Galilean transformation: x'=x - vt", color=color.yellow)
