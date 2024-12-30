@@ -49,10 +49,10 @@ track = box(pos=vec(tracklength / 2, 0, 0), axis=vec(1, 0, 0),
 ##
 for x in arange(0, 1 + tracklength, 10):
     curve(pos=[vec(x, 0, 0), vec(x, 100, 0)])
-    text(text=x, pos=vec(x, 0, 0), color=color.black)
+    text(text="x", pos=vec(x, 0, 0), color=color.black)
 for y in arange(0, 1 + 100, 10):
     curve(pos=[vec(0, y, 0), vec(tracklength, y, 0)])
-    text(text=y, pos=vec(0, y, 0), color=color.black)
+    text(text="y", pos=vec(0, y, 0), color=color.black)
 
 #
 # block
@@ -74,10 +74,10 @@ scene.camera.follow(block)
 t = 0.
 counter = 0
 
-count_tick = 200  # for ticks at 1-second intervals
+count_tick = 300  # for ticks at 1-second intervals
 dt = 1. / count_tick
 
-## scene.mouse.getclick() #wait for click
+scene.waitfor("click ")
 
 print(t, block.pos)
 while t < 2 * vel_init.y / gmag:

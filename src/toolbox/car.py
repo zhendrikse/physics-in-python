@@ -1,5 +1,6 @@
 from vpython import vec, box, color, label, arrow
 
+from ..toolbox.axis import UnitVectors
 
 class Car:
     def __init__(self, position=vec(0, 0, 0), velocity=vec(0, 0, 0), colour=color.green, draw=True):
@@ -8,6 +9,8 @@ class Car:
         self._car = box(pos=position, length=2.5, height=1, width=1, color=colour) if draw else None
         self._label = label(pos=vec(position.x, position.y + 1.52, position.z), text="Select my perspective",
                             color=colour, line=True) if draw else None
+
+        self._base = UnitVectors(position=position, scale=2) if draw else None
 
     def show_label(self):
         self._label.visible = True
@@ -18,6 +21,7 @@ class Car:
     def _draw(self):
         if self._label:
             self._car.pos = self._position
+            self._base.reorient_with(self)
             self._label.pos = vec(self._position.x, self._position.y + 1.5, self._position.z)
 
     def move(self, dt):
