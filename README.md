@@ -114,7 +114,7 @@ the electromagnetic waves emanate from an antenna, in the second they are propag
 
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Antenna">
   <img alt="Antenna" width="45%" height="45%" src="./src/demos/images/antenna.png" title="Click to animate"/>
-</a>&nbsp;&nbsp;&nbsp;
+</a>
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Electromagneticwave">
   <img alt="Electromagnetic waves" width="50%" height="50%" src="./src/demos/images/electromagnetic_wave.png" title="Click to animate"/>
 </a>
@@ -188,7 +188,7 @@ the velocity distribution of the colliding atoms eventually approaches the calcu
 theoretical velocity distribution.
 
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas">
-  <img alt="Hard sphere gas" width="35%" height="35%" src="./src/demos/images/hard_sphere_gas.png" title="Click to animate"/>
+  <img alt="Hard sphere gas" width="40%" height="40%" src="./src/demos/images/hard_sphere_gas.png" title="Click to animate"/>
 </a>
 
 - Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/hard_sphere_gas) 
