@@ -155,7 +155,7 @@ The other code snippet visualizes an electric field of a
 fast moving (relativistic) proton.
 
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Relativity/program/Lightcone">
-  <img alt="Light cone" width="35%" height="35%" src="./src/demos/images/lightcone.png" title="Click to animate"/>
+  <img alt="Light cone" width="40%" height="40%" src="./src/demos/images/lightcone.png" title="Click to animate"/>
 </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Relativity/program/Relativisticproton">
   <img alt="Relativistic proton" width="30%" height="30%" src="./src/demos/images/relativistic_proton.png" title="Click to animate"/>
@@ -259,27 +259,40 @@ The code pertaining to the demos in this section is available under the
 [kinematics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/)
 on [glowscript.org](https://glowscript.org).
 
-## Simple Harmonic oscillator
+## The (dropping of a) simple harmonic oscillator
 
-The following two scripts visualize harmonic oscillations caused by beads connected by springs.
-A simple harmonic oscillator is shown by letting two balls vibrate on a spring.
+The applications of a simple harmonic oscillator are almost endless. 
+A simple such a harmonic oscillator is shown by letting two balls vibrate on a spring.
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+You may be surprised though to find out what happens when you drop such a simple harmonic oscillator!! 
+
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Harmonicoscillator">
   <img alt="Harmonic oscillator" width="20%" height="20%" src="./src/demos/images/harmonic_oscillator.png" title="Click to animate"/>
 </a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Slinkydrop">
+  <img alt="Slinky drop" width="50%" height="50%" src="./src/demos/images/slinky_drop.png" title="Click to animate"/>
+</a>
+
+- Simple harmonic oscillator in action [on Trinket](https://zegerh-6085.trinket.io/sites/harmonic_oscillator) 
+  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Harmonicoscillator)
+- Simple harmonic oscillator code base [on Trinket](https://trinket.io/library/trinkets/e80e37600b06)
 
 
-An N-body coupled harmonic oscillator lets you play around with an arbitrary 
-number of vibrating beads coupled on both sides by springs!
+- Observe [the slinky drop](https://zegerh-6085.trinket.io/sites/slinkydrop) on Trinket
+  or [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Slinkydrop)
+- View the slinky drop code [on Trinket](https://trinket.io/library/trinkets/9c6757b113dc),
+  which is based on the original [slinky drop](https://rhettallain.com/2019/02/06/modeling-a-falling-slinky/) blog post and [the code presented therein](https://trinket.io/glowscript/e5f14ebee1)
+
+
+The N-body coupled harmonic oscillator is composed of beads connected by springs.
+This coupled harmonic oscillator here lets you play around with an arbitrary 
+number of vibrating beads coupled by springs on both sides!
 
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/N-bodycoupledoscillator">
   <img alt="N-body coupled oscillator" width="60%" height="60%" src="./src/demos/images/n_body_coupled_oscillator.png" title="Click to animate"/>
 </a>
 
-- Simple harmonic oscillator code in action [on Trinket](https://zegerh-6085.trinket.io/sites/harmonic_oscillator) 
-  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Harmonicoscillator)
-- Simple harmonic oscillator code base [on Trinket](https://trinket.io/library/trinkets/e80e37600b06)
 
 
 - N-body coupled oscillator code in action [on Trinket](https://zegerh-6085.trinket.io/sites/n_body_coupled_oscillator) 
@@ -351,15 +364,6 @@ original code more object-oriented and make it [reveal its intent](https://marti
 
 - See [my code in action](https://trinket.io/glowscript/42acc05540ae) on Trinket
 - Based on the original [earth-moon system](https://www.youtube.com/watch?v=2BisyQhNBFM) video and the code presented therein
-
-## Slinky drop
-
-<a href="https://zegerh-6085.trinket.io/sites/slinkydrop">
-  <img alt="Slinky drop" width="50%" height="50%" src="./src/demos/images/slinky_drop.png" title="Click to animate"/>
-</a>
-
-- See [my code in action](https://trinket.io/library/trinkets/9c6757b113dc) on Trinket
-- Based on the original [slinky drop](https://rhettallain.com/2019/02/06/modeling-a-falling-slinky/) blog post and [the code presented therein](https://trinket.io/glowscript/e5f14ebee1)
 
 # Fun stuff with [VPython](https://vpython.org/) 
 
