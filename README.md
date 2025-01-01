@@ -296,7 +296,7 @@ The applications of a simple harmonic oscillator are almost endless.
 You may be surprised though to find out what happens when you drop such a simple harmonic oscillator!! 
 
 <a href="hhttps://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Ballonspringdrop">
-  <img alt="Slinky drop" width="30%" height="30%" src="./src/demos/images/ball_falling_on_spring.png" title="Click to animate"/>
+  <img alt="Ball drop" width="30%" height="30%" src="./src/demos/images/ball_falling_on_spring.png" title="Click to animate"/>
 </a>
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Slinkydrop">
   <img alt="Slinky drop" width="50%" height="50%" src="./src/demos/images/slinky_drop.png" title="Click to animate"/>
