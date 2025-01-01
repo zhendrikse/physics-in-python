@@ -308,14 +308,18 @@ number of vibrating beads coupled by springs on both sides!
 - Pendulum code base [on Trinket](https://trinket.io/glowscript/1b74de8aeee8)
 
 
-## [Ball on sliding ramp](https://trinket.io/library/trinkets/0731c4e734f8) and [Ball hitting block](https://trinket.io/library/trinkets/0e414ca766d1)
+## [Ball on sliding ramp](https://trinket.io/library/trinkets/0731c4e734f8) and ball hitting block
 
 <a href="https://zegerh-6085.trinket.io/sites/ball_on_sliding_ramp">
   <img alt="Ball on sliding ramp" width="48%" height="48%" src="./src/demos/images/ball_on_sliding_ramp.png" title="Click to animate"/>
 </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://zegerh-6085.trinket.io/sites/block_rotation">
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Blockrotation">
   <img alt="Block rotation" width="42%" height="42%" src="./src/demos/images/block_rotation.png" title="Click to animate"/>
 </a>
+
+- Rotating block in action [on Trinket](https://zegerh-6085.trinket.io/sites/block_rotation) 
+  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Blockrotation)
+- Rotating block code base [on Trinket](https://trinket.io/library/trinkets/0e414ca766d1)
 
 ## [Doppler effect](https://trinket.io/library/trinkets/9d869c1167ec)
 
