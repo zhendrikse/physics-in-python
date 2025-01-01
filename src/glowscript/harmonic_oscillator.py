@@ -2,6 +2,7 @@
 
 from vpython import vector, sphere, color, rate, mag, norm, scene, gcurve, graph, helix, arange
 
+
 title = """Basic harmonic oscillator
 
 &#x2022; Written by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a> 
@@ -10,6 +11,7 @@ title = """Basic harmonic oscillator
 &lt;mouse click&gt; &rarr; start the animation for a limited time interval
 
 """
+
 
 class Ball:
   def __init__(self, mass=1.5, position=vector(0, 0, 0), velocity=vector(0, 0, 0), radius=0.1, color=color.yellow,
@@ -58,33 +60,34 @@ class Spring:
 
 
 class Oscillator:
-  def __init__(self, position=vector(0, 0, 0), length=0.75, spring_constant=10.0, colour=color.red):
+  def __init__(self, position=vector(0, 0, 0), length=0.75, spring_constant=10.0, ball_radius=0.1, ball_mass=1.0,
+               colour=color.red):
     left = position - length * vector(1, 0, 0)
     right = position + length * vector(1, 0, 0)
-
-    self._left_ball = Ball(mass=1.0, position=left, radius=0.1, color=colour)
-    self._right_ball = Ball(mass=1.0, position=right, radius=0.1, color=colour)
+    self._position = position
+    self._left_ball = Ball(mass=ball_mass, position=left, radius=ball_radius, color=colour)
+    self._right_ball = Ball(mass=ball_mass, position=right, radius=ball_radius, color=colour)
     self._distance = self._left_ball.distance_to(self._right_ball)
-    self._spring = Spring(position=-self._distance / 2, axis=self._distance, spring_constant=spring_constant,
-                          radius=0.05)
+    self._spring = Spring(position=position - self._distance / 2, axis=self._distance, spring_constant=spring_constant,
+                          radius=0.6 * ball_radius)
 
   def update_by(self, dt):
     self._right_ball.move(self._spring.force(), dt)
     self._left_ball.move(-self._spring.force(), dt)
     self._distance = self._left_ball.distance_to(self._right_ball)
-    self._spring.update(self._distance, -self._distance / 2)
+    self._spring.update(self._distance, self._position - self._distance / 2)
 
   def reset(self):
     self._left_ball.reset()
     self._right_ball.reset()
     self._distance = self._left_ball.distance_to(self._right_ball)
-    self._spring.update(self._distance, -self._distance / 2)
+    self._spring.update(self._distance, self._position - self._distance / 2)
 
   def compress_by(self, amount):
     self._left_ball.shift_by(amount / 2 * vector(1, 0, 0))
     self._right_ball.shift_by(-amount / 2 * vector(1, 0, 0))
     self._distance = self._left_ball.distance_to(self._right_ball)
-    self._spring.update(-self._distance, self._distance / 2)
+    self._spring.update(-self._distance, self._position + self._distance / 2)
 
   def left_ball_position(self):
     return self._left_ball.position()

@@ -21,11 +21,18 @@ class Ball:
         self._velocity = velocity
         self._elasticity = elasticity
         self._position = position
+        self._start_position = position
+        self._start_velocity = velocity
 
     @staticmethod
     def _vpython_ball(mass, position, velocity, radius, color, elasticity, make_trail):
         return sphere(pos=position, radius=radius, color=color, velocity=velocity, mass=mass, elasticity=elasticity,
                       make_trail=make_trail)
+
+    def reset(self):
+        self._position = self._start_position
+        self._velocity = self._start_velocity
+        self._draw()
 
     def _draw(self):
         if self._ball:
