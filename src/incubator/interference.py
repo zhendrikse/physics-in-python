@@ -149,8 +149,8 @@ def wfcycle(wf):
 
 
 def stop():
-    print("TODO: HOW TO STOP?")
-    #stp.stp = 1
+    #print("TODO: HOW TO STOP?")
+    what_is_this_variable.stp = 1
 
 
 def autotoggle():
@@ -169,25 +169,25 @@ def wfcycle_2():
 
 
 # Control scene
-c = controls(title='Controls',
-             x=0, y=600, width=1024, height=150, range=50)
+my_scene = controls(title='Controls',
+                    x=0, y=600, width=1024, height=150, range=50)
 ss = button(pos=vec(-5, 0, 0), width=10, height=10,
             text='Start', bind=togglego)
 wf1 = button(pos=vec(-15, 0, 0), width=10, height=10,
              text='sine', bind=wfcycle_1)
 wf2 = button(pos=vec(25, 0, 0), width=10, height=10,
              text='sine', bind=wfcycle_2)
-stp = button(pos=vec(5, 0, 0), width=10, height=10,
-             text='Stop', bind=stop())
+what_is_this_variable = button(pos=vec(5, 0, 0), width=10, height=10,
+                               text='Stop', bind=stop())
 auto = button(pos=vec(15, 0, 0), width=10, height=10,
               text='Auto', bind=autotoggle)
 
 # Main Loop:
 while 1:
     ss.go = 0
-    stp.stp = 0
+    what_is_this_variable.stp = 0
     ss.text = "Start"
-    c.interact()
+    #my_scene.interact()
     if ss.go == 1:
         t = 0
         try:
@@ -206,7 +206,7 @@ while 1:
             wave2 = wave(wf2.text, -pi, pi, globstep, (7, 0), 0)
         # Motion Loop
         while t < tmax:
-            c.interact()
+            my_scene.interact()
             if ss.go == 1:
                 rate(framerate)
                 t += dt
@@ -216,5 +216,5 @@ while 1:
             if auto.text == "Manual":
                 ss.go = 0
                 ss.text = "Start"
-            if stp.stp == 1:
+            if what_is_this_variable.stp == 1:
                 t = tmax

@@ -1,59 +1,115 @@
-from vpython import vector, sphere, color, rate, mag, norm, box, gcurve, graph, helix
+#Web VPython 3.2
+
+from vpython import vector, sphere, color, rate, mag, norm, scene, gcurve, graph, helix, arange
+
+title = """Basic harmonic oscillator
+
+&#x2022; Written by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a> 
+&#x2022; The code resides in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
+
+&lt;mouse click&gt; &rarr; start the animation for a limited time interval
+
+"""
 
 class Ball:
-  def __init__(self, mass=1.5, position=vector(0, 0, 0), velocity=vector(0, 0, 0), radius=0.1, color=color.yellow, make_trail=False):
-    self._ball = sphere(pos=position, radius=radius, color=color, velocity=velocity, mass=mass, make_trail=make_trail)
+  def __init__(self, mass=1.5, position=vector(0, 0, 0), velocity=vector(0, 0, 0), radius=0.1, color=color.yellow,
+               make_trail=False):
+    self._ball = sphere(pos=position, radius=radius, color=color, make_trail=make_trail)
+    self._mass = mass
+    self._velocity = velocity
+    self._start_velocity = velocity
+    self._start_position = position
 
   def move(self, force__vector, dt):
-      acceleration_vector = force__vector / self._ball.mass
-      self._ball.velocity += acceleration_vector * dt
-      self._ball.pos += self._ball.velocity * dt
-      self._ball.velocity -= self._ball.velocity * 0.001 # Friction
+    acceleration_vector = force__vector / self._mass
+    self._velocity += acceleration_vector * dt
+    self._ball.pos += self._velocity * dt
+
+  def shift_by(self, amount):
+    self._ball.pos += amount
+
+  def reset(self):
+    self._ball.pos = self._start_position
+    self._velocity = self._start_velocity
 
   def distance_to(self, other):
-     return other.position() - self.position()
-     
+    return other.position() - self.position()
+
   def position(self):
     return self._ball.pos
 
-class Spring:  
-  def __init__(self, position=vector(0, 0, 0), axis=vector(1.0, 0, 0), spring_constant=1, equilibrium_size=1.0, radius=0.5, thickness=0.03):
-    self._equilibrium_size = equilibrium_size
-    self._spring = helix(pos=position, axis=axis, radius=radius, thickness=thickness, spring_constant=spring_constant)
+
+class Spring:
+  def __init__(self, position=vector(0, 0, 0), axis=vector(1.0, 0, 0), spring_constant=10.0, radius=0.5,
+               thickness=0.03):
+    self._equilibrium_size = mag(axis)
+    self._spring = helix(pos=position, axis=axis, radius=radius, thickness=thickness, spring_constant=spring_constant,
+                         coils=15)
     self._position = position
+    self._spring_constant = spring_constant
 
   def update(self, axis, position=None):
     self._spring.axis = axis
     self._spring.pos = self._position if position is None else position
-  
+
   def force(self):
     displacement = mag(self._spring.axis) - self._equilibrium_size
-    return -self._spring.spring_constant * displacement * norm(self._spring.axis)
+    return -self._spring_constant * displacement * norm(self._spring.axis)
+
+
+class Oscillator:
+  def __init__(self, position=vector(0, 0, 0), length=0.75, spring_constant=10.0, colour=color.red):
+    left = position - length * vector(1, 0, 0)
+    right = position + length * vector(1, 0, 0)
+
+    self._left_ball = Ball(mass=1.0, position=left, radius=0.1, color=colour)
+    self._right_ball = Ball(mass=1.0, position=right, radius=0.1, color=colour)
+    self._distance = self._left_ball.distance_to(self._right_ball)
+    self._spring = Spring(position=-self._distance / 2, axis=self._distance, spring_constant=spring_constant,
+                          radius=0.05)
+
+  def update_by(self, dt):
+    self._right_ball.move(self._spring.force(), dt)
+    self._left_ball.move(-self._spring.force(), dt)
+    self._distance = self._left_ball.distance_to(self._right_ball)
+    self._spring.update(self._distance, -self._distance / 2)
+
+  def reset(self):
+    self._left_ball.reset()
+    self._right_ball.reset()
+    self._distance = self._left_ball.distance_to(self._right_ball)
+    self._spring.update(self._distance, -self._distance / 2)
+
+  def compress_by(self, amount):
+    self._left_ball.shift_by(amount / 2 * vector(1, 0, 0))
+    self._right_ball.shift_by(-amount / 2 * vector(1, 0, 0))
+    self._distance = self._left_ball.distance_to(self._right_ball)
+    self._spring.update(-self._distance, self._distance / 2)
+
+  def left_ball_position(self):
+    return self._left_ball.position()
+
+  def right_ball_position(self):
+    return self._right_ball.position()
 
 
 position_plot = graph(title="Ball on spring", xtitle="Time", ytitle="Amplitude", width=400, height=250)
 curve_left = gcurve(color=color.blue)
 curve_right = gcurve(color=color.red)
 
-left_ball  = Ball(mass=1.0, position=vector(-0.75, 0, 0), radius=0.1, color=color.red)
-right_ball = Ball(mass=1.0, position=vector( 0.75, 0, 0), radius=0.1, color=color.blue)
-distance = left_ball.distance_to(right_ball)
-spring = Spring(position=-distance / 2, axis=distance, spring_constant=1, equilibrium_size=1.0, radius=0.05)
+oscillator = Oscillator()
+oscillator.compress_by(0.75)
 
-def main():
-  dt = 0.01
-  for t in range(0, 5000):
-    rate(3/dt)
-    right_ball.move(spring.force(), dt)
-    left_ball.move(-spring.force(), dt)
-    distance = left_ball.distance_to(right_ball)
-    spring.update(distance, -distance / 2)
-    curve_left.plot(t * dt, 1.5 + left_ball.position().x)
-    curve_right.plot(t * dt, right_ball.position().x)
+scene.title = title
 
-  
-if __name__=="__main__":
-    main()
+t = 0
+dt = 0.01
+while True:
+  scene.waitfor("click")
+  for i in arange(0, 10 / dt):
+    t += dt
+    rate(1 / dt)
+    oscillator.update_by(dt)
+    curve_left.plot(t, oscillator.left_ball_position().x)
+    curve_right.plot(t, oscillator.right_ball_position().x)
 
-  
-  
