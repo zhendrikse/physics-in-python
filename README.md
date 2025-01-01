@@ -238,8 +238,10 @@ on [glowscript.org](https://glowscript.org).
 
 ## The quantum harmonic oscillator
 
+The quantum harmonic oscillator is visualized in a semi-classical way below.
+
 <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Quantumoscillator">
-  <img alt="Kepler's laws" width="50%" height="50%" src="./src/demos/images/quantum_oscillator.png" title="Click to animate"/>
+  <img alt="Quantum oscillator" width="50%" height="50%" src="./src/demos/images/quantum_oscillator.png" title="Click to animate"/>
 </a>
 
 - Quantum oscillator in action [on Trinket](https://zegerh-6085.trinket.io/sites/quantum_oscillator) 
@@ -288,21 +290,30 @@ The code pertaining to the demos in this section is available under the
 [kinematics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/)
 on [glowscript.org](https://glowscript.org).
 
-## Dropping a harmonic oscillator
+## Fun with springs
 
 The applications of a simple harmonic oscillator are almost endless. 
 You may be surprised though to find out what happens when you drop such a simple harmonic oscillator!! 
 
-&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Slinkydrop">
-  <img alt="Slinky drop" width="50%" height="50%" src="./src/demos/images/slinky_drop.png" title="Click to animate"/>
+<a href="hhttps://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Ballonspringdrop">
+  <img alt="Slinky drop" align="bottom" width="40%" height="40%" src="./src/demos/images/ball_falling_on_spring.png" title="Click to animate"/>
 </a>
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Slinkydrop">
+  <img alt="Slinky drop" align="bottom" width="50%" height="50%" src="./src/demos/images/slinky_drop.png" title="Click to animate"/>
+</a>
+
+- [Drop the ball](https://zegerh-6085.trinket.io/sites/slinkydrop) on Trinket
+  or [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Ballonspringdrop)
+- View the code [on Trinket](https://trinket.io/glowscript/92ffad53ab4d) which is based on the
+  original [ball falling on spring](https://www.youtube.com/watch?v=ExxDuRTIe0E) video and the code presented therein
+
 
 - Observe [the slinky drop](https://zegerh-6085.trinket.io/sites/slinkydrop) on Trinket
   or [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Slinkydrop)
-- View the slinky drop code [on Trinket](https://trinket.io/library/trinkets/9c6757b113dc),
-  which is based on the original [slinky drop](https://rhettallain.com/2019/02/06/modeling-a-falling-slinky/) blog post and [the code presented therein](https://trinket.io/glowscript/e5f14ebee1)
+- View the slinky drop code [on Trinket](https://trinket.io/library/trinkets/9c6757b113dc), which is
+  based on the original [slinky drop](https://rhettallain.com/2019/02/06/modeling-a-falling-slinky/) blog post and [the code presented therein](https://trinket.io/glowscript/e5f14ebee1)
 
+## The _N_-body coupled oscillator
 
 The N-body coupled harmonic oscillator is composed of beads connected by springs.
 This coupled harmonic oscillator here lets you play around with an arbitrary 
@@ -370,11 +381,6 @@ original code more object-oriented and make it [reveal its intent](https://marti
 
 - See [my code in action](https://trinket.io/glowscript/c3e556761469) on Trinket
 - Based on the original [chain falling from table](https://www.youtube.com/watch?v=vXp1hW_t-bo) video and the code presented therein
-
-## Ball falling on spring
-
-- See [my code in action](https://trinket.io/glowscript/92ffad53ab4d) on Trinket
-- Based on the original [ball falling on spring](https://www.youtube.com/watch?v=ExxDuRTIe0E) video and the code presented therein
 
 ## Three-body problem
 
