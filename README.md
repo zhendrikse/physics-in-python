@@ -215,9 +215,37 @@ This demo models the magnetization at various temperatures using a two-dimension
   <img alt="Ising spin model" width="40%" height="40%" src="./src/demos/images/ising_spin_model.png" title="Click to animate"/>
 </a>
 
-- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/ising_spin_model) 
+- Ising spin in action [on Trinket](https://zegerh-6085.trinket.io/sites/ising_spin_model) 
   and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Isingspin)
-- Code base [on Trinket](https://trinket.io/library/trinkets/07404ee90b64)
+- Ising spin code base [on Trinket](https://trinket.io/library/trinkets/07404ee90b64)
+
+# Quantum &amp; wave mechanics
+
+The code pertaining to the demos in this section is available under the 
+[quantum tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Quantum/)
+on [glowscript.org](https://glowscript.org).
+
+## [Doppler effect]()
+
+<a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Dopplereffect">
+  <img alt="Doppler effect" width="50%" height="50%" src="./src/demos/images/doppler_effect.png" title="Click to animate"/>
+</a>
+
+
+- Doppler effect in action [on Trinket](https://zegerh-6085.trinket.io/sites/doppler_effect) 
+  and in action [on glowscript.org](https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Dopplereffect)
+- The code base [on Trinket](https://trinket.io/library/trinkets/9d869c1167ec)
+
+## The quantum harmonic oscillator
+
+<a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Quantumoscillator">
+  <img alt="Kepler's laws" width="50%" height="50%" src="./src/demos/images/quantum_oscillator.png" title="Click to animate"/>
+</a>
+
+- Quantum oscillator in action [on Trinket](https://zegerh-6085.trinket.io/sites/quantum_oscillator) 
+  and in action [on glowscript.org](https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Quantumoscillator)
+- Quantum oscillator code base [on Trinket](https://trinket.io/library/trinkets/555f7535fe74)
+
 
 # Astrophysics
 
@@ -245,6 +273,7 @@ A not accurate to scale sun-earth-moon model, but very detailed and instructive 
 incoming energy from the sun (at a given latitude), as well as the variations in the length of
 the days per season. By clicking on the sun or earth, the camera perspective can be changed as well!
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Daylightvariations">
   <img alt="Daylight variations" width="50%" height="50%" src="./src/demos/images/daylight_variations.png" title="Click to animate"/>
 </a>
@@ -259,25 +288,15 @@ The code pertaining to the demos in this section is available under the
 [kinematics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/)
 on [glowscript.org](https://glowscript.org).
 
-## The (dropping of a) simple harmonic oscillator
+## Dropping a harmonic oscillator
 
 The applications of a simple harmonic oscillator are almost endless. 
-A simple such a harmonic oscillator is shown by letting two balls vibrate on a spring.
-
 You may be surprised though to find out what happens when you drop such a simple harmonic oscillator!! 
 
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Harmonicoscillator">
-  <img alt="Harmonic oscillator" width="20%" height="20%" src="./src/demos/images/harmonic_oscillator.png" title="Click to animate"/>
-</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Slinkydrop">
   <img alt="Slinky drop" width="50%" height="50%" src="./src/demos/images/slinky_drop.png" title="Click to animate"/>
 </a>
-
-- Simple harmonic oscillator in action [on Trinket](https://zegerh-6085.trinket.io/sites/harmonic_oscillator) 
-  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Harmonicoscillator)
-- Simple harmonic oscillator code base [on Trinket](https://trinket.io/library/trinkets/e80e37600b06)
-
 
 - Observe [the slinky drop](https://zegerh-6085.trinket.io/sites/slinkydrop) on Trinket
   or [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Slinkydrop)
@@ -321,11 +340,6 @@ number of vibrating beads coupled by springs on both sides!
   and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Blockrotation)
 - Rotating block code base [on Trinket](https://trinket.io/library/trinkets/0e414ca766d1)
 
-## [Doppler effect](https://trinket.io/library/trinkets/9d869c1167ec)
-
-<a href="https://zegerh-6085.trinket.io/sites/doppler_effect">
-  <img alt="Doppler effect" width="50%" height="50%" src="./src/demos/images/doppler_effect.png" title="Click to animate"/>
-</a>
 
 ## [Floating block](https://trinket.io/library/trinkets/94ed363f8b25)
 <a href="https://zegerh-6085.trinket.io/sites/floating_block">

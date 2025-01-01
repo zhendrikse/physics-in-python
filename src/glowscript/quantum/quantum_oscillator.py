@@ -1,8 +1,8 @@
 #Web VPython 3.2
 
-from vpython import vector, vec, sphere, helix, mag, color, cylinder, curve, scene, arange, sqrt, rate
+from vpython import vector, vec, sphere, helix, mag, color, cylinder, curve, scene, arange, sqrt, rate, norm
 
-title = """Quantum oscillator
+title = """Semi-classical visualization of quantum oscillator
 
 &#x2022; Original <a href="https://lectdemo.github.io/virtual/06_oscillator.html">06_oscillator.py</a> by Ruth Chabay 2004
 &#x2022; Maintained by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a> in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
@@ -11,10 +11,15 @@ Click on an energy level to put the oscillator into that state
 
 """
 
+y_axis_pos = -10
+ks = 1.2  ## 200
+ball_mass = 0.025
+omega = sqrt(ks / ball_mass)
+L0 = 10
+show_vertical_lines = False
 
 class Ball:
-    def __init__(self, mass=1.5, position=vector(0, 0, 0), velocity=vector(0, 0, 0), radius=0.1, color=color.yellow,
-                 make_trail=False):
+    def __init__(self, mass=1.5, position=vector(0, 0, 0), velocity=vector(0, 0, 0), radius=0.1, color=color.yellow, make_trail=False):
         self._ball = sphere(pos=position, radius=radius, color=color, make_trail=make_trail)
         self._mass = mass
         self._velocity = velocity
@@ -41,11 +46,9 @@ class Ball:
 
 
 class Spring:
-    def __init__(self, position=vector(0, 0, 0), axis=vector(1.0, 0, 0), spring_constant=10.0, radius=0.5,
-                 thickness=0.03):
+    def __init__(self, position=vector(0, 0, 0), axis=vector(1.0, 0, 0), spring_constant=10.0, radius=0.5, thickness=0.03):
         self._equilibrium_size = mag(axis)
-        self._spring = helix(pos=position, axis=axis, radius=radius, thickness=thickness,
-                             spring_constant=spring_constant, coils=15)
+        self._spring = helix(pos=position, axis=axis, radius=radius, thickness=thickness, spring_constant=spring_constant, coils=15)
         self._position = position
         self._spring_constant = spring_constant
 
@@ -59,16 +62,14 @@ class Spring:
 
 
 class HarmonicOscillator:
-    def __init__(self, position=vector(0, 0, 0), length=0.75, spring_constant=10.0, ball_radius=0.1, ball_mass=1.0,
-                 colour=color.red):
+    def __init__(self, position=vector(0, 0, 0), length=0.75, spring_constant=10.0, ball_radius=0.1, ball_mass=1.0, colour=color.red):
         left = position - length * vector(1, 0, 0)
         right = position + length * vector(1, 0, 0)
         self._position = position
         self._left_ball = Ball(mass=ball_mass, position=left, radius=ball_radius, color=colour)
         self._right_ball = Ball(mass=ball_mass, position=right, radius=ball_radius, color=colour)
         self._distance = self._left_ball.distance_to(self._right_ball)
-        self._spring = Spring(position=position - self._distance / 2, axis=self._distance,
-                              spring_constant=spring_constant, radius=ball_radius / 2, thickness=0.3)
+        self._spring = Spring(position=position - self._distance / 2, axis=self._distance,spring_constant=spring_constant, radius=ball_radius / 2, thickness=0.3)
 
     def update_by(self, dt):
         self._right_ball.move(self._spring.force(), dt)
@@ -95,44 +96,7 @@ class HarmonicOscillator:
         return self._right_ball.position()
 
 
-scene.x = scene.y = 0
-scene.width = scene.height = 600
-scene.title = title
-
-show_levels = 0
-L0 = 10
-U0 = -10
-dU = 2
-ks = 1.2  ## 200
-mass = 0.025
-omega = sqrt(ks / mass)
-
-equilibrium_position = cylinder(pos=vector(0, U0, 0), axis=vector(0, 18, 0), radius=0.1, color=color.green)
-
-curve_positions = [vector(xx, .5 * ks * xx ** 2 + U0, 0) for xx in arange(-5.8, 5.3, 0.1)]
-
-well = curve(radius=0.2, pos=[vector(-5.8, 5.8 * 5.8 * .5 * ks + U0, 0)])
-for xx in arange(-5.8, 5.3, 0.1):
-    well.append(pos=vector(xx, .5 * ks * xx ** 2 + U0, 0))
-
-vline1 = cylinder(pos=vector(-5, U0, 0), axis=vector(0, 15, 0), radius=0.1, color=vector(.6, .6, .6),
-                  visible=show_levels)
-vline2 = cylinder(pos=vector(5, U0, 0), axis=vector(0, 15, 0), radius=0.1, color=vector(.6, .6, .6),
-                  visible=show_levels)
-
-energy_levels = []
-for Ux in arange(0.5 * dU, 7.51 * dU, dU):
-    s = sqrt(2 * Ux / ks)
-    e_level = cylinder(radius=0.2, pos=vector(-s, Ux + U0, 0), axis=vector(2 * s, 0, 0),
-                       color=color.white)
-    energy_levels.append(e_level)
-
-oscillator = HarmonicOscillator(position=vec(0, 0.5 * 5 ** 2, 0), length=L0 / 2, ball_radius=0.5)
-
 current_level = None
-amplitude = 1
-
-
 def on_mouse_click():
     global oscillator, energy_levels, current_level
 
@@ -146,21 +110,40 @@ def on_mouse_click():
         amplitude = abs(current_level.pos.x)
         oscillator.reset()
         oscillator.compress_by(amplitude)
-        vline1.pos = current_level.pos
-        vline2.pos = current_level.pos + current_level.axis
+        vertical_line_left.pos = current_level.pos
+        vertical_line_right.pos = current_level.pos + current_level.axis
 
-    elif scene.mouse.project(normal=vec(0, 0, 1)).y > .5 * ks * 5.2 ** 2 + U0:
-        print("Wanneer kom ik hier?")
-        run = False
-        if current_level is not None:
+    elif scene.mouse.project(normal=vec(0, 0, 1)).y > .5 * ks * 5.2 ** 2 + y_axis_pos:
+        if current_level:
             current_level.color = color.white
-        while ball_2.position.x < 2 * L0:
+        while oscillator.right_ball_position().x < 2 * L0:
             rate(200)
             # ball_2.position.x += L0 / 100
             oscillator.pull(L0 / 100)
 
 
+scene.x = scene.y = 0
+scene.width = scene.height = 600
+scene.title = title
 scene.bind("click", on_mouse_click)
+
+equilibrium_position = cylinder(pos=vector(0, y_axis_pos, 0), axis=vector(0, 18, 0), radius=0.1, color=color.green)
+well = curve(radius=0.2, pos=[vector(-5.8, 5.8 * 5.8 * .5 * ks + y_axis_pos, 0)])
+for xx in arange(-5.8, 5.3, 0.1):
+    well.append(pos=vector(xx, .5 * ks * xx ** 2 + y_axis_pos, 0))
+well.append(pos=vector(8,.5 * ks * 5.2**2 + y_axis_pos, 0))
+
+vertical_line_left = cylinder(pos=vector(-5, y_axis_pos, 0), axis=vector(0, 15, 0), radius=0.1, color=vector(.6, .6, .6), visible=show_vertical_lines)
+vertical_line_right = cylinder(pos=vector(5, y_axis_pos, 0), axis=vector(0, 15, 0), radius=0.1, color=vector(.6, .6, .6), visibile=show_vertical_lines)
+
+energy_levels = []
+dU = 2
+for Ux in arange(0.5 * dU, 7.51 * dU, dU):
+    s = sqrt(2 * Ux / ks)
+    e_level = cylinder(radius=0.2, pos=vector(-s, Ux + y_axis_pos, 0), axis=vector(2 * s, 0, 0), color=color.white)
+    energy_levels.append(e_level)
+
+oscillator = HarmonicOscillator(position=vec(0, 0.5 * 5 ** 2, 0), length=L0 / 2, spring_constant=ks, ball_radius=0.5, ball_mass=ball_mass)
 
 t = 0.0
 dt = 0.01
