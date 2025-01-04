@@ -358,7 +358,7 @@ Some animations that have something to do with water.
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Floatingblock">
   <img alt="Floating block" width="45%" height="45%" src="./src/demos/images/floating_block.png" title="Click to animate"/>
 </a>
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/Watersprinkler">
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Watersprinkler">
   <img alt="Water sprinkler" width="45%" height="45%" src="./src/demos/images/water_sprinkler.png" title="Click to animate"/>
 </a>
 
@@ -367,7 +367,7 @@ Some animations that have something to do with water.
 - Floating block code base [on Trinket](https://trinket.io/library/trinkets/94ed363f8b25)
 
 - See the water sprinkler in action [on Trinket](https://zegerh-6085.trinket.io/sites/sprinkler) 
-  and on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/Watersprinkler)
+  and on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Watersprinkler)
 - Take a look at [the code base](https://trinket.io/glowscript/3ec01917098d), which is 
   based on the original [water sprinkler](https://rhettallain.com/2019/11/12/modeling-a-spinning-sprinkler/) blog post and the code presented therein
 
