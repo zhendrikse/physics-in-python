@@ -156,7 +156,7 @@ while True:
 
         for j in arange(len(ball0flag)):
             source_label[j].pos = ball[int(N * j + 3 * N / 4)].pos
-            if (ball0flag[j] == 0 and((source.pos.x <= receiver.pos.x <= ball[N * j].pos.x) or (source.pos.x >= receiver.pos.x > ball[int(N * j + N / 2)].pos.x) )):
+            if ball0flag[j] == 0 and((source.pos.x <= receiver.pos.x <= ball[N * j].pos.x) or (source.pos.x >= receiver.pos.x > ball[int(N * j + N / 2)].pos.x)):
                 ball0flag[j] = 1
                 print("t=" + str(round(t, 2)))
                 new_label_text = "t=" + str(round(t, 2))
