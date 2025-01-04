@@ -355,8 +355,6 @@ number of vibrating beads coupled by springs on both sides!
 
 Some animations that have something to do with water.
 
-## [Floating block]()
-
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Floatingblock">
   <img alt="Floating block" width="45%" height="45%" src="./src/demos/images/floating_block.png" title="Click to animate"/>
 </a>
