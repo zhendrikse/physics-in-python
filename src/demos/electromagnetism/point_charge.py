@@ -3,8 +3,8 @@
 #
 from vpython import canvas, vec, color, arange, rate
 
-from ..toolbox.charge import Positron
-from ..toolbox.mouse import zoom_in_on
+from src.toolbox.charge import Positron
+from src.toolbox.mouse import zoom_in_on
 
 
 def on_mouse_click():

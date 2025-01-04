@@ -1,7 +1,7 @@
 from vpython import vec, rate, vector, scene, arange
 
-from ..toolbox.charge import Electron
-from ..toolbox.charged_ring import ChargedRing
+from src.toolbox.charge import Electron
+from src.toolbox.charged_ring import ChargedRing
 
 #
 # Original: https://bphilhour.trinket.io/physics-through-glowscript-an-introductory-course#/1-introduction-objects-parameters-and-the-3d-environment/optional-scale-models

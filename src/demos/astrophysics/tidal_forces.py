@@ -5,7 +5,7 @@
 #
 
 from vpython import vector, random, color, pi, mag, norm, arrow, rate
-from ..toolbox.celestial_object import G, Earth, Moon, EARTH_MOON_DISTANCE, MOON_MASS, EARTH_RADIUS
+from src.toolbox.celestial_object import G, Earth, Moon, EARTH_MOON_DISTANCE, MOON_MASS, EARTH_RADIUS
 
 scale = 1e12
 moon_position_vector = vector(EARTH_MOON_DISTANCE, 0, 0)
@@ -26,7 +26,7 @@ N = 500
 dR = 500
 while n < N:
   rt = EARTH_RADIUS * vector(2 * random() - 1, 2 * random() - 1, 2 * random() - 1)
-  if mag(rt) < (EARTH_RADIUS + dR) and mag(rt) > (EARTH_RADIUS - dR):
+  if (EARTH_RADIUS + dR) > mag(rt) > (EARTH_RADIUS - dR):
     r = rt - moon_position_vector
     gravitational_force_moon = gravitational_force(r)
     arrow(pos=rt - moon_position_vector * 0.05, axis=scale * (gravitational_force_moon + FAKE_FORCE), color=color.yellow)

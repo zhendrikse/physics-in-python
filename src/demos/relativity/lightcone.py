@@ -1,5 +1,5 @@
 from vpython import points, vec, color, rate, cone, scene, label
-from ..toolbox.axis import Base
+from src.toolbox.axis import Base
 
 title = """Photon moving in space-time
 
@@ -14,8 +14,9 @@ title = """Photon moving in space-time
 
 """
 
-axis = Base(mesh=True, axis_labels=["x", "ct", "y"], tick_mark_labels=False)
-axis.toggle_xy_mesh()
+axis = Base(axis_labels=["x", "ct", "y"])
+axis.show_xy_mesh()
+axis.hide_tick_labels()
 
 light_cone_top = cone(pos=vec(0, 0, 0), radius=0, opacity=0.4, axis=vec(0, -1, 0))
 light_cone_bottom = cone(pos=vec(0, -10, 0), radius=10, opacity=0.4, axis=vec(0, 10, 0))

@@ -1,6 +1,6 @@
 from vpython import vector, rate, graph, gcurve, color, scene, arange
 
-from ..toolbox.harmonic_oscillator import HarmonicOscillator
+from src.toolbox.harmonic_oscillator import HarmonicOscillator
 
 def set_scene():
     _ = graph(title="Harmonic oscillator", xtitle="Time", ytitle="Amplitude")

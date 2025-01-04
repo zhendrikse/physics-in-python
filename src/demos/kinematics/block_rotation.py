@@ -4,9 +4,9 @@
 #
 
 from vpython import canvas, vec, box, sin, cos, radians, random, color, winput, button, graph, gdots, rate
-from ..toolbox.ball import Ball
-from ..toolbox.building import Building, g
-from ..toolbox.timer import Timer
+from src.toolbox.ball import Ball
+from src.toolbox.building import Building, g
+from src.toolbox.timer import Timer
 
 # initial perimeter setting
 theta, v0, e = 45, 100, 0.9

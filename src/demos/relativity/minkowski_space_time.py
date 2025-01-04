@@ -1,8 +1,8 @@
 from vpython import vec, rate, graph, gcurve, color, canvas, sqrt
 
-from ..toolbox.axis import Axis
-from ..toolbox.timer import Timer
-from ..toolbox.car import Car
+from src.toolbox.axis import Base
+from src.toolbox.timer import Timer
+from src.toolbox.car import Car
 
 c = 1 # velocity of light
 

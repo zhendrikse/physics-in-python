@@ -1,7 +1,7 @@
 from vpython import mag, helix, vector, box, color, random, rate, gcurve, graph, norm
 
-from ..toolbox.ball import Ball
-from ..toolbox.spring import Spring
+from src.toolbox.ball import Ball
+from src.toolbox.spring import Spring
 
 
 class Oscillator:

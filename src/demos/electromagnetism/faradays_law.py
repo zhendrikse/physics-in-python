@@ -1,7 +1,7 @@
 from vpython import vector, canvas, color, arrow, arange, sin, cos, pi, box, mag, curve, cylinder, sphere, label, rate, \
     vec, norm
 
-from ..toolbox.mouse import zoom_in_on
+from src.toolbox.mouse import zoom_in_on
 
 # Web VPython 3.2
 

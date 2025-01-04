@@ -4,8 +4,8 @@
 # - https://www.youtube.com/watch?v=2BisyQhNBFM
 
 from vpython import vector, color, rate, graph, gcurve, textures, sqrt, mag, norm, canvas
-from ..toolbox.celestial_object import Earth, Moon
-from ..toolbox.mouse import zoom_in_on
+from src.toolbox.celestial_object import Earth, Moon
+from src.toolbox.mouse import zoom_in_on
 
 def on_mouse_click():
     zoom_in_on(scene)

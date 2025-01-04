@@ -2,8 +2,8 @@
 # Original: https://github.com/Physics-Morris/Physics-Vpython/blob/master/8_Charge_Motion.py
 #
 from vpython import vec, color, rate, canvas, button
-from ..toolbox.capacitor import Capacitor
-from ..toolbox.charge import Charge, Q
+from src.toolbox.capacitor import Capacitor
+from src.toolbox.charge import Charge, Q
 
 scene = canvas(width=1000, height=600, align='left', range=3E-13)
 

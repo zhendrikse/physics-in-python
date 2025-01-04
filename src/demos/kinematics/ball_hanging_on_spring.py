@@ -1,7 +1,7 @@
 from vpython import vector, rate, box, graph, gcurve, color, mag, button
 
-from ..toolbox.ball import Ball
-from ..toolbox.spring import Spring
+from src.toolbox.ball import Ball
+from src.toolbox.spring import Spring
 
 running = False
 

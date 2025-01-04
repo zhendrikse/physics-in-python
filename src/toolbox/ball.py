@@ -1,9 +1,11 @@
 from vpython import vector, sphere, color, mag, norm
 
+from src.toolbox.moveable import Moveable
+
 zero_force = vector(0, 0, 0)
 
 
-class Ball:
+class Ball(Moveable):
     def __init__(self,
                  mass=1.5,
                  position=vector(0, 0, 0),
@@ -39,9 +41,9 @@ class Ball:
             self._ball.pos = self._position
             self._ball.velocity = self._velocity
 
-    def move(self, force__vector=vector(0, 0, 0), dt=0.01):
+    def move(self, force_vector=vector(0, 0, 0), dt=0.01):
         # Newton's second law: F = m * a
-        acceleration_vector = force__vector / self.mass
+        acceleration_vector = force_vector / self.mass
         self._velocity += acceleration_vector * dt
         self._position += self._velocity * dt
         self._draw()

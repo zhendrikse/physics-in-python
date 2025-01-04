@@ -3,9 +3,9 @@
 #
 
 from vpython import canvas, vec, arange, rate, color
-from ..toolbox.charge import Charge, Q
-from ..toolbox.field import Field
-from ..toolbox.mouse import zoom_in_on
+from src.toolbox.charge import Charge, Q
+from src.toolbox.field import Field
+from src.toolbox.mouse import zoom_in_on
 
 
 class Dipole:

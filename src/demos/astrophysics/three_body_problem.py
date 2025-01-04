@@ -5,7 +5,7 @@
 #
 
 from vpython import sphere, vector, color, rate, sqrt, mag, norm
-from ..toolbox.celestial_object import CelestialObject, G
+from src.toolbox.celestial_object import CelestialObject, G
 
 astronomical_unit = 1.49e11
 mass = 1e30
