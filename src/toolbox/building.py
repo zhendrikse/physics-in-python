@@ -49,9 +49,9 @@ class Building:
 
     def collide_with(self, ball):
         # sets angular velocity omega after collision with ball
-        velocity = (ball.mass * ball.velocity.x + self.mass * self.velocity.x + ball.elasticity * ball.mass * (
-                    ball.velocity.x - self.velocity.x)) / (ball.mass + self.mass)
-        radius = ball.position.y - 0.5
+        velocity = (ball.mass() * ball.velocity().x + self.mass * self.velocity.x + ball.elasticity() * ball.mass() * (
+                    ball.velocity().x - self.velocity.x)) / (ball.mass() + self.mass)
+        radius = ball.position().y - 0.5
         omega = velocity / radius
         self._w = omega
 

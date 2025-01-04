@@ -28,7 +28,7 @@ ball_counter = 0
 
 def create_ball(velocity):
     global ball_counter
-    a = Ball(mass=1, position=vec(100, 105, 0), radius=5, color=vec(random(), random(), random()), velocity=velocity,
+    a = Ball(mass=1, position=vec(100, 105, 0), radius=5, colour=vec(random(), random(), random()), velocity=velocity,
              elasticity=e)
     balls.append(a)
     ball_counter += 1
@@ -145,7 +145,7 @@ def increment_time_for(ball, dt):
 
     # ball travelling through the air
     target_building.update(dt)
-    ball.move(vec(0, -g, 0) * ball.mass, dt)
+    ball.move_due_to(vec(0, -g, 0) * ball.mass(), dt)
 
 
 t, dt = 0, 0.01

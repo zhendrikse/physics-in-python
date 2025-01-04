@@ -8,8 +8,8 @@ class HarmonicOscillator:
         left = position - length * vector(1, 0, 0)
         right = position + length * vector(1, 0, 0)
         self._position = position
-        self._left_ball = Ball(mass=ball_mass, position=left, radius=ball_radius, color=colour)
-        self._right_ball = Ball(mass=ball_mass, position=right, radius=ball_radius, color=colour)
+        self._left_ball = Ball(mass=ball_mass, position=left, radius=ball_radius, colour=colour)
+        self._right_ball = Ball(mass=ball_mass, position=right, radius=ball_radius, colour=colour)
         self._distance = self._left_ball.distance_to(self._right_ball)
         self._spring = Spring(position=-self._distance / 2, axis=self._distance, spring_constant=spring_constant,
                               coils=coils, radius=0.6 * ball_radius)

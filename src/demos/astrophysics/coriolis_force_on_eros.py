@@ -16,7 +16,7 @@ position_vector = vector(-EROS_RADIUS, 0, 0)
 velocity_vector = vector(-3, 3, 3)
 
 eros = Eros()
-ball = Ball(mass=1, position=position_vector, velocity=velocity_vector, radius=EROS_RADIUS / 20, color=color.yellow,
+ball = Ball(mass=1, position=position_vector, velocity=velocity_vector, radius=EROS_RADIUS / 20, colour=color.yellow,
             make_trail=True)
 
 t = 0
@@ -31,7 +31,7 @@ while mag(ball.position) >= EROS_RADIUS:
     t += dt
 
 velocity_vector += cross(W, position_vector)
-ball_2 = Ball(mass=1, position=position_vector, velocity=velocity_vector, radius=EROS_RADIUS / 20, color=color.magenta,
+ball_2 = Ball(mass=1, position=position_vector, velocity=velocity_vector, radius=EROS_RADIUS / 20, colour=color.magenta,
               make_trail=True)
 
 t = 0

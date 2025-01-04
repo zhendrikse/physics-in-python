@@ -2,7 +2,7 @@ from vpython import vec, rate, box, color, graph, gcurve, scene
 from src.toolbox.ball import Ball
 from src.toolbox.timer import Timer
 
-ball = Ball(position=vec(0, 20, 0), velocity=vec(1, 0, 0), radius=2, elasticity=0.9, color=color.red)
+ball = Ball(position=vec(0, 20, 0), velocity=vec(1, 0, 0), radius=2, elasticity=0.9, colour=color.red)
 floor = box(pos=vec(25, 0, 0), length=50, height=1, width=10, color=color.green)
 position_plot = graph(title="Bouncing ball", xtitle="Time", ytitle="Height", width=400, height=250)
 curve = gcurve(color=color.red)

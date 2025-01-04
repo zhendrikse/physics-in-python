@@ -26,7 +26,7 @@ spring_size = 0.7
 spring_rest_position = vector(0, spring_size, 0)
 
 floor = box(pos=vector(0, 0, 0), size=vector(2, 0.05, 1), color=color.green)
-ball = Ball(position=vector(0, 2 + spring_size, 0), color=color.red, radius=0.15)
+ball = Ball(position=vector(0, 2 + spring_size, 0), colour=color.red, radius=0.15)
 spring = Spring(axis=spring_rest_position, spring_constant=1000, radius=0.1, thickness=0.06)
 
 gravitational_force = vector(0, -9.8 * ball.mass, 0)
