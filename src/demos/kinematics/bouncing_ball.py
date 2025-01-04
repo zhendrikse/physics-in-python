@@ -1,26 +1,31 @@
 from vpython import vec, rate, box, color, graph, gcurve, scene
 from src.toolbox.ball import Ball
 from src.toolbox.timer import Timer
+from src.toolbox.axis import Base
 
-ball = Ball(position=vec(0, 20, 0), velocity=vec(1, 0, 0), radius=2, elasticity=0.9, colour=color.red)
-floor = box(pos=vec(25, 0, 0), length=50, height=1, width=10, color=color.green)
+ball = Ball(position=vec(-10, 20, -10), velocity=vec(1, 0, 1), radius=1, elasticity=0.9, colour=color.cyan)
 position_plot = graph(title="Bouncing ball", xtitle="Time", ytitle="Height", width=400, height=250)
 curve = gcurve(color=color.red)
-timer = Timer(position=vec(-10, 0, 0))
+timer = Timer(position=vec(20, 20, 0))
+base = Base(length=40)
+base.hide_tick_labels()
+base.show_xz_mesh()
 
 scene.title = "Click mouse button to drop ball"
-scene.waitfor('click')
+scene.forward= vec(-0.359679, -0.505533, -0.784262)
+scene.range= 25
 
 t = 0
 dt = 0.01
-while ball.position.x < floor.length:
-    rate(3 / dt)
-    timer.update(t / 3)
+scene.waitfor('click')
+while ball.position().x < 20:
+    rate(2 / dt)
+    timer.update(t / 2)
 
-    force = vec(0, -9.8, 0) * ball.mass
-    ball.move(force, dt)
+    force = vec(0, -9.8, 0) * ball.mass()
+    ball.move_due_to(force, dt)
     if ball.lies_on_floor():
         ball.bounce_from_floor(dt)
 
-    curve.plot(t * dt, ball.position.y)
+    curve.plot(t / 2, ball.position().y)
     t += dt
