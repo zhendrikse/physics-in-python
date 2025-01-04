@@ -376,12 +376,12 @@ This is a refactored version of the original idea from [Dot Physics](https://www
 
 An illustration of using polar (spherical) coordinates.
 
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Polarcoordinates">
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">
   <img alt="Polar coordinates" width="60%" height="60%" src="./src/demos/images/polar_coordinates.png" title="Click to animate"/>
 </a>
 
 - Polar code in action [on Trinket](https://zegerh-6085.trinket.io/sites/polar_coordinates) 
-  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Polarcoordinates)
+  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates)
 - Polar coordinates code base [on Trinket](https://trinket.io/library/trinkets/d7fa526a8ee9)
 
 
