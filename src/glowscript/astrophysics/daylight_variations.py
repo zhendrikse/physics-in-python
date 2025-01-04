@@ -115,17 +115,11 @@ list_of_months = ['January', 'February', 'March', 'April',
                   'May', 'June', 'July', 'August',
                   'September', 'October', 'November', 'December']
 
-# below is the main loop of the program - everything above is "setup" and now we are in the main "loop" where all the action occurs
 month_counter = 0
-clock_ticks = 0
-accum = 0
 daylight = 0
 days_counter = 0
-clock_ticks_per_day = 0
 while -earth_angle <= 365:  # stop after one year
-
-    rate(100)  # this limits the animation rate so that it won't depend on computer/browser processor speed
-    clock_ticks += 1
+    rate(100)
 
     # update the position of the Earth and Moon by using basic circle trigonometry
     earth.pos = astronomical_unit * vec(cos(radians(earth_angle)), 0, sin(radians(earth_angle)))
@@ -133,19 +127,14 @@ while -earth_angle <= 365:  # stop after one year
     earth_arrows.update(earth.pos, radians(program_speed * 365))
 
     sun_energy_transfer = earth_arrows.sun_energy_transfer()
-    accum += sun_energy_transfer
     daylight += sun_energy_transfer
-    clock_ticks_per_day += 1
     if sun_energy_transfer == 0 and daylight != 0:
-        print(program_speed, 24 - clock_ticks_per_day)
-        daylight_curve.plot(days_counter, daylight + 7.2)
-        daylight = 0
-        clock_ticks_per_day = 0
         days_counter += 1
+        daylight = daylight * program_speed
+        daylight_curve.plot(days_counter, daylight * 24 + 7.2)
+        daylight = 0
 
     if -earth_angle > month_counter * new_graph_interval:  # new month, new graph
-        print(list_of_months[month_counter%12-1], "\t accum=", accum, " from days=", days_counter,
-              "accum/hours=", accum / clock_ticks)
         energy_graph = graph(title="Sunlight in " + list_of_months[month_counter%12], width=graph_width, height=graph_height,
                              xmin=month_counter * new_graph_interval, xmax=(month_counter + 1) * new_graph_interval,
                              ymin=-0.1,
@@ -167,5 +156,3 @@ while -earth_angle <= 365:  # stop after one year
     # Rotate the Sun with a period of about 22 days
     sun.rotate(angle=radians(program_speed * 16), axis=vec(0, 1, 0))
 
-print(list_of_months[month_counter % 12-1], "\t accum=", accum, " from days=", round(clock_ticks) / 24, "accum/hours=",
-      accum / clock_ticks)
