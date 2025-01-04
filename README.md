@@ -351,13 +351,22 @@ number of vibrating beads coupled by springs on both sides!
   and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Blockrotation)
 - Rotating block code base [on Trinket](https://trinket.io/library/trinkets/0e414ca766d1)
 
-## Water sprinkler
+## Water sprinkler and floating block
 
-This is a refactored version of the original idea from [Dot Physics](https://www.youtube.com/channel/UCVxIDFY01y4n_c2lK1TB-KA). 
+Some animations that have something to do with water.
 
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/Watersprinkler">
-  <img alt="Water sprinkler" width="50%" height="50%" src="https://rhettallain.com/wp-content/uploads/2019/11/sprinkler1.gif" title="Click to animate"/>
+## [Floating block]()
+
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Floatingblock">
+  <img alt="Floating block" width="45%" height="45%" src="./src/demos/images/floating_block.png" title="Click to animate"/>
 </a>
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/Watersprinkler">
+  <img alt="Water sprinkler" width="45%" height="45%" src="./src/demos/images/water_sprinkler.png" title="Click to animate"/>
+</a>
+
+- Floating block in action [on Trinket](https://zegerh-6085.trinket.io/sites/floating_block) 
+  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Floatingblock)
+- Floating block code base [on Trinket](https://trinket.io/library/trinkets/94ed363f8b25)
 
 - See the water sprinkler in action [on Trinket](https://zegerh-6085.trinket.io/sites/sprinkler) 
   and on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/Watersprinkler)
@@ -365,12 +374,6 @@ This is a refactored version of the original idea from [Dot Physics](https://www
   based on the original [water sprinkler](https://rhettallain.com/2019/11/12/modeling-a-spinning-sprinkler/) blog post and the code presented therein
 
 # Miscellaneous
-
-## [Floating block](https://trinket.io/library/trinkets/94ed363f8b25)
-
-<a href="https://zegerh-6085.trinket.io/sites/floating_block">
-  <img alt="Floating block" width="50%" height="50%" src="./src/demos/images/floating_block.png" title="Click to animate"/>
-</a>
 
 ## Polar coordinates
 
