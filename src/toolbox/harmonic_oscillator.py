@@ -15,8 +15,8 @@ class HarmonicOscillator:
                               coils=coils, radius=0.6 * ball_radius)
 
     def update_by(self, dt):
-        self._right_ball.move(self._spring.force(), dt)
-        self._left_ball.move(-self._spring.force(), dt)
+        self._right_ball.move_due_to(self._spring.force(), dt)
+        self._left_ball.move_due_to(-self._spring.force(), dt)
         self._distance = self._left_ball.distance_to(self._right_ball)
         self._spring.update(self._distance, self._position - self._distance / 2)
 

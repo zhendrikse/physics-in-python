@@ -351,26 +351,39 @@ number of vibrating beads coupled by springs on both sides!
   and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Blockrotation)
 - Rotating block code base [on Trinket](https://trinket.io/library/trinkets/0e414ca766d1)
 
+## Water sprinkler
+
+This is a refactored version of the original idea from [Dot Physics](https://www.youtube.com/channel/UCVxIDFY01y4n_c2lK1TB-KA). 
+
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/Watersprinkler">
+  <img alt="Water sprinkler" width="50%" height="50%" src="https://rhettallain.com/wp-content/uploads/2019/11/sprinkler1.gif" title="Click to animate"/>
+</a>
+
+- See the water sprinkler in action [on Trinket](https://zegerh-6085.trinket.io/sites/sprinkler) 
+  and on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/Watersprinkler)
+- Take a look at [the code base](https://trinket.io/glowscript/3ec01917098d), which is 
+  based on the original [water sprinkler](https://rhettallain.com/2019/11/12/modeling-a-spinning-sprinkler/) blog post and the code presented therein
+
+# Miscellaneous
 
 ## [Floating block](https://trinket.io/library/trinkets/94ed363f8b25)
+
 <a href="https://zegerh-6085.trinket.io/sites/floating_block">
   <img alt="Floating block" width="50%" height="50%" src="./src/demos/images/floating_block.png" title="Click to animate"/>
 </a>
 
-# Glowscript demos from [Dot Physics](https://www.youtube.com/channel/UCVxIDFY01y4n_c2lK1TB-KA)
+## Polar coordinates
 
-These demos are _refactored versions_ of the originals, found 
-by the followling hyperlinks below. I have tried to make the
-original code more object-oriented and make it [reveal its intent](https://martinfowler.com/bliki/BeckDesignRules.html).
+An illustration of using polar (spherical) coordinates.
 
-## Water Sprinkler
-
-<a href="https://zegerh-6085.trinket.io/sites/sprinkler">
-  <img alt="Water sprinkler" width="50%" height="50%" src="https://rhettallain.com/wp-content/uploads/2019/11/sprinkler1.gif" title="Click to animate"/>
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Polarcoordinates.png">
+  <img alt="Polar coordinates" width="60%" height="60%" src="./src/demos/images/polar_coordinates.png" title="Click to animate"/>
 </a>
 
-- See [my code in action](https://trinket.io/glowscript/3ec01917098d) on Trinket
-- Based on the original [water sprinkler](https://rhettallain.com/2019/11/12/modeling-a-spinning-sprinkler/) blog post and the code presented therein
+- Polar code in action [on Trinket](https://zegerh-6085.trinket.io/sites/polar_coordinates) 
+  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Polarcoordinates)
+- Polar coordinates code base [on Trinket](https://trinket.io/library/trinkets/d7fa526a8ee9)
+
 
 ## Elastic collision
 
