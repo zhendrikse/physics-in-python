@@ -15,7 +15,7 @@ class Ball(Moveable):
                  elasticity=1.0,
                  make_trail=False,
                  draw=True):
-        Moveable.__init__(self, pos=position, velocity=velocity, mass=mass)
+        super().__init__(pos=position, velocity=velocity, mass=mass)
 
         self._ball = self._vpython_ball(mass, position, velocity, radius, colour, elasticity,
                                         make_trail) if draw else None
@@ -32,10 +32,10 @@ class Ball(Moveable):
         left_side = building.position.x - building.L / 2
 
         if self._is_approaching_from_the_right(right_side):
-            return self.position().x <= right_side + self.radius() and self.position().y <= building.H
+            return self.position().x <= right_side + self.radius and self.position().y <= building.H
 
         if self._is_approaching_from_the_left(left_side):
-            return self.position().x >= left_side - self.radius() and self.position().y <= building.H
+            return self.position().x >= left_side - self.radius and self.position().y <= building.H
 
         return False
 
@@ -44,8 +44,8 @@ class Ball(Moveable):
         # set new velocity in x-direction after collision with building
         momentum_ball = self.mass() * self.velocity().x
         momentum_building = building.mass * building.velocity.x
-        self._velocity.x = (momentum_ball + momentum_building + self.elasticity() * building.mass * (
-                    building.velocity.x - self.velocity().x)) / (self.mass() + building.mass)
+        self._velocity.x = (momentum_ball + momentum_building + self.elasticity * building.mass * (
+                building.velocity.x - self.velocity().x)) / (self.mass() + building.mass)
         self.render()
 
     def render(self):
@@ -58,29 +58,31 @@ class Ball(Moveable):
 
         k = 101
         r = self.distance_to(other_ball)
-        return k * (mag(r) - (self.radius() + other_ball.radius())) * norm(r)
+        return k * (mag(r) - (self.radius + other_ball.radius())) * norm(r)
 
     def has_collided_with(self, other_ball):
-        return mag(self.distance_to(other_ball)) < (self.radius() + other_ball.radius())
+        return mag(self.distance_to(other_ball)) < (self.radius + other_ball.radius())
 
     def rotate(self, angle, origin=vector(0, 0, 0), axis=vector(0, 1, 0)):
         self._ball.rotate(origin=origin, axis=axis, angle=angle)
 
     def lies_on_floor(self):
-        return self.position().y - self.radius() <= 0.5
+        return self.position.y - self.radius <= 0.5
 
     def bounce_from_floor(self, dt):
-        self._velocity.y *= -self.elasticity()
+        self._velocity.y *= -self.elasticity
         self._position += self._velocity * dt
 
         # if the velocity is too slow, stay on the ground
         if self._velocity.y <= 0.1:
-            self._position.y = self.radius() + self.radius() / 10
+            self._position.y = self.radius + self.radius / 10
 
         self.render()
 
+    @property
     def radius(self):
         return self._radius
 
+    @property
     def elasticity(self):
         return self._elasticity

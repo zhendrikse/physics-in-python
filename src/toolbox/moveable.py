@@ -30,29 +30,34 @@ class Moveable:
         self.render()
 
     def _is_approaching_from_the_right(self, right_side):
-        return self.velocity().x < 0 and self.position().x > right_side
+        return self.velocity.x < 0 and self.position.x > right_side
 
     def _is_approaching_from_the_left(self, left_side):
-        return self.velocity().x > 0 and self.position().x < left_side
+        return self.velocity.x > 0 and self.position.x < left_side
 
     def shift_by(self, delta):
         self._position += delta
         self.render()
 
     def distance_to(self, other):
-        return other.position() - self.position()
+        return other.position() - self.position
 
+    @property
     def momentum(self):
         return self.velocity * self.mass
 
+    @property
     def kinetic_energy(self):
         return mag(self.momentum) * mag(self.momentum) / (2 * self._mass)
 
+    @property
     def position(self):
         return self._position
 
+    @property
     def velocity(self):
         return self._velocity
 
+    @property
     def mass(self):
         return self._mass

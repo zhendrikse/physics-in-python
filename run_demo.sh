@@ -6,4 +6,4 @@ if [ "$#" -ne 1 ]; then
     exit 0
 fi
 
-poetry run python -m src.demos.$1
+poetry run python -m src.$1
