@@ -4,7 +4,7 @@ from vpython import *
 
 title = """Odysseus
 
-&#x2022; Original <a href="https://glowscript.org/#/user/X9Z3/folder/X9Z3Publications/program/Odysseus">Original version</a> created by Maximillian DeMarr
+&#x2022; <a href="https://glowscript.org/#/user/X9Z3/folder/X9Z3Publications/program/Odysseus">Original version</a> created by Maximillian DeMarr
 &#x2022; Maintained by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a> in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
 &#x2022; Pan around by holding shift, left-clicking, and dragging.
 &#x2022; Reset the scene by reloading the browser. 
@@ -160,7 +160,7 @@ class Axes:
 
 
 axes = Axes(vec(15.5, 0, 0.4))
-odysseus = Odysseus(vec(-20, 0, 0))
+odysseus = Odysseus(vec(-15, 0, 0))
 his_bow = Bow(odysseus.position())
 his_arrow = arrow(pos=odysseus.position() + vec(-0.408753, 1.47742, 0.408753), axis=vec(4, 0, 0), color=color.yellow,
                   shaftwidth=0.05, round=True, emissive=True)

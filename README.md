@@ -373,17 +373,25 @@ Some animations that have something to do with water.
 
 # Miscellaneous
 
-## Polar coordinates
+## Polar coordinates and flock of birds
 
-An illustration of using polar (spherical) coordinates.
+An illustration of using polar (spherical) coordinates and a flock of birds
 
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">
-  <img alt="Polar coordinates" width="60%" height="60%" src="./images/polar_coordinates.png" title="Click to animate"/>
+  <img alt="Polar coordinates" width="49%" height="49%" src="./images/polar_coordinates.png" title="Click to animate"/>
+</a>
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Flockingbirds">
+  <img alt="Flocking birds" width="49%" height="49%" src="./images/flocking_birds.png" title="Click to animate"/>
 </a>
 
 - Polar code in action [on Trinket](https://zegerh-6085.trinket.io/sites/polar_coordinates) 
   and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates)
 - Polar coordinates code base [on Trinket](https://trinket.io/library/trinkets/d7fa526a8ee9)
+
+
+- Flocking birds in action [on Trinket](https://zegerh-6085.trinket.io/sites/flocking_birds) 
+  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Flockingbirds)
+- Flocking birds code base [on Trinket](https://trinket.io/library/trinkets/54d12548d4ec)
 
 
 ## Elastic collision
@@ -416,6 +424,17 @@ An illustration of using polar (spherical) coordinates.
 <a href="https://zegerh-6085.trinket.io/sites/vturtle">
   <img alt="Robot for turtle graphics" width="45%" height="50%" src="./images/robot.png" title="Click to animate"/>
 </a>
+
+## Odysseus
+
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Odysseus">
+  <img alt="Odysseus" width="85%" height="85%" src="./images/odysseus.png" title="Click to animate"/>
+</a>
+
+- Odysseus in action [on Trinket](https://zegerh-6085.trinket.io/sites/odysseus) 
+  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Odysseus)
+- Odysseus code base [on Trinket](https://trinket.io/library/trinkets/f3568325e563)
+
 
 # Acknowledgements
 

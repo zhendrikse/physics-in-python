@@ -1,18 +1,23 @@
 # Web VPython 3.2
 
-from vpython import pi, box, vec, color, sin, cos, rate, sphere, hat, mag, scene
+from vpython import pi, box, vec, color, sin, cos, rate, sphere, hat, mag, canvas
 
-#
-# Original: https://bphilhour.trinket.io/physics-through-glowscript-an-introductory-course#/1-introduction-objects-parameters-and-the-3d-environment/optional-scale-models
-# See also: https://github.com/zhendrikse/physics-in-python/
-#
+title="""Electron spinning around a charged ring
+
+&#x2022; Based on original <a href="https://bphilhour.trinket.io/physics-through-glowscript-an-introductory-course#/1-introduction-objects-parameters-and-the-3d-environment/optional-scale-models
+#">example</a>
+&#x2022; Maintained by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a> in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
+
+"""
 
 Q = 1.6E-19  # charge magnitude of electron
 k = 9E9  # Coulomb's law constant
 
+animation = canvas(title=title, forward=vec(-0.55, -0.65, -0.55), range=1e-10)
+animation.append_to_caption("If it isn't doing anything interesting, either wait or run again to randomize start position.")
 
 class ChargedRing:
-    def __init__(self, number_of_ring_segments=60, radius=0.5e-10, draw=True, charge=-Q):
+    def __init__(self, number_of_ring_segments=60, radius=0.5e-10, render=True, charge=-Q):
         self._segments = []  # array holding all the segments
         self._radius = radius
         self._charge = charge
@@ -22,7 +27,7 @@ class ChargedRing:
             theta = i * (2 * pi / number_of_ring_segments)  # angular position on ring
             x = radius * cos(theta)
             y = radius * sin(theta)
-            if draw:
+            if render:
                 self._segments.append(box(pos=vec(x, y, 0), size=vec(dx, dx, dx), color=color.green))
                 self._segments[i].rotate(axis=vec(0, 0, 1), angle=theta)
 
@@ -31,8 +36,7 @@ class ChargedRing:
         electric_field = vec(0, 0, 0)
         for segment in self._segments:
             r = segment.pos - position
-            dE = k * dq * r.norm() / r.mag2
-            electric_field += dE
+            electric_field += k * dq * r.norm() / r.mag2
         return electric_field
 
 
@@ -40,15 +44,14 @@ class Electron:
     def __init__(self, mass=9.1093837E-31, position=vec(0, 0, 0), velocity=vec(0, 0, 0), radius=2.8179E-15, charge=Q,
                  colour=None, make_trail=False, retain=-1, draw=True):
         colour = colour if colour is not None else color.blue if charge > 0 else color.red
-        self._ball = sphere(mass=mass, pos=position, radius=radius, color=colour,
-                            make_trail=make_trail, retain=retain) if draw else None
+        self._ball = sphere(mass=mass, pos=position, radius=radius, color=colour, make_trail=make_trail, retain=retain) if draw else None
         self._velocity = velocity
         self._position = position
         self._radius = radius
         self._charge = charge
         self._mass = mass
 
-    def _draw(self):
+    def render(self):
         if self._ball:
             self._ball.pos = self._position
 
@@ -59,27 +62,21 @@ class Electron:
         return electric_field * self._charge
 
     def update(self, coulomb_force, dt):
-        '''given a charge and position and update position'''
         self._velocity += coulomb_force / self._mass * dt
         self._position += self._velocity * dt
-        self._draw()
+        self.render()
 
     def position(self):
         return self._position
 
-scene.title = "Electron spinning around a charged ring"
-scene.caption = "If it isn't doing anything interesting, either wait or run again to randomize start position."
-scene.forward=vec(-0.55, -0.65, -0.55)
-scene.range=1.0e-10
 
 radius = 0.5e-10
 ring = ChargedRing(radius=radius)
-electron = Electron(position=vec(0, 0, radius) + 1.5 * radius * vec.random(), radius=radius / 20, charge=-Q,
-                    make_trail=True, retain=150)
+electron = Electron(position=vec(0, 0, radius) + 1.5 * radius * vec.random(), radius=radius / 20, charge=-Q, make_trail=True, retain=150)
 
 dt = 1e-18  # time step
 while True:
     rate(100)
-    E = ring.field_at(electron.position())
-    F = electron.coulomb_force_in(E)
-    electron.update(F, dt)
+    field = ring.field_at(electron.position())
+    force = electron.coulomb_force_in(field)
+    electron.update(force, dt)

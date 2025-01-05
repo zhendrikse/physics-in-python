@@ -1,14 +1,17 @@
 #Web VPython 3.2
 
-# Flock of Birds
-# B. Philhour 10/9/17
-# inspired by Gary Flake's "Computational Beauty of Nature"
-# 1998 MIT Press ISBN-13 978-0-262-56127-3
-# https://www.amazon.com/Computational-Beauty-Nature-Explorations-Adaptation/dp/0262561271
-
 from vpython import canvas, color, arrow, vector, vec, slider, button, rate, random, norm
 
-animation = canvas(width=600, height=450, background=color.black)  # , fov=10)
+title="""Flock of Birds
+
+&#x2022; Original version created by B. Philhour 10/9/17 
+&#x2022; Inspired by Gary Flake's <a href="https://www.amazon.com/Computational-Beauty-Nature-Explorations-Adaptation/dp/0262561271">Computational Beauty of Nature</a>
+&#x2022; 1998 MIT Press ISBN-13 978-0-262-56127-3
+&#x2022; Maintained by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a> in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
+
+"""
+
+animation = canvas(width=600, height=450, background=color.black, title=title)  # , fov=10)
 
 spread = 3  # initial physical radius of entire flock
 speed = 6  # initial horizontal speed
