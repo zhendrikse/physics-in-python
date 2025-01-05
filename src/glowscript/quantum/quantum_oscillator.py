@@ -1,6 +1,6 @@
-#Web VPython 3.2
+Web VPython 3.2
 
-from vpython import vector, vec, sphere, helix, mag, color, cylinder, curve, scene, arange, sqrt, rate, norm
+from vpython import vector, vec, sphere, helix, mag, color, cylinder, curve, canvas, arange, sqrt, rate, norm, checkbox
 
 title = """Semi-classical visualization of quantum oscillator
 
@@ -12,15 +12,15 @@ Click on an energy level to put the oscillator into that state
 """
 
 y_axis_pos = -10
-ks = 1.2  ## 200
-ball_mass = 0.025
-omega = sqrt(ks / ball_mass)
+ks = 1.2
 L0 = 10
-show_vertical_lines = False
+
+animation = canvas(title=title, x=0, y=0, width=600, height=600)
+
 
 class Ball:
-    def __init__(self, mass=1.5, position=vector(0, 0, 0), velocity=vector(0, 0, 0), radius=0.1, color=color.yellow, make_trail=False):
-        self._ball = sphere(pos=position, radius=radius, color=color, make_trail=make_trail)
+    def __init__(self, mass=1.5, position=vector(0, 0, 0), velocity=vector(0, 0, 0), radius=0.1, colour=color.yellow, make_trail=False):
+        self._ball = sphere(pos=position, radius=radius, color=colour, make_trail=make_trail)
         self._mass = mass
         self._velocity = velocity
         self._start_velocity = velocity
@@ -34,8 +34,8 @@ class Ball:
     def shift_by(self, amount):
         self._ball.pos += amount
 
-    def reset(self):
-        self._ball.pos = self._start_position
+    def reset(self, position=None):
+        self._ball.pos = position if position else self._start_position
         self._velocity = self._start_velocity
 
     def distance_to(self, other):
@@ -66,10 +66,10 @@ class HarmonicOscillator:
         left = position - length * vector(1, 0, 0)
         right = position + length * vector(1, 0, 0)
         self._position = position
-        self._left_ball = Ball(mass=ball_mass, position=left, radius=ball_radius, color=colour)
-        self._right_ball = Ball(mass=ball_mass, position=right, radius=ball_radius, color=colour)
+        self._left_ball = Ball(mass=ball_mass, position=left, radius=ball_radius, colour=colour)
+        self._right_ball = Ball(mass=ball_mass, position=right, radius=ball_radius, colour=colour)
         self._distance = self._left_ball.distance_to(self._right_ball)
-        self._spring = Spring(position=position - self._distance / 2, axis=self._distance,spring_constant=spring_constant, radius=ball_radius / 2, thickness=0.3)
+        self._spring = Spring(position=position - self._distance / 2, axis=self._distance, spring_constant=spring_constant, radius=ball_radius / 2, thickness=0.3)
 
     def update_by(self, dt):
         self._right_ball.move(self._spring.force(), dt)
@@ -96,60 +96,78 @@ class HarmonicOscillator:
         return self._right_ball.position()
 
 
-current_level = None
-def on_mouse_click():
-    global oscillator, energy_levels, current_level
+class Well:
+    def __init__(self, colour=color.yellow):
+        equilibrium_position = cylinder(pos=vector(0, y_axis_pos, 0), axis=vector(0, 18, 0), radius=0.1, color=color.green)
+        well = curve(radius=0.2, pos=[vector(-5.8, 5.8 * 5.8 * .5 * ks + y_axis_pos, 0)], color=colour)
+        for xx in arange(-5.8, 5.3, 0.1):
+            well.append(pos=vector(xx, .5 * ks * xx ** 2 + y_axis_pos, 0))
+        well.append(pos=vector(8, .5 * ks * 5.2 ** 2 + y_axis_pos, 0))
 
-    selected_level = scene.mouse.pick
-    if selected_level in energy_levels:
-        old_level = current_level
-        current_level = selected_level
-        current_level.color = color.red
+        self._current_level = None
+        self._vline1 = cylinder(pos=vector(-5, y_axis_pos, 0), axis=vector(0, 15, 0), radius=0.1,
+                                color=vector(.6, .6, .6), visible=False)
+        self._vline2 = cylinder(pos=vector(5, y_axis_pos, 0), axis=vector(0, 15, 0), radius=0.1,
+                                color=vector(.6, .6, .6), visible=False)
+        self._energy_levels = []
+
+        dU = 2
+        for Ux in arange(0.5 * dU, 7.51 * dU, dU):
+            s = sqrt(2 * Ux / ks)
+            e_level = cylinder(radius=0.2, pos=vector(-s, Ux + y_axis_pos, 0), color=color.white, axis=vector(2 * s, 0, 0))
+            self._energy_levels.append(e_level)
+
+    def vertical_lines(self, show):
+        self._vline1.visible = show
+        self._vline2.visible = show
+
+    def energy_level_present(self, selected_level):
+        return selected_level in self._energy_levels
+
+    def set_current_level(self, level):
+        old_level = self._current_level
+        self._current_level = level
+        self._vline1.pos = level.pos
+        self._vline2.pos = level.pos + self._current_level.axis
+        self._current_level.color = color.red
         if old_level is not None:
             old_level.color = color.white
-        amplitude = abs(current_level.pos.x)
+
+
+well = Well()
+oscillator = HarmonicOscillator(position=vec(0, 0.5 * 5 ** 2, 0), length=L0 / 2, spring_constant=ks, ball_radius=0.5, ball_mass=0.025)
+
+
+def on_mouse_click():
+    global oscillator, well
+
+    selected_level = animation.mouse.pick
+    if well.energy_level_present(selected_level):
+        well.set_current_level(selected_level)
+        amplitude = abs(selected_level.pos.x / 2)
         oscillator.reset()
         oscillator.compress_by(amplitude)
-        vertical_line_left.pos = current_level.pos
-        vertical_line_right.pos = current_level.pos + current_level.axis
 
-    elif scene.mouse.project(normal=vec(0, 0, 1)).y > .5 * ks * 5.2 ** 2 + y_axis_pos:
-        if current_level:
-            current_level.color = color.white
-        while oscillator.right_ball_position().x < 2 * L0:
-            rate(200)
-            # ball_2.position.x += L0 / 100
-            oscillator.pull(L0 / 100)
+    # elif animation.mouse.project(normal=vec(0, 0, 1)).y > .5 * ks * 5.2 ** 2 + y_axis_pos:
+    #     if current_level:
+    #         current_level.color = color.white
+    #     while oscillator.right_ball_position().x < 2 * L0:
+    #         rate(200)
+    #         # ball_2.position.x += L0 / 100
+    #         oscillator.pull(L0 / 100)
 
 
-scene.x = scene.y = 0
-scene.width = scene.height = 600
-scene.title = title
-scene.bind("click", on_mouse_click)
+def toggle_vertical_lines(event):
+    well.vertical_lines(event.checked)
 
-equilibrium_position = cylinder(pos=vector(0, y_axis_pos, 0), axis=vector(0, 18, 0), radius=0.1, color=color.green)
-well = curve(radius=0.2, pos=[vector(-5.8, 5.8 * 5.8 * .5 * ks + y_axis_pos, 0)])
-for xx in arange(-5.8, 5.3, 0.1):
-    well.append(pos=vector(xx, .5 * ks * xx ** 2 + y_axis_pos, 0))
-well.append(pos=vector(8,.5 * ks * 5.2**2 + y_axis_pos, 0))
 
-vertical_line_left = cylinder(pos=vector(-5, y_axis_pos, 0), axis=vector(0, 15, 0), radius=0.1, color=vector(.6, .6, .6), visible=show_vertical_lines)
-vertical_line_right = cylinder(pos=vector(5, y_axis_pos, 0), axis=vector(0, 15, 0), radius=0.1, color=vector(.6, .6, .6), visibile=show_vertical_lines)
-
-energy_levels = []
-dU = 2
-for Ux in arange(0.5 * dU, 7.51 * dU, dU):
-    s = sqrt(2 * Ux / ks)
-    e_level = cylinder(radius=0.2, pos=vector(-s, Ux + y_axis_pos, 0), axis=vector(2 * s, 0, 0), color=color.white)
-    energy_levels.append(e_level)
-
-oscillator = HarmonicOscillator(position=vec(0, 0.5 * 5 ** 2, 0), length=L0 / 2, spring_constant=ks, ball_radius=0.5, ball_mass=ball_mass)
+animation.bind("click", on_mouse_click)
+lines_box = checkbox(text='Vertical lines', bind=toggle_vertical_lines, checked=False)
 
 t = 0.0
 dt = 0.01
-while 1:
+while True:
     rate(1 / dt)
-    if current_level:
-        oscillator.update_by(dt)
-        t += dt
+    oscillator.update_by(dt)
+    t += dt
 
