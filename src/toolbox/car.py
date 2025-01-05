@@ -9,7 +9,8 @@ class Car(Moveable):
         self._car = self._vpython_car(scale, colour) if render else None
         self.move_to(pos)
 
-    def _vpython_car(self, scale, colour):
+    @staticmethod
+    def _vpython_car(scale, colour):
         parts = []
         parts += [box(pos=vec(0, 0, 0), width=7 * scale, height=3.5 * scale, length=18 * scale, color=colour)]
         parts += [box(pos=vec(1.5, 3.0, 0) * scale, width=7 * scale, height=3 * scale, length=9 * scale, color=colour)]

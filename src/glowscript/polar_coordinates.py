@@ -7,7 +7,7 @@ title = """Frequently used objects
 
 """
 
-from vpython import sphere, vec, arrow, color, sin, cos, ring, curve, cross, label, canvas, text, cylinder, norm, slider, radians, rate, checkbox, pi, box
+from vpython import sphere, vec, arrow, color, sin, cos, ring, curve, cross, label, canvas, norm, slider, radians, rate, cylinder, text, checkbox
 
 animation = canvas(forward=vec(0.37, -0.55, -0.75), range=8., title=title)
 
@@ -171,29 +171,17 @@ phi_slider = slider(bind = set_phi, value = phi, min = 0, max = 360)
 
 animation.append_to_caption("\n\n")
 
-show_tick_marks = True
-def toggle_tick_marks(btn):
-    nonlocal show_tick_marks, axis
-    show_tick_marks = not show_tick_marks
-    axis.tick_marks_visible(show_tick_marks)
+def toggle_tick_marks(event):
+    axis.tick_marks_visible(event.checked)
 
-show_tick_labels = False
-def toggle_tick_labels(btn):
-    nonlocal show_tick_labels, axis
-    show_tick_labels = not show_tick_labels
-    axis.tick_labels_visible(show_tick_labels)
+def toggle_tick_labels(event):
+    axis.tick_labels_visible(event.checked)
 
-show_xz_mesh = True
-def toggle_xz_mesh(btn):
-    nonlocal show_xz_mesh, axis
-    show_xz_mesh = not show_xz_mesh
-    axis.xz_mesh_visible(show_xz_mesh)
+def toggle_xz_mesh(event):
+    axis.xz_mesh_visible(event.checked)
 
-show_xy_mesh = False
-def toggle_xy_mesh(btn):
-    nonlocal show_xy_mesh, axis
-    show_xy_mesh = not show_xy_mesh
-    axis.xy_mesh_visible(show_xy_mesh)
+def toggle_xy_mesh(event):
+    axis.xy_mesh_visible(event.checked)
 
 tick_marks_button = checkbox(text = 'Tick marks', bind = toggle_tick_marks, checked=True)
 tick_labels_button = checkbox(text = 'Tick labels', bind = toggle_tick_labels, checked=False)

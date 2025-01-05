@@ -27,6 +27,27 @@ class Ball(Moveable):
         return sphere(pos=position, radius=radius, color=colour, velocity=velocity, mass=mass, elasticity=elasticity,
                       make_trail=make_trail)
 
+    def hits(self, building):
+        right_side = building.position.x + building.L / 2
+        left_side = building.position.x - building.L / 2
+
+        if self._is_approaching_from_the_right(right_side):
+            return self.position().x <= right_side + self.radius() and self.position().y <= building.H
+
+        if self._is_approaching_from_the_left(left_side):
+            return self.position().x >= left_side - self.radius() and self.position().y <= building.H
+
+        return False
+
+    def collide_with(self, building):
+        building.collide_with(self)
+        # set new velocity in x-direction after collision with building
+        momentum_ball = self.mass() * self.velocity().x
+        momentum_building = building.mass * building.velocity.x
+        self._velocity.x = (momentum_ball + momentum_building + self.elasticity() * building.mass * (
+                    building.velocity.x - self.velocity().x)) / (self.mass() + building.mass)
+        self.render()
+
     def render(self):
         if self._ball:
             self._ball.pos = self._position
