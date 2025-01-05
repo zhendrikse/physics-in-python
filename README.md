@@ -427,24 +427,21 @@ An illustration of using polar (spherical) coordinates.
 
 - [MyScript](https://webdemo.myscript.com/): enter text, equations, or diagrams by hand, and effortlessly convert 
   it to MathML, LaTeX, etc.!
-
 - Just for fun: [online electric circuit construction kit](https://phet.colorado.edu/sims/html/circuit-construction-kit-ac/latest/circuit-construction-kit-ac_all.html).
 Make sure to check it out, it simply is brilliant.
-
 - [Manim](https://github.com/3b1b/manim), an animation engine for explanatory math videos
 
-## Other VPython resources
+## Other VPython apps
 
+- Glowscript apps written by [X9Z3](https://glowscript.org/#/user/X9Z3/folder/X9Z3Publications/)
+- Glowscript apps written by [Bob Salgado](https://www.glowscript.org/#/user/Rob_Salgado/folder/My_Programs/)
+- [Glowscript apps](https://www.glowscript.org/#/user/matterandinteractions/folder/matterandinteractions/) belonging to the book [Matter and Interactions](https://matterandinteractions.org/)
 - [Physics through Glowscript - An introductory course](https://bphilhour.trinket.io/physics-through-glowscript-an-introductory-course), an excellent tutorial!
+- [VPython lecture demos](https://lectdemo.github.io/virtual/index.html) (based on deprecated (V)Python versions)
+
+## Other resources
 
 - [3D Modeling with VPython](https://rsehosting.reading.ac.uk/courses/py3d-basic/)
-
-- [VPython Applications for Teaching Physics](https://www.visualrelativity.com/vpython/)
-
-- [Programs by Bob Salgado](https://www.glowscript.org/#/user/Rob_Salgado/folder/My_Programs/)
-
+- [VPython Applications for Teaching Physics](https://www.visualrelativity.com/vpython/) by Bob Salgado
 - [VPython Docs](https://www.beautifulmathuncensored.de/static/GlowScript/VPythonDocs/)
-
 - [Glowscript documentation](https://www.glowscript.org/docs/VPythonDocs/index.html)
-
-- [VPython lecture demos](https://lectdemo.github.io/virtual/index.html) (based on deprecated (V)Python versions)
