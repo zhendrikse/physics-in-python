@@ -480,6 +480,6 @@ Make sure to check it out, it simply is brilliant.
 
 - [3D Modeling with VPython](https://rsehosting.reading.ac.uk/courses/py3d-basic/)
 - [Hydrogen wavefunctions](https://github.com/ssebastianmag/hydrogen-wavefunctions)
-- [VPython Applications for Teaching Physics](https://www.visualrelativity.com/vpython/) by Bob Salgado
+- [VPython Applications for Teaching Physics](https://www.visualrelativity.com/vpython/) by Rob Salgado
 - [VPython Docs](https://www.beautifulmathuncensored.de/static/GlowScript/VPythonDocs/)
 - [Glowscript documentation](https://www.glowscript.org/docs/VPythonDocs/index.html)
