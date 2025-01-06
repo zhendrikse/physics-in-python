@@ -10,12 +10,6 @@ Click on your mouse button to drop the ball
 
 """
 
-# Available on GitHub: https://github.com/zhendrikse/physics-in-python
-#
-# Refactored from Dot Physics
-# -
-# - https://trinket.io/glowscript/58d3d4ba0b
-
 from vpython import sphere, vector, color, rate, graph, gcurve, box, mag, norm, helix, label, scene
 
 plot = graph(title="Ball on spring", xtitle="Time", ytitle="Height", width=400, height=250)
