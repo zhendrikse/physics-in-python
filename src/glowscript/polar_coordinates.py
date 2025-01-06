@@ -7,7 +7,7 @@ title = """Frequently used objects
 
 """
 
-from vpython import sphere, vec, arrow, color, sin, cos, ring, curve, cross, label, canvas, norm, slider, radians, rate, cylinder, text, checkbox
+from vpython import sphere, vec, arrow, color, sin, cos, ring, curve, cross, label, canvas, norm, slider, radians, rate, cylinder, text, checkbox, box
 
 animation = canvas(forward=vec(0.37, -0.55, -0.75), range=8., title=title)
 
@@ -51,7 +51,7 @@ class Base:
                 self._tick_labels.append(marker)
                 a_box = box(pos=pos, width=2 * radius, height=0.5, length=2 * radius, color=tick_marks_color)
                 if i == 1:
-                    a_box.rotate(angle=0.5 * pi, axis=vec(0, 0, 1))
+                    a_box.rotate(angle=radians(90), axis=z_hat)
                 self._tick_marks.append(a_box)
 
         self._xy_mesh, self._zx_mesh, self._xz_mesh, self._yx_mesh = [], [], [], []
@@ -168,9 +168,6 @@ theta_slider = slider(bind = set_theta, value = theta, min = 0, max = 360)
 animation.append_to_caption("\nAdjust phi using the slider\n")
 phi_slider = slider(bind = set_phi, value = phi, min = 0, max = 360)
 
-
-animation.append_to_caption("\n\n")
-
 def toggle_tick_marks(event):
     axis.tick_marks_visible(event.checked)
 
@@ -183,10 +180,11 @@ def toggle_xz_mesh(event):
 def toggle_xy_mesh(event):
     axis.xy_mesh_visible(event.checked)
 
-tick_marks_button = checkbox(text = 'Tick marks', bind = toggle_tick_marks, checked=True)
-tick_labels_button = checkbox(text = 'Tick labels', bind = toggle_tick_labels, checked=False)
-show_xz_button = checkbox(text = 'XZ mesh', bind = toggle_xz_mesh, checked=True)
-show_xy_button = checkbox(text = 'XY mesh', bind = toggle_xy_mesh, checked=False)
+animation.append_to_caption("\n\n")
+_ = checkbox(text = 'Tick marks', bind = toggle_tick_marks, checked=True)
+_ = checkbox(text = 'Tick labels', bind = toggle_tick_labels, checked=False)
+_ = checkbox(text = 'XZ mesh', bind = toggle_xz_mesh, checked=True)
+_ = checkbox(text = 'XY mesh', bind = toggle_xy_mesh, checked=False)
 
 while True:
     rate(60)
