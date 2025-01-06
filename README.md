@@ -197,7 +197,9 @@ on [glowscript.org](https://glowscript.org).
 
 This model represents a Boltzmann gas (consisting of hard spheres) in a box, where 
 the velocity distribution of the colliding atoms eventually approaches the calculated 
-theoretical velocity distribution.
+theoretical velocity distribution:
+
+$f(\\vec{v}) d^3\\vec{v} = \\bigg [ \dfrac{m}{2\\pi k_b T} \\bigg ]^{3/2} \\exp \\bigg (-\\dfrac{mv^2}{2 k_b T} \\bigg) d^3\\vec{v}$
 
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas">
   <img alt="Hard sphere gas" width="40%" height="40%" src="./images/hard_sphere_gas.png" title="Click to animate"/>
@@ -207,7 +209,7 @@ theoretical velocity distribution.
   and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas)
 - Code base [on Trinket](https://trinket.io/library/trinkets/554248a15bc4)
 
-## Two-dimensional Ising spin model
+## Two-dimensional Ising spin model: 
 
 This demo models the magnetization at various temperatures using a two-dimensional Ising spin lattice.
 
@@ -225,7 +227,7 @@ The code pertaining to the demos in this section is available under the
 [quantum tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Quantum/)
 on [glowscript.org](https://glowscript.org).
 
-## Visualization of a complex wave
+## Visualization of $A(t) = e^{-i \\omega t}$
 
 <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Rotatingwavefunction">
   <img alt="Complex wave" width="50%" height="50%" src="./images/rotating_wave_function.png" title="Click to animate"/>
