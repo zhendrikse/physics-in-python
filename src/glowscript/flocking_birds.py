@@ -20,20 +20,28 @@ size = 1  # length of bird vector
 
 class Bird:
     def __init__(self, velocity, size=1):
-        self._bird = arrow(pos=spread * vector.random(), axis=size * velocity.norm(), color=color.yellow)
+        pos = spread * vector.random()
+        self._bird = arrow(pos=pos, axis=size * velocity.norm(), color=color.yellow)
         self._velocity = velocity
+        self._position = pos
 
     def update(self, acceleration, dt):
         self._velocity += acceleration * dt
-        self._bird.pos += self._velocity * dt
+        self._position += self._velocity * dt
         self._bird.axis = size * self._velocity.norm()
+        self.render()
 
     def position(self):
-        return self._bird.pos
+        return self._position
 
     def velocity(self):
         return self._velocity
 
+    def render(self):
+        self._bird.pos = self._position
+
+    def distance_to(self, other_bird):
+        return other_bird.position() - self.position()
 
 class Flock:
     def __init__(self, bird_count, random_weight=0.1, center_weight=0.1, direction_weight=0.05, avoid_weight=0.5):
@@ -61,12 +69,11 @@ class Flock:
         # avoid nearest birds (A BETTER VERSION WOULD ANTICIPATE COLLISIONS)
         avoid = [vector(0, 0, 0)] * self._bird_count
         for i in range(self._bird_count):
-            for j in range(self._bird_count):
-                if i == j: continue
-                separation_dist = self._birds[i].position() - self._birds[j].position()
+            for j in range(i):
+                separation_dist = self._birds[i].distance_to(self._birds[j])
                 if separation_dist.mag < 5 * size:
-                    avoid[i] += separation_dist / separation_dist.mag2
-                    avoid[j] -= separation_dist / separation_dist.mag2
+                    avoid[i] -= separation_dist / separation_dist.mag2
+                    avoid[j] += separation_dist / separation_dist.mag2
 
         for count in range(self._bird_count):
             acceleration = self._random_weight * vector.random()
@@ -87,36 +94,40 @@ class Flock:
     def set_random_weight(self, new_random_weight):
         self._random_weight = new_random_weight
 
+    def center_weight(self):
+        return self._center_weight
 
-# set up some slider interaction
-def on_random_weight_slider():
-    flock.set_random_weight(random_weight_slider.value)
+    def direction_weight(self):
+        return self._direction_weight
 
+    def avoid_weight(self):
+        return self._avoid_weight
 
-animation.append_to_caption("\nRandom behavior\n")
-random_weight_slider = slider(bind=on_random_weight_slider, min=0.0, max=50.0)
+    def random_weight(self):
+        return self._random_weight
 
-
-def center_bird():
-    flock.set_center_weight(center_weight_slider.value)
-
-
-animation.append_to_caption("\n\nCentering behavior\n")
-center_weight_slider = slider(bind=center_bird, min=0.0, max=2.0)
-
-
-def direction_bird():
-    flock.set_direction_weight(direction_weight_slider.value)
-
-
-animation.append_to_caption("\n\nDirection behavior\n")
-direction_weight_slider = slider(bind=direction_bird, min=0.0, max=2.0)
+flock = Flock(250)
 
 def avoid_bird():
   flock.set_avoid_weight(avoid_weight_slider.value)
 
+def direction_bird():
+    flock.set_direction_weight(direction_weight_slider.value)
+
+def center_bird():
+    flock.set_center_weight(center_weight_slider.value)
+
+def on_random_weight_slider():
+    flock.set_random_weight(random_weight_slider.value)
+
+animation.append_to_caption("\nRandom behavior\n")
+random_weight_slider = slider(bind=on_random_weight_slider, min=0.0, max=50.0, value=flock.random_weight())
+animation.append_to_caption("\n\nCentering behavior\n")
+center_weight_slider = slider(bind=center_bird, min=0.0, max=2.0, value=flock.center_weight())
+animation.append_to_caption("\n\nDirection behavior\n")
+direction_weight_slider = slider(bind=direction_bird, min=0.0, max=2.0, value=flock.direction_weight())
 animation.append_to_caption("\n\nAvoidance behavior\n")
-avoid_weight_slider = slider(bind = avoid_bird, min = 0.0, max = 2.0)
+avoid_weight_slider = slider(bind = avoid_bird, min = 0.0, max = 2.0, value=flock.avoid_weight())
 
 # make a button for startling the birds
 # def startle():
@@ -128,8 +139,7 @@ avoid_weight_slider = slider(bind = avoid_bird, min = 0.0, max = 2.0)
 # button( bind=startle, text='Startle' )
 
 # set up the time step interval
-dt = 0.01
-flock = Flock(250)
+dt = 0.02
 while True:
     flock.update(dt)
     rate(1 / dt)
