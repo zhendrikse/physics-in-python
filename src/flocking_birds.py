@@ -1,6 +1,4 @@
-#Web VPython 3.2
-
-from vpython import canvas, color, arrow, vector, vec, slider, button, rate, random, norm
+from vpython import canvas, color, arrow, vector, vec, slider, rate
 from itertools import combinations
 
 title="""Flock of Birds

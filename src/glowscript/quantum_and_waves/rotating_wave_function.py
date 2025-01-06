@@ -2,7 +2,7 @@
 
 from vpython import canvas, scene, arrow, color, vec, pi, floor, arange, cos, sin, rate, cylinder, box, label, checkbox
 
-title = """\\( A(t) = e^{-i \\omega t} \\)
+title = """\\( A(t) = r \\cdot e^{k x - i \\omega t} \\)
 
 &#x2022; From <a href="https://www.amazon.com/Visualizing-Quantum-Mechanics-Python-Spicklemire/dp/1032569247">Visualizing Quantum Mechanics with Python</a>
 &#x2022; Modified by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a> in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
