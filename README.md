@@ -227,7 +227,7 @@ The code pertaining to the demos in this section is available under the
 [quantum tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Quantum/)
 on [glowscript.org](https://glowscript.org).
 
-## Visualization of $A(t) = r e^{k x - i \\omega t}$
+## Visualization of $A(t) = r \\cdot e^{k x - i \\omega t}$
 
 <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Rotatingwavefunction">
   <img alt="Complex wave" width="50%" height="50%" src="./images/rotating_wave_function.png" title="Click to animate"/>
