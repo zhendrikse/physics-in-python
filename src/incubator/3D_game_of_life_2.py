@@ -1,8 +1,14 @@
 # https://metakatie.wordpress.com/2008/09/25/a-3d-version-of-the-game-of-life-with-vpython/
 
-from numpy import zeros
 from vpython import *
 
+def zeros(m, n, channels = 3):
+    panel = []
+    for k in range(channels):
+        panel.append([])
+        for j in range(m):
+            panel[k].append([0 for i in range(n)])
+    return panel
 
 def alive_neighbour_counter(z, y, x):  # counts the number of alive neighbours (wraps around canvas edges)
 
@@ -45,7 +51,7 @@ def alive_neighbour_counter(z, y, x):  # counts the number of alive neighbours (
 
 def kill(grid):  # kills if the number of alive neighbours is other than 2 or 3
 
-    gridkilled = zeros([10, 10, 10])
+    gridkilled = zeros(10, 10, 10)
     for z in range(len(grid)):
         for y in range(len(grid)):
             for x in range(len(grid)):
@@ -59,7 +65,7 @@ def kill(grid):  # kills if the number of alive neighbours is other than 2 or 3
 
 
 def come_to_life(grid):  # brings to life if there are exactly 3 alive neighbours
-    gridcametolife = zeros([10, 10, 10])
+    gridcametolife = zeros(10, 10, 10)
 
     for z in range(len(grid)):
         for y in range(len(grid)):
@@ -84,10 +90,11 @@ boxlist = [Y, Y, Y, Y, Y, Y, Y, Y, Y, Y]
 
 # set up the initial state of the system (0 means 'dead', 1 means 'alive'):
 
-grid = zeros([10, 10, 10])
+grid = zeros(10, 10, 10)
 grid[2][2][1] = grid[2][2][3] = grid[2][2][5] = 1
 grid[3][3][1] = grid[3][3][2] = grid[3][3][3] = 1
 grid[2][3][3] = 1
+grid[3][3][4] = 1
 
 while True:
 
