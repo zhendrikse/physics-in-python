@@ -1,8 +1,9 @@
 # written by Lenore Horner, 2009
 
 from vpython import *
+from random import *
 
-drops_total = 100
+Ndrops = 100
 toggle = 0  # 0 makes all drops the same mass; 1 makes all drops the same density
 
 power = 2
@@ -10,23 +11,20 @@ constant = .5
 dropheight = 4
 dt = 0.01
 
-worldsize = sqrt(drops_total) * 1.5
+worldsize = sqrt(Ndrops) * 1.5
 max_dropsize = 1
 allowed = worldsize / 2.0 - max_dropsize
 
-floor = box(length=worldsize, height=0.5, width=worldsize, pos=vector(0, -dropheight, 0), color=color.blue)
+floor = box(length=worldsize, height=0.5, width=worldsize, pos=vec(0, -dropheight, 0), color=color.blue)
 
 Drops = []
 
-for i in range(drops_total):  # create drops of various sizes at rest at common height
-    #size = random(0.1, max_dropsize)
-    size = random()
+for i in range(Ndrops):  # create drops of various sizes at rest at common height
+    size = random.uniform(0.1, max_dropsize)
     Drops = Drops + [ellipsoid(length=size, width=size, height=size, color=color.red)]
     Drops[i].velocity = vector(0, 0, 0)
     Drops[i].acceleration = vector(0, 9.8, 0)
-    #Drops[i].pos = vector(random(-allowed, allowed), dropheight, random(-allowed, allowed))
-    Drops[i].pos = vector(allowed * (random() - 0.5), dropheight, allowed * (random() - 0.5))
-
+    Drops[i].pos = vector(random.uniform(-allowed, allowed), dropheight, random.uniform(-allowed, allowed))
     # make sure drops don't overlap; including making sure changed location doesn't overlap one that was clear before
     check = -1
     while check < 0:
@@ -35,16 +33,15 @@ for i in range(drops_total):  # create drops of various sizes at rest at common 
             if mag(Drops[i].pos - Drops[j].pos) < (Drops[i].length + Drops[j].length) / 2.0:
                 check = check - 1
         if check < 0:
-            #Drops[i].pos = vector(random(-allowed, allowed), dropheight, random(-allowed, allowed))
-            Drops[i].pos = vector(allowed * (random() - 0.5), dropheight, allowed * (random() - 0.5))
+            Drops[i].pos = vector(random.uniform(-allowed, allowed), dropheight, random.uniform(-allowed, allowed))
 
 # scene.mouse.getclick()          # hold the drops until we're ready to drop them
 
 while 1:
     rate(100)
-    for i in range(drops_total):  # let all the drops fall
+    for i in range(Ndrops):  # let all the drops fall
         Drops[i].pos = Drops[i].pos + Drops[i].velocity * dt
-        if Drops[i].pos.y < -dropheight + Drops[i].height + 0.5:  # check for drops hitting surface
+        if Drops[i].y < -dropheight + Drops[i].height + 0.5:  # check for drops hitting surface
             if Drops[i].height > 0.09:  # only worry about drops that haven't already gone splat
                 Drops[i].velocity.y = 0  # drops stop
                 # drops flatten on surface
