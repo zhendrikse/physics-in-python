@@ -225,12 +225,21 @@ The code pertaining to the demos in this section is available under the
 [quantum tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Quantum/)
 on [glowscript.org](https://glowscript.org).
 
-## [Doppler effect]()
+## Visualization of complex wave
+
+<a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Rotatingwavefunction">
+  <img alt="Complex wave" width="50%" height="50%" src="./images/rotating_wave_function.png" title="Click to animate"/>
+</a>
+
+- Wave function in action [on Trinket](https://zegerh-6085.trinket.io/sites/rotating_wave_function) 
+  and in action [on glowscript.org](https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Rotatingwavefunction)
+- Wave function code base [on Trinket](https://trinket.io/library/trinkets/628948ec9d16)
+
+## Doppler effect
 
 <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Dopplereffect">
   <img alt="Doppler effect" width="50%" height="50%" src="./images/doppler_effect.png" title="Click to animate"/>
 </a>
-
 
 - Doppler effect in action [on Trinket](https://zegerh-6085.trinket.io/sites/doppler_effect) 
   and in action [on glowscript.org](https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Dopplereffect)
@@ -441,9 +450,11 @@ An illustration of using polar (spherical) coordinates and a flock of birds
 - [Ruth Chabay and Bruce Sherwood](https://www.aapt.org/aboutaapt/Chabay_Sherwood_2014-Halliday-Resnick-Award.cfm)
 - [Rhett Allain](https://en.wikipedia.org/wiki/Rhett_Allain)
 - [Rob Salgado](https://www.linkedin.com/in/robertobsalgado)
+- [Steve Spicklemire](https://github.com/sspickle)
 
 # References
 
+- Check this out &rarr; [QMsolve: A module for solving and visualizing the Schrödinger equation](https://github.com/quantum-visualizations/qmsolve)
 - [MyScript](https://webdemo.myscript.com/): enter text, equations, or diagrams by hand, and effortlessly convert 
   it to MathML, LaTeX, etc.!
 - Just for fun: [online electric circuit construction kit](https://phet.colorado.edu/sims/html/circuit-construction-kit-ac/latest/circuit-construction-kit-ac_all.html).
@@ -454,7 +465,12 @@ Make sure to check it out, it simply is brilliant.
 
 - Glowscript apps written by [X9Z3](https://glowscript.org/#/user/X9Z3/folder/X9Z3Publications/)
 - Glowscript apps written by [Bob Salgado](https://www.glowscript.org/#/user/Rob_Salgado/folder/My_Programs/)
+- Glowscript apps written by [Steve Spicklemire](https://www.glowscript.org/#/user/spicklemire/)
 - [Glowscript apps](https://www.glowscript.org/#/user/matterandinteractions/folder/matterandinteractions/) belonging to the book [Matter and Interactions](https://matterandinteractions.org/)
+- Glowscript apps written by [Dr Harrell Pane](https://www.glowscript.org/#/user/dr.harrell.pane/)
+- Some [Glowscript games](https://glowscript.org/#/user/Guhan/folder/MyPrograms/) 
+
+- [Physics simulations GitHub repository](https://github.com/Humboldt-Penguin/Physics_Simulations) of [Humboldt-Penguin](https://github.com/Humboldt-Penguin/)
 - [Physics through Glowscript - An introductory course](https://bphilhour.trinket.io/physics-through-glowscript-an-introductory-course), an excellent tutorial!
 - [VPython lecture demos](https://lectdemo.github.io/virtual/index.html) (based on deprecated (V)Python versions)
 
