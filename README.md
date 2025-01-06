@@ -204,15 +204,13 @@ The code pertaining to the demos in this section is available under the
 [quantum tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Quantum/)
 on [glowscript.org](https://glowscript.org).
 
-## Visualization of $\psi(x, t) = A \cdot e^{k x - i \omega t}$
+## Visualization of plane wave solutions $\psi(x, t) = A \cdot e^{k x - i \omega t}$
 
 <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Rotatingwavefunction">
   <img alt="Complex wave" width="50%" height="50%" src="./images/rotating_wave_function.png" title="Click to animate"/>
 </a>
 
-- Wave function in action [on Trinket](https://zegerh-6085.trinket.io/sites/rotating_wave_function) 
-  and in action [on glowscript.org](https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Rotatingwavefunction)
-- Wave function code base [on Trinket](https://trinket.io/library/trinkets/628948ec9d16)
+- Wave function [in action](https://zegerh-6085.trinket.io/sites/rotating_wave_function) on Trinket, [in action](https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Rotatingwavefunction) on glowscript.org, and [code base](https://trinket.io/library/trinkets/628948ec9d16) on Trinket. 
 
 ## Doppler effect
 
