@@ -235,7 +235,7 @@ The code pertaining to the demos in this section is available under the
 [quantum tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Quantum/)
 on [glowscript.org](https://glowscript.org).
 
-## Visualization of plane wave solutions $\psi(x, t) = A \cdot e^{k x - i \omega t}$
+## Visualization of plane waves $\psi(x, t) = A \cdot e^{k x - i \omega t}$
 
 <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave">
   <img alt="Complex wave" width="50%" height="50%" src="./images/plane_wave.png" title="Click to animate"/>
