@@ -1,10 +1,13 @@
-# Web VPython 3.2
+#Web VPython 3.2
 
-from vpython import canvas, color, vector, rate, arrow, pi, box, sphere, cos, sin, arange, curve, mag, cylinder, norm
+from vpython import canvas, color, vector, rate, arrow, pi, box, sphere, cos, sin, arange, curve, mag, cylinder, norm, \
+    checkbox
 
-title = """Faraday law: changing-Bs are associated with curly-Es
-&#x2022; Rob Salgado (salgado@physics.syr.edu)
-&#x2022; Maintained by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a> in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
+title = """
+Faraday law: changing-Bs are associated with curly-Es
+
+&#x2022; Written by Rob Salgado (salgado@physics.syr.edu)
+&#x2022; Modified by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a>, located in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
 
 The thick green vector representing d|B|/dt, i.e. the rate of change of the magnitude 
 of the magnetic field) is associated with the spatial arrangement of the electric field 
@@ -12,13 +15,14 @@ according to the Faraday Law (as evaluated on the green loop). The sense of circ
 on the green loop (by the RightHandRule) determines the direction of change of the magnetic 
 field, which is opposite to your thumb.
 
-&#x2022; &lt;f&gt; &rarr; show Faraday loop 
-&#x2022; &lt;d&gt; &rarr; dim electric field 
-&#x2022; &lt;n&gt; &rarr; change color-scheme  
-&#x2022; &lt;v&gt; &rarr; verbose output 
-&#x2022; &lt;s&gt; &rarr; screenshot 
-&#x2022; &lt;space&gt; &rarr; pause animation
-&#x2022; &lt;mouse click&gt; &rarr; zoom to selected point
+&lt;v&gt; &rarr; verbose output
+&lt;s&gt; &rarr; screenshot
+&lt;mouse click&gt; &rarr; zoom to selected point
+
+"""
+
+caption = """
+\\( \\Phi_B = \\iint_{\\Sigma(t)} \\vec{B}(t) \\cdot d\\vec{A} \\),\n where \\(d\\vec{A}\\) is an element of area vector of the moving surface Σ(t), and \\(\\vec{B}\\) is the magnetic field."
 
 """
 
@@ -29,15 +33,12 @@ electric_field_colors = [color.blue, (0.5, 0.5, 1), color.green]
 electric_field_colors[1] = dimmed_colors_electric_field[color_scheme]
 faraday_color = electric_field_colors[2]
 
-scene = canvas(title=title, width=800, height=600, x=0, y=0)
-scene.background = background_color[color_scheme]
-scene.background = color.black;
-electric_field_colors = [color.blue, vector(0, 0, .4), color.green]
-scene.caption = "\\( \\Phi_B = \\iint_{\\Sigma(t)} \\vec{B}(t) \\cdot d\\vec{A} \\),\n where \\(d\\vec{A}\\) is an element of area vector of the moving surface Σ(t), and \\(\\vec{B}\\) is the magnetic field."
-MathJax.Hub.Queue(["Typeset", MathJax.Hub])
-scene.forward = vector(-0.75, -0.10, -0.65)
-scene.range = 2.5
+animation = canvas(title=title, range=2.5, forward=vector(-0.75, -0.10, -0.65), width=800, height=600, x=0, y=0,
+                   background=background_color[color_scheme])
+#MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 # scene.ambient = color.gray(0.4)
+
+electric_field_colors = [color.blue, vector(0, 0, .4), color.green]
 
 showFaraday = 0
 dimFields = 0
@@ -52,7 +53,8 @@ magnetic_field_vector_positions = [
     vector(0, 0.25, -2),
     vector(0, -0.25, -2)
 ]
-magnetic_field_vectors = [arrow(pos=arrow_pos, axis=vector(0, 0, 1e-3), shaftwidth=0.04, fixedwidth=1, color=color.red) for arrow_pos in magnetic_field_vector_positions]
+magnetic_field_vectors = [arrow(pos=arrow_pos, axis=vector(0, 0, 1e-3), shaftwidth=0.04, fixedwidth=1, color=color.red)
+                          for arrow_pos in magnetic_field_vector_positions]
 
 N = 8
 dBdt = 0.2
@@ -106,7 +108,8 @@ class Wire:
 electric_field_vectors = get_electric_field_vectors(N)
 electric_field_vector_tails = get_tails_for(electric_field_vectors)
 faraday_vectors = get_faraday_vectors_from(magnetic_field_vectors)
-faraday_loop_positions = [mag(electric_field_vectors[0].pos) * vector(cos(2. * pi * n / 40.), sin(2. * pi * n / 40.), 0) for n in range(40)]
+faraday_loop_positions = [mag(electric_field_vectors[0].pos) * vector(cos(2. * pi * n / 40.), sin(2. * pi * n / 40.), 0)
+                          for n in range(40)]
 faraday_loop = curve(color=faraday_color, pos=faraday_loop_positions, visible=False)
 wire = Wire()
 
@@ -136,9 +139,9 @@ def toggle_show_fields(show=0):
 
 
 def toggle_color_scheme(color_scheme=0):
-    scene.background = background_color[color_scheme]
+    animation.background = background_color[color_scheme]
     electric_field_colors[1] = dimmed_colors_electric_field[color_scheme]
-    scene.background = background_color[color_scheme]
+    animation.background = background_color[color_scheme]
 
     for i in range(N, len(electric_field_vectors)):
         electric_field_vectors[i].color = electric_field_colors[dimFields]
@@ -154,72 +157,65 @@ def pause_animation():
     dt %= 2
 
 
-class KeyboardEventProcessor:
-    def __init__(self):
-        self._show_faraday = False
-        self._show_fields = 0
-        self._color_scheme = 0
-
-    def toggle_show_faraday(self):
-        self._show_faraday = not self._show_faraday
-        return self._show_faraday
-
-    def toggle_show_fields(self):
-        self._show_fields += 1
-        return self._show_fields % 2
-
-    def toggle_color_schemes(self):
-        self._color_scheme += 1
-        return self._color_scheme % 2
-
-    def on_key_press(self, key):
-        if key == 's':
-            scene.capture("faradays_law")
-        if key == 'f':
-            toggle_show_faraday(keyboard_event_processor.toggle_show_faraday())
-        if key == 'd':
-            toggle_show_fields(keyboard_event_processor.toggle_show_fields())
-        if key == 'n':
-            toggle_color_scheme(keyboard_event_processor.toggle_color_schemes())
-        if key == 'v':
-            print("scene.center=" + str(scene.center))
-            print("scene.forward=" + str(scene.forward))
-            print("scene.range=" + str(scene.range))
-            print("t=" + str(t) + "\n")
-        if key == ' ':
-            pause_animation()
-
-
-keyboard_event_processor = KeyboardEventProcessor()
-
+def on_key_press(key):
+    if key == 's':
+        animation.capture("faradays_law")
+    if key == 'v':
+        print("scene.center=" + str(animation.center))
+        print("scene.forward=" + str(animation.forward))
+        print("scene.range=" + str(animation.range))
+        print("t=" + str(t) + "\n")
 
 def key_pressed(event):
     key = event.key
-    keyboard_event_processor.on_key_press(key)
+    on_key_press(key)
 
 
-scene.bind('keydown', key_pressed)
+animation.bind('keydown', key_pressed)
 
 
 def on_mouse_click():
-    selected_object = scene.mouse.pick
-    if selected_object is None:
+    selected_object = animation.mouse.pick
+    if not selected_object:
         return
 
-    ### ANIMATE TO SELECTED POSITION
     temp_color = vector(selected_object.color.x, selected_object.color.y, selected_object.color.z)
     selected_object.color = color.yellow
     target = selected_object.pos
-    step = (target - scene.center) / 20.0
+    step = (target - animation.center) / 20.0
     for _ in arange(1, 20, 1):
         rate(20)
-        scene.center += step
-        scene.range /= 1.037  # (1.037**19=1.99)
+        animation.center += step
+        animation.range /= 1.037  # (1.037**19=1.99)
 
     selected_object.color = temp_color
 
 
-scene.bind('click', on_mouse_click)
+animation.bind('click', on_mouse_click)
+
+
+def show_faraday(event):
+    toggle_show_faraday(event.checked)
+
+
+_ = checkbox(bind=show_faraday, text="Show Faraday loop", checked=False)
+
+
+def dim_electric_field(event):
+    toggle_show_fields(1 if event.checked else 0)
+
+
+_ = checkbox(bind=dim_electric_field, text="Dim electric field", checked=False)
+
+
+def dark_background(event):
+    toggle_color_scheme(0 if event.checked else 1)
+
+
+_ = checkbox(bind=dark_background, text="Dark color scheme", checked=True)
+_ = checkbox(bind=pause_animation, text="Pause animation", checked=False)
+
+animation.append_to_caption("\n\n" + caption)
 
 t = 9.50
 dt = 1
