@@ -35,8 +35,8 @@ ddtcolor = [Bcolor[2 + colorScheme], Ecolor[2 + colorScheme]]  # for Ampere and 
 Bcolor[1] = colorBdimmed[colorScheme]
 
 #scene.autoscale = 1
-scene.range = vec(2.5, 2.5, 2.5)
-scene.forward = vec(-0.162765, 0.013403, -0.986574)
+scene.range = 2.5
+#scene.forward = vec(-0.162765, 0.013403, -0.986574)
 
 # based on
 #
@@ -78,7 +78,7 @@ countmax = 100
 n = len(p)
 # print (n)
 
-while (counter < countmax):
+while counter < countmax:
     minp1 = 0
     minp2 = 1
     mind = mag2(p[minp1] - p[minp2])
@@ -87,11 +87,11 @@ while (counter < countmax):
     for i in arange(0, n - 1):
         for j in arange(i + 1, n):
             d = mag2(p[i] - p[j])
-            if (d < mind):
-                mind = d;
+            if d < mind:
+                mind = d
                 minp1 = i
                 minp2 = j
-            if (d > maxd):
+            if d > maxd:
                 maxd = d
     p1 = p[minp1]
     p2 = p[minp2]
@@ -120,11 +120,8 @@ for i in arange(0, N):
 A = ring(pos=(scene.mouse.pos + scene.center) / 2., axis=scene.mouse.pos - scene.center, color=colorNO)
 A2 = cylinder(pos=A.pos, axis=cross(scene.up, A.axis), radius=0.5, color=colorNO)
 
-scene.autoscale = 1
+#scene.autoscale = 1
 
-
-##########################################################################################################
-##########################################################################################################
 
 def keyInput(evt):
     global colorScheme, gaussSurface, Gcolor_boundary

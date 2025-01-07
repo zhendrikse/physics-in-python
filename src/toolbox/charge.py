@@ -19,6 +19,8 @@ class Charge:
         self._radius = radius
         self._charge = charge
         self._mass = mass
+        self._initial_position = position
+        self._initial_velocity = velocity
 
     def _draw(self):
         if self._ball:
@@ -29,6 +31,18 @@ class Charge:
 
     def field_at(self, position):
         return hat(position - self._position) * k * self._charge / mag(position - self._position) ** 2
+
+    def reset(self):
+        self._position = self._initial_position
+        self._velocity = self._initial_velocity
+        self._ball.clear_trail()
+        self._ball.pos = self._position
+
+    def set_initial_x_velocity(self, velocity_x):
+        self._initial_velocity = vec(velocity_x, 0, 0)
+
+    def set_charge_to(self, value):
+        self._charge = value
 
     @property
     def coulomb(self):

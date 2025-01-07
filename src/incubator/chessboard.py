@@ -98,17 +98,20 @@ class Piece:
 
 class Pawn(Piece):
     def __init__(self, spos, sColor):
+        Piece.__init__(self)
         self.base = cone(pos=spos, radius=0.4, axis=vec(0, 1, 0), color=sColor)
 
 
 class Rook(Piece):
     def __init__(self, spos, sColor):
+        Piece.__init__(self)
         self.base = cylinder(pos=spos, radius=0.4, length=1, axis=vec(0, 1, 0), color=sColor)
 
 
 class Knight(Piece):
     def __init__(self, spos, sColor):
         #self.base = frame(pos=spos)
+        Piece.__init__(self)
         self.base = None
         box(frame=self.base, pos=vec(0, 0.4, 0), width=0.4, length=0.8, height=0.4, axis=vec(0, 1, 0), color=sColor)
         cone(frame=self.base, pos=vec(0, 0.6, 0), radius=0.2, axis=vec(0, 1, 0), color=sColor)
@@ -116,6 +119,7 @@ class Knight(Piece):
 
 class Bishop(Piece):
     def __init__(self, spos, sColor):
+        Piece.__init__(self)
         #self.base = frame(pos=spos)
         self.base = None
         cylinder(frame=self.base, pos=vec(0, 0, 0), radius=0.2, length=0.8, axis=vec(0, 1, 0), color=sColor)
@@ -124,6 +128,7 @@ class Bishop(Piece):
 
 class Queen(Piece):
     def __init__(self, spos, sColor):
+        Piece.__init__(self)
         #self.base = frame(pos=spos)
         self.base = None
         cylinder(frame=self.base, pos=vec(0, 0, 0), radius=0.4, length=1.0, axis=vec(0, 1, 0), color=sColor)
@@ -132,6 +137,7 @@ class Queen(Piece):
 
 class King(Piece):
     def __init__(self, spos, sColor):
+        Piece.__init__(self)
         #self.base = frame(pos=spos)
         self.base = None
         cylinder(frame=self.base, pos=vec(0, 0, 0), radius=0.4, length=1.2, axis=vec(0, 1, 0), color=sColor)

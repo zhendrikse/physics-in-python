@@ -1,100 +1,168 @@
 #Web VPython 3.2
 
-from vpython import canvas, box, vector, sphere, sin, cos, rate, pi, button, slider, wtext, cross, color
+from vpython import arrow, hat, vec, exp, sphere, mag, color, wtext, canvas, rate, label, slider
 
-title = """Helical motion of charged particle in magnetic field
+title = """Moving charge through electric field between two plates 
 
-&#x2022; Based on <a href="https://towardsdatascience.com/simple-physics-animations-using-vpython-1fce0284606">Simple Physics Animations Using VPython</a> by Zhiheng Jiang
-&#x2022; Refactored and maintained by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a> in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
+&#x2022; Based on <a href="https://github.com/Physics-Morris/Physics-Vpython/blob/master/8_Charge_Motion.py">8_Charge_Motion.py</a>
+&#x2022; Refactored by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a>
+&#x2022; Located in the <a href="https://github.com/zhendrikse/physics-in-python/">Physics in Python GitHub repository</a>
 
 """
 
-animation = canvas(width=800, height=600, title=title)
-
-xlen, ylen, zlen = 100, 100, 100
-boundaries = [
-    box(pos=vector(0, -ylen / 2, 0), size=vector(xlen, .2, zlen)),
-    box(pos=vector(0, ylen / 2, 0), size=vector(xlen, .2, zlen)),
-    box(pos=vector(-xlen / 2, 0, 0), size=vector(.2, ylen, zlen)),
-    box(pos=vector(xlen / 2, 0, 0), size=vector(.2, ylen, zlen)),
-    box(pos=vector(0, 0, -zlen / 2), size=vector(xlen, ylen, .2))
-]
-
-dt = .001  # time step
-Bfield = 5  # strength of magnetic field
-v_mag = 20  # magnitude of velocity of proton
-proton_charge = 0.5  # charge of proton in arbitrary units
-theta = pi / 4  # angle of launch of proton
-#v = vector(v_mag * cos(theta), v_mag * sin(theta), 0)  # velocity vector
-magnetic_field = vector(0, -Bfield, 0)  # vector of magnetic field
-starting_point = vector(0, -ylen / 2 + 1, 0)  # starting position vector of proton
+ec = 1.6E-19  # electron charge
+k = 9E9  # Coulomb constant
 
 
-class Proton:
-    def __init__(self, position=vector(0, -ylen / 2 + 1, 0), velocity=v_mag * vector(cos(theta), sin(theta), 0)):  # v is a vector representing velocity
-        self.velocity = velocity
-        self._initial_velocity = velocity
+class FieldArrow:
+    def __init__(self, position, field):
+        colour = self.mapping(field)
+        arrow_length = 3E-14
+        arrow(pos=position, axis=hat(field) * arrow_length, color=vec(1, colour, 0))
+
+    def mapping(self, field):
+        a = 1E-17
+        return 1 - exp(-a * mag(field))
+
+
+class Charge:
+    def __init__(self, mass=1.6E-27, position=vec(0, 0, 0), velocity=vec(0, 0, 0), radius=1.0, coulomb=ec,
+                 charge_color=None, make_trail=False):
+        colour = charge_color
+        if colour is None:
+            colour = color.blue if coulomb > 0 else color.red
+
+        self._sphere = sphere(mass=mass, pos=position, radius=radius, color=colour, make_trail=make_trail)
+        self._charge = coulomb
+        self._velocity = velocity
+        self._position = position
+        self._radius = radius
+        self._mass = mass
         self._initial_position = position
-        self.proton = sphere(pos=starting_point, color=color.red, radius=1, make_trail=True, trail_type="curve")
-        self.acceleration = vector(0, 0, 0)
+        self._initial_velocity = velocity
 
-    def move(self):  # moves proton by small step
-        self.acceleration = proton_charge * cross(self.velocity, magnetic_field)  # F = ma = q v x B
-        self.velocity += self.acceleration * dt  # a = dv/dt
-        self.proton.pos += self.velocity * dt  # v = dx/dt
+    def reset(self):
+        self._position = self._initial_position
+        self._velocity = self._initial_velocity
+        self._sphere.clear_trail()
+        self._sphere.pos = self._position
 
-    def reset_proton(self):  # resets proton position and path
-        self.proton.pos = self._initial_position
-        self.velocity = self._initial_velocity
-        self.proton.clear_trail()
-        self.acceleration = vector(0, 0, 0)
+    def field_at(self, position):
+        return hat(position - self._position) * k * self._charge / mag(position - self._position) ** 2
 
-    def check_collision(self):  # checks for boundaries
-        return ylen / 2 > self.proton.pos.y > -ylen / 2 and xlen / 2 > self.proton.pos.x > -xlen / 2 and -zlen / 2 < self.proton.pos.z < zlen / 2
+    def radius(self):
+        return self._radius
+
+    def position(self):
+        return self._position
+
+    def charge(self):
+        return self._charge
+
+    def set_initial_x_velocity(self, velocity_x):
+        self._initial_velocity = vec(velocity_x, 0, 0)
+
+    def set_charge_to(self, value):
+        self._charge = value
+
+    def coulomb_force_in(self, electric_field):
+        return electric_field * self._charge
+
+    def update(self, coulomb_force, dt):
+        # use formula: s = v0*t + 1/2*a*t^2
+        self._velocity += coulomb_force / self._mass * dt
+        self._position += self._velocity * dt
+        self._sphere.pos = self._position
 
 
-proton = Proton()
-def launch():
-    proton.reset_proton()
-    while proton.check_collision():
-        rate(1 / dt)
-        proton.move()
+class Field:
+    def __init__(self, charges=[]):
+        self._charges = charges
+        self._field_arrows = []
+
+    def show(self, x_range, y_range, z_range):
+        self._field_arrows = []
+        for x in x_range:
+            for y in y_range:
+                for z in z_range:
+                    self._field_arrows.append(self._field_arrow(x, y, z))
+
+    def _field_arrow(self, x, y, z):
+        point = vec(x, y, z) * self._charge_radius()
+        return FieldArrow(position=point, field=self.field_at(point))
+
+    def _charge_radius(self):
+        return self._charges[0].radius()  # Simply assuminging all charges in the field have same radius
+
+    def field_at(self, position):
+        field = vec(0, 0, 0)
+        for charge in self._charges:
+            field += charge.field_at(position)
+        return field
 
 
-button(text="Launch!", bind=launch)  # link the button and function
-animation.append_to_caption("\n\n")  # newlines for aesthetics
+class Capacitor:
+    def __init__(self, pos=vec(0, 1E-13, 0), size=vec(4E-13, 4E-16, 4E-13)):
+        # fill the plates with charge
+        top_plate_y_pos = vec(0, 1E-13, 0).y
+        bottom_plate_y_pos = -vec(0, 1E-13, 0).y
+        charges = []
+        for x in range(-20, 22, 2):
+            for y in [top_plate_y_pos, bottom_plate_y_pos]:
+                for z in range(-20, 22, 2):
+                    # positive charge and negative charge locate at top plate and down plate
+                    mu = 1 if y > 0 else -1
+                    charges.append(Charge(position=vec(x * 1E-14, y, z * 1E-14), radius=1E-14, coulomb=mu * ec))
 
-def adjust_bfield():
-    global Bfield, magnetic_field  # to update global value
-    Bfield = BfieldSlider.value
-    magnetic_field = vector(0, -Bfield, 0)  # B directed downwards
-    BfieldSliderReadout.text = BfieldSlider.value + " Tesla"
+        self._field = Field(charges)
+        self._field.show(x_range=range(-18, 18, 8), y_range=range(-9, 9, 4), z_range=range(-18, 18, 8))
+
+    def show_field(self, x_range, y_range, z_range):
+        self._field.show(x_range, y_range, z_range)
+
+    def field_at(self, position):
+        return self._field.field_at(position)
 
 
-BfieldSlider = slider(min=1, max=10, step=.5, value=5, bind=adjust_bfield)
-animation.append_to_caption(" B-field Strength = ")
-BfieldSliderReadout = wtext(text="5 Tesla")
-animation.append_to_caption("\n\n")
+animation = canvas(width=1000, height=600, align='top', range=3E-13, forward=vec(0.35, -0.20, -0.9), title=title)
+capacitor = Capacitor(pos=vec(0, 1E-13, 0), size=vec(4E-13, 4E-16, 4E-13))
+capacitor.show_field(x_range=range(-18, 18, 8), y_range=range(-9, 9, 4), z_range=range(-18, 18, 8))
+moving_charge = Charge(position=vec(-4E-13, 5E-14, 0), velocity=vec(1.5E-13, 0, 0), radius=1.2E-14, coulomb=5E-42 * ec,
+                       charge_color=color.green, make_trail=True)
+
+animation.append_to_caption("\n")
+
+
+def adjust_velocity():
+    moving_charge.set_initial_x_velocity(velocity_slider.value * 1E-13)
+    velocity_slider_text.text = velocity_slider.value + " 1E-13 m/s"
+
 
 def adjust_q():
-    global proton_charge
-    proton_charge = QSlider.value
-    QSliderReadout.text = QSlider.value + " Coulumbs"
+    moving_charge.set_charge_to(charge_slider.value * ec * 5E-42)
+    charge_slider_text.text = charge_slider.value + " electron charge(s)"
 
-QSlider = slider(min=0, max=1, step=.1, value=.5, bind=adjust_q)
-animation.append_to_caption(" Q = ")
-QSliderReadout = wtext(text="0.5 Coulumbs")
+
+velocity_slider = slider(min=0.1, max=5, step=0.1, value=1.5, bind=adjust_velocity)
+animation.append_to_caption(" Velocity in x-direction = ")
+velocity_slider_text = wtext(text="1.5 E-13 m/s")
 animation.append_to_caption("\n\n")
 
-def adjust_angle():
-    global theta
-    theta = angleSlider.value * pi / 180  # degree - radian conversion
-    angleSliderReadout.text = str(angleSlider.value) + " degrees"
-    proton.velocity = v_mag * vector(cos(theta), sin(theta), 0)
+charge_slider = slider(min=0, max=5, step=0.1, value=1, bind=adjust_q)
+animation.append_to_caption(" Q = ")
+charge_slider_text = wtext(text="1 electron charge")
+animation.append_to_caption("\n\n")
 
-angleSlider = slider(min=0, max=90, step=1, value=45, bind=adjust_angle)
-animation.append_to_caption(" Angle = ")
-angleSliderReadout = wtext(text="45 degrees")
-
+dt = 0.01
+pop_up = label(pos=vec(0, 2E-13, 0), text="Click mouse button to repeat", visible=False)
 while True:
-    rate(10)
+    while moving_charge.position().x < 6E-13:
+        rate(1 / dt)
+        field = capacitor.field_at(moving_charge.position())
+        coulomb_force = moving_charge.coulomb_force_in(field)
+        moving_charge.update(coulomb_force, dt)
+
+    pop_up.visible = True
+    animation.waitfor("click")
+    pop_up.visible = False
+    moving_charge.reset()

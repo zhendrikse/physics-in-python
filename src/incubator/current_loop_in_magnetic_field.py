@@ -25,17 +25,17 @@ plane = box(pos=vector(0, 0, 0), length=2.5 * mag(inc1), width=0.1, height=2.5 *
 plane.color = color.green
 plane.opacity = 0.2
 
-B00 = arrow(pos=vector(0, 0, -Bsize / 2.0) + 0.0 * inc1 + 0.0 * inc2, axis=Bdirect, shaft=Bshaft, color=color.blue)
-B20 = arrow(pos=vector(0, 0, -Bsize / 2.0) - 1.0 * inc1 + 0.0 * inc2, axis=Bdirect, shaft=Bshaft, color=color.blue)
-B30 = arrow(pos=vector(0, 0, -Bsize / 2.0) + 1.0 * inc1 + 0.0 * inc2, axis=Bdirect, shaft=Bshaft, color=color.blue)
+B00 = arrow(pos=vector(0, 0, -Bsize / 2.0) + 0.0 * inc1 + 0.0 * inc2, axis=Bdirect, shaftwidth=Bshaft, color=color.blue)
+B20 = arrow(pos=vector(0, 0, -Bsize / 2.0) - 1.0 * inc1 + 0.0 * inc2, axis=Bdirect, shaftwidth=Bshaft, color=color.blue)
+B30 = arrow(pos=vector(0, 0, -Bsize / 2.0) + 1.0 * inc1 + 0.0 * inc2, axis=Bdirect, shaftwidth=Bshaft, color=color.blue)
 
-B01 = arrow(pos=vector(0, 0, -Bsize / 2.0) + 0.0 * inc1 - 1.0 * inc2, axis=Bdirect, shaft=Bshaft, color=color.blue)
-B21 = arrow(pos=vector(0, 0, -Bsize / 2.0) - 1.0 * inc1 - 1.0 * inc2, axis=Bdirect, shaft=Bshaft, color=color.blue)
-B31 = arrow(pos=vector(0, 0, -Bsize / 2.0) + 1.0 * inc1 - 1.0 * inc2, axis=Bdirect, shaft=Bshaft, color=color.blue)
+B01 = arrow(pos=vector(0, 0, -Bsize / 2.0) + 0.0 * inc1 - 1.0 * inc2, axis=Bdirect, shaftwidth=Bshaft, color=color.blue)
+B21 = arrow(pos=vector(0, 0, -Bsize / 2.0) - 1.0 * inc1 - 1.0 * inc2, axis=Bdirect, shaftwidth=Bshaft, color=color.blue)
+B31 = arrow(pos=vector(0, 0, -Bsize / 2.0) + 1.0 * inc1 - 1.0 * inc2, axis=Bdirect, shaftwidth=Bshaft, color=color.blue)
 
-B03 = arrow(pos=vector(0, 0, -Bsize / 2.0) + 0.0 * inc1 + 1.0 * inc2, axis=Bdirect, shaft=Bshaft, color=color.blue)
-B23 = arrow(pos=vector(0, 0, -Bsize / 2.0) - 1.0 * inc1 + 1.0 * inc2, axis=Bdirect, shaft=Bshaft, color=color.blue)
-B33 = arrow(pos=vector(0, 0, -Bsize / 2.0) + 1.0 * inc1 + 1.0 * inc2, axis=Bdirect, shaft=Bshaft, color=color.blue)
+B03 = arrow(pos=vector(0, 0, -Bsize / 2.0) + 0.0 * inc1 + 1.0 * inc2, axis=Bdirect, shaftwidth=Bshaft, color=color.blue)
+B23 = arrow(pos=vector(0, 0, -Bsize / 2.0) - 1.0 * inc1 + 1.0 * inc2, axis=Bdirect, shaftwidth=Bshaft, color=color.blue)
+B33 = arrow(pos=vector(0, 0, -Bsize / 2.0) + 1.0 * inc1 + 1.0 * inc2, axis=Bdirect, shaftwidth=Bshaft, color=color.blue)
 
 # simple current loop
 Ishaft = 1.0
@@ -47,9 +47,9 @@ axis4 = vector(0, -1.5, 0)
 
 current = 0.25
 Iarrow1 = arrow(pos=corner, axis=axis1, shaft=Ishaft)
-Iarrow2 = arrow(pos=Iarrow1.pos + Iarrow1.axis, axis=axis2, shaft=Ishaft)
-Iarrow3 = arrow(pos=Iarrow2.pos + Iarrow2.axis, axis=axis3, shaft=Ishaft)
-Iarrow4 = arrow(pos=Iarrow3.pos + Iarrow3.axis, axis=axis4, shaft=Ishaft)
+Iarrow2 = arrow(pos=Iarrow1.pos + Iarrow1.axis, axis=axis2, shaftwidth=Ishaft)
+Iarrow3 = arrow(pos=Iarrow2.pos + Iarrow2.axis, axis=axis3, shaftwidth=Ishaft)
+Iarrow4 = arrow(pos=Iarrow3.pos + Iarrow3.axis, axis=axis4, shaftwidth=Ishaft)
 
 force1 = current * cross(axis1, Bdirect)
 force2 = current * cross(axis2, Bdirect)

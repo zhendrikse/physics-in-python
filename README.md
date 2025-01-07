@@ -85,19 +85,32 @@ an electric field inside a series of charged rings.
   </a>  
 </figure>
 
-## Electron spinning around a charged ring
+## Electron moving in two electric fields
 
 The following demos show the movement of an electron in two different electric fields. 
 
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedring">
-  <img alt="Electron spinning around charged ring" width="45%" height="45%" src="./images/electron_and_charged_ring.png" title="Click to animate"/>
-</a>
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Movingcharge">
-  <img alt="Particle in electric field" width="45%" height="45%" src="./images/particle_in_electric_field.png" title="Click to animate"/>
-</a>
+<details>
+  <summary>Animations and source code</summary>
+  <ul>
+    <ul><b>Electron spinning around a charged ring</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/electron_and_charged_ring">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedring">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/electromagnetism/charged_ring.py">charged_ring.py</a> and VPython <a href="./src/electromagnetism/charged_ring.py">charged_ring.py</a> versions in this repository</li>
+    </ul>
+    <ul><b>Moving charge between two charged capacitor plates</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/moving_charge">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Movingcharge">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/electromagnetism/moving_charge.py">moving_charge.py</a> and VPython <a href="./src/electromagnetism/moving_charge.py">moving_charge.py</a> versions in this repository</li>
+    </ul>
+  </ul>
+</details>
 
-- Charged ring [in action](https://zegerh-6085.trinket.io/sites/electron_and_charged_ring) on Trinket, [in action](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedring) on glowscript.org, and [code base](https://trinket.io/library/trinkets/1983b9c1dc58) on Trinket. 
-- Charged plates [in action](https://zegerh-6085.trinket.io/sites/moving_charge) on Trinket, [in action](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedring) on glowscript.org, and [code base](https://trinket.io/glowscript/db4616ccd73c) on Trinket. 
+<figure>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedring">
+    <img alt="Electron spinning around charged ring" width="45%" height="45%" src="./images/electron_and_charged_ring.png" title="Click to animate"/>
+  </a>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Movingcharge">
+    <img alt="Particle in electric field" width="45%" height="45%" src="./images/particle_in_electric_field.png" title="Click to animate"/>
+  </a>
+</figure>
 
 ## Charged disk and accompanying builder
 
