@@ -212,6 +212,9 @@ on [glowscript.org](https://glowscript.org).
 
 With the plane wave as illustrated above, we can easily derive the Schr&#246;dinger equation:
 
+<details>
+  <summary>Concise derivation of the Schr&#246;dinger equation:</summary>
+
 According to De Broglie we have:
 
 $p = \dfrac{h}{\lambda} = \dfrac{h}{2\pi} \dfrac{2\pi}{\lambda} = \hbar k \Rightarrow \hbar k = \hbar \dfrac{\partial}{\partial x} \psi(x,t) = p \psi(x, t) \Rightarrow p = \hbar \dfrac{\partial}{\partial x}$
@@ -227,6 +230,8 @@ $E = hf = \dfrac{h}{2\pi}\dfrac{2\pi}{T} = \hbar \omega \Rightarrow -i\hbar\dfra
 From this follows the Schr&#246;dinger equation:
 
 $(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x, t) = -\dfrac{\hbar^2}{2m}\dfrac{\partial^2}{\partial x^2} \Psi(x,t) + V(x)\Psi(x,t)$
+
+</details>
 
 Wave function [in action](https://zegerh-6085.trinket.io/sites/plane_wave) on Trinket, 
 [in action](https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave) on glowscript.org, 
