@@ -23,7 +23,7 @@ scene.x = scene.y = 0
 scene.height = 800
 scene.width = 800
 scene.background = color.white
-scene.lights = [(1, 0, 1)]
+#scene.lights = [(1, 0, 1)]
 
 R = 6e-14
 
@@ -39,12 +39,12 @@ gold.mass = 197e-3 / 6.02e23
 gold.charge = 79 * 1.6e-19
 gold.momentum = vector(0, 0, 0)
 
-src = cylinder(pos=vector(-xMax * 2.0, 0, 0), axis=vector(-R * 0.1, 0, 0), radius=R, color=(.7, .7, .7))
+src = cylinder(pos=vector(-xMax * 2.0, 0, 0), axis=vector(-R * 0.1, 0, 0), radius=R, color=vector(.7, .7, .7))
 
 trails = []
 
 for nalpha in range(1000):
-    alpha = sphere(pos=beam(), radius=4e-15, color=(.2, 1., 1.))
+    alpha = sphere(pos=beam(), radius=4e-15, color=vector(.2, 1., 1.))
     alpha.spot = cylinder(pos=vector(src.pos.x, alpha.pos.y, alpha.pos.z), radius=2e-15, axis=vector(1e-15, 0, 0),
                           color=alpha.color)
     alpha.mass = 4e-3 / 6.12e23
@@ -67,7 +67,7 @@ for nalpha in range(1000):
 
     if alpha.momentum.x / mag(alpha.momentum) <= cos(pi / 2):
         alpha.color = color.red
-        trail.color = array(alpha.color) / 1.5
+        #trail.color = array(alpha.color) / 1.5
         ##        alpha.spot.color = array(alpha.color)/1.5
         alpha.spot.color = alpha.color
     elif alpha.momentum.x / mag(alpha.momentum) <= cos(pi / 4):

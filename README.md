@@ -206,11 +206,26 @@ on [glowscript.org](https://glowscript.org).
 
 ## Visualization of plane wave solutions $\psi(x, t) = A \cdot e^{k x - i \omega t}$
 
-<a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Rotatingwavefunction">
-  <img alt="Complex wave" width="50%" height="50%" src="./images/rotating_wave_function.png" title="Click to animate"/>
+<a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave">
+  <img alt="Complex wave" width="50%" height="50%" src="./images/plane_wave.png" title="Click to animate"/>
 </a>
 
-- Wave function [in action](https://zegerh-6085.trinket.io/sites/rotating_wave_function) on Trinket, [in action](https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Rotatingwavefunction) on glowscript.org, and [code base](https://trinket.io/library/trinkets/628948ec9d16) on Trinket. 
+With the plane wave as illustrated above, we can easily derive the Schr&#246;dinger equation:
+
+1. De Broglie: $ p = \dfrac{h}{\lambda} = \dfrac{h}{2\pi} \dfrac{2\pi}{\lambda} = \hbar k \Rightarrow \hbar k = \hbar \dfrac{\partial}{\partial x} \psi(x,t) = p \psi(x, t) \Rightarrow p = \hbar \dfrac{\partial}{\partial x} $
+
+
+2. Kinetic energy: $ K = \dfrac{p^2}{2m} = -\dfrac{\hbar^2}{2m}\dfrac{\partial^2}{\partial x^2} \psi(x,t) $
+
+
+3. Energy: $ E = hf = \dfrac{h}{2\pi}\dfrac{2\pi}{T} = \hbar \omega \Rightarrow -i\hbar\dfrac{\partial}{\partial t} \psi(x,t) = E \psi(x,t) \Rightarrow E = -i\hbar\dfrac{\partial}{\partial t} $
+
+
+4. Schr&#246;dinger equation: $ E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x, t) = -\dfrac{\hbar^2}{2m}\dfrac{\partial^2}{\partial x^2} \Psi(x,t) + V(x)\Psi(x,t) = (KE + PE)\Psi(x,,t)$
+
+Wave function [in action](https://zegerh-6085.trinket.io/sites/plane_wave) on Trinket, 
+[in action](https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave) on glowscript.org, 
+and [code base](https://trinket.io/library/trinkets/628948ec9d16) on Trinket. 
 
 ## Doppler effect
 
