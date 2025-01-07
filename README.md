@@ -387,14 +387,14 @@ number of vibrating beads coupled by springs on both sides!
 
 <figure>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Newtonspendulum">
-    <img alt="Newton's pendulum" width="45%" height="45%" src="./images/newtons_pendulum.png" title="Click to animate"/>
+    <img alt="Newton's pendulum" width="45%" height="45%" src="./images/newtons_pendulum.png" title="Click to animate" align="top"/>
   </a>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Newtonscannon">
     <img alt="Newton's cannon" width="45%" height="45%" src="./images/newtons_cannon.png" title="Click to animate"/>
   </a>
 </figure>
 
-## [Ball on sliding ramp](https://trinket.io/library/trinkets/0731c4e734f8) and ball hitting block
+## Ball on sliding ramp &amp; ball hitting block
 
 <a href="https://zegerh-6085.trinket.io/sites/ball_on_sliding_ramp">
   <img alt="Ball on sliding ramp" width="48%" height="48%" src="./images/ball_on_sliding_ramp.png" title="Click to animate"/>
