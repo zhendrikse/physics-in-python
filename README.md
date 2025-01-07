@@ -206,14 +206,21 @@ on [glowscript.org](https://glowscript.org).
 
 ## Visualization of plane wave solutions $\psi(x, t) = A \cdot e^{k x - i \omega t}$
 
+<figure>
 <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave">
   <img alt="Complex wave" width="50%" height="50%" src="./images/plane_wave.png" title="Click to animate"/>
 </a>
+<figcaption>
+Wave function [in action](https://zegerh-6085.trinket.io/sites/plane_wave) on Trinket, 
+[in action](https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave) on glowscript.org, 
+and [code base](https://trinket.io/library/trinkets/628948ec9d16) on Trinket.
+</figcaption>
+</figure>
 
 With the plane wave as illustrated above, we can easily derive the Schr&#246;dinger equation:
 
 <details>
-  <summary>Concise derivation of the Schr&#246;dinger equation:</summary>
+  <summary>Concise derivation of the Schr&#246;dinger equation</summary>
 
 According to De Broglie we have:
 
@@ -233,9 +240,7 @@ $(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x, 
 
 </details>
 
-Wave function [in action](https://zegerh-6085.trinket.io/sites/plane_wave) on Trinket, 
-[in action](https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave) on glowscript.org, 
-and [code base](https://trinket.io/library/trinkets/628948ec9d16) on Trinket. 
+ 
 
 ## Doppler effect
 
