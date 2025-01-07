@@ -19,40 +19,71 @@ on [glowscript.org](https://glowscript.org).
 
 ## Electric fields of dipoles and point charges
 
-The following code snippets visualize the electric fields around dipoles
+<details>
+  <summary>Visualization of electric fields around dipoles and point charges</summary>
+
+For dipoles the field is given by
 
 $\vec{E} ( \vec{r} ) = \dfrac {1} {4\pi\epsilon_0} \dfrac {Q} {r^2} \hat{r}, \text{ with } \vec{F}(\vec{r}) = q \vec{E} (\vec{r}) = \dfrac {1} {4\pi\epsilon_{0}} \dfrac {qQ} {r^2}\hat{r} \text{ }$
 
-and point charges
+and for point charges by
 
 $\vec{E} ( \vec{r} ) = -\dfrac {1} {4\pi\epsilon_0} \nabla \bigg( \dfrac{\vec{r}  \cdot \vec{p}} {r^3} \bigg), \text{ where } \vec{p} = +q(\vec{r_{+}}) + -q(\vec{r_{-})}$
+</details>
 
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Pointchargefield">
-  <img alt="Electric field of point charge" width="45%" height="45%" src="./images/point_charge.png" title="Click to animate"/>
-</a>
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Electricdipolefield">
-  <img alt="Electric field of a dipole" width="40%" height="40%" src="./images/dipole_field.png" title="Click to animate"/>
-</a>
+<details>
+  <summary>Animations and source code</summary>
+  <ul>
+    <ul><b>Point charge</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/point_charge">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Pointchargefield">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/electromagnetism/point_charge.py">point_charge.py</a> and VPython <a href="./src/electromagnetism/point_charge.py">point_charge.py</a> versions in this repository</li>
+    </ul>
+  </ul>
+  <ul>
+    <ul><b>Dipole</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/dipole">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Pointchargefield">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/electromagnetism/dipole.py">point_charge.py</a> and VPython <a href="./src/electromagnetism/dipole.py">point_charge.py</a> versions in this repository</li>
+    </ul>
+  </ul>
+</details>
 
-- Point charge field [in action](https://zegerh-6085.trinket.io/sites/point_charge) on Trinket,
-  [in action](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Pointchargefield) on glowscript.org, and [code base](https://trinket.io/glowscript/96da4eb68335) on Trinket.
-- Dipole field [in action](https://zegerh-6085.trinket.io/sites/dipole) on Trinket,
-  [in action](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Electricdipolefield) on glowscript.org, and [code base](https://trinket.io/glowscript/a2b8b655fa07) on Trinket.
+<figure>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Pointchargefield">
+    <img alt="Electric field of point charge" width="45%" height="45%" src="./images/point_charge.png" title="Click to animate"/>
+  </a>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Electricdipolefield">
+    <img alt="Electric field of a dipole" width="40%" height="40%" src="./images/dipole_field.png" title="Click to animate"/>
+  </a>
+</figure>
+
 
 ## Interactive visualization of electric and magnetic fields
 
-The first dynamic simulation illustrates Faraday's law by visualizing an electric current (of electric charges) running through a wire. 
-The second static simulation shows the electric field inside a series of charged rings.
+Visualization of Faraday's law by running an electric current (of electric charges) through a wire and of
+an electric field inside a series of charged rings.
 
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Faradayslaw">
-  <img alt="Faraday's law" width="45%" height="45%" src="./images/faradays_law.png" title="Click to animate"/>
-</a>
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedrings">
-  <img alt="Charged rings" width="45%" height="45%" src="./images/charged_rings.png" title="Click to animate"/>
-</a>
+<details>
+  <summary>Animations and source code</summary>
+  <ul>
+    <ul><b>Faraday's law</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/faradays_law">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Faradayslaw">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/electromagnetism/faradays_law.py">faradays_law.py</a> and VPython <a href="./src/electromagnetism/faradays_law.py">faradays_law.py</a> versions in this repository</li>
+    </ul>
+    <ul><b>Field inside charged rings</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/charged_rings">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedrings">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/electromagnetism/charged_rings.py">charged_rings.py</a> and VPython <a href="./src/electromagnetism/charged_rings.py">charged_rings.py</a> versions in this repository</li>
+    </ul>
+  </ul>
+</details>
 
-- Faraday's law [in action](https://zegerh-6085.trinket.io/sites/faradays_law) on Trinket, [in action](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Faradayslaw) on glowscript.org, and [code base](https://trinket.io/library/trinkets/d3934e117c2e) on Trinket. 
-- Charged rings [in action](https://zegerh-6085.trinket.io/sites/charged_rings) on Trinket, [in action](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedrings) on glowscript.org, and [code base](https://trinket.io/library/trinkets/0a61629dcbdb) on Trinket. 
+<figure>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Faradayslaw">
+    <img alt="Faraday's law" width="45%" height="45%" src="./images/faradays_law.png" title="Click to animate"/>
+  </a>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedrings">
+    <img alt="Charged rings" width="45%" height="45%" src="./images/charged_rings.png" title="Click to animate"/>
+  </a>  
+</figure>
 
 ## Electron spinning around a charged ring
 
