@@ -369,16 +369,30 @@ number of vibrating beads coupled by springs on both sides!
   and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/N-bodycoupledoscillator)
 - N-body coupled oscillator code base [on Trinket](https://trinket.io/glowscript/5a852a2b7570)
 
-## Newton&apos;s pendulum 
+## Newton&apos;s pendulum and cannonball
 
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Newtonspendulum">
-  <img alt="Newton's pendulum" width="50%" height="50%" src="./images/newtons_pendulum.png" title="Click to animate"/>
-</a>
+<details>
+  <summary>Animations and source code</summary>
+  <ul>
+    <ul><b>Newton's pendulum</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/newtons_pendulum">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Newtonspendulum">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/kinematics/newtons_cannon.py">newtons_pendulum.py</a> and VPython <a href="./src/kinematics/newtons_pendulum.py">newtons_cannon.py</a> versions in this repository</li>
+    </ul>
+    <ul><b>Newton's cannonball</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/newtons_cannon">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Newtonscannon">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/kinematics/charged_rings.py">newtons_cannon.py</a> and VPython <a href="./src/kinematics/newtons_cannon.py">charged_rings.py</a> versions in this repository</li>
+    </ul>
+  </ul>
+</details>
 
-- Pendulum in action [on Trinket](https://zegerh-6085.trinket.io/sites/newtons_pendulum) 
-  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Newtonspendulum)
-- Pendulum code base [on Trinket](https://trinket.io/glowscript/1b74de8aeee8)
-
+<figure>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Newtonspendulum">
+    <img alt="Newton's pendulum" width="45%" height="45%" src="./images/newtons_pendulum.png" title="Click to animate"/>
+  </a>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Newtonscannon">
+    <img alt="Newton's cannon" width="45%" height="45%" src="./images/newtons_cannon.png" title="Click to animate"/>
+  </a>
+</figure>
 
 ## [Ball on sliding ramp](https://trinket.io/library/trinkets/0731c4e734f8) and ball hitting block
 
