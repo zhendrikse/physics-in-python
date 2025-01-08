@@ -117,16 +117,29 @@ The following demos show the movement of an electron in two different electric f
 Two rather simple demos that show the electric field around a disk. The builder allows a step-by-step
 set-up of the disk by adding a charged ring at each mouse click.
 
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargeddisk">
-  <img alt="Charged disk" width="40%" height="40%" src="./images/charged_disk.png" title="Click to animate"/>
-</a>
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargeddiskbuilder">
-  <img alt="Charged disk builder" width="50%" height="50%" src="./images/charged_disk_builder.png" title="Click to animate"/>
-</a>
+<figure>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargeddisk">
+    <img alt="Charged disk" width="40%" height="40%" src="./images/charged_disk.png" title="Click to animate"/>
+  </a>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargeddiskbuilder">
+    <img alt="Charged disk builder" width="50%" height="50%" src="./images/charged_disk_builder.png" title="Click to animate"/>
+  </a>
+</figure>
 
-- Charged disk [in action](https://zegerh-6085.trinket.io/sites/charged_disk) on Trinket, [in action](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargeddisk) on glowscript.org, and [code base](https://trinket.io/library/trinkets/93fcb16edcea) on Trinket. 
-- Charged disk builder [in action](https://zegerh-6085.trinket.io/sites/charged_disk_builder) on Trinket, [in action](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargeddiskbuilder), and [code base](https://trinket.io/library/trinkets/3456b49e462d) on Trinket. 
 
+<details>
+  <summary>Animations and source code</summary>
+  <ul>
+    <ul><b>Charged disk</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/charged_disk">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargeddisk">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/electromagnetism/charged_disk.py">charged_disk.py</a> and VPython <a href="./src/electromagnetism/charged_disk.py">charged_disk.py</a> versions in this repository</li>
+    </ul>
+    <ul><b>Charged disk builder</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/charged_disk_builder">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargeddiskbuilder">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/electromagnetism/charged_disk_builder.py">charged_disk_builder.py</a> and VPython <a href="./src/electromagnetism/charged_disk_builder.py">charged_disk_builder.py</a> versions in this repository</li>
+    </ul>
+  </ul>
+</details>
 
 ## Visualization of electromagnetic waves
 
@@ -277,9 +290,15 @@ $(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x, 
 
 </details>
 
-Wave function [in action](https://zegerh-6085.trinket.io/sites/plane_wave) on Trinket, 
-[in action](https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave) on glowscript.org, 
-and [code base](https://trinket.io/library/trinkets/628948ec9d16) on Trinket. 
+<details>
+  <summary>Animations and source code</summary>
+  <ul>
+    <ul><b>Plane wave</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/plane_wave">on Trinket</a> and <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/quantum_and_waves/plane_wave.py">plane_wave.py</a> and VPython <a href="./src/quantum_and_waves/plane_wave.py">plane_wave.py</a> versions in this repository</li>
+    </ul>
+  </ul>
+</details>
 
 ## Doppler effect
 
