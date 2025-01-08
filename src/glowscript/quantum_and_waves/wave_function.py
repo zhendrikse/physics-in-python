@@ -1,6 +1,6 @@
 # Web VPython 3.2
 
-title = """Visualization of particle wave functions
+title = """Visualization of free particle wave functions
 
 &#x2022; From <a href="https://www.amazon.com/Visualizing-Quantum-Mechanics-Python-Spicklemire/dp/1032569247">Visualizing Quantum Mechanics with Python</a>
 &#x2022; Modified by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a>, located in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
@@ -132,22 +132,24 @@ class Base:
 
 
 class Wave:
-    def __init__(self, L=20, N=40):
+    def __init__(self, psi, L=20, N=40):
         self._x = linspace(-L / 2, L / 2, N)
         self._arrows = []
+        self._psi = psi
         for xval in self._x:
             a = arrow(pos=vec(xval, 0, 0), axis=vec(0, 1, 0), color=color.red)
             self._arrows.append(a)
 
-    def update_for(self, psi_array):
+    def update_for(self, t):
+        psi_array = []
+        for xval in self._x:
+            psi_array.append(self._psi.value_at(xval, t))
+
         for i in range(len(psi_array)):
             self._arrows[i].axis = vec(0, psi_array[i].re, psi_array[i].im)
 
-    def x_range(self):
-        return self._x
 
-
-class Psi:
+class PsiFreeParticle:
     def __init__(self, k, omega):
         self._k = k
         self._omega = omega
@@ -195,16 +197,11 @@ k = 1  # particle is stationary, so k=0
 
 t = 0
 dt = 0.02
-psi = Psi(k, omega)
-wave = Wave()
+psi = PsiFreeParticle(k, omega)
+wave = Wave(psi)
 
 while t < 5:  # simulate for 5 seconds
     rate(1 / dt)
-    psi_array = []
-    for xval in wave.x_range():
-        psi_array.append(psi.value_at(xval, t))
-
-    wave.update_for(psi_array)
-
+    wave.update_for(t)
     t += dt
 
