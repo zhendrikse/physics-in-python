@@ -1,12 +1,9 @@
 # Web VPython 3.2
 
-from vpython import canvas, vec, cylinder, wtext, slider, rate, arrow, cos, sin, pi, arange, floor, color
+from vpython import canvas, vec, cylinder, wtext, slider, rate, arrow, cos, sin, pi, arange, floor, color, sqrt, graph, \
+    gcurve, label
 
 title = """Visualization of particle confined by an infinite square well
-
-Ground state: $\Psi = \sin(kx)e^{-i\omega t}$
-First excited state: $\Psi = \sin(2kx)e^{-4i\omega t}$
-Second excited state: $\Psi = \sin(3kx)e^{-9i\omega t}$
 
 &#x2022; From <a href="https://www.amazon.com/Visualizing-Quantum-Mechanics-Python-Spicklemire/dp/1032569247">Visualizing Quantum Mechanics with Python</a>
 &#x2022; Modified by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a>, located in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
@@ -41,21 +38,43 @@ def numpy_linspace(start, end, total):
 class Wave:
     def __init__(self, psi, linspace):
         self._x = linspace
-        self._arrows = [arrow(pos=vec(xval, 0, 0), axis=vec(0, 1, 0), shaftwidth=0.01 * L, color=color.red) for xval in linspace]
+        self._arrows = [arrow(pos=vec(xval, 0, 0), axis=vec(0, 1, 0), shaftwidth=0.01 * L, color=color.red) for xval in
+                        linspace]
         self._psi = psi
 
-    def update_for(self, t):
-        count = 0
+    def _get_psi_values(self, t):
+        psi_values, phase_values = [], []
         for xval in self._x:
             psi_value, phase = self._psi.value_at(xval, t)
+            psi_values.append(psi_value)
+            phase_values.append(phase)
+        return psi_values, phase_values
+
+    def _psi_squared(self, psi_values):
+        abs_psi = []
+        for value in psi_values:
+            psi_squared = value.real() * value.real() + value.imaginary() * value.imaginary()
+            abs_psi.append(psi_squared)
+
+        return abs_psi
+
+    def update_for(self, t):
+        psi_values, phase_values = self._get_psi_values(t)
+        abs_psi = self._psi_squared(psi_values)
+        sum_psi = sum(abs_psi)
+
+        scale = L / sum_psi
+        for count in range(len(psi_values)):
+            psi_value, phase = psi_values[count], phase_values[count]
             cycles = phase / (2 * pi)
             cycles -= floor(cycles)
             cphase = 2 * pi * cycles
             colour = color.hsv_to_rgb(vec(1.0 - cphase / (2 * pi), 1.0, 1.0))
 
-            self._arrows[count].axis = vec(0, psi_value.real(), psi_value.imaginary()) * 3
+            self._arrows[count].axis = scale * vec(0, psi_value.real(), psi_value.imaginary()) * 3
             self._arrows[count].color = colour
-            count += 1
+
+        return sum([abs_psi[i] / sum_psi * self._x[i] for i in range(len(self._x))])
 
     def set_linspace_to(self, linspace):
         count = 0
@@ -86,6 +105,10 @@ def phase(omega, t):
     return Complex(sin(omega * t), cos(omega * t))
 
 
+def third_excited_state(k, x, omega, t):
+    return Complex(sin(4 * k * x) * phase(-16 * omega, t).real(), sin(4 * k * x) * phase(-16 * omega, t).imaginary())
+
+
 def second_excited_state(k, x, omega, t):
     return Complex(sin(3 * k * x) * phase(-9 * omega, t).real(), sin(3 * k * x) * phase(-9 * omega, t).imaginary())
 
@@ -105,16 +128,23 @@ def superposition(k, x, omega, t):
     imaginary += first_state_weight * first_excited_state(k, x, omega, t).imaginary()
     real += second_state_weight * second_excited_state(k, x, omega, t).real()
     imaginary += second_state_weight * second_excited_state(k, x, omega, t).imaginary()
+    real += third_state_weight * third_excited_state(k, x, omega, t).real()
+    imaginary += third_state_weight * third_excited_state(k, x, omega, t).imaginary()
     return Complex(real, imaginary)
 
+
 ground_state_weight = 1.0
+
+
 def set_ground_state_weight():
     global ground_state_weight
     ground_state_weight = ground_state_slider.value
     ground_state_text.text = "contribution = " + str(ground_state_weight)
 
 
-first_state_weight = 0.0
+first_state_weight = 1.0
+
+
 def set_first_state_weight():
     global first_state_weight
     first_state_weight = first_state_slider.value
@@ -122,36 +152,65 @@ def set_first_state_weight():
 
 
 second_state_weight = 0.0
+
+
 def set_second_state_weight():
     global second_state_weight
     second_state_weight = second_state_slider.value
     second_state_text.text = "contribution = " + str(second_state_weight)
 
 
-animation.append_to_caption("\nGround state")
+third_state_weight = 0.0
+
+
+def set_third_state_weight():
+    global third_state_weight
+    third_state_weight = third_state_slider.value
+    third_state_text.text = "contribution = " + str(third_state_weight)
+
+
+animation.append_to_caption("\n$\Psi = \sin(kx)e^{-i\omega t}$")
 ground_state_slider = slider(text="Ground state", value=1.0, min=0, max=1, bind=set_ground_state_weight)
 ground_state_text = wtext(text="contribution = 1")
 
-animation.append_to_caption("\n\nFirst state")
-first_state_slider = slider(text="First excited state", value=0.0, min=0, max=1, bind=set_first_state_weight)
-first_state_text = wtext(text="contribution = 0")
+animation.append_to_caption("\n\n$\Psi = \sin(2kx)e^{-4i\omega t}$")
+first_state_slider = slider(text="First excited state", value=1.0, min=0, max=1, bind=set_first_state_weight)
+first_state_text = wtext(text="contribution = 1")
 
-animation.append_to_caption("\n\nSecond state")
+animation.append_to_caption("\n\n$\Psi = \sin(3kx)e^{-9i\omega t}$")
 second_state_slider = slider(text="Second excited state", value=0.0, min=0, max=1, bind=set_second_state_weight)
 second_state_text = wtext(text="contribution = 0")
+
+animation.append_to_caption("\n\n$\Psi = \sin(4kx)e^{-16i\omega t}$")
+third_state_slider = slider(text="Third excited state", value=0.0, min=0, max=1, bind=set_third_state_weight)
+third_state_text = wtext(text="contribution = 0")
+
+animation.append_to_caption("\n\n")
 
 frequency = 2
 L = 20
 
-left = cylinder(pos=vec(0, -5, 0), axis=vec(0, 10, 0), radius=0.1, color=color.yellow)
-right = cylinder(pos=vec(L, -5, 0), axis=vec(0, 10, 0), radius=0.1, color=color.yellow)
+left = cylinder(pos=vec(-0.5, -3, 0), axis=vec(0, 6, 0), radius=0.1, color=color.yellow)
+right = cylinder(pos=vec(L, -3, 0), axis=vec(0, 6, 0), radius=0.1, color=color.yellow)
+info = label(pos=vec(L / 2, 3, 0), text="Click mouse to restart", box=False, color=color.yellow, visible=False)
+
 psi = Psi(k=pi / L, omega=2 * pi / frequency, wave_function=superposition)
 wave = Wave(psi, numpy_linspace(0, L, 40))
 
 t = 0
 dt = 0.02
 while True:
-    rate(1 / dt)
-    wave.update_for(t)
-    t += dt
+    gd = graph(title="Probability finding the particle at x", xtitle="t", ytitle="<x>", width=640, height=300)
+    gr = gcurve(color=color.red)
 
+    while t < 10:
+        rate(1 / dt)
+        gr.plot(t, wave.update_for(t))
+        t += dt
+
+    info.visible = True
+    animation.waitfor("click")
+    info.visible = False
+    gr.delete()
+    gd.delete()
+    t = 0
