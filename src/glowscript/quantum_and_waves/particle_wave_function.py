@@ -14,7 +14,7 @@ animation = canvas(width=800, height=600, align='top', title=title, range=9, for
 get_library("https://cdnjs.cloudflare.com/ajax/libs/mathjs/14.0.1/math.js")
 
 
-def linspace(start, end, total):
+def numpy_linspace(start, end, total):
     return arange(start, end, (end - start) / total)
 
 
@@ -132,32 +132,50 @@ class Base:
 
 
 class Wave:
-    def __init__(self, psi, L=20, N=40):
-        self._x = linspace(-L / 2, L / 2, N)
-        self._arrows = []
+    def __init__(self, psi, linspace):
+        self._x = linspace
+        self._arrows = [arrow(pos=vec(xval, 0, 0), axis=vec(0, 1, 0), color=color.red) for xval in linspace]
         self._psi = psi
-        for xval in self._x:
-            a = arrow(pos=vec(xval, 0, 0), axis=vec(0, 1, 0), color=color.red)
-            self._arrows.append(a)
 
     def update_for(self, t):
         psi_array = []
+        count = 0
         for xval in self._x:
-            psi_array.append(self._psi.value_at(xval, t))
+            psi_value, phase = self._psi.value_at(xval, t)
+            cycles = phase / (2 * pi)
+            cycles -= floor(cycles)
+            cphase = 2 * pi * cycles
+            colour = color.hsv_to_rgb(vec(1.0 - cphase / (2 * pi), 1.0, 1.0))
 
-        for i in range(len(psi_array)):
-            self._arrows[i].axis = vec(0, psi_array[i].re, psi_array[i].im)
+            self._arrows[count].axis = vec(0, psi_value.re, psi_value.im) * 3
+            self._arrows[count].color = colour
+            count += 1
+
+    def set_linspace_to(self, linspace):
+        count = 0
+        for xval in linspace:
+            self._arrows[count].pos = vec(xval, 0, 0)
+            count += 1
+        self._x = linspace
 
 
-class PsiFreeParticle:
-    def __init__(self, k, omega):
+class Psi:
+    def __init__(self, k, omega, wave_function):
         self._k = k
         self._omega = omega
+        self._psi = wave_function
 
     def value_at(self, x, t):
         k = self._k
         omega = self._omega
-        return math.complex(cos(k * x - omega * t), sin(k * x - omega * t))
+
+        phase = k * x - omega * t
+
+        return self._psi(k, x, omega, t), phase
+
+    def set_wave_function_to(self, new_wave_function, with_k):
+        self._psi = new_wave_function
+        self._k = with_k
 
 
 def toggle_tick_marks(event):
@@ -180,7 +198,20 @@ def toggle_axis(event):
     axis.axis_visible(event.checked)
 
 
+def set_constraint(event):
+    print(event.index)
+    if event.index < 0:
+        pass
+    elif event.index == 0:
+        wave.set_linspace_to(numpy_linspace(-L / 2, L / 2, 40))
+        psi.set_wave_function_to(free_particle_wave, with_k=1)
+    elif event.index == 1:
+        wave.set_linspace_to(numpy_linspace(0, L, 40))
+        psi.set_wave_function_to(infinite_square_well_wave, with_k=pi / L)
+
+
 animation.append_to_caption("\n")
+_ = menu(choices=["Free particle", "Infinite Square Well"], bind=set_constraint)
 _ = checkbox(text='Tick marks', bind=toggle_tick_marks, checked=False)
 _ = checkbox(text='Tick labels', bind=toggle_tick_labels, checked=False)
 _ = checkbox(text='XZ mesh', bind=toggle_xz_mesh, checked=False)
@@ -191,16 +222,23 @@ axis = Base(length=10)
 axis.hide_tick_labels()
 axis.hide_tick_marks()
 
-T = 0.5
-omega = 2 * pi / T
-k = 1  # particle is stationary, so k=0
+
+def free_particle_wave(k, x, omega, t):
+    return math.complex(cos(k * x - omega * t), sin(k * x - omega * t))
+
+
+def infinite_square_well_wave(k, x, omega, t):
+    return math.complex(sin(k * x) * cos(-omega * t), sin(k * x) * sin(-omega * t))
+
+
+frequency = 2
+L = 20
+psi = Psi(k=1, omega=2 * pi / frequency, wave_function=free_particle_wave)
+wave = Wave(psi, numpy_linspace(-L / 2, L / 2, 40))
 
 t = 0
 dt = 0.02
-psi = PsiFreeParticle(k, omega)
-wave = Wave(psi)
-
-while t < 5:  # simulate for 5 seconds
+while True:  # simulate for 5 seconds
     rate(1 / dt)
     wave.update_for(t)
     t += dt
