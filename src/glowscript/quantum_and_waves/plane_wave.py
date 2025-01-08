@@ -3,12 +3,12 @@
 from vpython import canvas, scene, arrow, color, vec, pi, floor, arange, cos, sin, rate, cylinder, box, label, checkbox, \
     wtext, slider, text
 
-title = """Visualization of plane waves \\( \psi(x, t) = A \cdot e^{k x -i \omega t} \\)
+title = """Visualization of plane waves $\psi(x, t) = A \cdot e^{i(k x - \omega t)}$
 
 &#x2022; From <a href="https://www.amazon.com/Visualizing-Quantum-Mechanics-Python-Spicklemire/dp/1032569247">Visualizing Quantum Mechanics with Python</a>
 &#x2022; Modified by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a>, located in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
-&#x2022; The motion and x-axis represent the parameters \\(t \\text{ and } x\\) respectively
-&#x2022; The colors represent the wave number \\( k \\)
+&#x2022; The motion and x-axis represent the parameters $t$ and $x$ respectively
+&#x2022; The colors represent the wave number $k$
 
 """
 

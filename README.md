@@ -20,31 +20,46 @@ on [glowscript.org](https://glowscript.org).
 
 ## Visualizing a hard sphere gas model
 
-This model represents a Boltzmann gas (consisting of hard spheres) in a box, where 
-the velocity distribution of the colliding atoms eventually approaches the calculated 
+This model represents a Boltzmann gas (consisting of hard spheres) in a box. The velocity distribution of the colliding atoms eventually approaches the calculated 
 theoretical velocity distribution:
 
 $f(\vec{v}) d^3\vec{v} = \bigg [ \dfrac{m}{2\pi k_b T} \bigg ]^{3/2} \exp \bigg (-\dfrac{mv^2}{2 k_b T} \bigg) d^3\vec{v}$
 
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas">
-  <img alt="Hard sphere gas" width="40%" height="40%" src="./images/hard_sphere_gas.png" title="Click to animate"/>
-</a>
+<figure>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas">
+    <img alt="Hard sphere gas" width="40%" height="40%" src="./images/hard_sphere_gas.png" title="Click to animate"/>
+  </a>
+</figure>
 
-- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/hard_sphere_gas) 
-  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas)
-- Code base [on Trinket](https://trinket.io/library/trinkets/554248a15bc4)
+<details>
+  <summary>Animations and source code</summary>
+  <ul>
+    <ul><b>Ideal gas</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/hard_sphere_gas">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/thermodynamics/hard_sphere_gas.py">hard_sphere_gas.py</a> and VPython <a href="./src/thermodynamics/hard_sphere_gas.py">hard_sphere_gas.py</a> versions in this repository</li>
+    </ul>
+  </ul>
+</details>
 
 ## Two-dimensional Ising spin model: 
 
 This demo models the magnetization at various temperatures using a two-dimensional Ising spin lattice.
 
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Isingspin">
-  <img alt="Ising spin model" width="40%" height="40%" src="./images/ising_spin_model.png" title="Click to animate"/>
-</a>
+<figure>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Isingspin">
+    <img alt="Ising spin model" width="40%" height="40%" src="./images/ising_spin_model.png" title="Click to animate"/>
+  </a>
+</figure>
 
-- Ising spin in action [on Trinket](https://zegerh-6085.trinket.io/sites/ising_spin_model) 
-  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Isingspin)
-- Ising spin code base [on Trinket](https://trinket.io/library/trinkets/07404ee90b64)
+<details>
+  <summary>Animations and source code</summary>
+  <ul>
+    <ul><b>Ising spin model</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/ising_spin_model">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Isingspin">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/thermodynamics/ising_spin.py">ising_spin.py</a> and VPython <a href="./src/thermodynamics/ising_spin.py">ising_spin.py</a> versions in this repository</li>
+    </ul>
+  </ul>
+</details>
 
 # Quantum &amp; wave mechanics
 

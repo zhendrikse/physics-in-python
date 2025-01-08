@@ -1,10 +1,12 @@
 # Web VPython 3.2
 
+from vpython import canvas, vec, cylinder, wtext, slider, rate, arrow, cos, sin, pi, arange, floor, color
+
 title = """Visualization of particle confined by an infinite square well
 
 Ground state: $\Psi = \sin(kx)e^{-i\omega t}$
-First excited state: $\Psi = \sin(2kx)e^{-4\omega t}$
-Second excited state: $\Psi = \sin(3kx)e^{-9\omega t}$
+First excited state: $\Psi = \sin(2kx)e^{-4i\omega t}$
+Second excited state: $\Psi = \sin(3kx)e^{-9i\omega t}$
 
 &#x2022; From <a href="https://www.amazon.com/Visualizing-Quantum-Mechanics-Python-Spicklemire/dp/1032569247">Visualizing Quantum Mechanics with Python</a>
 &#x2022; Modified by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a>, located in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
@@ -25,9 +27,6 @@ class Complex:
         self._real = real
         self._imaginary = imaginary
 
-    def add_to(self, another):
-        return Complex(self._real + other.real(), self._imaginary + other.imaginary)
-
     def real(self):
         return self._real
 
@@ -42,8 +41,7 @@ def numpy_linspace(start, end, total):
 class Wave:
     def __init__(self, psi, linspace):
         self._x = linspace
-        self._arrows = [arrow(pos=vec(xval, 0, 0), axis=vec(0, 1, 0), shaftwidth=0.01 * L, color=color.red) for xval in
-                        linspace]
+        self._arrows = [arrow(pos=vec(xval, 0, 0), axis=vec(0, 1, 0), shaftwidth=0.01 * L, color=color.red) for xval in linspace]
         self._psi = psi
 
     def update_for(self, t):
@@ -84,61 +82,6 @@ class Psi:
         self._k = with_k
 
 
-def set_constraint(event):
-    if event.index < 0:
-        pass
-    elif event.index == 0:
-        psi.set_wave_function_to(ground_state, with_k=pi / L)
-    elif event.index == 1:
-        psi.set_wave_function_to(first_excited_state, with_k=pi / L)
-    elif event.index == 2:
-        psi.set_wave_function_to(second_excited_state, with_k=pi / L)
-    elif event.index == 3:
-        psi.set_wave_function_to(superposition, with_k=pi / L)
-
-
-animation.append_to_caption("\n")
-
-ground_state_weight = 1.0
-
-
-def set_ground_state_weight():
-    global ground_state_weight
-    ground_state_weight = ground_state_slider.value
-    ground_state_text.text = "contribution = " + str(ground_state_weight)
-
-
-first_state_weight = 0.0
-
-
-def set_first_state_weight():
-    global first_state_weight
-    first_state_weight = first_state_slider.value
-    first_state_text.text = "contribution = " + str(first_state_weight)
-
-
-second_state_weight = 0.0
-
-
-def set_second_state_weight():
-    global second_state_weight
-    second_state_weight = second_state_slider.value
-    second_state_text.text = "contribution = " + str(second_state_weight)
-
-
-animation.append_to_caption("Ground state")
-ground_state_slider = slider(text="Ground state", value=1.0, min=0, max=1, bind=set_ground_state_weight)
-ground_state_text = wtext(text="contribution = 1")
-
-animation.append_to_caption("\n\nFirst state")
-first_state_slider = slider(text="First excited state", value=0.0, min=0, max=1, bind=set_first_state_weight)
-first_state_text = wtext(text="contribution = 0")
-
-animation.append_to_caption("\n\nSecond state")
-second_state_slider = slider(text="Second excited state", value=0.0, min=0, max=1, bind=set_second_state_weight)
-second_state_text = wtext(text="contribution = 0")
-
-
 def phase(omega, t):
     return Complex(sin(omega * t), cos(omega * t))
 
@@ -164,6 +107,38 @@ def superposition(k, x, omega, t):
     imaginary += second_state_weight * second_excited_state(k, x, omega, t).imaginary()
     return Complex(real, imaginary)
 
+ground_state_weight = 1.0
+def set_ground_state_weight():
+    global ground_state_weight
+    ground_state_weight = ground_state_slider.value
+    ground_state_text.text = "contribution = " + str(ground_state_weight)
+
+
+first_state_weight = 0.0
+def set_first_state_weight():
+    global first_state_weight
+    first_state_weight = first_state_slider.value
+    first_state_text.text = "contribution = " + str(first_state_weight)
+
+
+second_state_weight = 0.0
+def set_second_state_weight():
+    global second_state_weight
+    second_state_weight = second_state_slider.value
+    second_state_text.text = "contribution = " + str(second_state_weight)
+
+
+animation.append_to_caption("\nGround state")
+ground_state_slider = slider(text="Ground state", value=1.0, min=0, max=1, bind=set_ground_state_weight)
+ground_state_text = wtext(text="contribution = 1")
+
+animation.append_to_caption("\n\nFirst state")
+first_state_slider = slider(text="First excited state", value=0.0, min=0, max=1, bind=set_first_state_weight)
+first_state_text = wtext(text="contribution = 0")
+
+animation.append_to_caption("\n\nSecond state")
+second_state_slider = slider(text="Second excited state", value=0.0, min=0, max=1, bind=set_second_state_weight)
+second_state_text = wtext(text="contribution = 0")
 
 frequency = 2
 L = 20
