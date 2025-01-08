@@ -122,7 +122,7 @@ The box is modeled by an infinite square well, so that the particle cannot escap
 beyond the boundaries of the box.
 
 Inside the box, the potential energy $V$ is zero (or constant). Substituting this together with the
-formula for the plane wave $\psi(x,t) = Ae^{ik * x}e^{-i\omega t}$ into the Schrödinger equation, we get:
+formula for the plane wave $\psi(x,t) = Ae^{ik x}e^{-i\omega t}$ into the Schrödinger equation, we get:
 
 $\dfrac{\partial^2\psi}{\partial x^2} + \dfrac{8\pi^2m}{h^2}(E - 0)\psi=0 \Rightarrow \bigg(\dfrac{-h^2}{8\pi^2m}\bigg)\dfrac{\partial^2\psi}{\partial x^2}=E\psi$
 
