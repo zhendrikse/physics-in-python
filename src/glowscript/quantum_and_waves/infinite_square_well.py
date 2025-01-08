@@ -63,7 +63,7 @@ class Wave:
         abs_psi = self._psi_squared(psi_values)
         sum_psi = sum(abs_psi)
 
-        scale = L / sum_psi
+        scale = 1.5 * L / sum_psi
         for count in range(len(psi_values)):
             psi_value, phase = psi_values[count], phase_values[count]
             cycles = phase / (2 * pi)
