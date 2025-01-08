@@ -1,13 +1,13 @@
 #Web VPython 3.2
 
+from vpython import sphere, vec, arrow, color, sin, cos, ring, curve, cross, label, canvas, norm, slider, radians, rate, cylinder, text, box, pi, checkbox
+
 title = """Frequently used objects
 
 &#x2022; Created by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a> 
 &#x2022; Maintained in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
 
 """
-
-from vpython import sphere, vec, arrow, color, sin, cos, ring, curve, cross, label, canvas, norm, slider, radians, rate, cylinder, text, checkbox, box
 
 animation = canvas(forward=vec(0.37, -0.55, -0.75), range=8., title=title)
 
@@ -36,8 +36,8 @@ class Base:
                 arrow(pos=position + length * base_vec / 2, axis=base_vec, color=axis_color, shaftwidth=radius)]
 
         for i in range(len(base)):
-            self._arrow_labels.append(label(pos=position + base[i] * (length / 2 + tick_increment), text=axis_labels[i],
-                                            color=tick_marks_color, box=False))
+            pos = position + base[i] * (length / 2 + tick_increment)
+            self._arrow_labels.append(text(pos=pos, text=axis_labels[i], color=axis_color, height=radius*10, align='center', billboard=True, emissive=True))
 
         offset = [-0.05 * length * y_hat, 0.05 * length * x_hat, -0.05 * length * y_hat]
         positions = []
@@ -51,7 +51,7 @@ class Base:
                 self._tick_labels.append(marker)
                 a_box = box(pos=pos, width=2 * radius, height=0.5, length=2 * radius, color=tick_marks_color)
                 if i == 1:
-                    a_box.rotate(angle=radians(90), axis=z_hat)
+                    a_box.rotate(angle=0.5 * pi, axis=vec(0, 0, 1))
                 self._tick_marks.append(a_box)
 
         self._xy_mesh, self._zx_mesh, self._xz_mesh, self._yx_mesh = [], [], [], []
@@ -92,8 +92,6 @@ class Base:
             self._arrow_labels[i].visible = visible
             self._arrows[i].visible = visible
             self._axis[i].visible = visible
-        self.tick_labels_visible(visible)
-        self.tick_marks_visible(visible)
 
     def tick_labels_visible(self, visible):
         for a_label in self._tick_labels:
@@ -168,6 +166,9 @@ theta_slider = slider(bind = set_theta, value = theta, min = 0, max = 360)
 animation.append_to_caption("\nAdjust phi using the slider\n")
 phi_slider = slider(bind = set_phi, value = phi, min = 0, max = 360)
 
+
+animation.append_to_caption("\n\n")
+
 def toggle_tick_marks(event):
     axis.tick_marks_visible(event.checked)
 
@@ -180,11 +181,14 @@ def toggle_xz_mesh(event):
 def toggle_xy_mesh(event):
     axis.xy_mesh_visible(event.checked)
 
-animation.append_to_caption("\n\n")
+def toggle_axis(event):
+    axis.axis_visible(event.checked)
+
 _ = checkbox(text = 'Tick marks', bind = toggle_tick_marks, checked=True)
 _ = checkbox(text = 'Tick labels', bind = toggle_tick_labels, checked=False)
 _ = checkbox(text = 'XZ mesh', bind = toggle_xz_mesh, checked=True)
 _ = checkbox(text = 'XY mesh', bind = toggle_xy_mesh, checked=False)
+_ = checkbox(text = 'Axis', bind = toggle_axis, checked=True)
 
 while True:
     rate(60)

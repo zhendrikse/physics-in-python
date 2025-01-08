@@ -1,5 +1,4 @@
-# Web VPython 3.2
-
+#Web VPython 3.2
 from vpython import points, vec, pi, box, color, rate, cone, canvas, label, arrow, cylinder, text, checkbox
 
 title = """Photon moving in space-time
@@ -38,8 +37,10 @@ class Base:
                 arrow(pos=position + length * base_vec / 2, axis=base_vec, color=axis_color, shaftwidth=radius)]
 
         for i in range(len(base)):
-            self._arrow_labels.append(label(pos=position + base[i] * (length / 2 + tick_increment), text=axis_labels[i],
-                                            color=tick_marks_color, box=False))
+            pos = position + base[i] * (length / 2 + tick_increment)
+            self._arrow_labels.append(
+                text(pos=pos, text=axis_labels[i], color=axis_color, height=radius * 10, align='center', billboard=True,
+                     emissive=True))
 
         offset = [-0.05 * length * y_hat, 0.05 * length * x_hat, -0.05 * length * y_hat]
         positions = []

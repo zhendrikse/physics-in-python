@@ -57,7 +57,7 @@ class Base:
 
         for i in range(len(base)):
             pos = position + base[i] * (length / 2 + tick_increment)
-            self._arrow_labels.append(label(pos=pos, text=axis_labels[i], color=tick_marks_color, box=False))
+            self._arrow_labels.append(text(pos=pos, text=axis_labels[i], color=axis_color, height=radius*10, align='center', billboard=True, emissive=True))
 
     def _create_tick_marks_and_labels(self, position, num_tick_marks, tick_increment, length, radius, colour):
         offset = [-0.05 * length * y_hat, 0.05 * length * x_hat, -0.05 * length * y_hat]

@@ -1,7 +1,7 @@
 # Web VPython 3.2
 
 from vpython import canvas, scene, arrow, color, vec, pi, floor, arange, cos, sin, rate, cylinder, box, label, checkbox, \
-    wtext, slider
+    wtext, slider, text
 
 title = """Visualization of plane waves \\( \psi(x, t) = A \cdot e^{k x -i \omega t} \\)
 
@@ -19,13 +19,13 @@ info_4 = "Schr&#246;dinger equation: $ E\Psi(x,t) = -i\hbar \dfrac{\partial}{\pa
 
 animation = canvas(forward=vec(0.37, -0.55, -0.75), width=600, height=450, align='top', background=color.black,
                    title=title, range=11.5)
-#MathJax.Hub.Queue(["Typeset", MathJax.Hub])
+MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 x_hat = vec(1, 0, 0)
 y_hat = vec(0, 1, 0)
 z_hat = vec(0, 0, 1)
 base = [x_hat, y_hat, z_hat]
-label_text = ("x", "Re(ψ)", "Im(ψ)")
+label_text = ("X", "Re(ψ)", "Im(ψ)")
 
 
 class Base:
@@ -44,8 +44,10 @@ class Base:
                 arrow(pos=position + length * base_vec / 2, axis=base_vec, color=axis_color, shaftwidth=radius)]
 
         for i in range(len(base)):
-            self._arrow_labels.append(label(pos=position + base[i] * (length / 2 + tick_increment), text=axis_labels[i],
-                                            color=tick_marks_color, box=False))
+            pos = position + base[i] * (length / 2 + tick_increment)
+            self._arrow_labels.append(
+                text(pos=pos, text=axis_labels[i], color=axis_color, height=radius * 5, align='center', billboard=True,
+                     emissive=True))
 
         offset = [-0.05 * length * y_hat, 0.05 * length * x_hat, -0.05 * length * y_hat]
         positions = []
