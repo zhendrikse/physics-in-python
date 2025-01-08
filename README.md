@@ -11,6 +11,160 @@ All animations can be viewed on [my glowscript.org](https://glowscript.org/#/use
 - [**`src`**](src) &rarr; contains the sources
 - [**`test`**](test) &rarr; the tests of the components in the generic toolbox
 
+
+# Thermodynamics
+
+The code pertaining to the demos in this section is available under the 
+[thermodynamics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/)
+on [glowscript.org](https://glowscript.org).
+
+## Visualizing a hard sphere gas model
+
+This model represents a Boltzmann gas (consisting of hard spheres) in a box, where 
+the velocity distribution of the colliding atoms eventually approaches the calculated 
+theoretical velocity distribution:
+
+$f(\vec{v}) d^3\vec{v} = \bigg [ \dfrac{m}{2\pi k_b T} \bigg ]^{3/2} \exp \bigg (-\dfrac{mv^2}{2 k_b T} \bigg) d^3\vec{v}$
+
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas">
+  <img alt="Hard sphere gas" width="40%" height="40%" src="./images/hard_sphere_gas.png" title="Click to animate"/>
+</a>
+
+- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/hard_sphere_gas) 
+  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas)
+- Code base [on Trinket](https://trinket.io/library/trinkets/554248a15bc4)
+
+## Two-dimensional Ising spin model: 
+
+This demo models the magnetization at various temperatures using a two-dimensional Ising spin lattice.
+
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Isingspin">
+  <img alt="Ising spin model" width="40%" height="40%" src="./images/ising_spin_model.png" title="Click to animate"/>
+</a>
+
+- Ising spin in action [on Trinket](https://zegerh-6085.trinket.io/sites/ising_spin_model) 
+  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Isingspin)
+- Ising spin code base [on Trinket](https://trinket.io/library/trinkets/07404ee90b64)
+
+# Quantum &amp; wave mechanics
+
+The code pertaining to the demos in this section is available under the 
+[quantum tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Quantum/)
+on [glowscript.org](https://glowscript.org).
+
+## Visualization of plane waves $\psi(x, t) = A \cdot e^{k x - i \omega t}$
+
+<a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave">
+  <img alt="Complex wave" width="50%" height="50%" src="./images/plane_wave.png" title="Click to animate"/>
+</a>
+
+With the plane wave as illustrated above, we can easily derive the Schr&#246;dinger equation:
+
+<details>
+  <summary>Concise derivation of the Schr&#246;dinger equation</summary>
+
+According to [De Broglie](https://en.wikipedia.org/wiki/Matter_wave) we have:
+
+$p = \dfrac{h}{\lambda} = \dfrac{h}{2\pi} \dfrac{2\pi}{\lambda} = \hbar k \Rightarrow \hbar k = \hbar \dfrac{\partial}{\partial x} \psi(x,t) = p \psi(x, t) \Rightarrow p = \hbar \dfrac{\partial}{\partial x}$
+
+The Kinetic energy can be expressed as:
+
+$K = \dfrac{p^2}{2m} = -\dfrac{\hbar^2}{2m}\dfrac{\partial^2}{\partial x^2} \psi(x,t)$
+
+The total energy is given by the [Planck-Einstein relation](https://en.wikipedia.org/wiki/Planck_relation):
+
+$E = hf = \dfrac{h}{2\pi}\dfrac{2\pi}{T} = \hbar \omega \Rightarrow -i\hbar\dfrac{\partial}{\partial t} \psi(x,t) = E \psi(x,t) \Rightarrow E = -i\hbar\dfrac{\partial}{\partial t}$
+
+From this we arrive at the [Schr&#246;dinger equation](https://en.wikipedia.org/wiki/Schr%C3%B6dinger_equation):
+
+$(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x, t) = -\dfrac{\hbar^2}{2m}\dfrac{\partial^2}{\partial x^2} \Psi(x,t) + V(x)\Psi(x,t)$
+
+</details>
+
+<details>
+  <summary>Animations and source code</summary>
+  <ul>
+    <ul><b>Plane wave</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/plane_wave">on Trinket</a> and <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/quantum_and_waves/plane_wave.py">plane_wave.py</a> and VPython <a href="./src/quantum_and_waves/plane_wave.py">plane_wave.py</a> versions in this repository</li>
+    </ul>
+  </ul>
+</details>
+
+## One-dimensional quantum particle bound by an infinite square well
+
+<a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Infinitesquarewell">
+  <img alt="Complex wave" width="50%" height="50%" src="./images/infinite_square_well.png" title="Click to animate"/>
+</a>
+
+<details>
+  <summary>Animations and source code</summary>
+  <ul>
+    <ul><b>Plane wave</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/infinite_square_well">on Trinket</a> and <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Infinitesquarewell">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/quantum_and_waves/infinite_square_well.py">infinite_square_well.py</a> and VPython <a href="./src/quantum_and_waves/infinite_square_well.py">infinite_square_well.py</a> versions in this repository</li>
+    </ul>
+  </ul>
+</details>
+
+## Doppler effect
+
+<a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Dopplereffect">
+  <img alt="Doppler effect" width="50%" height="50%" src="./images/doppler_effect.png" title="Click to animate"/>
+</a>
+
+- Doppler effect in action [on Trinket](https://zegerh-6085.trinket.io/sites/doppler_effect) 
+  and in action [on glowscript.org](https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Dopplereffect)
+- The code base [on Trinket](https://trinket.io/library/trinkets/9d869c1167ec)
+
+## The quantum harmonic oscillator
+
+The quantum harmonic oscillator is visualized in a semi-classical way below.
+
+<a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Quantumoscillator">
+  <img alt="Quantum oscillator" width="50%" height="50%" src="./images/quantum_oscillator.png" title="Click to animate"/>
+</a>
+
+- Quantum oscillator in action [on Trinket](https://zegerh-6085.trinket.io/sites/quantum_oscillator) 
+  and in action [on glowscript.org](https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Quantumoscillator)
+- Quantum oscillator code base [on Trinket](https://trinket.io/library/trinkets/555f7535fe74)
+
+
+# Astrophysics
+
+The code pertaining to the demos in this section is available under the 
+[astrophysics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/)
+on [glowscript.org](https://glowscript.org).
+
+
+##  Kepler's law of equal areas
+
+A dynamic visualization of Kepler's laws.
+
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw">
+  <img alt="Kepler's laws" width="50%" height="50%" src="./images/keplers_law.png" title="Click to animate"/>
+</a>
+
+- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/keplers_law) 
+  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw)
+- Code base [on Trinket](https://trinket.io/library/trinkets/11c6cd8b5622)
+
+
+## Daylight variations &mdash; sun-earth-moon model
+
+A not accurate to scale sun-earth-moon model, but very detailed and instructive nonetheless! It shows the per day
+incoming energy from the sun (at a given latitude), as well as the variations in the length of
+the days per season. By clicking on the sun or earth, the camera perspective can be changed as well!
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Daylightvariations">
+  <img alt="Daylight variations" width="50%" height="50%" src="./images/daylight_variations.png" title="Click to animate"/>
+</a>
+
+- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/daylight_variations) 
+  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Daylightvariations)
+- Code base [on Trinket](https://trinket.io/library/trinkets/d218d43e551a)
+
 # Electromagnetism
 
 The code pertaining to the demos in this section is available under the 
@@ -220,159 +374,6 @@ the so-called Galilean transformation.
 # Coming soon: Minkowski space-time
 
 This is currently under construction
-
-# Thermodynamics
-
-The code pertaining to the demos in this section is available under the 
-[thermodynamics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/)
-on [glowscript.org](https://glowscript.org).
-
-## Visualizing a hard sphere gas model
-
-This model represents a Boltzmann gas (consisting of hard spheres) in a box, where 
-the velocity distribution of the colliding atoms eventually approaches the calculated 
-theoretical velocity distribution:
-
-$f(\vec{v}) d^3\vec{v} = \bigg [ \dfrac{m}{2\pi k_b T} \bigg ]^{3/2} \exp \bigg (-\dfrac{mv^2}{2 k_b T} \bigg) d^3\vec{v}$
-
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas">
-  <img alt="Hard sphere gas" width="40%" height="40%" src="./images/hard_sphere_gas.png" title="Click to animate"/>
-</a>
-
-- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/hard_sphere_gas) 
-  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas)
-- Code base [on Trinket](https://trinket.io/library/trinkets/554248a15bc4)
-
-## Two-dimensional Ising spin model: 
-
-This demo models the magnetization at various temperatures using a two-dimensional Ising spin lattice.
-
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Isingspin">
-  <img alt="Ising spin model" width="40%" height="40%" src="./images/ising_spin_model.png" title="Click to animate"/>
-</a>
-
-- Ising spin in action [on Trinket](https://zegerh-6085.trinket.io/sites/ising_spin_model) 
-  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Isingspin)
-- Ising spin code base [on Trinket](https://trinket.io/library/trinkets/07404ee90b64)
-
-# Quantum &amp; wave mechanics
-
-The code pertaining to the demos in this section is available under the 
-[quantum tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Quantum/)
-on [glowscript.org](https://glowscript.org).
-
-## Visualization of plane waves $\psi(x, t) = A \cdot e^{k x - i \omega t}$
-
-<a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave">
-  <img alt="Complex wave" width="50%" height="50%" src="./images/plane_wave.png" title="Click to animate"/>
-</a>
-
-With the plane wave as illustrated above, we can easily derive the Schr&#246;dinger equation:
-
-<details>
-  <summary>Concise derivation of the Schr&#246;dinger equation</summary>
-
-According to [De Broglie](https://en.wikipedia.org/wiki/Matter_wave) we have:
-
-$p = \dfrac{h}{\lambda} = \dfrac{h}{2\pi} \dfrac{2\pi}{\lambda} = \hbar k \Rightarrow \hbar k = \hbar \dfrac{\partial}{\partial x} \psi(x,t) = p \psi(x, t) \Rightarrow p = \hbar \dfrac{\partial}{\partial x}$
-
-The Kinetic energy can be expressed as:
-
-$K = \dfrac{p^2}{2m} = -\dfrac{\hbar^2}{2m}\dfrac{\partial^2}{\partial x^2} \psi(x,t)$
-
-The total energy is given by the [Planck-Einstein relation](https://en.wikipedia.org/wiki/Planck_relation):
-
-$E = hf = \dfrac{h}{2\pi}\dfrac{2\pi}{T} = \hbar \omega \Rightarrow -i\hbar\dfrac{\partial}{\partial t} \psi(x,t) = E \psi(x,t) \Rightarrow E = -i\hbar\dfrac{\partial}{\partial t}$
-
-From this we arrive at the [Schr&#246;dinger equation](https://en.wikipedia.org/wiki/Schr%C3%B6dinger_equation):
-
-$(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x, t) = -\dfrac{\hbar^2}{2m}\dfrac{\partial^2}{\partial x^2} \Psi(x,t) + V(x)\Psi(x,t)$
-
-</details>
-
-<details>
-  <summary>Animations and source code</summary>
-  <ul>
-    <ul><b>Plane wave</b>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/plane_wave">on Trinket</a> and <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/quantum_and_waves/plane_wave.py">plane_wave.py</a> and VPython <a href="./src/quantum_and_waves/plane_wave.py">plane_wave.py</a> versions in this repository</li>
-    </ul>
-  </ul>
-</details>
-
-## One-dimensional quantum particle bound by an infinite square well
-
-<a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Infinitesquarewell">
-  <img alt="Complex wave" width="50%" height="50%" src="./images/infinite_square_well.png" title="Click to animate"/>
-</a>
-
-<details>
-  <summary>Animations and source code</summary>
-  <ul>
-    <ul><b>Plane wave</b>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/infinite_square_well">on Trinket</a> and <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Infinitesquarewell">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/quantum_and_waves/infinite_square_well.py">infinite_square_well.py</a> and VPython <a href="./src/quantum_and_waves/infinite_square_well.py">infinite_square_well.py</a> versions in this repository</li>
-    </ul>
-  </ul>
-</details>
-
-## Doppler effect
-
-<a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Dopplereffect">
-  <img alt="Doppler effect" width="50%" height="50%" src="./images/doppler_effect.png" title="Click to animate"/>
-</a>
-
-- Doppler effect in action [on Trinket](https://zegerh-6085.trinket.io/sites/doppler_effect) 
-  and in action [on glowscript.org](https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Dopplereffect)
-- The code base [on Trinket](https://trinket.io/library/trinkets/9d869c1167ec)
-
-## The quantum harmonic oscillator
-
-The quantum harmonic oscillator is visualized in a semi-classical way below.
-
-<a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Quantumoscillator">
-  <img alt="Quantum oscillator" width="50%" height="50%" src="./images/quantum_oscillator.png" title="Click to animate"/>
-</a>
-
-- Quantum oscillator in action [on Trinket](https://zegerh-6085.trinket.io/sites/quantum_oscillator) 
-  and in action [on glowscript.org](https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Quantumoscillator)
-- Quantum oscillator code base [on Trinket](https://trinket.io/library/trinkets/555f7535fe74)
-
-
-# Astrophysics
-
-The code pertaining to the demos in this section is available under the 
-[astrophysics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/)
-on [glowscript.org](https://glowscript.org).
-
-
-##  Kepler's law of equal areas
-
-A dynamic visualization of Kepler's laws.
-
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw">
-  <img alt="Kepler's laws" width="50%" height="50%" src="./images/keplers_law.png" title="Click to animate"/>
-</a>
-
-- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/keplers_law) 
-  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw)
-- Code base [on Trinket](https://trinket.io/library/trinkets/11c6cd8b5622)
-
-
-## Daylight variations &mdash; sun-earth-moon model
-
-A not accurate to scale sun-earth-moon model, but very detailed and instructive nonetheless! It shows the per day
-incoming energy from the sun (at a given latitude), as well as the variations in the length of
-the days per season. By clicking on the sun or earth, the camera perspective can be changed as well!
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Daylightvariations">
-  <img alt="Daylight variations" width="50%" height="50%" src="./images/daylight_variations.png" title="Click to animate"/>
-</a>
-
-- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/daylight_variations) 
-  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Daylightvariations)
-- Code base [on Trinket](https://trinket.io/library/trinkets/d218d43e551a)
 
 # Kinematics
 
