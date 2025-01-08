@@ -198,13 +198,13 @@ psi = Psi(k=pi / L, omega=2 * pi / frequency, wave_function=superposition)
 wave = Wave(psi, numpy_linspace(0, L, 40))
 
 t = 0
-dt = 0.02
+dt = 0.001
 while True:
     gd = graph(title="Probability finding the particle at x", xtitle="t", ytitle="<x>", width=640, height=300)
     gr = gcurve(color=color.red)
 
-    while t < 10:
-        rate(1 / dt)
+    while t < 5:
+        rate(100)
         gr.plot(t, wave.update_for(t))
         t += dt
 
