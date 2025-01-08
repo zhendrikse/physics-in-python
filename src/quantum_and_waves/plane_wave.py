@@ -59,7 +59,7 @@ animation.append_to_caption(" Omega = ")
 omega_slider_text = wtext(text="2 * π")
 animation.append_to_caption("\n\n")
 
-k_slider = slider(min=pi / 30, max=2 * pi / 3, value=2 * pi / 5, bind=adjust_k)
+k_slider = slider(min=-2 * pi / 3, max=2 * pi / 3, value=2 * pi / 5, bind=adjust_k)
 animation.append_to_caption(" Wave number k = ")
 k_slider_text = wtext(text="2 * π  / 5")
 animation.append_to_caption("\n\n")
