@@ -397,7 +397,7 @@ the days per season.
 - Code base [on Trinket](https://trinket.io/library/trinkets/d218d43e551a)
 
 
-# Special relativity &mdash; space-time visualizations and more
+# Special relativity
 
 The code pertaining to the demos in this section is available under the 
 [relativity tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Relativity/)
