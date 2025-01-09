@@ -439,7 +439,7 @@ the so-called Galilean transformation.
   and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Relativity/program/Glalileantransformation)
 - Code base [on Trinket](https://trinket.io/library/trinkets/6499b8e78c27)
 
-# Coming soon: Minkowski space-time
+## Coming soon: Minkowski space-time
 
 This is currently under construction
 
