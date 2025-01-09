@@ -144,15 +144,14 @@ The following demos show the movement of an electron in two different electric f
   </ul>
 </details>
 
-
-## Rutherford scattering & symmetry planes of a cubic lattice
+## Rutherford scattering & charged particle in magnetic field
 
 <figure>
   <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Rutherfordscattering">
     <img alt="Rutherford scattering" width="45%" height="45%" src="./images/rutherford_scattering.png" title="Click to animate"/>
-  </a>&nbsp;&nbsp;
-  <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes ">
-    <img alt="Symmetry planes" width="35%" height="35%" src="./images/crystal_planes.png" title="Click to animate"/>
+  </a>
+  <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Helicalmotion">
+    <img alt="Helical motion" width="50%" height="50%" src="./images/helical_motion.png" title="Click to animate"/>
   </a>
 </figure>
 
@@ -164,9 +163,9 @@ The following demos show the movement of an electron in two different electric f
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/rutherford_scattering">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Rutherfordscattering">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/electromagnetism/rutherford_scattering.py">rutherford_scattering.py</a> and VPython <a href="./src/electromagnetism/rutherford_scattering.py">rutherford_scattering.py</a> versions in this repository</li>
     </ul>
-    <ul><b>Cubic lattice</b>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/crystal_symmetry_plaes">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/electromagnetism/crystal_symmetry_plaes.py">crystal_symmetry_plaes.py</a> and VPython <a href="./src/electromagnetism/crystal_symmetry_plaes.py">crystal_symmetry_plaes.py</a> versions in this repository</li>
+    <ul><b>Helical motion of charged particle in magnetic field</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/helical_motion">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Helicalmotion">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/electromagnetism/helical_motion.py">helical_motion.py</a> and VPython <a href="./src/electromagnetism/helical_motion.py">helical_motion.py</a> versions in this repository</li>
     </ul>
   </ul>
 </details>
@@ -217,7 +216,7 @@ $\vec{E} ( \vec{r} ) = -\dfrac {1} {4\pi\epsilon_0} \nabla \bigg( \dfrac{\vec{r}
 </figure>
 
 
-## Interactive visualization of electric and magnetic fields
+## Electric and magnetic fields
 
 Visualization of Faraday's law by running an electric current (of electric charges) through a wire and of
 an electric field inside a series of charged rings.
@@ -275,7 +274,7 @@ set-up of the disk by adding a charged ring at each mouse click.
   </ul>
 </details>
 
-## Visualization of electromagnetic waves
+## Electromagnetic waves
 
 Both of the two dynamic simulations below visualize the propagation of electromagnetic waves. 
 
@@ -489,6 +488,16 @@ number of vibrating beads coupled by springs on both sides!
 
 ## Newton&apos;s pendulum and cannonball
 
+
+<figure>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Newtonspendulum">
+    <img alt="Newton's pendulum" width="45%" height="45%" src="./images/newtons_pendulum.png" title="Click to animate" align="top"/>
+  </a>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Newtonscannon">
+    <img alt="Newton's cannon" width="45%" height="45%" src="./images/newtons_cannon.png" title="Click to animate"/>
+  </a>
+</figure>
+
 <details>
   <summary>Animations and source code</summary>
   <ul>
@@ -502,15 +511,6 @@ number of vibrating beads coupled by springs on both sides!
     </ul>
   </ul>
 </details>
-
-<figure>
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Newtonspendulum">
-    <img alt="Newton's pendulum" width="45%" height="45%" src="./images/newtons_pendulum.png" title="Click to animate" align="top"/>
-  </a>
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Newtonscannon">
-    <img alt="Newton's cannon" width="45%" height="45%" src="./images/newtons_cannon.png" title="Click to animate"/>
-  </a>
-</figure>
 
 ## Ball on sliding ramp &amp; ball hitting block
 
@@ -567,6 +567,23 @@ An illustration of using polar (spherical) coordinates and a flock of birds
   and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Flockingbirds)
 - Flocking birds code base [on Trinket](https://trinket.io/library/trinkets/54d12548d4ec)
 
+## Symmetry planes of a cubic lattice
+
+<figure>
+  <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes">
+    <img alt="Symmetry planes" width="35%" height="35%" src="./images/crystal_planes.png" title="Click to animate"/>
+  </a>
+</figure>
+
+<details>
+  <summary>Animations and source code</summary>
+  <ul>
+    <ul><b>Cubic lattice</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/crystal_symmetry_plaes">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/electromagnetism/crystal_symmetry_plaes.py">crystal_symmetry_plaes.py</a> and VPython <a href="./src/electromagnetism/crystal_symmetry_plaes.py">crystal_symmetry_plaes.py</a> versions in this repository</li>
+    </ul>
+  </ul>
+</details>
 
 ## Elastic collision
 
