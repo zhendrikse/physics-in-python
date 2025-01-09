@@ -345,8 +345,7 @@ set-up of the disk by adding a charged ring at each mouse click.
 
 ## Visualization of electromagnetic waves
 
-Both of the two dynamic simulations below visualize the propagation of electromagnetic waves. In the first demo,
-the electromagnetic waves emanate from an antenna, in the second they are propagating through a vacuum.
+Both of the two dynamic simulations below visualize the propagation of electromagnetic waves. 
 
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Antenna">
   <img alt="Antenna" width="45%" height="45%" src="./images/antenna.png" title="Click to animate"/>
@@ -355,26 +354,45 @@ the electromagnetic waves emanate from an antenna, in the second they are propag
   <img alt="Electromagnetic waves" width="50%" height="50%" src="./images/electromagnetic_wave.png" title="Click to animate"/>
 </a>
 
-- Antenna in action [on Trinket](https://zegerh-6085.trinket.io/sites/antenna) 
-  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Antenna)
-- Antenna code base [on Trinket](https://trinket.io/library/trinkets/32ca075649d6)
+<details>
+  <summary>Animations and source code</summary>
+  <ul>
+    <ul><b>Antenna</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/antenna">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Antenna">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/electromagnetism/antenna.py">antenna.py</a> and VPython <a href="./src/electromagnetism/antenna.py">antenna.py</a> versions in this repository</li>
+    </ul>
+    <ul><b>Electromagnetic wave</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/electromagnetic_wave">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Electromagneticwave">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/electromagnetism/electromagnetic_wave.py">electromagnetic_wave.py</a> and VPython <a href="./src/electromagnetism/electromagnetic_wave.py">electromagnetic_wave.py</a> versions in this repository</li>
+    </ul>
+  </ul>
+</details>
+
+## Rutherford scattering & symmetry planes of a cubic lattice
+
+<figure>
+  <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Rutherfordscattering">
+    <img alt="Rutherford scattering" width="45%" height="45%" src="./images/rutherford_scattering.png" title="Click to animate"/>
+  </a>&nbsp;&nbsp;
+  <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes ">
+    <img alt="Symmetry planes" width="35%" height="35%" src="./images/crystal_planes.png" title="Click to animate"/>
+  </a>
+</figure>
 
 
-- Electromagnetic waves in action [on Trinket](https://zegerh-6085.trinket.io/sites/electromagnetic_wave)
-  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Electromagneticwave)
-- Electromagnetic waves code [on Trinket](https://trinket.io/library/trinkets/b8d62b38e852)
-
-## Symmetry planes within a cubic lattice
-
-This simple visualization allows the viewer to alternate between some planes of symmetry within a cubic crystal.
-
-<a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes ">
-  <img alt="Symmetry planes" width="40%" height="40%" src="./images/crystal_planes.png" title="Click to animate"/>
-</a>
-
-- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/relativistic_proton) 
-  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes)
-- Code base [on Trinket](https://trinket.io/library/trinkets/78efbf3b2a97)
+<details>
+  <summary>Animations and source code</summary>
+  <ul>
+    <ul><b>Rutherford scattering</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/rutherford_scattering">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Rutherfordscattering">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/electromagnetism/rutherford_scattering.py">rutherford_scattering.py</a> and VPython <a href="./src/electromagnetism/rutherford_scattering.py">rutherford_scattering.py</a> versions in this repository</li>
+    </ul>
+    <ul><b>Cubic lattice</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/crystal_symmetry_plaes">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/electromagnetism/crystal_symmetry_plaes.py">crystal_symmetry_plaes.py</a> and VPython <a href="./src/electromagnetism/crystal_symmetry_plaes.py">crystal_symmetry_plaes.py</a> versions in this repository</li>
+    </ul>
+  </ul>
+</details>
 
 # Special relativity &mdash; space-time visualizations and more
 

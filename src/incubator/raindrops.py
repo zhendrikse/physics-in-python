@@ -1,7 +1,7 @@
 # written by Lenore Horner, 2009
 
 from vpython import *
-from random import random
+from random import uniform
 
 Ndrops = 100
 toggle = 0  # 0 makes all drops the same mass; 1 makes all drops the same density

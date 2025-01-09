@@ -191,7 +191,7 @@ def toggle_axis(event):
 
 def adjust_k():
     complex_function.set_k_to(k_slider.value)
-    k_slider_text.text = str(round(k_slider.value / pi)) + " * π"
+    k_slider_text.text = str(round(k_slider.value / pi, 2)) + " * π"
 
 
 def adjust_amplitude():

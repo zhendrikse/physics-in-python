@@ -1,6 +1,8 @@
 ## Based on gas.py by Bruce Sherwood for a cube as a container
 ## Sligthly modified by Andrey Antonov for a torus.
 
+# https://vpython.org/contents/contributed/GasInToroid.py
+
 from vpython import *
 from random import random, uniform
 
