@@ -1,7 +1,7 @@
 from vpython import vec, color, rate, canvas, slider, wtext, label
 
 from src.toolbox.capacitor import Capacitor
-from src.toolbox.charge import Charge, Q
+from src.toolbox.particle import Particle, Q
 
 
 title = """Moving charge through electric field between two plates 
@@ -39,12 +39,12 @@ animation.append_to_caption(" Q = ")
 charge_slider_text = wtext(text="1 electron charge")
 animation.append_to_caption("\n\n")
 
-moving_charge = Charge(position=vec(-4E-13, 5E-14, 0),
-                       velocity=vec(1.5E-13, 0, 0),
-                       radius=1.2E-14,
-                       charge=5E-42 * Q,
-                       colour=color.green,
-                       make_trail=True)
+moving_charge = Particle(position=vec(-4E-13, 5E-14, 0),
+                         velocity=vec(1.5E-13, 0, 0),
+                         radius=1.2E-14,
+                         charge=5E-42 * Q,
+                         colour=color.green,
+                         make_trail=True)
 
 capacitor = Capacitor(pos=vec(0, 1E-13, 0),
                       plate_size=vec(4E-13, 4E-16, 4E-13))

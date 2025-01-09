@@ -11,57 +11,7 @@ All animations can be viewed on [my glowscript.org](https://glowscript.org/#/use
 - [**`src`**](src) &rarr; contains the sources
 - [**`test`**](test) &rarr; the tests of the components in the generic toolbox
 
-
-# Thermodynamics
-
-The code pertaining to the demos in this section is available under the 
-[thermodynamics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/)
-on [glowscript.org](https://glowscript.org).
-
-## Visualizing a hard sphere gas model
-
-This model represents a Boltzmann gas (consisting of hard spheres) in a box. The velocity distribution of the colliding atoms eventually approaches the calculated 
-theoretical velocity distribution:
-
-$f(\vec{v}) d^3\vec{v} = \bigg [ \dfrac{m}{2\pi k_b T} \bigg ]^{3/2} \exp \bigg (-\dfrac{mv^2}{2 k_b T} \bigg) d^3\vec{v}$
-
-<figure>
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas">
-    <img alt="Hard sphere gas" width="40%" height="40%" src="./images/hard_sphere_gas.png" title="Click to animate"/>
-  </a>
-</figure>
-
-<details>
-  <summary>Animations and source code</summary>
-  <ul>
-    <ul><b>Ideal gas</b>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/hard_sphere_gas">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/thermodynamics/hard_sphere_gas.py">hard_sphere_gas.py</a> and VPython <a href="./src/thermodynamics/hard_sphere_gas.py">hard_sphere_gas.py</a> versions in this repository</li>
-    </ul>
-  </ul>
-</details>
-
-## Two-dimensional Ising spin model: 
-
-This demo models the magnetization at various temperatures using a two-dimensional Ising spin lattice.
-
-<figure>
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Isingspin">
-    <img alt="Ising spin model" width="40%" height="40%" src="./images/ising_spin_model.png" title="Click to animate"/>
-  </a>
-</figure>
-
-<details>
-  <summary>Animations and source code</summary>
-  <ul>
-    <ul><b>Ising spin model</b>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/ising_spin_model">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Isingspin">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/thermodynamics/ising_spin.py">ising_spin.py</a> and VPython <a href="./src/thermodynamics/ising_spin.py">ising_spin.py</a> versions in this repository</li>
-    </ul>
-  </ul>
-</details>
-
-# Quantum &amp; wave mechanics
+# Particle and quantum physics
 
 The code pertaining to the demos in this section is available under the 
 [quantum tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Quantum/)
@@ -155,16 +105,6 @@ These energy eigenstates (and superpositions thereof) are used in the visualizat
   </ul>
 </details>
 
-## Doppler effect
-
-<a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Dopplereffect">
-  <img alt="Doppler effect" width="50%" height="50%" src="./images/doppler_effect.png" title="Click to animate"/>
-</a>
-
-- Doppler effect in action [on Trinket](https://zegerh-6085.trinket.io/sites/doppler_effect) 
-  and in action [on glowscript.org](https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Dopplereffect)
-- The code base [on Trinket](https://trinket.io/library/trinkets/9d869c1167ec)
-
 ## The quantum harmonic oscillator
 
 The quantum harmonic oscillator is visualized in a semi-classical way below.
@@ -177,41 +117,59 @@ The quantum harmonic oscillator is visualized in a semi-classical way below.
   and in action [on glowscript.org](https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Quantumoscillator)
 - Quantum oscillator code base [on Trinket](https://trinket.io/library/trinkets/555f7535fe74)
 
+## Charged particle moving in two electric fields
 
-# Astrophysics
+The following demos show the movement of an electron in two different electric fields. 
 
-The code pertaining to the demos in this section is available under the 
-[astrophysics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/)
-on [glowscript.org](https://glowscript.org).
+<figure>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedring">
+    <img alt="Electron spinning around charged ring" width="45%" height="45%" src="./images/electron_and_charged_ring.png" title="Click to animate"/>
+  </a>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Movingcharge">
+    <img alt="Particle in electric field" width="45%" height="45%" src="./images/particle_in_electric_field.png" title="Click to animate"/>
+  </a>
+</figure>
+
+<details>
+  <summary>Animations and source code</summary>
+  <ul>
+    <ul><b>Electron spinning around a charged ring</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/electron_and_charged_ring">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedring">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/electromagnetism/charged_ring.py">charged_ring.py</a> and VPython <a href="./src/electromagnetism/charged_ring.py">charged_ring.py</a> versions in this repository</li>
+    </ul>
+    <ul><b>Moving charge between two charged capacitor plates</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/moving_charge">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Movingcharge">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/electromagnetism/moving_charge.py">moving_charge.py</a> and VPython <a href="./src/electromagnetism/moving_charge.py">moving_charge.py</a> versions in this repository</li>
+    </ul>
+  </ul>
+</details>
 
 
-##  Kepler's law of equal areas
+## Rutherford scattering & symmetry planes of a cubic lattice
 
-A dynamic visualization of Kepler's laws.
+<figure>
+  <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Rutherfordscattering">
+    <img alt="Rutherford scattering" width="45%" height="45%" src="./images/rutherford_scattering.png" title="Click to animate"/>
+  </a>&nbsp;&nbsp;
+  <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes ">
+    <img alt="Symmetry planes" width="35%" height="35%" src="./images/crystal_planes.png" title="Click to animate"/>
+  </a>
+</figure>
 
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw">
-  <img alt="Kepler's laws" width="50%" height="50%" src="./images/keplers_law.png" title="Click to animate"/>
-</a>
 
-- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/keplers_law) 
-  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw)
-- Code base [on Trinket](https://trinket.io/library/trinkets/11c6cd8b5622)
-
-
-## Daylight variations &mdash; sun-earth-moon model
-
-A not accurate to scale sun-earth-moon model, but very detailed and instructive nonetheless! It shows the per day
-incoming energy from the sun (at a given latitude), as well as the variations in the length of
-the days per season. By clicking on the sun or earth, the camera perspective can be changed as well!
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Daylightvariations">
-  <img alt="Daylight variations" width="50%" height="50%" src="./images/daylight_variations.png" title="Click to animate"/>
-</a>
-
-- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/daylight_variations) 
-  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Daylightvariations)
-- Code base [on Trinket](https://trinket.io/library/trinkets/d218d43e551a)
+<details>
+  <summary>Animations and source code</summary>
+  <ul>
+    <ul><b>Rutherford scattering</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/rutherford_scattering">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Rutherfordscattering">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/electromagnetism/rutherford_scattering.py">rutherford_scattering.py</a> and VPython <a href="./src/electromagnetism/rutherford_scattering.py">rutherford_scattering.py</a> versions in this repository</li>
+    </ul>
+    <ul><b>Cubic lattice</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/crystal_symmetry_plaes">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/electromagnetism/crystal_symmetry_plaes.py">crystal_symmetry_plaes.py</a> and VPython <a href="./src/electromagnetism/crystal_symmetry_plaes.py">crystal_symmetry_plaes.py</a> versions in this repository</li>
+    </ul>
+  </ul>
+</details>
 
 # Electromagnetism
 
@@ -287,32 +245,6 @@ an electric field inside a series of charged rings.
   </a>  
 </figure>
 
-## Electron moving in two electric fields
-
-The following demos show the movement of an electron in two different electric fields. 
-
-<details>
-  <summary>Animations and source code</summary>
-  <ul>
-    <ul><b>Electron spinning around a charged ring</b>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/electron_and_charged_ring">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedring">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/electromagnetism/charged_ring.py">charged_ring.py</a> and VPython <a href="./src/electromagnetism/charged_ring.py">charged_ring.py</a> versions in this repository</li>
-    </ul>
-    <ul><b>Moving charge between two charged capacitor plates</b>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/moving_charge">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Movingcharge">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/electromagnetism/moving_charge.py">moving_charge.py</a> and VPython <a href="./src/electromagnetism/moving_charge.py">moving_charge.py</a> versions in this repository</li>
-    </ul>
-  </ul>
-</details>
-
-<figure>
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedring">
-    <img alt="Electron spinning around charged ring" width="45%" height="45%" src="./images/electron_and_charged_ring.png" title="Click to animate"/>
-  </a>
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Movingcharge">
-    <img alt="Particle in electric field" width="45%" height="45%" src="./images/particle_in_electric_field.png" title="Click to animate"/>
-  </a>
-</figure>
 
 ## Charged disk and accompanying builder
 
@@ -368,31 +300,102 @@ Both of the two dynamic simulations below visualize the propagation of electroma
   </ul>
 </details>
 
-## Rutherford scattering & symmetry planes of a cubic lattice
+# Thermodynamics
+
+The code pertaining to the demos in this section is available under the 
+[thermodynamics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/)
+on [glowscript.org](https://glowscript.org).
+
+## Visualizing a hard sphere gas model
+
+This model represents a Boltzmann gas (consisting of hard spheres) in a box. The velocity distribution of the colliding atoms eventually approaches the calculated 
+theoretical velocity distribution:
+
+$f(\vec{v}) d^3\vec{v} = \bigg [ \dfrac{m}{2\pi k_b T} \bigg ]^{3/2} \exp \bigg (-\dfrac{mv^2}{2 k_b T} \bigg) d^3\vec{v}$
 
 <figure>
-  <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Rutherfordscattering">
-    <img alt="Rutherford scattering" width="45%" height="45%" src="./images/rutherford_scattering.png" title="Click to animate"/>
-  </a>&nbsp;&nbsp;
-  <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes ">
-    <img alt="Symmetry planes" width="35%" height="35%" src="./images/crystal_planes.png" title="Click to animate"/>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas">
+    <img alt="Hard sphere gas" width="40%" height="40%" src="./images/hard_sphere_gas.png" title="Click to animate"/>
   </a>
 </figure>
-
 
 <details>
   <summary>Animations and source code</summary>
   <ul>
-    <ul><b>Rutherford scattering</b>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/rutherford_scattering">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Rutherfordscattering">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/electromagnetism/rutherford_scattering.py">rutherford_scattering.py</a> and VPython <a href="./src/electromagnetism/rutherford_scattering.py">rutherford_scattering.py</a> versions in this repository</li>
-    </ul>
-    <ul><b>Cubic lattice</b>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/crystal_symmetry_plaes">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/electromagnetism/crystal_symmetry_plaes.py">crystal_symmetry_plaes.py</a> and VPython <a href="./src/electromagnetism/crystal_symmetry_plaes.py">crystal_symmetry_plaes.py</a> versions in this repository</li>
+    <ul><b>Ideal gas</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/hard_sphere_gas">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/thermodynamics/hard_sphere_gas.py">hard_sphere_gas.py</a> and VPython <a href="./src/thermodynamics/hard_sphere_gas.py">hard_sphere_gas.py</a> versions in this repository</li>
     </ul>
   </ul>
 </details>
+
+## Two-dimensional Ising spin model: 
+
+This demo models the magnetization at various temperatures using a two-dimensional Ising spin lattice.
+
+<figure>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Isingspin">
+    <img alt="Ising spin model" width="40%" height="40%" src="./images/ising_spin_model.png" title="Click to animate"/>
+  </a>
+</figure>
+
+<details>
+  <summary>Animations and source code</summary>
+  <ul>
+    <ul><b>Ising spin model</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/ising_spin_model">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Isingspin">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/thermodynamics/ising_spin.py">ising_spin.py</a> and VPython <a href="./src/thermodynamics/ising_spin.py">ising_spin.py</a> versions in this repository</li>
+    </ul>
+  </ul>
+</details>
+
+# Waves
+
+## Doppler effect
+
+<a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Dopplereffect">
+  <img alt="Doppler effect" width="50%" height="50%" src="./images/doppler_effect.png" title="Click to animate"/>
+</a>
+
+- Doppler effect in action [on Trinket](https://zegerh-6085.trinket.io/sites/doppler_effect) 
+  and in action [on glowscript.org](https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Dopplereffect)
+- The code base [on Trinket](https://trinket.io/library/trinkets/9d869c1167ec)
+
+# Astrophysics
+
+The code pertaining to the demos in this section is available under the 
+[astrophysics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/)
+on [glowscript.org](https://glowscript.org).
+
+
+##  Kepler's law of equal areas
+
+A dynamic visualization of Kepler's laws.
+
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw">
+  <img alt="Kepler's laws" width="50%" height="50%" src="./images/keplers_law.png" title="Click to animate"/>
+</a>
+
+- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/keplers_law) 
+  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw)
+- Code base [on Trinket](https://trinket.io/library/trinkets/11c6cd8b5622)
+
+
+## Daylight variations &mdash; sun-earth-moon model
+
+A not accurate to scale sun-earth-moon model, but very detailed and instructive nonetheless! It shows the per day
+incoming energy from the sun (at a given latitude), as well as the variations in the length of
+the days per season. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Daylightvariations">
+  <img alt="Daylight variations" width="50%" height="50%" src="./images/daylight_variations.png" title="Click to animate"/>
+</a>
+
+- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/daylight_variations) 
+  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Daylightvariations)
+- Code base [on Trinket](https://trinket.io/library/trinkets/d218d43e551a)
+
 
 # Special relativity &mdash; space-time visualizations and more
 

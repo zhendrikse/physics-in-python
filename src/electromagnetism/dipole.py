@@ -4,7 +4,7 @@
 
 from vpython import canvas, vec, rate
 
-from src.toolbox.charge import Charge, Q
+from src.toolbox.particle import Particle, Q
 from src.toolbox.field import Field
 from src.toolbox.mouse import zoom_in_on
 
@@ -21,8 +21,8 @@ animation = canvas(width=1000, height=600, align='top', range=3E-13, title = tit
 class Dipole:
     def __init__(self, radius=1.2E-14):
         position = vec(10 * radius, 0, 0)
-        self._charges = [Charge(position=position, radius=radius, charge=Q),
-                         Charge(position=-position, radius=radius, charge=-Q)]
+        self._charges = [Particle(position=position, radius=radius, charge=Q),
+                         Particle(position=-position, radius=radius, charge=-Q)]
 
     def show_field(self):
         Field(self._charges).show(x_range=range(-22, 22, 5), y_range=range(-22, 22, 5), z_range=range(-12, 12, 5))

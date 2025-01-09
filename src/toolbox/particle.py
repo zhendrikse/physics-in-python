@@ -7,7 +7,7 @@ classic_electron_radius = 2.8179E-15
 electron_mass = 9.1093837E-31  # kilograms
 
 
-class Charge:
+class Particle:
     def __init__(self, mass=1.6E-27, position=vec(0, 0, 0), velocity=vec(0, 0, 0), radius=1E-14, charge=Q,
                  colour=None, make_trail=False, retain=-1, draw=True):
         colour = colour if colour is not None else color.blue if charge > 0 else color.red
@@ -26,11 +26,35 @@ class Charge:
         if self._ball:
             self._ball.pos = self._position
 
+    def colour_is(self, colour):
+        self._ball.color = colour
+
+    def force_between(self, other_particle):
+        field = self.field_at(other_particle.position)
+        return self.coulomb_force_in(field)
+
+    def distance_to(self, other_particle):
+        return other_particle.position - self.position
+
     def show_field(self):
         self._field.show()
 
     def field_at(self, position):
         return hat(position - self._position) * k * self._charge / mag(position - self._position) ** 2
+
+    def delete(self):
+        self._ball.clear_trail()
+        self._ball.visible = False
+        del self._ball
+        self._field.delete()
+
+    def coulomb_force_in(self, electric_field):
+        return electric_field * self._charge
+
+    def update(self, coulomb_force, dt):
+        self._velocity += coulomb_force / self._mass * dt
+        self._position += self._velocity * dt
+        self._draw()
 
     def reset(self):
         self._position = self._initial_position
@@ -60,28 +84,22 @@ class Charge:
     def charge(self):
         return self._charge
 
-    def delete(self):
-        self._ball.clear_trail()
-        self._ball.visible = False
-        del self._ball
-        self._field.delete()
+    @property
+    def momentum(self):
+        return self._mass * self._velocity
 
-    def coulomb_force_in(self, electric_field):
-        return electric_field * self._charge
-
-    def update(self, coulomb_force, dt):
-        self._velocity += coulomb_force / self._mass * dt
-        self._position += self._velocity * dt
-        self._draw()
+    @property
+    def colour(self):
+        return self._ball.color
 
 
-class Electron(Charge):
+class Electron(Particle):
     def __init__(self, position=vec(0, 0, 0), velocity=vec(0, 0, 0), radius=classic_electron_radius, make_trail=False, retain=-1):
         super().__init__(mass=electron_mass, position=position, velocity=velocity, radius=radius,
                          charge=-Q, make_trail=make_trail, retain=retain)
 
 
-class Positron(Charge):
+class Positron(Particle):
     def __init__(self, position=vec(0, 0, 0), velocity=vec(0, 0, 0), radius=classic_electron_radius, make_trail=False, retain=-1):
         super().__init__(mass=electron_mass, position=position, velocity=velocity, radius=radius,
                          charge=-Q, make_trail=make_trail, retain=retain)

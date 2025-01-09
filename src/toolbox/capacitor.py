@@ -1,6 +1,6 @@
 from vpython import vector
 
-from .charge import Charge, Q
+from .particle import Particle, Q
 from .field import Field
 
 
@@ -16,11 +16,11 @@ class Capacitor:
     def charge(self):
         x_range = range(-20, 22, 2)
         z_range = range(-20, 22, 2)
-        charges = [Charge(
+        charges = [Particle(
             position=vector(x * self._scale, self._up_plate.y, z * self._scale),
             radius=self._scale,
             charge=Q) for x in x_range for z in z_range]
-        charges += [Charge(
+        charges += [Particle(
             position=vector(x * self._scale, self._down_plate.y, z * self._scale),
             radius=1E-14,
             charge=-Q) for x in x_range for z in z_range]

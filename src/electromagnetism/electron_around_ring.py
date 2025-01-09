@@ -1,6 +1,6 @@
 from vpython import vec, rate, vector, scene, arange
 
-from src.toolbox.charge import Electron
+from src.toolbox.particle import Electron
 from src.toolbox.charged_ring import ChargedRing
 
 #

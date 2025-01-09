@@ -1,6 +1,6 @@
 from vpython import canvas, vec, color, arange, rate
 
-from src.toolbox.charge import Positron
+from src.toolbox.particle import Positron
 from src.toolbox.mouse import zoom_in_on
 
 title = """Electric field of a point charge 
