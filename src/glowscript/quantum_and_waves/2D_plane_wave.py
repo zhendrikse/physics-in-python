@@ -1,18 +1,18 @@
-#Web VPython 3.2
+Web VPython 3.2
 
-from  vpython import get_library, arange, pi, cylinder, vec, vector, color, pi
 #
 # https://groups.google.com/g/glowscript-users/c/nAe7zx6lBE8?pli=1
 #
 # You need to import the "browser" version of the Javascript library
 #
 
-get_library("https://cdnjs.cloudflare.com/ajax/libs/mathjs/14.0.1/math.js")
-d = math.distance([0, 0], [3, 4])
-print(d)
+# get_library("https://cdnjs.cloudflare.com/ajax/libs/mathjs/14.0.1/math.js")
+# d = math.distance([0,0], [3,4])
+# print(d)
 
 # https://github.com/nicolaspanel/numjs
 get_library('https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js')
+
 
 def numpy_linspace(start, stop, num):
     return numpy_array([x for x in arange(start, stop, (stop - start) / (num - 1))] + [stop])
@@ -36,7 +36,13 @@ def numpy_meshgrid(linspace_1, linspace_2):
     return xx, yy
 
 
-# x, y = numpy_meshgrid(numpy_linspace(0, 3, 3), numpy_linspace(0, 3, 3))
+def numpy_multiply(a, b):
+    return a.multiply(b)
+
+
+def numpy_divide(a, by_b):
+    return a.divide(by_b)
+
 
 scene.background = color.gray(0.7)
 hbar = 1.0  # use units where hbar = 1
@@ -90,7 +96,11 @@ for i in range(NA):
 eigenstates = {}  # dictionary for precomputed eigenstates
 for nx in NX:
     for ny in NY:
-        psi_nx_ny = x.divide(a).multiply(nx * pi))
+        nx1 = nj.sin(x.divide(a).multiply(nx * pi))
+        nx2 = nj.sin(y.divide(a).multiply(ny * pi))
+        psi_nx_ny = nx1.multiply(nx2)
+        # psi_nx_ny = nj.sin(x.divide(a).multiply(nx * pi))
+
         # psi_nx_my = np.sin(nx * np.pi * x / a) * np.sin(ny * np.pi * y / a)  # compute the n,m energy eigenstate
         # psi_nx_my /= np.sqrt((abs(psi_nx_my) ** 2).sum())  # normalize it.
         # eigenstates[(nx, ny)] = psi_nx_my
