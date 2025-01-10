@@ -3,22 +3,38 @@
 from vpython import canvas, scene, arrow, color, vec, pi, floor, arange, cos, sin, rate, cylinder, box, label, checkbox, \
     wtext, slider, text
 
-title = """Visualization of plane waves $\psi(x, t) = A \cdot e^{i(k x - \omega t)}$
+title = """Visualization of plane waves \\( \psi(x, t) = A \cdot e^{i(k x - \omega t)} \\)
 
 &#x2022; From <a href="https://www.amazon.com/Visualizing-Quantum-Mechanics-Python-Spicklemire/dp/1032569247">Visualizing Quantum Mechanics with Python</a>
 &#x2022; Modified by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a>, located in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
-&#x2022; The motion and x-axis represent the parameters $t$ and $x$ respectively
-&#x2022; The colors represent the wave number $k$
+&#x2022; The motion and x-axis represent the parameters \\(t \\text{ and } x\\) respectively
+&#x2022; The colors represent the wave number \\( k \\)
 
 """
 
-info_1 = "De Broglie: $ p = \dfrac{h}{\lambda} = \dfrac{h}{2\pi} \dfrac{2\pi}{\lambda} = \hbar k \Rightarrow \hbar k = \hbar \dfrac{\partial}{\partial x} \psi(x,t) = p \psi(x, t) \Rightarrow p = \hbar \dfrac{\partial}{\partial x} $"
-info_2 = "Kinetic energy: $ K = \dfrac{p^2}{2m} = -\dfrac{\hbar^2}{2m}\dfrac{\partial^2}{\partial x^2} \psi(x,t) $"
-info_3 = "Energy: $ E = hf = \dfrac{h}{2\pi}\dfrac{2\pi}{T} = \hbar \omega \Rightarrow -i\hbar\dfrac{\partial}{\partial t} \psi(x,t) = E \psi(x,t) \Rightarrow E = -i\hbar\dfrac{\partial}{\partial t} $"
-info_4 = "Schr&#246;dinger equation: $ E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x, t) = -\dfrac{\hbar^2}{2m}\dfrac{\partial^2}{\partial x^2} \Psi(x,t) + V(x)\Psi(x,t) $"
+info = """
+    <b>Concise derivation of the Schr&#246;dinger equation</b>
 
-animation = canvas(forward=vec(0.37, -0.55, -0.75), width=600, height=450, align='top', background=color.black,
+    According to <a href="https://en.wikipedia.org/wiki/Matter_wave">De Broglie</a> we have:
+
+    $p = \dfrac{h}{\lambda} = \dfrac{h}{2\pi} \dfrac{2\pi}{\lambda} = \hbar k \Rightarrow \hbar k = \hbar \dfrac{\partial}{\partial x} \psi(x,t) = p \psi(x, t) \Rightarrow p = \hbar \dfrac{\partial}{\partial x}$
+
+    The Kinetic energy can be expressed as:
+
+    $K = \dfrac{p^2}{2m} = -\dfrac{\hbar^2}{2m}\dfrac{\partial^2}{\partial x^2} \psi(x,t)$
+
+    The total energy is given by the <a href="https://en.wikipedia.org/wiki/Planck_relation">Planck-Einstein relation</a>:
+
+    $E = hf = \dfrac{h}{2\pi}\dfrac{2\pi}{T} = \hbar \omega \Rightarrow -i\hbar\dfrac{\partial}{\partial t} \psi(x,t) = E \psi(x,t) \Rightarrow E = -i\hbar\dfrac{\partial}{\partial t}$
+
+    From this we arrive at the <a href="https://en.wikipedia.org/wiki/Schr%C3%B6dinger_equation">Schr&#246;dinger equation</a>:
+
+    $(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x, t) = -\dfrac{\hbar^2}{2m}\dfrac{\partial^2}{\partial x^2} \Psi(x,t) + V(x)\Psi(x,t)$
+"""
+
+animation = canvas(align="left", forward=vec(0.37, -0.55, -0.75), width=600, height=450, background=color.black,
                    title=title, range=11.5)
+
 MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 x_hat = vec(1, 0, 0)
@@ -189,6 +205,17 @@ def toggle_axis(event):
     axis.axis_visible(event.checked)
 
 
+def toggle_info(event):
+    if event.checked:
+        # animation.width = 1200
+        animation.caption = info
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub])  # , animation.title])  # LaTeX formatting
+    else:
+        # animation.width = 600
+        animation.caption = ""
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub])  # , animation.title])  # LaTeX formatting
+
+
 def adjust_k():
     complex_function.set_k_to(k_slider.value)
     k_slider_text.text = str(round(k_slider.value / pi, 2)) + " * π"
@@ -204,28 +231,28 @@ def adjust_omega():
     omega_slider_text.text = str(round(omega_slider.value / pi, 2)) + " * π"
 
 
-omega_slider = slider(min=0, max=6 * pi, value=2 * pi, bind=adjust_omega)
-animation.append_to_caption(" Omega = ")
-omega_slider_text = wtext(text="2 * π")
-animation.append_to_caption("\n\n")
+omega_slider = slider(pos=animation.title_anchor, min=0, max=6 * pi, value=2 * pi, bind=adjust_omega)
+animation.append_to_title(" Omega = ")
+omega_slider_text = wtext(pos=animation.title_anchor, text="2 * π")
+animation.append_to_title("\n\n")
 
-k_slider = slider(min=-2 * pi / 3, max=2 * pi / 3, value=2 * pi / 5, bind=adjust_k)
-animation.append_to_caption(" Wave number k = ")
-k_slider_text = wtext(text="2 * π  / 5")
-animation.append_to_caption("\n\n")
+k_slider = slider(pos=animation.title_anchor, min=-2 * pi / 3, max=2 * pi / 3, value=2 * pi / 5, bind=adjust_k)
+animation.append_to_title(" Wave number k = ")
+k_slider_text = wtext(pos=animation.title_anchor, text="2 * π  / 5")
+animation.append_to_title("\n\n")
 
-amplitude_slider = slider(min=1, max=6, value=3, bind=adjust_amplitude)
-animation.append_to_caption(" Amplitude = ")
-amplitude_slider_text = wtext(text="3 units")
-animation.append_to_caption("\n\n")
+amplitude_slider = slider(pos=animation.title_anchor, min=1, max=6, value=3, bind=adjust_amplitude)
+animation.append_to_title(" Amplitude = ")
+amplitude_slider_text = wtext(pos=animation.title_anchor, text="3 units")
+animation.append_to_title("\n\n")
 
-_ = checkbox(text='Tick marks', bind=toggle_tick_marks, checked=True)
-_ = checkbox(text='Tick labels', bind=toggle_tick_labels, checked=False)
-_ = checkbox(text='XZ mesh', bind=toggle_xz_mesh, checked=True)
-_ = checkbox(text='XY mesh', bind=toggle_xy_mesh, checked=False)
-_ = checkbox(text='Axis', bind=toggle_axis, checked=True)
-
-animation.append_to_caption("\n\n" + info_1 + "\n\n" + info_2 + "\n\n" + info_3 + "\n\n" + info_4)
+_ = checkbox(pos=animation.title_anchor, text='Tick marks', bind=toggle_tick_marks, checked=True)
+_ = checkbox(pos=animation.title_anchor, text='Tick labels', bind=toggle_tick_labels, checked=False)
+_ = checkbox(pos=animation.title_anchor, text='XZ mesh', bind=toggle_xz_mesh, checked=True)
+_ = checkbox(pos=animation.title_anchor, text='XY mesh', bind=toggle_xy_mesh, checked=False)
+_ = checkbox(pos=animation.title_anchor, text='Axis', bind=toggle_axis, checked=True)
+_ = checkbox(pos=animation.title_anchor, text="Show info", bind=toggle_info, checked=False)
+animation.append_to_title("\n\n")
 
 axis = Base(length=16)
 axis.hide_tick_labels()
