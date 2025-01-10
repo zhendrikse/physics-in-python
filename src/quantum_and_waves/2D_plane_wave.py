@@ -1,7 +1,7 @@
 # Web VPython 3.2 WASM
 
 import numpy as np
-from vpython import *
+import vpython as vp
 
 
 def SetCylinderFromCN(cn, a):
@@ -14,11 +14,11 @@ def SetCylinderFromCN(cn, a):
     """
     a.axis.z = cn.real
     a.radius = max(0.05 * abs(cn), abs(cn.imag) / 6.0)
-    phase = np.arctan2(cn.imag, cn.real) / (2 * np.pi)
+    phase = vp.atan2(cn.imag, cn.real) / (2 * vp.pi)
     a.color = vp.color.hsv_to_rgb(vp.vec(phase, 1, 1))
 
 
-scene.background = vp.color.white
+vp.scene.background = vp.color.gray(0.7)
 hbar = 1.0  # use units where hbar = 1
 m = 1.0  # and m=1.0
 NA = 20  # how many arrows per dimension NAxNA grid
@@ -29,17 +29,17 @@ a = 10.0  # size of box
 dt = 0.1  # time step
 t = 0.0  # start time at zero...
 cylinderScale = 20.0  # just make the arrows long enough to see..
-eigenstates = {}  # dictionary for precomputed eigenstates
 coefs = {}  # dictionary for precomputed fourier coef.
 omegas = {}  # dictionary for energies
-kn_max = np.pi * NX[-1] / a
-km_max = np.pi * NY[-1] / a
+kn_max = vp.pi * NX[-1] / a
+km_max = vp.pi * NY[-1] / a
 Emax = ((hbar * kn_max) ** 2 + (hbar * km_max) ** 2) / (2 * m)
 omegaMax = Emax / hbar
-dt = np.pi / (10 * omegaMax)  # come up with a sensible dt
+dt = vp.pi / (10 * omegaMax)  # come up with a sensible dt
 
 RSdict = {'runStop': False}
 
+# ORIGINAL
 x, y = np.meshgrid(np.linspace(0, a, NA), np.linspace(0, a, NA))
 
 #
@@ -53,7 +53,7 @@ vp.cylinder(pos=vp.vec(-a / 2, -a / 2, 0), axis=vp.vec(0, a, 0), color=vp.color.
 vp.cylinder(pos=vp.vec(a / 2, -a / 2, 0), axis=vp.vec(0, a, 0), color=vp.color.blue, radius=boundary_radius)
 vp.cylinder(pos=vp.vec(-a / 2, a / 2, 0), axis=vp.vec(a, 0, 0), color=vp.color.blue, radius=boundary_radius)
 
-r0 = vector(-a / 2, -a / 2, 0)  # place origin of arrows
+arrow_base_pos = vp.vector(-a / 2, -a / 2, 0)  # place origin of arrows
 
 #
 # build vp.cylinders.... in 2-D space, store them in a set of nested lists
@@ -64,18 +64,18 @@ for i in range(NA):
     sublist = []
     alist.append(sublist)
     for j in range(NA):
-        r = r0 + vector(x[i, j], y[i, j], 0)
-        sublist.append(vp.cylinder(pos=r, axis=(0, 0, 1), color=vp.color.red))
+        position = arrow_base_pos + vp.vector(x[i, j], y[i, j], 0)
+        sublist.append(vp.cylinder(pos=position, axis=vp.vec(0, 0, 1), color=vp.color.red))
 
 #
 # compute the eigenstates and store them in a dictionary 'eigenstates'
 #
-
+eigenstates = {}  # dictionary for precomputed eigenstates
 for nx in NX:
     for ny in NY:
-        psinxmy = np.sin(nx * np.pi * x / a) * np.sin(ny * np.pi * y / a)  # compute the n,m energy eigenstate
-        psinxmy = psinxmy / np.sqrt((abs(psinxmy) ** 2).sum())  # normalize it.
-        eigenstates[(nx, ny)] = psinxmy
+        psi_nx_my = np.sin(nx * np.pi * x / a) * np.sin(ny * np.pi * y / a)  # compute the n,m energy eigenstate
+        psi_nx_my /= np.sqrt((abs(psi_nx_my) ** 2).sum())  # normalize it.
+        eigenstates[(nx, ny)] = psi_nx_my
 
 psi0 = np.zeros((NA, NA), complex)
 psi0[:NA2, :NA2] = 1.0
@@ -117,10 +117,10 @@ def setRunLabel():
         runStopButton.text = "Resume"
 
 
-runStopButton = button(bind=toggleRun, align="left", text="Start")
+runStopButton = vp.button(bind=toggleRun, align="left", text="Start")
 
 while True:
-    rate(20.0 / dt)
+    vp.rate(20.0 / dt)
 
     if RSdict['runStop']:
         t += dt

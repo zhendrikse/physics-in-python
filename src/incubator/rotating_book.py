@@ -41,9 +41,9 @@ omega_s = vector(omega_b)
 # setval = 0
 
 paused = 0
-slidermax = 100
+slider_max = 100
 speed = 50
-speedmax = 100
+speed_max = 100
 
 # define the geometry of the rigid object (a physics book)
 
@@ -83,19 +83,19 @@ book_text = text(pos=vector(0, 0 + book_h / 9, book_w / 2),
 
 # define space frame unit vectors
 
-xhat = vector(1, 0, 0)
-yhat = vector(0, 1, 0)
-zhat = vector(0, 0, 1)
+x_hat = vector(1, 0, 0)
+y_hat = vector(0, 1, 0)
+z_hat = vector(0, 0, 1)
 
 # initialize body frame unit vectors to initially point along space frame unit vectors
 
-e1 = vector(xhat)
-e2 = vector(yhat)
-e3 = vector(zhat)
+e1 = vector(x_hat.x, x_hat.y, x_hat.z)
+e2 = vector(x_hat.x, x_hat.y, x_hat.z)
+e3 = vector(x_hat.x, x_hat.y, x_hat.z)
 
-label_e1 = label(text='1', opacity=0, box=0, line=0)
-label_e2 = label(text='2', opacity=0, box=0, line=0)
-label_e3 = label(text='3', opacity=0, box=0, line=0)
+label_e1 = label(text='1', opacity=False, box=False, line=False)
+label_e2 = label(text='2', opacity=False, box=False, line=False)
+label_e3 = label(text='3', opacity=False, box=False, line=False)
 
 mass = 4.0
 
@@ -115,17 +115,17 @@ arrow_e3 = arrow(pos=vector(vecoffset, 0, 0), axis=e3, color=vector(1, 1, 1), sh
 
 # angular momentum vector in the body and space frame
 
-angmom_b = vector(lambda1 * omega_b.x, lambda2 * omega_b.y, lambda3 * omega_b.z)
-angmom_s = angmom_b.x * e1 + angmom_b.y * e2 + angmom_b.z * e3
+angular_momentum_b = vector(lambda1 * omega_b.x, lambda2 * omega_b.y, lambda3 * omega_b.z)
+angular_momentum_s = angular_momentum_b.x * e1 + angular_momentum_b.y * e2 + angular_momentum_b.z * e3
 
 # arrows for angular momentum and angular velocity vectors
 
-arrow_L = arrow(pos=vector(vecoffset, 0, 0), axis=angmom_s, color=vector(0, 0, 1), shaftwidth=0.005)
-arrow_Omega = arrow(pos=vector(vecoffset, 0, 0), axis=omega_s, color=vector(0, 1, 0), shaftwidth=0.005)
+arrow_L = arrow(pos=vector(vecoffset, 0, 0), axis=angular_momentum_s, color=vector(0, 0, 1), shaftwidth=0.005)
+arrow_omega = arrow(pos=vector(vecoffset, 0, 0), axis=omega_s, color=vector(0, 1, 0), shaftwidth=0.005)
 
 label_L = text(pos=vector(vecoffset, -1.1 * vecoffset, 0), text="Angular Momentum (L)", align='center', height=0.20,
                depth=0.01, color=vector(0, 0, 1))
-label_Omega = text(pos=vector(vecoffset, -1.3 * vecoffset, 0), text="Angular velocity (Omega)", align='center',
+label_omega = text(pos=vector(vecoffset, -1.3 * vecoffset, 0), text="Angular velocity (Omega)", align='center',
                    height=0.20, depth=0.01, color=vector(0, 1, 0))
 
 ##---------------------------------------------------------------------
@@ -136,65 +136,65 @@ label_Omega = text(pos=vector(vecoffset, -1.3 * vecoffset, 0), text="Angular vel
 #    angular velocity vector.
 # The bottom slider controls how fast the animation goes.
 
-c = controls(x=0, y=500, width=200, height=250, range=80)
+#c = controls(x=0, y=500, width=200, height=250, range=80)
 
 
-def setpause(val):
+def set_pause(val):
     global paused
     paused = val
     print('set paused to %d' % (val))
 
 
-def set_omega1_0(obj):
+def set_omega1_0():
     global omega1_0
-    omega1_0 = obj.value * (omegamax / slidermax)
-    print('omega1_0 set to %.3f' % (omega1_0))
+    omega1_0 = slider_omega1_0.value * (omegamax / slider_max)
+    print('omega1_0 set to %.3f' % omega1_0)
     if paused == 1:
-        reset()
+       reset()
 
 
-def set_omega2_0(obj):
+def set_omega2_0():
     global omega2_0
-    omega2_0 = obj.value * (omegamax / slidermax)
-    print('omega2_0 set to %.3f' % (omega2_0))
+    omega2_0 = slider_omega2_0.value * (omegamax / slider_max)
+    print('omega2_0 set to %.3f' % omega2_0)
     if paused == 1:
         reset()
 
 
-def set_omega3_0(obj):
+def set_omega3_0():
     global omega3_0
-    omega3_0 = obj.value * (omegamax / slidermax)
-    print('omega3_0 set to %.3f' % (omega3_0))
+    omega3_0 = slider_omega3_0.value * (omegamax / slider_max)
+    print('omega3_0 set to %.3f' % omega3_0)
     if paused == 1:
         reset()
 
 
-def set_speed(obj):
+def set_speed():
     global speed
-    speed = obj.value * (speedmax / slidermax)
-    print('set speed to %.1f' % (speed))
+    speed = slider_speed.value * (speed_max / slider_max)
+    print('set speed to %.1f' % speed)
 
 
 def reset():
     global omega_s, omega_b
-    global arrow_Omega, arrow_L, arrow_e1, arrow_e2, arrow_e3
-    global frame_book
+    global arrow_omega, arrow_L, arrow_e1, arrow_e2, arrow_e3
+    # global frame_book
     global e1, e2, e3
     global label_e1, label_e2, label_e3
     omega_s = vector(omega1_0, omega2_0, omega3_0)
     omega_b = omega_s
-    arrow_e1.axis = xhat;
-    arrow_e2.axis = yhat;
-    arrow_e3.axis = zhat;
-    e1 = xhat;
-    e2 = yhat;
-    e3 = zhat;
-    angmom_b = vector(lambda1 * omega_b[1 - 1], lambda2 * omega_b[2 - 1], lambda3 * omega_b[3 - 1])
-    angmom_s = angmom_b[1 - 1] * e1 + angmom_b[2 - 1] * e2 + angmom_b[3 - 1] * e3
+    arrow_e1.axis = x_hat;
+    arrow_e2.axis = y_hat;
+    arrow_e3.axis = z_hat;
+    e1 = x_hat;
+    e2 = y_hat;
+    e3 = z_hat;
+    angmom_b = vector(lambda1 * omega_b.x, lambda2 * omega_b.y, lambda3 * omega_b.z)
+    angmom_s = angmom_b.x * e1 + angmom_b.y * e2 + angmom_b.z * e3
     arrow_L.axis = angmom_s
-    arrow_Omega.axis = omega_s
-    frame_book.axis = vector(1, 0, 0)
-    frame_book.up = vector(0, 1, 0)
+    arrow_omega.axis = omega_s
+    # frame_book.axis = vector(1, 0, 0)
+    # frame_book.up = vector(0, 1, 0)
     label_e1.pos = e1 + vector(vecoffset, 0, 0)
     label_e2.pos = e2 + vector(vecoffset, 0, 0)
     label_e3.pos = e3 + vector(vecoffset, 0, 0)
@@ -202,24 +202,17 @@ def reset():
     print(omega_s)
 
 
-button_pause = button(pos=(-30, 30), height=20, width=40, text='Pause', bind=lambda: setpause(1))
-button_resume = button(pos=(-30, 0), height=20, width=40, text='Resume', bind=lambda: setpause(0))
-button_reset = button(pos=(30, 30), height=20, width=40, text='Reset', bind=lambda: reset())
+scene.append_to_caption("\n")
+button_pause = button(height=20, width=40, text='Pause', bind=lambda: set_pause(1))
+button_resume = button(height=20, width=40, text='Resume', bind=lambda: set_pause(0))
+button_reset = button(height=20, width=40, text='Reset', bind=reset)
 
-slider_omega1_0 = slider(pos=(-30, -20), width=5, length=50, axis=(1, 0, 0),
-                         bind=lambda: set_omega1_0(slider_omega1_0))
-slider_omega2_0 = slider(pos=(-30, -30), width=5, length=50, axis=(1, 0, 0),
-                         bind=lambda: set_omega2_0(slider_omega2_0))
-slider_omega3_0 = slider(pos=(-30, -40), width=5, length=50, axis=(1, 0, 0),
-                         bind=lambda: set_omega3_0(slider_omega3_0))
-
-slider_speed = slider(pos=(-30, -60), width=5, length=50, axis=(1, 0, 0), bind=lambda: set_speed(slider_speed))
-
-slider_omega1_0.value = omega1_0 * slidermax / omegamax
-slider_omega2_0.value = omega2_0 * slidermax / omegamax
-slider_omega3_0.value = omega3_0 * slidermax / omegamax
-
-slider_speed.value = speed * slidermax / speedmax
+scene.append_to_caption("\n")
+slider_omega1_0 = slider(text="Omega 1", bind=set_omega1_0, max=slider_max, value = omega1_0 * slider_max / omegamax)#, width=5, length=50, axis=vec(1, 0, 0))
+slider_omega2_0 = slider(text="Omega 2", bind=set_omega2_0, max=slider_max, value = omega2_0 * slider_max / omegamax)#, width=5, length=50, axis=vec(1, 0, 0))
+slider_omega3_0 = slider(text="Omega 3", bind=set_omega3_0, max=slider_max, value = omega3_0 * slider_max / omegamax)#, width=5, length=50, axis=vec(1, 0, 0))
+scene.append_to_caption("\n")
+slider_speed = slider(text="Speed", bind=set_speed, max=slider_max, value = speed * slider_max / speed_max)#, width=5, length=50, axis=vec(1, 0, 0),)
 
 ##---------------------------------------------------------------------
 
@@ -232,13 +225,11 @@ while t < 1500:
     dt = 0.000003 * speed
 
     rate(30000)
-    # c.interact()
-    #
-    # if paused == 1:
-    #     print('pause requested')
-    #     while paused == 1:
-    #         c.interact()
-    #         rate(50)
+
+    if paused == 1:
+        print('pause requested')
+        while paused == 1:
+            rate(50)
 
     t = t + dt
 
@@ -280,13 +271,13 @@ while t < 1500:
 
     # update the angular momentum vector
 
-    angmom_b = vector(lambda1 * omega_b.x, lambda2 * omega_b.y, lambda3 * omega_b.z)
-    angmom_s = angmom_b.x * e1 + angmom_b.y * e2 + angmom_b.z * e3
+    angular_momentum_b = vector(lambda1 * omega_b.x, lambda2 * omega_b.y, lambda3 * omega_b.z)
+    angular_momentum_s = angular_momentum_b.x * e1 + angular_momentum_b.y * e2 + angular_momentum_b.z * e3
 
-    arrow_L.axis = angmom_s
-    arrow_Omega.axis = omega_s
+    arrow_L.axis = angular_momentum_s
+    arrow_omega.axis = omega_s
 
-    scene.autoscale = 0
+    #scene.autoscale = 0
 
     count = count + 1
 

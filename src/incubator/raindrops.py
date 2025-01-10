@@ -19,12 +19,13 @@ floor = box(length=worldsize, height=0.5, width=worldsize, pos=vec(0, -dropheigh
 
 Drops = []
 
+
 for i in range(Ndrops):  # create drops of various sizes at rest at common height
-    size = random.uniform(0.1, max_dropsize)
+    size = uniform(0.1, max_dropsize)
     Drops = Drops + [ellipsoid(length=size, width=size, height=size, color=color.red)]
     Drops[i].velocity = vector(0, 0, 0)
     Drops[i].acceleration = vector(0, 9.8, 0)
-    Drops[i].pos = vector(random.uniform(-allowed, allowed), dropheight, random.uniform(-allowed, allowed))
+    Drops[i].pos = vector(uniform(-allowed, allowed), dropheight, uniform(-allowed, allowed))
     # make sure drops don't overlap; including making sure changed location doesn't overlap one that was clear before
     check = -1
     while check < 0:
@@ -33,15 +34,17 @@ for i in range(Ndrops):  # create drops of various sizes at rest at common heigh
             if mag(Drops[i].pos - Drops[j].pos) < (Drops[i].length + Drops[j].length) / 2.0:
                 check = check - 1
         if check < 0:
-            Drops[i].pos = vector(random.uniform(-allowed, allowed), dropheight, random.uniform(-allowed, allowed))
+            Drops[i].pos = vector(uniform(-allowed, allowed), dropheight, uniform(-allowed, allowed))
 
-# scene.mouse.getclick()          # hold the drops until we're ready to drop them
+pop_up = label(pos=vec(0, 0, 0), text="Click mouse to start", box=False, color=color.yellow)
+scene.waitfor("click")
+pop_up.visible = False
 
 while 1:
     rate(100)
     for i in range(Ndrops):  # let all the drops fall
         Drops[i].pos = Drops[i].pos + Drops[i].velocity * dt
-        if Drops[i].y < -dropheight + Drops[i].height + 0.5:  # check for drops hitting surface
+        if Drops[i].pos.y < -dropheight + Drops[i].height + 0.5:  # check for drops hitting surface
             if Drops[i].height > 0.09:  # only worry about drops that haven't already gone splat
                 Drops[i].velocity.y = 0  # drops stop
                 # drops flatten on surface

@@ -1,6 +1,8 @@
-from vpython import *
-from time import clock
-from random import random
+from vpython import graph, gcurve, gvbars, color, arange, sin, cos, pi, exp, canvas, label, button, curve, vec, vector, random, mag, sphere
+
+#from time import clock
+#from random import random
+import numpy as np
 
 
 # A model of an ideal gas with hard-sphere collisions
@@ -16,16 +18,16 @@ from random import random
 ## which makes the system irreversible (aside from rounoff errors).
 
 def reset():
-    setdefaultsituation()
+    #setdefaultsituation()
     pause(state=1)
-    breset.state = 1
+    #breset.state = 1
 
 
 ##    restoreview()
 def click():
     # return 1 if click in main window
-    if scene.mouse.events:
-        m = scene.mouse.getevent()
+    if scene.mouse.pick:
+        m = scene.mouse.pick
         return m.click
     else:
         return 0
@@ -66,25 +68,20 @@ T = 300.  # around room temperature
 ##calculated parameters:
 V = (L - Ratom) ** 3  ##available volume
 pressure = Natoms * k * T / V
-print
-'Number of Atoms', Natoms
-print
-'Temperature', T
-print
-'Volume', V
-print
-'Pressure', pressure
+print('Number of Atoms', Natoms)
+print('Temperature', T)
+print('Volume', V)
+print('Pressure', pressure)
 
 ###########################################
 # Set up Histogram Plot for speeds
 ###########################################
 deltav = 100.  # binning for v histogram
-vdist = gdisplay(x=0, y=win, ymax=Natoms * deltav / 1000.,
+vdist = graph(x=0, y=win, ymax=Natoms * deltav / 1000.,
                  width=win, height=win / 2., xtitle='v', ytitle='dN',
                  title="Distribution of v")
 theory = gcurve(color=color.green)
-observation = ghistogram(bins=arange(0., 3000., deltav),
-                         accumulate=1, average=1, color=color.red)
+observation = gvbars(delta=deltav, color=color.red) #bins=arange(0., 3000., deltav), accumulate=1, average=1, color=color.red)
 
 dv = 10.
 for v in arange(0., 3001. + dv, dv):  # theoretical prediction
@@ -97,12 +94,11 @@ for v in arange(0., 3001. + dv, dv):  # theoretical prediction
 ###########################################
 # add the same for vx
 deltavx = 200.  # binning for vx histogram
-vxdist = gdisplay(x=0, y=int(1.5 * win), ymax=Natoms * deltavx / 1000.,
+vxdist = graph(x=0, y=int(1.5 * win), ymax=Natoms * deltavx / 1000.,
                   width=win, height=win / 2., xtitle='vx', ytitle='dN',
                   title="Distribution of vx")
 theoryvx = gcurve(color=color.green)
-observationvx = ghistogram(bins=arange(-3000., 3000., deltavx),
-                           accumulate=1, average=1, color=color.orange)
+observationvx = gvbars(delta=deltavx, color=color.orange) #bins=arange(-3000., 3000., deltavx), accumulate=1, average=1, color=color.orange)
 
 dvx = 10.
 for vx in arange(-(3000. + dvx), 3000. + dvx, dvx):  # theoretical prediction
@@ -114,12 +110,11 @@ for vx in arange(-(3000. + dvx), 3000. + dvx, dvx):  # theoretical prediction
 ###########################################
 # add the same for x
 deltax = 0.1 * (L - 2 * Ratom)  # binning for x histogram
-xdist = gdisplay(x=win, y=win, ymax=Natoms / 5.,
+xdist = graph(x=win, y=win, ymax=Natoms / 5.,
                  width=win, height=win / 2., xtitle='x', ytitle='dN',
                  title="Distribution of x")
 theoryx = gcurve(color=color.green)
-observationx = ghistogram(bins=arange(Ratom, L - 2 * Ratom, deltax),
-                          accumulate=1, average=1, color=color.orange)
+observationx = gvbars(delta=deltax, color=color.orange)#bins=arange(Ratom, L - 2 * Ratom, deltax), accumulate=1, average=1, color=color.orange)
 
 dx = .05
 for x in arange(0, 1 + dx, dx):  # theoretical prediction
@@ -128,31 +123,28 @@ for x in arange(0, 1 + dx, dx):  # theoretical prediction
 # Set up Histogram Plot for Energy
 ###########################################
 deltaE = 1.e-21  # binning for E histogram
-Edist = gdisplay(xmin=0., xmax=2.e-20, x=win, y=int(.5 * win), ymax=Natoms / 2.,
+Edist = graph(xmin=0., xmax=2.e-20, x=win, y=int(.5 * win), ymax=Natoms / 2.,
                  width=win, height=.5 * win, xtitle='E', ytitle='dN',
                  title="Distribution of Energy")
 theoryE = gcurve(color=color.green)
-observationE = ghistogram(bins=arange(0, 2.e-20, deltaE),
-                          accumulate=1, average=1, color=color.orange)
+observationE = gvbars(delta=deltaE, color=color.orange) #bins=arange(0, 2.e-20, deltaE), accumulate=1, average=1, color=color.orange)
 
 dE = 1.e-21
 for E in arange(0, 2.e-20 + dE, dE):  # theoretical prediction
-    theoryE.plot(pos=(E, Natoms * 2. * (E / pi / k / T) ** (.5) * exp(-E / (k * T)) * deltaE / (k * T)))
+    theoryE.plot(pos=(E, Natoms * 2. * (E / pi / k / T) ** .5 * exp(-E / (k * T)) * deltaE / (k * T)))
 ###########################################
 ## Set up Histogram of Free Paths (atom-to-atom)
 ###########################################
 deltal = 2.
-fpdist = gdisplay(xmin=-0.1, xmax=40., x=win, y=int(1.5 * win), ymax=Natoms / 4.,
+fpdist = graph(xmin=-0.1, xmax=40., x=win, y=int(1.5 * win), ymax=Natoms / 4.,
                   width=win, height=win / 2., xtitle='x', ytitle='dN',
                   title="Distribution of free paths")
 sigma = 4. * pi * Ratom ** 2  ##collision cross-section
 Vol = (L - Ratom) ** 3
 meanfp = Vol / sigma / (Natoms - 1)  ##mean free path
-print
-'meanfp', meanfp
+print('meanfp', meanfp)
 theoryl = gcurve(color=color.green)
-observationfp = ghistogram(bins=arange(0, 40., deltal),
-                           accumulate=1, average=1, color=color.orange)
+observationfp = gvbars(delta=deltal, color=color.orange) #bins=arange(0, 40., deltal), accumulate=1, average=1, color=color.orange)
 
 dfp = 1.
 for fp in arange(0, 40. + dfp, dfp):  # theoretical prediction
@@ -166,9 +158,8 @@ for fp in arange(0, 40. + dfp, dfp):  # theoretical prediction
 ##panel = gdisplay(xmin=-0.1,xmax=1., x=2.*win,y=0, ymax = Natoms/5.,
 ##             width=.7*win, height=2*win, xtitle='x', ytitle='dN',
 ##                 title="Control panel")
-ctrl = controls(x=2 * win, y=0, width=.7 * win, height=2 * win, title='Control Panel')
-bpause = button(pos=(0, 30), width=60, height=30,
-                action=lambda: pause())
+#ctrl = controls(x=2 * win, y=0, width=.7 * win, height=2 * win, title='Control Panel')
+bpause = button(pos=(0, 30), width=60, height=30, bind=pause)
 ##brepeat = button(pos=(0,60), width=60, height=30, text='Repeat',
 ##             action=lambda: repeat())
 ##benergy = button(pos=(0,90), width=60, height=30,
@@ -186,7 +177,7 @@ bpause = button(pos=(0, 30), width=60, height=30,
 ##########################################
 # Prepare graph of pressure
 ##########################################
-pR_graph = gdisplay(x=win, y=0, ymax=1.e-19,
+pR_graph = graph(x=win, y=0, ymax=1.e-19,
                     width=win, height=win / 2., xtitle='t', ytitle='press',
                     title="Average Pressure on right wall")
 avpR_Plot = gcurve(color=color.green)
@@ -194,14 +185,13 @@ avpR_Plot = gcurve(color=color.green)
 # Prepare a digital readout screen
 ##########################################
 impulseR = 0  # cumulative impulse on right wall
-scene2 = display(title='Pressure',
+scene2 = canvas(title='Pressure',
                  x=win, y=2 * win, width=150, height=150,
-                 center=(0, 0, 0), background=(0.25, 0.25, 0.25))
+                 center=vec(0, 0, 0), background=vec(0.25, 0.25, 0.25))
 ##
 ##
 Pxvalue = 0
-labQ = label(pos=(0, 0, 0), text="%.6e" % Pxvalue, opacity=0.,
-             box=0, color=color.green)
+labQ = label(pos=vec(0, 0, 0), text="%.6e" % Pxvalue, opacity=0., box=0, color=color.green)
 
 scene2.visible = 1
 scene2.userspin = 0
@@ -213,17 +203,17 @@ scene2.autoscale = 0
 ###########################################
 # Set up Display of Atoms
 ###########################################
-scene = display(title="Ideal Gas", width=win, height=win, x=0, y=0,
-                range=L, center=(L / 2., L / 2., L / 2.))
+scene = canvas(title="Ideal Gas", width=win, height=win, x=0, y=0,
+                range=L, center=vec(L / 2., L / 2., L / 2.))
 ##########################################
 # Create the Box
 ##########################################
-xaxis = curve(pos=[(0, 0, 0), (L, 0, 0)], color=gray, radius=Raxes)
-yaxis = curve(pos=[(0, 0, 0), (0, L, 0)], color=gray, radius=Raxes)
-zaxis = curve(pos=[(0, 0, 0), (0, 0, L)], color=gray, radius=Raxes)
-xaxis2 = curve(pos=[(L, L, L), (0, L, L), (0, 0, L), (L, 0, L)], color=gray, radius=Raxes)
-yaxis2 = curve(pos=[(L, L, L), (L, 0, L), (L, 0, 0), (L, L, 0)], color=gray, radius=Raxes)
-zaxis2 = curve(pos=[(L, L, L), (L, L, 0), (0, L, 0), (0, L, L)], color=gray, radius=Raxes)
+xaxis = curve(pos=[vec(0, 0, 0), vec(L, 0, 0)], color=vector(0.5, 0.5, 0.5), radius=Raxes)
+yaxis = curve(pos=[vec(0, 0, 0), vec(0, L, 0)], color=vector(0.5, 0.5, 0.5), radius=Raxes)
+zaxis = curve(pos=[vec(0, 0, 0), vec(0, 0, L)], color=vector(0.5, 0.5, 0.5), radius=Raxes)
+xaxis2 = curve(pos=[vec(L, L, L), vec(0, L, L), vec(0, 0, L), vec(L, 0, L)], color=vector(0.5, 0.5, 0.5), radius=Raxes)
+yaxis2 = curve(pos=[vec(L, L, L), vec(L, 0, L), vec(L, 0, 0), vec(L, L, 0)], color=vector(0.5, 0.5, 0.5), radius=Raxes)
+zaxis2 = curve(pos=[vec(L, L, L), vec(L, L, 0), vec(0, L, 0), vec(0, L, L)], color=vector(0.5, 0.5, 0.5), radius=Raxes)
 
 Atoms = []
 colors = [color.red, color.green, color.blue,
@@ -248,15 +238,15 @@ while n < Natoms:
     z = Lmin + (Lmax - Lmin) * random()
     r = Ratom
     mass = Matom * r ** 3 / Ratom ** 3
-    pavg = sqrt(2. * mass * 1.5 * k * T)  # average kinetic energy p**2/(2mass) = (3/2)kT
+    pavg = np.sqrt(2. * mass * 1.5 * k * T)  # average kinetic energy p**2/(2mass) = (3/2)kT
 
     if n == 0:
         n += 1
         poslist.append((x, y, z))
         rlist.append(r)
         xlist.append(x)
-        pos = array(poslist)
-        radius = array(rlist)
+        pos = np.array(poslist)
+        radius = np.array(rlist)
         phi = random() * (2. * pi)
         costheta = 1. - 2. * random()
         sintheta = (1 - costheta ** 2) ** .5
@@ -266,7 +256,7 @@ while n < Natoms:
         plist.append((px, py, pz))
         mlist.append(mass)
         pxlist.append(px)
-        Atoms = Atoms + [sphere(pos=(x, y, z), radius=r, color=colors[n % 6])]
+        Atoms = Atoms + [sphere(pos=vec(x, y, z), radius=r, color=colors[n % 6])]
     #### To test for reversibility make the spheres in different portions of the box different colors
     ##        if x<.5:
     ##            col=color.red
@@ -274,19 +264,19 @@ while n < Natoms:
     ##            col=color.white
     ##        Atoms = Atoms+[sphere(pos=(x,y,z), radius=r, color=col)]
     else:
-        dr = pos - array([x, y, z])
-        drmag = sqrt(add.reduce(dr * dr, -1))
+        dr = pos - np.array([x, y, z])
+        drmag = np.sqrt(np.add.reduce(dr * dr, -1))
         ##test for overlap; reject if atom overlaps atoms that are there
         if (drmag > radius + r).all():
             n += 1
             poslist.append((x, y, z))
             rlist.append(r)
             xlist.append(x)
-            pos = array(poslist)
-            radius = array(rlist)
+            pos = np.array(poslist)
+            radius = np.array(rlist)
             mass = Matom * r ** 3 / Ratom ** 3
 
-            Atoms = Atoms + [sphere(pos=(x, y, z), radius=r, color=colors[n % 6])]
+            Atoms = Atoms + [sphere(pos=vec(x, y, z), radius=r, color=colors[n % 6])]
             #### To test for reversibility make the spheres in different portions of the box different colors
             ##            if x<.5:
             ##                col=color.red
@@ -307,15 +297,15 @@ while n < Natoms:
             plist.append((px, py, pz))
             mlist.append(mass)
             pxlist.append(px)
-p = array(plist)
-m = array(mlist)
+p = np.array(plist)
+m = np.array(mlist)
 m.shape = (Natoms, 1)  # specify column vector. Numeric Python: (1 by Natoms) vs. (Natoms by 1)
-mrow = array(mlist)
-pxarray = array(pxlist)
-Earray = add.reduce(p * p, -1) / mrow / 2.
-xarray = array(xlist)
-larray = zeros(Natoms)  # distance traveled since last atom-to-atom even
-collarray = zeros(Natoms)  # array of free paths
+mrow = np.array(mlist)
+pxarray = np.array(pxlist)
+Earray = np.add.reduce(p * p, -1) / mrow / 2.
+xarray = np.array(xlist)
+larray = np.zeros(Natoms)  # distance traveled since last atom-to-atom even
+collarray = np.zeros(Natoms)  # array of free paths
 
 ###########################################
 # Advance molecules to new positions
@@ -327,7 +317,7 @@ st = 0  ##pause state
 tcoll = 0.  ## time
 impulseR = 0  # cumulative impulse on right wall
 while 1:
-    ctrl.interact()
+    #ctrl.interact()
     ##    if click() or breset.state or brepeat.state or bget.state:
     if click():
         pause(state=1 - st)
@@ -338,10 +328,14 @@ while 1:
         ##        if nsteps==2*ntest:pause(state=1)
 
         v = p / m
-        observation.plot(data=mag(p / m))
-        observationvx.plot(data=(pxarray / mrow))
-        observationx.plot(data=xarray)
-        observationE.plot(data=Earray)
+        #print(v)
+        ## TODO
+        ## TODO
+        ## TODO
+        # observation.plot(data=mag(v))
+        # observationvx.plot(data=(pxarray / mrow))
+        # observationx.plot(data=xarray)
+        # observationE.plot(data=Earray)
         #####################
         ## wall collisions
         ## find time interval to the next impending collision with a wall
@@ -381,27 +375,27 @@ while 1:
                 rrellist.append(dr)
                 vrellist.append(dv)
                 dminlist.append(radius[j] + radius[i])  ##closest allowable distance
-        rrel = array(rrellist)
-        vrel = array(vrellist)
-        dmin = array(dminlist)  ##this calculation doesn't have to be repeated
-        rmag = sqrt(add.reduce(rrel * rrel, -1))  ##array of magnitudes of relative positions
-        vmag = sqrt(add.reduce(vrel * vrel, -1))  ##array of magnitudes of relative velocities
-        dotrv = add.reduce(rrel * vrel, -1)  ##array of dot products
+        rrel = np.array(rrellist)
+        vrel = np.array(vrellist)
+        dmin = np.array(dminlist)  ##this calculation doesn't have to be repeated
+        rmag = np.sqrt(np.add.reduce(rrel * rrel, -1))  ##array of magnitudes of relative positions
+        vmag = np.sqrt(np.add.reduce(vrel * vrel, -1))  ##array of magnitudes of relative velocities
+        dotrv = np.add.reduce(rrel * vrel, -1)  ##array of dot products
         ##this seems to be the best way to get the array of dot products
         prodmag = rmag * vmag
         crv = dotrv / prodmag  ##array of cosines
         ###################################
         ##  calculate array of distances of closest approach
-        d = rmag * sqrt(1 - crv ** 2)
+        d = rmag * np.sqrt(1 - crv ** 2)
         ##time for collision
         ##for positive time, dot product must be negative
         ##for collision to occur, dmin >d
         dtatom = 1.e9
         imin = -1
-        for i in range(Natoms * (Natoms - 1) / 2):
+        for i in range(int(Natoms * (Natoms - 1) / 2)):
             if dotrv[i] < 0:
                 if dmin[i] > d[i]:
-                    dt = (sqrt(rmag[i] ** 2 - d[i] ** 2) - sqrt(dmin[i] ** 2 - d[i] ** 2)) / vmag[i]
+                    dt = (np.sqrt(rmag[i] ** 2 - d[i] ** 2) - np.sqrt(dmin[i] ** 2 - d[i] ** 2)) / vmag[i]
                     if dt > 0:
                         if dt < dtatom:
                             dtatom = dt
@@ -425,7 +419,7 @@ while 1:
                     im = im - N
                     iz = iz + 1
             ##update distance traveled by molecules
-            vmag = sqrt(add.reduce(v * v, -1))  ##array of speeds
+            vmag = np.sqrt(np.add.reduce(v * v, -1))  ##array of speeds
             ##            print larray,vmag*dtatom
             larray += vmag * dtatom  ##once in a while this line gives an error. Why?
             observationfp.plot(data=collarray)
@@ -444,7 +438,7 @@ while 1:
             pos += v * dtwall
             tcoll += dtwall
             ##update distance traveled by molecules
-            vmag = sqrt(add.reduce(v * v, -1))  ##array of speeds
+            vmag = np.sqrt(np.add.reduce(v * v, -1))  ##array of speeds
             ##            print larray,vmag*dtwall
             larray = larray + vmag * dtwall
             if nwall == 0:
@@ -461,13 +455,13 @@ while 1:
             v[kwall, lwall] = -v[kwall, lwall]
             p = v * m
         nsteps += 1
-        Earray = add.reduce(p * p, -1) / mrow / 2.
+        Earray = np.add.reduce(p * p, -1) / mrow / 2.
 
         #####################################
         # Update display objects
         #####################################
         for i in range(Natoms):
-            Atoms[i].pos = pos[i]
+            Atoms[i].pos = vec(pos[i][0], pos[i][1], pos[i][2])
             # need to update x and vx as well
             xarray[i] = pos[i, 0]
             pxarray[i] = p[i, 0]
