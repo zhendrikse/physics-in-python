@@ -47,16 +47,16 @@ class plot3D:
 
 
         self.vertices = []
-        function_values = self.function_values()
+        values = self.f_values()
         for i in range(L * L):
             x = int(i / L)
             y = i % L
-            self.vertices.append(self.make_vertex(x, y, function_values[i]))
+            self.vertices.append(self.make_vertex(x, y, values[i]))
 
         self.make_quads()
         self.make_normals()
 
-    def function_values(self):
+    def f_values(self):
         function_values = []
         for i in range(L * L):
             x = int(i / L)
@@ -86,7 +86,7 @@ class plot3D:
 
     def make_normals(self):
         # Set the normal for each vertex to be perpendicular to the lower left corner of the quad.
-        # The vectors a and b point to the right and up around a vertex in the xy plance.
+        # The vectors a and b point to the right and up around a vertex in the xy plane.
         for i in range(L * L):
             x = int(i / L)
             y = i % L
@@ -97,9 +97,9 @@ class plot3D:
             v.normal = cross(a, b)
 
     def replot(self):
-        function_values = self.function_values()
+        values = self.f_values()
         for i in range(L * L):
-            self.vertices[i].pos.y = function_values[i]
+            self.vertices[i].pos.y = values[i]
 
         self.make_normals()
 
