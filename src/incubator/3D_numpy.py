@@ -45,15 +45,24 @@ class plot3D:
         text(pos=yaxis.pos + k * yaxis.axis, text='y', height=h, align='center', billboard=True, emissive=True)
         text(pos=zaxis.pos + k * zaxis.axis, text='z', height=h, align='center', billboard=True, emissive=True)
 
+
         self.vertices = []
-        for x in range(L):
-            for y in range(L):
-                f_x_y = self.f(x, y)
-                val = self.evaluate(f_x_y)
-                self.vertices.append(self.make_vertex(x, y, val))
+        function_values = self.function_values()
+        for i in range(L * L):
+            x = int(i / L)
+            y = i % L
+            self.vertices.append(self.make_vertex(x, y, function_values[i]))
 
         self.make_quads()
         self.make_normals()
+
+    def function_values(self):
+        function_values = []
+        for i in range(L * L):
+            x = int(i / L)
+            y = i % L
+            function_values.append(self.evaluate(self.f_x_y(x, y)))
+        return function_values
 
     def f_x_y(self, x, y):
         d = L - 2
@@ -88,11 +97,10 @@ class plot3D:
             v.normal = cross(a, b)
 
     def replot(self):
+        function_values = self.function_values()
         for i in range(L * L):
-            x = int(i / L)
-            y = i % L
-            v = self.vertices[i]
-            v.pos.y = self.evaluate(self.f_x_y(x, y))
+            self.vertices[i].pos.y = function_values[i]
+
         self.make_normals()
 
     def make_vertex(self, x, y, value):
