@@ -134,11 +134,11 @@ class Base:
             tick_marks.append(a_box)
         return tick_marks
 
-    def axis_visiblility_is(self, visible):
+    def axis_visibility_is(self, visible):
         for i in range(len(self._axis)):
             self._axis[i].visible = visible
 
-    def tick_marks_visiblility_is(self, visible):
+    def tick_marks_visibility_is(self, visible):
         for tick_mark in self._tick_marks:
             tick_mark.visible = visible
 
@@ -239,7 +239,7 @@ class plot3D:
 
 
 def toggle_tick_marks(event):
-    axis.tick_marks_visiblility_is(event.checked)
+    axis.tick_marks_visibility_is(event.checked)
 
 
 def toggle_xz_mesh(event):
@@ -255,7 +255,7 @@ def toggle_yz_mesh(event):
 
 
 def toggle_axis(event):
-    axis.axis_visiblility_is(event.checked)
+    axis.axis_visibility_is(event.checked)
 
 
 animation.append_to_caption("\n")
