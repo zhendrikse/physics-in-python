@@ -547,31 +547,37 @@ Some animations that have something to do with water.
 
 # Miscellaneous
 
-## Polar coordinates and flock of birds
-
-An illustration of using polar (spherical) coordinates and a flock of birds
+## Polar coordinates &amp; 3D plots
 
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">
   <img alt="Polar coordinates" width="49%" height="49%" src="./images/polar_coordinates.png" title="Click to animate"/>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/3dplot">
+    <img alt="3D plot" width="45%" height="44%" src="./images/3d_plot.png" title="Click to animate"/>
+  </a>
 </a>
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Flockingbirds">
-  <img alt="Flocking birds" width="49%" height="49%" src="./images/flocking_birds.png" title="Click to animate"/>
-</a>
 
-- Polar code in action [on Trinket](https://zegerh-6085.trinket.io/sites/polar_coordinates) 
-  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates)
-- Polar coordinates code base [on Trinket](https://trinket.io/library/trinkets/d7fa526a8ee9)
+<details>
+  <summary>Animations and source code</summary>
+  <ul>
+    <ul><b>Polar coordinates</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/polar_coordinates">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/polar_coordinates.py">polar_coordinates.py</a> and VPython <a href="./src/polar_coordinates.py">polar_coordinates.py</a> versions in this repository</li>
+    </ul>
+    <ul><b>3D plot</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/3d_plot">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/3d_plot.py">3d_plot.py</a> and VPython <a href="./src/3d_plot.py">3d_plot.py</a> versions in this repository</li>
+    </ul>
+  </ul>
+</details>
 
-
-- Flocking birds in action [on Trinket](https://zegerh-6085.trinket.io/sites/flocking_birds) 
-  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Flockingbirds)
-- Flocking birds code base [on Trinket](https://trinket.io/library/trinkets/54d12548d4ec)
-
-## Symmetry planes of a cubic lattice
+## Symmetry planes of a cubic lattice &amp; flock of birds
 
 <figure>
   <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes">
     <img alt="Symmetry planes" width="35%" height="35%" src="./images/crystal_planes.png" title="Click to animate"/>
+  </a>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Flockingbirds">
+    <img alt="Flocking birds" width="49%" height="49%" src="./images/flocking_birds.png" title="Click to animate"/>
   </a>
 </figure>
 
@@ -580,7 +586,7 @@ An illustration of using polar (spherical) coordinates and a flock of birds
   <ul>
     <ul><b>Cubic lattice</b>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/crystal_symmetry_plaes">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/electromagnetism/crystal_symmetry_plaes.py">crystal_symmetry_plaes.py</a> and VPython <a href="./src/electromagnetism/crystal_symmetry_plaes.py">crystal_symmetry_plaes.py</a> versions in this repository</li>
+        <li>Glowscript <a href="./src/glowscript/electromagnetism/crystal_symmetry_planes.py">crystal_symmetry_planes.py</a> and VPython <a href="./src/electromagnetism/crystal_symmetry_planes.py">crystal_symmetry_planes.py</a> versions in this repository</li>
     </ul>
   </ul>
 </details>
