@@ -1,19 +1,53 @@
 # Web VPython 3.2
 
 from vpython import canvas, vec, cylinder, wtext, slider, rate, arrow, cos, sin, pi, arange, floor, color, sqrt, graph, \
-    gcurve, label
+    gcurve, label, checkbox, wtext
 
 title = """Visualization of particle confined by an infinite square well
 
 &#x2022; From <a href="https://www.amazon.com/Visualizing-Quantum-Mechanics-Python-Spicklemire/dp/1032569247">Visualizing Quantum Mechanics with Python</a>
 &#x2022; Modified by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a>, located in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
 &#x2022; The motion and $x$-axis represent the parameters $t$ and $x$ respectively
-&#x2022; The $y$ and $z$-axis represent the real and imaginary parts of $\Psi$ respectively
+&#x2022; The $y$ and $z$-axis represent the real and imaginary parts of $\\Psi$ respectively
+"""
+
+background_info = """
+<b>Background</b>: particle in a box, i.e. confined by an infinite square well
+
+Although the one-dimensional particle-in-a-box problem does not correspond to any
+real-world system, it illustrates quite well some (fundamental) 
+quantum mechanical features nonetheless.
+
+The box is modeled by an infinite square well, so that the particle cannot escape 
+beyond the boundaries of the box.
+
+Inside the box, the potential energy $V$ is zero (or constant). Substituting this together with the
+formula for the plane wave $\psi(x,t) = Ae^{ik x}e^{-i\omega t}$ into the Schrödinger equation, we get:
+
+$\dfrac{\partial^2\psi}{\partial x^2} + \dfrac{8\pi^2m}{h^2}(E - 0)\psi=0 \Rightarrow \\bigg(\dfrac{-h^2}{8\pi^2m}\\bigg)\dfrac{\partial^2\psi}{\partial x^2}=E\psi$
+
+Which function does give itself (times $E$) when differentiated twice <em>and</em> is zero at both boundaries of the box?
+
+$\psi = A\sin(ax) \Rightarrow \dfrac{h^2a^2}{8\pi^2m}\psi=E\psi \Rightarrow E=\dfrac{h^2a^2}{8\pi^2m}$
+
+To get $a$, we note that the wave function equals zero at the box boundaries:
+
+$\psi=A\sin(ax) = 0 \Rightarrow a=\dfrac{n\pi}{L} \Rightarrow \psi_n = A\sin\\bigg(\dfrac{n\pi x}{L}\\bigg) \Rightarrow E_n=\dfrac{h^2n^2}{8mL^2}$
+
+Normalizing the wave function results in an expression for $A$:
+
+$\int_0^L \psi \cdot  \psi dx = 1 \Rightarrow A^2 \int_0^L\sin^2\\bigg(\dfrac{n\pi x}{L}\\bigg) dx=1 \Rightarrow A^2\\bigg(\dfrac{L}{2}\\bigg)=1 \Rightarrow A=\sqrt{\dfrac{2}{L}}$
+
+So summarizing, we have
+
+$E=\dfrac{h^2a^2}{8\pi^2m} \\text{ and } \psi_n=\sqrt{\dfrac{2}{L}}\sin(nkx), \\text{where } k=\dfrac{\pi}{L}$
+
+These energy eigenstates (and superpositions thereof) are used in the visualization software.
 
 """
 
 animation = canvas(width=600, height=300, align='top', title=title, range=6, center=vec(10, 0, 0))
-MathJax.Hub.Queue(["Typeset", MathJax.Hub])
+#MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 
 # For complex numbers
@@ -23,6 +57,11 @@ class Complex:
     def __init__(self, real, imaginary):
         self._real = real
         self._imaginary = imaginary
+
+    def multiplied_by(self, factor):
+        real = self._real * factor._real - self._imaginary * factor._imaginary
+        imaginary = self._imaginary * factor._real + self._real * factor._imaginary
+        return Complex(real, imaginary)
 
     def real(self):
         return self._real
@@ -106,19 +145,19 @@ def phase(omega, t):
 
 
 def third_excited_state(k, x, omega, t):
-    return Complex(sin(4 * k * x) * phase(-16 * omega, t).real(), sin(4 * k * x) * phase(-16 * omega, t).imaginary())
+    return Complex(sin(4 * k * x), 0).multiplied_by(phase(-16 * omega, t))
 
 
 def second_excited_state(k, x, omega, t):
-    return Complex(sin(3 * k * x) * phase(-9 * omega, t).real(), sin(3 * k * x) * phase(-9 * omega, t).imaginary())
+    return Complex(sin(3 * k * x), 0).multiplied_by(phase(-9 * omega, t))
 
 
 def first_excited_state(k, x, omega, t):
-    return Complex(sin(2 * k * x) * phase(-4 * omega, t).real(), sin(2 * k * x) * phase(-4 * omega, t).imaginary())
+    return Complex(sin(2 * k * x), 0).multiplied_by(phase(-4 * omega, t))
 
 
 def ground_state(k, x, omega, t):
-    return Complex(sin(k * x) * phase(omega, t).real(), sin(k * x) * phase(omega, t).imaginary())
+    return Complex(sin(k * x), 0).multiplied_by(phase(-1 * omega, t))
 
 
 def superposition(k, x, omega, t):
@@ -169,22 +208,40 @@ def set_third_state_weight():
     third_state_text.text = "contribution = " + str(third_state_weight)
 
 
-animation.append_to_caption("\n$\Psi = \sin(kx)e^{-i\omega t}$")
-ground_state_slider = slider(text="Ground state", value=1.0, min=0, max=1, bind=set_ground_state_weight)
-ground_state_text = wtext(text="contribution = 1")
+def toggle_info(event):
+    if event.checked:
+        # animation.width = 1200
+        animation.caption = background_info
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub])  # , animation.title])  # LaTeX formatting
+    else:
+        # animation.width = 600
+        animation.caption = ""
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub])  # , animation.title])  # LaTeX formatting
 
-animation.append_to_caption("\n\n$\Psi = \sin(2kx)e^{-4i\omega t}$")
-first_state_slider = slider(text="First excited state", value=1.0, min=0, max=1, bind=set_first_state_weight)
-first_state_text = wtext(text="contribution = 1")
 
-animation.append_to_caption("\n\n$\Psi = \sin(3kx)e^{-9i\omega t}$")
-second_state_slider = slider(text="Second excited state", value=0.0, min=0, max=1, bind=set_second_state_weight)
-second_state_text = wtext(text="contribution = 0")
+_ = checkbox(pos=animation.title_anchor, text="Show more background information in the caption", bind=toggle_info,
+             checked=False)
+animation.append_to_title("\n\n$\\Psi = \\sin(kx)e^{-i\\omega t}$")
+ground_state_slider = slider(pos=animation.title_anchor, text="Ground state", value=1.0, min=0, max=1,
+                             bind=set_ground_state_weight)
+ground_state_text = wtext(pos=animation.title_anchor, text="contribution = 1")
 
-animation.append_to_caption("\n\n$\Psi = \sin(4kx)e^{-16i\omega t}$")
-third_state_slider = slider(text="Third excited state", value=0.0, min=0, max=1, bind=set_third_state_weight)
-third_state_text = wtext(text="contribution = 0")
+animation.append_to_title("\n\n$\\Psi = \\sin(2kx)e^{-4i\\omega t}$")
+first_state_slider = slider(pos=animation.title_anchor, text="First excited state", value=1.0, min=0, max=1,
+                            bind=set_first_state_weight)
+first_state_text = wtext(pos=animation.title_anchor, text="contribution = 1")
 
+animation.append_to_title("\n\n$\\Psi = \\sin(3kx)e^{-9i\\omega t}$")
+second_state_slider = slider(pos=animation.title_anchor, text="Second excited state", value=0.0, min=0, max=1,
+                             bind=set_second_state_weight)
+second_state_text = wtext(pos=animation.title_anchor, text="contribution = 0")
+
+animation.append_to_title("\n\n$\\Psi = \\sin(4kx)e^{-16i\\omega t}$")
+third_state_slider = slider(pos=animation.title_anchor, text="Third excited state", value=0.0, min=0, max=1,
+                            bind=set_third_state_weight)
+third_state_text = wtext(pos=animation.title_anchor, text="contribution = 0")
+
+animation.append_to_title("\n\n")
 animation.append_to_caption("\n\n")
 
 frequency = 2
@@ -198,12 +255,12 @@ psi = Psi(k=pi / L, omega=2 * pi / frequency, wave_function=superposition)
 wave = Wave(psi, numpy_linspace(0, L, 40))
 
 t = 0
-dt = 0.001
+dt = 0.002
 while True:
     gd = graph(title="Probability finding the particle at x", xtitle="t", ytitle="<x>", width=640, height=300)
     gr = gcurve(color=color.red)
 
-    while t < 5:
+    while t < 10:
         rate(100)
         gr.plot(t, wave.update_for(t))
         t += dt

@@ -32,7 +32,7 @@ info = """
     $(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x, t) = -\dfrac{\hbar^2}{2m}\dfrac{\partial^2}{\partial x^2} \Psi(x,t) + V(x)\Psi(x,t)$
 """
 
-animation = canvas(align="left", forward=vec(0.37, -0.55, -0.75), width=600, height=450, background=color.black,
+animation = canvas(align="top", forward=vec(0.37, -0.55, -0.75), width=600, height=450, background=color.black,
                    title=title, range=11.5)
 
 MathJax.Hub.Queue(["Typeset", MathJax.Hub])
