@@ -33,10 +33,12 @@ the days per season.
   </ul>
 </details>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Daylightvariations">
-  <img alt="Daylight variations" width="70%" height="70%" src="./images/daylight_variations.png" title="Click to animate"/>
-</a>
+<figure>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Daylightvariations">
+    <img alt="Daylight variations" width="70%" height="70%" src="./images/daylight_variations.png" title="Click to animate"/>
+  </a>
+</figure>
 
 ##  Kepler's law of equal areas
 
@@ -47,6 +49,12 @@ the days per season.
       <li>Glowscript <a href="./src/glowscript/asstrophysics/keplers_law.png">keplers_law.png</a> and VPython <a href="./src/astrophysics/keplers_law.png">keplers_law.png</a> versions in this repository</li>
   </ul>
 </details>
+
+<figure>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw">
+    <img alt="Kepler's laws" width="50%" height="50%" src="./images/keplers_law.png" title="Click to animate"/>
+  </a>
+</figure>
 
 # Particle and quantum physics
 
