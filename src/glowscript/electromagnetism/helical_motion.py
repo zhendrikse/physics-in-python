@@ -1,9 +1,7 @@
-Web
-VPython
-3.2
+# Web VPython 3.2
 
 from vpython import canvas, box, vector, sphere, sin, cos, rate, pi, arrow, slider, wtext, cross, color, vec, cylinder, \
-    text, label, box, checkbox, radians
+    text, label, box, checkbox, radians, get_library
 
 title = """Helical motion of charged particle in magnetic field
 
@@ -14,117 +12,137 @@ title = """Helical motion of charged particle in magnetic field
 
 animation = canvas(width=800, height=600, title=title, range=40, forward=vec(-0.381663, -0.605187, -0.698629))
 
+# https://github.com/nicolaspanel/numjs
+get_library('https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js')
+
+
+class Numpy:
+    def __init__(self):
+        self.array = self._array
+        self.linspace = self._linspace
+        self.len = self._len
+
+    def _array(self, an_array):
+        return nj.array(an_array)
+
+    def _linspace(self, start, stop, num):
+        return self._array([x for x in arange(start, stop, (stop - start) / (num - 1))] + [stop])
+
+    def _len(self, numpy_array): return numpy_array.shape[0]
+
+
+np = Numpy()
+
 x_hat = vec(1, 0, 0)
 y_hat = vec(0, 1, 0)
 z_hat = vec(0, 0, 1)
-base = [x_hat, y_hat, z_hat]
 label_text = ("x", "y", "z")
 
 
+class Space:
+    def __init__(self, linspace_x, linspace_y, linspace_z):
+        self.linspace_x = linspace_x
+        self.linspace_y = linspace_y
+        self.linspace_z = linspace_z
+
+
 class Base:
-    def __init__(self, position=vec(0, 0, 0), axis_color=color.yellow, tick_marks_color=color.red, length=20,
-                 num_tick_marks=None, axis_labels=label_text):
-        self._position = position
-        num_tick_marks = length - 1 if not num_tick_marks else num_tick_marks
-        tick_increment = length / (num_tick_marks - 1)
-        radius = length / 200
+    def __init__(self, space, position=vec(0, 0, 0), axis_color=color.yellow, tick_marks_color=color.red,
+                 axis_labels=label_text):
+        x_ = space.linspace_x
+        y_ = space.linspace_y
+        z_ = space.linspace_z
+        scale = .01 * (x_.get(-1) - x_.get(0))
+        delta_x = x_.get(1) - x_.get(0)
+        delta_y = y_.get(1) - y_.get(0)
+        delta_z = z_.get(1) - z_.get(0)
+        range_x = x_.get(-1) - x_.get(0)
+        range_y = y_.get(-1) - y_.get(0)
+        range_z = z_.get(-1) - z_.get(0)
+        self._axis = self._make_axis(x_, y_, z_, delta_x, delta_y, delta_z, axis_color, axis_labels, scale)
+        self._tick_marks = self._make_tick_marks(x_, y_, z_, tick_marks_color, scale)
 
-        self._axis, self._arrows, self._arrow_labels, self._tick_marks, self._tick_labels = [], [], [], [], []
-        for base_vec in base:
-            self._axis += [
-                cylinder(pos=position - length * base_vec / 2, axis=length * base_vec, radius=radius, color=axis_color)]
-            self._arrows += [
-                arrow(pos=position + length * base_vec / 2, axis=base_vec, color=axis_color, shaftwidth=radius)]
-
-        for i in range(len(base)):
-            pos = position + base[i] * (length / 2 + tick_increment)
-            self._arrow_labels.append(
-                text(pos=pos, text=axis_labels[i], color=axis_color, height=radius * 10, align='center', billboard=True,
-                     emissive=True))
-
-        offset = [-0.05 * length * y_hat, 0.05 * length * x_hat, -0.05 * length * y_hat]
-        positions = []
-        for i in range(len(base)):
-            for j in range(num_tick_marks):
-                pos = position - base[i] * (length / 2 - j * tick_increment)
-                positions.append(pos)
-                label_value = pos.x - position.x if i == 0 else pos.y - position.y if i == 1 else pos.z - position.z
-                label_value = "" if int(num_tick_marks / 2) == j else str(int(label_value))
-                marker = label(pos=pos + offset[i], text=label_value, color=color.gray(0.5), box=False)
-                self._tick_labels.append(marker)
-                a_box = box(pos=pos, width=2 * radius, height=0.5, length=2 * radius, color=tick_marks_color)
-                if i == 1:
-                    a_box.rotate(angle=0.5 * pi, axis=vec(0, 0, 1))
-                self._tick_marks.append(a_box)
-
-        self._xy_mesh, self._zx_mesh, self._xz_mesh, self._yx_mesh = [], [], [], []
-        for j in range(num_tick_marks):
+        self._xy_mesh, self._xz_mesh, self._yz_mesh = [], [], []
+        for j in range(np.len(x_)):
+            pos_x_y = x_hat * x_.get(0) + y_hat * y_.get(0)
+            pos_x_z = x_hat * x_.get(0) + z_hat * z_.get(0)
+            pos_y_z = y_hat * y_.get(0) + z_hat * z_.get(0)
             self._xy_mesh += [
-                cylinder(pos=vec(position.x - length / 2, position.y + j * tick_increment - length / 2, position.z),
-                         axis=x_hat * length, color=color.gray(.5), radius=radius / 2, visible=False)]
-            self._yx_mesh += [
-                cylinder(pos=vec(position.x - length / 2 + j * tick_increment, position.y - length / 2, position.z),
-                         axis=y_hat * length, color=color.gray(.5), radius=radius / 2, visible=False)]
+                cylinder(pos=position + pos_x_y + x_hat * j * delta_x, axis=y_hat * range_y, color=color.gray(.5),
+                         radius=scale * .5, visible=False)]
+            self._xy_mesh += [
+                cylinder(pos=position + pos_x_y + y_hat * j * delta_y, axis=x_hat * range_x, color=color.gray(.5),
+                         radius=scale * .5, visible=False)]
+            pos = position + (x_.get(0) + .5 * range_x) * x_hat + (y_.get(0) + .5 * range_y) * y_hat
+            self._xy_mesh += [box(pos=pos, length=range_x, width=scale, height=range_y, opacity=0.15, visible=False)]
             self._xz_mesh += [
-                cylinder(pos=vec(position.x - length / 2 + j * tick_increment, position.y, position.z - length / 2),
-                         axis=z_hat * length, color=color.gray(.5), radius=radius / 2, visible=False)]
-            self._zx_mesh += [
-                cylinder(pos=vec(position.x - length / 2, position.y, position.z - length / 2 + j * tick_increment),
-                         axis=x_hat * length, color=color.gray(.5), radius=radius / 2, visible=False)]
+                cylinder(pos=position + pos_x_z + x_hat * j * delta_x, axis=z_hat * range_z, color=color.gray(.5),
+                         radius=scale * .5, visible=False)]
+            self._xz_mesh += [
+                cylinder(pos=position + pos_x_z + z_hat * j * delta_z, axis=x_hat * range_x, color=color.gray(.5),
+                         radius=scale * .5, visible=False)]
+            pos = position + (x_.get(0) + .5 * range_x) * x_hat + (z_.get(0) + .5 * range_z) * z_hat
+            self._xz_mesh += [box(pos=pos, length=range_x, width=range_z, height=scale, opacity=0.15, visible=False)]
+            self._yz_mesh += [
+                cylinder(pos=position + pos_y_z + y_hat * j * delta_y, axis=z_hat * range_z, color=color.gray(.5),
+                         radius=scale * .5, visible=False)]
+            self._yz_mesh += [
+                cylinder(pos=position + pos_y_z + z_hat * j * delta_z, axis=y_hat * range_y, color=color.gray(.5),
+                         radius=scale * .5, visible=False)]
+            pos = position + (y_.get(0) + .5 * range_y) * y_hat + (z_.get(0) + .5 * range_z) * z_hat
+            self._yz_mesh += [box(pos=pos, length=scale, width=range_z, height=range_y, opacity=0.15, visible=False)]
 
-    def show_axis(self):
-        self.axis_visible(True)
+    def _make_axis(self, x_, y_, z_, delta_x, delta_y, delta_z, axis_color, axis_labels, scale):
+        c1 = cylinder(pos=x_hat * x_.get(0), axis=x_hat * (x_.get(-1) - x_.get(0)), color=axis_color, radius=scale)
+        c2 = cylinder(pos=y_hat * y_.get(0), axis=y_hat * (y_.get(-1) - y_.get(0)), color=axis_color, radius=scale)
+        c3 = cylinder(pos=z_hat * z_.get(0), axis=z_hat * (z_.get(-1) - z_.get(0)), color=axis_color, radius=scale)
+        a1 = arrow(pos=x_hat * x_.get(-1), color=axis_color, shaftwidth=scale * 2, axis=2 * delta_x * x_hat, round=True)
+        a2 = arrow(pos=y_hat * y_.get(-1), color=axis_color, shaftwidth=scale * 2, axis=2 * delta_y * y_hat, round=True)
+        a3 = arrow(pos=z_hat * z_.get(-1), color=axis_color, shaftwidth=scale * 2, axis=2 * delta_z * z_hat, round=True)
+        l1 = text(pos=x_hat * (x_.get(-1) + 2 * delta_x) - vec(0, scale, 0), text=axis_labels[0],
+                  color=axis_color, height=scale * 7, billboard=True, emissive=True)
+        l2 = text(pos=y_hat * (y_.get(-1) + 2 * delta_y) - vec(0, scale, 0), text=axis_labels[1],
+                  color=axis_color, height=scale * 7, billboard=True, emissive=True)
+        l3 = text(pos=z_hat * (z_.get(-1) + 2 * delta_z) - vec(0, scale, 0), text=axis_labels[2],
+                  color=axis_color, height=scale * 7, billboard=True, emissive=True)
+        return [c1, c2, c3, a1, a2, a3, l1, l2, l3]
 
-    def hide_axis(self):
-        self.axis_visible(False)
+    def _make_tick_marks(self, x_dim, y_dim, z_dim, tick_marks_color, scale):
+        tick_marks = []
+        for i in range(np.len(x_dim)):
+            a_box = box(pos=x_hat * x_dim.get(i), width=scale * 2, height=scale * 5, length=scale * 2,
+                        color=tick_marks_color)
+            tick_marks.append(a_box)
+        for i in range(np.len(z_dim)):
+            a_box = box(pos=z_hat * z_dim.get(i), width=scale * 2, height=scale * 5, length=scale * 2,
+                        color=tick_marks_color)
+            tick_marks.append(a_box)
+        for i in range(np.len(y_dim)):
+            a_box = box(pos=y_hat * y_dim.get(i), width=scale * 2, height=scale * 5, length=scale * 2,
+                        color=tick_marks_color)
+            a_box.rotate(angle=0.5 * pi, axis=vec(0, 0, 1))
+            tick_marks.append(a_box)
+        return tick_marks
 
-    def show_tick_labels(self):
-        self.tick_labels_visible(True)
-
-    def hide_tick_labels(self):
-        self.tick_labels_visible(False)
-
-    def show_tick_marks(self):
-        self.tick_marks_visible(True)
-
-    def hide_tick_marks(self):
-        self.tick_marks_visible(False)
-
-    def axis_visible(self, visible):
-        for i in range(len(base)):
-            self._arrow_labels[i].visible = visible
-            self._arrows[i].visible = visible
+    def axis_visibility_is(self, visible):
+        for i in range(len(self._axis)):
             self._axis[i].visible = visible
 
-    def tick_labels_visible(self, visible):
-        for a_label in self._tick_labels:
-            a_label.visible = visible
-
-    def tick_marks_visible(self, visible):
+    def tick_marks_visibility_is(self, visible):
         for tick_mark in self._tick_marks:
             tick_mark.visible = visible
 
-    def xy_mesh_visible(self, visible):
+    def xy_mesh_visibility_is(self, visible):
         for i in range(len(self._xy_mesh)):
             self._xy_mesh[i].visible = visible
-            self._yx_mesh[i].visible = visible
 
-    def xz_mesh_visible(self, visible):
+    def xz_mesh_visibility_is(self, visible):
         for i in range(len(self._xz_mesh)):
             self._xz_mesh[i].visible = visible
-            self._zx_mesh[i].visible = visible
 
-    def show_xy_mesh(self):
-        self.xy_mesh_visible(True)
-
-    def hide_xy_mesh(self):
-        self.xy_mesh_visible(False)
-
-    def show_xz_mesh(self):
-        self.xz_mesh_visible(True)
-
-    def hide_xz_mesh(self):
-        self.xz_mesh_visible(False)
+    def yz_mesh_visibility_is(self, visible):
+        for i in range(len(self._xz_mesh)):
+            self._yz_mesh[i].visible = visible
 
 
 xlen, ylen, zlen = 100, 100, 100
@@ -181,24 +199,11 @@ class Proton:
         return ylen / 2 > self._proton.pos.y > -ylen / 2 and xlen / 2 > self._proton.pos.x > -xlen / 2 and -zlen / 2 < self._proton.pos.z < zlen / 2
 
 
-def toggle_tick_marks(event):
-    axis.tick_marks_visible(event.checked)
-
-
-def toggle_tick_labels(event):
-    axis.tick_labels_visible(event.checked)
-
-
-def toggle_xz_mesh(event):
-    axis.xz_mesh_visible(event.checked)
-
-
-def toggle_xy_mesh(event):
-    axis.xy_mesh_visible(event.checked)
-
-
-def toggle_axis(event):
-    axis.axis_visible(event.checked)
+space = Space(np.linspace(-xlen / 4, xlen / 4, 11), np.linspace(-xlen / 4, xlen / 4, 11),
+              np.linspace(-xlen / 4, xlen / 4, 11))
+axis = Base(space)
+axis.xz_mesh_visibility_is(True)
+axis.tick_marks_visibility_is(False)
 
 
 def toggle_box(event):
@@ -206,15 +211,33 @@ def toggle_box(event):
         boundary.visible = event.checked
 
 
-axis = Base(length=int(xlen / 2.), num_tick_marks=20)
-axis.hide_tick_labels()
-axis.show_xz_mesh()
+def toggle_tick_marks(event):
+    axis.tick_marks_visibility_is(event.checked)
 
-_ = checkbox(text='Tick marks', bind=toggle_tick_marks, checked=True)
-_ = checkbox(text='Tick labels', bind=toggle_tick_labels, checked=False)
+
+def toggle_xz_mesh(event):
+    axis.xz_mesh_visibility_is(event.checked)
+
+
+def toggle_xy_mesh(event):
+    axis.xy_mesh_visibility_is(event.checked)
+
+
+def toggle_yz_mesh(event):
+    axis.yz_mesh_visibility_is(event.checked)
+
+
+def toggle_axis(event):
+    axis.axis_visibility_is(event.checked)
+
+
+animation.append_to_caption("\n")
+_ = checkbox(text='Tick marks', bind=toggle_tick_marks, checked=False)
+_ = checkbox(text='YZ mesh', bind=toggle_yz_mesh, checked=False)
 _ = checkbox(text='XZ mesh', bind=toggle_xz_mesh, checked=True)
 _ = checkbox(text='XY mesh', bind=toggle_xy_mesh, checked=False)
 _ = checkbox(text='Axis', bind=toggle_axis, checked=True)
+
 _ = checkbox(text="Show box", bind=toggle_box, checked=False)
 
 pop_up = label(pos=vec(0, 32, 0), text="Click mouse button to start", visible=True, box=False)
@@ -268,3 +291,4 @@ angle_text = wtext(text="10 degrees")
 
 while True:
     rate(10)
+
