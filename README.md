@@ -25,27 +25,28 @@ A not accurate to scale sun-earth-moon model, but very detailed and instructive 
 incoming energy from the sun (at a given latitude), as well as the variations in the length of
 the days per season. 
 
+<details>
+  <summary>Animations and source code</summary>
+  <ul><b>Sun-earth-moon system</b>
+      <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/daylight_variations">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Daylightvariations">glowscript.org</a></li>
+      <li>Glowscript <a href="./src/glowscript/asstrophysics/daylight_variations.py">daylight_variations.py</a> and VPython <a href="./src/astrophysics/daylight_variations.py">daylight_variations.py</a> versions in this repository</li>
+  </ul>
+</details>
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Daylightvariations">
   <img alt="Daylight variations" width="70%" height="70%" src="./images/daylight_variations.png" title="Click to animate"/>
 </a>
 
-- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/daylight_variations) 
-  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Daylightvariations)
-- Code base [on Trinket](https://trinket.io/library/trinkets/d218d43e551a)
-
-
 ##  Kepler's law of equal areas
 
-A dynamic visualization of Kepler's laws.
-
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw">
-  <img alt="Kepler's laws" width="50%" height="50%" src="./images/keplers_law.png" title="Click to animate"/>
-</a>
-
-- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/keplers_law) 
-  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw)
-- Code base [on Trinket](https://trinket.io/library/trinkets/11c6cd8b5622)
+<details>
+  <summary>Animations and source code</summary>
+  <ul><b>A dynamic visualization of Kepler's laws.</b>
+      <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/keplers_law.png">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw">glowscript.org</a></li>
+      <li>Glowscript <a href="./src/glowscript/asstrophysics/keplers_law.png">keplers_law.png</a> and VPython <a href="./src/astrophysics/keplers_law.png">keplers_law.png</a> versions in this repository</li>
+  </ul>
+</details>
 
 # Particle and quantum physics
 
