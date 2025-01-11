@@ -11,6 +11,42 @@ All animations can be viewed on [my glowscript.org](https://glowscript.org/#/use
 - [**`src`**](src) &rarr; contains the sources
 - [**`test`**](test) &rarr; the tests of the components in the generic toolbox
 
+Trinket](https://trinket.io/library/trinkets/9d869c1167ec)
+
+# Astrophysics
+
+The code pertaining to the demos in this section is available under the 
+[astrophysics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/)
+on [glowscript.org](https://glowscript.org).
+
+## Daylight variations &mdash; sun-earth-moon model
+
+A not accurate to scale sun-earth-moon model, but very detailed and instructive nonetheless! It shows the per day
+incoming energy from the sun (at a given latitude), as well as the variations in the length of
+the days per season. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Daylightvariations">
+  <img alt="Daylight variations" width="70%" height="70%" src="./images/daylight_variations.png" title="Click to animate"/>
+</a>
+
+- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/daylight_variations) 
+  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Daylightvariations)
+- Code base [on Trinket](https://trinket.io/library/trinkets/d218d43e551a)
+
+
+##  Kepler's law of equal areas
+
+A dynamic visualization of Kepler's laws.
+
+<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw">
+  <img alt="Kepler's laws" width="50%" height="50%" src="./images/keplers_law.png" title="Click to animate"/>
+</a>
+
+- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/keplers_law) 
+  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw)
+- Code base [on Trinket](https://trinket.io/library/trinkets/11c6cd8b5622)
+
 # Particle and quantum physics
 
 The code pertaining to the demos in this section is available under the 
@@ -358,43 +394,7 @@ This demo models the magnetization at various temperatures using a two-dimension
 
 - Doppler effect in action [on Trinket](https://zegerh-6085.trinket.io/sites/doppler_effect) 
   and in action [on glowscript.org](https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Dopplereffect)
-- The code base [on Trinket](https://trinket.io/library/trinkets/9d869c1167ec)
-
-# Astrophysics
-
-The code pertaining to the demos in this section is available under the 
-[astrophysics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/)
-on [glowscript.org](https://glowscript.org).
-
-
-##  Kepler's law of equal areas
-
-A dynamic visualization of Kepler's laws.
-
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw">
-  <img alt="Kepler's laws" width="50%" height="50%" src="./images/keplers_law.png" title="Click to animate"/>
-</a>
-
-- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/keplers_law) 
-  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw)
-- Code base [on Trinket](https://trinket.io/library/trinkets/11c6cd8b5622)
-
-
-## Daylight variations &mdash; sun-earth-moon model
-
-A not accurate to scale sun-earth-moon model, but very detailed and instructive nonetheless! It shows the per day
-incoming energy from the sun (at a given latitude), as well as the variations in the length of
-the days per season. 
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Daylightvariations">
-  <img alt="Daylight variations" width="50%" height="50%" src="./images/daylight_variations.png" title="Click to animate"/>
-</a>
-
-- Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/daylight_variations) 
-  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Daylightvariations)
-- Code base [on Trinket](https://trinket.io/library/trinkets/d218d43e551a)
-
+- The code base [on 
 
 # Special relativity
 
