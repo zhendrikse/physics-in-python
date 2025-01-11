@@ -1,7 +1,6 @@
 #Web VPython 3.2
 
 from vpython import canvas, color, arrow, vector, vec, slider, button, rate, random, norm
-from itertools import combinations
 
 title="""Flock of Birds
 
@@ -69,11 +68,12 @@ class Flock:
 
         # avoid nearest birds (A BETTER VERSION WOULD ANTICIPATE COLLISIONS)
         avoid = [vector(0, 0, 0)] * self._bird_count
-        for i, j in combinations(range(self._bird_count), 2):
-            separation_dist = self._birds[i].distance_to(self._birds[j])
-            if separation_dist.mag < 5 * size:
-                avoid[i] -= separation_dist / separation_dist.mag2
-                avoid[j] += separation_dist / separation_dist.mag2
+        for i in range(self._bird_count):
+            for j in range(i):
+                separation_dist = self._birds[i].distance_to(self._birds[j])
+                if separation_dist.mag < 5 * size:
+                    avoid[i] -= separation_dist / separation_dist.mag2
+                    avoid[j] += separation_dist / separation_dist.mag2
 
         for count in range(self._bird_count):
             acceleration = self._random_weight * vector.random()
