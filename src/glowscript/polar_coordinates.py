@@ -65,24 +65,24 @@ class Base:
             self._xy_mesh += [
                 cylinder(pos=position + pos_x_y + y_hat * j * delta_y, axis=x_hat * range_x, color=color.gray(.5),
                          radius=scale * .5, visible=False)]
-            self._xy_mesh += [
-                box(pos=position, length=range_x, width=scale, height=range_y, opacity=0.15, visible=False)]
+            pos = position + (x_.get(0) + .5 * range_x) * x_hat + (y_.get(0) + .5 * range_y) * y_hat
+            self._xy_mesh += [box(pos=pos, length=range_x, width=scale, height=range_y, opacity=0.15, visible=False)]
             self._xz_mesh += [
                 cylinder(pos=position + pos_x_z + x_hat * j * delta_x, axis=z_hat * range_z, color=color.gray(.5),
                          radius=scale * .5, visible=False)]
             self._xz_mesh += [
                 cylinder(pos=position + pos_x_z + z_hat * j * delta_z, axis=x_hat * range_x, color=color.gray(.5),
                          radius=scale * .5, visible=False)]
-            self._xz_mesh += [
-                box(pos=position, length=range_x, width=range_z, height=scale, opacity=0.15, visible=False)]
+            pos = position + (x_.get(0) + .5 * range_x) * x_hat + (z_.get(0) + .5 * range_z) * z_hat
+            self._xz_mesh += [box(pos=pos, length=range_x, width=range_z, height=scale, opacity=0.15, visible=False)]
             self._yz_mesh += [
                 cylinder(pos=position + pos_y_z + y_hat * j * delta_y, axis=z_hat * range_z, color=color.gray(.5),
                          radius=scale * .5, visible=False)]
             self._yz_mesh += [
                 cylinder(pos=position + pos_y_z + z_hat * j * delta_z, axis=y_hat * range_y, color=color.gray(.5),
                          radius=scale * .5, visible=False)]
-            self._yz_mesh += [
-                box(pos=position, length=scale, width=range_z, height=range_y, opacity=0.15, visible=False)]
+            pos = position + (y_.get(0) + .5 * range_y) * y_hat + (z_.get(0) + .5 * range_z) * z_hat
+            self._yz_mesh += [box(pos=pos, length=scale, width=range_z, height=range_y, opacity=0.15, visible=False)]
 
     def _make_axis(self, x_, y_, z_, delta_x, delta_y, delta_z, axis_color, axis_labels, scale):
         c1 = cylinder(pos=x_hat * x_.get(0), axis=x_hat * (x_.get(-1) - x_.get(0)), color=axis_color, radius=scale)
