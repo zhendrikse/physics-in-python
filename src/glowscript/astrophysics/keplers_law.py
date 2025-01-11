@@ -29,7 +29,7 @@ def month_step(time, offset=20, whole=1):  # mark the end of each "month"
 scene = canvas(title=title, width=1000, height=1000, range=3.2)
 #scene.background = color.white
 duration = 'Period: '
-sun = sphere(color=color.yellow, radius=0.1)  # motion of sun is ignored (or centre of mass coordinates)
+sun = sphere(color=color.yellow, radius=0.1, texture="http://i.imgur.com/yoEzbtg.jpg")  # motion of sun is ignored (or centre of mass coordinates)
 scale = 1.0
 poss = vector(0, scale, 0)
 planet = sphere(pos=poss, color=color.cyan, radius=0.05)
