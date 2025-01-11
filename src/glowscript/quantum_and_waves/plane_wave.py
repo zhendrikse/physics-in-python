@@ -235,7 +235,7 @@ animation.append_to_title(" Amplitude = ")
 amplitude_slider_text = wtext(pos=animation.title_anchor, text="3 units")
 animation.append_to_title("\n\n")
 
-_ = checkbox(pos=animation.title_anchor, text='Tick marks', bind=toggle_tick_marks, checked=True)
+_ = checkbox(pos=animation.title_anchor, text='Tick marks', bind=toggle_tick_marks, checked=False)
 _ = checkbox(pos=animation.title_anchor, text='YZ mesh', bind=toggle_yz_mesh, checked=False)
 _ = checkbox(pos=animation.title_anchor, text='XZ mesh', bind=toggle_xz_mesh, checked=True)
 _ = checkbox(pos=animation.title_anchor, text='XY mesh', bind=toggle_xy_mesh, checked=False)
