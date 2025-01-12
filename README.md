@@ -9,9 +9,7 @@ All animations can be viewed on [my glowscript.org](https://glowscript.org/#/use
 ### Repository contents
 
 - [**`src`**](src) &rarr; contains the sources
-- [**`test`**](test) &rarr; the tests of the components in the generic toolbox
-
-Trinket](https://trinket.io/library/trinkets/9d869c1167ec)
+- [**`test`**](test) &rarr; the tests of the components in the generic toolbox.
 
 # Astrophysics
 
