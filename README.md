@@ -579,6 +579,8 @@ Some animations that have something to do with water.
   </ul>
 </details>
 
+# Miscellaneous
+
 ## Symmetry planes of a cubic lattice &amp; flock of birds
 
 <figure>
