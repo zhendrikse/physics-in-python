@@ -554,7 +554,7 @@ Some animations that have something to do with water.
 - Take a look at [the code base](https://trinket.io/glowscript/3ec01917098d), which is 
   based on the original [water sprinkler](https://rhettallain.com/2019/11/12/modeling-a-spinning-sprinkler/) blog post and the code presented therein
 
-# Miscellaneous
+# Mathematics
 
 ## Polar coordinates &amp; 3D plots
 
