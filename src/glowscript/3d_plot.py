@@ -1,4 +1,4 @@
-# Web VPython 3.2
+Web VPython 3.2
 
 # https://github.com/nicolaspanel/numjs
 get_library('https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js')
@@ -24,13 +24,15 @@ Python code:
      return <span style="color: blue">0.4</span> + <span style="color: blue">0.2</span> * sin(<span style="color: blue">10</span> * x) * cos(<span style="color: blue">10</span> * y) * sin(<span style="color: blue">5</span> * t)
 
  xx, yy = np.meshgrid(np.linspace(<span style="color: blue">0</span>, <span style="color: blue">1</span>, <span style="color: blue">50</span>), np.linspace(<span style="color: blue">0</span>, <span style="color: blue">1</span>, <span style="color: blue">50</span>))
- p = plot3D(xx, yy, f, <span style="color: blue">0</span>, <span style="color: blue">1</span>)  
+ zz = np.linspace(<span style="color: blue">0</span>, <span style="color: blue">1</span>, <span style="color: blue">50</span>)
+
+ p = plot3D(xx, yy, zz, f)  
  </code>
  </div>
 
 """
 
-animation = canvas(align="top", width=600, height=600, center=vec(0.05 * 50, 0.2 * 50, 0), range=1.3 * 50,
+animation = canvas(align="top", width=600, height=600, center=vec(0.05 * 50, 0.2 * 50, 0),
                    forward=vec(-0.7, -0.5, -1), title=title)
 MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
@@ -66,7 +68,7 @@ np = Numpy()
 x_hat = vec(1, 0, 0)
 y_hat = vec(0, 1, 0)
 z_hat = vec(0, 0, 1)
-label_text = ("x", "y", "z")
+label_text = ("y", "z", "x")
 
 
 class Space:
@@ -77,8 +79,7 @@ class Space:
 
 
 class Base:
-    def __init__(self, space, position=vec(0, 0, 0), axis_color=color.yellow, tick_marks_color=color.red,
-                 axis_labels=label_text):
+    def __init__(self, space, position=vec(0, 0, 0), axis_color=color.yellow, tick_marks_color=color.red, axis_labels=label_text):
         x_ = space.linspace_x
         y_ = space.linspace_y
         z_ = space.linspace_z
@@ -175,23 +176,27 @@ class Base:
             self._yz_mesh[i].visible = visible
 
 
+# The x axis is labeled y, the z axis is labeled x, and the y axis is labeled z.
+# This is done to mimic fairly standard practive for plotting
+#     the z value of a function of x and y.
 class plot3D:
-    def __init__(self, xx, yy, f, zmin, zmax):
-        # The x axis is labeled y, the z axis is labeled x, and the y axis is labeled z.
-        # This is done to mimic fairly standard practive for plotting
-        #     the z value of a function of x and y.
+    def __init__(self, xx, yy, zz, f):
+        self.L_x = np.len(xx)
+        self.L_y = np.len(yy)
+        self.L_z = np.len(zz)
+        self._zz = zz
+        space = Space(np.linspace(-0, self.L_x, 11), np.linspace(0, self.L_y, 11), np.linspace(0, self.L_z, 11))
+        self._axis = Base(space)
+        self._axis.xy_mesh_visibility_is(True)
+        self._axis.xz_mesh_visibility_is(True)
+        self._axis.yz_mesh_visibility_is(True)
+
         self._f = f
         self._xx = xx
         self._yy = yy
-        self.zmin = zmin
-        self.zmax = zmax
-
-        self.L = np.len(xx)
-        R = self.L / 100
-        d = self.L - 2
 
         self.vertices = []
-        for i in range(self.L * self.L):
+        for i in range(self.L_x * self.L_x):
             x, y = self.get_x_and_y_for(i)
             value = self.evaluate(self._f(xx.get(x, y), yy.get(x, y), 0))
             self.vertices.append(self.make_vertex(x, y, value))
@@ -200,15 +205,16 @@ class plot3D:
         self.make_normals()
 
     def get_x_and_y_for(self, index):
-        return int(index / self.L), index % self.L
+        return int(index / self.L_x), index % self.L_x
 
     def evaluate(self, f_x_y):
-        return ((self.L - 2) / (self.zmax - self.zmin)) * (f_x_y - self.zmin)
+        range_z = self._zz.get(-1) - self._zz.get(0)
+        return self.L_z / range_z * (f_x_y - self._zz.get(0))
 
     def make_quads(self):
         # Create the quad objects, based on the vertex objects already created.
-        for x in range(self.L - 2):
-            for y in range(self.L - 2):
+        for x in range(self.L_x - 2):
+            for y in range(self.L_x - 2):
                 v0 = self.get_vertex(x, y)
                 v1 = self.get_vertex(x + 1, y)
                 v2 = self.get_vertex(x + 1, y + 1)
@@ -218,17 +224,17 @@ class plot3D:
     def make_normals(self):
         # Set the normal for each vertex to be perpendicular to the lower left corner of the quad.
         # The vectors a and b point to the right and up around a vertex in the xy plane.
-        for i in range(self.L * self.L):
-            x = int(i / self.L)
-            y = i % self.L
-            if x == self.L - 1 or y == self.L - 1: continue
+        for i in range(self.L_x * self.L_x):
+            x = int(i / self.L_x)
+            y = i % self.L_x
+            if x == self.L_x - 1 or y == self.L_x - 1: continue
             v = self.vertices[i]
-            a = self.vertices[i + self.L].pos - v.pos
+            a = self.vertices[i + self.L_x].pos - v.pos
             b = self.vertices[i + 1].pos - v.pos
             v.normal = cross(a, b)
 
     def replot(self, t):
-        for i in range(self.L * self.L):
+        for i in range(self.L_x * self.L_x):
             x, y = self.get_x_and_y_for(i)
             value = self.evaluate(self._f(xx.get(x, y), yy.get(x, y), t))
             self.vertices[i].pos.y = value
@@ -239,10 +245,25 @@ class plot3D:
         return vertex(pos=vec(y, value, x), color=color.cyan, normal=vec(0, 1, 0))
 
     def get_vertex(self, x, y):
-        return self.vertices[x * self.L + y]
+        return self.vertices[x * self.L_x + y]
 
     def get_pos(self, x, y):
         return self.get_vertex(x, y).pos
+
+    def axis_visibility_is(self, visible):
+        self._axis.axis_visibility_is(visible)
+
+    def tick_marks_visibility_is(self, visible):
+        self._axis.tick_marks_visibility_is(visible)
+
+    def xy_mesh_visibility_is(self, visible):
+        self._axis.xy_mesh_visibility_is(visible)
+
+    def xz_mesh_visibility_is(self, visible):
+        self._axis.xz_mesh_visibility_is(visible)
+
+    def yz_mesh_visibility_is(self, visible):
+        self._axis.yz_mesh_visibility_is(visible)
 
 
 def toggle_tick_marks(event):
@@ -273,14 +294,8 @@ _ = checkbox(text='Axis', bind=toggle_axis, checked=True)
 
 animation.append_to_caption(caption)
 
-space = Space(np.linspace(-0, 50, 11), np.linspace(0, 50, 11), np.linspace(0, 50, 11))
-axis = Base(space)
-axis.xy_mesh_visibility_is(True)
-axis.xz_mesh_visibility_is(True)
-axis.yz_mesh_visibility_is(True)
-
 xx, yy = np.meshgrid(np.linspace(0, 1, 50), np.linspace(0, 1, 50))
-
+zz = np.linspace(0, 1, 50)
 
 def f(x, y, t):
     return 0.4 + 0.2 * sin(10 * x) * cos(10 * y) * sin(5 * t)
@@ -289,10 +304,6 @@ def f(x, y, t):
 # xx, yy = np.meshgrid(np.linspace(-4, 4, 33), np.linspace(-4, 4, 33))
 # def f(x, y, t):
 #     return sqrt(x * x + y * y)
-
-
-p = plot3D(xx, yy, f, 0, 1)
-
 
 def running(ev):
     global run
@@ -305,10 +316,11 @@ MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 time = 0
 dt = 0.02
 run = True
+plot = plot3D(xx, yy, zz, f)
 while True:
     # print("scene.forward=" + str(animation.forward))
     # print("scene.range=" + str(animation.range))
     rate(30)
     if run:
-        p.replot(time)
+        plot.replot(time)
         time += dt
