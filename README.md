@@ -577,7 +577,7 @@ number of vibrating beads coupled by springs on both sides!
   </a>
 </figure>
 
-### $\psi(x,y,t) = \dfrac{1 + \sin(4 * t)}{\pi\sigma^4} \bigg(1 - \dfrac{1}{2} \bigg( \dfrac{x^2 + y^2}{\sigma^2} \bigg) \bigg) e^{-\dfrac{x^2+y^2}{2\sigma^2}} \text{ } \Bigg | \text{ } \psi(x,y,t) = 0.7+0.2\sin{(10x)}\cos{(10y)}\cos{(2t)}$
+### $\psi(x,y,t) = \dfrac{1 + \sin(4t)}{\pi\sigma^4} \bigg(1 - \dfrac{1}{2} \bigg( \dfrac{x^2 + y^2}{\sigma^2} \bigg) \bigg) e^{-\dfrac{x^2+y^2}{2\sigma^2}} \text{ } \Bigg | \text{ } \psi(x,y,t) = 0.7+0.2\sin{(10x)}\cos{(10y)}\cos{(2t)}$
 
 ## Polar coordinates
 

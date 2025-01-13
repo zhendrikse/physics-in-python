@@ -11,7 +11,7 @@ get_library('https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.mi
 
 title = """<a href="https://en.wikipedia.org/wiki/Ricker_wavelet">Ricker / Mexican hat / Marr wavelet</a>
 
-$\\psi(x,y,t) = \dfrac{1 + \sin(4 * t)}{\pi\sigma^4} \\bigg(1 - \dfrac{1}{2} \\bigg( \dfrac{x^2 + y^2}{\sigma^2} \\bigg) \\bigg) e^{-\\dfrac{x^2+y^2}{2\sigma^2}}$
+$\\psi(x,y,t) = \dfrac{1 + \sin(4t)}{\pi\sigma^4} \\bigg(1 - \dfrac{1}{2} \\bigg( \dfrac{x^2 + y^2}{\sigma^2} \\bigg) \\bigg) e^{-\\dfrac{x^2+y^2}{2\sigma^2}}$
 
 &#x2022; Based on <a href="https://www.glowscript.org/#/user/GlowScriptDemos/folder/Examples/program/Plot3D">Plot3D</a>
 &#x2022; Rewritten by <a href="https://github.com/zhendrikse/physics-in-python">Zeger Hendrikse</a> to include: 
@@ -272,7 +272,8 @@ class plot3D:
 
 
 def toggle_tick_marks(event):
-    plot
+    plot.tick_marks_visibility_is(event.checked)
+
 
 def toggle_xz_mesh(event):
     plot.xz_mesh_visibility_is(event.checked)
