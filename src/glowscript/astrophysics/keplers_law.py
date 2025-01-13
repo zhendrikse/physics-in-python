@@ -13,73 +13,91 @@ initial velocity. The program uses normalised units (G =1).
 
 from vpython import *
 
+
+animation = canvas(title=title, width=1000, height=1000, range=3.2)
+duration = 'Period: '
+
+# Default velocity gives a satisfactory range of eccentricities
+# velocity = -vector(0.984,0,0)   # gives period of 12.0 "months"
+class Planet:
+    def __init__(self, velocity = -vector(0.7 + 0.5 * random(), 0, 0)  ):
+        scale = 1.0
+        poss = vector(0, scale, 0)
+        self._velocity = velocity
+        self._planet = sphere(pos=poss, color=color.cyan, radius=0.05)
+        self._last_position = poss
+        #speed = mag(velocity)
+
+    def update(self):
+        self._last_position = vector(self._planet.pos)  # construction vector(planet.pos) makes oldpos a varible in its own right
+        # plot orbit
+        curve(pos=[self._last_position, self._planet.pos], color=color.red)
+
+        denominator = mag(self._planet.pos) ** 3
+        self._velocity -= self._planet.pos * dt / denominator  # inverse square law; force points toward sun
+        self._planet.pos += self._velocity * dt
+
+    def pos(self):
+        return self._planet.pos
+
+    def old_position(self):
+        return self._last_position
+
+    def speed(self):
+        return mag(self._velocity)
+
+
 def month_step(time, offset=20, whole=1):  # mark the end of each "month"
-    global ccolor  # have to make it global, since label uses it before it is updated
+    global colour  # have to make it global, since label uses it before it is updated
     if whole:
         label_text = str(int(time * 2 + dt))  # end of 'month', printing twice time gives about 12 'months' in 'year'
     else:
-        label_text = duration + str(round(time * 2), 2) + ' "months"\n Initial speed: ' + str(round(speed, 3))
-        ccolor = color.white
-    label(pos=planet.pos, text=label_text, color=ccolor,
-          xoffset=offset * planet.pos.x, yoffset=offset * planet.pos.y)
-    ccolor = vector(0.5 * (1 + random()), random(), random())  # randomise colour of radial vector
-    return ccolor
+        label_text = str(duration) + str(round(time * 2, 2)) + ' "months"\n Initial speed: ' + str(round(planet.speed(), 3))
+        colour = color.white
+    label(pos=planet.pos(), text=label_text, color=colour, xoffset=offset * planet.pos().x, yoffset=offset * planet.pos().y)
+    return vector(0.5 * (1 + random()), random(), random())  # randomise colour of radial vector
 
 
-scene = canvas(title=title, width=1000, height=1000, range=3.2)
-#scene.background = color.white
-duration = 'Period: '
+planet = Planet()
 sun = sphere(color=color.yellow, radius=0.1, texture="http://i.imgur.com/yoEzbtg.jpg")  # motion of sun is ignored (or centre of mass coordinates)
-scale = 1.0
-poss = vector(0, scale, 0)
-planet = sphere(pos=poss, color=color.cyan, radius=0.05)
+colour = color.white
 
-while 1:
-    velocity = -vector(0.7 + 0.5 * random(), 0, 0)  # gives a satisfactory range of eccentricities
-    ##velocity = -vector(0.984,0,0)   # gives period of 12.0 "months"
-    speed = mag(velocity)
-    steps = 20
-    dt = 0.5 / float(steps)
-    step = 0
-    time = 0
-    ccolor = color.white
-    old_position = vector(planet.pos)
-    ccolor = month_step(time)
-    curve(pos=[sun.pos, planet.pos], color=ccolor)
-
-    while not (old_position.x > 0 > planet.pos.x):
+def revolve_one_period(time):
+    global step, colour
+    while not (planet.old_position().x > 0 > planet.pos().x):
 
         rate(steps * 2)  # keep rate down so that development of orbit can be followed
         time += dt
-        old_position = vector(planet.pos)  # construction vector(planet.pos) makes oldpos a varible in its own right
-        # old_position = planet.pos makes "oldposs" point to "planet.pos"
-        # oldposs = planet.pos[:] does not work, because vector does not permit slicing
-        denominator = mag(planet.pos) ** 3
-        velocity -= planet.pos * dt / denominator  # inverse square law; force points toward sun
-        planet.pos += velocity * dt
-
-        # plot orbit
-        curve(pos=[old_position, planet.pos], color=color.red)
+        planet.update()
 
         step += 1
         if step == steps:
             step = 0
-            ccolor = month_step(time)
-            curve(pos=[sun.pos, planet.pos], color=color.white)
-        else:
-            # plot radius vector
-            curve(pos=[sun.pos, planet.pos], color=ccolor)
+            colour = month_step(time)
+            curve(pos=[sun.pos, planet.pos()], color=color.white)
+            continue
 
-        # if scene.kb.keys:
-        #     print
-        #     "key pressed"
-        #     duration = 'Duration: '
-        #     break
+        # plot radius vector
+        curve(pos=[sun.pos, planet.pos()], color=colour)
+    return time
+
+
+while 1:
+    steps = 20
+    dt = 0.5 / float(steps)
+    step = 0
+    time = 0
+    colour = month_step(time)
+    curve(pos=[sun.pos, planet.pos()], color=colour)
+    planet = Planet()
+
+    time = revolve_one_period(time)
 
     month_step(time, 50, 0)
     label(pos=vector(2.5, -2.5, 0), text='Click for another orbit')
-    _ = scene.waitfor('click')
+    _ = animation.waitfor('click')
 
-    for obj in scene.objects:
+    for obj in animation.objects:
         if obj is sun or obj is planet: continue
         obj.visible = 0  # clear the screen to do it again
+        obj.delete()

@@ -14,7 +14,7 @@ from random import random
 max_steps = 20
 
 def radial_vector_color(time, offset=max_steps, whole=True):  # mark the end of each "month"
-    global ccolor  # have to make it global, since label uses it before it is updated
+    global colour  # have to make it global, since label uses it before it is updated
     if whole:
         label_text = str(int(time * 2 + dt))  # end of 'month', printing twice time gives about 12 'months' in 'year'
     else:
@@ -40,10 +40,10 @@ while 1:
     dt = 0.5 / float(max_steps)
     step = 0
     time = 0
-    ccolor = color.white
+    colour = color.white
     old_position = vector(planet.pos)
-    ccolor = radial_vector_color(time)
-    curve(pos=[sun.pos, planet.pos], color=ccolor)
+    colour = radial_vector_color(time)
+    curve(pos=[sun.pos, planet.pos], color=colour)
 
     while not (old_position.x > 0 > planet.pos.x):
 
@@ -62,11 +62,11 @@ while 1:
         step += 1
         if step == max_steps:
             step = 0
-            ccolor = radial_vector_color(time)
+            colour = radial_vector_color(time)
             curve(pos=[sun.pos, planet.pos], color=color.white)
         else:
             # plot radius vector
-            curve(pos=[sun.pos, planet.pos], color=ccolor)
+            curve(pos=[sun.pos, planet.pos], color=colour)
 
         # if scene.kb.keys:
         #     print
