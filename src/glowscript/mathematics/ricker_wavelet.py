@@ -1,4 +1,4 @@
-Web VPython 3.2
+#Web VPython 3.2
 
 # https://github.com/nicolaspanel/numjs
 get_library('https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js')
@@ -9,10 +9,14 @@ get_library('https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.mi
 # The stride length from y = 0 to y = 1 is L.
 
 
-title = """
-$f(x,y,t) = 0.7+0.2\\sin{(10x)}\\cos{(10y)}\\cos{(2t)}$
+title = """<a href="https://en.wikipedia.org/wiki/Ricker_wavelet">Ricker / Mexican hat / Marr wavelet</a>
 
-<b>Click to toggle between pausing or running.</b>
+$\\psi(x,y,t) = \dfrac{1 + \sin(4 * t)}{\pi\sigma^4} \\bigg(1 - \dfrac{1}{2} \\bigg( \dfrac{x^2 + y^2}{\sigma^2} \\bigg) \\bigg) e^{-\\dfrac{x^2+y^2}{2\sigma^2}}$
+
+&#x2022; Based on <a href="https://www.glowscript.org/#/user/GlowScriptDemos/folder/Examples/program/Plot3D">Plot3D</a>
+&#x2022; Rewritten by <a href="https://github.com/zhendrikse/physics-in-python">Zeger Hendrikse</a> to include: 
+  &#x2022; Numpy linspace and meshgrid syntax
+  &#x2022; Configurable base and mesh background
 
 """
 
@@ -21,19 +25,19 @@ caption = """
 Python code:
 <code style="text-align: left; font-size: 14px">
  <span style="color: red">def</span> f(x, y, t):
-     return <span style="color: blue">0.4</span> + <span style="color: blue">0.2</span> * sin(<span style="color: blue">10</span> * x) * cos(<span style="color: blue">10</span> * y) * sin(<span style="color: blue">5</span> * t)
+     return (<span style="color: blue">1</span> + sin(<span style="color: blue">4</span> * t)) / (pi * sigma**<span style="color: blue">4</span>) * (<span style="color: blue">1</span> - <span style="color: blue">0.5</span> * ((x * x + y * y)) / (sigma * sigma)) * exp(<span style="color: blue">-1</span> * ((x * x + y * y) / (<span style="color: blue">2</span> * sigma * sigma)))
 
- xx, yy = np.meshgrid(np.linspace(<span style="color: blue">0</span>, <span style="color: blue">1</span>, <span style="color: blue">50</span>), np.linspace(<span style="color: blue">0</span>, <span style="color: blue">1</span>, <span style="color: blue">50</span>))
- zz = np.linspace(<span style="color: blue">0</span>, <span style="color: blue">1</span>, <span style="color: blue">50</span>)
-
+ xx, yy = np.meshgrid(np.linspace(<span style="color: blue">-2</span>, <span style="color: blue">2</span>, <span style="color: blue">50</span>), np.linspace(<span style="color: blue">-2</span>, <span style="color: blue">2</span>, <span style="color: blue">50</span>))
+ zz = np.linspace(<span style="color: blue">-2</span>, <span style="color: blue">2</span>, <span style="color: blue">50</span>)
+ sigma = <span style="color: blue">.6</span>
  p = plot3D(xx, yy, zz, f)  
  </code>
  </div>
 
 """
 
-animation = canvas(align="top", width=600, height=600, center=vec(0.05 * 50, 0.2 * 50, 0),
-                   forward=vec(-0.7, -0.5, -1), title=title)
+animation = canvas(align="top", width=600, height=600, center=vec(0, 5, 0),
+                   forward=vec(-0.9, -0.5, -.8), title=title, range=75)
 MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 
@@ -79,7 +83,8 @@ class Space:
 
 
 class Base:
-    def __init__(self, space, position=vec(0, 0, 0), axis_color=color.yellow, tick_marks_color=color.red, axis_labels=label_text):
+    def __init__(self, space, position=vec(0, 0, 0), axis_color=color.yellow, tick_marks_color=color.red,
+                 axis_labels=label_text):
         x_ = space.linspace_x
         y_ = space.linspace_y
         z_ = space.linspace_z
@@ -236,7 +241,7 @@ class plot3D:
     def replot(self, t):
         for i in range(self.L_x * self.L_x):
             x, y = self.get_x_and_y_for(i)
-            value = self.evaluate(self._f(xx.get(x, y), yy.get(x, y), t))
+            value = self.evaluate(self._f(self._xx.get(x, y), self._yy.get(x, y), t))
             self.vertices[i].pos.y = value
 
         self.make_normals()
@@ -286,28 +291,56 @@ def toggle_axis(event):
     axis.axis_visibility_is(event.checked)
 
 
+def ricker_wave():
+    xx, yy = np.meshgrid(np.linspace(-2, 2, 50), np.linspace(-2, 2, 50))
+    zz = np.linspace(-2, 2, 50)
+    sigma = .65
+
+    def f(x, y, t):
+        return -1 + (1 + sin(4 * t)) / (pi * sigma ** 4) * (1 - 0.5 * ((x * x + y * y)) / (sigma * sigma)) * exp(
+            -1 * ((x * x + y * y) / (2 * sigma * sigma)))
+
+    return xx, yy, zz, f
+
+
+def sine_cosine_wave():
+    xx, yy = np.meshgrid(np.linspace(0, 1, 50), np.linspace(0, 1, 50))
+    zz = np.linspace(0, 1, 50)
+
+    def f(x, y, t):
+        return 0.4 + 0.2 * sin(10 * x) * cos(10 * y) * sin(5 * t)
+
+    return xx, yy, zz, f
+
+
+def select_f(event):
+    if event.index < 0:
+        return
+    elif event.index == 0:
+        plot = plot3D(ricker_wave())
+    elif event.index == 1:
+        plot = plot3D(sine_cosine_wave())
+
+
 _ = checkbox(text='Tick marks', bind=toggle_tick_marks, checked=True)
 _ = checkbox(text='YZ mesh', bind=toggle_yz_mesh, checked=True)
 _ = checkbox(text='XZ mesh', bind=toggle_xz_mesh, checked=True)
 _ = checkbox(text='XY mesh', bind=toggle_xy_mesh, checked=True)
-_ = checkbox(text='Axis', bind=toggle_axis, checked=True)
-
+_ = checkbox(text='Axis  ', bind=toggle_axis, checked=True)
 animation.append_to_caption(caption)
 
-xx, yy = np.meshgrid(np.linspace(0, 1, 50), np.linspace(0, 1, 50))
-zz = np.linspace(0, 1, 50)
 
-def f(x, y, t):
-    return 0.4 + 0.2 * sin(10 * x) * cos(10 * y) * sin(5 * t)
-
-
-# xx, yy = np.meshgrid(np.linspace(-4, 4, 33), np.linspace(-4, 4, 33))
+# xx, yy = np.meshgrid(np.linspace(-4, 4, 25), np.linspace(-4, 4, 25))
+# zz = np.linspace(-5, 5, 25)
 # def f(x, y, t):
-#     return sqrt(x * x + y * y)
+#     return sqrt(x * x + y * y) - 5
 
 def running(ev):
     global run
     run = not run
+    # print("scene.center=" + str(animation.center))
+    # print("scene.forward=" + str(animation.forward))
+    # print("scene.range=" + str(animation.range))
 
 
 animation.bind('mousedown', running)
@@ -316,10 +349,8 @@ MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 time = 0
 dt = 0.02
 run = True
-plot = plot3D(xx, yy, zz, f)
+plot = plot3D(ricker_wave()[0], ricker_wave()[1], ricker_wave()[2], ricker_wave()[3])
 while True:
-    # print("scene.forward=" + str(animation.forward))
-    # print("scene.range=" + str(animation.range))
     rate(30)
     if run:
         plot.replot(time)

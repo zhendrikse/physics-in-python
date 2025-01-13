@@ -554,14 +554,38 @@ Some animations that have something to do with water.
 
 # Mathematics
 
-## Polar coordinates &amp; 3D plots
+## Some dynamic 3D plots
 
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">
-  <img alt="Polar coordinates" width="49%" height="49%" src="./images/polar_coordinates.png" title="Click to animate"/>
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/3dplot">
-    <img alt="3D plot" width="45%" height="44%" src="./images/3d_plot.png" title="Click to animate"/>
+<figure>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Rickerwavelet">
+    <img alt="Ricker wavelet" width="40%" height="40%" src="./images/ricker_wavelet.png" title="Click to animate"/>
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/3dsinewave">
+    <img alt="Sine cosine wave" width="40%" height="40%" src="./images/sine_cosine_wave.png" title="Click to animate"/>
   </a>
-</a>
+</figure>
+
+<details>
+  <summary>Animations and source code</summary>
+  <ul>
+    <ul><b>Dynamic Ricker wavelet</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/ricker_wavelet">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Rickerwavelet">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/mathematics/ricker_wavelet.py">ricker_wavelet.py</a> and VPython <a href="./src/mathematics/ricker_wavelet.py">ricker_wavelet.py</a> versions in this repository</li>
+    </ul>
+    <ul><b>Dynamic sine-cosine wave</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/sine_cosine_wave">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/3dsinewave">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/mathematics/sine_cosine_wave.py">sine_cosine_wave.py</a> and VPython <a href="./src/mathematics/sine_cosine_wave.py">sine_cosine_wave.py</a> versions in this repository</li>
+    </ul>
+  </ul>
+</details>
+
+## Polar coordinates
+
+<figure>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">
+    <img alt="Polar coordinates" width="49%" height="49%" src="./images/polar_coordinates.png" title="Click to animate"/>
+  </a>
+</figure>
 
 <details>
   <summary>Animations and source code</summary>
@@ -569,10 +593,6 @@ Some animations that have something to do with water.
     <ul><b>Polar coordinates</b>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/polar_coordinates">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/polar_coordinates.py">polar_coordinates.py</a> and VPython <a href="./src/polar_coordinates.py">polar_coordinates.py</a> versions in this repository</li>
-    </ul>
-    <ul><b>3D plot</b>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/3d_plot">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/3d_plot.py">3d_plot.py</a> and VPython <a href="./src/3d_plot.py">3d_plot.py</a> versions in this repository</li>
     </ul>
   </ul>
 </details>
