@@ -350,16 +350,7 @@ on [glowscript.org](https://glowscript.org).
 
 ## Visualizing a hard sphere gas model
 
-This model represents a Boltzmann gas (consisting of hard spheres) in a box. The velocity distribution of the colliding atoms eventually approaches the calculated 
-theoretical velocity distribution:
-
-$f(\vec{v}) d^3\vec{v} = \bigg [ \dfrac{m}{2\pi k_b T} \bigg ]^{3/2} \exp \bigg (-\dfrac{mv^2}{2 k_b T} \bigg) d^3\vec{v}$
-
-<figure>
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas">
-    <img alt="Hard sphere gas" width="40%" height="40%" src="./images/hard_sphere_gas.png" title="Click to animate"/>
-  </a>
-</figure>
+This model represents a Boltzmann gas (consisting of hard spheres) in a box. 
 
 <details>
   <summary>Animations and source code</summary>
@@ -370,6 +361,17 @@ $f(\vec{v}) d^3\vec{v} = \bigg [ \dfrac{m}{2\pi k_b T} \bigg ]^{3/2} \exp \bigg 
     </ul>
   </ul>
 </details>
+
+<figure>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas">
+    <img alt="Hard sphere gas" width="40%" height="40%" src="./images/hard_sphere_gas.png" title="Click to animate"/>
+  </a>
+</figure>
+
+The velocity distribution of the colliding atoms eventually approaches the calculated 
+theoretical velocity distribution:
+### $f(\vec{v}) d^3\vec{v} = \bigg [ \dfrac{m}{2\pi k_b T} \bigg ]^{3/2} e^{ \bigg (-\dfrac{mv^2}{2 k_b T} \bigg)} d^3\vec{v}$
+
 
 ## Two-dimensional Ising spin model: 
 
