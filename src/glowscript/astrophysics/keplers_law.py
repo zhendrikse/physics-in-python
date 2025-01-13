@@ -13,20 +13,16 @@ initial velocity. The program uses normalised units (G =1).
 
 from vpython import *
 
-
-animation = canvas(title=title, width=1000, height=1000, range=3.2)
-duration = 'Period: '
+animation = canvas(title=title, width=1000, height=1000, range=3.2, forward=vector(0.0222862, 0.928369, -0.370991))
 
 # Default velocity gives a satisfactory range of eccentricities
 # velocity = -vector(0.984,0,0)   # gives period of 12.0 "months"
 class Planet:
-    def __init__(self, velocity = -vector(0.7 + 0.5 * random(), 0, 0)  ):
-        scale = 1.0
+    def __init__(self, scale=1.0, velocity = -vector(0.7 + 0.5 * random(), 0, 0)  ):
         poss = vector(0, scale, 0)
         self._velocity = velocity
         self._planet = sphere(pos=poss, color=color.cyan, radius=0.05)
         self._last_position = poss
-        #speed = mag(velocity)
 
     def update(self):
         self._last_position = vector(self._planet.pos)  # construction vector(planet.pos) makes oldpos a varible in its own right
@@ -52,7 +48,7 @@ def month_step(time, offset=20, whole=1):  # mark the end of each "month"
     if whole:
         label_text = str(int(time * 2 + dt))  # end of 'month', printing twice time gives about 12 'months' in 'year'
     else:
-        label_text = str(duration) + str(round(time * 2, 2)) + ' "months"\n Initial speed: ' + str(round(planet.speed(), 3))
+        label_text = str('Period: ') + str(round(time * 2, 2)) + ' "months"\n Initial speed: ' + str(round(planet.speed(), 3))
         colour = color.white
     label(pos=planet.pos(), text=label_text, color=colour, xoffset=offset * planet.pos().x, yoffset=offset * planet.pos().y)
     return vector(0.5 * (1 + random()), random(), random())  # randomise colour of radial vector
@@ -63,8 +59,7 @@ sun = sphere(color=color.yellow, radius=0.1, texture="http://i.imgur.com/yoEzbtg
 colour = color.white
 
 def revolve_one_period(time):
-    global colour
-    step = 0
+    global step, colour
     while not (planet.old_position().x > 0 > planet.pos().x):
 
         rate(steps * 2)  # keep rate down so that development of orbit can be followed
@@ -90,7 +85,6 @@ while 1:
     time = 0
     colour = month_step(time)
     curve(pos=[sun.pos, planet.pos()], color=colour)
-    planet = Planet()
 
     time = revolve_one_period(time)
 
@@ -102,3 +96,5 @@ while 1:
         if obj is sun or obj is planet: continue
         obj.visible = 0  # clear the screen to do it again
         obj.delete()
+
+    planet = Planet()
