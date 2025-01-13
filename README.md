@@ -573,7 +573,7 @@ number of vibrating beads coupled by springs on both sides!
 <figure>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Rickerwavelet">
     <img alt="Ricker wavelet" width="40%" height="40%" src="./images/ricker_wavelet.png" title="Click to animate"/>
-  </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/3dsinewave">
     <img alt="Sine cosine wave" width="40%" height="40%" src="./images/sine_cosine_wave.png" title="Click to animate"/>
   </a>
