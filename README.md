@@ -534,8 +534,6 @@ number of vibrating beads coupled by springs on both sides!
 
 ## Water sprinkler and floating block
 
-Some animations that have something to do with water.
-
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Floatingblock">
   <img alt="Floating block" width="45%" height="45%" src="./images/floating_block.png" title="Click to animate"/>
 </a>
@@ -556,15 +554,6 @@ Some animations that have something to do with water.
 
 ## Some dynamic 3D plots
 
-<figure>
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Rickerwavelet">
-    <img alt="Ricker wavelet" width="40%" height="40%" src="./images/ricker_wavelet.png" title="Click to animate"/>
-  </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/3dsinewave">
-    <img alt="Sine cosine wave" width="40%" height="40%" src="./images/sine_cosine_wave.png" title="Click to animate"/>
-  </a>
-</figure>
-
 <details>
   <summary>Animations and source code</summary>
   <ul>
@@ -579,13 +568,18 @@ Some animations that have something to do with water.
   </ul>
 </details>
 
-## Polar coordinates
-
 <figure>
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">
-    <img alt="Polar coordinates" width="49%" height="49%" src="./images/polar_coordinates.png" title="Click to animate"/>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Rickerwavelet">
+    <img alt="Ricker wavelet" width="40%" height="40%" src="./images/ricker_wavelet.png" title="Click to animate"/>
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/3dsinewave">
+    <img alt="Sine cosine wave" width="40%" height="40%" src="./images/sine_cosine_wave.png" title="Click to animate"/>
   </a>
 </figure>
+
+### $\psi(x,y,t) = \dfrac{1 + \sin(4 * t)}{\pi\sigma^4} \bigg(1 - \dfrac{1}{2} \bigg( \dfrac{x^2 + y^2}{\sigma^2} \bigg) \bigg) e^{-\dfrac{x^2+y^2}{2\sigma^2}} \text{ } \Bigg | \text{ } \psi(x,y,t) = 0.7+0.2\sin{(10x)}\cos{(10y)}\cos{(2t)}$
+
+## Polar coordinates
 
 <details>
   <summary>Animations and source code</summary>
@@ -596,6 +590,12 @@ Some animations that have something to do with water.
     </ul>
   </ul>
 </details>
+
+<figure>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">
+    <img alt="Polar coordinates" width="49%" height="49%" src="./images/polar_coordinates.png" title="Click to animate"/>
+  </a>
+</figure>
 
 # Miscellaneous
 
@@ -616,6 +616,10 @@ Some animations that have something to do with water.
     <ul><b>Cubic lattice</b>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/crystal_symmetry_plaes">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/electromagnetism/crystal_symmetry_planes.py">crystal_symmetry_planes.py</a> and VPython <a href="./src/electromagnetism/crystal_symmetry_planes.py">crystal_symmetry_planes.py</a> versions in this repository</li>
+    </ul>
+    <ul><b>Flocking birds</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/crystal_symmetry_plaes">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Flockingbirds">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/flocking_birds.py">flocking_birds.py</a> and VPython <a href="./src/flocking_birds.py">flocking_birds.py</a> versions in this repository</li>
     </ul>
   </ul>
 </details>
