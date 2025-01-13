@@ -272,29 +272,28 @@ class plot3D:
 
 
 def toggle_tick_marks(event):
-    axis.tick_marks_visibility_is(event.checked)
-
+    plot
 
 def toggle_xz_mesh(event):
-    axis.xz_mesh_visibility_is(event.checked)
+    plot.xz_mesh_visibility_is(event.checked)
 
 
 def toggle_xy_mesh(event):
-    axis.xy_mesh_visibility_is(event.checked)
+    plot.xy_mesh_visibility_is(event.checked)
 
 
 def toggle_yz_mesh(event):
-    axis.yz_mesh_visibility_is(event.checked)
+    plot.yz_mesh_visibility_is(event.checked)
 
 
 def toggle_axis(event):
-    axis.axis_visibility_is(event.checked)
+    plot.axis_visibility_is(event.checked)
 
 
 def ricker_wave():
     xx, yy = np.meshgrid(np.linspace(-2, 2, 50), np.linspace(-2, 2, 50))
     zz = np.linspace(-2, 2, 50)
-    sigma = .65
+    sigma = .7
 
     def f(x, y, t):
         return -1 + (1 + sin(4 * t)) / (pi * sigma ** 4) * (1 - 0.5 * ((x * x + y * y)) / (sigma * sigma)) * exp(
