@@ -3,7 +3,9 @@ from vpython import *
 # https://github.com/nicolaspanel/numjs
 #get_library('https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js')
 
-animation = canvas(title="Axis componen")
+
+L = 50
+animation = canvas(width=600, height=600, center=vec(0.05 * L, 0.2 * L, 0), range=1.3 * L)
 
 class Array:
     def __init__(self, python_array=[]):
@@ -23,9 +25,11 @@ class Numpy:
         return Array(python_array)
         #return nj.array(python_array)
 
+    @staticmethod
     def _linspace(self, start, stop, num):
         return self.array([x for x in arange(start, stop, (stop - start) / (num - 1))] + [stop])
 
+    @staticmethod
     def _meshgrid(self, linspace_1, linspace_2):
         xx = nj.stack([linspace_1 for _ in range(linspace_1.shape)])
         temp = []
@@ -35,13 +39,11 @@ class Numpy:
         yy = nj.array(temp).reshape(linspace_2.shape[0], linspace_2.shape[0])
         return xx, yy
 
+    @staticmethod
     def _len(self, numpy_array): return numpy_array.shape[0]
 
 
 np = Numpy()
-
-L = 50
-animation = canvas(width=600, height=600, center=vec(0.05 * L, 0.2 * L, 0), range=1.3 * L)
 
 # There is an L by L grid of vertex objects, numbered 0 through L-1 by 0 through L-1.
 # Only the vertex operators numbered L-2 by L-2 are used to create quads.
@@ -50,7 +52,7 @@ animation = canvas(width=600, height=600, center=vec(0.05 * L, 0.2 * L, 0), rang
 
 ## The next line contains LaTeX math notation. See http://www.glowscript.org/docs/VPythonDocs/MathJax.html
 # scene.caption = """\\( f(x,y,t) = 0.7+0.2\\sin{(10x)}\\cos{(10y)}\\cos{(2t)} \\)
-scene.caption = """<i>f</i>(<i>x,y,t</i>) = 0.7+0.2sin(10<i>x</i>)cos(10<i>y</i>)cos(2<i>t</i>)
+animation.caption = """<i>f</i>(<i>x,y,t</i>) = 0.7+0.2sin(10<i>x</i>)cos(10<i>y</i>)cos(2<i>t</i>)
 <b>Click to toggle between pausing or running.</b>
    To rotate "camera", drag with right button or Ctrl-drag.
    To zoom, drag with middle button or Alt/Option depressed, or use scroll wheel.

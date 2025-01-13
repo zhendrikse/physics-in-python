@@ -3,7 +3,34 @@ from vpython import *
 # https://github.com/nicolaspanel/numjs
 get_library('https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js')
 
-animation = canvas(title="Axis componen")
+# There is an L by L grid of vertex objects, numbered 0 through L-1 by 0 through L-1.
+# Only the vertex operators numbered L-2 by L-2 are used to create quads.
+# The extra row and extra column of vertex objects simplifies edge calculations.
+# The stride length from y = 0 to y = 1 is L.
+
+
+title = """$f(x,y,t) = 0.7+0.2\\sin{(10x)}\\cos{(10y)}\\cos{(2t)}$
+
+"""
+
+caption = """
+<b>Click to toggle between pausing or running.</b>
+   <code style="text-align: left">
+   def f(x, y, t):
+     return 0.4 + 0.2 * sin(10 * x) * cos(10 * y) * sin(5 * t)
+
+   xx, yy = np.meshgrid(np.linspace(0, 1, L), np.linspace(0, 1, L))
+   p = plot3D(xx, yy, f, 0, 1)  
+   </code>
+   To rotate "camera", drag with right button or Ctrl-drag.
+   To zoom, drag with middle button or Alt/Option depressed, or use scroll wheel.
+     On a two-button mouse, middle is left + right.
+   To pan left/right and up/down, Shift-drag.
+   Touch screen: pinch/extend to zoom, swipe or two-finger rotate."""
+
+animation = canvas(width=600, height=600, center=vec(0.05 * 50, 0.2 * 50, 0), range=1.3 * 50,
+                   forward=vec(-0.7, -0.5, -1), title=title, caption=caption)
+MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 
 class Numpy:
@@ -11,6 +38,10 @@ class Numpy:
         self.array = self._array
         self.linspace = self._linspace
         self.len = self._len
+        self.meshgrid = self._meshgrid
+
+    def _len(self, numpy_array):
+        return numpy_array.shape[0]
 
     def _array(self, an_array):
         return nj.array(an_array)
@@ -18,30 +49,17 @@ class Numpy:
     def _linspace(self, start, stop, num):
         return self._array([x for x in arange(start, stop, (stop - start) / (num - 1))] + [stop])
 
-    def _len(self, numpy_array): return numpy_array.shape[0]
+    def _meshgrid(self, linspace_1, linspace_2):
+        xx = nj.stack([linspace_1 for _ in range(linspace_1.shape)])
+        temp = []
+        for i in range(linspace_2.shape[0]):
+            for j in range(linspace_2.shape[0]):
+                temp.append(linspace_2.get(i))
+        yy = nj.array(temp).reshape(linspace_2.shape[0], linspace_2.shape[0])
+        return xx, yy
 
 
 np = Numpy()
-
-L = 50
-animation = canvas(width=600, height=600, center=vec(0.05 * L, 0.2 * L, 0), range=1.3 * L)
-
-# There is an L by L grid of vertex objects, numbered 0 through L-1 by 0 through L-1.
-# Only the vertex operators numbered L-2 by L-2 are used to create quads.
-# The extra row and extra column of vertex objects simplifies edge calculations.
-# The stride length from y = 0 to y = 1 is L.
-
-## The next line contains LaTeX math notation. See http://www.glowscript.org/docs/VPythonDocs/MathJax.html
-# scene.caption = """\\( f(x,y,t) = 0.7+0.2\\sin{(10x)}\\cos{(10y)}\\cos{(2t)} \\)
-scene.caption = """<i>f</i>(<i>x,y,t</i>) = 0.7+0.2sin(10<i>x</i>)cos(10<i>y</i>)cos(2<i>t</i>)
-<b>Click to toggle between pausing or running.</b>
-   To rotate "camera", drag with right button or Ctrl-drag.
-   To zoom, drag with middle button or Alt/Option depressed, or use scroll wheel.
-     On a two-button mouse, middle is left + right.
-   To pan left/right and up/down, Shift-drag.
-   Touch screen: pinch/extend to zoom, swipe or two-finger rotate."""
-
-# MathJax.Hub.Queue(["Typeset",MathJax.Hub]) # format the LaTeX; see http://www.glowscript.org/docs/VPythonDocs/MathJax.html
 
 x_hat = vec(1, 0, 0)
 y_hat = vec(0, 1, 0)
@@ -156,53 +174,39 @@ class Base:
 
 
 class plot3D:
-    def __init__(self, f, xmin, xmax, ymin, ymax, zmin, zmax):
+    def __init__(self, xx, yy, f, zmin, zmax):
         # The x axis is labeled y, the z axis is labeled x, and the y axis is labeled z.
         # This is done to mimic fairly standard practive for plotting
         #     the z value of a function of x and y.
-        self.f = f
-        self.xmin = xmin if xmin else 0
-        self.xmax = xmax if xmax else 0
-        self.ymin = ymin if ymin else 0
-        self.ymax = ymax if ymax else 0
-        self.zmin = zmin if zmin else 0
-        self.zmax = zmax if zmax else 0
+        self._f = f
+        self._xx = xx
+        self._yy = yy
+        self.zmin = zmin
+        self.zmax = zmax
 
-        R = L / 100
-        d = L - 2
+        self.L = np.len(xx)
+        R = self.L / 100
+        d = self.L - 2
 
         self.vertices = []
-        values = self.f_values()
-        for i in range(L * L):
-            x = int(i / L)
-            y = i % L
-            self.vertices.append(self.make_vertex(x, y, values[i]))
+        for i in range(self.L * self.L):
+            x, y = self.get_x_and_y_for(i)
+            value = self.evaluate(self._f(xx.get(x, y), yy.get(x, y), 0))
+            self.vertices.append(self.make_vertex(x, y, value))
 
         self.make_quads()
         self.make_normals()
 
-    def f_values(self):
-        function_values = []
-        for i in range(L * L):
-            x = int(i / L)
-            y = i % L
-            function_values.append(self.evaluate(self.f_x_y(x, y)))
-        return function_values
-
-    def f_x_y(self, x, y):
-        d = L - 2
-        x_ = self.xmin + x * (self.xmax - self.xmin) / d
-        y_ = self.ymin + y * (self.ymax - self.ymin) / d
-        return self.f(x_, y_)
+    def get_x_and_y_for(self, index):
+        return int(index / self.L), index % self.L
 
     def evaluate(self, f_x_y):
-        d = L - 2
-        return (d / (self.zmax - self.zmin)) * (f_x_y - self.zmin)
+        return ((self.L - 2) / (self.zmax - self.zmin)) * (f_x_y - self.zmin)
 
     def make_quads(self):
         # Create the quad objects, based on the vertex objects already created.
-        for x in range(L - 2):
-            for y in range(L - 2):
+        for x in range(self.L - 2):
+            for y in range(self.L - 2):
                 v0 = self.get_vertex(x, y)
                 v1 = self.get_vertex(x + 1, y)
                 v2 = self.get_vertex(x + 1, y + 1)
@@ -212,19 +216,20 @@ class plot3D:
     def make_normals(self):
         # Set the normal for each vertex to be perpendicular to the lower left corner of the quad.
         # The vectors a and b point to the right and up around a vertex in the xy plane.
-        for i in range(L * L):
-            x = int(i / L)
-            y = i % L
-            if x == L - 1 or y == L - 1: continue
+        for i in range(self.L * self.L):
+            x = int(i / self.L)
+            y = i % self.L
+            if x == self.L - 1 or y == self.L - 1: continue
             v = self.vertices[i]
-            a = self.vertices[i + L].pos - v.pos
+            a = self.vertices[i + self.L].pos - v.pos
             b = self.vertices[i + 1].pos - v.pos
             v.normal = cross(a, b)
 
-    def replot(self):
-        values = self.f_values()
-        for i in range(L * L):
-            self.vertices[i].pos.y = values[i]
+    def replot(self, t):
+        for i in range(self.L * self.L):
+            x, y = self.get_x_and_y_for(i)
+            value = self.evaluate(self._f(xx.get(x, y), yy.get(x, y), t))
+            self.vertices[i].pos.y = value
 
         self.make_normals()
 
@@ -232,7 +237,7 @@ class plot3D:
         return vertex(pos=vec(y, value, x), color=color.cyan, normal=vec(0, 1, 0))
 
     def get_vertex(self, x, y):
-        return self.vertices[x * L + y]
+        return self.vertices[x * self.L + y]
 
     def get_pos(self, x, y):
         return self.get_vertex(x, y).pos
@@ -260,26 +265,30 @@ def toggle_axis(event):
 
 animation.append_to_caption("\n")
 _ = checkbox(text='Tick marks', bind=toggle_tick_marks, checked=True)
-_ = checkbox(text='YZ mesh', bind=toggle_yz_mesh, checked=False)
-_ = checkbox(text='XZ mesh', bind=toggle_xz_mesh, checked=False)
-_ = checkbox(text='XY mesh', bind=toggle_xy_mesh, checked=False)
+_ = checkbox(text='YZ mesh', bind=toggle_yz_mesh, checked=True)
+_ = checkbox(text='XZ mesh', bind=toggle_xz_mesh, checked=True)
+_ = checkbox(text='XY mesh', bind=toggle_xy_mesh, checked=True)
 _ = checkbox(text='Axis', bind=toggle_axis, checked=True)
 
-space = Space(np.linspace(-0, L, 11), np.linspace(0, L * .8, 11), np.linspace(0, L, 11))
+space = Space(np.linspace(-0, 50, 11), np.linspace(0, 50, 11), np.linspace(0, 50, 11))
 axis = Base(space)
+axis.xy_mesh_visibility_is(True)
+axis.xz_mesh_visibility_is(True)
+axis.yz_mesh_visibility_is(True)
 
-t = 0
-dt = 0.02
+xx, yy = np.meshgrid(np.linspace(0, 1, 50), np.linspace(0, 1, 50))
 
 
-def f(x, y):
-    # Return the value of the function of x and y:
+def f(x, y, t):
     return 0.4 + 0.2 * sin(10 * x) * cos(10 * y) * sin(5 * t)
 
 
-p = plot3D(f, 0, 1, 0, 1, 0, 1)  # function, xmin, xmax, ymin, ymax (defaults 0, 1, 0, 1, 0, 1)
+# xx, yy = np.meshgrid(np.linspace(-4, 4, 33), np.linspace(-4, 4, 33))
+# def f(x, y, t):
+#     return sqrt(x * x + y * y)
 
-run = True
+
+p = plot3D(xx, yy, f, 0, 1)
 
 
 def running(ev):
@@ -288,12 +297,15 @@ def running(ev):
 
 
 animation.bind('mousedown', running)
-animation.forward = vec(-0.7, -0.5, -1)
+MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
+time = 0
+dt = 0.02
+run = True
 while True:
     # print("scene.forward=" + str(animation.forward))
     # print("scene.range=" + str(animation.range))
     rate(30)
     if run:
-        p.replot()
-        t += dt
+        p.replot(time)
+        time += dt
