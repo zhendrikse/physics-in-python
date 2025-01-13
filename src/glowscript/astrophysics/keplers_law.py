@@ -63,7 +63,8 @@ sun = sphere(color=color.yellow, radius=0.1, texture="http://i.imgur.com/yoEzbtg
 colour = color.white
 
 def revolve_one_period(time):
-    global step, colour
+    global colour
+    step = 0
     while not (planet.old_position().x > 0 > planet.pos().x):
 
         rate(steps * 2)  # keep rate down so that development of orbit can be followed
