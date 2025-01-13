@@ -1,4 +1,4 @@
-from vpython import *
+# Web VPython 3.2
 
 # https://github.com/nicolaspanel/numjs
 get_library('https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js')
@@ -9,27 +9,29 @@ get_library('https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.mi
 # The stride length from y = 0 to y = 1 is L.
 
 
-title = """$f(x,y,t) = 0.7+0.2\\sin{(10x)}\\cos{(10y)}\\cos{(2t)}$
+title = """
+$f(x,y,t) = 0.7+0.2\\sin{(10x)}\\cos{(10y)}\\cos{(2t)}$
+
+<b>Click to toggle between pausing or running.</b>
 
 """
 
 caption = """
-<b>Click to toggle between pausing or running.</b>
-   <code style="text-align: left">
-   def f(x, y, t):
-     return 0.4 + 0.2 * sin(10 * x) * cos(10 * y) * sin(5 * t)
+<div style="float: left; text-align:left">
+Python code:
+<code style="text-align: left; font-size: 14px">
+ <span style="color: red">def</span> f(x, y, t):
+     return <span style="color: blue">0.4</span> + <span style="color: blue">0.2</span> * sin(<span style="color: blue">10</span> * x) * cos(<span style="color: blue">10</span> * y) * sin(<span style="color: blue">5</span> * t)
 
-   xx, yy = np.meshgrid(np.linspace(0, 1, L), np.linspace(0, 1, L))
-   p = plot3D(xx, yy, f, 0, 1)  
-   </code>
-   To rotate "camera", drag with right button or Ctrl-drag.
-   To zoom, drag with middle button or Alt/Option depressed, or use scroll wheel.
-     On a two-button mouse, middle is left + right.
-   To pan left/right and up/down, Shift-drag.
-   Touch screen: pinch/extend to zoom, swipe or two-finger rotate."""
+ xx, yy = np.meshgrid(np.linspace(<span style="color: blue">0</span>, <span style="color: blue">1</span>, <span style="color: blue">50</span>), np.linspace(<span style="color: blue">0</span>, <span style="color: blue">1</span>, <span style="color: blue">50</span>))
+ p = plot3D(xx, yy, f, <span style="color: blue">0</span>, <span style="color: blue">1</span>)  
+ </code>
+ </div>
 
-animation = canvas(width=600, height=600, center=vec(0.05 * 50, 0.2 * 50, 0), range=1.3 * 50,
-                   forward=vec(-0.7, -0.5, -1), title=title, caption=caption)
+"""
+
+animation = canvas(align="top", width=600, height=600, center=vec(0.05 * 50, 0.2 * 50, 0), range=1.3 * 50,
+                   forward=vec(-0.7, -0.5, -1), title=title)
 MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 
@@ -263,12 +265,13 @@ def toggle_axis(event):
     axis.axis_visibility_is(event.checked)
 
 
-animation.append_to_caption("\n")
 _ = checkbox(text='Tick marks', bind=toggle_tick_marks, checked=True)
 _ = checkbox(text='YZ mesh', bind=toggle_yz_mesh, checked=True)
 _ = checkbox(text='XZ mesh', bind=toggle_xz_mesh, checked=True)
 _ = checkbox(text='XY mesh', bind=toggle_xy_mesh, checked=True)
 _ = checkbox(text='Axis', bind=toggle_axis, checked=True)
+
+animation.append_to_caption(caption)
 
 space = Space(np.linspace(-0, 50, 11), np.linspace(0, 50, 11), np.linspace(0, 50, 11))
 axis = Base(space)
