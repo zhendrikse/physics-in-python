@@ -554,12 +554,12 @@ number of vibrating beads coupled by springs on both sides!
 
 # Mathematics
 
-## Some dynamic 3D plots
+## Dynamic 3D-plots of multivariate and complex functions
 
 <details>
   <summary>Animations and source code</summary>
   <ul>
-    <ul><b>Dynamic 3D-plots</b>
+    <ul><b>Dynamic 3D-plots of multivariate and complex functions</b>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/3d_plots">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/3dplots">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/mathematics/3d_plots.py">3d_plots.py</a> and VPython <a href="./src/mathematics/3d_plots.py">3d_plots.py</a> versions in this repository</li>
     </ul>
@@ -569,6 +569,10 @@ number of vibrating beads coupled by springs on both sides!
 <figure>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/3dplots">
     <img alt="3D-plots" width="45%" height="45%" src="./images/3d_plot.png" title="Click to animate"/>
+  </a>&nbsp;&nbsp;&nbsp;
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">
+    <img alt="Polar coordinates" width="45%" height="45%" src="./images/complex_function_plot.png" title="Click to animate"/>
+  </a>
 </figure>
 
 ## Polar coordinates
