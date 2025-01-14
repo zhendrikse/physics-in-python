@@ -572,10 +572,10 @@ number of vibrating beads coupled by springs on both sides!
 
 <figure>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/3dplots">
-    <img alt="3D-plots" width="45%" height="45%" src="./images/3d_plot.png" title="Click to animate"/>
+    <img alt="Multivariate functions" width="45%" height="45%" src="./images/3d_plot.png" title="Click to animate"/>
   </a>&nbsp;&nbsp;&nbsp;
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Complexfunctionplot">
-    <img alt="Polar coordinates" width="45%" height="45%" src="./images/complex_function_plot.png" title="Click to animate"/>
+    <img alt="Complex functions" width="45%" height="45%" src="./images/complex_function_plot.png" title="Click to animate"/>
   </a>
 </figure>
 
