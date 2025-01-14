@@ -20,7 +20,7 @@ sine_cosine_title = "<h2>$\\psi(x,y,t) = 0.7+0.2\\sin{(10x)}\\cos{(10y)}\\cos{(2
 exponential_title = "<h2>$\\psi(x, y, t) = \\sin(6t) \\sin(x^2 + y^2) e^{ -x^2 - y^2}$</h2>"
 ripple_title = "<h2>$\\psi(x, y, t) = \dfrac{\\sin(8t)}{8} \\sin\\bigg(3 (x^2 + y^2)\\bigg)$</h2"
 polynomial_title = "<h2>$\\psi(x, y, t) = \\sin(5t) (yx^3 - xy^3)$</h2>"
-cosine_of_abs_title = "<h2>$\\psi(x, y, t) = \\sin(4t)\\cos(|x| + |y|)$</h2>"
+cosine_of_abs_title = "<h2>$\\psi(x, y, t) = \\sin(5t)\\cos(|x| + |y|)$</h2>"
 
 caption = """
 &#x2022; Based on <a href="https://www.glowscript.org/#/user/GlowScriptDemos/folder/Examples/program/Plot3D">Plot3D</a>
@@ -326,7 +326,7 @@ def cosine_of_abs():
     zz = np.linspace(-2, 2, 75)
 
     def f(x, y, t):
-        return sin(4 * t) * cos(abs(x) + abs(y))
+        return sin(5 * t) * cos(abs(x) + abs(y))
 
     return xx, yy, zz, f
 
