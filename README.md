@@ -559,9 +559,13 @@ number of vibrating beads coupled by springs on both sides!
 <details>
   <summary>Animations and source code</summary>
   <ul>
-    <ul><b>Dynamic 3D-plots of multivariate and complex functions</b>
+    <ul><b>Dynamic 3D-plots of multivariate functions</b>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/3d_plots">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/3dplots">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/mathematics/3d_plots.py">3d_plots.py</a> and VPython <a href="./src/mathematics/3d_plots.py">3d_plots.py</a> versions in this repository</li>
+    </ul>
+    <ul><b>Dynamic 3D-plots of complex functions</b>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/complex_function_plot">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Complexfunctionplot">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/mathematics/complex_function_plot.py">complex_function_plot.py</a> and VPython <a href="./src/mathematics/complex_function_plot.py">complex_function_plot.py</a> versions in this repository</li>
     </ul>
   </ul>
 </details>
@@ -570,7 +574,7 @@ number of vibrating beads coupled by springs on both sides!
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/3dplots">
     <img alt="3D-plots" width="45%" height="45%" src="./images/3d_plot.png" title="Click to animate"/>
   </a>&nbsp;&nbsp;&nbsp;
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Complexfunctionplot">
     <img alt="Polar coordinates" width="45%" height="45%" src="./images/complex_function_plot.png" title="Click to animate"/>
   </a>
 </figure>
