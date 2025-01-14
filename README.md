@@ -25,9 +25,11 @@ the days per season.
 
 <details>
   <summary>Animations and source code</summary>
-  <ul><b>Sun-earth-moon system</b>
+  <ul><li><b>Sun-earth-moon system</b>
+    <ul>
       <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/daylight_variations">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Daylightvariations">glowscript.org</a></li>
       <li>Glowscript <a href="./src/glowscript/asstrophysics/daylight_variations.py">daylight_variations.py</a> and VPython <a href="./src/astrophysics/daylight_variations.py">daylight_variations.py</a> versions in this repository</li>
+    </ul></li>
   </ul>
 </details>
 
@@ -559,14 +561,17 @@ number of vibrating beads coupled by springs on both sides!
 <details>
   <summary>Animations and source code</summary>
   <ul>
-    <ul><b>Dynamic 3D-plots of multivariate functions</b>
+    <li><b>Dynamic 3D-plots of multivariate functions</b>
+    <ul>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/3d_plots">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/3dplots">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/mathematics/3d_plots.py">3d_plots.py</a> and VPython <a href="./src/mathematics/3d_plots.py">3d_plots.py</a> versions in this repository</li>
     </ul>
-    <ul><b>Dynamic 3D-plots of complex functions</b>
+    </li>
+    <li><b>Dynamic 3D-plots of complex functions</b>
+      <ul>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/complex_function_plot">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Complexfunctionplot">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/mathematics/complex_function_plot.py">complex_function_plot.py</a> and VPython <a href="./src/mathematics/complex_function_plot.py">complex_function_plot.py</a> versions in this repository</li>
-    </ul>
+      </ul></li>
   </ul>
 </details>
 
