@@ -1,4 +1,6 @@
-#Web VPython 3.2
+# Web VPython 3.2
+
+from vpython import *
 
 # https://github.com/nicolaspanel/numjs
 get_library('https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js')
@@ -9,35 +11,26 @@ get_library('https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.mi
 # The stride length from y = 0 to y = 1 is L.
 
 
-title = """<a href="https://en.wikipedia.org/wiki/Ricker_wavelet">Ricker / Mexican hat / Marr wavelet</a>
+ricker_title = """<a href="https://en.wikipedia.org/wiki/Ricker_wavelet">Ricker / Mexican hat / Marr wavelet</a>
 
 $\\psi(x,y,t) = \dfrac{1 + \sin(4t)}{\pi\sigma^4} \\bigg(1 - \dfrac{1}{2} \\bigg( \dfrac{x^2 + y^2}{\sigma^2} \\bigg) \\bigg) e^{-\\dfrac{x^2+y^2}{2\sigma^2}}$
+"""
 
+sine_cosine_title = "<h2>$\\psi(x,y,t) = 0.7+0.2\\sin{(10x)}\\cos{(10y)}\\cos{(2t)}$</h2>"
+exponential_title = "<h2>$\\psi(x, y, t) = \\sin(6t) \\sin(x^2 + y^2) e^{ -x^2 - y^2}$</h2>"
+ripple_title = "<h2>$\\psi(x, y, t) = \dfrac{\\sin(8t)}{8} \\sin\\bigg(3 (x^2 + y^2)\\bigg)$</h2"
+polynomial_title = "<h2>$\\psi(x, y, t) = \\sin(5t) (yx^3 - xy^3)$</h2>"
+cosine_of_abs_title = "<h2>$\\psi(x, y, t) = \\sin(4t)\\cos(|x| + |y|)$</h2>"
+
+caption = """
 &#x2022; Based on <a href="https://www.glowscript.org/#/user/GlowScriptDemos/folder/Examples/program/Plot3D">Plot3D</a>
 &#x2022; Rewritten by <a href="https://github.com/zhendrikse/physics-in-python">Zeger Hendrikse</a> to include: 
   &#x2022; Numpy linspace and meshgrid syntax
   &#x2022; Configurable base and mesh background
-
-"""
-
-caption = """
-<div style="float: left; text-align:left">
-Python code:
-<code style="text-align: left; font-size: 14px">
- <span style="color: red">def</span> f(x, y, t):
-     return (<span style="color: blue">1</span> + sin(<span style="color: blue">4</span> * t)) / (pi * sigma**<span style="color: blue">4</span>) * (<span style="color: blue">1</span> - <span style="color: blue">0.5</span> * ((x * x + y * y)) / (sigma * sigma)) * exp(<span style="color: blue">-1</span> * ((x * x + y * y) / (<span style="color: blue">2</span> * sigma * sigma)))
-
- xx, yy = np.meshgrid(np.linspace(<span style="color: blue">-2</span>, <span style="color: blue">2</span>, <span style="color: blue">50</span>), np.linspace(<span style="color: blue">-2</span>, <span style="color: blue">2</span>, <span style="color: blue">50</span>))
- zz = np.linspace(<span style="color: blue">-2</span>, <span style="color: blue">2</span>, <span style="color: blue">50</span>)
- sigma = <span style="color: blue">.6</span>
- p = plot3D(xx, yy, zz, f)  
- </code>
- </div>
-
 """
 
 animation = canvas(align="top", width=600, height=600, center=vec(0, 5, 0),
-                   forward=vec(-0.9, -0.5, -.8), title=title, range=75)
+                   forward=vec(-0.9, -0.5, -.8), title=ricker_title + "\n", range=75)
 MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 
@@ -185,72 +178,97 @@ class Base:
 # This is done to mimic fairly standard practive for plotting
 #     the z value of a function of x and y.
 class plot3D:
-    def __init__(self, xx, yy, zz, f):
-        self.L_x = np.len(xx)
-        self.L_y = np.len(yy)
-        self.L_z = np.len(zz)
-        self._zz = zz
-        space = Space(np.linspace(-0, self.L_x, 11), np.linspace(0, self.L_y, 11), np.linspace(0, self.L_z, 11))
-        self._axis = Base(space)
-        self._axis.xy_mesh_visibility_is(True)
-        self._axis.xz_mesh_visibility_is(True)
-        self._axis.yz_mesh_visibility_is(True)
-
+    def __init__(self, xx, yy, zz, f, colour=color.cyan):
         self._f = f
         self._xx = xx
         self._yy = yy
+        self._zz = zz
+        self._vertices = self._create_vertices(colour)
+        self._quads = self._create_quads()
+        self._make_normals()
+        self._axis = self._create_base()
 
-        self.vertices = []
-        for i in range(self.L_x * self.L_x):
-            x, y = self.get_x_and_y_for(i)
-            value = self.evaluate(self._f(xx.get(x, y), yy.get(x, y), 0))
-            self.vertices.append(self.make_vertex(x, y, value))
+    def reinitialize(self, xx, yy, zz, f, colour=color.cyan):
+        self._f = f
+        self._xx = xx
+        self._yy = yy
+        self._zz = zz
+        self._hide_plot()
+        self._hide_axis()
+        self._vertices = self._create_vertices(colour)
+        self._quads = self._create_quads()
+        self._make_normals()
+        self._axis = self._create_base()
 
-        self.make_quads()
-        self.make_normals()
+    def _hide_axis(self):
+        self._axis.tick_marks_visibility_is(False)
+        self._axis.axis_visibility_is(False)
+        self._axis.xy_mesh_visibility_is(False)
+        self._axis.xz_mesh_visibility_is(False)
+        self._axis.yz_mesh_visibility_is(False)
 
-    def get_x_and_y_for(self, index):
-        return int(index / self.L_x), index % self.L_x
+    def _hide_plot(self):
+        _ = [quad_.visible = False for quad_ in self._quads]
+        _ = [vertex_.visible = False for vertex_ in self._vertices]
 
-    def evaluate(self, f_x_y):
+    def _create_base(self):
+        space = Space(np.linspace(-0, np.len(self._xx), 11), np.linspace(0, np.len(self._yy), 11),
+                      np.linspace(0, np.len(self._zz), 11))
+        axis = Base(space)
+        axis.xy_mesh_visibility_is(True)
+        axis.xz_mesh_visibility_is(True)
+        axis.yz_mesh_visibility_is(True)
+        return axis
+
+    def _create_vertices(self, colour):
+        vertices = []
+        for i in range(np.len(self._xx) * np.len(self._yy)):
+            x, y = self._get_x_and_y_for(i)
+            value = self._evaluate(x, y, 0)
+            vertices.append(vertex(pos=vec(y, value, x), color=colour, normal=vec(0, 1, 0)))
+        return vertices
+
+    def _get_x_and_y_for(self, index):
+        return int(index / np.len(self._xx)), index % np.len(self._yy)
+
+    def _evaluate(self, x, y, t):
+        f_x_y = self._f(self._xx.get(x, y), self._yy.get(x, y), t)
         range_z = self._zz.get(-1) - self._zz.get(0)
-        return self.L_z / range_z * (f_x_y - self._zz.get(0))
+        return np.len(self._zz) / range_z * (f_x_y - self._zz.get(0))
 
-    def make_quads(self):
-        # Create the quad objects, based on the vertex objects already created.
-        for x in range(self.L_x - 2):
-            for y in range(self.L_x - 2):
+    # Create the quad objects, based on the vertex objects already created.
+    def _create_quads(self):
+        quads = []
+        for x in range(np.len(self._xx) - 2):
+            for y in range(np.len(self._yy) - 2):
                 v0 = self.get_vertex(x, y)
                 v1 = self.get_vertex(x + 1, y)
                 v2 = self.get_vertex(x + 1, y + 1)
                 v3 = self.get_vertex(x, y + 1)
-                quad(vs=[v0, v1, v2, v3])
+                quads.append(quad(vs=[v0, v1, v2, v3]))
+        return quads
 
-    def make_normals(self):
-        # Set the normal for each vertex to be perpendicular to the lower left corner of the quad.
-        # The vectors a and b point to the right and up around a vertex in the xy plane.
-        for i in range(self.L_x * self.L_x):
-            x = int(i / self.L_x)
-            y = i % self.L_x
-            if x == self.L_x - 1 or y == self.L_x - 1: continue
-            v = self.vertices[i]
-            a = self.vertices[i + self.L_x].pos - v.pos
-            b = self.vertices[i + 1].pos - v.pos
+    # Set the normal for each vertex to be perpendicular to the lower left corner of the quad.
+    # The vectors a and b point to the right and up around a vertex in the xy plane.
+    def _make_normals(self):
+        for i in range(np.len(self._xx) * np.len(self._yy)):
+            x, y = self._get_x_and_y_for(i)
+            if x == np.len(self._xx) - 1 or y == np.len(self._yy) - 1: continue
+            v = self._vertices[i]
+            a = self._vertices[i + np.len(self._xx)].pos - v.pos
+            b = self._vertices[i + 1].pos - v.pos
             v.normal = cross(a, b)
 
     def replot(self, t):
-        for i in range(self.L_x * self.L_x):
-            x, y = self.get_x_and_y_for(i)
-            value = self.evaluate(self._f(self._xx.get(x, y), self._yy.get(x, y), t))
-            self.vertices[i].pos.y = value
+        for i in range(np.len(self._xx) * np.len(self._yy)):
+            x, y = self._get_x_and_y_for(i)
+            value = self._evaluate(x, y, t)
+            self._vertices[i].pos.y = value
 
-        self.make_normals()
-
-    def make_vertex(self, x, y, value):
-        return vertex(pos=vec(y, value, x), color=color.cyan, normal=vec(0, 1, 0))
+        self._make_normals()
 
     def get_vertex(self, x, y):
-        return self.vertices[x * self.L_x + y]
+        return self._vertices[x * np.len(self._xx) + y]
 
     def get_pos(self, x, y):
         return self.get_vertex(x, y).pos
@@ -291,49 +309,116 @@ def toggle_axis(event):
     plot.axis_visibility_is(event.checked)
 
 
-def ricker_wave():
+def ricker():
     xx, yy = np.meshgrid(np.linspace(-2, 2, 50), np.linspace(-2, 2, 50))
     zz = np.linspace(-2, 2, 50)
     sigma = .7
 
     def f(x, y, t):
-        return -1 + (1 + sin(4 * t)) / (pi * sigma ** 4) * (1 - 0.5 * ((x * x + y * y)) / (sigma * sigma)) * exp(
+        return 1.5 * sin(4 * t) / (pi * sigma ** 4) * (1 - 0.5 * ((x * x + y * y)) / (sigma * sigma)) * exp(
             -1 * ((x * x + y * y) / (2 * sigma * sigma)))
 
     return xx, yy, zz, f
 
 
-def sine_cosine_wave():
-    xx, yy = np.meshgrid(np.linspace(0, 1, 50), np.linspace(0, 1, 50))
-    zz = np.linspace(0, 1, 50)
+def cosine_of_abs():
+    xx, yy = np.meshgrid(np.linspace(-2 * pi, 2 * pi, 75), np.linspace(-2 * pi, 2 * pi, 75))
+    zz = np.linspace(-2, 2, 75)
 
     def f(x, y, t):
-        return 0.4 + 0.2 * sin(10 * x) * cos(10 * y) * sin(5 * t)
+        return sin(4 * t) * cos(abs(x) + abs(y))
 
     return xx, yy, zz, f
 
 
-def select_f(event):
+def polynomial():
+    xx, yy = np.meshgrid(np.linspace(-1.75, 1.75, 50), np.linspace(-1.75, 1.75, 50))
+    zz = np.linspace(-4, 4, 50)
+
+    def f(x, y, t):
+        return sin(5 * t) * (y * x * x * x - x * y * y * y)
+
+    return xx, yy, zz, f
+
+
+def exp_sine():
+    xx, yy = np.meshgrid(np.linspace(-3, 3, 75), np.linspace(-3, 3, 75))
+    zz = np.linspace(-.45, .45, 75)
+
+    def f(x, y, t):
+        return sin(6 * t) * sin(x * x + y * y) * exp(-(x * x + y * y))
+
+    return xx, yy, zz, f
+
+
+def sine_cosine():
+    xx, yy = np.meshgrid(np.linspace(0, pi, 50), np.linspace(0, pi, 50))
+    zz = np.linspace(0, 3, 50)
+
+    def f(x, y, t):
+        return 1 + sin(1.25 * pi * x) * cos(1.25 * pi * y) * sin(5 * t)
+
+    return xx, yy, zz, f
+
+
+def ripple():
+    xx, yy = np.meshgrid(np.linspace(-1.75, 1.75, 75), np.linspace(-1.75, 1.75, 75))
+    zz = np.linspace(-.75, .75, 75)
+
+    def f(x, y, t):
+        return sin(8 * t) * sin(3 * (x * x + y * y)) / 8
+
+    return xx, yy, zz, f
+
+
+def switch_function(event):
+    xx, yy, zz, f, colour = None, None, None, None, color.cyan
     if event.index < 0:
         return
     elif event.index == 0:
-        plot = plot3D(ricker_wave())
+        xx, yy, zz, f = ricker()
+        animation.title = ricker_title + "\n"
+        animation.range = 75
     elif event.index == 1:
-        plot = plot3D(sine_cosine_wave())
+        xx, yy, zz, f = sine_cosine()
+        animation.title = sine_cosine_title + "\n"
+        animation.range = 75
+        colour = color.yellow
+    elif event.index == 2:
+        colour = color.green
+        xx, yy, zz, f = ripple()
+        animation.range = 115
+        animation.title = ripple_title + "\n\n"
+    elif event.index == 3:
+        colour = color.red
+        xx, yy, zz, f = exp_sine()
+        animation.range = 115
+        animation.title = exponential_title + "\n"
+    elif event.index == 4:
+        colour = color.blue
+        xx, yy, zz, f = polynomial()
+        animation.range = 75
+        animation.title = polynomial_title + "\n"
+    elif event.index == 5:
+        colour = color.white
+        xx, yy, zz, f = cosine_of_abs()
+        animation.range = 115
+        animation.title = cosine_of_abs_title + "\n"
+
+    plot.reinitialize(xx, yy, zz, f, colour)
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 
-_ = checkbox(text='Tick marks', bind=toggle_tick_marks, checked=True)
+wave_choices = ["Ricker wavelet", "Sine-cosine", "Ripple", "Exponential", "Polynomial", "Cosine of abs(x, y)"]
+_ = menu(choices=wave_choices, bind=switch_function)
+animation.append_to_caption("  ")
 _ = checkbox(text='YZ mesh', bind=toggle_yz_mesh, checked=True)
 _ = checkbox(text='XZ mesh', bind=toggle_xz_mesh, checked=True)
 _ = checkbox(text='XY mesh', bind=toggle_xy_mesh, checked=True)
-_ = checkbox(text='Axis  ', bind=toggle_axis, checked=True)
-animation.append_to_caption(caption)
+_ = checkbox(text='Axis', bind=toggle_axis, checked=True)
+_ = checkbox(text='Tick marks', bind=toggle_tick_marks, checked=True)
+animation.append_to_caption("\n" + caption + "\n")
 
-
-# xx, yy = np.meshgrid(np.linspace(-4, 4, 25), np.linspace(-4, 4, 25))
-# zz = np.linspace(-5, 5, 25)
-# def f(x, y, t):
-#     return sqrt(x * x + y * y) - 5
 
 def running(ev):
     global run
@@ -349,9 +434,10 @@ MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 time = 0
 dt = 0.02
 run = True
-plot = plot3D(ricker_wave()[0], ricker_wave()[1], ricker_wave()[2], ricker_wave()[3])
+plot = plot3D(ricker()[0], ricker()[1], ricker()[2], ricker()[3])
 while True:
     rate(30)
     if run:
         plot.replot(time)
         time += dt
+

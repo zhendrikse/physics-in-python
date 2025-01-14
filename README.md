@@ -560,26 +560,17 @@ number of vibrating beads coupled by springs on both sides!
   <summary>Animations and source code</summary>
   <ul>
     <ul><b>Dynamic Ricker wavelet</b>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/ricker_wavelet">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Rickerwavelet">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/mathematics/ricker_wavelet.py">ricker_wavelet.py</a> and VPython <a href="./src/mathematics/ricker_wavelet.py">ricker_wavelet.py</a> versions in this repository</li>
-    </ul>
-    <ul><b>Dynamic sine-cosine wave</b>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/sine_cosine_wave">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/3dsinewave">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/mathematics/sine_cosine_wave.py">sine_cosine_wave.py</a> and VPython <a href="./src/mathematics/sine_cosine_wave.py">sine_cosine_wave.py</a> versions in this repository</li>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/3d_plots">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/3dplots">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/mathematics/3d_plots.py">3d_plots.py</a> and VPython <a href="./src/mathematics/3d_plots.py">3d_plots.py</a> versions in this repository</li>
     </ul>
   </ul>
 </details>
 
 <figure>
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Rickerwavelet">
-    <img alt="Ricker wavelet" width="40%" height="40%" src="./images/ricker_wavelet.png" title="Click to animate"/>
-  </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/3dsinewave">
-    <img alt="Sine cosine wave" width="40%" height="40%" src="./images/sine_cosine_wave.png" title="Click to animate"/>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/3dplots">
+    <img alt="Ricker wavelet" width="45%" height="45%" src="./images/3d_plot.png" title="Click to animate"/>
   </a>
 </figure>
-
-### $\psi(x,y,t) = \dfrac{1 + \sin(4t)}{\pi\sigma^4} \bigg(1 - \dfrac{1}{2} \bigg( \dfrac{x^2 + y^2}{\sigma^2} \bigg) \bigg) e^{-\dfrac{x^2+y^2}{2\sigma^2}} \text{ } \Bigg | \text{ } \psi(x,y,t) = 0.7+0.2\sin{(10x)}\cos{(10y)}\cos{(2t)}$
 
 ## Polar coordinates
 
