@@ -44,9 +44,11 @@ the days per season.
 
 <details>
   <summary>Animations and source code</summary>
-  <ul><b>A dynamic visualization of Kepler's laws.</b>
+  <ul><li><b>A dynamic visualization of Kepler's laws.</b>
+    <ul>
       <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/keplers_law.png">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw">glowscript.org</a></li>
       <li>Glowscript <a href="./src/glowscript/asstrophysics/keplers_law.png">keplers_law.png</a> and VPython <a href="./src/astrophysics/keplers_law.png">keplers_law.png</a> versions in this repository</li>
+    </ul></li>
   </ul>
 </details>
 
@@ -64,9 +66,11 @@ on [glowscript.org](https://glowscript.org).
 
 ## Visualization of plane waves $\psi(x, t) = A \cdot e^{i(k x - \omega t)}$
 
-<a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave">
-  <img alt="Complex wave" width="50%" height="50%" src="./images/plane_wave.png" title="Click to animate"/>
-</a>
+<figure>
+  <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave">
+    <img alt="Complex wave" width="50%" height="50%" src="./images/plane_wave.png" title="Click to animate"/>
+  </a>
+</figure>
 
 With the plane wave as illustrated above, we can easily derive the Schr&#246;dinger equation:
 
@@ -93,19 +97,21 @@ $(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x, 
 
 <details>
   <summary>Animations and source code</summary>
-  <ul>
-    <ul><b>Plane wave</b>
+  <ul><li><b>Plane wave</b>
+    <ul>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/plane_wave">on Trinket</a> and <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/quantum_and_waves/plane_wave.py">plane_wave.py</a> and VPython <a href="./src/quantum_and_waves/plane_wave.py">plane_wave.py</a> versions in this repository</li>
-    </ul>
+    </ul></li>
   </ul>
 </details>
 
 ## One-dimensional quantum particle bound by an infinite square well
 
-<a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Infinitesquarewell">
-  <img alt="Complex wave" width="50%" height="50%" src="./images/infinite_square_well.png" title="Click to animate"/>
-</a>
+<figure>
+  <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Infinitesquarewell">
+    <img alt="Complex wave" width="50%" height="50%" src="./images/infinite_square_well.png" title="Click to animate"/>
+  </a>
+</figure>
 
 <details>
 <summary>Background: particle in a box, i.e. confined by an infinite square well</summary>
@@ -143,10 +149,11 @@ These energy eigenstates (and superpositions thereof) are used in the visualizat
 <details>
   <summary>Animations and source code</summary>
   <ul>
-    <ul><b>Plane wave</b>
+    <li><b>Plane wave</b>
+      <ul>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/infinite_square_well">on Trinket</a> and <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Infinitesquarewell">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/quantum_and_waves/infinite_square_well.py">infinite_square_well.py</a> and VPython <a href="./src/quantum_and_waves/infinite_square_well.py">infinite_square_well.py</a> versions in this repository</li>
-    </ul>
+    </ul></li>
   </ul>
 </details>
 
@@ -154,9 +161,11 @@ These energy eigenstates (and superpositions thereof) are used in the visualizat
 
 The quantum harmonic oscillator is visualized in a semi-classical way below.
 
-<a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Quantumoscillator">
-  <img alt="Quantum oscillator" width="50%" height="50%" src="./images/quantum_oscillator.png" title="Click to animate"/>
-</a>
+<figure>
+  <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Quantumoscillator">
+    <img alt="Quantum oscillator" width="50%" height="50%" src="./images/quantum_oscillator.png" title="Click to animate"/>
+  </a>
+</figure>
 
 - Quantum oscillator in action [on Trinket](https://zegerh-6085.trinket.io/sites/quantum_oscillator) 
   and in action [on glowscript.org](https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Quantumoscillator)
