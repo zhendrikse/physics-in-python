@@ -3,7 +3,7 @@
 from vpython import canvas, vec, cylinder, wtext, slider, rate, arrow, cos, sin, pi, arange, floor, color, sqrt, graph, \
     gcurve, label, checkbox, wtext
 
-title = """Visualization of particle confined by a quadratic well
+title = """Visualization of particle confined by an infinite square well
 
 &#x2022; From <a href="https://www.amazon.com/Visualizing-Quantum-Mechanics-Python-Spicklemire/dp/1032569247">Visualizing Quantum Mechanics with Python</a>
 &#x2022; Modified by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a>, located in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
@@ -12,7 +12,38 @@ title = """Visualization of particle confined by a quadratic well
 """
 
 background_info = """
-<b>Background</b>: Simple Harmonic Oscillator
+<b>Background</b>: particle in a box, i.e. confined by an infinite square well
+
+Although the one-dimensional particle-in-a-box problem does not correspond to any
+real-world system, it illustrates quite well some (fundamental) 
+quantum mechanical features nonetheless.
+
+The box is modeled by an infinite square well, so that the particle cannot escape 
+beyond the boundaries of the box.
+
+Inside the box, the potential energy $V$ is zero (or constant). Substituting this together with the
+formula for the plane wave $\psi(x,t) = Ae^{ik x}e^{-i\omega t}$ into the Schrödinger equation, we get:
+
+$\dfrac{\partial^2\psi}{\partial x^2} + \dfrac{8\pi^2m}{h^2}(E - 0)\psi=0 \Rightarrow \\bigg(\dfrac{-h^2}{8\pi^2m}\\bigg)\dfrac{\partial^2\psi}{\partial x^2}=E\psi$
+
+Which function does give itself (times $E$) when differentiated twice <em>and</em> is zero at both boundaries of the box?
+
+$\psi = A\sin(ax) \Rightarrow \dfrac{h^2a^2}{8\pi^2m}\psi=E\psi \Rightarrow E=\dfrac{h^2a^2}{8\pi^2m}$
+
+To get $a$, we note that the wave function equals zero at the box boundaries:
+
+$\psi=A\sin(ax) = 0 \Rightarrow a=\dfrac{n\pi}{L} \Rightarrow \psi_n = A\sin\\bigg(\dfrac{n\pi x}{L}\\bigg) \Rightarrow E_n=\dfrac{h^2n^2}{8mL^2}$
+
+Normalizing the wave function results in an expression for $A$:
+
+$\int_0^L \psi \cdot  \psi dx = 1 \Rightarrow A^2 \int_0^L\sin^2\\bigg(\dfrac{n\pi x}{L}\\bigg) dx=1 \Rightarrow A^2\\bigg(\dfrac{L}{2}\\bigg)=1 \Rightarrow A=\sqrt{\dfrac{2}{L}}$
+
+So summarizing, we have
+
+$E=\dfrac{h^2a^2}{8\pi^2m} \\text{ and } \psi_n=\sqrt{\dfrac{2}{L}}\sin(nkx), \\text{where } k=\dfrac{\pi}{L}$
+
+These energy eigenstates (and superpositions thereof) are used in the visualization software.
+
 """
 
 animation = canvas(width=600, height=300, align='top', title=title, range=6, center=vec(10, 0, 0))
@@ -28,8 +59,8 @@ class Complex:
         self._imaginary = imaginary
 
     def multiplied_by(self, factor):
-        real = self._real * factor.real() - self._imaginary * factor.imaginary()
-        imaginary = self._imaginary * factor.real() + self._real * factor.imaginary()
+        real = self._real * factor._real - self._imaginary * factor._imaginary
+        imaginary = self._imaginary * factor._real + self._real * factor._imaginary
         return Complex(real, imaginary)
 
     def real(self):
@@ -181,11 +212,11 @@ def toggle_info(event):
     if event.checked:
         # animation.width = 1200
         animation.caption = background_info
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub])  # , animation.title])  # LaTeX formatting
+        #MathJax.Hub.Queue(["Typeset", MathJax.Hub])  # , animation.title])  # LaTeX formatting
     else:
         # animation.width = 600
         animation.caption = ""
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub])  # , animation.title])  # LaTeX formatting
+        #MathJax.Hub.Queue(["Typeset", MathJax.Hub])  # , animation.title])  # LaTeX formatting
 
 
 _ = checkbox(pos=animation.title_anchor, text="Show more background information in the caption", bind=toggle_info,
@@ -214,14 +245,14 @@ animation.append_to_title("\n\n")
 animation.append_to_caption("\n\n")
 
 frequency = 2
-a = 15
+L = 20
 
 left = cylinder(pos=vec(-0.5, -3, 0), axis=vec(0, 6, 0), radius=0.1, color=color.yellow)
-right = cylinder(pos=vec(a, -3, 0), axis=vec(0, 6, 0), radius=0.1, color=color.yellow)
-info = label(pos=vec(a / 2, 3, 0), text="Click mouse to restart", box=False, color=color.yellow, visible=False)
+right = cylinder(pos=vec(L, -3, 0), axis=vec(0, 6, 0), radius=0.1, color=color.yellow)
+info = label(pos=vec(L / 2, 3, 0), text="Click mouse to restart", box=False, color=color.yellow, visible=False)
 
-psi = Psi(k=pi / a, omega=2 * pi / frequency, wave_function=superposition)
-wave = Wave(psi, numpy_linspace(-a / 2, a / 2, 80))
+psi = Psi(k=pi / L, omega=2 * pi / frequency, wave_function=superposition)
+wave = Wave(psi, numpy_linspace(0, L, 40))
 
 t = 0
 dt = 0.002

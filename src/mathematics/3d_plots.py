@@ -34,6 +34,13 @@ animation = canvas(align="top", width=600, height=600, center=vec(0, 5, 0),
                    forward=vec(-0.9, -0.5, -.8), title=ricker_title + "\n", range=75)
 #MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
+class ArrayWrapper:
+    def __init__(self, np_array):
+        self._array = numpy.array(np_array)
+
+    def get(self, i, j):
+        return self._array[i, j]
+
 class Numpy:
     def __init__(self):
         self.array = self._array
@@ -41,24 +48,12 @@ class Numpy:
         self.len = self._len
         self.meshgrid = self._meshgrid
 
-    def _len(self, numpy_array):
-        return numpy_array.shape[0]
-
-    def _array(self, an_array):
-        return numpy.array(an_array)
+    def _meshgrid(self, linspace_1, linspace_2): return numpy.meshgrid(linspace_1, linspace_2)
+    def _len(self, numpy_array): return numpy_array.shape[0]
+    def _array(self, an_array): return ArrayWrapper(an_array)
 
     def _linspace(self, start, stop, num):
         return self._array([x for x in arange(start, stop, (stop - start) / (num - 1))] + [stop])
-
-    def _meshgrid(self, linspace_1, linspace_2):
-        xx = numpy.stack([linspace_1 for _ in range(linspace_1.shape)])
-        temp = []
-        for i in range(linspace_2.shape[0]):
-            for j in range(linspace_2.shape[0]):
-                temp.append(linspace_2.get(i))
-        yy = numpy.array(temp).reshape(linspace_2.shape[0], linspace_2.shape[0])
-        return xx, yy
-
 
 np = Numpy()
 
@@ -311,6 +306,16 @@ def toggle_axis(event):
     plot.axis_visibility_is(event.checked)
 
 
+def sine_sqrt():
+    xx, yy = np.meshgrid(np.linspace(-2 * pi, 2 * pi, 50), np.linspace(-2 * pi, 2 * pi, 50))
+    zz = np.linspace(-2, 2, 50)
+
+    def f(x, y, t):
+        return sin(5 * t) * sin(sqrt(x * x + y * y))
+
+    return xx, yy, zz, f
+
+
 def ricker():
     xx, yy = np.meshgrid(np.linspace(-2, 2, 50), np.linspace(-2, 2, 50))
     zz = np.linspace(-2, 2, 50)
@@ -381,37 +386,44 @@ def switch_function(event):
         xx, yy, zz, f = ricker()
         animation.title = ricker_title + "\n"
         animation.range = 75
+        colour = color.cyan
     elif event.index == 1:
+        xx, yy, zz, f = sine_sqrt()
+        animation.title = sine_sqrt_title + "\n"
+        animation.range = 75
+        colour = color.magenta
+    elif event.index == 2:
         xx, yy, zz, f = sine_cosine()
         animation.title = sine_cosine_title + "\n"
         animation.range = 75
         colour = color.yellow
-    elif event.index == 2:
+    elif event.index == 3:
         colour = color.green
         xx, yy, zz, f = ripple()
         animation.range = 115
         animation.title = ripple_title + "\n\n"
-    elif event.index == 3:
+    elif event.index == 4:
         colour = color.red
         xx, yy, zz, f = exp_sine()
         animation.range = 115
         animation.title = exponential_title + "\n"
-    elif event.index == 4:
+    elif event.index == 5:
         colour = color.blue
         xx, yy, zz, f = polynomial()
         animation.range = 75
         animation.title = polynomial_title + "\n"
-    elif event.index == 5:
+    elif event.index == 6:
         colour = color.white
         xx, yy, zz, f = cosine_of_abs()
         animation.range = 115
         animation.title = cosine_of_abs_title + "\n"
 
     plot.reinitialize(xx, yy, zz, f, colour)
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub])
+    #MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 
-wave_choices = ["Ricker wavelet", "Sine-cosine", "Ripple", "Exponential", "Polynomial", "Cosine of abs(x, y)"]
+wave_choices = ["Ricker wavelet", "Sine of square root", "Sine-cosine", "Ripple", "Exponential", "Polynomial",
+                "Cosine of abs(x, y)"]
 _ = menu(choices=wave_choices, bind=switch_function)
 animation.append_to_caption("  ")
 _ = checkbox(text='YZ mesh', bind=toggle_yz_mesh, checked=True)

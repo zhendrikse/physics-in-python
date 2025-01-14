@@ -1,4 +1,4 @@
-# Web VPython 3.2
+#Web VPython 3.2
 
 from vpython import *
 
@@ -21,7 +21,7 @@ exponential_title = "<h2>$\\psi(x, y, t) = \\sin(6t) \\sin(x^2 + y^2) e^{ -x^2 -
 ripple_title = "<h2>$\\psi(x, y, t) = \dfrac{\\sin(8t)}{8} \\sin\\bigg(3 (x^2 + y^2)\\bigg)$</h2"
 polynomial_title = "<h2>$\\psi(x, y, t) = \\sin(5t) (yx^3 - xy^3)$</h2>"
 cosine_of_abs_title = "<h2>$\\psi(x, y, t) = \\sin(5t)\\cos(|x| + |y|)$</h2>"
-
+sine_sqrt_title = "<h2>$\\psi(x, y, t) = \\sin(5t)\sqrt{x^2+y^2}$</h2>"
 caption = """
 &#x2022; Based on <a href="https://www.glowscript.org/#/user/GlowScriptDemos/folder/Examples/program/Plot3D">Plot3D</a>
 &#x2022; Rewritten by <a href="https://github.com/zhendrikse/physics-in-python">Zeger Hendrikse</a> to include: 
@@ -208,8 +208,10 @@ class plot3D:
         self._axis.yz_mesh_visibility_is(False)
 
     def _hide_plot(self):
-        _ = [quad_.visible = False for quad_ in self._quads]
-        _ = [vertex_.visible = False for vertex_ in self._vertices]
+        for quad_ in self._quads:
+            quad_.visible = False
+        for vertex_ in self._vertices:
+            vertex_.visible = False
 
     def _create_base(self):
         space = Space(np.linspace(-0, np.len(self._xx), 11), np.linspace(0, np.len(self._yy), 11),
@@ -309,6 +311,16 @@ def toggle_axis(event):
     plot.axis_visibility_is(event.checked)
 
 
+def sine_sqrt():
+    xx, yy = np.meshgrid(np.linspace(-2 * pi, 2 * pi, 50), np.linspace(-2 * pi, 2 * pi, 50))
+    zz = np.linspace(-2, 2, 50)
+
+    def f(x, y, t):
+        return sin(5 * t) * sin(sqrt(x * x + y * y))
+
+    return xx, yy, zz, f
+
+
 def ricker():
     xx, yy = np.meshgrid(np.linspace(-2, 2, 50), np.linspace(-2, 2, 50))
     zz = np.linspace(-2, 2, 50)
@@ -379,27 +391,33 @@ def switch_function(event):
         xx, yy, zz, f = ricker()
         animation.title = ricker_title + "\n"
         animation.range = 75
+        colour = color.cyan
     elif event.index == 1:
+        xx, yy, zz, f = sine_sqrt()
+        animation.title = sine_sqrt_title + "\n"
+        animation.range = 75
+        colour = color.magenta
+    elif event.index == 2:
         xx, yy, zz, f = sine_cosine()
         animation.title = sine_cosine_title + "\n"
         animation.range = 75
         colour = color.yellow
-    elif event.index == 2:
+    elif event.index == 3:
         colour = color.green
         xx, yy, zz, f = ripple()
         animation.range = 115
         animation.title = ripple_title + "\n\n"
-    elif event.index == 3:
+    elif event.index == 4:
         colour = color.red
         xx, yy, zz, f = exp_sine()
         animation.range = 115
         animation.title = exponential_title + "\n"
-    elif event.index == 4:
+    elif event.index == 5:
         colour = color.blue
         xx, yy, zz, f = polynomial()
         animation.range = 75
         animation.title = polynomial_title + "\n"
-    elif event.index == 5:
+    elif event.index == 6:
         colour = color.white
         xx, yy, zz, f = cosine_of_abs()
         animation.range = 115
@@ -409,7 +427,8 @@ def switch_function(event):
     MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 
-wave_choices = ["Ricker wavelet", "Sine-cosine", "Ripple", "Exponential", "Polynomial", "Cosine of abs(x, y)"]
+wave_choices = ["Ricker wavelet", "Sine of square root", "Sine-cosine", "Ripple", "Exponential", "Polynomial",
+                "Cosine of abs(x, y)"]
 _ = menu(choices=wave_choices, bind=switch_function)
 animation.append_to_caption("  ")
 _ = checkbox(text='YZ mesh', bind=toggle_yz_mesh, checked=True)
