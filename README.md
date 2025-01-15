@@ -58,6 +58,56 @@ the days per season.
   </a>
 </figure>
 
+
+# Mathematics
+
+## Dynamic 3D-plots of multivariate and complex functions
+
+<details>
+  <summary>Animations and source code</summary>
+  <ul>
+    <li><b>Dynamic 3D-plots of multivariate functions</b>
+    <ul>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/3d_plots">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/3dplots">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/mathematics/3d_plots.py">3d_plots.py</a> and VPython <a href="./src/mathematics/3d_plots.py">3d_plots.py</a> versions in this repository</li>
+    </ul>
+    </li>
+    <li><b>Dynamic 3D-plots of complex functions</b>
+      <ul>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/complex_function_plot">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Complexfunctionplot">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/mathematics/complex_function_plot.py">complex_function_plot.py</a> and VPython <a href="./src/mathematics/complex_function_plot.py">complex_function_plot.py</a> versions in this repository</li>
+      </ul></li>
+  </ul>
+</details>
+
+<figure>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/3dplots">
+    <img alt="Multivariate functions" width="45%" height="45%" src="./images/3d_plot.png" title="Click to animate"/>
+  </a>&nbsp;&nbsp;&nbsp;
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Complexfunctionplot">
+    <img alt="Complex functions" width="45%" height="45%" src="./images/complex_function_plot.png" title="Click to animate"/>
+  </a>
+</figure>
+
+## Polar coordinates
+
+<details>
+  <summary>Animations and source code</summary>
+  <ul><li><b>Polar coordinates</b>
+    <ul>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/polar_coordinates">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/polar_coordinates.py">polar_coordinates.py</a> and VPython <a href="./src/polar_coordinates.py">polar_coordinates.py</a> versions in this repository</li>
+    </ul></li>
+  </ul>
+</details>
+
+<figure>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">
+    <img alt="Polar coordinates" width="49%" height="49%" src="./images/polar_coordinates.png" title="Click to animate"/>
+  </a>
+</figure>
+
+
 # Particle and quantum physics
 
 The code pertaining to the demos in this section is available under the 
@@ -401,11 +451,11 @@ This demo models the magnetization at various temperatures using a two-dimension
 
 <details>
   <summary>Animations and source code</summary>
-  <ul>
-    <ul><b>Ising spin model</b>
+  <ul><li><b>Ising spin model</b>
+    <ul>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/ising_spin_model">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Isingspin">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/thermodynamics/ising_spin.py">ising_spin.py</a> and VPython <a href="./src/thermodynamics/ising_spin.py">ising_spin.py</a> versions in this repository</li>
-    </ul>
+    </ul></li>
   </ul>
 </details>
 
@@ -582,54 +632,6 @@ number of vibrating beads coupled by springs on both sides!
   </a>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Watersprinkler">
     <img alt="Water sprinkler" width="45%" height="45%" src="./images/water_sprinkler.png" title="Click to animate"/>
-  </a>
-</figure>
-
-# Mathematics
-
-## Dynamic 3D-plots of multivariate and complex functions
-
-<details>
-  <summary>Animations and source code</summary>
-  <ul>
-    <li><b>Dynamic 3D-plots of multivariate functions</b>
-    <ul>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/3d_plots">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/3dplots">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/mathematics/3d_plots.py">3d_plots.py</a> and VPython <a href="./src/mathematics/3d_plots.py">3d_plots.py</a> versions in this repository</li>
-    </ul>
-    </li>
-    <li><b>Dynamic 3D-plots of complex functions</b>
-      <ul>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/complex_function_plot">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Complexfunctionplot">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/mathematics/complex_function_plot.py">complex_function_plot.py</a> and VPython <a href="./src/mathematics/complex_function_plot.py">complex_function_plot.py</a> versions in this repository</li>
-      </ul></li>
-  </ul>
-</details>
-
-<figure>
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/3dplots">
-    <img alt="Multivariate functions" width="45%" height="45%" src="./images/3d_plot.png" title="Click to animate"/>
-  </a>&nbsp;&nbsp;&nbsp;
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Complexfunctionplot">
-    <img alt="Complex functions" width="45%" height="45%" src="./images/complex_function_plot.png" title="Click to animate"/>
-  </a>
-</figure>
-
-## Polar coordinates
-
-<details>
-  <summary>Animations and source code</summary>
-  <ul><li><b>Polar coordinates</b>
-    <ul>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/polar_coordinates">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/polar_coordinates.py">polar_coordinates.py</a> and VPython <a href="./src/polar_coordinates.py">polar_coordinates.py</a> versions in this repository</li>
-    </ul></li>
-  </ul>
-</details>
-
-<figure>
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">
-    <img alt="Polar coordinates" width="49%" height="49%" src="./images/polar_coordinates.png" title="Click to animate"/>
   </a>
 </figure>
 

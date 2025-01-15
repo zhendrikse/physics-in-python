@@ -6,23 +6,20 @@ from vpython import *
 get_library('https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js')
 get_library("https://cdnjs.cloudflare.com/ajax/libs/mathjs/14.0.1/math.js")
 
-# There is an L by L grid of vertex objects, numbered 0 through L-1 by 0 through L-1.
-# Only the vertex operators numbered L-2 by L-2 are used to create quads.
-# The extra row and extra column of vertex objects simplifies edge calculations.
-# The stride length from y = 0 to y = 1 is L.
-
-
 z_2_title = "<h2>$\\psi(z, t) = \\big(z^2 + 2\\big)e^{2 \pi i t} \\text{ where } z \in \\mathbb{C}$, $t \in \\mathbb{R}$</h2>"
 z_abs_squared_title = "<h2>$\\psi(x,y,t) = zz^* e^{i \pi t} \\text{ where } z \in \\mathbb{C}$, $t \in \\mathbb{R}$</h2>"
 z_cubed_title = "<h2>$\\psi(z, t) = \\big(z^3 + 2\\big)e^{2 \pi i t} \\text{ where } z \in \\mathbb{C}$, $t \in \\mathbb{R}$</h2>"
-z_plus_1_divided_by_z_min_1_title = "<h2>$\\psi(z, t) = \\bigg(\dfrac{z + 3/2}{z - 3/2} \\bigg)e^{2 \pi i t} \\text{ where } z \in \\mathbb{C}$, $t \in \\mathbb{R}$</h2>"
+z_plus_1_divided_by_z_min_1_title = "<h2>$\\psi(z, t) = \\bigg(\dfrac{z + 1}{z - 1} \\bigg)e^{2 \pi i t} \\text{ where } z \in \\mathbb{C}$, $t \in \\mathbb{R}$</h2>"
 sine_z_title = "<h2>$\\psi(z,t) = \\sin{(z)}e^{2 \pi i t} \\text{ where } z \in \\mathbb{C}$, $t \in \\mathbb{R}$</h2>"
+log_z_title = "<h2>$\\psi(z,t) = \\log{(z)}e^{2 \pi i t} \\text{ where } z \in \\mathbb{C}$, $t \in \\mathbb{R}$</h2>"
+exp_z_title = "<h2>$\\psi(z,t) = e^{-z^2}e^{2 \pi i t} \\text{ where } z \in \\mathbb{C}$, $t \in \\mathbb{R}$</h2>"
 
 caption = """
 &#x2022; Based on <a href="https://www.glowscript.org/#/user/GlowScriptDemos/folder/Examples/program/Plot3D">Plot3D</a>
 &#x2022; Rewritten by <a href="https://github.com/zhendrikse/physics-in-python">Zeger Hendrikse</a> to include: 
   &#x2022; Numpy linspace and meshgrid syntax
   &#x2022; Configurable base and mesh background
+  &#x2022; Complex functions and numbers
 """
 
 animation = canvas(align="top", width=600, height=600, center=vec(0, 5, 0),
@@ -91,30 +88,29 @@ class Base:
             pos_x_y = x_hat * x_.get(0) + y_hat * y_.get(0)
             pos_x_z = x_hat * x_.get(0) + z_hat * z_.get(0)
             pos_y_z = y_hat * y_.get(0) + z_hat * z_.get(0)
-            self._xy_mesh += [
-                cylinder(pos=position + pos_x_y + x_hat * j * delta_x, axis=y_hat * range_y, color=color.gray(.5),
-                         radius=scale * .5, visible=False)]
-            self._xy_mesh += [
-                cylinder(pos=position + pos_x_y + y_hat * j * delta_y, axis=x_hat * range_x, color=color.gray(.5),
-                         radius=scale * .5, visible=False)]
-            pos = position + (x_.get(0) + .5 * range_x) * x_hat + (y_.get(0) + .5 * range_y) * y_hat
-            self._xy_mesh += [box(pos=pos, length=range_x, width=scale, height=range_y, opacity=0.15, visible=False)]
-            self._xz_mesh += [
-                cylinder(pos=position + pos_x_z + x_hat * j * delta_x, axis=z_hat * range_z, color=color.gray(.5),
-                         radius=scale * .5, visible=False)]
-            self._xz_mesh += [
-                cylinder(pos=position + pos_x_z + z_hat * j * delta_z, axis=x_hat * range_x, color=color.gray(.5),
-                         radius=scale * .5, visible=False)]
-            pos = position + (x_.get(0) + .5 * range_x) * x_hat + (z_.get(0) + .5 * range_z) * z_hat
-            self._xz_mesh += [box(pos=pos, length=range_x, width=range_z, height=scale, opacity=0.15, visible=False)]
-            self._yz_mesh += [
-                cylinder(pos=position + pos_y_z + y_hat * j * delta_y, axis=z_hat * range_z, color=color.gray(.5),
-                         radius=scale * .5, visible=False)]
-            self._yz_mesh += [
-                cylinder(pos=position + pos_y_z + z_hat * j * delta_z, axis=y_hat * range_y, color=color.gray(.5),
-                         radius=scale * .5, visible=False)]
+            self._xy_mesh += [cylinder(pos=position + pos_x_y + x_hat * j * delta_x, axis=y_hat * range_y)]
+            self._xy_mesh += [cylinder(pos=position + pos_x_y + y_hat * j * delta_y, axis=x_hat * range_x)]
+            self._xz_mesh += [cylinder(pos=position + pos_x_z + x_hat * j * delta_x, axis=z_hat * range_z)]
+            self._xz_mesh += [cylinder(pos=position + pos_x_z + z_hat * j * delta_z, axis=x_hat * range_x)]
+            self._yz_mesh += [cylinder(pos=position + pos_y_z + y_hat * j * delta_y, axis=z_hat * range_z)]
+            self._yz_mesh += [cylinder(pos=position + pos_y_z + z_hat * j * delta_z, axis=y_hat * range_y)]
+
             pos = position + (y_.get(0) + .5 * range_y) * y_hat + (z_.get(0) + .5 * range_z) * z_hat
             self._yz_mesh += [box(pos=pos, length=scale, width=range_z, height=range_y, opacity=0.15, visible=False)]
+            pos = position + (x_.get(0) + .5 * range_x) * x_hat + (y_.get(0) + .5 * range_y) * y_hat
+            self._xy_mesh += [box(pos=pos, length=range_x, width=scale, height=range_y, opacity=0.15, visible=False)]
+            pos = position + (x_.get(0) + .5 * range_x) * x_hat + (z_.get(0) + .5 * range_z) * z_hat
+            self._xz_mesh += [box(pos=pos, length=range_x, width=range_z, height=scale, opacity=0.15, visible=False)]
+
+            self._set_mesh_properties(self._xy_mesh, scale)
+            self._set_mesh_properties(self._xz_mesh, scale)
+            self._set_mesh_properties(self._yz_mesh, scale)
+
+    def _set_mesh_properties(self, mesh, scale):
+        for item_ in mesh:
+            item_.color = color.gray(.5)
+            item_.radius = scale * .5
+            item_.visible = False
 
     def _make_axis(self, x_, y_, z_, delta_x, delta_y, delta_z, axis_color, axis_labels, scale):
         c1 = cylinder(pos=x_hat * x_.get(0), axis=x_hat * (x_.get(-1) - x_.get(0)), color=axis_color, radius=scale)
@@ -169,41 +165,6 @@ class Base:
             self._yz_mesh[i].visible = visible
 
 
-class Complex:
-    def __init__(self, real, imaginary):
-        self._real = real
-        self._imaginary = imaginary
-
-    def multiplied_by(self, factor):
-        real = self._real * factor.real() - self._imaginary * factor.imaginary()
-        imaginary = self._imaginary * factor.real() + self._real * factor.imaginary()
-        return Complex(real, imaginary)
-
-    def divided_by(self, denominator):
-        r = denominator.real() * denominator.real() + denominator.imaginary() * denominator.imaginary()
-        real = denominator.real() * self._real + denominator.imaginary() * self._imaginary
-        imaginary = denominator.real() * self._imaginary - denominator.imaginary() * self._real
-        return Complex(real, imaginary)
-
-    def abs(self):
-        return sqrt(self._real * self._real + self._imaginary * self._imaginary)
-
-    def conjugate(self):
-        return Complex(self._real, -self._imaginary)
-
-    def add(self, term):
-        return Complex(self._real + term.real(), self._imaginary + term.imaginary())
-
-    def real(self):
-        return self._real
-
-    def sin(self, z):
-        return Complex(sin(z.real()) * math.cosh(z.imaginary()), cos(z.real()) * math.sinh(z.imaginary()))
-
-    def imaginary(self):
-        return self._imaginary
-
-
 # The x axis is labeled y, the z axis is labeled x, and the y axis is labeled z.
 # This is done to mimic fairly standard practive for plotting
 #     the z value of a function of x and y.
@@ -217,6 +178,7 @@ class plot3D:
         self._quads = self._create_quads()
         self._make_normals()
         self._axis = self._create_base()
+        self.replot(0)
 
     def reinitialize(self, xx, yy, zz, f):
         self._f = f
@@ -256,24 +218,19 @@ class plot3D:
         vertices = []
         for i in range(np.len(self._xx) * np.len(self._yy)):
             x, y = self._get_x_and_y_for(i)
-            value, phase = self._evaluate(x, y, 0)
-            colour = color.hsv_to_rgb(vec(phase, 1, 1.25))
-            vertices.append(vertex(pos=vec(y, value, x), color=colour, normal=vec(0, 1, 0)))
+            vertices.append(vertex(pos=vec(y, 0, x), normal=vec(0, 1, 0)))
         return vertices
 
     def _get_x_and_y_for(self, index):
         return int(index / np.len(self._xx)), index % np.len(self._yy)
 
-    def _evaluate(self, z_re, z_im, t):
-        f_x_y = self._f(Complex(self._xx.get(z_re, z_im), self._yy.get(z_re, z_im)), t)
-        range_z = self._zz.get(-1) - self._zz.get(0)
-        phase = atan2(f_x_y.imaginary(), f_x_y.real())
+    def _color_for(self, complex_num):
+        phase = atan2(complex_num.im, complex_num.re)
         phase += 2 * pi if phase < 0 else 0
         phase /= 2 * pi
-        return np.len(self._zz) / range_z * (f_x_y.abs() - self._zz.get(0)), phase
+        return color.hsv_to_rgb(vec(phase, 1, 1.25))
 
-        # Create the quad objects, based on the vertex objects already created.
-
+    # Create the quad objects, based on the vertex objects already created.
     def _create_quads(self):
         quads = []
         for x in range(np.len(self._xx) - 2):
@@ -298,11 +255,14 @@ class plot3D:
 
     def replot(self, t):
         for i in range(np.len(self._xx) * np.len(self._yy)):
-            x, y = self._get_x_and_y_for(i)
-            value, phase = self._evaluate(x, y, t)
+            re, im = self._get_x_and_y_for(i)
+            f_z = self._f(math.complex(self._xx.get(re, im), self._yy.get(re, im)), t)
+            # f_z = self._f(Complex(self._xx.get(re, im), self._yy.get(re, im)), t)
+
+            range_z = self._zz.get(-1) - self._zz.get(0)
+            value = np.len(self._zz) / range_z * (f_z.abs() - self._zz.get(0))
             self._vertices[i].pos.y = value
-            colour = color.hsv_to_rgb(vec(phase, 1, 1.25))
-            self._vertices[i].color = colour
+            self._vertices[i].color = self._color_for(f_z)
 
         self._make_normals()
 
@@ -357,7 +317,9 @@ def z_squared():
     zz = np.linspace(0, 8, 50)
 
     def f(z, t):
-        return z.multiplied_by(z).add(Complex(2, 0)).multiplied_by(phase(2 * pi, t))
+        value = math.add(math.multiply(z, z), math.complex(2, 0))
+        phase = math.complex(cos(2 * pi * t), sin(2 * pi * t))
+        return math.multiply(value, phase)
 
     return xx, yy, zz, f
 
@@ -367,7 +329,9 @@ def z_abs_squared():
     zz = np.linspace(0, 10, 50)
 
     def f(z, t):
-        return z.multiplied_by(z.conjugate()).multiplied_by(phase(pi, t))
+        value = math.multiply(z, math.conj(z))
+        phase = math.complex(cos(2 * pi * t), sin(2 * pi * t))
+        return math.multiply(value, phase)
 
     return xx, yy, zz, f
 
@@ -377,17 +341,33 @@ def z_cubed():
     zz = np.linspace(0, 24, 50)
 
     def f(z, t):
-        return z.multiplied_by(z).multiplied_by(z).add(Complex(2, 0)).multiplied_by(phase(2 * pi, t))
+        value = math.add(math.multiply(math.multiply(z, z), z), math.complex(2, 0))
+        phase = math.complex(cos(2 * pi * t), sin(2 * pi * t))
+        return math.multiply(value, phase)
 
     return xx, yy, zz, f
 
 
 def z_plus_1_divided_by_z_min_1():
-    xx, yy = np.meshgrid(np.linspace(-2, 2, 75), np.linspace(-2, 2, 75))
-    zz = np.linspace(0, 10, 75)
+    xx, yy = np.meshgrid(np.linspace(-3, 3, 100), np.linspace(-3, 3, 100))
+    zz = np.linspace(0, 50, 100)
 
     def f(z, t):
-        return z.add(Complex(3 / 2, 0)).divided_by(z.add(Complex(-3 / 2, 0))).multiplied_by(phase(2 * pi, t))
+        value = math.add(math.complex(1, 0), z)
+        value = math.divide(value, math.add(math.complex(-1, 0), z))
+        phase = math.complex(cos(2 * pi * t), sin(2 * pi * t))
+        return math.multiply(value, phase)
+
+    return xx, yy, zz, f
+
+
+def log_z():
+    xx, yy = np.meshgrid(np.linspace(-3, 3, 50), np.linspace(-3, 3, 50))
+    zz = np.linspace(0, 3, 50)
+
+    def f(z, t):
+        phase = math.complex(cos(2 * pi * t), sin(2 * pi * t))
+        return math.multiply(math.log(z), phase)
 
     return xx, yy, zz, f
 
@@ -397,9 +377,19 @@ def sine_z():
     zz = np.linspace(0, 4, 50)
 
     def f(z, t):
-        # return Complex(sin(z.real(), z.imaginary()).multiplied_by(phase(2 * pi, t))
-        sine_z = Complex(sin(z.real()) * math.cosh(z.imaginary()), cos(z.real()) * math.sinh(z.imaginary()))
-        return sine_z.multiplied_by(phase(2 * pi, t))
+        phase = math.complex(cos(2 * pi * t), sin(2 * pi * t))
+        return math.multiply(math.sin(z), phase)
+
+    return xx, yy, zz, f
+
+
+def exp_z():
+    xx, yy = np.meshgrid(np.linspace(-2, 2, 50), np.linspace(-2, 2, 50))
+    zz = np.linspace(0, 40, 50)
+
+    def f(z, t):
+        phase = math.complex(cos(2 * pi * t), sin(2 * pi * t))
+        return math.multiply(math.exp(math.multiply(math.complex(-1, 0), math.multiply(z, z))), phase)
 
     return xx, yy, zz, f
 
@@ -422,19 +412,27 @@ def switch_function(event):
         animation.title = z_cubed_title + "\n\n"
     elif event.index == 3:
         xx, yy, zz, f = z_plus_1_divided_by_z_min_1()
-        animation.range = 115
+        animation.range = 150
         animation.title = z_plus_1_divided_by_z_min_1_title + "\n"
     elif event.index == 4:
         xx, yy, zz, f = sine_z()
         animation.range = 75
         animation.title = sine_z_title + "\n"
+    elif event.index == 5:
+        xx, yy, zz, f = log_z()
+        animation.range = 75
+        animation.title = log_z_title + "\n"
+    elif event.index == 6:
+        xx, yy, zz, f = exp_z()
+        animation.range = 85
+        animation.title = exp_z_title + "\n"
 
     plot.reinitialize(xx, yy, zz, f)
     MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 
-wave_choices = ["f(z, t) = z * z + 2", "f(z, t) = |z| * |z|", "f(z, t) = z * z * z + 2", "f(z, t) = z + 1.5 / z - 1.5",
-                "f(z, t) = sin(z)"]
+wave_choices = ["f(z, t) = z * z + 2", "f(z, t) = |z| * |z|", "f(z, t) = z * z * z + 2", "f(z, t) = z + 1 / z - 1",
+                "f(z, t) = sin(z)", "f(z, t) = log(z)", "f(z, t) = exp(-z * z)"]
 _ = menu(choices=wave_choices, bind=switch_function)
 animation.append_to_caption("  ")
 _ = checkbox(text='YZ mesh', bind=toggle_yz_mesh, checked=True)

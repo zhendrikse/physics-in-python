@@ -18,7 +18,7 @@ $\\psi(x,y,t) = \dfrac{1 + \sin(4t)}{\pi\sigma^4} \\bigg(1 - \dfrac{1}{2} \\bigg
 
 sine_cosine_title = "<h2>$\\psi(x,y,t) = 0.7+0.2\\sin{(10x)}\\cos{(10y)}\\cos{(2t)}$</h2>"
 exponential_title = "<h2>$\\psi(x, y, t) = \\sin(6t) \\sin(x^2 + y^2) e^{ -x^2 - y^2}$</h2>"
-ripple_title = "<h2>$\\psi(x, y, t) = \dfrac{\\sin(8t)}{8} \\sin\\bigg(3 (x^2 + y^2)\\bigg)$</h2"
+ripple_title = "<h2>$\\psi(x, y, t) = \\sin(8t) \\sin\\bigg(3 (x^2 + y^2)\\bigg)$</h2"
 polynomial_title = "<h2>$\\psi(x, y, t) = \\sin(5t) (yx^3 - xy^3)$</h2>"
 cosine_of_abs_title = "<h2>$\\psi(x, y, t) = \\sin(5t)\\cos(|x| + |y|)$</h2>"
 sine_sqrt_title = "<h2>$\\psi(x, y, t) = \\sin(5t)\sqrt{x^2+y^2}$</h2>"
@@ -27,6 +27,7 @@ caption = """
 &#x2022; Rewritten by <a href="https://github.com/zhendrikse/physics-in-python">Zeger Hendrikse</a> to include: 
   &#x2022; Numpy linspace and meshgrid syntax
   &#x2022; Configurable base and mesh background
+  &#x2022; Non-uniform coloring
 """
 
 animation = canvas(align="top", width=600, height=600, center=vec(0, 5, 0),
@@ -65,7 +66,6 @@ np = Numpy()
 x_hat = vec(1, 0, 0)
 y_hat = vec(0, 1, 0)
 z_hat = vec(0, 0, 1)
-label_text = ("y", "z", "x")
 
 
 class Space:
@@ -76,8 +76,7 @@ class Space:
 
 
 class Base:
-    def __init__(self, space, position=vec(0, 0, 0), axis_color=color.yellow, tick_marks_color=color.red,
-                 axis_labels=label_text):
+    def __init__(self, space, position=vec(0, 0, 0), axis_color=color.yellow, tick_marks_color=color.red):
         x_ = space.linspace_x
         y_ = space.linspace_y
         z_ = space.linspace_z
@@ -88,6 +87,7 @@ class Base:
         range_x = x_.get(-1) - x_.get(0)
         range_y = y_.get(-1) - y_.get(0)
         range_z = z_.get(-1) - z_.get(0)
+        axis_labels = ("y", "z", "x")
         self._axis = self._make_axis(x_, y_, z_, delta_x, delta_y, delta_z, axis_color, axis_labels, scale)
         self._tick_marks = self._make_tick_marks(x_, y_, z_, tick_marks_color, scale)
 
@@ -96,30 +96,29 @@ class Base:
             pos_x_y = x_hat * x_.get(0) + y_hat * y_.get(0)
             pos_x_z = x_hat * x_.get(0) + z_hat * z_.get(0)
             pos_y_z = y_hat * y_.get(0) + z_hat * z_.get(0)
-            self._xy_mesh += [
-                cylinder(pos=position + pos_x_y + x_hat * j * delta_x, axis=y_hat * range_y, color=color.gray(.5),
-                         radius=scale * .5, visible=False)]
-            self._xy_mesh += [
-                cylinder(pos=position + pos_x_y + y_hat * j * delta_y, axis=x_hat * range_x, color=color.gray(.5),
-                         radius=scale * .5, visible=False)]
-            pos = position + (x_.get(0) + .5 * range_x) * x_hat + (y_.get(0) + .5 * range_y) * y_hat
-            self._xy_mesh += [box(pos=pos, length=range_x, width=scale, height=range_y, opacity=0.15, visible=False)]
-            self._xz_mesh += [
-                cylinder(pos=position + pos_x_z + x_hat * j * delta_x, axis=z_hat * range_z, color=color.gray(.5),
-                         radius=scale * .5, visible=False)]
-            self._xz_mesh += [
-                cylinder(pos=position + pos_x_z + z_hat * j * delta_z, axis=x_hat * range_x, color=color.gray(.5),
-                         radius=scale * .5, visible=False)]
-            pos = position + (x_.get(0) + .5 * range_x) * x_hat + (z_.get(0) + .5 * range_z) * z_hat
-            self._xz_mesh += [box(pos=pos, length=range_x, width=range_z, height=scale, opacity=0.15, visible=False)]
-            self._yz_mesh += [
-                cylinder(pos=position + pos_y_z + y_hat * j * delta_y, axis=z_hat * range_z, color=color.gray(.5),
-                         radius=scale * .5, visible=False)]
-            self._yz_mesh += [
-                cylinder(pos=position + pos_y_z + z_hat * j * delta_z, axis=y_hat * range_y, color=color.gray(.5),
-                         radius=scale * .5, visible=False)]
+            self._xy_mesh += [cylinder(pos=position + pos_x_y + x_hat * j * delta_x, axis=y_hat * range_y)]
+            self._xy_mesh += [cylinder(pos=position + pos_x_y + y_hat * j * delta_y, axis=x_hat * range_x)]
+            self._xz_mesh += [cylinder(pos=position + pos_x_z + x_hat * j * delta_x, axis=z_hat * range_z)]
+            self._xz_mesh += [cylinder(pos=position + pos_x_z + z_hat * j * delta_z, axis=x_hat * range_x)]
+            self._yz_mesh += [cylinder(pos=position + pos_y_z + y_hat * j * delta_y, axis=z_hat * range_z)]
+            self._yz_mesh += [cylinder(pos=position + pos_y_z + z_hat * j * delta_z, axis=y_hat * range_y)]
+
             pos = position + (y_.get(0) + .5 * range_y) * y_hat + (z_.get(0) + .5 * range_z) * z_hat
             self._yz_mesh += [box(pos=pos, length=scale, width=range_z, height=range_y, opacity=0.15, visible=False)]
+            pos = position + (x_.get(0) + .5 * range_x) * x_hat + (y_.get(0) + .5 * range_y) * y_hat
+            self._xy_mesh += [box(pos=pos, length=range_x, width=scale, height=range_y, opacity=0.15, visible=False)]
+            pos = position + (x_.get(0) + .5 * range_x) * x_hat + (z_.get(0) + .5 * range_z) * z_hat
+            self._xz_mesh += [box(pos=pos, length=range_x, width=range_z, height=scale, opacity=0.15, visible=False)]
+
+            self._set_mesh_properties(self._xy_mesh, scale)
+            self._set_mesh_properties(self._xz_mesh, scale)
+            self._set_mesh_properties(self._yz_mesh, scale)
+
+    def _set_mesh_properties(self, mesh, scale):
+        for item_ in mesh:
+            item_.color = color.gray(.5)
+            item_.radius = scale * .5
+            item_.visible = False
 
     def _make_axis(self, x_, y_, z_, delta_x, delta_y, delta_z, axis_color, axis_labels, scale):
         c1 = cylinder(pos=x_hat * x_.get(0), axis=x_hat * (x_.get(-1) - x_.get(0)), color=axis_color, radius=scale)
@@ -178,24 +177,26 @@ class Base:
 # This is done to mimic fairly standard practive for plotting
 #     the z value of a function of x and y.
 class plot3D:
-    def __init__(self, xx, yy, zz, f, colour=color.cyan):
+    def __init__(self, xx, yy, zz, f):
         self._f = f
         self._xx = xx
         self._yy = yy
         self._zz = zz
-        self._vertices = self._create_vertices(colour)
+        self._hue_offset = 0.
+        self._vertices = self._create_vertices()
         self._quads = self._create_quads()
         self._make_normals()
         self._axis = self._create_base()
+        self.replot(0)
 
-    def reinitialize(self, xx, yy, zz, f, colour=color.cyan):
+    def reinitialize(self, xx, yy, zz, f):
         self._f = f
         self._xx = xx
         self._yy = yy
         self._zz = zz
-        self._hide_plot()
-        self._hide_axis()
-        self._vertices = self._create_vertices(colour)
+        self._hide_plot()  # Hide previous shizzle before creating new stuff
+        self._hide_axis()  # Hide previous stizzle before creating new stuff
+        self._vertices = self._create_vertices()
         self._quads = self._create_quads()
         self._make_normals()
         self._axis = self._create_base()
@@ -222,21 +223,15 @@ class plot3D:
         axis.yz_mesh_visibility_is(True)
         return axis
 
-    def _create_vertices(self, colour):
+    def _create_vertices(self):
         vertices = []
         for i in range(np.len(self._xx) * np.len(self._yy)):
             x, y = self._get_x_and_y_for(i)
-            value = self._evaluate(x, y, 0)
-            vertices.append(vertex(pos=vec(y, value, x), color=colour, normal=vec(0, 1, 0)))
+            vertices.append(vertex(pos=vec(y, 0, x), normal=vec(0, 1, 0)))
         return vertices
 
     def _get_x_and_y_for(self, index):
         return int(index / np.len(self._xx)), index % np.len(self._yy)
-
-    def _evaluate(self, x, y, t):
-        f_x_y = self._f(self._xx.get(x, y), self._yy.get(x, y), t)
-        range_z = self._zz.get(-1) - self._zz.get(0)
-        return np.len(self._zz) / range_z * (f_x_y - self._zz.get(0))
 
     # Create the quad objects, based on the vertex objects already created.
     def _create_quads(self):
@@ -261,13 +256,27 @@ class plot3D:
             b = self._vertices[i + 1].pos - v.pos
             v.normal = cross(a, b)
 
+    def _update_vertex_with_index(self, i, t):
+        z_min = self._zz.get(0)
+        range_z = self._zz.get(-1) - self._zz.get(0)
+
+        x, y = self._get_x_and_y_for(i)
+        f_x_y = self._f(self._xx.get(x, y), self._yy.get(x, y), t)
+        value = np.len(self._zz) / range_z * (f_x_y - z_min)
+
+        self._vertices[i].pos.y = value
+        color_ = (abs(value) - z_min) / (range_z * 20) + self._hue_offset
+
+        self._vertices[i].color = color.hsv_to_rgb(vec(color_, color_, 1))
+
     def replot(self, t):
         for i in range(np.len(self._xx) * np.len(self._yy)):
-            x, y = self._get_x_and_y_for(i)
-            value = self._evaluate(x, y, t)
-            self._vertices[i].pos.y = value
+            self._update_vertex_with_index(i, t)
 
         self._make_normals()
+
+    def hue_offset_is(self, hue_offset):
+        self._hue_offset = hue_offset
 
     def get_vertex(self, x, y):
         return self._vertices[x * np.len(self._xx) + y]
@@ -354,11 +363,11 @@ def polynomial():
 
 
 def exp_sine():
-    xx, yy = np.meshgrid(np.linspace(-3, 3, 75), np.linspace(-3, 3, 75))
-    zz = np.linspace(-.45, .45, 75)
+    xx, yy = np.meshgrid(np.linspace(-3, 3, 100), np.linspace(-3, 3, 100))
+    zz = np.linspace(-4, 4, 100)
 
     def f(x, y, t):
-        return sin(6 * t) * sin(x * x + y * y) * exp(-(x * x + y * y))
+        return 10 * sin(6 * t) * sin(x * x + y * y) * exp(-(x * x + y * y))
 
     return xx, yy, zz, f
 
@@ -374,56 +383,53 @@ def sine_cosine():
 
 
 def ripple():
-    xx, yy = np.meshgrid(np.linspace(-1.75, 1.75, 75), np.linspace(-1.75, 1.75, 75))
-    zz = np.linspace(-.75, .75, 75)
+    xx, yy = np.meshgrid(np.linspace(-2 * pi / 3, 2 * pi / 3, 100), np.linspace(-2 * pi / 3, 2 * pi / 3, 100))
+    zz = np.linspace(-7, 7, 100)
 
     def f(x, y, t):
-        return sin(8 * t) * sin(3 * (x * x + y * y)) / 8
+        return sin(8 * t) * sin(3 * (x * x + y * y))
 
     return xx, yy, zz, f
 
 
+def adjust_color():
+    plot.hue_offset_is(color_slider.value)
+
+
 def switch_function(event):
-    xx, yy, zz, f, colour = None, None, None, None, color.cyan
+    xx, yy, zz, f = None, None, None, None
     if event.index < 0:
         return
     elif event.index == 0:
         xx, yy, zz, f = ricker()
         animation.title = ricker_title + "\n"
         animation.range = 75
-        colour = color.cyan
     elif event.index == 1:
         xx, yy, zz, f = sine_sqrt()
         animation.title = sine_sqrt_title + "\n"
         animation.range = 75
-        colour = color.magenta
     elif event.index == 2:
         xx, yy, zz, f = sine_cosine()
         animation.title = sine_cosine_title + "\n"
         animation.range = 75
-        colour = color.yellow
     elif event.index == 3:
-        colour = color.green
         xx, yy, zz, f = ripple()
-        animation.range = 115
+        animation.range = 150
         animation.title = ripple_title + "\n\n"
     elif event.index == 4:
-        colour = color.red
         xx, yy, zz, f = exp_sine()
         animation.range = 115
         animation.title = exponential_title + "\n"
     elif event.index == 5:
-        colour = color.blue
         xx, yy, zz, f = polynomial()
         animation.range = 75
         animation.title = polynomial_title + "\n"
     elif event.index == 6:
-        colour = color.white
         xx, yy, zz, f = cosine_of_abs()
         animation.range = 115
         animation.title = cosine_of_abs_title + "\n"
 
-    plot.reinitialize(xx, yy, zz, f, colour)
+    plot.reinitialize(xx, yy, zz, f)
     MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 
@@ -436,6 +442,9 @@ _ = checkbox(text='XZ mesh', bind=toggle_xz_mesh, checked=True)
 _ = checkbox(text='XY mesh', bind=toggle_xy_mesh, checked=True)
 _ = checkbox(text='Axis', bind=toggle_axis, checked=True)
 _ = checkbox(text='Tick marks', bind=toggle_tick_marks, checked=True)
+animation.append_to_caption("\n\nHue offset  ")
+color_slider = slider(min=0, max=1, step=.01, value=0, bind=adjust_color)
+
 animation.append_to_caption("\n" + caption + "\n")
 
 
