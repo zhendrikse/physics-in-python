@@ -40,7 +40,7 @@ the days per season.
   </a>
 </figure>
 
-##  Kepler's law of equal areas
+##  Kepler's law &amp; the three-body problem
 
 <details>
   <summary>Animations and source code</summary>
