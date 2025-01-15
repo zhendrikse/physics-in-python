@@ -10,18 +10,17 @@ get_library('https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.mi
 # The extra row and extra column of vertex objects simplifies edge calculations.
 # The stride length from y = 0 to y = 1 is L.
 
-
 ricker_title = """<a href="https://en.wikipedia.org/wiki/Ricker_wavelet">Ricker / Mexican hat / Marr wavelet</a>
 
-$\\psi(x,y,t) = \dfrac{1 + \sin(4t)}{\pi\sigma^4} \\bigg(1 - \dfrac{1}{2} \\bigg( \dfrac{x^2 + y^2}{\sigma^2} \\bigg) \\bigg) e^{-\\dfrac{x^2+y^2}{2\sigma^2}}$
+$\\psi(x,y,t) = \dfrac{1 + \sin(\\omega t)}{\pi\sigma^4} \\bigg(1 - \dfrac{1}{2} \\bigg( \dfrac{x^2 + y^2}{\sigma^2} \\bigg) \\bigg) e^{-\\dfrac{x^2+y^2}{2\sigma^2}}$
 """
 
-sine_cosine_title = "<h2>$\\psi(x,y,t) = 0.7+0.2\\sin{(10x)}\\cos{(10y)}\\cos{(2t)}$</h2>"
-exponential_title = "<h2>$\\psi(x, y, t) = \\sin(6t) \\sin(x^2 + y^2) e^{ -x^2 - y^2}$</h2>"
-ripple_title = "<h2>$\\psi(x, y, t) = \\sin(8t) \\sin\\bigg(3 (x^2 + y^2)\\bigg)$</h2"
-polynomial_title = "<h2>$\\psi(x, y, t) = \\sin(5t) (yx^3 - xy^3)$</h2>"
-cosine_of_abs_title = "<h2>$\\psi(x, y, t) = \\sin(5t)\\cos(|x| + |y|)$</h2>"
-sine_sqrt_title = "<h2>$\\psi(x, y, t) = \\sin(5t)\sqrt{x^2+y^2}$</h2>"
+sine_cosine_title = "<h2>$\\psi(x,y,t) = 0.7+0.2\\sin{(10x)}\\cos{(10y)}\\cos{(\omega t)}$</h2>"
+exponential_title = "<h2>$\\psi(x, y, t) = \\sin(\omega t) \\sin(x^2 + y^2) e^{ -x^2 - y^2}$</h2>"
+ripple_title = "<h2>$\\psi(x, y, t) = \\sin(\omega t) \\sin\\bigg(3 (x^2 + y^2)\\bigg)$</h2"
+polynomial_title = "<h2>$\\psi(x, y, t) = \\sin(\omega t) (yx^3 - xy^3)$</h2>"
+cosine_of_abs_title = "<h2>$\\psi(x, y, t) = \\sin(\omega t)\\cos(|x| + |y|)$</h2>"
+sine_sqrt_title = "<h2>$\\psi(x, y, t) = \\sin(\\omega t)\sqrt{x^2+y^2}$</h2>"
 caption = """
 &#x2022; Based on <a href="https://www.glowscript.org/#/user/GlowScriptDemos/folder/Examples/program/Plot3D">Plot3D</a>
 &#x2022; Rewritten by <a href="https://github.com/zhendrikse/physics-in-python">Zeger Hendrikse</a> to include: 
@@ -32,7 +31,6 @@ caption = """
 
 animation = canvas(align="top", width=600, height=600, center=vec(0, 5, 0),
                    forward=vec(-0.9, -0.5, -.8), title=ricker_title + "\n", range=75)
-MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 
 class Numpy:
@@ -183,6 +181,7 @@ class plot3D:
         self._yy = yy
         self._zz = zz
         self._hue_offset = 0.
+        self._omega = pi
         self._vertices = self._create_vertices()
         self._quads = self._create_quads()
         self._make_normals()
@@ -261,7 +260,7 @@ class plot3D:
         range_z = self._zz.get(-1) - self._zz.get(0)
 
         x, y = self._get_x_and_y_for(i)
-        f_x_y = self._f(self._xx.get(x, y), self._yy.get(x, y), t)
+        f_x_y = self._f(self._xx.get(x, y), self._yy.get(x, y), self._omega, t)
         value = np.len(self._zz) / range_z * (f_x_y - z_min)
 
         self._vertices[i].pos.y = value
@@ -274,6 +273,9 @@ class plot3D:
             self._update_vertex_with_index(i, t)
 
         self._make_normals()
+
+    def set_omega_to(self, omega):
+        self._omega = omega
 
     def hue_offset_is(self, hue_offset):
         self._hue_offset = hue_offset
@@ -324,8 +326,8 @@ def sine_sqrt():
     xx, yy = np.meshgrid(np.linspace(-2 * pi, 2 * pi, 50), np.linspace(-2 * pi, 2 * pi, 50))
     zz = np.linspace(-2, 2, 50)
 
-    def f(x, y, t):
-        return sin(5 * t) * sin(sqrt(x * x + y * y))
+    def f(x, y, omega, t):
+        return sin(omega * t) * sin(sqrt(x * x + y * y))
 
     return xx, yy, zz, f
 
@@ -335,8 +337,8 @@ def ricker():
     zz = np.linspace(-2, 2, 50)
     sigma = .7
 
-    def f(x, y, t):
-        return 1.5 * sin(4 * t) / (pi * sigma ** 4) * (1 - 0.5 * ((x * x + y * y)) / (sigma * sigma)) * exp(
+    def f(x, y, omega, t):
+        return 1.5 * sin(omega * t) / (pi * sigma ** 4) * (1 - 0.5 * ((x * x + y * y)) / (sigma * sigma)) * exp(
             -1 * ((x * x + y * y) / (2 * sigma * sigma)))
 
     return xx, yy, zz, f
@@ -346,8 +348,8 @@ def cosine_of_abs():
     xx, yy = np.meshgrid(np.linspace(-2 * pi, 2 * pi, 75), np.linspace(-2 * pi, 2 * pi, 75))
     zz = np.linspace(-2, 2, 75)
 
-    def f(x, y, t):
-        return sin(5 * t) * cos(abs(x) + abs(y))
+    def f(x, y, omega, t):
+        return sin(omega * t) * cos(abs(x) + abs(y))
 
     return xx, yy, zz, f
 
@@ -356,8 +358,8 @@ def polynomial():
     xx, yy = np.meshgrid(np.linspace(-1.75, 1.75, 50), np.linspace(-1.75, 1.75, 50))
     zz = np.linspace(-4, 4, 50)
 
-    def f(x, y, t):
-        return sin(5 * t) * (y * x * x * x - x * y * y * y)
+    def f(x, y, omega, t):
+        return sin(omega * t) * (y * x * x * x - x * y * y * y)
 
     return xx, yy, zz, f
 
@@ -366,8 +368,8 @@ def exp_sine():
     xx, yy = np.meshgrid(np.linspace(-3, 3, 100), np.linspace(-3, 3, 100))
     zz = np.linspace(-4, 4, 100)
 
-    def f(x, y, t):
-        return 10 * sin(6 * t) * sin(x * x + y * y) * exp(-(x * x + y * y))
+    def f(x, y, omega, t):
+        return 10 * sin(omega * t) * sin(x * x + y * y) * exp(-(x * x + y * y))
 
     return xx, yy, zz, f
 
@@ -376,8 +378,8 @@ def sine_cosine():
     xx, yy = np.meshgrid(np.linspace(0, pi, 50), np.linspace(0, pi, 50))
     zz = np.linspace(0, 3, 50)
 
-    def f(x, y, t):
-        return 1 + sin(1.25 * pi * x) * cos(1.25 * pi * y) * sin(5 * t)
+    def f(x, y, omega, t):
+        return 1 + sin(1.25 * pi * x) * cos(1.25 * pi * y) * sin(omega * t)
 
     return xx, yy, zz, f
 
@@ -386,8 +388,8 @@ def ripple():
     xx, yy = np.meshgrid(np.linspace(-2 * pi / 3, 2 * pi / 3, 100), np.linspace(-2 * pi / 3, 2 * pi / 3, 100))
     zz = np.linspace(-7, 7, 100)
 
-    def f(x, y, t):
-        return sin(8 * t) * sin(3 * (x * x + y * y))
+    def f(x, y, omega, t):
+        return sin(omega * t) * sin(3 * (x * x + y * y))
 
     return xx, yy, zz, f
 
@@ -433,6 +435,11 @@ def switch_function(event):
     MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 
+def adjust_omega():
+    plot.set_omega_to(omega_slider.value)
+    omega_slider_text.text = str(round(omega_slider.value / pi, 2)) + " * π"
+
+
 wave_choices = ["Ricker wavelet", "Sine of square root", "Sine-cosine", "Ripple", "Exponential", "Polynomial",
                 "Cosine of abs(x, y)"]
 _ = menu(choices=wave_choices, bind=switch_function)
@@ -445,6 +452,9 @@ _ = checkbox(text='Tick marks', bind=toggle_tick_marks, checked=True)
 animation.append_to_caption("\n\nHue offset  ")
 color_slider = slider(min=0, max=1, step=.01, value=0, bind=adjust_color)
 
+animation.append_to_caption("\n\nOmega = ")
+omega_slider = slider(min=0, max=3 * pi, value=pi, bind=adjust_omega)
+omega_slider_text = wtext(text="1 * π")
 animation.append_to_caption("\n" + caption + "\n")
 
 
