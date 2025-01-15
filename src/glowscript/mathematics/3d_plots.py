@@ -31,6 +31,7 @@ caption = """
 
 animation = canvas(align="top", width=600, height=600, center=vec(0, 5, 0),
                    forward=vec(-0.9, -0.5, -.8), title=ricker_title + "\n", range=75)
+MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 
 class Numpy:
@@ -334,11 +335,11 @@ def sine_sqrt():
 
 def ricker():
     xx, yy = np.meshgrid(np.linspace(-2, 2, 50), np.linspace(-2, 2, 50))
-    zz = np.linspace(-2, 2, 50)
+    zz = np.linspace(-1, 3, 50)
     sigma = .7
 
     def f(x, y, omega, t):
-        return 1.5 * sin(omega * t) / (pi * sigma ** 4) * (1 - 0.5 * ((x * x + y * y)) / (sigma * sigma)) * exp(
+        return (1 + sin(omega * t)) / (pi * sigma ** 4) * (1 - 0.5 * ((x * x + y * y)) / (sigma * sigma)) * exp(
             -1 * ((x * x + y * y) / (2 * sigma * sigma)))
 
     return xx, yy, zz, f
