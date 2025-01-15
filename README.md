@@ -44,10 +44,15 @@ the days per season.
 
 <details>
   <summary>Animations and source code</summary>
-  <ul><li><b>A dynamic visualization of Kepler's laws.</b>
+  <ul><li><b>Dynamic visualization of Kepler's laws</b>
     <ul>
       <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/keplers_law.png">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw">glowscript.org</a></li>
       <li>Glowscript <a href="./src/glowscript/asstrophysics/keplers_law.png">keplers_law.png</a> and VPython <a href="./src/astrophysics/keplers_law.png">keplers_law.png</a> versions in this repository</li>
+    </ul></li>
+    <li><b>Three-body problem</b>
+    <ul>
+      <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/three_body_problem.png">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Threebody/program/Keplerslaw">glowscript.org</a></li>
+      <li>Glowscript <a href="./src/glowscript/asstrophysics/three_body_problem.png">three_body_problem.png</a> and VPython <a href="./src/astrophysics/three_body_problem.png">three_body_problem.png</a> versions in this repository</li>
     </ul></li>
   </ul>
 </details>
@@ -55,6 +60,9 @@ the days per season.
 <figure>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw">
     <img alt="Kepler's laws" width="50%" height="50%" src="./images/keplers_law.png" title="Click to animate"/>
+  </a>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Threebody">
+    <img alt="Three body problem" width="40%" height="40%" src="./images/three_body.png" title="Click to animate"/>
   </a>
 </figure>
 
@@ -89,7 +97,7 @@ the days per season.
   </a>
 </figure>
 
-## Polar coordinates
+## Polar coordinates &amp; flocking birds model
 
 <details>
   <summary>Animations and source code</summary>
@@ -98,6 +106,11 @@ the days per season.
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/polar_coordinates">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/polar_coordinates.py">polar_coordinates.py</a> and VPython <a href="./src/polar_coordinates.py">polar_coordinates.py</a> versions in this repository</li>
     </ul></li>
+    <li><b>Flocking birds</b>
+     <ul>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/crystal_symmetry_plaes">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Flockingbirds">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/flocking_birds.py">flocking_birds.py</a> and VPython <a href="./src/flocking_birds.py">flocking_birds.py</a> versions in this repository</li>
+    </ul></li>
   </ul>
 </details>
 
@@ -105,8 +118,10 @@ the days per season.
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">
     <img alt="Polar coordinates" width="49%" height="49%" src="./images/polar_coordinates.png" title="Click to animate"/>
   </a>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Flockingbirds">
+    <img alt="Flocking birds" width="49%" height="49%" src="./images/flocking_birds.png" title="Click to animate"/>
+  </a>
 </figure>
-
 
 # Particle and quantum physics
 
@@ -415,20 +430,21 @@ The code pertaining to the demos in this section is available under the
 [thermodynamics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/)
 on [glowscript.org](https://glowscript.org).
 
-## Visualizing a hard sphere gas model
-
-This model represents a Boltzmann gas (consisting of hard spheres) in a box. 
-
+## Boltzmann gas &amp; cubic symmetry planes
 
 <details>
   <summary>Animations and source code</summary>
   <ul>
-    <li><b>Ideal gas</b>
+    <li><b>Boltzmann gas (consisting of hard spheres) in a box</b>
       <ul>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/hard_sphere_gas">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/thermodynamics/hard_sphere_gas.py">hard_sphere_gas.py</a> and VPython <a href="./src/thermodynamics/hard_sphere_gas.py">hard_sphere_gas.py</a> versions in this repository</li>
-      </ul>
-    </li>
+      </ul></li>
+    <li><b>Cubic lattice</b>
+    <ul>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/crystal_symmetry_plaes">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/electromagnetism/crystal_symmetry_planes.py">crystal_symmetry_planes.py</a> and VPython <a href="./src/electromagnetism/crystal_symmetry_planes.py">crystal_symmetry_planes.py</a> versions in this repository</li>
+    </ul></li>
   </ul>
 </details>
 
@@ -436,10 +452,13 @@ This model represents a Boltzmann gas (consisting of hard spheres) in a box.
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas">
     <img alt="Hard sphere gas" width="40%" height="40%" src="./images/hard_sphere_gas.png" title="Click to animate"/>
   </a>
+  <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes">
+    <img alt="Symmetry planes" width="45%" height="45%" src="./images/crystal_planes.png" title="Click to animate"/>
+  </a>
 </figure>
 
 
-## Two-dimensional Ising spin model: 
+## Two-dimensional Ising spin model
 
 This demo models the magnetization at various temperatures using a two-dimensional Ising spin lattice.
 
@@ -552,21 +571,23 @@ You may be surprised though to find out what happens when you drop such a simple
   </ul>
 </details>
 
-## The _N_-body coupled oscillator
-
-The N-body coupled harmonic oscillator is composed of beads connected by springs.
-This coupled harmonic oscillator here lets you play around with an arbitrary 
-number of vibrating beads coupled by springs on both sides!
+## The $N$-body coupled oscillator with adjustable $N$
 
 <figure>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/N-bodycoupledoscillator">
-    <img alt="N-body coupled oscillator" width="60%" height="60%" src="./images/n_body_coupled_oscillator.png" title="Click to animate"/>
+    <img alt="N-body coupled oscillator" width="40%" height="40%" src="./images/n_body_coupled_oscillator.png" title="Click to animate"/>
   </a>
 </figure>
 
-- N-body coupled oscillator code in action [on Trinket](https://zegerh-6085.trinket.io/sites/n_body_coupled_oscillator) 
-  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/N-bodycoupledoscillator)
-- N-body coupled oscillator code base [on Trinket](https://trinket.io/glowscript/5a852a2b7570)
+<details>
+  <summary>Animations and source code</summary>
+  <ul><li><b>The $N$-body coupled oscillator</b>
+    <ul>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/n_body_coupled_oscillator">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/N-bodycoupledoscillator">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/kinematics/n_body_coupled_oscillator.py">n_body_coupled_oscillator.py</a> and VPython <a href="./src/kinematics/n_body_coupled_oscillator.py">n_body_coupled_oscillator.py</a> versions in this repository</li>
+    </ul></li>
+  </ul>
+</details>
 
 ## Newton&apos;s pendulum and cannonball
 
@@ -594,6 +615,26 @@ number of vibrating beads coupled by springs on both sides!
   </ul>
 </details>
 
+
+## Model of chain drop from table
+
+<figure>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Chainfromtable">
+    <img alt="Chain from table" width="40%" height="40%" src="./images/chain_from_table.png" title="Click to animate"/>
+  </a>
+</figure>
+
+<details>
+  <summary>Animations and source code</summary>
+  <ul><li><b>The $N$-body coupled oscillator</b>
+    <ul>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/falling_chain">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Chainfromtable">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/kinematics/chain_from_table.py">chain_from_table.py</a> and VPython <a href="./src/kinematics/chain_from_table.py">chain_from_table.py</a> versions in this repository</li>
+    </ul></li>
+  </ul>
+</details>
+
+
 ## Ball on sliding ramp &amp; ball hitting block
 
 <a href="https://zegerh-6085.trinket.io/sites/ball_on_sliding_ramp">
@@ -607,7 +648,17 @@ number of vibrating beads coupled by springs on both sides!
   and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Blockrotation)
 - Rotating block code base [on Trinket](https://trinket.io/library/trinkets/0e414ca766d1)
 
+
 ## Water sprinkler and floating block
+
+<figure>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Floatingblock">
+    <img alt="Floating block" width="25%" height="25%" src="./images/floating_block.png" title="Click to animate"/>
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Watersprinkler">
+    <img alt="Water sprinkler" width="45%" height="45%" src="./images/water_sprinkler.png" title="Click to animate"/>
+  </a>
+</figure>
 
 <details>
   <summary>Animations and source code</summary>
@@ -625,54 +676,6 @@ number of vibrating beads coupled by springs on both sides!
       </ul></li>
   </ul>
 </details>
-
-<figure>
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Floatingblock">
-    <img alt="Floating block" width="45%" height="45%" src="./images/floating_block.png" title="Click to animate"/>
-  </a>
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Watersprinkler">
-    <img alt="Water sprinkler" width="45%" height="45%" src="./images/water_sprinkler.png" title="Click to animate"/>
-  </a>
-</figure>
-
-# Miscellaneous
-
-## Symmetry planes of a cubic lattice &amp; flock of birds
-
-<figure>
-  <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes">
-    <img alt="Symmetry planes" width="35%" height="35%" src="./images/crystal_planes.png" title="Click to animate"/>
-  </a>
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Flockingbirds">
-    <img alt="Flocking birds" width="49%" height="49%" src="./images/flocking_birds.png" title="Click to animate"/>
-  </a>
-</figure>
-
-<details>
-  <summary>Animations and source code</summary>
-  <ul><li><b>Cubic lattice</b>
-    <ul>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/crystal_symmetry_plaes">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/electromagnetism/crystal_symmetry_planes.py">crystal_symmetry_planes.py</a> and VPython <a href="./src/electromagnetism/crystal_symmetry_planes.py">crystal_symmetry_planes.py</a> versions in this repository</li>
-    </ul></li>
-    <li><b>Flocking birds</b>
-     <ul>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/crystal_symmetry_plaes">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Flockingbirds">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/flocking_birds.py">flocking_birds.py</a> and VPython <a href="./src/flocking_birds.py">flocking_birds.py</a> versions in this repository</li>
-    </ul></li>
-  </ul>
-</details>
-
-## Chain falling from table
-
-- See [my code in action](https://trinket.io/glowscript/c3e556761469) on Trinket
-- Based on the original [chain falling from table](https://www.youtube.com/watch?v=vXp1hW_t-bo) video and the code presented therein
-
-## Three-body problem
-
-- See [my code in action](https://trinket.io/glowscript/42acc05540ae) on Trinket
-- Based on the original [three-body problem](https://www.youtube.com/watch?v=Ye2wIV8-SB8) video and the code presented therein
-
 
 # Fun stuff with [VPython](https://vpython.org/) 
 

@@ -2,7 +2,7 @@
 
 title = """Click to drop slinky and ball 
 
-&#x2022; Original by <a href="https://trinket.io/glowscript/e5f14ebee1">Rhett Allain</a>
+&#x2022; Based on original by <a href="https://trinket.io/glowscript/e5f14ebee1">Rhett Allain</a>
 &#x2022; Belongs to <a href="https://rhettallain.com/2019/02/06/modeling-a-falling-slinky/">this article</a> 
 &#x2022; Maintained by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a> in this <a href="https://github.com/zhendrikse/physics-in-python/">GitHub repository</a>
 
