@@ -186,15 +186,16 @@ The following demos show the movement of an electron in two different electric f
 
 <details>
   <summary>Animations and source code</summary>
-  <ul>
-    <ul><b>Electron spinning around a charged ring</b>
+  <ul><li><b>Electron spinning around a charged ring</b>
+    <ul>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/electron_and_charged_ring">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedring">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/electromagnetism/charged_ring.py">charged_ring.py</a> and VPython <a href="./src/electromagnetism/charged_ring.py">charged_ring.py</a> versions in this repository</li>
-    </ul>
-    <ul><b>Moving charge between two charged capacitor plates</b>
+    </ul></li>
+    <li><b>Moving charge between two charged capacitor plates</b>
+      <ul>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/moving_charge">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Movingcharge">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/electromagnetism/moving_charge.py">moving_charge.py</a> and VPython <a href="./src/electromagnetism/moving_charge.py">moving_charge.py</a> versions in this repository</li>
-    </ul>
+    </ul></li>
   </ul>
 </details>
 
@@ -212,15 +213,16 @@ The following demos show the movement of an electron in two different electric f
 
 <details>
   <summary>Animations and source code</summary>
-  <ul>
-    <ul><b>Rutherford scattering</b>
+  <ul><li><b>Rutherford scattering</b>
+    <ul>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/rutherford_scattering">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Rutherfordscattering">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/electromagnetism/rutherford_scattering.py">rutherford_scattering.py</a> and VPython <a href="./src/electromagnetism/rutherford_scattering.py">rutherford_scattering.py</a> versions in this repository</li>
-    </ul>
-    <ul><b>Helical motion of charged particle in magnetic field</b>
+    </ul></li>
+    <li><b>Helical motion of charged particle in magnetic field</b>
+      <ul>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/helical_motion">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Helicalmotion">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/electromagnetism/helical_motion.py">helical_motion.py</a> and VPython <a href="./src/electromagnetism/helical_motion.py">helical_motion.py</a> versions in this repository</li>
-    </ul>
+    </ul></li>
   </ul>
 </details>
 
@@ -246,17 +248,17 @@ $\vec{E} ( \vec{r} ) = -\dfrac {1} {4\pi\epsilon_0} \nabla \bigg( \dfrac{\vec{r}
 
 <details>
   <summary>Animations and source code</summary>
-  <ul>
-    <ul><b>Point charge</b>
+  <ul><li><b>Point charge</b>
+    <ul>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/point_charge">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Pointchargefield">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/electromagnetism/point_charge.py">point_charge.py</a> and VPython <a href="./src/electromagnetism/point_charge.py">point_charge.py</a> versions in this repository</li>
-    </ul>
+    </ul></li>
   </ul>
-  <ul>
-    <ul><b>Dipole</b>
+  <ul><li><b>Dipole</b>
+    <ul>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/dipole">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Pointchargefield">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/electromagnetism/dipole.py">point_charge.py</a> and VPython <a href="./src/electromagnetism/dipole.py">point_charge.py</a> versions in this repository</li>
-    </ul>
+    </ul></li>
   </ul>
 </details>
 
@@ -277,15 +279,16 @@ an electric field inside a series of charged rings.
 
 <details>
   <summary>Animations and source code</summary>
-  <ul>
-    <ul><b>Faraday's law</b>
+  <ul><li><b>Faraday's law</b>
+    <ul>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/faradays_law">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Faradayslaw">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/electromagnetism/faradays_law.py">faradays_law.py</a> and VPython <a href="./src/electromagnetism/faradays_law.py">faradays_law.py</a> versions in this repository</li>
-    </ul>
-    <ul><b>Field inside charged rings</b>
+    </ul></li>
+    <li><li><b>Field inside charged rings</b>
+      <ul>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/charged_rings">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedrings">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/electromagnetism/charged_rings.py">charged_rings.py</a> and VPython <a href="./src/electromagnetism/charged_rings.py">charged_rings.py</a> versions in this repository</li>
-    </ul>
+    </ul></li>
   </ul>
 </details>
 
@@ -313,18 +316,18 @@ set-up of the disk by adding a charged ring at each mouse click.
   </a>
 </figure>
 
-
 <details>
   <summary>Animations and source code</summary>
-  <ul>
-    <ul><b>Charged disk</b>
+  <ul><li><b>Charged disk</b>
+    <ul>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/charged_disk">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargeddisk">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/electromagnetism/charged_disk.py">charged_disk.py</a> and VPython <a href="./src/electromagnetism/charged_disk.py">charged_disk.py</a> versions in this repository</li>
-    </ul>
-    <ul><b>Charged disk builder</b>
+    </ul></li>
+    <li><b>Charged disk builder</b>
+      <ul>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/charged_disk_builder">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargeddiskbuilder">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/electromagnetism/charged_disk_builder.py">charged_disk_builder.py</a> and VPython <a href="./src/electromagnetism/charged_disk_builder.py">charged_disk_builder.py</a> versions in this repository</li>
-    </ul>
+    </ul></li>
   </ul>
 </details>
 
@@ -332,24 +335,27 @@ set-up of the disk by adding a charged ring at each mouse click.
 
 Both of the two dynamic simulations below visualize the propagation of electromagnetic waves. 
 
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Antenna">
-  <img alt="Antenna" width="45%" height="45%" src="./images/antenna.png" title="Click to animate"/>
-</a>
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Electromagneticwave">
-  <img alt="Electromagnetic waves" width="50%" height="50%" src="./images/electromagnetic_wave.png" title="Click to animate"/>
-</a>
+<figure>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Antenna">
+    <img alt="Antenna" width="45%" height="45%" src="./images/antenna.png" title="Click to animate"/>
+  </a>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Electromagneticwave">
+    <img alt="Electromagnetic waves" width="50%" height="50%" src="./images/electromagnetic_wave.png" title="Click to animate"/>
+  </a>
+</figure>
 
 <details>
   <summary>Animations and source code</summary>
   <ul>
-    <ul><b>Antenna</b>
+    <li><b>Antenna</b>
+    <ul>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/antenna">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Antenna">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/electromagnetism/antenna.py">antenna.py</a> and VPython <a href="./src/electromagnetism/antenna.py">antenna.py</a> versions in this repository</li>
-    </ul>
-    <ul><b>Electromagnetic wave</b>
+    </ul></li><b>Electromagnetic wave</b>
+    <ul>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/electromagnetic_wave">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Electromagneticwave">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/electromagnetism/electromagnetic_wave.py">electromagnetic_wave.py</a> and VPython <a href="./src/electromagnetism/electromagnetic_wave.py">electromagnetic_wave.py</a> versions in this repository</li>
-    </ul>
+    </ul></li>
   </ul>
 </details>
 
@@ -363,13 +369,16 @@ on [glowscript.org](https://glowscript.org).
 
 This model represents a Boltzmann gas (consisting of hard spheres) in a box. 
 
+
 <details>
   <summary>Animations and source code</summary>
   <ul>
-    <ul><b>Ideal gas</b>
+    <li><b>Ideal gas</b>
+      <ul>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/hard_sphere_gas">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/thermodynamics/hard_sphere_gas.py">hard_sphere_gas.py</a> and VPython <a href="./src/thermodynamics/hard_sphere_gas.py">hard_sphere_gas.py</a> versions in this repository</li>
-    </ul>
+      </ul>
+    </li>
   </ul>
 </details>
 
@@ -378,10 +387,6 @@ This model represents a Boltzmann gas (consisting of hard spheres) in a box.
     <img alt="Hard sphere gas" width="40%" height="40%" src="./images/hard_sphere_gas.png" title="Click to animate"/>
   </a>
 </figure>
-
-The velocity distribution of the colliding atoms eventually approaches the calculated 
-theoretical velocity distribution:
-### $f(\vec{v}) d^3\vec{v} = \bigg [ \dfrac{m}{2\pi k_b T} \bigg ]^{3/2} e^{ \bigg (-\dfrac{mv^2}{2 k_b T} \bigg)} d^3\vec{v}$
 
 
 ## Two-dimensional Ising spin model: 
@@ -481,16 +486,21 @@ You may be surprised though to find out what happens when you drop such a simple
   <img alt="Slinky drop" width="50%" height="50%" src="./images/slinky_drop.png" title="Click to animate"/>
 </a>
 
-- [Drop the ball](https://zegerh-6085.trinket.io/sites/slinkydrop) on Trinket
-  or [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Ballonspringdrop)
-- View the code [on Trinket](https://trinket.io/glowscript/92ffad53ab4d) which is based on the
-  original [ball falling on spring](https://www.youtube.com/watch?v=ExxDuRTIe0E) video and the code presented therein
 
-
-- Observe [the slinky drop](https://zegerh-6085.trinket.io/sites/slinkydrop) on Trinket
-  or [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Slinkydrop)
-- View the slinky drop code [on Trinket](https://trinket.io/library/trinkets/9c6757b113dc), which is
-  based on the original [slinky drop](https://rhettallain.com/2019/02/06/modeling-a-falling-slinky/) blog post and [the code presented therein](https://trinket.io/glowscript/e5f14ebee1)
+<details>
+  <summary>Animations and source code</summary>
+  <ul><li><b>Ball drop</b>
+    <ul>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/ball_fallling_on_spring">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Ballonspringdrop">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/kinematics/ball_fallling_on_spring.py">ball_fallling_on_spring.py</a> and VPython <a href="./src/kinematics/ball_fallling_on_spring.py">ball_fallling_on_spring.py</a> versions in this repository</li>
+    </ul></li>
+    <li><b>Slinky drop</b>
+    <ul>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/slinkydrop">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Slinkydrop">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/kinematics/slinkydrop.py">slinkydrop.py</a> and VPython <a href="./src/kinematics/slinkydrop.py">slinkydrop.py</a> versions in this repository</li>
+    </ul></li>
+  </ul>
+</details>
 
 ## The _N_-body coupled oscillator
 
@@ -498,16 +508,17 @@ The N-body coupled harmonic oscillator is composed of beads connected by springs
 This coupled harmonic oscillator here lets you play around with an arbitrary 
 number of vibrating beads coupled by springs on both sides!
 
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/N-bodycoupledoscillator">
-  <img alt="N-body coupled oscillator" width="60%" height="60%" src="./images/n_body_coupled_oscillator.png" title="Click to animate"/>
-</a>
+<figure>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/N-bodycoupledoscillator">
+    <img alt="N-body coupled oscillator" width="60%" height="60%" src="./images/n_body_coupled_oscillator.png" title="Click to animate"/>
+  </a>
+</figure>
 
 - N-body coupled oscillator code in action [on Trinket](https://zegerh-6085.trinket.io/sites/n_body_coupled_oscillator) 
   and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/N-bodycoupledoscillator)
 - N-body coupled oscillator code base [on Trinket](https://trinket.io/glowscript/5a852a2b7570)
 
 ## Newton&apos;s pendulum and cannonball
-
 
 <figure>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Newtonspendulum">
@@ -520,15 +531,16 @@ number of vibrating beads coupled by springs on both sides!
 
 <details>
   <summary>Animations and source code</summary>
-  <ul>
-    <ul><b>Newton's pendulum</b>
+  <ul><li><b>Newton's pendulum</b>
+    <ul>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/newtons_pendulum">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Newtonspendulum">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/kinematics/newtons_cannon.py">newtons_pendulum.py</a> and VPython <a href="./src/kinematics/newtons_pendulum.py">newtons_cannon.py</a> versions in this repository</li>
-    </ul>
-    <ul><b>Newton's cannonball</b>
+    </ul></li>
+    <li><b>Newton's cannonball</b>
+    <ul>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/newtons_cannon">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Newtonscannon">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/kinematics/charged_rings.py">newtons_cannon.py</a> and VPython <a href="./src/kinematics/newtons_cannon.py">charged_rings.py</a> versions in this repository</li>
-    </ul>
+    </ul></li>
   </ul>
 </details>
 
@@ -547,21 +559,31 @@ number of vibrating beads coupled by springs on both sides!
 
 ## Water sprinkler and floating block
 
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Floatingblock">
-  <img alt="Floating block" width="45%" height="45%" src="./images/floating_block.png" title="Click to animate"/>
-</a>
-<a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Watersprinkler">
-  <img alt="Water sprinkler" width="45%" height="45%" src="./images/water_sprinkler.png" title="Click to animate"/>
-</a>
+<details>
+  <summary>Animations and source code</summary>
+  <ul>
+    <li><b>Floating block</b>
+    <ul>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/floating_block">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Floatingblock">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/kinematics/floating_block.py">floating_block.py</a> and VPython <a href="./src/kinematics/floating_block.py">floating_block.py</a> versions in this repository</li>
+    </ul>
+    </li>
+    <li><b>Water sprinkler</b>
+      <ul>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/sprinkler">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Watersprinkler">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/kinematics/sprinkler.py">sprinkler.py</a> and VPython <a href="./src/kinematics/sprinkler.py">sprinkler.py</a> versions in this repository</li>
+      </ul></li>
+  </ul>
+</details>
 
-- Floating block in action [on Trinket](https://zegerh-6085.trinket.io/sites/floating_block) 
-  and in action [on glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Floatingblock)
-- Floating block code base [on Trinket](https://trinket.io/library/trinkets/94ed363f8b25)
-
-- See the water sprinkler in action [on Trinket](https://zegerh-6085.trinket.io/sites/sprinkler) 
-  and on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Watersprinkler)
-- Take a look at [the code base](https://trinket.io/glowscript/3ec01917098d), which is 
-  based on the original [water sprinkler](https://rhettallain.com/2019/11/12/modeling-a-spinning-sprinkler/) blog post and the code presented therein
+<figure>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Floatingblock">
+    <img alt="Floating block" width="45%" height="45%" src="./images/floating_block.png" title="Click to animate"/>
+  </a>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Watersprinkler">
+    <img alt="Water sprinkler" width="45%" height="45%" src="./images/water_sprinkler.png" title="Click to animate"/>
+  </a>
+</figure>
 
 # Mathematics
 
@@ -597,11 +619,11 @@ number of vibrating beads coupled by springs on both sides!
 
 <details>
   <summary>Animations and source code</summary>
-  <ul>
-    <ul><b>Polar coordinates</b>
+  <ul><li><b>Polar coordinates</b>
+    <ul>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/polar_coordinates">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/polar_coordinates.py">polar_coordinates.py</a> and VPython <a href="./src/polar_coordinates.py">polar_coordinates.py</a> versions in this repository</li>
-    </ul>
+    </ul></li>
   </ul>
 </details>
 
@@ -626,22 +648,18 @@ number of vibrating beads coupled by springs on both sides!
 
 <details>
   <summary>Animations and source code</summary>
-  <ul>
-    <ul><b>Cubic lattice</b>
+  <ul><li><b>Cubic lattice</b>
+    <ul>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/crystal_symmetry_plaes">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/electromagnetism/crystal_symmetry_planes.py">crystal_symmetry_planes.py</a> and VPython <a href="./src/electromagnetism/crystal_symmetry_planes.py">crystal_symmetry_planes.py</a> versions in this repository</li>
-    </ul>
-    <ul><b>Flocking birds</b>
+    </ul></li>
+    <li><b>Flocking birds</b>
+     <ul>
         <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/crystal_symmetry_plaes">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Flockingbirds">glowscript.org</a></li>
         <li>Glowscript <a href="./src/glowscript/flocking_birds.py">flocking_birds.py</a> and VPython <a href="./src/flocking_birds.py">flocking_birds.py</a> versions in this repository</li>
-    </ul>
+    </ul></li>
   </ul>
 </details>
-
-## Elastic collision
-
-- See [my code in action](https://trinket.io/glowscript/d7600bd4705a) on Trinket
-- Based on the original [elastic collision](https://www.youtube.com/watch?v=g_p-5YfUSnw&t=11s) video and the code presented therein
 
 ## Chain falling from table
 
@@ -653,21 +671,19 @@ number of vibrating beads coupled by springs on both sides!
 - See [my code in action](https://trinket.io/glowscript/42acc05540ae) on Trinket
 - Based on the original [three-body problem](https://www.youtube.com/watch?v=Ye2wIV8-SB8) video and the code presented therein
 
-## Earth-moon orbit
-
-- See [my code in action](https://trinket.io/glowscript/42acc05540ae) on Trinket
-- Based on the original [earth-moon system](https://www.youtube.com/watch?v=2BisyQhNBFM) video and the code presented therein
 
 # Fun stuff with [VPython](https://vpython.org/) 
 
 ## [Rubik's cube](https://trinket.io/library/trinkets/00eb13fbcd14) and  [Turtle graphics robot](https://trinket.io/library/trinkets/31a188264ef1)
 
-<a href="https://zegerh-6085.trinket.io/sites/rubiks_cube">
-  <img alt="Rubiks cube" width="45%" height="50%" src="./images/rubiks_cube.png" title="Click to animate"/>
-</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="https://zegerh-6085.trinket.io/sites/vturtle">
-  <img alt="Robot for turtle graphics" width="45%" height="50%" src="./images/robot.png" title="Click to animate"/>
-</a>
+<figure>
+  <a href="https://zegerh-6085.trinket.io/sites/rubiks_cube">
+    <img alt="Rubiks cube" width="45%" height="50%" src="./images/rubiks_cube.png" title="Click to animate"/>
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://zegerh-6085.trinket.io/sites/vturtle">
+    <img alt="Robot for turtle graphics" width="45%" height="50%" src="./images/robot.png" title="Click to animate"/>
+  </a>
+</figure>
 
 ## Odysseus
 
