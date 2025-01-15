@@ -1,4 +1,4 @@
-#Web VPython 3.2
+# Web VPython 3.2
 
 from vpython import *
 
@@ -6,13 +6,14 @@ from vpython import *
 get_library('https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js')
 get_library("https://cdnjs.cloudflare.com/ajax/libs/mathjs/14.0.1/math.js")
 
-z_2_title = "<h2>$\\psi(z, t) = \\big(z^2 + 2\\big)e^{2 \pi i t} \\text{ where } z \in \\mathbb{C}$, $t \in \\mathbb{R}$</h2>"
-z_abs_squared_title = "<h2>$\\psi(x,y,t) = zz^* e^{i \pi t} \\text{ where } z \in \\mathbb{C}$, $t \in \\mathbb{R}$</h2>"
-z_cubed_title = "<h2>$\\psi(z, t) = \\big(z^3 + 2\\big)e^{2 \pi i t} \\text{ where } z \in \\mathbb{C}$, $t \in \\mathbb{R}$</h2>"
-z_plus_1_divided_by_z_min_1_title = "<h2>$\\psi(z, t) = \\bigg(\dfrac{z + 1}{z - 1} \\bigg)e^{2 \pi i t} \\text{ where } z \in \\mathbb{C}$, $t \in \\mathbb{R}$</h2>"
-sine_z_title = "<h2>$\\psi(z,t) = \\sin{(z)}e^{2 \pi i t} \\text{ where } z \in \\mathbb{C}$, $t \in \\mathbb{R}$</h2>"
-log_z_title = "<h2>$\\psi(z,t) = \\log{(z)}e^{2 \pi i t} \\text{ where } z \in \\mathbb{C}$, $t \in \\mathbb{R}$</h2>"
-exp_z_title = "<h2>$\\psi(z,t) = e^{-z^2}e^{2 \pi i t} \\text{ where } z \in \\mathbb{C}$, $t \in \\mathbb{R}$</h2>"
+title_end = "e^{i\\omega t} \\text{, } \{z \in \\mathbb{C}\} \\text{, } \{\omega, t \in \\mathbb{R}\}$</h2>"
+z_2_title = "<h2>$\\psi(z, t) = \\big(z^2 + 2\\big)" + title_end
+z_abs_squared_title = "<h2>$\\psi(x,y,t) = z\\bar{z}" + title_end
+z_cubed_title = "<h2>$\\psi(z, t) = \\big(z^3 + 2\\big)" + title_end
+z_plus_1_divided_by_z_min_1_title = "<h2>$\\psi(z, t) = \\bigg(\dfrac{z + 1}{z - 1} \\bigg)" + title_end
+sine_z_title = "<h2>$\\psi(z,t) = \\sin{(z)}" + title_end
+log_z_title = "<h2>$\\psi(z,t) = \\log{(z)}" + title_end
+exp_z_title = "<h2>$\\psi(z,t) = e^{-z^2}" + title_end
 
 caption = """
 &#x2022; Based on <a href="https://www.glowscript.org/#/user/GlowScriptDemos/folder/Examples/program/Plot3D">Plot3D</a>
@@ -174,6 +175,7 @@ class plot3D:
         self._xx = xx
         self._yy = yy
         self._zz = zz
+        self._omega = 2 * pi
         self._vertices = self._create_vertices()
         self._quads = self._create_quads()
         self._make_normals()
@@ -253,10 +255,13 @@ class plot3D:
             b = self._vertices[i + 1].pos - v.pos
             v.normal = cross(a, b)
 
+    def set_omega_to(self, omega):
+        self._omega = omega
+
     def replot(self, t):
         for i in range(np.len(self._xx) * np.len(self._yy)):
             re, im = self._get_x_and_y_for(i)
-            f_z = self._f(math.complex(self._xx.get(re, im), self._yy.get(re, im)), t)
+            f_z = self._f(math.complex(self._xx.get(re, im), self._yy.get(re, im)), self._omega * t)
             # f_z = self._f(Complex(self._xx.get(re, im), self._yy.get(re, im)), t)
 
             range_z = self._zz.get(-1) - self._zz.get(0)
@@ -318,19 +323,19 @@ def z_squared():
 
     def f(z, t):
         value = math.add(math.multiply(z, z), math.complex(2, 0))
-        phase = math.complex(cos(2 * pi * t), sin(2 * pi * t))
+        phase = math.complex(cos(t), sin(t))
         return math.multiply(value, phase)
 
     return xx, yy, zz, f
 
 
 def z_abs_squared():
-    xx, yy = np.meshgrid(np.linspace(-2, 2, 50), np.linspace(-2, 2, 50))
-    zz = np.linspace(0, 10, 50)
+    xx, yy = np.meshgrid(np.linspace(-3, 3, 50), np.linspace(-3, 3, 50))
+    zz = np.linspace(0, 15, 50)
 
     def f(z, t):
         value = math.multiply(z, math.conj(z))
-        phase = math.complex(cos(2 * pi * t), sin(2 * pi * t))
+        phase = math.complex(cos(t), sin(t))
         return math.multiply(value, phase)
 
     return xx, yy, zz, f
@@ -342,7 +347,7 @@ def z_cubed():
 
     def f(z, t):
         value = math.add(math.multiply(math.multiply(z, z), z), math.complex(2, 0))
-        phase = math.complex(cos(2 * pi * t), sin(2 * pi * t))
+        phase = math.complex(cos(t), sin(t))
         return math.multiply(value, phase)
 
     return xx, yy, zz, f
@@ -355,7 +360,7 @@ def z_plus_1_divided_by_z_min_1():
     def f(z, t):
         value = math.add(math.complex(1, 0), z)
         value = math.divide(value, math.add(math.complex(-1, 0), z))
-        phase = math.complex(cos(2 * pi * t), sin(2 * pi * t))
+        phase = math.complex(cos(t), sin(t))
         return math.multiply(value, phase)
 
     return xx, yy, zz, f
@@ -366,7 +371,7 @@ def log_z():
     zz = np.linspace(0, 3, 50)
 
     def f(z, t):
-        phase = math.complex(cos(2 * pi * t), sin(2 * pi * t))
+        phase = math.complex(cos(t), sin(t))
         return math.multiply(math.log(z), phase)
 
     return xx, yy, zz, f
@@ -377,7 +382,7 @@ def sine_z():
     zz = np.linspace(0, 4, 50)
 
     def f(z, t):
-        phase = math.complex(cos(2 * pi * t), sin(2 * pi * t))
+        phase = math.complex(cos(t), sin(t))
         return math.multiply(math.sin(z), phase)
 
     return xx, yy, zz, f
@@ -388,7 +393,7 @@ def exp_z():
     zz = np.linspace(0, 40, 50)
 
     def f(z, t):
-        phase = math.complex(cos(2 * pi * t), sin(2 * pi * t))
+        phase = math.complex(cos(t), sin(t))
         return math.multiply(math.exp(math.multiply(math.complex(-1, 0), math.multiply(z, z))), phase)
 
     return xx, yy, zz, f
@@ -431,6 +436,11 @@ def switch_function(event):
     MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 
+def adjust_omega():
+    plot.set_omega_to(omega_slider.value)
+    omega_slider_text.text = str(round(omega_slider.value / pi, 2)) + " * π"
+
+
 wave_choices = ["f(z, t) = z * z + 2", "f(z, t) = |z| * |z|", "f(z, t) = z * z * z + 2", "f(z, t) = z + 1 / z - 1",
                 "f(z, t) = sin(z)", "f(z, t) = log(z)", "f(z, t) = exp(-z * z)"]
 _ = menu(choices=wave_choices, bind=switch_function)
@@ -440,7 +450,12 @@ _ = checkbox(text='XZ mesh', bind=toggle_xz_mesh, checked=True)
 _ = checkbox(text='XY mesh', bind=toggle_xy_mesh, checked=True)
 _ = checkbox(text='Axis', bind=toggle_axis, checked=True)
 _ = checkbox(text='Tick marks', bind=toggle_tick_marks, checked=True)
-animation.append_to_caption("\n" + caption + "\n")
+
+animation.append_to_caption("\n\n")
+omega_slider = slider(min=0, max=6 * pi, value=2 * pi, bind=adjust_omega)
+animation.append_to_caption("Omega = ")
+omega_slider_text = wtext(text="2 * π")
+animation.append_to_caption("\n\n" + caption + "\n")
 
 
 def running(ev):
