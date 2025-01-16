@@ -1,9 +1,10 @@
-#Web VPython 3.2
+# Web VPython 3.2
 
 from vpython import *
 
 # https://github.com/nicolaspanel/numjs
 get_library('https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js')
+get_library("https://cdnjs.cloudflare.com/ajax/libs/mathjs/14.0.1/math.js")
 
 # There is an L by L grid of vertex objects, numbered 0 through L-1 by 0 through L-1.
 # Only the vertex operators numbered L-2 by L-2 are used to create quads.
@@ -17,7 +18,7 @@ $\\psi(x,y,t) = \dfrac{1 + \sin(\\omega t)}{\pi\sigma^4} \\bigg(1 - \dfrac{1}{2}
 
 sine_cosine_title = "<h2>$\\psi(x,y,t) = 0.7+0.2\\sin{(10x)}\\cos{(10y)}\\cos{(\omega t)}$</h2>"
 exponential_title = "<h2>$\\psi(x, y, t) = \\sin(\omega t) \\sin(x^2 + y^2) e^{ -x^2 - y^2}$</h2>"
-ripple_title = "<h2>$\\psi(x, y, t) = \\sin(\omega t) \\sin\\bigg(3 (x^2 + y^2)\\bigg)$</h2"
+ripple_title = "<h2>$\\psi(x, y, t) = \\sin(\omega t) \\sin\\big(3 (x^2 + y^2)\\big)$</h2"
 polynomial_title = "<h2>$\\psi(x, y, t) = \\sin(\omega t) (yx^3 - xy^3)$</h2>"
 cosine_of_abs_title = "<h2>$\\psi(x, y, t) = \\sin(\omega t)\\cos(|x| + |y|)$</h2>"
 sine_sqrt_title = "<h2>$\\psi(x, y, t) = \\sin(\\omega t)\sqrt{x^2+y^2}$</h2>"
@@ -65,49 +66,42 @@ np = Numpy()
 x_hat = vec(1, 0, 0)
 y_hat = vec(0, 1, 0)
 z_hat = vec(0, 0, 1)
-
-
-class Space:
-    def __init__(self, linspace_x, linspace_y, linspace_z):
-        self.linspace_x = linspace_x
-        self.linspace_y = linspace_y
-        self.linspace_z = linspace_z
+base = [x_hat, y_hat, z_hat]
 
 
 class Base:
-    def __init__(self, space, position=vec(0, 0, 0), axis_color=color.yellow, tick_marks_color=color.red):
-        x_ = space.linspace_x
-        y_ = space.linspace_y
-        z_ = space.linspace_z
-        scale = .01 * (x_.get(-1) - x_.get(0))
-        delta_x = x_.get(1) - x_.get(0)
-        delta_y = y_.get(1) - y_.get(0)
-        delta_z = z_.get(1) - z_.get(0)
-        range_x = x_.get(-1) - x_.get(0)
-        range_y = y_.get(-1) - y_.get(0)
-        range_z = z_.get(-1) - z_.get(0)
-        axis_labels = ("y", "z", "x")
-        self._axis = self._make_axis(x_, y_, z_, delta_x, delta_y, delta_z, axis_color, axis_labels, scale)
-        self._tick_marks = self._make_tick_marks(x_, y_, z_, tick_marks_color, scale)
+    def __init__(self, xx, yy, zz):
+        axis_color = color.yellow
+        tick_marks_color = vec(0.4, 0.8, 0.4)
+
+        base_ = [np.linspace(0, np.len(xx), 11), np.linspace(0, np.len(yy), 11), np.linspace(0, np.len(zz), 11)]
+        scale = .01 * (base_[0].get(-1) - base_[0].get(0))
+        delta_ = [i.get(1) - i.get(0) for i in base_]
+        range_ = [i.get(-1) - i.get(0) for i in base_]
+        self._axis = self._make_axis(base_, delta_, axis_color, tick_marks_color, scale)
+        self._tick_marks = self._make_tick_marks(base_, xx, yy, zz, tick_marks_color, scale)
 
         self._xy_mesh, self._xz_mesh, self._yz_mesh = [], [], []
-        for j in range(np.len(x_)):
-            pos_x_y = x_hat * x_.get(0) + y_hat * y_.get(0)
-            pos_x_z = x_hat * x_.get(0) + z_hat * z_.get(0)
-            pos_y_z = y_hat * y_.get(0) + z_hat * z_.get(0)
-            self._xy_mesh += [cylinder(pos=position + pos_x_y + x_hat * j * delta_x, axis=y_hat * range_y)]
-            self._xy_mesh += [cylinder(pos=position + pos_x_y + y_hat * j * delta_y, axis=x_hat * range_x)]
-            self._xz_mesh += [cylinder(pos=position + pos_x_z + x_hat * j * delta_x, axis=z_hat * range_z)]
-            self._xz_mesh += [cylinder(pos=position + pos_x_z + z_hat * j * delta_z, axis=x_hat * range_x)]
-            self._yz_mesh += [cylinder(pos=position + pos_y_z + y_hat * j * delta_y, axis=z_hat * range_z)]
-            self._yz_mesh += [cylinder(pos=position + pos_y_z + z_hat * j * delta_z, axis=y_hat * range_y)]
+        for j in range(np.len(base_[0])):
+            pos_x_y = x_hat * base_[0].get(0) + y_hat * base_[1].get(0)
+            pos_x_z = x_hat * base_[0].get(0) + z_hat * base_[2].get(0)
+            pos_y_z = y_hat * base_[1].get(0) + z_hat * base_[2].get(0)
+            self._xy_mesh += [cylinder(pos=pos_x_y + x_hat * j * delta_[0], axis=y_hat * range_[1])]
+            self._xy_mesh += [cylinder(pos=pos_x_y + y_hat * j * delta_[1], axis=x_hat * range_[0])]
+            self._xz_mesh += [cylinder(pos=pos_x_z + x_hat * j * delta_[0], axis=z_hat * range_[2])]
+            self._xz_mesh += [cylinder(pos=pos_x_z + z_hat * j * delta_[2], axis=x_hat * range_[0])]
+            self._yz_mesh += [cylinder(pos=pos_y_z + y_hat * j * delta_[1], axis=z_hat * range_[2])]
+            self._yz_mesh += [cylinder(pos=pos_y_z + z_hat * j * delta_[2], axis=y_hat * range_[1])]
 
-            pos = position + (y_.get(0) + .5 * range_y) * y_hat + (z_.get(0) + .5 * range_z) * z_hat
-            self._yz_mesh += [box(pos=pos, length=scale, width=range_z, height=range_y, opacity=0.15, visible=False)]
-            pos = position + (x_.get(0) + .5 * range_x) * x_hat + (y_.get(0) + .5 * range_y) * y_hat
-            self._xy_mesh += [box(pos=pos, length=range_x, width=scale, height=range_y, opacity=0.15, visible=False)]
-            pos = position + (x_.get(0) + .5 * range_x) * x_hat + (z_.get(0) + .5 * range_z) * z_hat
-            self._xz_mesh += [box(pos=pos, length=range_x, width=range_z, height=scale, opacity=0.15, visible=False)]
+            pos = (base_[1].get(0) + .5 * range_[1]) * y_hat + (base_[2].get(0) + .5 * range_[2]) * z_hat
+            self._yz_mesh += [
+                box(pos=pos, length=scale, width=range_[2], height=range_[1], opacity=0.15, visible=False)]
+            pos = (base_[0].get(0) + .5 * range_[0]) * x_hat + (base_[1].get(0) + .5 * range_[1]) * y_hat
+            self._xy_mesh += [
+                box(pos=pos, length=range_[0], width=scale, height=range_[1], opacity=0.15, visible=False)]
+            pos = (base_[0].get(0) + .5 * range_[0]) * x_hat + (base_[2].get(0) + .5 * range_[2]) * z_hat
+            self._xz_mesh += [
+                box(pos=pos, length=range_[0], width=range_[2], height=scale, opacity=0.15, visible=False)]
 
             self._set_mesh_properties(self._xy_mesh, scale)
             self._set_mesh_properties(self._xz_mesh, scale)
@@ -119,36 +113,52 @@ class Base:
             item_.radius = scale * .5
             item_.visible = False
 
-    def _make_axis(self, x_, y_, z_, delta_x, delta_y, delta_z, axis_color, axis_labels, scale):
-        c1 = cylinder(pos=x_hat * x_.get(0), axis=x_hat * (x_.get(-1) - x_.get(0)), color=axis_color, radius=scale)
-        c2 = cylinder(pos=y_hat * y_.get(0), axis=y_hat * (y_.get(-1) - y_.get(0)), color=axis_color, radius=scale)
-        c3 = cylinder(pos=z_hat * z_.get(0), axis=z_hat * (z_.get(-1) - z_.get(0)), color=axis_color, radius=scale)
-        a1 = arrow(pos=x_hat * x_.get(-1), color=axis_color, shaftwidth=scale * 2, axis=2 * delta_x * x_hat, round=True)
-        a2 = arrow(pos=y_hat * y_.get(-1), color=axis_color, shaftwidth=scale * 2, axis=2 * delta_y * y_hat, round=True)
-        a3 = arrow(pos=z_hat * z_.get(-1), color=axis_color, shaftwidth=scale * 2, axis=2 * delta_z * z_hat, round=True)
-        l1 = text(pos=x_hat * (x_.get(-1) + 2 * delta_x) - vec(0, scale, 0), text=axis_labels[0],
-                  color=axis_color, height=scale * 7, billboard=True, emissive=True)
-        l2 = text(pos=y_hat * (y_.get(-1) + 2 * delta_y) - vec(0, scale, 0), text=axis_labels[1],
-                  color=axis_color, height=scale * 7, billboard=True, emissive=True)
-        l3 = text(pos=z_hat * (z_.get(-1) + 2 * delta_z) - vec(0, scale, 0), text=axis_labels[2],
-                  color=axis_color, height=scale * 7, billboard=True, emissive=True)
+    def _make_axis(self, base_, delta_, axis_color, tick_marks_color, scale):
+        c1 = cylinder(pos=x_hat * base_[0].get(0), axis=x_hat * (base_[0].get(-1) - base_[0].get(0)), color=axis_color,
+                      radius=scale)
+        c2 = cylinder(pos=y_hat * base_[1].get(0), axis=y_hat * (base_[0].get(-1) - base_[1].get(0)), color=axis_color,
+                      radius=scale)
+        c3 = cylinder(pos=z_hat * base_[2].get(0), axis=z_hat * (base_[0].get(-1) - base_[2].get(0)), color=axis_color,
+                      radius=scale)
+        a1 = arrow(pos=x_hat * base_[0].get(-1), color=axis_color, shaftwidth=scale * 2, axis=2 * delta_[0] * x_hat,
+                   round=True)
+        a2 = arrow(pos=y_hat * base_[1].get(-1), color=axis_color, shaftwidth=scale * 2, axis=2 * delta_[1] * y_hat,
+                   round=True)
+        a3 = arrow(pos=z_hat * base_[2].get(-1), color=axis_color, shaftwidth=scale * 2, axis=2 * delta_[2] * z_hat,
+                   round=True)
+        pos = x_hat * (base_[0].get(-1) + 2.25 * delta_[0]) - vec(0, scale, 0)
+        l1 = text(pos=pos, text="X", color=tick_marks_color, height=scale * 5, billboard=True, emissive=True)
+        pos = y_hat * (base_[1].get(-1) + 2.25 * delta_[1]) - vec(0, scale, 0)
+        l2 = text(pos=pos, text="Z", color=tick_marks_color, height=scale * 5, billboard=True, emissive=True)
+        pos = z_hat * (base_[2].get(-1) + 2.25 * delta_[2]) - vec(0, scale, 0)
+        l3 = text(pos=pos, text="Y", color=tick_marks_color, height=scale * 5, billboard=True, emissive=True)
         return [c1, c2, c3, a1, a2, a3, l1, l2, l3]
 
-    def _make_tick_marks(self, x_dim, y_dim, z_dim, tick_marks_color, scale):
+    def _make_tick_marks(self, base_, xx, yy, zz, tick_marks_color, scale):
         tick_marks = []
-        for i in range(np.len(x_dim)):
-            a_box = box(pos=x_hat * x_dim.get(i), width=scale * 2, height=scale * 5, length=scale * 2,
-                        color=tick_marks_color)
-            tick_marks.append(a_box)
-        for i in range(np.len(z_dim)):
-            a_box = box(pos=z_hat * z_dim.get(i), width=scale * 2, height=scale * 5, length=scale * 2,
-                        color=tick_marks_color)
-            tick_marks.append(a_box)
-        for i in range(np.len(y_dim)):
-            a_box = box(pos=y_hat * y_dim.get(i), width=scale * 2, height=scale * 5, length=scale * 2,
-                        color=tick_marks_color)
-            a_box.rotate(angle=0.5 * pi, axis=vec(0, 0, 1))
-            tick_marks.append(a_box)
+        increment = (yy.get(-1, -1) - yy.get(0, 0)) / 10.
+        start_value = yy.get(0, 0)
+        for i in range(0, np.len(base_[0]), 2):
+            label_text = str(math.round(start_value + i * increment, 2))
+            pos = x_hat * base_[0].get(i) + z_hat * (base_[2].get(-1) + 7 * scale)
+            a_label = text(pos=pos, text=label_text, height=5 * scale, billboard=True, color=tick_marks_color)
+            tick_marks.append(a_label)
+
+        increment = (xx.get(-1, -1) - xx.get(0, 0)) / 10.
+        start_value = xx.get(0, 0)
+        for i in range(1, np.len(base_[2]), 2):
+            label_text = str(math.round(start_value + i * increment, 2))
+            pos = z_hat * base_[2].get(i) + x_hat * (base_[0].get(-1) + 5 * scale)
+            a_label = text(pos=pos, text=label_text, height=5 * scale, billboard=True, color=tick_marks_color)
+            tick_marks.append(a_label)
+
+        increment = (zz.get(-1, -1) - zz.get(0, 0)) / 10.
+        start_value = zz.get(0, 0)
+        for i in range(0, np.len(base_[1]), 2):
+            label_text = str(math.round(start_value + i * increment, 2))
+            pos = y_hat * base_[1].get(i) + z_hat * (base_[2].get(-1) + 7 * scale)
+            a_label = text(pos=pos, text=label_text, height=5 * scale, billboard=True, color=tick_marks_color)
+            tick_marks.append(a_label)
         return tick_marks
 
     def axis_visibility_is(self, visible):
@@ -215,9 +225,7 @@ class plot3D:
             vertex_.visible = False
 
     def _create_base(self):
-        space = Space(np.linspace(-0, np.len(self._xx), 11), np.linspace(0, np.len(self._yy), 11),
-                      np.linspace(0, np.len(self._zz), 11))
-        axis = Base(space)
+        axis = Base(self._xx, self._yy, self._zz)
         axis.xy_mesh_visibility_is(True)
         axis.xz_mesh_visibility_is(True)
         axis.yz_mesh_visibility_is(True)
@@ -421,7 +429,7 @@ def switch_function(event):
         animation.title = ripple_title + "\n\n"
     elif event.index == 4:
         xx, yy, zz, f = exp_sine()
-        animation.range = 115
+        animation.range = 150
         animation.title = exponential_title + "\n"
     elif event.index == 5:
         xx, yy, zz, f = polynomial()
@@ -441,15 +449,16 @@ def adjust_omega():
     omega_slider_text.text = str(round(omega_slider.value / pi, 2)) + " * π"
 
 
-wave_choices = ["Ricker wavelet", "Sine of square root", "Sine-cosine", "Ripple", "Exponential", "Polynomial",
-                "Cosine of abs(x, y)"]
+animation.append_to_caption("\n")
+wave_choices = ["Ricker wavelet", "f(x,y) = sqrt(x*x + y*y)", "f(x,y) = sin(10x) cos(10y)", "Ripple",
+                "f(x,y) = sin(x*x + y*y) exp(-x*x - y*y)", "f(x,y) = y*x*x*x - x*y*y*y", "f(x,y) = cos(|x| + |y|)"]
 _ = menu(choices=wave_choices, bind=switch_function)
-animation.append_to_caption("  ")
-_ = checkbox(text='YZ mesh', bind=toggle_yz_mesh, checked=True)
-_ = checkbox(text='XZ mesh', bind=toggle_xz_mesh, checked=True)
-_ = checkbox(text='XY mesh', bind=toggle_xy_mesh, checked=True)
-_ = checkbox(text='Axis', bind=toggle_axis, checked=True)
-_ = checkbox(text='Tick marks', bind=toggle_tick_marks, checked=True)
+animation.append_to_caption("\n\n")
+_ = checkbox(text='YZ mesh ', bind=toggle_yz_mesh, checked=True)
+_ = checkbox(text='XZ mesh ', bind=toggle_xz_mesh, checked=True)
+_ = checkbox(text='XY mesh ', bind=toggle_xy_mesh, checked=True)
+_ = checkbox(text='Axis ', bind=toggle_axis, checked=True)
+_ = checkbox(text='Tick marks ', bind=toggle_tick_marks, checked=True)
 animation.append_to_caption("\n\nHue offset  ")
 color_slider = slider(min=0, max=1, step=.01, value=0, bind=adjust_color)
 
@@ -457,6 +466,25 @@ animation.append_to_caption("\n\nOmega = ")
 omega_slider = slider(min=0, max=3 * pi, value=pi, bind=adjust_omega)
 omega_slider_text = wtext(text="1 * π")
 animation.append_to_caption("\n" + caption + "\n")
+
+
+def on_key_press(key):
+    if key == "b":
+        animation.background = color.white if animation.background == color.black else color.black
+    if key == 's':
+        animation.capture("3d_complex_function_plot")
+    if key == 'v':
+        print("scene.center=" + str(animation.center))
+        print("scene.forward=" + str(animation.forward))
+        print("scene.range=" + str(animation.range))
+
+
+def key_pressed(event):
+    key = event.key
+    on_key_press(key)
+
+
+animation.bind('keydown', key_pressed)
 
 
 def running(ev):
