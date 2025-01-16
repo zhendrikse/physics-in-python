@@ -73,13 +73,16 @@ class Base:
     def __init__(self, xx, yy, zz):
         axis_color = color.yellow
         tick_marks_color = vec(0.4, 0.8, 0.4)
+        num_tick_marks = 10
 
-        base_ = [np.linspace(0, np.len(xx), 11), np.linspace(0, np.len(yy), 11), np.linspace(0, np.len(zz), 11)]
+        base_ = [np.linspace(0, np.len(xx), num_tick_marks + 1),
+                 np.linspace(0, np.len(yy), num_tick_marks + 1),
+                 np.linspace(0, np.len(zz), num_tick_marks + 1)]
         scale = .01 * (base_[0].get(-1) - base_[0].get(0))
         delta_ = [i.get(1) - i.get(0) for i in base_]
         range_ = [i.get(-1) - i.get(0) for i in base_]
         self._axis = self._make_axis(base_, delta_, axis_color, tick_marks_color, scale)
-        self._tick_marks = self._make_tick_marks(base_, xx, yy, zz, tick_marks_color, scale)
+        self._tick_marks = self._make_tick_marks(base_, xx, yy, zz, tick_marks_color, scale, num_tick_marks)
 
         self._xy_mesh, self._xz_mesh, self._yz_mesh = [], [], []
         for j in range(np.len(base_[0])):
@@ -134,9 +137,9 @@ class Base:
         l3 = text(pos=pos, text="Y", color=tick_marks_color, height=scale * 5, billboard=True, emissive=True)
         return [c1, c2, c3, a1, a2, a3, l1, l2, l3]
 
-    def _make_tick_marks(self, base_, xx, yy, zz, tick_marks_color, scale):
+    def _make_tick_marks(self, base_, xx, yy, zz, tick_marks_color, scale, num_tick_marks):
         tick_marks = []
-        increment = (yy.get(-1, -1) - yy.get(0, 0)) / 10.
+        increment = (yy.get(-1, -1) - yy.get(0, 0)) / num_tick_marks
         start_value = yy.get(0, 0)
         for i in range(0, np.len(base_[0]), 2):
             label_text = str(math.round(start_value + i * increment, 2))
@@ -144,7 +147,7 @@ class Base:
             a_label = text(pos=pos, text=label_text, height=5 * scale, billboard=True, color=tick_marks_color)
             tick_marks.append(a_label)
 
-        increment = (xx.get(-1, -1) - xx.get(0, 0)) / 10.
+        increment = (xx.get(-1, -1) - xx.get(0, 0)) / num_tick_marks
         start_value = xx.get(0, 0)
         for i in range(1, np.len(base_[2]), 2):
             label_text = str(math.round(start_value + i * increment, 2))
@@ -152,7 +155,7 @@ class Base:
             a_label = text(pos=pos, text=label_text, height=5 * scale, billboard=True, color=tick_marks_color)
             tick_marks.append(a_label)
 
-        increment = (zz.get(-1, -1) - zz.get(0, 0)) / 10.
+        increment = (zz.get(-1, -1) - zz.get(0, 0)) / num_tick_marks
         start_value = zz.get(0, 0)
         for i in range(0, np.len(base_[1]), 2):
             label_text = str(math.round(start_value + i * increment, 2))
@@ -193,11 +196,11 @@ class plot3D:
         self._zz = zz
         self._hue_offset = 0.
         self._omega = pi
-        self._vertices = self._create_vertices()
-        self._quads = self._create_quads()
-        self._make_normals()
         self._axis = self._create_base()
-        self.replot(0)
+        self._vertices, self._quads = [], []
+        self._create_vertices()
+        self._create_quads()
+        self.render(0)
 
     def reinitialize(self, xx, yy, zz, f):
         self._f = f
@@ -206,10 +209,11 @@ class plot3D:
         self._zz = zz
         self._hide_plot()  # Hide previous shizzle before creating new stuff
         self._hide_axis()  # Hide previous stizzle before creating new stuff
-        self._vertices = self._create_vertices()
-        self._quads = self._create_quads()
-        self._make_normals()
         self._axis = self._create_base()
+        self._vertices, self._quads = [], []
+        self._create_vertices()
+        self._create_quads()
+        self.render(0)
 
     def _hide_axis(self):
         self._axis.tick_marks_visibility_is(False)
@@ -232,37 +236,36 @@ class plot3D:
         return axis
 
     def _create_vertices(self):
-        vertices = []
         for i in range(np.len(self._xx) * np.len(self._yy)):
             x, y = self._get_x_and_y_for(i)
-            vertices.append(vertex(pos=vec(y, 0, x), normal=vec(0, 1, 0)))
-        return vertices
+            self._vertices.append(vertex(pos=vec(y, 0, x), normal=vec(0, 1, 0)))
 
     def _get_x_and_y_for(self, index):
         return int(index / np.len(self._xx)), index % np.len(self._yy)
 
     # Create the quad objects, based on the vertex objects already created.
     def _create_quads(self):
-        quads = []
         for x in range(np.len(self._xx) - 2):
             for y in range(np.len(self._yy) - 2):
-                v0 = self.get_vertex(x, y)
-                v1 = self.get_vertex(x + 1, y)
-                v2 = self.get_vertex(x + 1, y + 1)
-                v3 = self.get_vertex(x, y + 1)
-                quads.append(quad(vs=[v0, v1, v2, v3]))
-        return quads
+                v0 = self._get_vertex(x, y)
+                v1 = self._get_vertex(x + 1, y)
+                v2 = self._get_vertex(x + 1, y + 1)
+                v3 = self._get_vertex(x, y + 1)
+                self._quads.append(quad(vs=[v0, v1, v2, v3]))
+
+    def _set_vertex_normal_for(self, index):
+        x, y = self._get_x_and_y_for(index)
+        if x == np.len(self._xx) - 1 or y == np.len(self._yy) - 1: return
+        v = self._vertices[index]
+        a = self._vertices[index + np.len(self._xx)].pos - v.pos
+        b = self._vertices[index + 1].pos - v.pos
+        v.normal = cross(a, b)
 
     # Set the normal for each vertex to be perpendicular to the lower left corner of the quad.
     # The vectors a and b point to the right and up around a vertex in the xy plane.
     def _make_normals(self):
         for i in range(np.len(self._xx) * np.len(self._yy)):
-            x, y = self._get_x_and_y_for(i)
-            if x == np.len(self._xx) - 1 or y == np.len(self._yy) - 1: continue
-            v = self._vertices[i]
-            a = self._vertices[i + np.len(self._xx)].pos - v.pos
-            b = self._vertices[i + 1].pos - v.pos
-            v.normal = cross(a, b)
+            self._set_vertex_normal_for(i)
 
     def _update_vertex_with_index(self, i, t):
         z_min = self._zz.get(0)
@@ -277,7 +280,7 @@ class plot3D:
 
         self._vertices[i].color = color.hsv_to_rgb(vec(color_, color_, 1))
 
-    def replot(self, t):
+    def render(self, t):
         for i in range(np.len(self._xx) * np.len(self._yy)):
             self._update_vertex_with_index(i, t)
 
@@ -289,11 +292,8 @@ class plot3D:
     def hue_offset_is(self, hue_offset):
         self._hue_offset = hue_offset
 
-    def get_vertex(self, x, y):
+    def _get_vertex(self, x, y):
         return self._vertices[x * np.len(self._xx) + y]
-
-    def get_pos(self, x, y):
-        return self.get_vertex(x, y).pos
 
     def axis_visibility_is(self, visible):
         self._axis.axis_visibility_is(visible)
@@ -505,6 +505,6 @@ plot = plot3D(ricker()[0], ricker()[1], ricker()[2], ricker()[3])
 while True:
     rate(30)
     if run:
-        plot.replot(time)
+        plot.render(time)
         time += dt
 
