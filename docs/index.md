@@ -157,6 +157,8 @@ $$(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x,
 
 </details>
 
+<p/>
+
 ## One-dimensional quantum particle bound by an infinite square well
 
 <details>
@@ -212,6 +214,8 @@ $$E=\dfrac{h^2a^2}{8\pi^2m} \text{ and } \psi_n=\sqrt{\dfrac{2}{L}}\sin(nkx), \t
 
 These energy eigenstates (and superpositions thereof) are used in the visualization software.
 </details>
+
+<p/>
 
 ## The quantum harmonic oscillator
 
