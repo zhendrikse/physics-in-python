@@ -1,0 +1,446 @@
+<div id="glowscript" class="glowscript">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css" rel="stylesheet" />
+<link type="text/css" href="https://www.glowscript.org/css/ide.css" rel="stylesheet" />
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+// START JAVASCRIPT
+;(function() {;
+var ρσ_modules = {};
+ρσ_modules.pythonize = {};
+
+(function(){
+    function strings() {
+        var string_funcs, exclude, name;
+        string_funcs = set("capitalize strip lstrip rstrip islower isupper isspace lower upper swapcase center count endswith startswith find rfind index rindex format join ljust rjust partition rpartition replace split rsplit splitlines zfill".split(" "));
+        if (!arguments.length) {
+            exclude = (function(){
+                var s = ρσ_set();
+                s.jsset.add("split");
+                s.jsset.add("replace");
+                return s;
+            })();
+        } else if (arguments[0]) {
+            exclude = Array.prototype.slice.call(arguments);
+        } else {
+            exclude = null;
+        }
+        if (exclude) {
+            string_funcs = string_funcs.difference(set(exclude));
+        }
+        var ρσ_Iter0 = string_funcs;
+        ρσ_Iter0 = ((typeof ρσ_Iter0[Symbol.iterator] === "function") ? (ρσ_Iter0 instanceof Map ? ρσ_Iter0.keys() : ρσ_Iter0) : Object.keys(ρσ_Iter0));
+        for (var ρσ_Index0 of ρσ_Iter0) {
+            name = ρσ_Index0;
+            (ρσ_expr_temp = String.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name] = (ρσ_expr_temp = ρσ_str.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name];
+        }
+    };
+    if (!strings.__module__) Object.defineProperties(strings, {
+        __module__ : {value: "pythonize"}
+    });
+
+    ρσ_modules.pythonize.strings = strings;
+})();
+
+async function __main__() {
+"use strict";
+    var display = canvas;
+    var scene = canvas();
+
+    function round(num, n=0) {return Number(num.toFixed(n))}
+    var box, compound, cone, curve, cylinder, ellipsoid, extrusion, helix, points, pyramid, ring, sphere, simple_sphere, group, sleep, update, paths, shapes, vertex, triangle, quad, label, distant_light, local_light, attach_trail, attach_arrow, attach_light, sqrt, pi, sin, cos, tan, asin, acos, atan, atan2, exp, log, pow, factorial, combin, radio, checkbox, checkbox, text, download, radians, degrees, get_library, read_local_file
+    var version, print, arange, __name__, type, ρσ_ls, title, animation, spread, speed, size, _GS_1, flock, random_weight_slider, center_weight_slider, direction_weight_slider, avoid_weight_slider, dt;
+    version = ρσ_list_decorate([ "3.2", "glowscript" ]);
+    Array.prototype['+'] = function(r) {return this.concat(r)}
+    Array.prototype['*'] = function(r) {return __array_times_number(this, r)}
+    window.__GSlang = "vpython";
+    print = GSprint;
+    arange = range;
+    __name__ = "__main__";
+    type = pytype;
+    var strings = ρσ_modules.pythonize.strings;
+
+    strings();
+    "12";
+    title = "Flock of Birds\n\n&#x2022; Original version created by B. Philhour 10/9/17 \n&#x2022; Inspired by Gary Flake's <a href=\"https://www.amazon.com/Computational-Beauty-Nature-Explorations-Adaptation/dp/0262561271\">Computational Beauty of Nature<\/a>\n&#x2022; 1998 MIT Press ISBN-13 978-0-262-56127-3\n&#x2022; Maintained by <a href=\"https://github.com/zhendrikse/\">Zeger Hendrikse</a> in this <a href=\"https://github.com/zhendrikse/physics-in-python/\">GitHub repository</a>\n\n";
+    "14";
+    animation = ρσ_interpolate_kwargs.call(this, canvas, [ρσ_desugar_kwargs({width: 600, height: 450, background: color.black, title: title})]);
+    "16";
+    spread = 3;
+    "17";
+    speed = 6;
+    "18";
+    size = 1;
+    "21";
+    function Bird() {;
+    }
+    Bird.prototype.__init__ = async function __init__() {
+        var self = this;
+        var velocity = ( 0 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true) ? undefined : arguments[0];
+        var size = (arguments[1] === undefined || ( 1 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true)) ? __init__.__defaults__.size : arguments[1];
+        var ρσ_kwargs_obj = arguments[arguments.length["-"](1)];
+        if (ρσ_kwargs_obj === null || typeof ρσ_kwargs_obj !== "object" || ρσ_kwargs_obj [ρσ_kwargs_symbol] !== true) ρσ_kwargs_obj = {};
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "size")){
+            size = ρσ_kwargs_obj.size;
+        }
+        var ρσ_ls, pos;
+        "23";
+        pos = spread["*"](vector.random());
+        "24";
+        self._bird = ρσ_interpolate_kwargs.call(this, arrow, [ρσ_desugar_kwargs({pos: pos, axis: size["*"](velocity.norm()), color: color.yellow})]);
+        "25";
+        self._velocity = velocity;
+        "26";
+        self._position = pos;
+    };
+    if (!Bird.prototype.__init__.__defaults__) Object.defineProperties(Bird.prototype.__init__, {
+        __defaults__ : {value: {size:1}},
+        __handles_kwarg_interpolation__ : {value: true},
+        __argnames__ : {value: ["velocity", "size"]},
+        __module__ : {value: null}
+    });
+    Bird.__argnames__ = Bird.prototype.__init__.__argnames__;
+    Bird.__handles_kwarg_interpolation__ = Bird.prototype.__init__.__handles_kwarg_interpolation__;
+    Bird.prototype.update = async function update(acceleration, dt) {
+        var self = this;
+        "29";
+        self._velocity=self._velocity["+"](acceleration["*"](dt));
+        "30";
+        self._position=self._position["+"](self._velocity["*"](dt));
+        "31";
+        self._bird.axis = size["*"](self._velocity.norm());
+        "32";
+        (await self.render());
+    };
+    if (!Bird.prototype.update.__argnames__) Object.defineProperties(Bird.prototype.update, {
+        __argnames__ : {value: ["acceleration", "dt"]},
+        __module__ : {value: null}
+    });
+    Bird.prototype.position = async function position() {
+        var self = this;
+        "35";
+        return self._position;
+    };
+    if (!Bird.prototype.position.__module__) Object.defineProperties(Bird.prototype.position, {
+        __module__ : {value: null}
+    });
+    Bird.prototype.velocity = async function velocity() {
+        var self = this;
+        "38";
+        return self._velocity;
+    };
+    if (!Bird.prototype.velocity.__module__) Object.defineProperties(Bird.prototype.velocity, {
+        __module__ : {value: null}
+    });
+    Bird.prototype.render = async function render() {
+        var self = this;
+        "41";
+        self._bird.pos = self._position;
+    };
+    if (!Bird.prototype.render.__module__) Object.defineProperties(Bird.prototype.render, {
+        __module__ : {value: null}
+    });
+    Bird.prototype.distance_to = async function distance_to(other_bird) {
+        var self = this;
+        "44";
+        return (await other_bird.position())["-"](1["*"]((await self.position())));
+    };
+    if (!Bird.prototype.distance_to.__argnames__) Object.defineProperties(Bird.prototype.distance_to, {
+        __argnames__ : {value: ["other_bird"]},
+        __module__ : {value: null}
+    });
+    Bird.prototype.__repr__ = async function __repr__() {
+                return "<"["+"](__name__)["+"](".")["+"](this.constructor.name)["+"](" #")["+"](this.ρσ_object_id)["+"](">");
+    };
+    Bird.prototype.__str__ = async function __str__() {
+        return this.__repr__();
+    };
+    Object.defineProperty(Bird.prototype, "__bases__", {value: []});
+    
+    
+    
+    
+    
+    
+
+    "46";
+    function Flock() {;
+    }
+    Flock.prototype.__init__ = async function __init__() {
+        var self = this;
+        var bird_count = ( 0 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true) ? undefined : arguments[0];
+        var random_weight = (arguments[1] === undefined || ( 1 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true)) ? __init__.__defaults__.random_weight : arguments[1];
+        var center_weight = (arguments[2] === undefined || ( 2 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true)) ? __init__.__defaults__.center_weight : arguments[2];
+        var direction_weight = (arguments[3] === undefined || ( 3 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true)) ? __init__.__defaults__.direction_weight : arguments[3];
+        var avoid_weight = (arguments[4] === undefined || ( 4 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true)) ? __init__.__defaults__.avoid_weight : arguments[4];
+        var ρσ_kwargs_obj = arguments[arguments.length["-"](1)];
+        if (ρσ_kwargs_obj === null || typeof ρσ_kwargs_obj !== "object" || ρσ_kwargs_obj [ρσ_kwargs_symbol] !== true) ρσ_kwargs_obj = {};
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "random_weight")){
+            random_weight = ρσ_kwargs_obj.random_weight;
+        }
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "center_weight")){
+            center_weight = ρσ_kwargs_obj.center_weight;
+        }
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "direction_weight")){
+            direction_weight = ρσ_kwargs_obj.direction_weight;
+        }
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "avoid_weight")){
+            avoid_weight = ρσ_kwargs_obj.avoid_weight;
+        }
+        var ρσ_ls, velocity, _GS_1, _;
+        "48";
+        self._birds = ρσ_list_decorate([]);
+        "49";
+        self._bird_count = bird_count;
+        "50";
+        self._random_weight = random_weight;
+        "51";
+        self._center_weight = center_weight;
+        "52";
+        self._direction_weight = direction_weight;
+        "53";
+        self._avoid_weight = avoid_weight;
+        "55";
+        for (var ρσ_Index1 = 0; ρσ_Index1["<"](bird_count); ρσ_Index1++) {
+            _ = ρσ_Index1;
+            "56";
+            velocity = vec(speed, 0, 0)["+"](speed["*"](vector.random()));
+            "57";
+            _GS_1 = new Bird;
+            (await _GS_1.__init__(velocity));
+            self._birds=self._birds["+"](ρσ_list_decorate([ _GS_1 ]));
+        }
+    };
+    if (!Flock.prototype.__init__.__defaults__) Object.defineProperties(Flock.prototype.__init__, {
+        __defaults__ : {value: {random_weight:.1, center_weight:.1, direction_weight:.05, avoid_weight:.5}},
+        __handles_kwarg_interpolation__ : {value: true},
+        __argnames__ : {value: ["bird_count", "random_weight", "center_weight", "direction_weight", "avoid_weight"]},
+        __module__ : {value: null}
+    });
+    Flock.__argnames__ = Flock.prototype.__init__.__argnames__;
+    Flock.__handles_kwarg_interpolation__ = Flock.prototype.__init__.__handles_kwarg_interpolation__;
+    Flock.prototype.update = async function update(dt) {
+        var self = this;
+        var ρσ_ls, center, direction, bird, avoid, separation_dist, j, i, acceleration, count;
+        "61";
+        center = vec(0, 0, 0);
+        "62";
+        direction = vec(0, 0, 0);
+        "63";
+        var ρσ_Iter2 = self._birds;
+        ρσ_Iter2 = ((typeof ρσ_Iter2[Symbol.iterator] === "function") ? (ρσ_Iter2 instanceof Map ? ρσ_Iter2.keys() : ρσ_Iter2) : Object.keys(ρσ_Iter2));
+        for (var ρσ_Index2 of ρσ_Iter2) {
+            bird = ρσ_Index2;
+            "64";
+            center=center["+"]((await bird.position()));
+            "65";
+            direction=direction["+"]((await bird.velocity()));
+        }
+        "66";
+        center=center["/"](self._bird_count);
+        "67";
+        direction=direction["/"](self._bird_count);
+        "70";
+        avoid = ρσ_list_decorate([ vector(0, 0, 0) ])["*"](self._bird_count);
+        "71";
+        for (var ρσ_Index3 = 0; ρσ_Index3["<"](self._bird_count); ρσ_Index3++) {
+            i = ρσ_Index3;
+            "72";
+            for (var ρσ_Index4 = 0; ρσ_Index4["<"](i); ρσ_Index4++) {
+                j = ρσ_Index4;
+                "73";
+                separation_dist = (await ρσ_getitem(self._birds, i).distance_to(ρσ_getitem(self._birds, j)));
+                "74";
+                if (separation_dist.mag["<"](5["*"](size))) {
+                    "75";
+                    ρσ_setitem(avoid, i, ρσ_getitem(avoid, i)["-"](separation_dist["/"](separation_dist.mag2)));
+                    "76";
+                    ρσ_setitem(avoid, j, ρσ_getitem(avoid, j)["+"](separation_dist["/"](separation_dist.mag2)));
+                }
+            }
+        }
+        "78";
+        for (var ρσ_Index5 = 0; ρσ_Index5["<"](self._bird_count); ρσ_Index5++) {
+            count = ρσ_Index5;
+            "79";
+            acceleration = self._random_weight["*"](vector.random());
+            "80";
+            acceleration=acceleration["+"](self._center_weight["*"](center["-"](1["*"]((await ρσ_getitem(self._birds, count).position())))));
+            "81";
+            acceleration=acceleration["+"](self._direction_weight["*"](direction["-"](1["*"]((await ρσ_getitem(self._birds, count).velocity())))));
+            "82";
+            acceleration=acceleration["+"](self._avoid_weight["*"](ρσ_getitem(avoid, count).norm()["-"](1["*"]((await ρσ_getitem(self._birds, count).position())))));
+            "83";
+            (await ρσ_getitem(self._birds, count).update(acceleration, dt));
+        }
+    };
+    if (!Flock.prototype.update.__argnames__) Object.defineProperties(Flock.prototype.update, {
+        __argnames__ : {value: ["dt"]},
+        __module__ : {value: null}
+    });
+    Flock.prototype.set_center_weight = async function set_center_weight(value) {
+        var self = this;
+        "86";
+        self._center_weight = value;
+    };
+    if (!Flock.prototype.set_center_weight.__argnames__) Object.defineProperties(Flock.prototype.set_center_weight, {
+        __argnames__ : {value: ["value"]},
+        __module__ : {value: null}
+    });
+    Flock.prototype.set_direction_weight = async function set_direction_weight(value) {
+        var self = this;
+        "89";
+        self._direction_weight = value;
+    };
+    if (!Flock.prototype.set_direction_weight.__argnames__) Object.defineProperties(Flock.prototype.set_direction_weight, {
+        __argnames__ : {value: ["value"]},
+        __module__ : {value: null}
+    });
+    Flock.prototype.set_avoid_weight = async function set_avoid_weight(value) {
+        var self = this;
+        "92";
+        self._avoid_weight = value;
+    };
+    if (!Flock.prototype.set_avoid_weight.__argnames__) Object.defineProperties(Flock.prototype.set_avoid_weight, {
+        __argnames__ : {value: ["value"]},
+        __module__ : {value: null}
+    });
+    Flock.prototype.set_random_weight = async function set_random_weight(new_random_weight) {
+        var self = this;
+        "95";
+        self._random_weight = new_random_weight;
+    };
+    if (!Flock.prototype.set_random_weight.__argnames__) Object.defineProperties(Flock.prototype.set_random_weight, {
+        __argnames__ : {value: ["new_random_weight"]},
+        __module__ : {value: null}
+    });
+    Flock.prototype.center_weight = async function center_weight() {
+        var self = this;
+        "98";
+        return self._center_weight;
+    };
+    if (!Flock.prototype.center_weight.__module__) Object.defineProperties(Flock.prototype.center_weight, {
+        __module__ : {value: null}
+    });
+    Flock.prototype.direction_weight = async function direction_weight() {
+        var self = this;
+        "101";
+        return self._direction_weight;
+    };
+    if (!Flock.prototype.direction_weight.__module__) Object.defineProperties(Flock.prototype.direction_weight, {
+        __module__ : {value: null}
+    });
+    Flock.prototype.avoid_weight = async function avoid_weight() {
+        var self = this;
+        "104";
+        return self._avoid_weight;
+    };
+    if (!Flock.prototype.avoid_weight.__module__) Object.defineProperties(Flock.prototype.avoid_weight, {
+        __module__ : {value: null}
+    });
+    Flock.prototype.random_weight = async function random_weight() {
+        var self = this;
+        "107";
+        return self._random_weight;
+    };
+    if (!Flock.prototype.random_weight.__module__) Object.defineProperties(Flock.prototype.random_weight, {
+        __module__ : {value: null}
+    });
+    Flock.prototype.__repr__ = async function __repr__() {
+                return "<"["+"](__name__)["+"](".")["+"](this.constructor.name)["+"](" #")["+"](this.ρσ_object_id)["+"](">");
+    };
+    Flock.prototype.__str__ = async function __str__() {
+        return this.__repr__();
+    };
+    Object.defineProperty(Flock.prototype, "__bases__", {value: []});
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    "109";
+    _GS_1 = new Flock;
+    (await _GS_1.__init__(250));
+    flock = _GS_1;
+    "111";
+    async function avoid_bird() {
+        "112";
+        (await flock.set_avoid_weight(avoid_weight_slider.value));
+    };
+    if (!avoid_bird.__module__) Object.defineProperties(avoid_bird, {
+        __module__ : {value: null}
+    });
+
+    "114";
+    async function direction_bird() {
+        "115";
+        (await flock.set_direction_weight(direction_weight_slider.value));
+    };
+    if (!direction_bird.__module__) Object.defineProperties(direction_bird, {
+        __module__ : {value: null}
+    });
+
+    "117";
+    async function center_bird() {
+        "118";
+        (await flock.set_center_weight(center_weight_slider.value));
+    };
+    if (!center_bird.__module__) Object.defineProperties(center_bird, {
+        __module__ : {value: null}
+    });
+
+    "120";
+    async function on_random_weight_slider() {
+        "121";
+        (await flock.set_random_weight(random_weight_slider.value));
+    };
+    if (!on_random_weight_slider.__module__) Object.defineProperties(on_random_weight_slider, {
+        __module__ : {value: null}
+    });
+
+    "123";
+    animation.append_to_caption("\nRandom behavior\n");
+    "124";
+    random_weight_slider = ρσ_interpolate_kwargs.call(this, slider, [ρσ_desugar_kwargs({bind: on_random_weight_slider, min: 0, max: 50, value: (await flock.random_weight())})]);
+    "125";
+    animation.append_to_caption("\n\nCentering behavior\n");
+    "126";
+    center_weight_slider = ρσ_interpolate_kwargs.call(this, slider, [ρσ_desugar_kwargs({bind: center_bird, min: 0, max: 2, value: (await flock.center_weight())})]);
+    "127";
+    animation.append_to_caption("\n\nDirection behavior\n");
+    "128";
+    direction_weight_slider = ρσ_interpolate_kwargs.call(this, slider, [ρσ_desugar_kwargs({bind: direction_bird, min: 0, max: 2, value: (await flock.direction_weight())})]);
+    "129";
+    animation.append_to_caption("\n\nAvoidance behavior\n");
+    "130";
+    avoid_weight_slider = ρσ_interpolate_kwargs.call(this, slider, [ρσ_desugar_kwargs({bind: avoid_bird, min: 0, max: 2, value: (await flock.avoid_weight())})]);
+    "142";
+    dt = .02;
+    "143";
+    while (true) {
+        "144";
+        (await flock.update(dt));
+        "145";
+        (await rate(1["/"](dt)));
+    }
+};
+if (!__main__.__module__) Object.defineProperties(__main__, {
+    __module__ : {value: null}
+});
+
+;$(function(){ window.__context = { glowscript_container: $("#glowscript").removeAttr("id") }; __main__() })})()
+// END JAVASCRIPT
+
+//--><!]]></script>
+</div>
+
