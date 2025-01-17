@@ -13,6 +13,7 @@ pyhamcrest = "^2.1.0"
 vpython = "^7.6.5"
 mathjax = "^0.1.2"
 numpy = "^2.2.1"
+matplotlib = "^3.10.0"
 
 [tool.poetry.dev-dependencies]
 
