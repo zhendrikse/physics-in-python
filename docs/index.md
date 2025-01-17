@@ -134,10 +134,10 @@ on [glowscript.org](https://glowscript.org).
   </a>
 </figure>
 
-With the plane wave as illustrated above, we can easily derive the Schr&#246;dinger equation:
+With the plane wave as illustrated above, we can easily derive the Schr&#246;dinger equation.
 
 <details>
-  <summary><b>Concise derivation of the Schr&#246;dinger equation</b></summary>
+  <summary><b>&dArr; Concise derivation of the Schr&#246;dinger equation &dArr;</b></summary>
 
 According to <a href="https://en.wikipedia.org/wiki/Matter_wave">De Broglie</a> we have:
 
@@ -179,7 +179,7 @@ $$(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x,
 </figure>
 
 <details>
-<summary><b>Background: particle in a box, i.e. confined by a infinite square well</b></summary>
+<summary><b>&dArr; Background: particle in a box, i.e. confined by a infinite square well &dArr;</b></summary>
 <p>
 Although the one-dimensional particle-in-a-box problem does not correspond to any
 real-world system, it illustrates quite well some (fundamental) 
