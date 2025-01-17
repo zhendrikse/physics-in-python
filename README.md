@@ -36,7 +36,7 @@ the days per season.
 <figure>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Daylightvariations">
-    <img alt="Daylight variations" width="100%" height="100%" src="./images/daylight_variations.png" title="Click to animate"/>
+    <img alt="Daylight variations" width="100%" height="100%" src="./docs/images/daylight_variations.png" title="Click to animate"/>
   </a>
 </figure>
 
@@ -59,10 +59,10 @@ the days per season.
 
 <figure>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw">
-    <img alt="Kepler's laws" width="50%" height="50%" src="./images/keplers_law.png" title="Click to animate"/>
+    <img alt="Kepler's laws" width="50%" height="50%" src="./docs/images/keplers_law.png" title="Click to animate"/>
   </a>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Threebody">
-    <img alt="Three body problem" width="40%" height="40%" src="./images/three_body.png" title="Click to animate"/>
+    <img alt="Three body problem" width="40%" height="40%" src="./docs/images/three_body.png" title="Click to animate"/>
   </a>
 </figure>
 
@@ -90,10 +90,10 @@ the days per season.
 
 <figure>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/3dplots">
-    <img alt="Multivariate functions" width="45%" height="45%" src="./images/3d_plot.png" title="Click to animate"/>
+    <img alt="Multivariate functions" width="45%" height="45%" src="./docs/images/3d_plot.png" title="Click to animate"/>
   </a>&nbsp;&nbsp;&nbsp;
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Complexfunctionplot">
-    <img alt="Complex functions" width="45%" height="45%" src="./images/complex_function_plot.png" title="Click to animate"/>
+    <img alt="Complex functions" width="45%" height="45%" src="./docs/images/complex_function_plot.png" title="Click to animate"/>
   </a>
 </figure>
 
@@ -116,10 +116,10 @@ the days per season.
 
 <figure>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">
-    <img alt="Polar coordinates" width="49%" height="49%" src="./images/polar_coordinates.png" title="Click to animate"/>
+    <img alt="Polar coordinates" width="49%" height="49%" src="./docs/images/polar_coordinates.png" title="Click to animate"/>
   </a>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Flockingbirds">
-    <img alt="Flocking birds" width="49%" height="49%" src="./images/flocking_birds.png" title="Click to animate"/>
+    <img alt="Flocking birds" width="49%" height="49%" src="./docs/images/flocking_birds.png" title="Click to animate"/>
   </a>
 </figure>
 
@@ -133,7 +133,7 @@ on [glowscript.org](https://glowscript.org).
 
 <figure>
   <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave">
-    <img alt="Complex wave" width="50%" height="50%" src="./images/plane_wave.png" title="Click to animate"/>
+    <img alt="Complex wave" width="50%" height="50%" src="./docs/images/plane_wave.png" title="Click to animate"/>
   </a>
 </figure>
 
@@ -174,7 +174,7 @@ $(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x, 
 
 <figure>
   <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Infinitesquarewell">
-    <img alt="Complex wave" width="50%" height="50%" src="./images/infinite_square_well.png" title="Click to animate"/>
+    <img alt="Complex wave" width="50%" height="50%" src="./docs/images/infinite_square_well.png" title="Click to animate"/>
   </a>
 </figure>
 
@@ -228,7 +228,7 @@ The quantum harmonic oscillator is visualized in a semi-classical way below.
 
 <figure>
   <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Quantumoscillator">
-    <img alt="Quantum oscillator" width="50%" height="50%" src="./images/quantum_oscillator.png" title="Click to animate"/>
+    <img alt="Quantum oscillator" width="50%" height="50%" src="./docs/images/quantum_oscillator.png" title="Click to animate"/>
   </a>
 </figure>
 
@@ -242,10 +242,10 @@ The following demos show the movement of an electron in two different electric f
 
 <figure>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedring">
-    <img alt="Electron spinning around charged ring" width="45%" height="45%" src="./images/electron_and_charged_ring.png" title="Click to animate"/>
+    <img alt="Electron spinning around charged ring" width="45%" height="45%" src="./docs/images/electron_and_charged_ring.png" title="Click to animate"/>
   </a>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Movingcharge">
-    <img alt="Particle in electric field" width="45%" height="45%" src="./images/particle_in_electric_field.png" title="Click to animate"/>
+    <img alt="Particle in electric field" width="45%" height="45%" src="./docs/images/particle_in_electric_field.png" title="Click to animate"/>
   </a>
 </figure>
 
@@ -268,10 +268,10 @@ The following demos show the movement of an electron in two different electric f
 
 <figure>
   <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Rutherfordscattering">
-    <img alt="Rutherford scattering" width="45%" height="45%" src="./images/rutherford_scattering.png" title="Click to animate"/>
+    <img alt="Rutherford scattering" width="45%" height="45%" src="./docs/images/rutherford_scattering.png" title="Click to animate"/>
   </a>
   <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Helicalmotion">
-    <img alt="Helical motion" width="50%" height="50%" src="./images/helical_motion.png" title="Click to animate"/>
+    <img alt="Helical motion" width="50%" height="50%" src="./docs/images/helical_motion.png" title="Click to animate"/>
   </a>
 </figure>
 
@@ -329,10 +329,10 @@ $\vec{E} ( \vec{r} ) = -\dfrac {1} {4\pi\epsilon_0} \nabla \bigg( \dfrac{\vec{r}
 
 <figure>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Pointchargefield">
-    <img alt="Electric field of point charge" width="45%" height="45%" src="./images/point_charge.png" title="Click to animate"/>
+    <img alt="Electric field of point charge" width="45%" height="45%" src="./docs/images/point_charge.png" title="Click to animate"/>
   </a>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Electricdipolefield">
-    <img alt="Electric field of a dipole" width="40%" height="40%" src="./images/dipole_field.png" title="Click to animate"/>
+    <img alt="Electric field of a dipole" width="40%" height="40%" src="./docs/images/dipole_field.png" title="Click to animate"/>
   </a>
 </figure>
 
@@ -359,10 +359,10 @@ an electric field inside a series of charged rings.
 
 <figure>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Faradayslaw">
-    <img alt="Faraday's law" width="45%" height="45%" src="./images/faradays_law.png" title="Click to animate"/>
+    <img alt="Faraday's law" width="45%" height="45%" src="./docs/images/faradays_law.png" title="Click to animate"/>
   </a>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedrings">
-    <img alt="Charged rings" width="45%" height="45%" src="./images/charged_rings.png" title="Click to animate"/>
+    <img alt="Charged rings" width="45%" height="45%" src="./docs/images/charged_rings.png" title="Click to animate"/>
   </a>  
 </figure>
 
@@ -374,10 +374,10 @@ set-up of the disk by adding a charged ring at each mouse click.
 
 <figure>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargeddisk">
-    <img alt="Charged disk" width="30%" height="30%" src="./images/charged_disk.png" title="Click to animate"/>
+    <img alt="Charged disk" width="30%" height="30%" src="./docs/images/charged_disk.png" title="Click to animate"/>
   </a>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargeddiskbuilder">
-    <img alt="Charged disk builder" width="40%" height="40%" src="./images/charged_disk_builder.png" title="Click to animate"/>
+    <img alt="Charged disk builder" width="40%" height="40%" src="./docs/images/charged_disk_builder.png" title="Click to animate"/>
   </a>
 </figure>
 
@@ -402,10 +402,10 @@ Both of the two dynamic simulations below visualize the propagation of electroma
 
 <figure>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Antenna">
-    <img alt="Antenna" width="45%" height="45%" src="./images/antenna.png" title="Click to animate"/>
+    <img alt="Antenna" width="45%" height="45%" src="./docs/images/antenna.png" title="Click to animate"/>
   </a>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Electromagneticwave">
-    <img alt="Electromagnetic waves" width="50%" height="50%" src="./images/electromagnetic_wave.png" title="Click to animate"/>
+    <img alt="Electromagnetic waves" width="50%" height="50%" src="./docs/images/electromagnetic_wave.png" title="Click to animate"/>
   </a>
 </figure>
 
@@ -450,10 +450,10 @@ on [glowscript.org](https://glowscript.org).
 
 <figure>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas">
-    <img alt="Hard sphere gas" width="40%" height="40%" src="./images/hard_sphere_gas.png" title="Click to animate"/>
+    <img alt="Hard sphere gas" width="40%" height="40%" src="./docs/images/hard_sphere_gas.png" title="Click to animate"/>
   </a>
   <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Crystalsymmetryplanes">
-    <img alt="Symmetry planes" width="45%" height="45%" src="./images/crystal_planes.png" title="Click to animate"/>
+    <img alt="Symmetry planes" width="45%" height="45%" src="./docs/images/crystal_planes.png" title="Click to animate"/>
   </a>
 </figure>
 
@@ -464,7 +464,7 @@ This demo models the magnetization at various temperatures using a two-dimension
 
 <figure>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Isingspin">
-    <img alt="Ising spin model" width="40%" height="40%" src="./images/ising_spin_model.png" title="Click to animate"/>
+    <img alt="Ising spin model" width="40%" height="40%" src="./docs/images/ising_spin_model.png" title="Click to animate"/>
   </a>
 </figure>
 
@@ -483,7 +483,7 @@ This demo models the magnetization at various temperatures using a two-dimension
 ## Doppler effect
 
 <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Dopplereffect">
-  <img alt="Doppler effect" width="50%" height="50%" src="./images/doppler_effect.png" title="Click to animate"/>
+  <img alt="Doppler effect" width="50%" height="50%" src="./docs/images/doppler_effect.png" title="Click to animate"/>
 </a>
 
 - Doppler effect in action [on Trinket](https://zegerh-6085.trinket.io/sites/doppler_effect) 
@@ -505,10 +505,10 @@ The other code snippet visualizes an electric field of a
 fast moving (relativistic) proton.
 
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Relativity/program/Lightcone">
-  <img alt="Light cone" width="40%" height="40%" src="./images/lightcone.png" title="Click to animate"/>
+  <img alt="Light cone" width="40%" height="40%" src="./docs/images/lightcone.png" title="Click to animate"/>
 </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Relativity/program/Relativisticproton">
-  <img alt="Relativistic proton" width="30%" height="30%" src="./images/relativistic_proton.png" title="Click to animate"/>
+  <img alt="Relativistic proton" width="30%" height="30%" src="./docs/images/relativistic_proton.png" title="Click to animate"/>
 </a>
 
 - Moving proton in action [on Trinket](https://zegerh-6085.trinket.io/sites/relativistic_proton) 
@@ -526,7 +526,7 @@ Before diving into (special) relativity, let's first get acquainted with
 the so-called Galilean transformation.
 
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Relativity/program/Glalileantransformation">
-  <img alt="Galilean space-time" width="50%" height="50%" src="./images/galilean_space_time.png" title="Click to animate"/>
+  <img alt="Galilean space-time" width="50%" height="50%" src="./docs/images/galilean_space_time.png" title="Click to animate"/>
 </a>
 
 - Code in action [on Trinket](https://zegerh-6085.trinket.io/sites/galileo_space_time) 
@@ -549,10 +549,10 @@ The applications of a simple harmonic oscillator are almost endless.
 You may be surprised though to find out what happens when you drop such a simple harmonic oscillator!! 
 
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Ballonspringdrop">
-  <img alt="Ball drop" width="30%" height="30%" src="./images/ball_falling_on_spring.png" title="Click to animate"/>
+  <img alt="Ball drop" width="30%" height="30%" src="./docs/images/ball_falling_on_spring.png" title="Click to animate"/>
 </a>
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Slinkydrop">
-  <img alt="Slinky drop" width="50%" height="50%" src="./images/slinky_drop.png" title="Click to animate"/>
+  <img alt="Slinky drop" width="50%" height="50%" src="./docs/images/slinky_drop.png" title="Click to animate"/>
 </a>
 
 
@@ -575,7 +575,7 @@ You may be surprised though to find out what happens when you drop such a simple
 
 <figure>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/N-bodycoupledoscillator">
-    <img alt="N-body coupled oscillator" width="40%" height="40%" src="./images/n_body_coupled_oscillator.png" title="Click to animate"/>
+    <img alt="N-body coupled oscillator" width="40%" height="40%" src="./docs/images/n_body_coupled_oscillator.png" title="Click to animate"/>
   </a>
 </figure>
 
@@ -593,10 +593,10 @@ You may be surprised though to find out what happens when you drop such a simple
 
 <figure>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Newtonspendulum">
-    <img alt="Newton's pendulum" width="45%" height="45%" src="./images/newtons_pendulum.png" title="Click to animate" align="top"/>
+    <img alt="Newton's pendulum" width="45%" height="45%" src="./docs/images/newtons_pendulum.png" title="Click to animate" align="top"/>
   </a>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Newtonscannon">
-    <img alt="Newton's cannon" width="45%" height="45%" src="./images/newtons_cannon.png" title="Click to animate"/>
+    <img alt="Newton's cannon" width="45%" height="45%" src="./docs/images/newtons_cannon.png" title="Click to animate"/>
   </a>
 </figure>
 
@@ -620,7 +620,7 @@ You may be surprised though to find out what happens when you drop such a simple
 
 <figure>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Chainfromtable">
-    <img alt="Chain from table" width="40%" height="40%" src="./images/chain_from_table.png" title="Click to animate"/>
+    <img alt="Chain from table" width="40%" height="40%" src="./docs/images/chain_from_table.png" title="Click to animate"/>
   </a>
 </figure>
 
@@ -638,10 +638,10 @@ You may be surprised though to find out what happens when you drop such a simple
 ## Ball on sliding ramp &amp; ball hitting block
 
 <a href="https://zegerh-6085.trinket.io/sites/ball_on_sliding_ramp">
-  <img alt="Ball on sliding ramp" width="48%" height="48%" src="./images/ball_on_sliding_ramp.png" title="Click to animate"/>
+  <img alt="Ball on sliding ramp" width="48%" height="48%" src="./docs/images/ball_on_sliding_ramp.png" title="Click to animate"/>
 </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Blockrotation">
-  <img alt="Block rotation" width="42%" height="42%" src="./images/block_rotation.png" title="Click to animate"/>
+  <img alt="Block rotation" width="42%" height="42%" src="./docs/images/block_rotation.png" title="Click to animate"/>
 </a>
 
 - Rotating block in action [on Trinket](https://zegerh-6085.trinket.io/sites/block_rotation) 
@@ -653,10 +653,10 @@ You may be surprised though to find out what happens when you drop such a simple
 
 <figure>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Floatingblock">
-    <img alt="Floating block" width="25%" height="25%" src="./images/floating_block.png" title="Click to animate"/>
+    <img alt="Floating block" width="25%" height="25%" src="./docs/images/floating_block.png" title="Click to animate"/>
   </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Watersprinkler">
-    <img alt="Water sprinkler" width="45%" height="45%" src="./images/water_sprinkler.png" title="Click to animate"/>
+    <img alt="Water sprinkler" width="45%" height="45%" src="./docs/images/water_sprinkler.png" title="Click to animate"/>
   </a>
 </figure>
 
@@ -683,17 +683,17 @@ You may be surprised though to find out what happens when you drop such a simple
 
 <figure>
   <a href="https://zegerh-6085.trinket.io/sites/rubiks_cube">
-    <img alt="Rubiks cube" width="45%" height="50%" src="./images/rubiks_cube.png" title="Click to animate"/>
+    <img alt="Rubiks cube" width="45%" height="50%" src="./docs/images/rubiks_cube.png" title="Click to animate"/>
   </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://zegerh-6085.trinket.io/sites/vturtle">
-    <img alt="Robot for turtle graphics" width="45%" height="50%" src="./images/robot.png" title="Click to animate"/>
+    <img alt="Robot for turtle graphics" width="45%" height="50%" src="./docs/images/robot.png" title="Click to animate"/>
   </a>
 </figure>
 
 ## Odysseus
 
 <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Odysseus">
-  <img alt="Odysseus" width="85%" height="85%" src="./images/odysseus.png" title="Click to animate"/>
+  <img alt="Odysseus" width="85%" height="85%" src="./docs/images/odysseus.png" title="Click to animate"/>
 </a>
 
 - Odysseus in action [on Trinket](https://zegerh-6085.trinket.io/sites/odysseus) 
