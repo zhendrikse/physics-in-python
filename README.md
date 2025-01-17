@@ -89,10 +89,10 @@ the days per season.
 </details>
 
 <figure>
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/3dplots">
+  <a href="./html/dynamic_3d_plots.html">
     <img alt="Multivariate functions" width="45%" height="45%" src="./images/3d_plot.png" title="Click to animate"/>
   </a>&nbsp;&nbsp;&nbsp;
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Complexfunctionplot">
+  <a href="complex_function_plots.html">
     <img alt="Complex functions" width="45%" height="45%" src="./images/complex_function_plot.png" title="Click to animate"/>
   </a>
 </figure>

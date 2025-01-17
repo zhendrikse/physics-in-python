@@ -14,6 +14,7 @@ z_plus_1_divided_by_z_min_1_title = "<h2>$\\psi(z, t) = \\bigg(\dfrac{z + 1}{z -
 sine_z_title = "<h2>$\\psi(z,t) = \\sin{(z)}" + title_end
 log_z_title = "<h2>$\\psi(z,t) = \\log{(z)}" + title_end
 exp_z_title = "<h2>$\\psi(z,t) = e^{-z^2}" + title_end
+sqrt_z_title = "<h2>$\\psi(z,t) = \\sqrt{z}" + title_end
 
 caption = """
 &#x2022; Based on <a href="https://www.glowscript.org/#/user/GlowScriptDemos/folder/Examples/program/Plot3D">Plot3D</a>
@@ -133,7 +134,7 @@ class Base:
         pos = x_hat * (base_[0].get(-1) + 2 * delta_[0]) - vec(0, scale, -30)
         l1 = text(pos=pos, text="Im(z)", color=axis_color, height=scale * 4, billboard=True, emissive=True)
         pos = z_hat * (base_[2].get(-1) + 2 * delta_[2]) + y_hat * (base_[1].get(-1) / 2)
-        l2 = text(pos=pos, text="| Ψ(z,t) |", color=axis_color, height=scale * 4, billboard=True, emissive=True)
+        l2 = text(pos=pos, text="|Ψ(z,t)|", color=axis_color, height=scale * 4, billboard=True, emissive=True)
         pos = x_hat * (base_[0].get(-1) / 2) + z_hat * (base_[2].get(-1) + 2.5 * delta_[2])
         l3 = text(pos=pos, text="Re(z)", color=axis_color, height=scale * 4, billboard=True, emissive=True)
         c1 = cylinder(pos=x_hat * base_[0].get(0), axis=x_hat * (base_[0].get(-1) - base_[0].get(0)), color=axis_color,
@@ -380,6 +381,17 @@ def exp_z():
     return xx, yy, zz, f
 
 
+def sqrt_z():
+    xx, yy = np.meshgrid(np.linspace(-1, 1, 50), np.linspace(-1, 1, 50))
+    zz = np.linspace(0, 1.5, 50)
+
+    def f(z, t):
+        phase = math.complex(cos(t), sin(t))
+        return math.multiply(math.sqrt(z), phase)
+
+    return xx, yy, zz, f
+
+
 def switch_function(event):
     xx, yy, zz, f = None, None, None, None
     if event.index < 0:
@@ -412,6 +424,10 @@ def switch_function(event):
         xx, yy, zz, f = exp_z()
         animation.range = 85
         animation.title = exp_z_title + "\n"
+    elif event.index == 7:
+        xx, yy, zz, f = sqrt_z()
+        animation.range = 75
+        animation.title = sqrt_z_title + "\n"
 
     plot.reinitialize(xx, yy, zz, f)
     MathJax.Hub.Queue(["Typeset", MathJax.Hub])
@@ -422,8 +438,8 @@ def adjust_omega():
     omega_slider_text.text = str(round(omega_slider.value / pi, 2)) + " * π"
 
 
-wave_choices = ["f(z, t) = z * z + 2", "f(z, t) = |z| * |z|", "f(z, t) = z * z * z + 2", "f(z, t) = z + 1 / z - 1",
-                "f(z, t) = sin(z)", "f(z, t) = log(z)", "f(z, t) = exp(-z * z)"]
+wave_choices = ["f(z,t) = z * z + 2", "f(z,t) = |z| * |z|", "f(z,t) = z * z * z + 2", "f(z,t) = z + 1 / z - 1",
+                "f(z,t) = sin(z)", "f(z,t) = log(z)", "f(z,t) = exp(-z * z)", "f(z,t) = sqrt(z)"]
 _ = menu(choices=wave_choices, bind=switch_function)
 animation.append_to_caption("  ")
 _ = checkbox(text='YZ mesh', bind=toggle_yz_mesh, checked=True)
