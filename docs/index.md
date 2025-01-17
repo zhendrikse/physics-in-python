@@ -118,6 +118,16 @@ on [glowscript.org](https://glowscript.org).
 
 ## Visualization of plane waves $\psi(x, t) = A \cdot e^{i(k x - \omega t)}$
 
+<details>
+  <summary>Animations and source code</summary>
+  <ul><li><b>Plane wave</b>
+    <ul>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/plane_wave">on Trinket</a> and <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/quantum_and_waves/plane_wave.py">plane_wave.py</a> and VPython <a href="./src/quantum_and_waves/plane_wave.py">plane_wave.py</a> versions in this repository</li>
+    </ul></li>
+  </ul>
+</details>
+
 <figure>
   <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave">
     <img alt="Complex wave" width="50%" height="50%" src="./images/plane_wave.png" title="Click to animate"/>
@@ -147,17 +157,18 @@ $$(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x,
 
 </details>
 
+## One-dimensional quantum particle bound by an infinite square well
+
 <details>
   <summary>Animations and source code</summary>
-  <ul><li><b>Plane wave</b>
-    <ul>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/plane_wave">on Trinket</a> and <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/quantum_and_waves/plane_wave.py">plane_wave.py</a> and VPython <a href="./src/quantum_and_waves/plane_wave.py">plane_wave.py</a> versions in this repository</li>
+  <ul>
+    <li><b>Plane wave</b>
+      <ul>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/infinite_square_well">on Trinket</a> and <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Infinitesquarewell">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/quantum_and_waves/infinite_square_well.py">infinite_square_well.py</a> and VPython <a href="./src/quantum_and_waves/infinite_square_well.py">infinite_square_well.py</a> versions in this repository</li>
     </ul></li>
   </ul>
 </details>
-
-## One-dimensional quantum particle bound by an infinite square well
 
 <figure>
   <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Infinitesquarewell">
@@ -200,17 +211,6 @@ So summarizing, we have
 $$E=\dfrac{h^2a^2}{8\pi^2m} \text{ and } \psi_n=\sqrt{\dfrac{2}{L}}\sin(nkx), \text{where } k=\dfrac{\pi}{L}$$
 
 These energy eigenstates (and superpositions thereof) are used in the visualization software.
-</details>
-
-<details>
-  <summary>Animations and source code</summary>
-  <ul>
-    <li><b>Plane wave</b>
-      <ul>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/infinite_square_well">on Trinket</a> and <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Infinitesquarewell">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/quantum_and_waves/infinite_square_well.py">infinite_square_well.py</a> and VPython <a href="./src/quantum_and_waves/infinite_square_well.py">infinite_square_well.py</a> versions in this repository</li>
-    </ul></li>
-  </ul>
 </details>
 
 ## The quantum harmonic oscillator
