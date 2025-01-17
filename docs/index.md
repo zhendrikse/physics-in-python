@@ -1,5 +1,3 @@
-{% use_math: true %}
-
 # Astrophysics
 
 The code pertaining to the demos in this section is available under the 
