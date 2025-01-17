@@ -1,0 +1,488 @@
+<div id="glowscript" class="glowscript">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css" rel="stylesheet" />
+<link type="text/css" href="https://www.glowscript.org/css/ide.css" rel="stylesheet" />
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+// START JAVASCRIPT
+;(function() {;
+var ρσ_modules = {};
+ρσ_modules.pythonize = {};
+
+(function(){
+    function strings() {
+        var string_funcs, exclude, name;
+        string_funcs = set("capitalize strip lstrip rstrip islower isupper isspace lower upper swapcase center count endswith startswith find rfind index rindex format join ljust rjust partition rpartition replace split rsplit splitlines zfill".split(" "));
+        if (!arguments.length) {
+            exclude = (function(){
+                var s = ρσ_set();
+                s.jsset.add("split");
+                s.jsset.add("replace");
+                return s;
+            })();
+        } else if (arguments[0]) {
+            exclude = Array.prototype.slice.call(arguments);
+        } else {
+            exclude = null;
+        }
+        if (exclude) {
+            string_funcs = string_funcs.difference(set(exclude));
+        }
+        var ρσ_Iter0 = string_funcs;
+        ρσ_Iter0 = ((typeof ρσ_Iter0[Symbol.iterator] === "function") ? (ρσ_Iter0 instanceof Map ? ρσ_Iter0.keys() : ρσ_Iter0) : Object.keys(ρσ_Iter0));
+        for (var ρσ_Index0 of ρσ_Iter0) {
+            name = ρσ_Index0;
+            (ρσ_expr_temp = String.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name] = (ρσ_expr_temp = ρσ_str.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name];
+        }
+    };
+    if (!strings.__module__) Object.defineProperties(strings, {
+        __module__ : {value: "pythonize"}
+    });
+
+    ρσ_modules.pythonize.strings = strings;
+})();
+
+async function __main__() {
+"use strict";
+    var display = canvas;
+    var scene = canvas();
+
+    function round(num, n=0) {return Number(num.toFixed(n))}
+    var box, compound, cone, curve, cylinder, ellipsoid, extrusion, helix, points, pyramid, ring, simple_sphere, group, vector, sleep, update, paths, shapes, vertex, triangle, quad, label, distant_light, attach_trail, attach_arrow, attach_light, sqrt, pi, tan, asin, acos, atan, atan2, exp, log, pow, factorial, combin, button, radio, text, download, degrees, get_library, read_local_file
+    var version, print, arange, __name__, type, ρσ_ls, title, list_of_months, astronomical_unit, earth_orbit_rate, moon_orbit_rate, animation, _GS_1, sun_earth_moon, _, speed_slider, sunlight, more_sunlight, graph_height, graph_width, daylight_graph, daylight_curve, equator_curve, day, energy_curve, new_graph_interval, month_counter, daylight, sun_energy_transfer, energy_graph;
+    version = ρσ_list_decorate([ "3.2", "glowscript" ]);
+    Array.prototype['+'] = function(r) {return this.concat(r)}
+    Array.prototype['*'] = function(r) {return __array_times_number(this, r)}
+    window.__GSlang = "vpython";
+    print = GSprint;
+    arange = range;
+    __name__ = "__main__";
+    type = pytype;
+    var strings = ρσ_modules.pythonize.strings;
+
+    strings();
+    "17";
+    title = "<b>Not<\/b> to scale Earth-Sun-Moon simulator\nIt does not include gravitational physics or Newtonian analysis &mdash; just circular motion\n\n&#x2022; Based on the <a href=\"https://trinket.io/embed/glowscript/575a4ed5d362597041cd6f84\">Sun-Earth-Moon model by B. Philhour</a>\n&#x2022; Modified by <a href=\"https://www.glowscript.org/#/user/Rob_Salgado/folder/My_Programs/program/SunshineOnTheEarth\">Rob Salgado</a> to model the sunshine seen by the United Kingdom\n&#x2022; Refactored by <a href=\"https://github.com/zhendrikse/\">Zeger Hendrikse</a> in this <a href=\"https://github.com/zhendrikse/physics-in-python/\">GitHub repository</a>\n\n&#x2022; The red arrow points \"upward from the UK\" (at 52 degrees latitude [from the equator])\n&#x2022; The cyan arrow is the rotational axis of the earth, tilted at 23 degrees from vertical\n&#x2022; The yellow arrow points from the earth to the sun\n&#x2022; Click on sun or earth to change the camera perspective\n\n";
+    "19";
+    list_of_months = ρσ_list_decorate([ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]);
+    "24";
+    astronomical_unit = 4;
+    "26";
+    earth_orbit_rate = 1;
+    "28";
+    moon_orbit_rate = 13;
+    "30";
+    animation = ρσ_interpolate_kwargs.call(this, canvas, [ρσ_desugar_kwargs({title: title, height: 300, width: 1200, range: astronomical_unit["/"](4), fov: (await radians(10))})]);
+    "32";
+    function EarthArrows() {;
+    }
+    EarthArrows.prototype.__init__ = async function __init__() {
+        var self = this;
+        var radius_earth = ( 0 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true) ? undefined : arguments[0];
+        var axis_earth = ( 1 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true) ? undefined : arguments[1];
+        var scale = (arguments[2] === undefined || ( 2 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true)) ? __init__.__defaults__.scale : arguments[2];
+        var latitude = (arguments[3] === undefined || ( 3 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true)) ? __init__.__defaults__.latitude : arguments[3];
+        var ρσ_kwargs_obj = arguments[arguments.length["-"](1)];
+        if (ρσ_kwargs_obj === null || typeof ρσ_kwargs_obj !== "object" || ρσ_kwargs_obj [ρσ_kwargs_symbol] !== true) ρσ_kwargs_obj = {};
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "scale")){
+            scale = ρσ_kwargs_obj.scale;
+        }
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "latitude")){
+            latitude = ρσ_kwargs_obj.latitude;
+        }
+        var ρσ_ls, axis;
+        "34";
+        self._scale = scale;
+        "35";
+        self._earth_axis = axis_earth;
+        "36";
+        axis = scale["*"](vec(sin((await radians(0["-"](1["*"](90["-"](1["*"](latitude))))))), cos((await radians(0["-"](1["*"](90["-"](1["*"](latitude))))))), 0));
+        "37";
+        self._from_uk_up_arrow = ρσ_interpolate_kwargs.call(this, arrow, [ρσ_desugar_kwargs({shaftwidth: radius_earth["/"](5), axis: axis, color: color.red})]);
+        "39";
+        ρσ_interpolate_kwargs.call(self._from_uk_up_arrow, self._from_uk_up_arrow.rotate, [ρσ_desugar_kwargs({angle: (await radians(90)), axis: vec(0, 1, 0)})]);
+        "41";
+        self._earth_sun_arrow = ρσ_interpolate_kwargs.call(this, arrow, [ρσ_desugar_kwargs({shaftwidth: radius_earth["/"](3), color: color.yellow})]);
+        "43";
+        self._earth_axis_arrow = ρσ_interpolate_kwargs.call(this, arrow, [ρσ_desugar_kwargs({shaftwidth: radius_earth["/"](5), axis: axis_earth["*"](scale), color: color.cyan})]);
+    };
+    if (!EarthArrows.prototype.__init__.__defaults__) Object.defineProperties(EarthArrows.prototype.__init__, {
+        __defaults__ : {value: {scale:.5, latitude:52}},
+        __handles_kwarg_interpolation__ : {value: true},
+        __argnames__ : {value: ["radius_earth", "axis_earth", "scale", "latitude"]},
+        __module__ : {value: null}
+    });
+    EarthArrows.__argnames__ = EarthArrows.prototype.__init__.__argnames__;
+    EarthArrows.__handles_kwarg_interpolation__ = EarthArrows.prototype.__init__.__handles_kwarg_interpolation__;
+    EarthArrows.prototype.update = async function update(position, rotation_angle) {
+        var self = this;
+        "46";
+        self._earth_axis_arrow.pos = position;
+        "47";
+        self._earth_sun_arrow.pos = position;
+        "48";
+        self._from_uk_up_arrow.pos = position;
+        "49";
+        ρσ_interpolate_kwargs.call(self._from_uk_up_arrow, self._from_uk_up_arrow.rotate, [ρσ_desugar_kwargs({angle: rotation_angle, axis: self._earth_axis})]);
+        "50";
+        self._earth_sun_arrow.axis = 1["-u"]()["*"](norm(position));
+    };
+    if (!EarthArrows.prototype.update.__argnames__) Object.defineProperties(EarthArrows.prototype.update, {
+        __argnames__ : {value: ["position", "rotation_angle"]},
+        __module__ : {value: null}
+    });
+    EarthArrows.prototype.sun_energy_transfer = async function sun_energy_transfer() {
+        var self = this;
+        var ρσ_ls, dot_product, energy_transfer;
+        "54";
+        dot_product = dot(self._from_uk_up_arrow.axis, self._earth_sun_arrow.axis);
+        "56";
+        energy_transfer = (dot_product["<="](0)) ? 0 : dot_product["/"](self._scale);
+        "57";
+        return energy_transfer;
+    };
+    if (!EarthArrows.prototype.sun_energy_transfer.__module__) Object.defineProperties(EarthArrows.prototype.sun_energy_transfer, {
+        __module__ : {value: null}
+    });
+    EarthArrows.prototype.show = async function show() {
+        var self = this;
+        "60";
+        self._earth_axis_arrow.visible = true;
+        "61";
+        self._from_uk_up_arrow.visible = true;
+        "62";
+        self._earth_sun_arrow.visible = true;
+    };
+    if (!EarthArrows.prototype.show.__module__) Object.defineProperties(EarthArrows.prototype.show, {
+        __module__ : {value: null}
+    });
+    EarthArrows.prototype.hide = async function hide() {
+        var self = this;
+        "65";
+        self._earth_axis_arrow.visible = false;
+        "66";
+        self._from_uk_up_arrow.visible = false;
+        "67";
+        self._earth_sun_arrow.visible = false;
+    };
+    if (!EarthArrows.prototype.hide.__module__) Object.defineProperties(EarthArrows.prototype.hide, {
+        __module__ : {value: null}
+    });
+    EarthArrows.prototype.__repr__ = async function __repr__() {
+                return "<"["+"](__name__)["+"](".")["+"](this.constructor.name)["+"](" #")["+"](this.ρσ_object_id)["+"](">");
+    };
+    EarthArrows.prototype.__str__ = async function __str__() {
+        return this.__repr__();
+    };
+    Object.defineProperty(EarthArrows.prototype, "__bases__", {value: []});
+    
+    
+    
+    
+    
+
+    "69";
+    function SunEarthMoonSystem() {;
+    }
+    SunEarthMoonSystem.prototype.__init__ = async function __init__() {
+        var self = this;
+        var simulation_speed = (arguments[0] === undefined || ( 0 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true)) ? __init__.__defaults__.simulation_speed : arguments[0];
+        var tilt = (arguments[1] === undefined || ( 1 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true)) ? __init__.__defaults__.tilt : arguments[1];
+        var ρσ_kwargs_obj = arguments[arguments.length["-"](1)];
+        if (ρσ_kwargs_obj === null || typeof ρσ_kwargs_obj !== "object" || ρσ_kwargs_obj [ρσ_kwargs_symbol] !== true) ρσ_kwargs_obj = {};
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "simulation_speed")){
+            simulation_speed = ρσ_kwargs_obj.simulation_speed;
+        }
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "tilt")){
+            tilt = ρσ_kwargs_obj.tilt;
+        }
+        var ρσ_ls, sun_radius, moon_radius, _GS_1;
+        "72";
+        sun_radius = .2;
+        "74";
+        self._earth_radius = sun_radius["*"](.5);
+        "75";
+        self._earth_axis = vec(sin((await radians(tilt))), cos((await radians(tilt))), 0);
+        "77";
+        moon_radius = self._earth_radius["*"](.27);
+        "78";
+        self._simulation_speed = min(simulation_speed, 1["/"](24));
+        "81";
+        self._earth_angle = 0;
+        "83";
+        self._moon_angle = 0;
+        "85";
+        self._sun = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({radius: sun_radius, opacity: .7, emissive: true, texture: "http://i.imgur.com/yoEzbtg.jpg"})]);
+        "86";
+        self._earth = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({radius: self._earth_radius, texture: textures.earth, flipx: false, shininess: .9})]);
+        "87";
+        self._moon = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({radius: moon_radius, texture: "http://i.imgur.com/YPg4RPU.jpg", flipx: true, flipy: true, shininess: .9})]);
+        "89";
+        _GS_1 = new EarthArrows;
+        ρσ_interpolate_kwargs.call(_GS_1, _GS_1.__init__, [ρσ_desugar_kwargs({radius_earth: self._earth_radius, axis_earth: self._earth_axis, latitude: 52})]);
+        self._earth_arrows = _GS_1;
+    };
+    if (!SunEarthMoonSystem.prototype.__init__.__defaults__) Object.defineProperties(SunEarthMoonSystem.prototype.__init__, {
+        __defaults__ : {value: {simulation_speed:.5, tilt:23}},
+        __handles_kwarg_interpolation__ : {value: true},
+        __argnames__ : {value: ["simulation_speed", "tilt"]},
+        __module__ : {value: null}
+    });
+    SunEarthMoonSystem.__argnames__ = SunEarthMoonSystem.prototype.__init__.__argnames__;
+    SunEarthMoonSystem.__handles_kwarg_interpolation__ = SunEarthMoonSystem.prototype.__init__.__handles_kwarg_interpolation__;
+    SunEarthMoonSystem.prototype.update = async function update() {
+        var self = this;
+        var ρσ_ls, earth_moon_distance;
+        "93";
+        earth_moon_distance = self._earth_radius["*"](6);
+        "96";
+        self._earth.pos = astronomical_unit["*"](vec(cos((await radians(self._earth_angle))), 0, sin((await radians(self._earth_angle)))));
+        "97";
+        self._moon.pos = self._earth.pos["+"](earth_moon_distance["*"](vec(cos((await radians(self._moon_angle))), 0, sin((await radians(self._moon_angle))))));
+        "98";
+        (await self._earth_arrows.update(self._earth.pos, (await radians(self._simulation_speed["*"](365)))));
+        "99";
+        (await self._rotate());
+    };
+    if (!SunEarthMoonSystem.prototype.update.__module__) Object.defineProperties(SunEarthMoonSystem.prototype.update, {
+        __module__ : {value: null}
+    });
+    SunEarthMoonSystem.prototype._rotate = async function _rotate() {
+        var self = this;
+        "103";
+        self._earth_angle=self._earth_angle["-"](earth_orbit_rate["*"](self._simulation_speed));
+        "104";
+        self._moon_angle=self._moon_angle["-"](moon_orbit_rate["*"](self._simulation_speed));
+        "108";
+        ρσ_interpolate_kwargs.call(self._earth, self._earth.rotate, [ρσ_desugar_kwargs({angle: (await radians(self._simulation_speed["*"](365))), axis: self._earth_axis})]);
+        "111";
+        ρσ_interpolate_kwargs.call(self._moon, self._moon.rotate, [ρσ_desugar_kwargs({angle: (await radians(self._simulation_speed["*"](moon_orbit_rate))), axis: vec(0, 1, 0)})]);
+        "113";
+        ρσ_interpolate_kwargs.call(self._sun, self._sun.rotate, [ρσ_desugar_kwargs({angle: (await radians(self._simulation_speed["*"](16))), axis: vec(0, 1, 0)})]);
+    };
+    if (!SunEarthMoonSystem.prototype._rotate.__module__) Object.defineProperties(SunEarthMoonSystem.prototype._rotate, {
+        __module__ : {value: null}
+    });
+    SunEarthMoonSystem.prototype.follow_sun = async function follow_sun(camera) {
+        var self = this;
+        "116";
+        camera.follow(self._sun);
+    };
+    if (!SunEarthMoonSystem.prototype.follow_sun.__argnames__) Object.defineProperties(SunEarthMoonSystem.prototype.follow_sun, {
+        __argnames__ : {value: ["camera"]},
+        __module__ : {value: null}
+    });
+    SunEarthMoonSystem.prototype.day_count = async function day_count() {
+        var self = this;
+        "119";
+        return abs(self._earth_angle);
+    };
+    if (!SunEarthMoonSystem.prototype.day_count.__module__) Object.defineProperties(SunEarthMoonSystem.prototype.day_count, {
+        __module__ : {value: null}
+    });
+    SunEarthMoonSystem.prototype.show_earth_arrows = async function show_earth_arrows() {
+        var self = this;
+        "122";
+        (await self._earth_arrows.show());
+    };
+    if (!SunEarthMoonSystem.prototype.show_earth_arrows.__module__) Object.defineProperties(SunEarthMoonSystem.prototype.show_earth_arrows, {
+        __module__ : {value: null}
+    });
+    SunEarthMoonSystem.prototype.hide_earth_arrows = async function hide_earth_arrows() {
+        var self = this;
+        "125";
+        (await self._earth_arrows.hide());
+    };
+    if (!SunEarthMoonSystem.prototype.hide_earth_arrows.__module__) Object.defineProperties(SunEarthMoonSystem.prototype.hide_earth_arrows, {
+        __module__ : {value: null}
+    });
+    SunEarthMoonSystem.prototype.sun_energy_transfer = async function sun_energy_transfer() {
+        var self = this;
+        "128";
+        return (await self._earth_arrows.sun_energy_transfer());
+    };
+    if (!SunEarthMoonSystem.prototype.sun_energy_transfer.__module__) Object.defineProperties(SunEarthMoonSystem.prototype.sun_energy_transfer, {
+        __module__ : {value: null}
+    });
+    SunEarthMoonSystem.prototype.simulation_speed = async function simulation_speed() {
+        var self = this;
+        "131";
+        return self._simulation_speed;
+    };
+    if (!SunEarthMoonSystem.prototype.simulation_speed.__module__) Object.defineProperties(SunEarthMoonSystem.prototype.simulation_speed, {
+        __module__ : {value: null}
+    });
+    SunEarthMoonSystem.prototype.set_simulation_speed_to = async function set_simulation_speed_to(value) {
+        var self = this;
+        "134";
+        self._simulation_speed = value;
+    };
+    if (!SunEarthMoonSystem.prototype.set_simulation_speed_to.__argnames__) Object.defineProperties(SunEarthMoonSystem.prototype.set_simulation_speed_to, {
+        __argnames__ : {value: ["value"]},
+        __module__ : {value: null}
+    });
+    SunEarthMoonSystem.prototype.__repr__ = async function __repr__() {
+                return "<"["+"](__name__)["+"](".")["+"](this.constructor.name)["+"](" #")["+"](this.ρσ_object_id)["+"](">");
+    };
+    SunEarthMoonSystem.prototype.__str__ = async function __str__() {
+        return this.__repr__();
+    };
+    Object.defineProperty(SunEarthMoonSystem.prototype, "__bases__", {value: []});
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    "136";
+    async function on_mouse_click() {
+        "137";
+        (await change_view());
+    };
+    if (!on_mouse_click.__module__) Object.defineProperties(on_mouse_click, {
+        __module__ : {value: null}
+    });
+
+    "139";
+    async function set_speed() {
+        "140";
+        (await sun_earth_moon.set_simulation_speed_to(speed_slider.value));
+    };
+    if (!set_speed.__module__) Object.defineProperties(set_speed, {
+        __module__ : {value: null}
+    });
+
+    "142";
+    async function change_view() {
+        var ρσ_ls, chosen_object;
+        "143";
+        chosen_object = animation.mouse.pick();
+        "144";
+        if (chosen_object !== null) {
+            "145";
+            animation.camera.follow(chosen_object);
+        }
+    };
+    if (!change_view.__module__) Object.defineProperties(change_view, {
+        __module__ : {value: null}
+    });
+
+    "147";
+    async function on_radio_button(event) {
+        "148";
+        if ((event.text === "white background" || typeof event.text === "object" && ρσ_equals(event.text, "white background"))) {
+            "149";
+            animation.background = (event.checked) ? color.white : color.black;
+            "150";
+        } else if ((event.text === "earth arrows" || typeof event.text === "object" && ρσ_equals(event.text, "earth arrows"))) {
+            "151";
+            (event.checked) ? (await sun_earth_moon.show_earth_arrows()) : (await sun_earth_moon.hide_earth_arrows());
+        }
+    };
+    if (!on_radio_button.__argnames__) Object.defineProperties(on_radio_button, {
+        __argnames__ : {value: ["event"]},
+        __module__ : {value: null}
+    });
+
+    "153";
+    _GS_1 = new SunEarthMoonSystem;
+    (await _GS_1.__init__());
+    sun_earth_moon = _GS_1;
+    "154";
+    animation.append_to_caption("\nAdjust the speed of the simulation using the slider\n");
+    "155";
+    _ = ρσ_interpolate_kwargs.call(this, checkbox, [ρσ_desugar_kwargs({bind: on_radio_button, text: "white background", name: "background", checked: false})]);
+    "156";
+    _ = ρσ_interpolate_kwargs.call(this, checkbox, [ρσ_desugar_kwargs({bind: on_radio_button, text: "earth arrows", name: "arrows", checked: true})]);
+    "157";
+    speed_slider = ρσ_interpolate_kwargs.call(this, slider, [ρσ_desugar_kwargs({bind: set_speed, value: (await sun_earth_moon.simulation_speed()), min: 0, max: 1["/"](24)})]);
+    "158";
+    animation.append_to_caption("\n\n");
+    "162";
+    (await sun_earth_moon.follow_sun(animation.camera));
+    "163";
+    animation.bind("mousedown", change_view);
+    "166";
+    sunlight = ρσ_interpolate_kwargs.call(this, local_light, [ρσ_desugar_kwargs({pos: vec(0, 0, 0), color: color.white})]);
+    "167";
+    more_sunlight = ρσ_interpolate_kwargs.call(this, local_light, [ρσ_desugar_kwargs({pos: vec(0, 0, 0), color: color.white})]);
+    "170";
+    graph_height = 70;
+    "171";
+    graph_width = 480;
+    "172";
+    daylight_graph = ρσ_interpolate_kwargs.call(this, graph, [ρσ_desugar_kwargs({width: graph_width, height: graph_height["*"](4), title: "Hours with daylight", xmax: 365, ymin: 5, ymax: 17})]);
+    "173";
+    daylight_curve = ρσ_interpolate_kwargs.call(this, gcurve, [ρσ_desugar_kwargs({graph: daylight_graph, color: color.red})]);
+    "174";
+    equator_curve = ρσ_interpolate_kwargs.call(this, gcurve, [ρσ_desugar_kwargs({graph: daylight_graph, color: color.cyan})]);
+    "175";
+    _ = (function() {
+        var ρσ_Iter = range(365), ρσ_Result = [], day;
+        ρσ_Iter = ((typeof ρσ_Iter[Symbol.iterator] === "function") ? (ρσ_Iter instanceof Map ? ρσ_Iter.keys() : ρσ_Iter) : Object.keys(ρσ_Iter));
+        for (var ρσ_Index of ρσ_Iter) {
+            day = ρσ_Index;
+            ρσ_Result.push(equator_curve.plot(day, 12));
+        }
+        ρσ_Result = ρσ_list_constructor(ρσ_Result);
+        return ρσ_Result;
+    })();
+    "176";
+    energy_curve = gcurve();
+    "178";
+    new_graph_interval = 30;
+    "179";
+    month_counter = 0;
+    "180";
+    daylight = 0;
+    "181";
+    while ((await sun_earth_moon.day_count())["<="](365)) {
+        "182";
+        (await rate(100));
+        "183";
+        (await sun_earth_moon.update());
+        "185";
+        sun_energy_transfer = (await sun_earth_moon.sun_energy_transfer());
+        "186";
+        energy_curve.plot((await sun_earth_moon.day_count()), sun_energy_transfer);
+        "188";
+        daylight=daylight["+"](sun_energy_transfer);
+        "189";
+        if ((sun_energy_transfer === 0 || typeof sun_energy_transfer === "object" && ρσ_equals(sun_energy_transfer, 0)) && (daylight !== 0 && (typeof daylight !== "object" || ρσ_not_equals(daylight, 0)))) {
+            "190";
+            daylight = daylight["*"]((await sun_earth_moon.simulation_speed()));
+            "191";
+            daylight_curve.plot((await sun_earth_moon.day_count()), daylight["*"](35)["+"](4.25));
+            "192";
+            daylight = 0;
+            "194";
+        }
+        if ((await sun_earth_moon.day_count())[">"](month_counter["*"](new_graph_interval))) {
+            "195";
+            energy_graph = ρσ_interpolate_kwargs.call(this, graph, [ρσ_desugar_kwargs({title: "Sunlight in "["+"](ρσ_getitem(list_of_months, month_counter["%"](12))), width: graph_width, height: graph_height, xmin: month_counter["*"](new_graph_interval), xmax: month_counter["+"](1)["*"](new_graph_interval), ymin: 1["-u"]()["*"](.1), ymax: 1})]);
+            "197";
+            energy_curve = ρσ_interpolate_kwargs.call(this, gcurve, [ρσ_desugar_kwargs({graph: energy_graph, interval: 1})]);
+            "198";
+            month_counter=month_counter["+"](1);
+        }
+    }
+};
+if (!__main__.__module__) Object.defineProperties(__main__, {
+    __module__ : {value: null}
+});
+
+;$(function(){ window.__context = { glowscript_container: $("#glowscript").removeAttr("id") }; __main__() })})()
+// END JAVASCRIPT
+
+//--><!]]></script>
+</div>
+
