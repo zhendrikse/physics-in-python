@@ -22,7 +22,7 @@ the days per season.
 
 <figure>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Daylightvariations">
+  <a href="glowscript/Daylightvariations.html">
     <img alt="Daylight variations" width="100%" height="100%" src="./images/daylight_variations.png" title="Click to animate"/>
   </a>
 </figure>
@@ -167,12 +167,16 @@ $$(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x,
 
 <details>
 <summary><b>Background: particle in a box, i.e. confined by a infinite square well</b></summary>
+<p>
 Although the one-dimensional particle-in-a-box problem does not correspond to any
 real-world system, it illustrates quite well some (fundamental) 
 quantum mechanical features nonetheless.
+</p>
 
+<p>
 The box is modeled by an infinite square well, so that the particle cannot escape 
 beyond the boundaries of the box.
+</p>
 
 Inside the box, the potential energy $V$ is zero (or constant). Substituting this together with the
 formula for the plane wave $\psi(x,t) = Ae^{ik x}e^{-i\omega t}$ into the Schrödinger equation, we get:
