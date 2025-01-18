@@ -5,7 +5,7 @@ The code pertaining to the demos in this section is available under the
 on [glowscript.org](https://glowscript.org).
 
 ### Daylight variations &mdash; sun-earth-moon model
-
+<hr/>
 A not accurate to scale sun-earth-moon model, but very detailed and instructive nonetheless! It shows the per day
 incoming energy from the sun (at a given latitude), as well as the variations in the length of
 the days per season. 
@@ -55,25 +55,9 @@ the days per season.
 
 
 # Mathematics
+<hr/>
 
 ### Dynamic 3D-plots of multivariate and complex functions
-
-<details>
-  <summary>Animations and source code</summary>
-  <ul>
-    <li><b>Dynamic 3D-plots of multivariate functions</b>
-    <ul>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/3d_plots">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/3dplots">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/mathematics/3d_plots.py">3d_plots.py</a> and VPython <a href="./src/mathematics/3d_plots.py">3d_plots.py</a> versions in this repository</li>
-    </ul>
-    </li>
-    <li><b>Dynamic 3D-plots of complex functions</b>
-      <ul>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/complex_function_plot">on Trinket</a> and <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Complexfunctionplot">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/mathematics/complex_function_plot.py">complex_function_plot.py</a> and VPython <a href="./src/mathematics/complex_function_plot.py">complex_function_plot.py</a> versions in this repository</li>
-      </ul></li>
-  </ul>
-</details>
 
 <figure>
   <a href="glowscript/3dplots.html">
@@ -85,7 +69,7 @@ the days per season.
 </figure>
 
 #### Polar coordinates &amp; flocking birds model
-
+<hr/>
 <details>
   <summary>Animations and source code</summary>
   <ul><li><b>Polar coordinates</b>
@@ -116,17 +100,8 @@ The code pertaining to the demos in this section is available under the
 [quantum tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Quantum/)
 on [glowscript.org](https://glowscript.org).
 
-## Visualization of plane waves $\psi(x, t) = A \cdot e^{i(k x - \omega t)}$
-
-<details>
-  <summary>Animations and source code</summary>
-  <ul><li><b>Plane wave</b>
-    <ul>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/plane_wave">on Trinket</a> and <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/quantum_and_waves/plane_wave.py">plane_wave.py</a> and VPython <a href="./src/quantum_and_waves/plane_wave.py">plane_wave.py</a> versions in this repository</li>
-    </ul></li>
-  </ul>
-</details>
+### Visualization of plane waves $\psi(x, t) = A \cdot e^{i(k x - \omega t)}$
+<hr/>
 
 <figure>
   <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave">
@@ -134,10 +109,8 @@ on [glowscript.org](https://glowscript.org).
   </a>
 </figure>
 
-With the plane wave as illustrated above, we can easily derive the Schr&#246;dinger equation.
-
 <details>
-  <summary><a>&dArr; Concise derivation of the Schr&#246;dinger equation &dArr;</a></summary>
+  <summary><a>&dArr; For such a plane wave, we can easily derive the Schr&#246;dinger equation &dArr;</a></summary>
 
 According to <a href="https://en.wikipedia.org/wiki/Matter_wave">De Broglie</a> we have:
 
@@ -159,19 +132,8 @@ $$(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x,
 
 <p/>
 
-## One-dimensional quantum particle bound by an infinite square well
-
-<details>
-  <summary>Animations and source code</summary>
-  <ul>
-    <li><b>Plane wave</b>
-      <ul>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/infinite_square_well">on Trinket</a> and <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Infinitesquarewell">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/quantum_and_waves/infinite_square_well.py">infinite_square_well.py</a> and VPython <a href="./src/quantum_and_waves/infinite_square_well.py">infinite_square_well.py</a> versions in this repository</li>
-    </ul></li>
-  </ul>
-</details>
-
+### One-dimensional quantum particle bound by an infinite square well
+<hr/>
 <figure>
   <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Infinitesquarewell">
     <img alt="Complex wave" width="50%" height="50%" src="./images/infinite_square_well.png" title="Click to animate"/>
