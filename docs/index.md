@@ -86,7 +86,7 @@ plot = Plot3D(X, Y, ,Z)
 
 <p>Similarly, a torus can be generated (select the torus from the drop-down menu in the application):</p>
 
-$\\begin{cases} x &amp; = (c + a \cos(v))\cdot\cos(u) \\ y &amp; = (c + a \cos(v))\cdot\sin(u) \\ z &amp; = a \sin(v) \end{cases}$
+$\begin{cases} x &amp; = (c + a \cos(v))\cdot\cos(u) \\ y &amp; = (c + a \cos(v))\cdot\sin(u) \\ z &amp; = a \sin(v) \end{cases}$
 
 <p>This leads to the following Python code</p>
 
@@ -107,6 +107,8 @@ def torus():
 plot = Plot3D(X, Y, ,Z)
 ```
 </details>
+
+<p/>
 
 # Nature models
 
