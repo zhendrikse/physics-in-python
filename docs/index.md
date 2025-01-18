@@ -32,6 +32,11 @@ the days per season.
 
 # Mathematics
 
+```python
+def func(some):
+  return code
+```
+
 The code pertaining to the demos in this section is available under the 
 [mathematics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Math/)
 on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
