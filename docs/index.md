@@ -29,6 +29,21 @@ the days per season.
   </a>
 </figure>
 
+```python
+def sine_sqrt():
+    resolution = 50
+    x = y = np.linspace(-2 * pi, 2 * pi, resolution)
+    xx, yy = np.meshgrid(x, y)
+    x_2_plus_y_2 = xx.multiply(xx).add(yy.multiply(yy))
+    zz = np.sin(np.sqrt(x_2_plus_y_2)).multiply(5)
+
+    return xx, yy, zz
+
+xx, yy, zz = sine_sqrt()
+plot = Plot3D(xx, yy, zz)
+```
+
+
 # Mathematics
 
 The code pertaining to the demos in this section is available under the 
@@ -71,8 +86,6 @@ $$\psi(x, y, t) = \sin(\omega t)\sqrt{x^2+y^2}$$
 <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">zz</span> <span class="o">=</span> <span class="n">torus</span><span class="p">()</span>
 <span class="n">plot</span> <span class="o">=</span> <span class="n">Plot3D</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">zz</span><span class="p">)</span>
 </code></pre></div></div>
-</details>
-
 </details>
 
 <p/>
