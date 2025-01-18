@@ -72,7 +72,7 @@ $\begin{cases} x &amp; = r\cos(\phi) \\ y &amp; = r\sin(\phi)) \\ z &amp; = (r^2
 
 <p>This leads to the following Python code</p>
 
-```python
+```
 def mexican_hat():
     r = np.linspace(0, 1.25, 50)
     p = np.linspace(-pi, 1.05 * pi, 50)
@@ -90,7 +90,7 @@ $\begin{cases} x &amp; = (c + a \cos(v))\cdot\cos(u) \\ y &amp; = (c + a \cos(v)
 
 <p>This leads to the following Python code</p>
 
-```python 
+```
 def torus():
     # https://www.mattiagiuri.com/2020/11/20/plotting-a-torus-with-python/
 
