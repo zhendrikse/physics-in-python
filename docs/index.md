@@ -201,7 +201,7 @@ $$(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x,
 <p/>
 
 <details>
-  <summary><a>&dArr; Python code snippet for plotting Spherical harmonics &dArr;</a></summary>
+  <summary><a>&dArr; Python code snippet for plotting spherical harmonics &dArr;</a></summary>
 
 The spherical harmonic function is given by
 
