@@ -118,16 +118,26 @@ on [glowscript.org](https://glowscript.org).
 
 ## Visualization of plane waves $\psi(x, t) = A \cdot e^{i(k x - \omega t)}$
 
+<details>
+  <summary>Animations and source code</summary>
+  <ul><li><b>Plane wave</b>
+    <ul>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/plane_wave">on Trinket</a> and <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/quantum_and_waves/plane_wave.py">plane_wave.py</a> and VPython <a href="./src/quantum_and_waves/plane_wave.py">plane_wave.py</a> versions in this repository</li>
+    </ul></li>
+  </ul>
+</details>
+
 <figure>
   <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave">
     <img alt="Complex wave" width="50%" height="50%" src="./images/plane_wave.png" title="Click to animate"/>
   </a>
 </figure>
 
-With the plane wave as illustrated above, we can easily derive the Schr&#246;dinger equation:
+With the plane wave as illustrated above, we can easily derive the Schr&#246;dinger equation.
 
 <details>
-  <summary><b>Concise derivation of the Schr&#246;dinger equation</b></summary>
+  <summary><b>&dArr; Concise derivation of the Schr&#246;dinger equation &dArr;</b></summary>
 
 According to <a href="https://en.wikipedia.org/wiki/Matter_wave">De Broglie</a> we have:
 
@@ -147,17 +157,20 @@ $$(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x,
 
 </details>
 
+<p/>
+
+## One-dimensional quantum particle bound by an infinite square well
+
 <details>
   <summary>Animations and source code</summary>
-  <ul><li><b>Plane wave</b>
-    <ul>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/plane_wave">on Trinket</a> and <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/quantum_and_waves/plane_wave.py">plane_wave.py</a> and VPython <a href="./src/quantum_and_waves/plane_wave.py">plane_wave.py</a> versions in this repository</li>
+  <ul>
+    <li><b>Plane wave</b>
+      <ul>
+        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/infinite_square_well">on Trinket</a> and <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Infinitesquarewell">glowscript.org</a></li>
+        <li>Glowscript <a href="./src/glowscript/quantum_and_waves/infinite_square_well.py">infinite_square_well.py</a> and VPython <a href="./src/quantum_and_waves/infinite_square_well.py">infinite_square_well.py</a> versions in this repository</li>
     </ul></li>
   </ul>
 </details>
-
-## One-dimensional quantum particle bound by an infinite square well
 
 <figure>
   <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Infinitesquarewell">
@@ -166,7 +179,7 @@ $$(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x,
 </figure>
 
 <details>
-<summary><b>Background: particle in a box, i.e. confined by a infinite square well</b></summary>
+<summary><b>&dArr; Background: particle in a box, i.e. confined by a infinite square well &dArr;</b></summary>
 <p>
 Although the one-dimensional particle-in-a-box problem does not correspond to any
 real-world system, it illustrates quite well some (fundamental) 
@@ -202,16 +215,7 @@ $$E=\dfrac{h^2a^2}{8\pi^2m} \text{ and } \psi_n=\sqrt{\dfrac{2}{L}}\sin(nkx), \t
 These energy eigenstates (and superpositions thereof) are used in the visualization software.
 </details>
 
-<details>
-  <summary>Animations and source code</summary>
-  <ul>
-    <li><b>Plane wave</b>
-      <ul>
-        <li>See live animations <a href="https://zegerh-6085.trinket.io/sites/infinite_square_well">on Trinket</a> and <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Infinitesquarewell">glowscript.org</a></li>
-        <li>Glowscript <a href="./src/glowscript/quantum_and_waves/infinite_square_well.py">infinite_square_well.py</a> and VPython <a href="./src/quantum_and_waves/infinite_square_well.py">infinite_square_well.py</a> versions in this repository</li>
-    </ul></li>
-  </ul>
-</details>
+<p/>
 
 ## The quantum harmonic oscillator
 
