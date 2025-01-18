@@ -33,8 +33,52 @@ the days per season.
 # Mathematics
 
 ```python
-def func(some):
-  return code
+def sine_sqrt():
+    resolution = 50
+    x = y = np.linspace(-2 * pi, 2 * pi, resolution)
+    xx, yy = np.meshgrid(x, y)
+    x_2_plus_y_2 = xx.multiply(xx).add(yy.multiply(yy))
+    zz = np.sin(np.sqrt(x_2_plus_y_2)).multiply(5)
+
+    z_min = -9
+    z_max = 9
+    return xx, yy, zz, z_min, z_max
+
+plot = Plot3D(X, Y, ,Z)
+```
+
+VOLGENDE
+
+
+```
+def mexican_hat():
+    r = np.linspace(0, 1.25, 50)
+    p = np.linspace(-pi, 1.05 * pi, 50)
+    R, P = np.meshgrid(r, p)
+    Z = R.multiply(R).subtract(1).multiply(R.multiply(R).subtract(1))
+    X, Y = np.cos(P).multiply(R), np.sin(P).multiply(R)
+    return X, Y, Z
+
+plot = Plot3D(X, Y, ,Z)
+```
+
+VOLGENDE
+
+```
+def torus():
+    # 
+
+    resolution = 75
+    c = 3
+    a = 1
+    xx = yy = np.linspace(-pi, 1.05 * pi, resolution)
+    U, V = np.meshgrid(xx, yy)
+    X = (np.cos(V).multiply(a).add(c)).multiply(np.cos(U))
+    Y = (np.cos(V).multiply(a).add(c)).multiply(np.sin(U))
+    Z = np.sin(V).multiply(a)
+    return X, Y, Z
+
+plot = Plot3D(X, Y, ,Z)
 ```
 
 The code pertaining to the demos in this section is available under the 
