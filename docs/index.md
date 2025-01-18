@@ -32,55 +32,6 @@ the days per season.
 
 # Mathematics
 
-```python
-def sine_sqrt():
-    resolution = 50
-    x = y = np.linspace(-2 * pi, 2 * pi, resolution)
-    xx, yy = np.meshgrid(x, y)
-    x_2_plus_y_2 = xx.multiply(xx).add(yy.multiply(yy))
-    zz = np.sin(np.sqrt(x_2_plus_y_2)).multiply(5)
-
-    z_min = -9
-    z_max = 9
-    return xx, yy, zz, z_min, z_max
-
-plot = Plot3D(X, Y, ,Z)
-```
-
-VOLGENDE
-
-
-```
-def mexican_hat():
-    r = np.linspace(0, 1.25, 50)
-    p = np.linspace(-pi, 1.05 * pi, 50)
-    R, P = np.meshgrid(r, p)
-    Z = R.multiply(R).subtract(1).multiply(R.multiply(R).subtract(1))
-    X, Y = np.cos(P).multiply(R), np.sin(P).multiply(R)
-    return X, Y, Z
-
-plot = Plot3D(X, Y, ,Z)
-```
-
-VOLGENDE
-
-```
-def torus():
-    # 
-
-    resolution = 75
-    c = 3
-    a = 1
-    xx = yy = np.linspace(-pi, 1.05 * pi, resolution)
-    U, V = np.meshgrid(xx, yy)
-    X = (np.cos(V).multiply(a).add(c)).multiply(np.cos(U))
-    Y = (np.cos(V).multiply(a).add(c)).multiply(np.sin(U))
-    Z = np.sin(V).multiply(a)
-    return X, Y, Z
-
-plot = Plot3D(X, Y, ,Z)
-```
-
 The code pertaining to the demos in this section is available under the 
 [mathematics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Math/)
 on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
@@ -108,10 +59,9 @@ $$\psi(x, y, t) = \sin(\omega t)\sqrt{x^2+y^2}$$
 
 <p>The following Python code was used to plot the graph belonging to this multivariate function:<br/></p>
 
-```
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def mexican_hat():
 def sine_sqrt():
-    resolution = 50
-    x = y = np.linspace(-2 * pi, 2 * pi, resolution)
+    x = y = np.linspace(-2 * pi, 2 * pi, 50)
     xx, yy = np.meshgrid(x, y)
     x_2_plus_y_2 = xx.multiply(xx).add(yy.multiply(yy))
     zz = np.sin(np.sqrt(x_2_plus_y_2)).multiply(5)
@@ -121,7 +71,8 @@ def sine_sqrt():
     return xx, yy, zz, z_min, z_max
 
 plot = Plot3D(X, Y, ,Z)
-```
+</code></pre></div></div>
+
 </details>
 
 <p/>
@@ -151,8 +102,7 @@ $\begin{cases} x &amp; = r\cos(\phi) \\ y &amp; = r\sin(\phi)) \\ z &amp; = (r^2
 
 <p>This leads to the following Python code<br/></p>
 
-```
-def mexican_hat():
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def mexican_hat():
     r = np.linspace(0, 1.25, 50)
     p = np.linspace(-pi, 1.05 * pi, 50)
     R, P = np.meshgrid(r, p)
@@ -160,8 +110,8 @@ def mexican_hat():
     X, Y = np.cos(P).multiply(R), np.sin(P).multiply(R)
     return X, Y, Z
 
-plot = Plot3D(X, Y, ,Z)
-```
+plot = Plot3D(X, Y, Z)
+</code></pre></div></div>
 
 <p>Similarly, a <a href="https://www.mattiagiuri.com/2020/11/20/plotting-a-torus-with-python/">torus</a> 
 can be generated (select the torus from the drop-down menu in the application):</p>
@@ -170,22 +120,19 @@ $\begin{cases} x &amp; = (c + a \cos(v))\cdot\cos(u) \\ y &amp; = (c + a \cos(v)
 
 <p>This leads to the following Python code<br/></p>
 
-```
-def torus():
-    # 
-
-    resolution = 75
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def torus():
     c = 3
     a = 1
-    xx = yy = np.linspace(-pi, 1.05 * pi, resolution)
+    xx = yy = np.linspace(-pi, 1.05 * pi, 75)
     U, V = np.meshgrid(xx, yy)
     X = (np.cos(V).multiply(a).add(c)).multiply(np.cos(U))
     Y = (np.cos(V).multiply(a).add(c)).multiply(np.sin(U))
     Z = np.sin(V).multiply(a)
     return X, Y, Z
 
-plot = Plot3D(X, Y, ,Z)
-```
+plot = Plot3D(X, Y ,Z)
+</code></pre></div></div>
+
 </details>
 
 <p/>
