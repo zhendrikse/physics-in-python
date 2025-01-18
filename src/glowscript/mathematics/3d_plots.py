@@ -11,6 +11,8 @@ ricker_title = """<a href="https://en.wikipedia.org/wiki/Ricker_wavelet">Ricker 
 $\\psi(x,y,t) = \dfrac{\sin(\\omega t)}{\pi\sigma^4} \\bigg(1 - \dfrac{1}{2} \\bigg( \dfrac{x^2 + y^2}{\sigma^2} \\bigg) \\bigg) e^{-\\dfrac{x^2+y^2}{2\sigma^2}}$
 """
 
+mexican_hat_title = "<h3>Polar coordinates for Mexican hat</h3>$\\begin{cases} x & = r\\cos(\\phi) \\\\ y & = r\\sin(\\phi)) \\\\ z & = (r^2 - 1)^2 \\end{cases}$"
+torus_title = "<h3>Polar coordinates for torus</h3>$\\begin{cases} x & = (c + a \\cos(v))\cdot\\cos(u) \\\\ y & = (c + a \\cos(v))\cdot\\sin(u) \\\\ z & = a \\sin(v) \\end{cases}$"
 sine_cosine_title = "<h2>$\\psi(x,y,t) = \\sin{(\pi x)}\\cos{(\pi y)}\\cos{(\omega t)}$</h2>"
 exponential_title = "<h2>$\\psi(x, y, t) = \\sin(\omega t) \\sin(x^2 + y^2) e^{ -x^2 - y^2}$</h2>"
 ripple_title = "<h2>$\\psi(x, y, t) = \\sin(\omega t) \\sin\\big(3 (x^2 + y^2)\\big)$</h2"
@@ -45,13 +47,26 @@ class Numpy:
         self.exp = self._exp
         self.abs = self._abs
 
-    def _abs(self, numpy_array): return nj.abs(numpy_array)
-    def _exp(self, numpy_array): return nj.exp(numpy_array)
-    def _cos(self, numpy_array): return nj.cos(numpy_array)
-    def _sin(self, numpy_array): return nj.sin(numpy_array)
-    def _sqrt(self, numpy_array): return nj.sqrt(numpy_array)
-    def _len(self, numpy_array): return numpy_array.shape[0]
-    def _array(self, an_array): return nj.array(an_array)
+    def _abs(self, numpy_array):
+        return nj.abs(numpy_array)
+
+    def _exp(self, numpy_array):
+        return nj.exp(numpy_array)
+
+    def _cos(self, numpy_array):
+        return nj.cos(numpy_array)
+
+    def _sin(self, numpy_array):
+        return nj.sin(numpy_array)
+
+    def _sqrt(self, numpy_array):
+        return nj.sqrt(numpy_array)
+
+    def _len(self, numpy_array):
+        return numpy_array.shape[0]
+
+    def _array(self, an_array):
+        return nj.array(an_array)
 
     def _linspace(self, start, stop, num):
         return self._array([x for x in arange(start, stop, (stop - start) / (num - 1))] + [stop])
@@ -99,11 +114,14 @@ class Base:
             self._yz_mesh += [cylinder(pos=pos_y_z + z_hat * j * delta_[2], axis=y_hat * range_[1])]
 
             pos = (base_[1].get(0) + .5 * range_[1]) * y_hat + (base_[2].get(0) + .5 * range_[2]) * z_hat
-            self._yz_mesh += [box(pos=pos, length=scale, width=range_[2], height=range_[1], opacity=0.15, visible=False)]
+            self._yz_mesh += [
+                box(pos=pos, length=scale, width=range_[2], height=range_[1], opacity=0.15, visible=False)]
             pos = (base_[0].get(0) + .5 * range_[0]) * x_hat + (base_[1].get(0) + .5 * range_[1]) * y_hat
-            self._xy_mesh += [box(pos=pos, length=range_[0], width=scale, height=range_[1], opacity=0.15, visible=False)]
+            self._xy_mesh += [
+                box(pos=pos, length=range_[0], width=scale, height=range_[1], opacity=0.15, visible=False)]
             pos = (base_[0].get(0) + .5 * range_[0]) * x_hat + (base_[2].get(0) + .5 * range_[2]) * z_hat
-            self._xz_mesh += [box(pos=pos, length=range_[0], width=range_[2], height=scale, opacity=0.15, visible=False)]
+            self._xz_mesh += [
+                box(pos=pos, length=range_[0], width=range_[2], height=scale, opacity=0.15, visible=False)]
 
             self._set_mesh_properties(self._xy_mesh, scale)
             self._set_mesh_properties(self._xz_mesh, scale)
@@ -146,9 +164,12 @@ class Base:
         l2 = text(pos=pos, text="Z-axis", color=axis_color, height=scale * 4, billboard=True, emissive=True)
         pos = x_hat * (base_[0].get(-1) / 2) + z_hat * (base_[2].get(-1) + 2.5 * delta_[2])
         l3 = text(pos=pos, text="X-axis", color=axis_color, height=scale * 4, billboard=True, emissive=True)
-        c1 = cylinder(pos=x_hat * base_[0].get(0), axis=x_hat * (base_[0].get(-1) - base_[0].get(0)), color=axis_color, radius=scale)
-        c2 = cylinder(pos=y_hat * base_[1].get(0), axis=y_hat * (base_[0].get(-1) - base_[1].get(0)), color=axis_color, radius=scale)
-        c3 = cylinder(pos=z_hat * base_[2].get(0), axis=z_hat * (base_[0].get(-1) - base_[2].get(0)), color=axis_color, radius=scale)
+        c1 = cylinder(pos=x_hat * base_[0].get(0), axis=x_hat * (base_[0].get(-1) - base_[0].get(0)), color=axis_color,
+                      radius=scale)
+        c2 = cylinder(pos=y_hat * base_[1].get(0), axis=y_hat * (base_[0].get(-1) - base_[1].get(0)), color=axis_color,
+                      radius=scale)
+        c3 = cylinder(pos=z_hat * base_[2].get(0), axis=z_hat * (base_[0].get(-1) - base_[2].get(0)), color=axis_color,
+                      radius=scale)
         self._tick_marks += [c1, c2, c3, l1, l2, l3]
 
     def tick_marks_visibility_is(self, visible):
@@ -214,7 +235,7 @@ class Plot3D:
         self._zz = zz
 
         self._z_min, self._z_max = self._z_min_and_z_max(z_min, z_max)
-        self._hue_offset = 0.
+        self._hue_offset = 0.75
         self._omega = pi
         self._axis_color = axis_color
         self._tick_marks_color = tick_marks_color
@@ -223,7 +244,7 @@ class Plot3D:
         self._vertices, self._quads = [], []
         self._create_vertices()
         self._create_quads()
-        self.render(0)
+        self.render(0.5)
 
     def reinitialize(self, xx, yy, zz, z_min=None, z_max=None):
         self._xx = xx
@@ -237,7 +258,7 @@ class Plot3D:
         self._vertices, self._quads = [], []
         self._create_vertices()
         self._create_quads()
-        self.render(0)
+        self.render(0.5)
 
     def _z_min_and_z_max(self, z_min, z_max):
         # Has user has already defined the boundaries for us?
@@ -247,10 +268,10 @@ class Plot3D:
 
         z_max = 0
         z_min = 0
-        for i in range(np.len(self._xx) * np.len(self._yy)):
-            x, y = self._get_x_and_y_for(i)
-            z_max = self._zz.get(x, y) if self._zz.get(x, y) > z_max else z_max
-            z_min = self._zz.get(x, y) if self._zz.get(x, y) < z_min else z_min
+        for x in range(np.len(self._xx)):
+            for y in range(np.len(self._yy)):
+                z_max = self._zz.get(x, y) if self._zz.get(x, y) > z_max else z_max
+                z_min = self._zz.get(x, y) if self._zz.get(x, y) < z_min else z_min
 
         if abs(z_min) > abs(z_max):
             z_max = -z_min
@@ -274,17 +295,36 @@ class Plot3D:
             vertex_.visible = False
 
     def _create_base(self):
-        zz = np.linspace(self._z_min, self._z_max, np.len(self._xx))
-        axis = Base(self._xx, self._yy, zz, self._axis_color, self._tick_marks_color, self._num_tick_marks)
+        x_min, x_max, y_min, y_max = self._ranges()
+        xx = np.linspace(x_min, x_max, np.len(self._xx))
+        yy = np.linspace(y_min, y_max, np.len(self._yy))
+        zz = np.linspace(self._z_min, self._z_max, np.len(self._zz))
+        axis = Base(xx, yy, zz, self._axis_color, self._tick_marks_color, self._num_tick_marks)
         axis.xy_mesh_visibility_is(True)
         axis.xz_mesh_visibility_is(True)
         axis.yz_mesh_visibility_is(True)
         return axis
 
+    def _ranges(self):
+        x_min = x_max = y_min = y_max = 0
+        for x in range(np.len(self._xx)):
+            for y in range(np.len(self._yy)):
+                x_min = self._xx.get(x, y) if self._xx.get(x, y) < x_min else x_min
+                y_min = self._yy.get(x, y) if self._yy.get(x, y) < y_min else y_min
+                x_max = self._xx.get(x, y) if self._xx.get(x, y) > x_max else x_max
+                y_max = self._yy.get(x, y) if self._yy.get(x, y) > y_max else y_max
+        return x_min, x_max, y_min, y_max
+
     def _create_vertices(self):
-        for i in range(np.len(self._xx) * np.len(self._yy)):
-            x, y = self._get_x_and_y_for(i)
-            self._vertices.append(vertex(pos=vec(y, 0, x), normal=vec(0, 1, 0)))
+        x_min, x_max, y_min, y_max = self._ranges()
+        range_x = x_max - x_min
+        range_y = y_max - y_min
+
+        for x in range(np.len(self._xx)):
+            for y in range(np.len(self._yy)):
+                x_ = (self._xx.get(x, y) - x_min) * np.len(self._xx) / range_x
+                y_ = (self._yy.get(x, y) - y_min) * np.len(self._yy) / range_y
+                self._vertices.append(vertex(pos=vec(x_, 0, y_), normal=vec(0, 1, 0)))
 
     # Create the quad objects, based on the vertex objects already created.
     def _create_quads(self):
@@ -296,38 +336,35 @@ class Plot3D:
                 v3 = self._get_vertex(x, y + 1)
                 self._quads.append(quad(vs=[v0, v1, v2, v3]))
 
-    def _set_vertex_normal_for(self, index):
-        x, y = self._get_x_and_y_for(index)
+    def _set_vertex_normal_for(self, x, y):
         if x == np.len(self._xx) - 1 or y == np.len(self._yy) - 1: return
-        v = self._vertices[index]
-        a = self._vertices[index + np.len(self._xx)].pos - v.pos
-        b = self._vertices[index + 1].pos - v.pos
+        v = self._get_vertex(x, y)
+        a = self._get_vertex(x, y + 1).pos - v.pos
+        b = self._get_vertex(x + 1, y).pos - v.pos
         v.normal = cross(a, b)
 
     # Set the normal for each vertex to be perpendicular to the lower left corner of the quad.
     # The vectors a and b point to the right and up around a vertex in the xy plane.
     def _make_normals(self):
-        for i in range(np.len(self._xx) * np.len(self._yy)):
-            self._set_vertex_normal_for(i)
+        for x in range(np.len(self._xx) - 2):
+            for y in range(np.len(self._yy) - 2):
+                self._set_vertex_normal_for(x, y)
 
-    def _get_x_and_y_for(self, index):
-        return int(index / np.len(self._xx)), index % np.len(self._yy)
-
-    def _value_to_plot(self, i, t, range_z):
-        x, y = self._get_x_and_y_for(i)
+    def _value_to_plot(self, x, y, t, range_z):
         f_x_y = self._zz.get(x, y) * sin(self._omega * t)
         return (np.len(self._xx) / range_z) * (f_x_y - self._z_min)
 
-    def _update_vertex(self, i, t, range_z):
-        value = self._value_to_plot(i, t, range_z)
-        self._vertices[i].pos.y = value
-        color_ = (abs(value) - self._z_min) / (range_z * 15) + self._hue_offset
-        self._vertices[i].color = color.hsv_to_rgb(vec(color_, color_, 1))
+    def _update_vertex(self, x, y, t, range_z):
+        value = self._value_to_plot(x, y, t, range_z)
+        self._get_vertex(x, y).pos.y = value
+        color_ = (abs(value) - self._z_min) / (range_z * 20) + self._hue_offset
+        self._get_vertex(x, y).color = color.hsv_to_rgb(vec(color_, color_, 1))
 
     def render(self, t):
         range_z = self._z_max - self._z_min
-        for i in range(np.len(self._xx) * np.len(self._yy)):
-            self._update_vertex(i, t, range_z)
+        for x in range(np.len(self._xx)):
+            for y in range(np.len(self._yy)):
+                self._update_vertex(x, y, t, range_z)
 
         self._make_normals()
 
@@ -379,6 +416,31 @@ def sine_sqrt():
     z_min = -10
     z_max = 10
     return xx, yy, zz, z_min, z_max
+
+
+def mexican_hat():
+    # https://matplotlib.org/stable/gallery/mplot3d/surface3d_radial.html#sphx-glr-gallery-mplot3d-surface3d-radial-py
+    r = np.linspace(0, 1.25, 50)
+    p = np.linspace(-pi, 1.05 * pi, 50)
+    R, P = np.meshgrid(r, p)
+    Z = R.multiply(R).subtract(1).multiply(R.multiply(R).subtract(1))
+    X, Y = np.cos(P).multiply(R), np.sin(P).multiply(R)
+
+    return X, Y, Z, -1, 1
+
+
+def torus():
+    # https://www.mattiagiuri.com/2020/11/20/plotting-a-torus-with-python/
+
+    resolution = 75
+    c = 3
+    a = 1
+    xx = yy = np.linspace(-pi, 1.05 * pi, resolution)
+    U, V = np.meshgrid(xx, yy)
+    X = (np.cos(V).multiply(a).add(c)).multiply(np.cos(U))
+    Y = (np.cos(V).multiply(a).add(c)).multiply(np.sin(U))
+    Z = np.sin(V).multiply(a)
+    return X, Y, Z, None, None
 
 
 def ricker():
@@ -465,38 +527,37 @@ def adjust_color():
 
 def switch_function(event):
     xx, yy, zz, z_min, z_max = None, None, None, None, None
-    if event.index < 0:
-        return
-    elif event.index == 0:
+    if event.index == 0:
         xx, yy, zz, z_min, z_max = ricker()
         animation.title = ricker_title + "\n"
-        animation.range = 75
     elif event.index == 1:
+        xx, yy, zz, z_min, z_max = mexican_hat()
+        animation.title = mexican_hat_title + "\n\n"
+    elif event.index == 2:
+        xx, yy, zz, z_min, z_max = ripple()
+        animation.title = ripple_title + "\n\n"
+    elif event.index == 3:
+        xx, yy, zz, z_min, z_max = torus()
+        animation.title = torus_title + "\n\n"
+    elif event.index == 4:
         xx, yy, zz, z_min, z_max = sine_sqrt()
         animation.title = sine_sqrt_title + "\n"
-        animation.range = 75
-    elif event.index == 2:
+    elif event.index == 5:
         xx, yy, zz, z_min, z_max = sine_cosine()
         animation.title = sine_cosine_title + "\n"
-        animation.range = 75
-    elif event.index == 3:
-        xx, yy, zz, z_min, z_max = ripple()
-        animation.range = 150
-        animation.title = ripple_title + "\n\n"
-    elif event.index == 4:
-        xx, yy, zz, z_min, z_max = exp_sine()
-        animation.range = 150
-        animation.title = exponential_title + "\n"
-    elif event.index == 5:
-        xx, yy, zz, z_min, z_max = polynomial()
-        animation.range = 75
-        animation.title = polynomial_title + "\n"
     elif event.index == 6:
+        xx, yy, zz, z_min, z_max = exp_sine()
+        animation.title = exponential_title + "\n"
+    elif event.index == 7:
+        xx, yy, zz, z_min, z_max = polynomial()
+        animation.title = polynomial_title + "\n"
+    elif event.index == 8:
         xx, yy, zz, z_min, z_max = cosine_of_abs()
-        animation.range = 115
         animation.title = cosine_of_abs_title + "\n"
 
+    animation.range = 1.5 * np.len(xx)
     plot.reinitialize(xx, yy, zz, z_min, z_max)
+    time = 0.5
     MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 
@@ -506,8 +567,15 @@ def adjust_omega():
 
 
 animation.append_to_caption("\n")
-wave_choices = ["Ricker wavelet", "f(x,y) = 5 sin(sqrt(x*x + y*y))", "f(x,y) = sin(πx) cos(πy)", "Ripple",
-                "f(x,y) = sin(x*x + y*y) exp(-x*x - y*y)", "f(x,y) = y*x*x*x - x*y*y*y", "f(x,y) = cos(|x| + |y|)"]
+wave_choices = ["Ricker wavelet",
+                "Mexican hat",
+                "Ripple",
+                "Torus",
+                "f(x,y) = 5 sin(sqrt(x*x + y*y))",
+                "f(x,y) = sin(πx) cos(πy)",
+                "f(x,y) = sin(x*x + y*y) exp(-x*x - y*y)",
+                "f(x,y) = y*x*x*x - x*y*y*y",
+                "f(x,y) = cos(|x| + |y|)"]
 _ = menu(choices=wave_choices, bind=switch_function)
 animation.append_to_caption("\n\n")
 _ = checkbox(text='YZ mesh ', bind=toggle_yz_mesh, checked=True)
@@ -515,7 +583,7 @@ _ = checkbox(text='XZ mesh ', bind=toggle_xy_mesh, checked=True)
 _ = checkbox(text='XY mesh ', bind=toggle_xz_mesh, checked=True)
 _ = checkbox(text='Tick marks ', bind=toggle_tick_marks, checked=True)
 animation.append_to_caption("\n\nHue offset  ")
-color_slider = slider(min=0, max=1, step=.01, value=0, bind=adjust_color)
+color_slider = slider(min=0, max=1, step=.01, value=0.75, bind=adjust_color)
 
 animation.append_to_caption("\n\nOmega = ")
 omega_slider = slider(min=0, max=3 * pi, value=pi, bind=adjust_omega)
@@ -550,13 +618,14 @@ def running(ev):
 animation.bind('mousedown', running)
 MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
-time = 0
+time = 0.5
 dt = 0.02
 run = True
-plot = Plot3D(ricker()[0], ricker()[1], ricker()[2])
+xx, yy, zz, z_min, z_max = ricker()
+plot = Plot3D(xx, yy, zz, z_min, z_max)
 while True:
     rate(30)
+    plot.render(time)
     if run:
-        plot.render(time)
         time += dt
 
