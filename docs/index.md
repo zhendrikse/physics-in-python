@@ -121,6 +121,7 @@ $\begin{cases} x &amp; = (c + a \cos(v))\cdot\cos(u) \\ y &amp; = (c + a \cos(v)
 <p>This leads to the following Python code<br/></p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def torus():
+def torus():
     c = 3
     a = 1
     xx = yy = np.linspace(-pi, 1.05 * pi, 75)
@@ -136,6 +137,21 @@ plot = Plot3D(X, Y ,Z)
 </details>
 
 <p/>
+
+```python
+def torus():
+    c = 3
+    a = 1
+    xx = yy = np.linspace(-pi, 1.05 * pi, 75)
+    U, V = np.meshgrid(xx, yy)
+    X = (np.cos(V).multiply(a).add(c)).multiply(np.cos(U))
+    Y = (np.cos(V).multiply(a).add(c)).multiply(np.sin(U))
+    Z = np.sin(V).multiply(a)
+    return X, Y, Z
+
+xx, yy, zz = torus()
+plot = Plot3D(xx, yy, zz)
+```
 
 # Nature models
 
@@ -194,6 +210,31 @@ From this we arrive at the <a href="https://en.wikipedia.org/wiki/Schr%C3%B6ding
 
 $$(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x, t) = -\dfrac{\hbar^2}{2m}\dfrac{\partial^2}{\partial x^2} \Psi(x,t) + V(x)\Psi(x,t)$$
 
+</details>
+
+<p/>
+
+<details>
+  <summary><a>&dArr; Python code snippet for plotting atomic orbitals &dArr;</a></summary>
+
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def mexican_hat():
+def p_orbitals():
+    theta = np.linspace(-1.1 * pi, pi, 100)
+    phi = np.linspace(0, pi, 100)
+    U, V = np.meshgrid(theta, phi)
+    
+    R1 = np.cos(U.multiply(2)).multiply(np.cos(U.multiply(2)))
+    R2 = np.sin(V).multiply(np.sin(V))
+    R = R1.multiply(R2).multiply(4)
+    
+    X = np.sin(U).multiply(np.cos(V)).multiply(R)
+    Y = np.sin(U).multiply(np.sin(V)).multiply(R)
+    Z = np.cos(U).multiply(R)
+    return X, Y, Z, None, None
+
+plot = Plot3D(X, Y, Z)
+</code></pre></div></div>
 </details>
 
 <p/>
