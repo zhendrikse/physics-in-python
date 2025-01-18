@@ -163,26 +163,20 @@ The code pertaining to the demos in this section is available under the
 [quantum tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Quantum/)
 on [glowscript.org](https://glowscript.org).
 
-### Atomic orbitals
+### Atomic orbitals &amp; plane waves $\psi(x, t) = A \cdot e^{i(k x - \omega t)}$
 <hr/>
 
 <figure>
   <a href="glowscript/AtomicOrbitals.html">
-    <img alt="Atomic orbitals" width="50%" height="50%" src="./images/atomic_orbitals.png" title="Click to animate"/>
+    <img alt="Atomic orbitals" width="49%" height="49%" src="./images/atomic_orbitals.png" title="Click to animate"/>
   </a>
-</figure>
-
-### Visualization of plane waves $\psi(x, t) = A \cdot e^{i(k x - \omega t)}$
-<hr/>
-
-<figure>
-  <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Planewave">
-    <img alt="Complex wave" width="50%" height="50%" src="./images/plane_wave.png" title="Click to animate"/>
+  <a href="glowscript/Planewave.html">
+    <img alt="Complex wave" width="49%" height="49%" src="./images/plane_wave.png" title="Click to animate"/>
   </a>
 </figure>
 
 <details>
-  <summary><a>&dArr; For such a plane wave, we can easily derive the Schr&#246;dinger equation &dArr;</a></summary>
+  <summary><a>&dArr; For a plane wave, we can easily derive the Schr&#246;dinger equation &dArr;</a></summary>
 
 According to <a href="https://en.wikipedia.org/wiki/Matter_wave">De Broglie</a> we have:
 
