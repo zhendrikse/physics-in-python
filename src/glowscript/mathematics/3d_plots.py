@@ -266,12 +266,8 @@ class Plot3D:
         if z_min and z_max:
             return z_min, z_max
 
-        z_max = 0
-        z_min = 0
-        for x in range(np.len(self._xx)):
-            for y in range(np.len(self._yy)):
-                z_max = self._zz.get(x, y) if self._zz.get(x, y) > z_max else z_max
-                z_min = self._zz.get(x, y) if self._zz.get(x, y) < z_min else z_min
+        z_max = self._zz.flatten().max()
+        z_min = self._zz.flatten().min()
 
         if abs(z_min) > abs(z_max):
             z_max = -z_min
@@ -306,13 +302,10 @@ class Plot3D:
         return axis
 
     def _ranges(self):
-        x_min = x_max = y_min = y_max = 0
-        for x in range(np.len(self._xx)):
-            for y in range(np.len(self._yy)):
-                x_min = self._xx.get(x, y) if self._xx.get(x, y) < x_min else x_min
-                y_min = self._yy.get(x, y) if self._yy.get(x, y) < y_min else y_min
-                x_max = self._xx.get(x, y) if self._xx.get(x, y) > x_max else x_max
-                y_max = self._yy.get(x, y) if self._yy.get(x, y) > y_max else y_max
+        x_min = self._xx.flatten().min()
+        x_max = self._xx.flatten().max()
+        y_min = self._yy.flatten().min()
+        y_max = self._yy.flatten().max()
         return x_min, x_max, y_min, y_max
 
     def _create_vertices(self):

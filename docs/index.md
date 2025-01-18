@@ -4,7 +4,7 @@ The code pertaining to the demos in this section is available under the
 [astrophysics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/)
 on [glowscript.org](https://glowscript.org).
 
-## Daylight variations &mdash; sun-earth-moon model
+### Daylight variations &mdash; sun-earth-moon model
 
 A not accurate to scale sun-earth-moon model, but very detailed and instructive nonetheless! It shows the per day
 incoming energy from the sun (at a given latitude), as well as the variations in the length of
@@ -27,7 +27,7 @@ the days per season.
   </a>
 </figure>
 
-##  Kepler's law &amp; the three-body problem
+###  Kepler's law &amp; the three-body problem
 
 <details>
   <summary>Animations and source code</summary>
@@ -56,7 +56,7 @@ the days per season.
 
 # Mathematics
 
-## Dynamic 3D-plots of multivariate and complex functions
+### Dynamic 3D-plots of multivariate and complex functions
 
 <details>
   <summary>Animations and source code</summary>
@@ -84,7 +84,7 @@ the days per season.
   </a>
 </figure>
 
-## Polar coordinates &amp; flocking birds model
+#### Polar coordinates &amp; flocking birds model
 
 <details>
   <summary>Animations and source code</summary>
@@ -137,7 +137,7 @@ on [glowscript.org](https://glowscript.org).
 With the plane wave as illustrated above, we can easily derive the Schr&#246;dinger equation.
 
 <details>
-  <summary><b>&dArr; Concise derivation of the Schr&#246;dinger equation &dArr;</b></summary>
+  <summary><a>&dArr; Concise derivation of the Schr&#246;dinger equation &dArr;</a></summary>
 
 According to <a href="https://en.wikipedia.org/wiki/Matter_wave">De Broglie</a> we have:
 
@@ -179,7 +179,7 @@ $$(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x,
 </figure>
 
 <details>
-<summary><b>&dArr; Background: particle in a box, i.e. confined by a infinite square well &dArr;</b></summary>
+<summary><a>&dArr; Background: particle in a box, i.e. confined by a infinite square well &dArr;</a></summary>
 <p>
 Although the one-dimensional particle-in-a-box problem does not correspond to any
 real-world system, it illustrates quite well some (fundamental) 
