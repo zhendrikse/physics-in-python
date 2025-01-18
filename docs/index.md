@@ -85,7 +85,7 @@ plot = Plot3D(X, Y, ,Z)
     <img alt="Polar coordinates" width="49%" height="49%" src="./images/polar_coordinates.png" title="Click to animate"/>
   </a>
   <a href="glowscript/NumpyMatplot3D.html">
-    <img alt="Polar coordinates" width="45%" height="45%" src="./images/mexican_hat.png" title="Click to animate"/>
+    <img alt="Mexican hat" width="45%" height="45%" src="./images/mexican_hat.png" title="Click to animate"/>
   </a>&nbsp;&nbsp;&nbsp;
 </figure>
 
@@ -152,7 +152,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
     <img alt="Flocking birds" width="53%" height="53%" src="./images/flocking_birds.png" title="Click to animate"/>
   </a>
   <a href="glowscript/Raindrops.html">
-    <img alt="Polar coordinates" width="45%" height="45%" src="./images/raindrops.png" title="Click to animate"/>
+    <img alt="Raindrops" width="45%" height="45%" src="./images/raindrops.png" title="Click to animate"/>
   </a>
 </figure>
 
@@ -162,6 +162,15 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 The code pertaining to the demos in this section is available under the 
 [quantum tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Quantum/)
 on [glowscript.org](https://glowscript.org).
+
+### Atomic orbitals
+<hr/>
+
+<figure>
+  <a href="glowscript/AtomicOrbitals.html">
+    <img alt="Atomic orbitals" width="50%" height="50%" src="./images/atomic_orbitals.png" title="Click to animate"/>
+  </a>
+</figure>
 
 ### Visualization of plane waves $\psi(x, t) = A \cdot e^{i(k x - \omega t)}$
 <hr/>
