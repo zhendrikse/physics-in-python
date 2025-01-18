@@ -1,0 +1,533 @@
+<div id="glowscript" class="glowscript">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css" rel="stylesheet" />
+<link type="text/css" href="https://www.glowscript.org/css/ide.css" rel="stylesheet" />
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+// START JAVASCRIPT
+;(function() {;
+var ρσ_modules = {};
+ρσ_modules.pythonize = {};
+ρσ_modules.random = {};
+
+(function(){
+    function strings() {
+        var string_funcs, exclude, name;
+        string_funcs = set("capitalize strip lstrip rstrip islower isupper isspace lower upper swapcase center count endswith startswith find rfind index rindex format join ljust rjust partition rpartition replace split rsplit splitlines zfill".split(" "));
+        if (!arguments.length) {
+            exclude = (function(){
+                var s = ρσ_set();
+                s.jsset.add("split");
+                s.jsset.add("replace");
+                return s;
+            })();
+        } else if (arguments[0]) {
+            exclude = Array.prototype.slice.call(arguments);
+        } else {
+            exclude = null;
+        }
+        if (exclude) {
+            string_funcs = string_funcs.difference(set(exclude));
+        }
+        var ρσ_Iter0 = string_funcs;
+        ρσ_Iter0 = ((typeof ρσ_Iter0[Symbol.iterator] === "function") ? (ρσ_Iter0 instanceof Map ? ρσ_Iter0.keys() : ρσ_Iter0) : Object.keys(ρσ_Iter0));
+        for (var ρσ_Index0 of ρσ_Iter0) {
+            name = ρσ_Index0;
+            (ρσ_expr_temp = String.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name] = (ρσ_expr_temp = ρσ_str.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name];
+        }
+    };
+    if (!strings.__module__) Object.defineProperties(strings, {
+        __module__ : {value: "pythonize"}
+    });
+
+    ρσ_modules.pythonize.strings = strings;
+})();
+
+(function(){
+    var ρσ_seed_state, ρσ_get_random_byte;
+    ρσ_seed_state = (function(){
+        var ρσ_d = {};
+        ρσ_d["key"] = ρσ_list_decorate([]);
+        ρσ_d["key_i"] = 0;
+        ρσ_d["key_j"] = 0;
+        return ρσ_d;
+    }).call(this);
+    ρσ_get_random_byte = (function() {
+        var ρσ_anonfunc = function () {
+            var ρσ_unpack;
+            ρσ_seed_state.key_i = (ρσ_seed_state.key_i + 1) % 256;
+            ρσ_seed_state.key_j = (ρσ_seed_state.key_j + (ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_i, ρσ_expr_temp)]) % 256;
+            ρσ_unpack = [(ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_j, ρσ_expr_temp)],
+            (ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_i, ρσ_expr_temp)]];
+            (ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_i, ρσ_expr_temp)] = ρσ_unpack[0];
+            (ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_j, ρσ_expr_temp)] = ρσ_unpack[1];
+            return (ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(((ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_i, ρσ_expr_temp)] + (ρσ_expr_temp = ρσ_seed_state.key)[ρσ_bound_index(ρσ_seed_state.key_j, ρσ_expr_temp)]) % 256, ρσ_expr_temp)];
+        };
+        if (!ρσ_anonfunc.__module__) Object.defineProperties(ρσ_anonfunc, {
+            __module__ : {value: "random"}
+        });
+        return ρσ_anonfunc;
+    })();
+    function seed() {
+        var x = (arguments[0] === undefined || ( 0 === arguments.length-1 && arguments[arguments.length-1] !== null && typeof arguments[arguments.length-1] === "object" && arguments[arguments.length-1] [ρσ_kwargs_symbol] === true)) ? seed.__defaults__.x : arguments[0];
+        var ρσ_kwargs_obj = arguments[arguments.length-1];
+        if (ρσ_kwargs_obj === null || typeof ρσ_kwargs_obj !== "object" || ρσ_kwargs_obj [ρσ_kwargs_symbol] !== true) ρσ_kwargs_obj = {};
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "x")){
+            x = ρσ_kwargs_obj.x;
+        }
+        var i, j, ρσ_unpack;
+        ρσ_seed_state.key_i = ρσ_seed_state.key_j = 0;
+        if (typeof x === "number") {
+            x = x.toString();
+        } else if (typeof x !== "string") {
+            throw new TypeError("unhashable type: '" + typeof x + "'");
+        }
+        for (var ρσ_Index1 = 0; ρσ_Index1 < 256; ρσ_Index1++) {
+            i = ρσ_Index1;
+            (ρσ_expr_temp = ρσ_seed_state.key)[(typeof i === "number" && i < 0) ? ρσ_expr_temp.length + i : i] = i;
+        }
+        j = 0;
+        for (var ρσ_Index2 = 0; ρσ_Index2 < 256; ρσ_Index2++) {
+            i = ρσ_Index2;
+            j = (j + (ρσ_expr_temp = ρσ_seed_state.key)[(typeof i === "number" && i < 0) ? ρσ_expr_temp.length + i : i] + x.charCodeAt(i % x.length)) % 256;
+            ρσ_unpack = [(ρσ_expr_temp = ρσ_seed_state.key)[(typeof j === "number" && j < 0) ? ρσ_expr_temp.length + j : j],
+            (ρσ_expr_temp = ρσ_seed_state.key)[(typeof i === "number" && i < 0) ? ρσ_expr_temp.length + i : i]];
+            (ρσ_expr_temp = ρσ_seed_state.key)[(typeof i === "number" && i < 0) ? ρσ_expr_temp.length + i : i] = ρσ_unpack[0];
+            (ρσ_expr_temp = ρσ_seed_state.key)[(typeof j === "number" && j < 0) ? ρσ_expr_temp.length + j : j] = ρσ_unpack[1];
+        }
+    };
+    if (!seed.__defaults__) Object.defineProperties(seed, {
+        __defaults__ : {value: {x:(new Date).getTime()}},
+        __handles_kwarg_interpolation__ : {value: true},
+        __argnames__ : {value: ["x"]},
+        __module__ : {value: "random"}
+    });
+
+    seed();
+    function random() {
+        var n, m, i;
+        n = 0;
+        m = 1;
+        for (var ρσ_Index3 = 0; ρσ_Index3 < 8; ρσ_Index3++) {
+            i = ρσ_Index3;
+            n += ρσ_get_random_byte() * m;
+            m *= 256;
+        }
+        return n / 0x10000000000000000;
+    };
+    if (!random.__module__) Object.defineProperties(random, {
+        __module__ : {value: "random"}
+    });
+
+    function randrange() {
+        var start, stop, step, width, n;
+        if (arguments.length === 1) {
+            return randbelow(int(arguments[0]));
+        }
+        start = int(arguments[0]);
+        stop = int(arguments[1]);
+        if (arguments.length < 3) {
+            step = 1;
+        } else {
+            step = int(arguments[2]);
+        }
+        width = stop - start;
+        if (step === 1) {
+            if (width > 0) {
+                return start + randbelow(width);
+            }
+            throw new ValueError("empty range for randrange()");
+        }
+        if (step > 0) {
+            n = Math.floor((width + step - 1) / step);
+        } else if (step < 0) {
+            n = Math.floor((width + step + 1) / step);
+        } else {
+            throw new ValueError("zero step for randrange()");
+        }
+        if (n <= 0) {
+            throw new ValueError("empty range in randrange(" + ρσ_str.format("{}", start) + ", " + ρσ_str.format("{}", stop) + ", " + ρσ_str.format("{}", step) + ")");
+        }
+        return start + step * randbelow(n);
+    };
+    if (!randrange.__module__) Object.defineProperties(randrange, {
+        __module__ : {value: "random"}
+    });
+
+    function randint(a, b) {
+        return int(random() * (b - a + 1) + a);
+    };
+    if (!randint.__argnames__) Object.defineProperties(randint, {
+        __argnames__ : {value: ["a", "b"]},
+        __module__ : {value: "random"}
+    });
+
+    function uniform(a, b) {
+        return random() * (b - a) + a;
+    };
+    if (!uniform.__argnames__) Object.defineProperties(uniform, {
+        __argnames__ : {value: ["a", "b"]},
+        __module__ : {value: "random"}
+    });
+
+    function randbelow(n) {
+        return Math.floor(random() * n);
+    };
+    if (!randbelow.__argnames__) Object.defineProperties(randbelow, {
+        __argnames__ : {value: ["n"]},
+        __module__ : {value: "random"}
+    });
+
+    function choice(seq) {
+        if (seq.length > 0) {
+            return seq[ρσ_bound_index(randbelow(seq.length), seq)];
+        } else {
+            throw new IndexError;
+        }
+    };
+    if (!choice.__argnames__) Object.defineProperties(choice, {
+        __argnames__ : {value: ["seq"]},
+        __module__ : {value: "random"}
+    });
+
+    function shuffle() {
+        var x = ( 0 === arguments.length-1 && arguments[arguments.length-1] !== null && typeof arguments[arguments.length-1] === "object" && arguments[arguments.length-1] [ρσ_kwargs_symbol] === true) ? undefined : arguments[0];
+        var random_f = (arguments[1] === undefined || ( 1 === arguments.length-1 && arguments[arguments.length-1] !== null && typeof arguments[arguments.length-1] === "object" && arguments[arguments.length-1] [ρσ_kwargs_symbol] === true)) ? shuffle.__defaults__.random_f : arguments[1];
+        var ρσ_kwargs_obj = arguments[arguments.length-1];
+        if (ρσ_kwargs_obj === null || typeof ρσ_kwargs_obj !== "object" || ρσ_kwargs_obj [ρσ_kwargs_symbol] !== true) ρσ_kwargs_obj = {};
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "random_f")){
+            random_f = ρσ_kwargs_obj.random_f;
+        }
+        var j, ρσ_unpack, i;
+        for (var ρσ_Index4 = 0; ρσ_Index4 < x.length; ρσ_Index4++) {
+            i = ρσ_Index4;
+            j = Math.floor(random_f() * (i + 1));
+            ρσ_unpack = [x[(typeof j === "number" && j < 0) ? x.length + j : j], x[(typeof i === "number" && i < 0) ? x.length + i : i]];
+            x[(typeof i === "number" && i < 0) ? x.length + i : i] = ρσ_unpack[0];
+            x[(typeof j === "number" && j < 0) ? x.length + j : j] = ρσ_unpack[1];
+        }
+        return x;
+    };
+    if (!shuffle.__defaults__) Object.defineProperties(shuffle, {
+        __defaults__ : {value: {random_f:random}},
+        __handles_kwarg_interpolation__ : {value: true},
+        __argnames__ : {value: ["x", "random_f"]},
+        __module__ : {value: "random"}
+    });
+
+    function sample(population, k) {
+        var x, j, ρσ_unpack, i;
+        x = population.slice();
+        for (var ρσ_Index5 = population.length - 1; ρσ_Index5 > population.length - k - 1; ρσ_Index5-=1) {
+            i = ρσ_Index5;
+            j = Math.floor(random() * (i + 1));
+            ρσ_unpack = [x[(typeof j === "number" && j < 0) ? x.length + j : j], x[(typeof i === "number" && i < 0) ? x.length + i : i]];
+            x[(typeof i === "number" && i < 0) ? x.length + i : i] = ρσ_unpack[0];
+            x[(typeof j === "number" && j < 0) ? x.length + j : j] = ρσ_unpack[1];
+        }
+        return x.slice(population.length - k);
+    };
+    if (!sample.__argnames__) Object.defineProperties(sample, {
+        __argnames__ : {value: ["population", "k"]},
+        __module__ : {value: "random"}
+    });
+
+    ρσ_modules.random.ρσ_seed_state = ρσ_seed_state;
+    ρσ_modules.random.ρσ_get_random_byte = ρσ_get_random_byte;
+    ρσ_modules.random.seed = seed;
+    ρσ_modules.random.random = random;
+    ρσ_modules.random.randrange = randrange;
+    ρσ_modules.random.randint = randint;
+    ρσ_modules.random.uniform = uniform;
+    ρσ_modules.random.randbelow = randbelow;
+    ρσ_modules.random.choice = choice;
+    ρσ_modules.random.shuffle = shuffle;
+    ρσ_modules.random.sample = sample;
+})();
+
+async function __main__() {
+"use strict";
+    var display = canvas;
+    var scene = canvas();
+
+    function round(num, n=0) {return Number(num.toFixed(n))}
+    var arrow, compound, cone, curve, cylinder, extrusion, helix, points, pyramid, ring, sphere, simple_sphere, group, sleep, update, paths, shapes, vertex, triangle, quad, distant_light, local_light, attach_trail, attach_arrow, attach_light, pi, sin, cos, tan, asin, acos, atan, atan2, exp, log, pow, factorial, combin, button, radio, checkbox, slider, checkbox, text, download, radians, degrees, get_library, read_local_file
+    var version, print, arange, __name__, type, ρσ_ls, title, animation, toggle, dropheight, worldsize, max_dropsize, floor, _GS_1, cloud, pop_up, delta_t;
+    version = ρσ_list_decorate([ "3.2", "glowscript" ]);
+    Array.prototype['+'] = function(r) {return this.concat(r)}
+    Array.prototype['*'] = function(r) {return __array_times_number(this, r)}
+    window.__GSlang = "vpython";
+    print = GSprint;
+    arange = range;
+    __name__ = "__main__";
+    type = pytype;
+    var strings = ρσ_modules.pythonize.strings;
+
+    strings();
+    var uniform = ρσ_modules.random.uniform;
+
+    "12";
+    title = "Splatting raindrops\n\n&#x2022; Original version written by Lenore Horner, 2009\n&#x2022; Refactored by <a href=\"https://github.com/zhendrikse/\">Zeger Hendrikse<\/a>\n&#x2022; Reset the scene by reloading the browser. \n&#x2022; Click mouse button to start\n\n";
+    "14";
+    animation = ρσ_interpolate_kwargs.call(this, canvas, [ρσ_desugar_kwargs({title: title})]);
+    "16";
+    toggle = 0;
+    "18";
+    function Raindrop() {;
+    }
+    Raindrop.prototype.__init__ = async function __init__(cloud_size, drop_size, cloud_height) {
+        var self = this;
+        "20";
+        self._droplet = ρσ_interpolate_kwargs.call(this, ellipsoid, [ρσ_desugar_kwargs({length: drop_size, width: drop_size, height: drop_size, color: color.cyan})]);
+        "21";
+        self._velocity = vec(0, 0, 0);
+        "22";
+        self._acceleration = vec(0, 0, 0);
+        "23";
+        self._droplet.pos = vector((await uniform(1["-u"]()["*"](cloud_size), cloud_size)), cloud_height, (await uniform(1["-u"]()["*"](cloud_size), cloud_size)));
+        "24";
+        self._cloud_height = cloud_height;
+    };
+    if (!Raindrop.prototype.__init__.__argnames__) Object.defineProperties(Raindrop.prototype.__init__, {
+        __argnames__ : {value: ["cloud_size", "drop_size", "cloud_height"]},
+        __module__ : {value: null}
+    });
+    Raindrop.__argnames__ = Raindrop.prototype.__init__.__argnames__;
+    Raindrop.__handles_kwarg_interpolation__ = Raindrop.prototype.__init__.__handles_kwarg_interpolation__;
+    Raindrop.prototype.overlaps_with = async function overlaps_with(other) {
+        var self = this;
+        "27";
+        return mag(self._droplet.pos["-"](1["*"](other._droplet.pos)))["<"](self._droplet.length["+"](other._droplet.length)["/"](2));
+    };
+    if (!Raindrop.prototype.overlaps_with.__argnames__) Object.defineProperties(Raindrop.prototype.overlaps_with, {
+        __argnames__ : {value: ["other"]},
+        __module__ : {value: null}
+    });
+    Raindrop.prototype.modify_position = async function modify_position(new_position) {
+        var self = this;
+        "30";
+        self._droplet.pos = new_position;
+    };
+    if (!Raindrop.prototype.modify_position.__argnames__) Object.defineProperties(Raindrop.prototype.modify_position, {
+        __argnames__ : {value: ["new_position"]},
+        __module__ : {value: null}
+    });
+    Raindrop.prototype._has_hit_the_ground = async function _has_hit_the_ground() {
+        var self = this;
+        "33";
+        return self._droplet.pos.y["<"](1["-u"]()["*"](self._cloud_height)["+"](self._droplet.height)["+"](.5));
+    };
+    if (!Raindrop.prototype._has_hit_the_ground.__module__) Object.defineProperties(Raindrop.prototype._has_hit_the_ground, {
+        __module__ : {value: null}
+    });
+    Raindrop.prototype._fall_down = async function _fall_down(dt) {
+        var self = this;
+        var ρσ_ls, constant, volume, accel;
+        "36";
+        constant = .5;
+        "38";
+        self._velocity.y = self._velocity.y["+"](self._acceleration.y["*"](dt));
+        "39";
+        volume = Math.pow(self._droplet.width, 2)["*"](self._droplet.height);
+        "40";
+        accel = sign(self._velocity.y)["*"](constant)["*"](Math.pow(self._droplet.width, 2))["*"](Math.pow(self._velocity.y, 2))["/"](Math.pow(volume, toggle));
+        "43";
+        self._acceleration.y = 1["-u"]()["*"](9.8)["-"](1["*"](accel));
+    };
+    if (!Raindrop.prototype._fall_down.__argnames__) Object.defineProperties(Raindrop.prototype._fall_down, {
+        __argnames__ : {value: ["dt"]},
+        __module__ : {value: null}
+    });
+    Raindrop.prototype._splat = async function _splat() {
+        var self = this;
+        "46";
+        if (self._droplet.height[">"](.09)) {
+            "47";
+            self._velocity.y = 0;
+            "49";
+            self._droplet.height = .09;
+            "50";
+            self._droplet.length = self._droplet.width = Math.pow(self._droplet.width, 1.5);
+            "51";
+            self._droplet.pos.y = 1["-u"]()["*"](self._cloud_height)["+"](.5);
+        }
+    };
+    if (!Raindrop.prototype._splat.__module__) Object.defineProperties(Raindrop.prototype._splat, {
+        __module__ : {value: null}
+    });
+    Raindrop.prototype.fall = async function fall(dt) {
+        var self = this;
+        "54";
+        self._droplet.pos=self._droplet.pos["+"](self._velocity["*"](dt));
+        "55";
+        if ((await self._has_hit_the_ground())) {
+            "56";
+            (await self._splat());
+            "57";
+        } else {
+            "58";
+            (await self._fall_down(dt));
+        }
+    };
+    if (!Raindrop.prototype.fall.__argnames__) Object.defineProperties(Raindrop.prototype.fall, {
+        __argnames__ : {value: ["dt"]},
+        __module__ : {value: null}
+    });
+    Raindrop.prototype.__repr__ = async function __repr__() {
+                return "<"["+"](__name__)["+"](".")["+"](this.constructor.name)["+"](" #")["+"](this.ρσ_object_id)["+"](">");
+    };
+    Raindrop.prototype.__str__ = async function __str__() {
+        return this.__repr__();
+    };
+    Object.defineProperty(Raindrop.prototype, "__bases__", {value: []});
+
+
+
+
+
+
+
+
+    "60";
+    function Cloud() {;
+    }
+    Cloud.prototype.__init__ = async function __init__() {
+        var self = this;
+        var size = ( 0 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true) ? undefined : arguments[0];
+        var height = (arguments[1] === undefined || ( 1 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true)) ? __init__.__defaults__.height : arguments[1];
+        var raindrops_amount = (arguments[2] === undefined || ( 2 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true)) ? __init__.__defaults__.raindrops_amount : arguments[2];
+        var max_dropsize = (arguments[3] === undefined || ( 3 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true)) ? __init__.__defaults__.max_dropsize : arguments[3];
+        var ρσ_kwargs_obj = arguments[arguments.length["-"](1)];
+        if (ρσ_kwargs_obj === null || typeof ρσ_kwargs_obj !== "object" || ρσ_kwargs_obj [ρσ_kwargs_symbol] !== true) ρσ_kwargs_obj = {};
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "height")){
+            height = ρσ_kwargs_obj.height;
+        }
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "raindrops_amount")){
+            raindrops_amount = ρσ_kwargs_obj.raindrops_amount;
+        }
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "max_dropsize")){
+            max_dropsize = ρσ_kwargs_obj.max_dropsize;
+        }
+        var ρσ_ls, _GS_1, i;
+        "62";
+        self._raindrops = ρσ_list_decorate([]);
+        "63";
+        self._height = height;
+        "64";
+        for (var ρσ_Index6 = 0; ρσ_Index6["<"](raindrops_amount); ρσ_Index6++) {
+            i = ρσ_Index6;
+            "65";
+            _GS_1 = new Raindrop;
+            ρσ_interpolate_kwargs.call(_GS_1, _GS_1.__init__, [ρσ_desugar_kwargs({cloud_size: size, drop_size: (await uniform(.1, max_dropsize)), cloud_height: height})]);
+            self._raindrops=self._raindrops["+"](ρσ_list_decorate([ _GS_1 ]));
+            "66";
+            (await self._check_for_overlap(i, size));
+        }
+    };
+    if (!Cloud.prototype.__init__.__defaults__) Object.defineProperties(Cloud.prototype.__init__, {
+        __defaults__ : {value: {height:10, raindrops_amount:200, max_dropsize:1}},
+        __handles_kwarg_interpolation__ : {value: true},
+        __argnames__ : {value: ["size", "height", "raindrops_amount", "max_dropsize"]},
+        __module__ : {value: null}
+    });
+    Cloud.__argnames__ = Cloud.prototype.__init__.__argnames__;
+    Cloud.__handles_kwarg_interpolation__ = Cloud.prototype.__init__.__handles_kwarg_interpolation__;
+    Cloud.prototype._check_for_overlap = async function _check_for_overlap(i, size) {
+        var self = this;
+        var ρσ_ls, check, j, new_position;
+        "70";
+        check = 1["-u"]()["*"](1);
+        "71";
+        while (check["<"](0)) {
+            "72";
+            check = 0;
+            "73";
+            for (var ρσ_Index7 = 0; ρσ_Index7["<"](i); ρσ_Index7++) {
+                j = ρσ_Index7;
+                "74";
+                if ((await ρσ_getitem(self._raindrops, i).overlaps_with(ρσ_getitem(self._raindrops, j)))) {
+                    "75";
+                    check = check["-"](1["*"](1));
+                    "76";
+                }
+            }
+            if (check["<"](0)) {
+                "77";
+                new_position = vector((await uniform(1["-u"]()["*"](size), size)), self._height, (await uniform(1["-u"]()["*"](size), size)));
+                "78";
+                (await ρσ_getitem(self._raindrops, i).modify_position(new_position));
+            }
+        }
+    };
+    if (!Cloud.prototype._check_for_overlap.__argnames__) Object.defineProperties(Cloud.prototype._check_for_overlap, {
+        __argnames__ : {value: ["i", "size"]},
+        __module__ : {value: null}
+    });
+    Cloud.prototype.let_it_rain = async function let_it_rain(dt) {
+        var self = this;
+        var ρσ_ls, raindrop;
+        "81";
+        var ρσ_Iter8 = self._raindrops;
+        ρσ_Iter8 = ((typeof ρσ_Iter8[Symbol.iterator] === "function") ? (ρσ_Iter8 instanceof Map ? ρσ_Iter8.keys() : ρσ_Iter8) : Object.keys(ρσ_Iter8));
+        for (var ρσ_Index8 of ρσ_Iter8) {
+            raindrop = ρσ_Index8;
+            "82";
+            (await raindrop.fall(dt));
+        }
+    };
+    if (!Cloud.prototype.let_it_rain.__argnames__) Object.defineProperties(Cloud.prototype.let_it_rain, {
+        __argnames__ : {value: ["dt"]},
+        __module__ : {value: null}
+    });
+    Cloud.prototype.__repr__ = async function __repr__() {
+                return "<"["+"](__name__)["+"](".")["+"](this.constructor.name)["+"](" #")["+"](this.ρσ_object_id)["+"](">");
+    };
+    Cloud.prototype.__str__ = async function __str__() {
+        return this.__repr__();
+    };
+    Object.defineProperty(Cloud.prototype, "__bases__", {value: []});
+
+
+
+
+    "84";
+    dropheight = 10;
+    "85";
+    worldsize = sqrt(200)["*"](2);
+    "86";
+    max_dropsize = 1;
+    "88";
+    floor = ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({length: worldsize, height: .5, width: worldsize, pos: vec(0, 1["-u"]()["*"](dropheight), 0), color: color.green})]);
+    "89";
+    _GS_1 = new Cloud;
+    (await _GS_1.__init__(worldsize["/"](2)["-"](1["*"](max_dropsize))));
+    cloud = _GS_1;
+    "91";
+    pop_up = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pos: vec(0, 0, 0), text: "Click mouse to start", box: false, color: color.yellow})]);
+    "92";
+    (await animation.waitfor("click"));
+    "93";
+    pop_up.visible = false;
+    "95";
+    delta_t = .01;
+    "96";
+    while (1) {
+        "97";
+        (await rate(1["/"](delta_t)));
+        "98";
+        (await cloud.let_it_rain(delta_t));
+    }
+};
+if (!__main__.__module__) Object.defineProperties(__main__, {
+    __module__ : {value: null}
+});
+
+;$(function(){ window.__context = { glowscript_container: $("#glowscript").removeAttr("id") }; __main__() })})()
+// END JAVASCRIPT
+
+//--><!]]></script>
+</div>
