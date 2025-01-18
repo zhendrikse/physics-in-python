@@ -114,7 +114,7 @@ $\begin{cases} x &amp; = r\cos(\phi) \\ y &amp; = r\sin(\phi)) \\ z &amp; = (r^2
 <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">zz</span> <span class="o">=</span> <span class="n">torus</span><span class="p">()</span>
 <span class="n">plot</span> <span class="o">=</span> <span class="n">Plot3D</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">zz</span><span class="p">)</span>
 </code></pre></div></div>
-</details>
+
 
 <p>Similarly, a <a href="https://www.mattiagiuri.com/2020/11/20/plotting-a-torus-with-python/">torus</a> 
 can be generated (select the torus from the drop-down menu in the application):</p>
