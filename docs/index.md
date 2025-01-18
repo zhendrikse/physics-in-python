@@ -48,6 +48,35 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
   </a>
 </figure>
 
+<p/>
+
+<details>
+  <summary><a>&dArr; Python code showing use of np.meshgrid() function &dArr;</a></summary>
+
+The formula for the above image is given by:
+
+$$\psi(x, y, t) = \sin(\omega t)\sqrt{x^2+y^2}$$
+
+<p>The following Python code was used to plot the graph belonging to this multivariate function:<br/></p>
+
+```
+def sine_sqrt():
+    resolution = 50
+    x = y = np.linspace(-2 * pi, 2 * pi, resolution)
+    xx, yy = np.meshgrid(x, y)
+    x_2_plus_y_2 = xx.multiply(xx).add(yy.multiply(yy))
+    zz = np.sin(np.sqrt(x_2_plus_y_2)).multiply(5)
+
+    z_min = -9
+    z_max = 9
+    return xx, yy, zz, z_min, z_max
+
+plot = Plot3D(X, Y, ,Z)
+```
+</details>
+
+<p/>
+
 #### Polar coordinates
 <hr/>
 
@@ -60,6 +89,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
   </a>&nbsp;&nbsp;&nbsp;
 </figure>
 
+<p/>
 
 <details>
   <summary><a>&dArr; Python code showing use of np.meshgrid() function with polar coordinates &dArr;</a></summary>
@@ -84,7 +114,8 @@ def mexican_hat():
 plot = Plot3D(X, Y, ,Z)
 ```
 
-<p>Similarly, a torus can be generated (select the torus from the drop-down menu in the application):</p>
+<p>Similarly, a <a href="https://www.mattiagiuri.com/2020/11/20/plotting-a-torus-with-python/">torus</a> 
+can be generated (select the torus from the drop-down menu in the application):</p>
 
 $\begin{cases} x &amp; = (c + a \cos(v))\cdot\cos(u) \\ y &amp; = (c + a \cos(v))\cdot\sin(u) \\ z &amp; = a \sin(v) \end{cases}$
 
@@ -92,7 +123,7 @@ $\begin{cases} x &amp; = (c + a \cos(v))\cdot\cos(u) \\ y &amp; = (c + a \cos(v)
 
 ```
 def torus():
-    # https://www.mattiagiuri.com/2020/11/20/plotting-a-torus-with-python/
+    # 
 
     resolution = 75
     c = 3
