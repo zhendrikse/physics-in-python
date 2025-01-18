@@ -40,10 +40,10 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 <hr/>
 
 <figure>
-  <a href="glowscript/3dplots.html">
+  <a href="glowscript/NumpyMatplot3D.html">
     <img alt="Multivariate functions" width="45%" height="45%" src="./images/3d_plot.png" title="Click to animate"/>
   </a>&nbsp;&nbsp;&nbsp;
-  <a href="glowscript/Complexfunctionplot">
+  <a href="glowscript/Complexfunctionplot.html">
     <img alt="Complex functions" width="45%" height="45%" src="./images/complex_function_plot.png" title="Click to animate"/>
   </a>
 </figure>
@@ -55,7 +55,58 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">
     <img alt="Polar coordinates" width="49%" height="49%" src="./images/polar_coordinates.png" title="Click to animate"/>
   </a>
+  <a href="glowscript/NumpyMatplot3D.html">
+    <img alt="Polar coordinates" width="45%" height="45%" src="./images/mexican_hat.png" title="Click to animate"/>
+  </a>&nbsp;&nbsp;&nbsp;
 </figure>
+
+
+<details>
+  <summary><a>&dArr; Python code showing use of <code>np.meshgrid()</code> with polar coordinates &dArr;</a></summary>
+
+<p>The 
+<a href="https://matplotlib.org/stable/gallery/mplot3d/surface3d_radial.html#sphx-glr-gallery-mplot3d-surface3d-radial-py">mexican hat</a> 
+is most easily obtained by using polar coordinates:</p>
+
+$\begin{cases} x &amp; = r\cos(\phi) \\ y &amp; = r\sin(\phi)) \\ z &amp; = (r^2 - 1)^2 \end{cases}$
+
+<p>This leads to the following Python code</p>
+
+```python
+def mexican_hat():
+    r = np.linspace(0, 1.25, 50)
+    p = np.linspace(-pi, 1.05 * pi, 50)
+    R, P = np.meshgrid(r, p)
+    Z = R.multiply(R).subtract(1).multiply(R.multiply(R).subtract(1))
+    X, Y = np.cos(P).multiply(R), np.sin(P).multiply(R)
+    return X, Y, Z
+
+plot = Plot3D(X, Y, ,Z)
+```
+
+<p>Similarly, a torus can be generated (select the torus from the drop-down menu in the application):</p>
+
+$\\begin{cases} x &amp; = (c + a \cos(v))\cdot\cos(u) \\ y &amp; = (c + a \cos(v))\cdot\sin(u) \\ z &amp; = a \sin(v) \end{cases}$
+
+<p>This leads to the following Python code</p>
+
+```python 
+def torus():
+    # https://www.mattiagiuri.com/2020/11/20/plotting-a-torus-with-python/
+
+    resolution = 75
+    c = 3
+    a = 1
+    xx = yy = np.linspace(-pi, 1.05 * pi, resolution)
+    U, V = np.meshgrid(xx, yy)
+    X = (np.cos(V).multiply(a).add(c)).multiply(np.cos(U))
+    Y = (np.cos(V).multiply(a).add(c)).multiply(np.sin(U))
+    Z = np.sin(V).multiply(a)
+    return X, Y, Z
+
+plot = Plot3D(X, Y, ,Z)
+```
+</details>
 
 # Nature models
 
