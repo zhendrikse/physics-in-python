@@ -102,16 +102,7 @@ $\begin{cases} x &amp; = r\cos(\phi) \\ y &amp; = r\sin(\phi)) \\ z &amp; = (r^2
 
 <p>This leads to the following Python code<br/></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def mexican_hat():
-    r = np.linspace(0, 1.25, 50)
-    p = np.linspace(-pi, 1.05 * pi, 50)
-    R, P = np.meshgrid(r, p)
-    Z = R.multiply(R).subtract(1).multiply(R.multiply(R).subtract(1))
-    X, Y = np.cos(P).multiply(R), np.sin(P).multiply(R)
-    return X, Y, Z
 
-plot = Plot3D(X, Y, Z)
-</code></pre></div></div>
 
 <p>Similarly, a <a href="https://www.mattiagiuri.com/2020/11/20/plotting-a-torus-with-python/">torus</a> 
 can be generated (select the torus from the drop-down menu in the application):</p>
@@ -120,33 +111,30 @@ $\begin{cases} x &amp; = (c + a \cos(v))\cdot\cos(u) \\ y &amp; = (c + a \cos(v)
 
 <p>This leads to the following Python code<br/></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def torus():
-def torus():
-    c = 3
-    a = 1
-    xx = yy = np.linspace(-pi, 1.05 * pi, 75)
-    U, V = np.meshgrid(xx, yy)
-    X = (np.cos(V).multiply(a).add(c)).multiply(np.cos(U))
-    Y = (np.cos(V).multiply(a).add(c)).multiply(np.sin(U))
-    Z = np.sin(V).multiply(a)
-    return X, Y, Z
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">torus</span><span class="p">():</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">xx</span> <span class="o">=</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">pi</span><span class="p">,</span> <span class="mf">1.05</span> <span class="o">*</span> <span class="n">pi</span><span class="p">,</span> <span class="mi">75</span><span class="p">)</span>
+    <span class="n">U</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">cos</span><span class="p">(</span><span class="n">V</span><span class="p">).</span><span class="n">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">).</span><span class="n">add</span><span class="p">(</span><span class="n">c</span><span class="p">)).</span><span class="n">multiply</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">cos</span><span class="p">(</span><span class="n">U</span><span class="p">))</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">cos</span><span class="p">(</span><span class="n">V</span><span class="p">).</span><span class="n">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">).</span><span class="n">add</span><span class="p">(</span><span class="n">c</span><span class="p">)).</span><span class="n">multiply</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="n">U</span><span class="p">))</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="n">V</span><span class="p">).</span><span class="n">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span>
 
-plot = Plot3D(X, Y ,Z)
+<span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">zz</span> <span class="o">=</span> <span class="n">torus</span><span class="p">()</span>
+<span class="n">plot</span> <span class="o">=</span> <span class="n">Plot3D</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">zz</span><span class="p">)</span>
 </code></pre></div></div>
-
 </details>
 
 <p/>
 
 ```python
-def torus():
-    c = 3
-    a = 1
-    xx = yy = np.linspace(-pi, 1.05 * pi, 75)
-    U, V = np.meshgrid(xx, yy)
-    X = (np.cos(V).multiply(a).add(c)).multiply(np.cos(U))
-    Y = (np.cos(V).multiply(a).add(c)).multiply(np.sin(U))
-    Z = np.sin(V).multiply(a)
+def mexican_hat():
+    r = np.linspace(0, 1.25, 50)
+    p = np.linspace(-pi, 1.05 * pi, 50)
+    R, P = np.meshgrid(r, p)
+    Z = R.multiply(R).subtract(1).multiply(R.multiply(R).subtract(1))
+    X, Y = np.cos(P).multiply(R), np.sin(P).multiply(R)
     return X, Y, Z
 
 xx, yy, zz = torus()
