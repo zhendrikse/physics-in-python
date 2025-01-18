@@ -62,7 +62,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 
 
 <details>
-  <summary><a>&dArr; Python code showing use of <code>np.meshgrid()</code> with polar coordinates &dArr;</a></summary>
+  <summary><a>&dArr; Python code showing use of np.meshgrid() function with polar coordinates &dArr;</a></summary>
 
 <p>The 
 <a href="https://matplotlib.org/stable/gallery/mplot3d/surface3d_radial.html#sphx-glr-gallery-mplot3d-surface3d-radial-py">mexican hat</a> 
@@ -70,7 +70,7 @@ is most easily obtained by using polar coordinates:</p>
 
 $\begin{cases} x &amp; = r\cos(\phi) \\ y &amp; = r\sin(\phi)) \\ z &amp; = (r^2 - 1)^2 \end{cases}$
 
-<p>This leads to the following Python code</p>
+<p>This leads to the following Python code<br/></p>
 
 ```
 def mexican_hat():
@@ -88,7 +88,7 @@ plot = Plot3D(X, Y, ,Z)
 
 $\begin{cases} x &amp; = (c + a \cos(v))\cdot\cos(u) \\ y &amp; = (c + a \cos(v))\cdot\sin(u) \\ z &amp; = a \sin(v) \end{cases}$
 
-<p>This leads to the following Python code</p>
+<p>This leads to the following Python code<br/></p>
 
 ```
 def torus():
