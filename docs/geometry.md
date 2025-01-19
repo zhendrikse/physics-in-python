@@ -4,7 +4,7 @@
   <a href="glowscript/Shapes.html">
     <img alt="Dini&apos;s spiral" src="./images/dini_spiral.png" title="Click to animate"/>
   </a>
-  <figcaption>Dini&apos;s spiral.</figcaption>
+  <figcaption>Dini&apos;s spiral, Dini&apos;s surface, or twisted pseudo-sphere, which is characterized by a surface of constant (negative) curvature and is named after Ulisse Dini.</figcaption>
 </figure>
 <figure style="float: right; width: 50%; text-align: center">
   <a href="glowscript/Shapes.html">

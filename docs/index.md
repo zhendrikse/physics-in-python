@@ -194,7 +194,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
   <a href="glowscript/Raindrops.html">
     <img alt="Raindrops" src="./images/raindrops.png" title="Click to animate"/>
   </a>
-  <figcaption>Falling raindrops that splat when hitting the ground.</figcaption>
+  <figcaption>There are holes in the sky. Where the rain gets in. But they're ever so small. That's why the rain is thin &mdash; Spike Milligan.</figcaption>
 </figure>
 
 <p><br clear="all"/></p>
@@ -207,7 +207,7 @@ The code pertaining to the demos in this section is available under the
 [quantum tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Quantum/)
 on [glowscript.org](https://glowscript.org).
 
-### Visualizing plane waves $\psi(x, t) = A \cdot e^{i(k x - \omega t)}$
+### Visualizing plane waves $\psi(x, t) = A \cdot e^{i(k x - \omega t)}$ &amp; spherical harmonics
 <hr/>
 
 <figure style="float: leftt; width: 50%; text-align: center">
