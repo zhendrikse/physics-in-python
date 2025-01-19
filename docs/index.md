@@ -210,15 +210,20 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 ### Flocking birds &amp; falling raindrops
 <hr/>
 
-
-<figure>
+<figure style="float: left; width: 50%; text-align: center">
   <a href="glowscript/Flockingbirds.html">
     <img alt="Flocking birds" width="53%" height="53%" src="./images/flocking_birds.png" title="Click to animate"/>
   </a>
+  <figcaption>Simulation of a flock of birds.</figcaption>
+</figure>
+<figure style="float: right; width: 50%; text-align: center">
   <a href="glowscript/Raindrops.html">
     <img alt="Raindrops" width="45%" height="45%" src="./images/raindrops.png" title="Click to animate"/>
   </a>
+  <figcaption>Falling raindrops that splat when hitting the ground.</figcaption>
 </figure>
+
+<p><br clear="all"/></p>
 
 
 <a name="quantum"></a>
