@@ -255,7 +255,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
   <a href="glowscript/Raindrops.html">
     <img alt="Raindrops" src="./images/raindrops.png" title="Click to animate"/>
   </a>
-  <figcaption>Falling raindrops that splat when hitting the ground.</figcaption>
+  <figcaption>There are holes in the sky. Where the rain gets in. But they're ever so small. That's why the rain is thin &mdash; Spike Milligan.</figcaption>
 </figure>
 
 <p><br clear="all"/></p>
