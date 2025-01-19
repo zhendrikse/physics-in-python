@@ -1,9 +1,9 @@
 <blockquote>
-Philosophy is written in this grand book &mdash; I mean universe &mdash; which stands continuously open to our gaze, 
-but which cannot be understood unless one first learns to comprehend the language in which it is written. 
-It is written in the language of mathematics, and its characters are triangles, circles and other geometric figures, 
-without which it is humanly impossible to understand a single word of it; without these, one is wandering about 
-in a dark labyrinth. Galileo (1623).
+It doesn't seem to me that this fantastically marvelous universe, this tremendous range of time 
+and space and different kinds of animals, and all the different planets, and all these atoms 
+with all their motions, and so on, all this complicated thing can merely be a stage so that 
+God can watch human beings struggle for good and evil - which is the view that religion has. 
+The stage is too big for the drama. ― Richard P. Feynman 
 </blockquote>
 
 <p><br clear="all"/></p>
