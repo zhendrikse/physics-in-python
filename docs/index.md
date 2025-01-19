@@ -77,7 +77,7 @@ $$\psi(x, y, t) = \sqrt{x^2+y^2}$$
 <a href="https://matplotlib.org/stable/gallery/mplot3d/surface3d_radial.html#sphx-glr-gallery-mplot3d-surface3d-radial-py">mexican hat</a> 
 is most easily obtained by using polar coordinates:</p>
 
-$\begin{pmatrix} x \\ y \\ z \end{pmatrix}=\begin{pmatrix} r\cos(\phi) \\ \sin(\phi)) \\ (r^2 - 1)^2 \end{pmatrix}$
+$$\begin{pmatrix} x \\ y \\ z \end{pmatrix}=\begin{pmatrix} r\cos(\phi) \\ \sin(\phi)) \\ (r^2 - 1)^2 \end{pmatrix}$$
 
 <p><br/>This leads to the following Python code<br/></p>
 
@@ -98,7 +98,7 @@ $\begin{pmatrix} x \\ y \\ z \end{pmatrix}=\begin{pmatrix} r\cos(\phi) \\ \sin(\
 <p>Similarly, many different geometric shapes such as a <a href="https://www.mattiagiuri.com/2020/11/20/plotting-a-torus-with-python/">torus</a> 
 can be generated (select the torus from the drop-down menu in the application):</p>
 
-$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\cos(u) \\ (c + a \cos(v))\cdot\sin(u) \\ a \sin(v) \end{pmatrix}$
+$$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\cos(u) \\ (c + a \cos(v))\cdot\sin(u) \\ a \sin(v) \end{pmatrix}$$
 
 <p><br/>This leads to the following Python code<br/></p>
 
@@ -119,29 +119,6 @@ $\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\c
 
 </details>
 
-<p><p>
-
-<details>
-  <summary><a>&dArr; Click here to open the Math Art image gallery &dArr;</a></summary>
-
-<figure>
-  <a href="glowscript/NumpyMatplot3D.html">
-    <img alt="Dini&apos;s spiral" width="48%" height="48%" src="./images/dini_spiral.png" title="Click to animate"/>
-  </a>
-  <a href="glowscript/NumpyMatplot3D.html">
-    <img alt="Mexican hat" width="48%" height="48%" src="./images/mexican_hat.png" title="Click to animate"/>
-  </a>
-</figure>
-<figure>
-  <a href="glowscript/NumpyMatplot3D.html">
-    <img alt="Twisted torus" width="48%" height="48%" src="./images/twisted_torus.png" title="Click to animate"/>
-  </a>
-  <a href="glowscript/NumpyMatplot3D.html">
-    <img alt="Bubbles shape" width="48%" height="48%" src="./images/bubbles.png" title="Click to animate"/>
-  </a>
-</figure>
-
-</details>
 
 ### Polar coordinates
 <hr/>
