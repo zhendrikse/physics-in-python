@@ -41,13 +41,13 @@ the days per season.
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw">
     <img alt="Kepler's laws" src="./images/keplers_law.png" title="Click to animate"/>
   </a>
-  <figcaption><a href="https://en.wikipedia.org/wiki/Kepler%27s_laws_of_planetary_motion">Kepler&apos;s laws of planetary motion.</a></figcaption>
+  <figcaption><a href="https://en.wikipedia.org/wiki/Kepler%27s_laws_of_planetary_motion">Kepler&apos;s laws</a> of planetary motion.</figcaption>
 </figure>
 <figure style="float: right; width: 50%; text-align: center">
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Threebody">
     <img alt="Three body problem" src="./images/three_body.png" title="Click to animate"/>
   </a>
-  <figcaption><a href="https://en.wikipedia.org/wiki/Three-body_problem">The three-body problem</a>.</figcaption>
+  <figcaption>The well-known <a href="https://en.wikipedia.org/wiki/Three-body_problem">three-body problem</a>.</figcaption>
 </figure>
 
 <p><br clear="all"/></p>
