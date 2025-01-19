@@ -126,16 +126,18 @@ $\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\c
 
 <figure>
   <a href="glowscript/NumpyMatplot3D.html">
-    <img alt="Dini&apos;s spiral" width="45%" height="45%" src="./images/dini_spiral.png" title="Click to animate"/>
+    <img alt="Dini&apos;s spiral" width="48%" height="48%" src="./images/dini_spiral.png" title="Click to animate"/>
   </a>
   <a href="glowscript/NumpyMatplot3D.html">
-    <img alt="Mexican hat" width="45%" height="45%" src="./images/mexican_hat.png" title="Click to animate"/>
-  </a>&nbsp;&nbsp;&nbsp;
+    <img alt="Mexican hat" width="48%" height="48%" src="./images/mexican_hat.png" title="Click to animate"/>
+  </a>&nbsp;&nb
+</figure>
+<figure>
   <a href="glowscript/NumpyMatplot3D.html">
-    <img alt="Twisted torus" width="45%" height="45%" src="./images/twisted_torus.png" title="Click to animate"/>
+    <img alt="Twisted torus" width="48%" height="48%" src="./images/twisted_torus.png" title="Click to animate"/>
   </a>
   <a href="glowscript/NumpyMatplot3D.html">
-    <img alt="Bubbles shape" width="45%" height="45%" src="./images/bubbles.png" title="Click to animate"/>
+    <img alt="Bubbles shape" width="48%" height="48%" src="./images/bubbles.png" title="Click to animate"/>
   </a>&nbsp;&nbsp;&nbsp;
 </figure>
 
