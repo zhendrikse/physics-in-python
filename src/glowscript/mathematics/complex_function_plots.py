@@ -17,13 +17,14 @@ exp_z_title = "<h2>$\\psi(z,t) = e^{-z^2}" + title_end
 sqrt_z_title = "<h2>$\\psi(z,t) = \\sqrt{z}" + title_end
 
 caption = """
-&#x2022; Based on <a href="https://www.glowscript.org/#/user/GlowScriptDemos/folder/Examples/program/Plot3D">Plot3D</a>
-&#x2022; Rewritten by <a href="https://github.com/zhendrikse/physics-in-python">Zeger Hendrikse</a> to include: 
+&#x2022; Source code can be found <a href="https://github.com/zhendrikse/physics-in-python/blob/main/src/glowscript/mathematics/complex_function_plots.py">here</a>
+&#x2022; Inspired on <a href="https://www.glowscript.org/#/user/GlowScriptDemos/folder/Examples/program/Plot3D">Plot3D</a> by adding the following features: 
   &#x2022; Numpy linspace and meshgrid syntax
   &#x2022; Configurable base and mesh background
-  &#x2022; Complex functions and numbers
-"""
+  &#x2022; Non-uniform coloring
+  &#x2022; Complex numbers and functions
 
+"""
 animation = canvas(align="top", width=600, height=600, center=vec(0, 5, 0),
                    forward=vec(-0.9, -0.5, -.8), title=z_2_title + "\n", range=75)
 
@@ -107,43 +108,43 @@ class Base:
             item_.visible = False
 
     def _make_tick_marks(self, base_, xx, yy, zz, delta_, tick_marks_color, axis_color, scale, num_tick_marks):
-        increment = (yy.get(-1, -1) - yy.get(0, 0)) / num_tick_marks
-        start_value = yy.get(0, 0)
-        for i in range(0, np.len(base_[0]), 2):
-            label_text = str(math.round(start_value + i * increment, 2))
-            pos = x_hat * base_[0].get(i) + z_hat * (base_[2].get(-1) + 7 * scale)
-            a_label = text(pos=pos, text=label_text, height=5 * scale, billboard=True, color=tick_marks_color)
-            self._tick_marks.append(a_label)
-
         increment = (xx.get(-1, -1) - xx.get(0, 0)) / num_tick_marks
         start_value = xx.get(0, 0)
         for i in range(1, np.len(base_[2]), 2):
-            label_text = str(math.round(start_value + i * increment, 2))
+            label_text = '{:1.2f}'.format(start_value + i * increment, 2)
             pos = z_hat * base_[2].get(i) + x_hat * (base_[0].get(-1) + 5 * scale)
-            a_label = text(pos=pos, text=label_text, height=5 * scale, billboard=True, color=tick_marks_color)
-            self._tick_marks.append(a_label)
+            x_label = text(pos=pos, text=label_text, height=5 * scale, billboard=True, color=tick_marks_color)
+            self._tick_marks.append(x_label)
+
+        increment = (yy.get(-1, -1) - yy.get(0, 0)) / num_tick_marks
+        start_value = yy.get(0, 0)
+        for i in range(0, np.len(base_[0]), 2):
+            label_text = '{:1.2f}'.format(start_value + i * increment, 2)
+            pos = x_hat * base_[0].get(i) + z_hat * (base_[2].get(-1) + 15 * scale)
+            y_label = text(pos=pos, text=label_text, height=5 * scale, billboard=True, color=tick_marks_color)
+            self._tick_marks.append(y_label)
 
         increment = (zz.get(-1, -1) - zz.get(0, 0)) / num_tick_marks
         start_value = zz.get(0, 0)
-        for i in range(0, np.len(base_[1]), 2):
-            label_text = str(math.round(start_value + i * increment, 2))
-            pos = y_hat * base_[1].get(i) + z_hat * (base_[2].get(-1) + 7 * scale)
-            a_label = text(pos=pos, text=label_text, height=5 * scale, billboard=True, color=tick_marks_color)
-            self._tick_marks.append(a_label)
+        for i in range(1, np.len(base_[1]), 2):
+            label_text = '{:1.2f}'.format(start_value + i * increment, 2)
+            pos = y_hat * base_[1].get(i) + z_hat * (base_[2].get(-1) + 15 * scale)
+            z_label = text(pos=pos, text=label_text, height=5 * scale, billboard=True, color=tick_marks_color)
+            self._tick_marks.append(z_label)
 
         pos = x_hat * (base_[0].get(-1) + 2 * delta_[0]) - vec(0, scale, -30)
-        l1 = text(pos=pos, text="Im(z)", color=axis_color, height=scale * 4, billboard=True, emissive=True)
-        pos = z_hat * (base_[2].get(-1) + 2 * delta_[2]) + y_hat * (base_[1].get(-1) / 2)
-        l2 = text(pos=pos, text="|Ψ(z,t)|", color=axis_color, height=scale * 4, billboard=True, emissive=True)
-        pos = x_hat * (base_[0].get(-1) / 2) + z_hat * (base_[2].get(-1) + 2.5 * delta_[2])
-        l3 = text(pos=pos, text="Re(z)", color=axis_color, height=scale * 4, billboard=True, emissive=True)
-        c1 = cylinder(pos=x_hat * base_[0].get(0), axis=x_hat * (base_[0].get(-1) - base_[0].get(0)), color=axis_color,
-                      radius=scale)
-        c2 = cylinder(pos=y_hat * base_[1].get(0), axis=y_hat * (base_[0].get(-1) - base_[1].get(0)), color=axis_color,
-                      radius=scale)
-        c3 = cylinder(pos=z_hat * base_[2].get(0), axis=z_hat * (base_[0].get(-1) - base_[2].get(0)), color=axis_color,
-                      radius=scale)
-        self._tick_marks += [c1, c2, c3, l1, l2, l3]
+        l_y = text(pos=pos, text="Y-axis", color=axis_color, height=scale * 4, billboard=True, emissive=True)
+        pos = z_hat * (base_[2].get(-1) + 2 * delta_[2]) + y_hat * (.625 * base_[1].get(-1))
+        l_z = text(pos=pos, text="Z-axis", color=axis_color, height=scale * 4, billboard=True, emissive=True)
+        pos = x_hat * (base_[0].get(-1) / 2) + z_hat * (base_[2].get(-1) + 3 * delta_[2])
+        l_x = text(pos=pos, text="X-axis", color=axis_color, height=scale * 4, billboard=True, emissive=True)
+        c_x = cylinder(pos=x_hat * base_[0].get(0), axis=x_hat * (base_[0].get(-1) - base_[0].get(0)), color=axis_color,
+                       radius=scale)
+        c_y = cylinder(pos=z_hat * base_[2].get(0), axis=z_hat * (base_[2].get(-1) - base_[2].get(0)), color=axis_color,
+                       radius=scale)
+        c_z = cylinder(pos=y_hat * base_[1].get(0), axis=y_hat * (base_[1].get(-1) - base_[1].get(0)), color=axis_color,
+                       radius=scale)
+        self._tick_marks += [c_x, c_y, c_z, l_x, l_y, l_z]
 
     def tick_marks_visibility_is(self, visible):
         for tick_mark in self._tick_marks:
@@ -162,10 +163,45 @@ class Base:
             self._yz_mesh[i].visible = visible
 
 
-# The x axis is labeled y, the z axis is labeled x, and the y axis is labeled z.
-# This is done to mimic fairly standard practive for plotting
-#     the z value of a function of x and y.
 class Plot3D:
+    """
+    A class to make 3D plots.
+
+    The x-axis is labeled y, the z axis is labeled x, and the y-axis is
+    labeled z. This is done to mimic fairly standard practive for plotting
+    the z value of a function of x and y.
+
+    A plot is typically made like so:
+
+    resolution = 75
+    x = y = np.linspace(-2 * pi, 2 * pi, resolution)
+    xx, yy = np.meshgrid(x, y)
+    zz = np.cos(np.abs(xx).add(np.abs(yy)))
+    Plot3D(xx, yy, zz)
+
+
+    Attributes
+    ----------
+    xx : array
+        Numpy array containing the x-values, typically generated by
+        the np.meshgrid() function
+    yy : array
+        Numpy array containing the y-values, typically generated by
+        the np.meshgrid() function
+    zz : array
+        Numpy array containing the function values
+    z_min: float
+        Optional minimum z-axis boundary
+    z_max: float
+        Optional maximum z-axis boundary
+
+
+    Methods
+    -------
+    render(t):
+        Render the plot with a new time.
+    """
+
     def __init__(self, xx, yy, zz, f, axis_color=color.yellow, tick_marks_color=vec(0.4, 0.8, 0.4), num_tick_marks=10):
         self._f = f
         self._xx = xx
@@ -213,13 +249,23 @@ class Plot3D:
         axis.yz_mesh_visibility_is(True)
         return axis
 
-    def _create_vertices(self):
-        for i in range(np.len(self._xx) * np.len(self._yy)):
-            x, y = self._get_x_and_y_for(i)
-            self._vertices.append(vertex(pos=vec(y, 0, x), normal=vec(0, 1, 0)))
+    def _ranges(self):
+        x_min = self._xx.flatten().min()
+        x_max = self._xx.flatten().max()
+        y_min = self._yy.flatten().min()
+        y_max = self._yy.flatten().max()
+        return x_min, x_max, y_min, y_max
 
-    def _get_x_and_y_for(self, index):
-        return int(index / np.len(self._xx)), index % np.len(self._yy)
+    def _create_vertices(self):
+        x_min, x_max, y_min, y_max = self._ranges()
+        range_x = x_max - x_min
+        range_y = y_max - y_min
+
+        for x in range(np.len(self._xx)):
+            for y in range(np.len(self._yy)):
+                x_ = (self._xx.get(x, y) - x_min) * np.len(self._xx) / range_x
+                y_ = (self._yy.get(x, y) - y_min) * np.len(self._yy) / range_y
+                self._vertices.append(vertex(pos=vec(x_, 0, y_), normal=vec(0, 1, 0)))
 
     def _color_for(self, complex_num):
         phase = atan2(complex_num.im, complex_num.re)
@@ -237,33 +283,36 @@ class Plot3D:
                 v3 = self._get_vertex(x, y + 1)
                 self._quads.append(quad(vs=[v0, v1, v2, v3]))
 
+    def _set_vertex_normal_for(self, x, y):
+        # if x == np.len(self._xx) - 1 or y == np.len(self._yy) - 1: return
+        vertex_ = self._get_vertex(x, y)
+        vec_1 = self._get_vertex(x, y + 1).pos - vertex_.pos
+        vec_2 = self._get_vertex(x + 1, y).pos - vertex_.pos
+        vertex_.normal = cross(vec_1, vec_2)
+
     # Set the normal for each vertex to be perpendicular to the lower left corner of the quad.
     # The vectors a and b point to the right and up around a vertex in the xy plane.
     def _make_normals(self):
-        for i in range(np.len(self._xx) * np.len(self._yy)):
-            x, y = self._get_x_and_y_for(i)
-            if x == np.len(self._xx) - 1 or y == np.len(self._yy) - 1: continue
-            v = self._vertices[i]
-            a = self._vertices[i + np.len(self._xx)].pos - v.pos
-            b = self._vertices[i + 1].pos - v.pos
-            v.normal = cross(a, b)
+        for x in range(np.len(self._xx) - 2):
+            for y in range(np.len(self._yy) - 2):
+                self._set_vertex_normal_for(x, y)
 
     def set_omega_to(self, omega):
         self._omega = omega
 
-    def _update_vertex_with_index(self, i, t):
-        re, im = self._get_x_and_y_for(i)
-        f_z = self._f(math.complex(self._xx.get(re, im), self._yy.get(re, im)), self._omega * t)
-        # f_z = self._f(Complex(self._xx.get(re, im), self._yy.get(re, im)), t)
+    def _update_vertex(self, x, y, t, range_z):
+        f_z = self._f(math.complex(self._xx.get(x, y), self._yy.get(x, y)), self._omega * t)
 
-        range_z = self._zz.get(-1) - self._zz.get(0)
         value = np.len(self._zz) / range_z * (f_z.abs() - self._zz.get(0))
-        self._vertices[i].pos.y = value
-        self._vertices[i].color = self._color_for(f_z)
+        self._get_vertex(x, y).pos.y = value
+        self._get_vertex(x, y).color = self._color_for(f_z)
 
     def render(self, t):
-        for i in range(np.len(self._xx) * np.len(self._yy)):
-            self._update_vertex_with_index(i, t)
+        z_min, z_max = self._zz.flatten().min(), self._zz.flatten().max()
+        range_z = (z_max - z_min) * 1.1
+        for x in range(np.len(self._xx)):
+            for y in range(np.len(self._yy)):
+                self._update_vertex(x, y, t, range_z)
 
         self._make_normals()
 
