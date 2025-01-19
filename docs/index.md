@@ -65,6 +65,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 
 <a name="mathematics"></a>
 # Mathematics
+<p><br/></p>
 
 <blockquote>
 Mathematics directs the flow of the universe, lurks behind its shapes and curves, 
@@ -215,6 +216,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 
 <a name="quantum"></a>
 # Particle and quantum physics
+<p><br/></p>
 
 <blockquote>
 If you think you understand quantum mechanics, you don't understand quantum mechanics.
