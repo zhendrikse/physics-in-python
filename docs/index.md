@@ -13,8 +13,7 @@ in a dark labyrinth. Galileo (1623).
 - [Astrophysics](#astrophysics)
 - [Electromagnetism](#electromagnetism)
 - [Kinematics](#kinematics)
-- [Mathematics](#mathematics)
-  - [Math art gallery](geometry.html) loaded with beautiful geometrical shapes
+- [Mathematics](#mathematics), with references to my separate [Math art gallery](geometry.html) 
 - [Nature models](#nature)
 - [Quantum and particle physics](#quantum)
 - [Special relativity](#relativity)
