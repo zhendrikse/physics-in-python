@@ -1,5 +1,10 @@
 # Welcome to my math art gallery 
 
+<blockquote>
+A straight line may be the shortest distance between two points, 
+but it is by no means the most interesting! &mdash; Dr. Who.
+</blockquote>
+
 <figure style="float: left; width: 50%; text-align: center">
   <a href="glowscript/Shapes.html">
     <img alt="Dini&apos;s spiral" src="./images/dini_spiral.png" title="Click to animate"/>
