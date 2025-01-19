@@ -1,9 +1,16 @@
 # Contents
 
 - [Astrophysics](#astrophysics)
+- [Electromagnetism](#electromagnetism)
+- [Kinematics](#kinematics)
 - [Mathematics](#mathematics)
 - [Nature models](#nature)
 - [Quantum and particle physics](#quantum)
+- [Special relativity](#relativity)
+- [Thermodynamics](#thermodynamics)
+- [Waves](#waves)
+- [Fun stuff](#fun), references &amp; acknowledgements
+
 
 <a name="astrophysics"></a>
 # Astrophysics
@@ -358,6 +365,7 @@ The following demos show the movement of an electron in two different electric f
 </figure>
 
 
+<a name="electromagnetism"></a>
 # Electromagnetism
 
 The code pertaining to the demos in this section is available under the 
@@ -434,6 +442,7 @@ Both of the two dynamic simulations below visualize the propagation of electroma
   </a>
 </figure>
 
+<a name="thermodynamics"></a>
 # Thermodynamics
 
 The code pertaining to the demos in this section is available under the 
@@ -464,6 +473,7 @@ This demo models the magnetization at various temperatures using a two-dimension
 </figure>
 
 
+<a name="waves"></a>
 # Waves
 
 ### Doppler effect
@@ -473,6 +483,7 @@ This demo models the magnetization at various temperatures using a two-dimension
   <img alt="Doppler effect" width="50%" height="50%" src="./images/doppler_effect.png" title="Click to animate"/>
 </a>
 
+<a name="relativity"></a>
 # Special relativity
 
 The code pertaining to the demos in this section is available under the 
@@ -505,6 +516,7 @@ the so-called Galilean transformation.
   <img alt="Galilean space-time" width="50%" height="50%" src="./images/galilean_space_time.png" title="Click to animate"/>
 </a>
 
+<a name="kinematics"></a>
 # Kinematics
 
 The code pertaining to the demos in this section is available under the 
@@ -578,6 +590,7 @@ You may be surprised though to find out what happens when you drop such a simple
   </a>
 </figure>
 
+<a name="fun"></a>
 # Fun stuff with [VPython](https://vpython.org/) 
 
 ### [Rubik's cube](https://trinket.io/library/trinkets/00eb13fbcd14) and  [Turtle graphics robot](https://trinket.io/library/trinkets/31a188264ef1)
