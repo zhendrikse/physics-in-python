@@ -328,7 +328,7 @@ class Plot3D:
                 self._quads.append(quad(vs=[v0, v1, v2, v3]))
 
     def _set_vertex_normal_for(self, x, y):
-        if x == np.len(self._xx) - 1 or y == np.len(self._yy) - 1: return
+        # if x == np.len(self._xx) - 1 or y == np.len(self._yy) - 1: return
         vertex_ = self._get_vertex(x, y)
         vec_1 = self._get_vertex(x, y + 1).pos - vertex_.pos
         vec_2 = self._get_vertex(x + 1, y).pos - vertex_.pos
@@ -434,7 +434,7 @@ def torus():
     return X, Y, Z, -2, 2
 
 
-def math_object_1():
+def knot():
     resolution = 50
 
     theta = np.linspace(-pi, pi, resolution)
@@ -448,7 +448,7 @@ def math_object_1():
     return xx, yy, zz, None, None
 
 
-def math_object_2():
+def arc():
     resolution = 50
 
     theta = np.linspace(0, 1.05 * pi, resolution)
@@ -459,10 +459,10 @@ def math_object_2():
     yy = np.sin(theta).add(np.cos(phi))
     zz = np.sin(phi)
 
-    return xx, yy, zz, 0.01, 1.25
+    return xx, yy, zz, None, None
 
 
-def math_object_3():
+def bubbles():
     resolution = 75
 
     theta = np.linspace(0, 1.02 * pi, resolution)
@@ -474,6 +474,20 @@ def math_object_3():
     zz = np.sin(phi)
 
     return xx, yy, zz, -1, 1.1
+
+
+def mobius_strip():
+    resolution = 100
+
+    theta = np.linspace(-pi, 1.03 * pi, resolution)
+    phi = np.linspace(-1, 1, resolution)
+    theta, phi = np.meshgrid(theta, phi)
+
+    factor = np.cos(theta.multiply(.5)).multiply(phi.multiply(.5)).add(1)
+    xx = factor.multiply(np.cos(theta))
+    yy = factor.multiply(np.sin(theta))
+    zz = np.sin(theta.multiply(.5)).multiply(phi.multiply(.5))
+    return xx, yy, zz, -0.5, 1
 
 
 def twisted_torus():
@@ -607,6 +621,10 @@ def switch_function(event):
     if event.name != "abs_cos": abs_cos_button.checked = False
     if event.name != "exp_sin": exp_sin_button.checked = False
     if event.name != "sin_sqrt": sin_sqrt_button.checked = False
+    if event.name != "mobius": mobius_button.checked = False
+    if event.name != "bubbles": bubbles_button.checked = False
+    if event.name != "knot": knot_button.checked = False
+    if event.name != "arc": arc_button.checked = False
 
     if event.name == "mexican_hat":
         xx, yy, zz, z_min, z_max = mexican_hat()
@@ -641,6 +659,18 @@ def switch_function(event):
     elif event.name == "exp_sin":
         xx, yy, zz, z_min, z_max = exp_sine()
         animation.title = exponential_title + "\n"
+    elif event.name == "mobius":
+        xx, yy, zz, z_min, z_max = mobius_strip()
+        animation.title = exponential_title + "\n"
+    elif event.name == "bubbles":
+        xx, yy, zz, z_min, z_max = bubbles()
+        animation.title = exponential_title + "\n"
+    elif event.name == "arc":
+        xx, yy, zz, z_min, z_max = arc()
+        animation.title = exponential_title + "\n"
+    elif event.name == "knot":
+        xx, yy, zz, z_min, z_max = knot()
+        animation.title = exponential_title + "\n"
 
     animation.range = 1.5 * np.len(xx)
     plot.reinitialize(xx, yy, zz, z_min, z_max)
@@ -673,12 +703,17 @@ twisted_torus_button = radio(bind=switch_function, text="Twisted torus", name="t
 ripple_button = radio(bind=switch_function, text="Ripple", name="ripple")
 spiral_button = radio(bind=switch_function, text="Spiral", name="spiral")
 animation.append_to_caption("\n\n")
-sin_sqrt_button = radio(bind=switch_function, text="F=sin(sqrt(x*x + y*y)) ", name="sin_sqrt")
-polynomial_button = radio(bind=switch_function, text="F=y*y*y*x - y*x*x*x ", name="polynomial")
+mobius_button = radio(bind=switch_function, text="Mobius strip ", name="mobius")
+bubbles_button = radio(bind=switch_function, text="Bubbles ", name="bubbles")
+arc_button = radio(bind=switch_function, text="Arc ", name="arc")
+knot_button = radio(bind=switch_function, text="Knot ", name="knot")
+animation.append_to_caption("\n\n")
+sin_sqrt_button = radio(bind=switch_function, text="F=sin(sqrt(x*x+y*y)) ", name="sin_sqrt")
+polynomial_button = radio(bind=switch_function, text="F=y*y*y*x-y*x*x*x ", name="polynomial")
 sin_cos_button = radio(bind=switch_function, text="F=sin(x)*cos(y) ", name="sin_cos")
 animation.append_to_caption("\n\n")
-abs_cos_button = radio(bind=switch_function, text="F=cos(abs(x) + abs(y)) ", name="abs_cos")
-exp_sin_button = radio(bind=switch_function, text="F=(x*x + y*y)exp(sin(-x*x - y*y)) ", name="exp_sin")
+abs_cos_button = radio(bind=switch_function, text="F=cos(abs(x)+abs(y)) ", name="abs_cos")
+exp_sin_button = radio(bind=switch_function, text="F=(x*x+y*y)exp(sin(-x*x-y*y)) ", name="exp_sin")
 
 animation.append_to_caption("\n" + caption + "\n")
 

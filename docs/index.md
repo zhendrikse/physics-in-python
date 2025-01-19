@@ -51,11 +51,11 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 <p/>
 
 <details>
-  <summary><a>&dArr; Python code showing use of np.meshgrid() function &dArr;</a></summary>
+  <summary><a>&dArr; Python code snippets with which to generate the plots &dArr;</a></summary>
 
 The formula for the above image is given by:
 
-$$\psi(x, y, t) = \sin(\omega t)\sqrt{x^2+y^2}$$
+$$\psi(x, y, t) = \sqrt{x^2+y^2}$$
 
 <p>The following Python code was used to plot the graph belonging to this multivariate function:<br/></p>
 
@@ -72,32 +72,12 @@ $$\psi(x, y, t) = \sin(\omega t)\sqrt{x^2+y^2}$$
 <span class="n">plot</span> <span class="o">=</span> <span class="n">Plot3D</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">zz</span><span class="p">)</span>
 </code></pre></div></div>
 
-</details>
-
-<p/>
-
-#### Polar coordinates
-<hr/>
-
-<figure>
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">
-    <img alt="Polar coordinates" width="49%" height="49%" src="./images/polar_coordinates.png" title="Click to animate"/>
-  </a>
-  <a href="glowscript/NumpyMatplot3D.html">
-    <img alt="Mexican hat" width="45%" height="45%" src="./images/mexican_hat.png" title="Click to animate"/>
-  </a>&nbsp;&nbsp;&nbsp;
-</figure>
-
-<p/>
-
-<details>
-  <summary><a>&dArr; Python code showing use of np.meshgrid() function with polar coordinates &dArr;</a></summary>
 
 <p>The 
 <a href="https://matplotlib.org/stable/gallery/mplot3d/surface3d_radial.html#sphx-glr-gallery-mplot3d-surface3d-radial-py">mexican hat</a> 
 is most easily obtained by using polar coordinates:</p>
 
-$\begin{cases} x &amp; = r\cos(\phi) \\ y &amp; = r\sin(\phi)) \\ z &amp; = (r^2 - 1)^2 \end{cases}$
+$\begin{pmatrix} x \\ y \\ z \end{pmatrix}=\begin{pmatrix} r\cos(\phi) \\ \sin(\phi)) \\ (r^2 - 1)^2 \end{pmatrix}$
 
 <p><br/>This leads to the following Python code<br/></p>
 
@@ -115,10 +95,10 @@ $\begin{cases} x &amp; = r\cos(\phi) \\ y &amp; = r\sin(\phi)) \\ z &amp; = (r^2
 </code></pre></div></div>
 
 
-<p>Similarly, a <a href="https://www.mattiagiuri.com/2020/11/20/plotting-a-torus-with-python/">torus</a> 
+<p>Similarly, many different geometric shapes such as a <a href="https://www.mattiagiuri.com/2020/11/20/plotting-a-torus-with-python/">torus</a> 
 can be generated (select the torus from the drop-down menu in the application):</p>
 
-$\begin{cases} x &amp; = (c + a \cos(v))\cdot\cos(u) \\ y &amp; = (c + a \cos(v))\cdot\sin(u) \\ z &amp; = a \sin(v) \end{cases}$
+$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\cos(u) \\ (c + a \cos(v))\cdot\sin(u) \\ a \sin(v) \end{pmatrix}$
 
 <p><br/>This leads to the following Python code<br/></p>
 
@@ -135,7 +115,40 @@ $\begin{cases} x &amp; = (c + a \cos(v))\cdot\cos(u) \\ y &amp; = (c + a \cos(v)
 <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">zz</span> <span class="o">=</span> <span class="n">torus</span><span class="p">()</span>
 <span class="n">plot</span> <span class="o">=</span> <span class="n">Plot3D</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">zz</span><span class="p">)</span>
 </code></pre></div></div>
+
+
 </details>
+
+<p/>
+
+<details>
+  <summary><a>&dArr; Click here to open the Math Art image gallery &dArr;</a></summary>
+
+<figure>
+  <a href="glowscript/NumpyMatplot3D.html">
+    <img alt="Dini&apos;s spiral" width="45%" height="45%" src="./images/dini_spiral.png" title="Click to animate"/>
+  </a>
+  <a href="glowscript/NumpyMatplot3D.html">
+    <img alt="Mexican hat" width="45%" height="45%" src="./images/mexican_hat.png" title="Click to animate"/>
+  </a>&nbsp;&nbsp;&nbsp;
+  <a href="glowscript/NumpyMatplot3D.html">
+    <img alt="Twisted torus" width="45%" height="45%" src="./images/twisted_torus.png" title="Click to animate"/>
+  </a>
+  <a href="glowscript/NumpyMatplot3D.html">
+    <img alt="Bubbles shape" width="45%" height="45%" src="./images/bubbles.png" title="Click to animate"/>
+  </a>&nbsp;&nbsp;&nbsp;
+</figure>
+
+</details>
+
+#### Polar coordinates
+<hr/>
+
+<figure>
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">
+    <img alt="Polar coordinates" width="49%" height="49%" src="./images/polar_coordinates.png" title="Click to animate"/>
+  </a>
+</figure>
 
 <p/>
 
