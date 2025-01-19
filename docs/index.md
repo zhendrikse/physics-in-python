@@ -39,13 +39,17 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 ### Dynamic 3D-plots of multivariate and complex functions
 <hr/>
 
-<figure>
+<figure style="float: left; width: 50%; text-align: center">
   <a href="glowscript/NumpyMatplot3D.html">
     <img alt="Multivariate functions" width="45%" height="45%" src="./images/3d_plot.png" title="Click to animate"/>
   </a>&nbsp;&nbsp;&nbsp;
+  <figcaption>Plotting multivariate functions $F(x, y)$</figcaption>
+</figure>
+<figure style="float: right; width: 50%; text-align: center; display: inline-block">
   <a href="glowscript/Complexfunctionplot.html">
     <img alt="Complex functions" width="45%" height="45%" src="./images/complex_function_plot.png" title="Click to animate"/>
   </a>
+  <figcaption>Plotting complex functions $F(z)$</figcaption>
 </figure>
 
 <p></p>
@@ -128,7 +132,7 @@ $$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\
   <a href="glowscript/NumpyMatplot3D.html">
     <img alt="Dini&apos;s spiral" src="./images/dini_spiral.png" title="Click to animate"/>
   </a>
-  <figcaption style="float: center">Dini&apos;s spiral</figcaption>
+  <figcaption>Dini&apos;s spiral</figcaption>
 </figure>
 <figure style="float: right; width: 50%;">
   <a href="glowscript/NumpyMatplot3D.html">
@@ -150,6 +154,8 @@ $$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\
 </figure>
 
 </details>
+
+<p></p>
 
 ### Polar coordinates
 <hr/>
