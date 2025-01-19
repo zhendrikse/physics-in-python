@@ -151,7 +151,7 @@ $$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\
 
 <p></p>
 
-### Polar coordinates &amp; geometrical shapes
+### Polar coordinates &amp; [geometrical shapes](geometry.html)
 <hr/>
 
 <figure style="float: left; width: 50%; text-align: center">
@@ -164,7 +164,7 @@ $$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\
   <a href="glowscript/AtomicOrbitals.html">
     <img alt="Twisted torus" src="./images/twisted_torus.png" title="Click to animate"/>
   </a>
-  <figcaption>A twisted torus. For more geometrical shapes like this, visit my [Math Art gallery](geometry.html).</figcaption>
+  <figcaption>A twisted torus. For more geometrical shapes like this, visit my <a href="geometry.html">Math Art gallery</a>.</figcaption>
 </figure>
 
 <p><br clear="all"/></p>
@@ -222,8 +222,7 @@ on [glowscript.org](https://glowscript.org).
   <a href="glowscript/AtomicOrbitals.html">
     <img alt="Spherical harmonics" src="./images/atomic_orbitals.png" title="Click to animate"/>
   </a>
-  <figcaption>Applying polar coordinates to spherical harmonics, which form 
-              solutions for the wave functions of the Schr&#246;dinger equation for the hydrogen atom.</figcaption>
+  <figcaption>Spherical harmonics are solutions of the Schr&#246;dinger equation for the hydrogen atom.</figcaption>
 </figure>
 
 <p><br clear="all"/></p>
