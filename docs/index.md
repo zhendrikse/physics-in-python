@@ -48,7 +48,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
   </a>
 </figure>
 
-<p/>
+<p></p>
 
 <details>
   <summary><a>&dArr; Python code snippets with which to generate the plots &dArr;</a></summary>
@@ -119,27 +119,31 @@ $\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\c
 
 </details>
 
-<p/>
+<p><p>
+
+.left, .right {
+  display: inline-block;
+}
 
 <details>
   <summary><a>&dArr; Click here to open the Math Art image gallery &dArr;</a></summary>
 
-<figure style="display: inline-block;">
+<figure class="left">
   <a href="glowscript/NumpyMatplot3D.html">
     <img alt="Dini&apos;s spiral" width="48%" height="48%" src="./images/dini_spiral.png" title="Click to animate"/>
   </a>
 </figure>
-<figure style="display: inline-block;">
+<figure class="right">
   <a href="glowscript/NumpyMatplot3D.html">
     <img alt="Mexican hat" width="48%" height="48%" src="./images/mexican_hat.png" title="Click to animate"/>
   </a>&nbsp;&nb
 </figure>
-<figure style="display: inline-block;">
+<figure class="left">
   <a href="glowscript/NumpyMatplot3D.html">
     <img alt="Twisted torus" width="48%" height="48%" src="./images/twisted_torus.png" title="Click to animate"/>
   </a>
 </figure>
-<figure style="display: inline-block;">
+<figure class="right">
   <a href="glowscript/NumpyMatplot3D.html">
     <img alt="Bubbles shape" width="48%" height="48%" src="./images/bubbles.png" title="Click to animate"/>
   </a>&nbsp;&nbsp;&nbsp;
@@ -156,7 +160,7 @@ $\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\c
   </a>
 </figure>
 
-<p/>
+<p></p>
 
 # Nature models
 
@@ -217,7 +221,7 @@ $$(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x,
 
 </details>
 
-<p/>
+<p></p>
 
 <details>
   <summary><a>&dArr; Python code snippet for plotting spherical harmonics &dArr;</a></summary>
@@ -252,7 +256,7 @@ seen in the mathematics section on this page:
 
 </details>
 
-<p/>
+<p></p>
 
 ### One-dimensional quantum particle bound by an infinite square well
 <hr/>
@@ -299,7 +303,7 @@ $$E=\dfrac{h^2a^2}{8\pi^2m} \text{ and } \psi_n=\sqrt{\dfrac{2}{L}}\sin(nkx), \t
 These energy eigenstates (and superpositions thereof) are used in the visualization software.
 </details>
 
-<p/>
+<p></p>
 
 ### The quantum harmonic oscillator
 <hr/>
