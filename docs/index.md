@@ -61,8 +61,8 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 
 <a name="mathematics"></a>
 # Mathematics
-<p><br/></p>
 
+<p></p>
 <blockquote>
 Mathematics directs the flow of the universe, lurks behind its shapes and curves, 
 holds the reins of everything from tiny atoms to the biggest stars. &mdash; Edward Frenkel
@@ -212,7 +212,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 
 <a name="quantum"></a>
 # Particle and quantum physics
-<p><br/></p>
+<p></p>
 
 <blockquote>
 If you think you understand quantum mechanics, you don't understand quantum mechanics.
