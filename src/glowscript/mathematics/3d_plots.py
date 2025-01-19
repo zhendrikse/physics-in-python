@@ -491,7 +491,7 @@ def mobius_strip():
 
 
 def twisted_torus():
-    resolution = 75
+    resolution = 100
 
     theta = np.linspace(-pi, pi * 1.05, resolution)
     phi = np.linspace(-pi, pi * 1.03, resolution)
@@ -605,11 +605,7 @@ def adjust_color():
     plot.hue_offset_is(color_slider.value)
 
 
-# def sync_radio_buttons():
-
-def switch_function(event):
-    # sync_radio_buttons()
-    xx, yy, zz, z_min, z_max = None, None, None, None, None
+def sync_radio_buttons(event):
     if event.name != "ricker": ricker_button.checked = False
     if event.name != "torus": torus_button.checked = False
     if event.name != "twisted_torus": twisted_torus_button.checked = False
@@ -625,6 +621,11 @@ def switch_function(event):
     if event.name != "bubbles": bubbles_button.checked = False
     if event.name != "knot": knot_button.checked = False
     if event.name != "arc": arc_button.checked = False
+
+
+def switch_function(event):
+    sync_radio_buttons(event)
+    xx, yy, zz, z_min, z_max = None, None, None, None, None
 
     if event.name == "mexican_hat":
         xx, yy, zz, z_min, z_max = mexican_hat()
