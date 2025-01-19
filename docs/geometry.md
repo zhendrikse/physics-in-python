@@ -3,7 +3,7 @@ A straight line may be the shortest distance between two points,
 but it is by no means the most interesting! &mdash; Dr. Who.
 </blockquote>
 
-<p><br clear="all"/>/</p>
+<p><br clear="all"/></p>
 
 # Welcome to my math art gallery 
 
