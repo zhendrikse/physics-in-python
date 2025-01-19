@@ -13,7 +13,7 @@ The stage is too big for the drama. ― Richard P. Feynman
 - [Astrophysics](#astrophysics)
 - [Electromagnetism](#electromagnetism)
 - [Kinematics](#kinematics)
-- [Mathematics](#mathematics), with references to my separate [Math art gallery](geometry.html) 
+- [Mathematics](#mathematics), with references to my separate [Math Art Gallery](geometry.html) 
 - [Nature models](#nature)
 - [Quantum and particle physics](#quantum)
 - [Special relativity](#relativity)
@@ -171,7 +171,8 @@ $$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\
   <a href="glowscript/AtomicOrbitals.html">
     <img alt="Twisted torus" src="./images/twisted_torus.png" title="Click to animate"/>
   </a>
-  <figcaption>A twisted torus. For more geometrical shapes like this, visit my <a href="geometry.html">Math Art gallery</a>.</figcaption>
+  <figcaption>A twisted torus. For more geometrical shapes like this, 
+  visit my <a href="geometry.html">Math Art gallery</a>.</figcaption>
 </figure>
 
 <p><br clear="all"/></p>
@@ -191,13 +192,15 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
   <a href="glowscript/Flockingbirds.html">
     <img alt="Flocking birds" src="./images/flocking_birds.png" title="Click to animate"/>
   </a>
-  <figcaption>Simulation of a flock of birds.</figcaption>
+  <figcaption>Simulation of a flock of birds: "Eagles commonly fly alone. They are crows, daws, 
+  and starlings that flock together" &mdash; John Webster </figcaption>
 </figure>
 <figure style="float: right; width: 50%; text-align: center">
   <a href="glowscript/Raindrops.html">
     <img alt="Raindrops" src="./images/raindrops.png" title="Click to animate"/>
   </a>
-  <figcaption>"There are holes in the sky. Where the rain gets in. But they're ever so small. That's why the rain is thin" &mdash; Spike Milligan.</figcaption>
+  <figcaption>"There are holes in the sky. Where the rain gets in. But they're ever so small. 
+  That's why the rain is thin" &mdash; Spike Milligan.</figcaption>
 </figure>
 
 <p><br clear="all"/></p>
