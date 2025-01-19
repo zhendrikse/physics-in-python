@@ -41,18 +41,18 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 
 <figure style="float: left; width: 50%; text-align: center">
   <a href="glowscript/NumpyMatplot3D.html">
-    <img alt="Multivariate functions" width="45%" height="45%" src="./images/3d_plot.png" title="Click to animate"/>
+    <img alt="Multivariate functions" src="./images/3d_plot.png" title="Click to animate"/>
   </a>&nbsp;&nbsp;&nbsp;
   <figcaption>Plotting multivariate functions $F(x, y)$</figcaption>
 </figure>
-<figure style="float: right; width: 50%; text-align: center; display: inline-block">
+<figure style="float: right; width: 50%; text-align: center">
   <a href="glowscript/Complexfunctionplot.html">
-    <img alt="Complex functions" width="45%" height="45%" src="./images/complex_function_plot.png" title="Click to animate"/>
+    <img alt="Complex functions" src="./images/complex_function_plot.png" title="Click to animate"/>
   </a>
   <figcaption>Plotting complex functions $F(z)$</figcaption>
 </figure>
 
-<p></p>
+<p><br/></p>
 
 <details>
   <summary><a>&dArr; Python code snippets with which to generate the plots &dArr;</a></summary>
@@ -128,25 +128,25 @@ $$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\
 <details>
   <summary><a>&dArr; Click here to open the Math Art image gallery &dArr;</a></summary>
 
-<figure style="float: left; width: 50%;">
+<figure style="float: left; width: 50%; text-align: center">
   <a href="glowscript/NumpyMatplot3D.html">
     <img alt="Dini&apos;s spiral" src="./images/dini_spiral.png" title="Click to animate"/>
   </a>
   <figcaption>Dini&apos;s spiral</figcaption>
 </figure>
-<figure style="float: right; width: 50%;">
+<figure style="float: right; width: 50%; text-align: center">
   <a href="glowscript/NumpyMatplot3D.html">
     <img alt="Mexican hat" src="./images/mexican_hat.png" title="Click to animate"/>
   </a>
   <figcaption>The so-called Mexican hat</figcaption>
 </figure>
-<figure style="float: left; width: 50%;">
+<figure style="float: left; width: 50%; text-align: center">
   <a href="glowscript/NumpyMatplot3D.html">
     <img alt="Twisted torus" src="./images/twisted_torus.png" title="Click to animate"/>
   </a>
   <figcaption>A twisted torus</figcaption>
 </figure>
-<figure style="float: right; width: 50%;">
+<figure style="float: right; width: 50%; text-align: center">
   <a href="glowscript/NumpyMatplot3D.html">
     <img alt="Bubbles shape" src="./images/bubbles.png" title="Click to animate"/>
   </a>
