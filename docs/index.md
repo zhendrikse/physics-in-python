@@ -91,7 +91,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 <p><br clear="all"></p>
 
 <details>
-  <summary><a>&dArr; Python code snippets with which to generate the plots &dArr;</a></summary>
+  <summary><a>&dArr; Python code snippets with which to generate the plots &uArr;</a></summary>
 
 The formula for the above image is given by:
 
@@ -178,12 +178,6 @@ $$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\
 
 <p><br clear="all"/></p>
 
-### Image gallery depicting more mathematical objects
-
-&rArr; [Make sure you also visit my Math Art gallery](geometry.html) &lArr;
-
-<p></p>
-
 
 <a name="nature"></a>
 # Nature models
@@ -237,7 +231,7 @@ on [glowscript.org](https://glowscript.org).
 <p><br clear="all"/></p>
 
 <details>
-  <summary><a>&dArr; For a plane wave, we can easily derive the Schr&#246;dinger equation &dArr;</a></summary>
+  <summary><a>&dArr; For a plane wave, we can easily derive the Schr&#246;dinger equation &uArr;</a></summary>
 
 According to <a href="https://en.wikipedia.org/wiki/Matter_wave">De Broglie</a> we have:
 
@@ -259,7 +253,7 @@ $$(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x,
 
 
 <details>
-  <summary><a>&dArr; Python code snippet for plotting spherical harmonics &dArr;</a></summary>
+  <summary><a>&dArr; Python code snippet for plotting spherical harmonics &uArr;</a></summary>
 
 The spherical harmonic function is given by
 
@@ -300,7 +294,7 @@ seen in the mathematics section on this page:
 </figure>
 
 <details>
-<summary><a>&dArr; Background: particle in a box, i.e. confined by a infinite square well &dArr;</a></summary>
+<summary><a>&dArr; Background: particle in a box, i.e. confined by a infinite square well &uArr;</a></summary>
 <p>
 Although the one-dimensional particle-in-a-box problem does not correspond to any
 real-world system, it illustrates quite well some (fundamental) 
