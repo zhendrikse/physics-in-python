@@ -52,8 +52,8 @@ the days per season.
     <img alt="Kepler's laws" src="./images/keplers_law.png" title="Click to animate"/>
   </a>
   <figcaption><a href="https://en.wikipedia.org/wiki/Kepler%27s_laws_of_planetary_motion">Kepler&apos;s laws</a>
-    of planetary motion &mdash; I believe the geometric proportion served the creator as an idea when He 
-    introduced the continuous generation of similar objects from similar objects &mdash; Johannes Kepler.
+    of planetary motion: "I believe the geometric proportion served the creator as an idea when He 
+    introduced the continuous generation of similar objects from similar objects" &mdash; Johannes Kepler.
   </figcaption>
 </figure>
 <figure style="float: right; width: 50%; text-align: center">
@@ -205,7 +205,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
   <a href="glowscript/Raindrops.html">
     <img alt="Raindrops" src="./images/raindrops.png" title="Click to animate"/>
   </a>
-  <figcaption>There are holes in the sky. Where the rain gets in. But they're ever so small. That's why the rain is thin &mdash; Spike Milligan.</figcaption>
+  <figcaption>"There are holes in the sky. Where the rain gets in. But they're ever so small. That's why the rain is thin" &mdash; Spike Milligan.</figcaption>
 </figure>
 
 <p><br clear="all"/></p>
