@@ -29,10 +29,10 @@ the days per season.
   <a href="glowscript/Daylightvariations.html">
     <img alt="Daylight variations" width="100%" height="100%" src="./images/daylight_variations.png" title="Click to animate"/>
   </a>
-  <figcaption>Visualizing the change in day length during the course of a year</figcaption>
+  <figcaption>Visualizing the change in day length during the course of a year.</figcaption>
 </figure>
 
-<p><br clear="all"></p>
+<p><br clear="all"/></p>
 
 ###  Kepler's law &amp; the three-body problem
 <hr/>
@@ -41,16 +41,16 @@ the days per season.
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw">
     <img alt="Kepler's laws" src="./images/keplers_law.png" title="Click to animate"/>
   </a>
-  <figcaption><a href="https://en.wikipedia.org/wiki/Kepler%27s_laws_of_planetary_motion">Kepler&apos;s laws of planetary motion</a></figcaption>
+  <figcaption><a href="https://en.wikipedia.org/wiki/Kepler%27s_laws_of_planetary_motion">Kepler&apos;s laws of planetary motion.</a></figcaption>
 </figure>
 <figure style="float: right; width: 50%; text-align: center">
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Threebody">
     <img alt="Three body problem" src="./images/three_body.png" title="Click to animate"/>
   </a>
-  <figcaption><a href="https://en.wikipedia.org/wiki/Three-body_problem">The three-body problem</a></figcaption>
+  <figcaption><a href="https://en.wikipedia.org/wiki/Three-body_problem">The three-body problem</a>.</figcaption>
 </figure>
 
-<p><br clear="all"></p>
+<p><br clear="all"/></p>
 
 <a name="mathematics"></a>
 # Mathematics
@@ -66,13 +66,13 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
   <a href="glowscript/NumpyMatplot3D.html">
     <img alt="Multivariate functions" src="./images/3d_plot.png" title="Click to animate"/>
   </a>&nbsp;&nbsp;&nbsp;
-  <figcaption>Plotting multivariate functions $F(x, y)$</figcaption>
+  <figcaption>Plotting multivariate functions $F(x, y)$.</figcaption>
 </figure>
 <figure style="float: right; width: 50%; text-align: center">
   <a href="glowscript/Complexfunctionplot.html">
     <img alt="Complex functions" src="./images/complex_function_plot.png" title="Click to animate"/>
   </a>
-  <figcaption>Plotting complex functions $F(z)$</figcaption>
+  <figcaption>Plotting complex functions $F(z)$.</figcaption>
 </figure>
 
 <p><br clear="all"></p>
@@ -156,41 +156,49 @@ $$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\
   <a href="glowscript/NumpyMatplot3D.html">
     <img alt="Dini&apos;s spiral" src="./images/dini_spiral.png" title="Click to animate"/>
   </a>
-  <figcaption>Dini&apos;s spiral</figcaption>
+  <figcaption>Dini&apos;s spiral.</figcaption>
 </figure>
 <figure style="float: right; width: 50%; text-align: center">
   <a href="glowscript/NumpyMatplot3D.html">
     <img alt="Mexican hat" src="./images/mexican_hat.png" title="Click to animate"/>
   </a>
-  <figcaption>The so-called Mexican hat</figcaption>
+  <figcaption>The so-called Mexican hat.</figcaption>
 </figure>
 <figure style="float: left; width: 50%; text-align: center">
   <a href="glowscript/NumpyMatplot3D.html">
     <img alt="Twisted torus" src="./images/twisted_torus.png" title="Click to animate"/>
   </a>
-  <figcaption>A twisted torus</figcaption>
+  <figcaption>A twisted torus.</figcaption>
 </figure>
 <figure style="float: right; width: 50%; text-align: center">
   <a href="glowscript/NumpyMatplot3D.html">
     <img alt="Bubbles shape" src="./images/bubbles.png" title="Click to animate"/>
   </a>
-  <figcaption>Surface of revolution</figcaption>
+  <figcaption>Surface of revolution.</figcaption>
 </figure>
 
 </details>
 
 <p></p>
 
-### Polar coordinates
+### Polar coordinates &amp; spherical harmonics 
 <hr/>
 
-<figure>
+<figure style="float: left; width: 50%; text-align: center">
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">
-    <img alt="Polar coordinates" width="49%" height="49%" src="./images/polar_coordinates.png" title="Click to animate"/>
+    <img alt="Polar coordinates" src="./images/polar_coordinates.png" title="Click to animate"/>
   </a>
+  <figcaption>Polar coordinates frequently simplify the tackling of rotationally symmetric problems.</figcaption>
+</figure>
+<figure style="float: right; width: 50%; text-align: center">
+  <a href="glowscript/AtomicOrbitals.html">
+    <img alt="Spherical harmonics" src="./images/atomic_orbitals.png" title="Click to animate"/>
+  </a>
+  <figcaption>Applying polar coordinates to spherical harmonics, which form 
+              solutions for the wave functions of the Schr&#246;dinger equation for the hydrogen atom.</figcaption>
 </figure>
 
-<p></p>
+<p><br clear="all"/></p>
 
 <a name="nature"></a>
 # Nature models
@@ -224,9 +232,6 @@ on [glowscript.org](https://glowscript.org).
 <hr/>
 
 <figure>
-  <a href="glowscript/AtomicOrbitals.html">
-    <img alt="Spherical harmonics" width="49%" height="49%" src="./images/atomic_orbitals.png" title="Click to animate"/>
-  </a>
   <a href="glowscript/Planewave.html">
     <img alt="Complex wave" width="49%" height="49%" src="./images/plane_wave.png" title="Click to animate"/>
   </a>
