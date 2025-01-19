@@ -124,25 +124,30 @@ $$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\
 <details>
   <summary><a>&dArr; Click here to open the Math Art image gallery &dArr;</a></summary>
 
-<figure style="float: left; width: 49%;">
-  <a href="glowscript/NumpyMatplot3D.html">
-    <img alt="Dini&apos;s spiral" width="48%" height="48%" src="./images/dini_spiral.png" title="Click to animate"/>
-  </a>
-</figure>
-<figure style="float: right; width: 49%;">
-  <a href="glowscript/NumpyMatplot3D.html">
-    <img alt="Mexican hat" width="48%" height="48%" src="./images/mexican_hat.png" title="Click to animate"/>
-  </a>
-</figure>
 <figure style="float: left; width: 50%;">
   <a href="glowscript/NumpyMatplot3D.html">
-    <img alt="Twisted torus" width="48%" height="48%" src="./images/twisted_torus.png" title="Click to animate"/>
+    <img alt="Dini&apos;s spiral" src="./images/dini_spiral.png" title="Click to animate"/>
   </a>
+  <figcaption>Dini&apos;s spiral</figcaption>
 </figure>
 <figure style="float: right; width: 50%;">
   <a href="glowscript/NumpyMatplot3D.html">
-    <img alt="Bubbles shape" width="48%" height="48%" src="./images/bubbles.png" title="Click to animate"/>
+    <img alt="Mexican hat" src="./images/mexican_hat.png" title="Click to animate"/>
+  <figcaption>Dini&apos;s spiral</figcaption>
   </a>
+  <figcaption>The so-called Mexican hat</figcaption>
+</figure>
+<figure style="float: left; width: 50%;">
+  <a href="glowscript/NumpyMatplot3D.html">
+    <img alt="Twisted torus" src="./images/twisted_torus.png" title="Click to animate"/>
+  </a>
+  <figcaption>A twisted torus</figcaption>
+</figure>
+<figure style="float: right; width: 50%;">
+  <a href="glowscript/NumpyMatplot3D.html">
+    <img alt="Bubbles shape" src="./images/bubbles.png" title="Click to animate"/>
+  </a>
+  <figcaption>Surface of revolution</figcaption>
 </figure>
 
 </details>
