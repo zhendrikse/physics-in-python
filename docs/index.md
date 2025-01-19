@@ -67,7 +67,7 @@ Mathematics directs the flow of the universe, lurks behind its shapes and curves
 holds the reins of everything from tiny atoms to the biggest stars. &mdash; Edward Frenkel
 </blockquote>
 
-<p><br clear="all"/></p>
+<p></p>
 
 The code pertaining to the demos in this section is available under the 
 [mathematics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Math/)
