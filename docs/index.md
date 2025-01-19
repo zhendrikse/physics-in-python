@@ -1,3 +1,11 @@
+<blockquote>
+Philosophy is written in this grand book &mdash; I mean universe &mdash; which stands continuously open to our gaze, 
+but which cannot be understood unless one first learns to comprehend the language in which it is written. 
+It is written in the language of mathematics, and its characters are triangles, circles and other geometric figures, 
+without which it is humanly impossible to understand a single word of it; without these, one is wandering about 
+in a dark labyrinth. Galileo (1623).
+</blockquote>
+
 #### Contents
 
 - [Astrophysics](#astrophysics)
