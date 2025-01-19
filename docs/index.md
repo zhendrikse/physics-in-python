@@ -23,8 +23,7 @@ A not accurate to scale sun-earth-moon model, but very detailed and instructive 
 incoming energy from the sun (at a given latitude), as well as the variations in the length of
 the days per season. 
 
-<figure style="text-align: center">
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<figure style="float: center; text-align: center;">
   <a href="glowscript/Daylightvariations.html">
     <img alt="Daylight variations" width="100%" height="100%" src="./images/daylight_variations.png" title="Click to animate"/>
   </a>
