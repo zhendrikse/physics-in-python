@@ -10,16 +10,12 @@ The stage is too big for the drama. ― Richard P. Feynman
 
 ### Contents
 
-- [Astrophysics](#astrophysics)
-- [Electromagnetism](#electromagnetism)
-- [Kinematics](#kinematics)
-- [Mathematics](#mathematics), with references to my separate [Math Art Gallery](geometry.html) 
-- [Nature models](#nature)
-- [Quantum and particle physics](#quantum)
-- [Special relativity](#relativity)
-- [Thermodynamics](#thermodynamics)
-- [Waves](#waves)
-- [Fun stuff](#fun), references &amp; acknowledgements
+[Astrophysics](#astrophysics) &mdash; [Electromagnetism](#electromagnetism) &mdash;
+[Kinematics](#kinematics) &mdash; [Mathematics](#mathematics), with references to my 
+separate [Math Art Gallery](geometry.html) &mdash; [Nature models](#nature) &mdash;
+[Quantum and particle physics](#quantum) &mdash; [Special relativity](#relativity) &mdash;
+[Thermodynamics](#thermodynamics) &mdash;[Waves](#waves) &mdash; [Fun stuff](#fun), 
+references &amp; acknowledgements.
 
 
 <a name="astrophysics"></a>
