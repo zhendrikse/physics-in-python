@@ -132,11 +132,13 @@ $\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\c
   <a href="glowscript/NumpyMatplot3D.html">
     <img alt="Dini&apos;s spiral" width="48%" height="48%" src="./images/dini_spiral.png" title="Click to animate"/>
   </a>
+  <figcaption>Dini&apos;s spiral</figcaption>
 </figure>
 <figure class="right">
   <a href="glowscript/NumpyMatplot3D.html">
     <img alt="Mexican hat" width="48%" height="48%" src="./images/mexican_hat.png" title="Click to animate"/>
   </a>
+  <figcaption>The mexican hat</figcaption>
 </figure>
 <figure class="left">
   <a href="glowscript/NumpyMatplot3D.html">
