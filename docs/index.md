@@ -6,7 +6,9 @@ without which it is humanly impossible to understand a single word of it; withou
 in a dark labyrinth. Galileo (1623).
 </blockquote>
 
-#### Contents
+<p><br clear="all"/></p>
+
+### Contents
 
 - [Astrophysics](#astrophysics)
 - [Electromagnetism](#electromagnetism)
@@ -256,7 +258,6 @@ $$(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x,
 
 </details>
 
-<p><br clear="all"/></p>
 
 <details>
   <summary><a>&dArr; Python code snippet for plotting spherical harmonics &dArr;</a></summary>
