@@ -140,6 +140,8 @@ $$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\
 
 <p></p>
 
+#### Image gallery of mathematical objects
+
 <details>
   <summary><a>&dArr; Click here to open the Math Art image gallery &dArr;</a></summary>
 
