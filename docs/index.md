@@ -52,7 +52,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
   <figcaption>Plotting complex functions $F(z)$</figcaption>
 </figure>
 
-<p><br/></p>
+<p><br clear="all"></p>
 
 <details>
   <summary><a>&dArr; Python code snippets with which to generate the plots &dArr;</a></summary>
@@ -119,7 +119,6 @@ $$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\
 <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">zz</span> <span class="o">=</span> <span class="n">torus</span><span class="p">()</span>
 <span class="n">plot</span> <span class="o">=</span> <span class="n">Plot3D</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">zz</span><span class="p">)</span>
 </code></pre></div></div>
-
 
 </details>
 
