@@ -1,9 +1,9 @@
-# Welcome to my math art gallery 
-
 <blockquote>
 A straight line may be the shortest distance between two points, 
 but it is by no means the most interesting! &mdash; Dr. Who.
 </blockquote>
+
+# Welcome to my math art gallery 
 
 <figure style="float: left; width: 50%; text-align: center">
   <a href="glowscript/Shapes.html">
