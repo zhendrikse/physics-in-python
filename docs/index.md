@@ -165,12 +165,12 @@ The code pertaining to the demos in this section is available under the
 [quantum tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Quantum/)
 on [glowscript.org](https://glowscript.org).
 
-### Visualizing atomic orbitals &amp; plane waves $\psi(x, t) = A \cdot e^{i(k x - \omega t)}$
+### Visualizing spherical harmonics &amp; plane waves $\psi(x, t) = A \cdot e^{i(k x - \omega t)}$
 <hr/>
 
 <figure>
   <a href="glowscript/AtomicOrbitals.html">
-    <img alt="Atomic orbitals" width="49%" height="49%" src="./images/atomic_orbitals.png" title="Click to animate"/>
+    <img alt="Spherical harmonics" width="49%" height="49%" src="./images/atomic_orbitals.png" title="Click to animate"/>
   </a>
   <a href="glowscript/Planewave.html">
     <img alt="Complex wave" width="49%" height="49%" src="./images/plane_wave.png" title="Click to animate"/>
@@ -201,7 +201,7 @@ $$(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x,
 <p/>
 
 <details>
-  <summary><a>&dArr; Python code snippet for plotting atomic orbitals &dArr;</a></summary>
+  <summary><a>&dArr; Python code snippet for plotting spherical harmonics &dArr;</a></summary>
 
 The spherical harmonic function is given by
 
