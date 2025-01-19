@@ -25,21 +25,19 @@ in a dark labyrinth. Galileo (1623).
 <a name="astrophysics"></a>
 # Astrophysics
 
-The code pertaining to the demos in this section is available under the 
+The code pertaining to the demos in this section is also available under the 
 [astrophysics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/)
 on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 
 ### Daylight variations &mdash; sun-earth-moon model
 <hr/>
-A not accurate to scale sun-earth-moon model, but very detailed and instructive nonetheless! It shows the per day
-incoming energy from the sun (at a given latitude), as well as the variations in the length of
-the days per season. 
 
 <figure style="float: center; text-align: center;">
   <a href="glowscript/Daylightvariations.html">
     <img alt="Daylight variations" width="100%" height="100%" src="./images/daylight_variations.png" title="Click to animate"/>
   </a>
-  <figcaption>Visualizing the change in day length during the course of a year.</figcaption>
+  <figcaption>A not accurate to scale sun-earth-moon model, but very detailed and instructive!
+  It&apos;s main goal is visualizing the change in day length during the course of a year.</figcaption>
 </figure>
 
 <p><br clear="all"/></p>
