@@ -1,3 +1,11 @@
+# Contents
+
+- [Astrophysics](#astrophysics)
+- [Mathematics](#mathematics)
+- [Nature models](#nature)
+- [Quantum and particle physics](#quantum)
+
+<a name="astrophysics"></a>
 # Astrophysics
 
 The code pertaining to the demos in this section is available under the 
@@ -30,6 +38,7 @@ the days per season.
 </figure>
 
 
+<a name="mathematics"></a>
 # Mathematics
 
 The code pertaining to the demos in this section is available under the 
@@ -167,6 +176,7 @@ $$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\
 
 <p></p>
 
+<a name="nature"></a>
 # Nature models
 
 The code pertaining to the demos in this section is available under the 
@@ -187,6 +197,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 </figure>
 
 
+<a name="quantum"></a>
 # Particle and quantum physics
 
 The code pertaining to the demos in this section is available under the 
