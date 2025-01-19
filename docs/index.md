@@ -156,7 +156,7 @@ $$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\
   <a href="glowscript/NumpyMatplot3D.html">
     <img alt="Dini&apos;s spiral" src="./images/dini_spiral.png" title="Click to animate"/>
   </a>
-  <figcaption>Dini&apos;s spiral.</figcaption>
+  <figcaption>Dini&apos;s spiral, Dini&apos;s surface or twisted pseudo-sphere, which is characterized by a surface of constant (negative) curvature and is named after Ulisse Dini.</figcaption>
 </figure>
 <figure style="float: right; width: 50%; text-align: center">
   <a href="glowscript/NumpyMatplot3D.html">
