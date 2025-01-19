@@ -209,6 +209,11 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 <a name="quantum"></a>
 # Particle and quantum physics
 
+<blockquote>
+If you think you understand quantum mechanics, you don't understand quantum mechanics.
+&mdash; Richard P. Feynman 
+</blockquote>
+
 The code pertaining to the demos in this section is available under the 
 [quantum tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Quantum/)
 on [glowscript.org](https://glowscript.org).
