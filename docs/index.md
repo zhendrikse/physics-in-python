@@ -66,6 +66,13 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 <a name="mathematics"></a>
 # Mathematics
 
+<blockquote>
+Mathematics directs the flow of the universe, lurks behind its shapes and curves, 
+holds the reins of everything from tiny atoms to the biggest stars. &mdash; Edward Frenkel
+</blockquote>
+
+<p><br clear="all"/></p>
+
 The code pertaining to the demos in this section is available under the 
 [mathematics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Math/)
 on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
@@ -213,6 +220,8 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 If you think you understand quantum mechanics, you don't understand quantum mechanics.
 &mdash; Richard P. Feynman 
 </blockquote>
+
+<p><br clear="all"/></p>
 
 The code pertaining to the demos in this section is available under the 
 [quantum tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Quantum/)
