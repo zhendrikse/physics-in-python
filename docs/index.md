@@ -1,9 +1,8 @@
 <blockquote>
-It doesn't seem to me that this fantastically marvelous universe, this tremendous range of time 
-and space and different kinds of animals, and all the different planets, and all these atoms 
-with all their motions, and so on, all this complicated thing can merely be a stage so that 
-God can watch human beings struggle for good and evil - which is the view that religion has. 
-The stage is too big for the drama. ― Richard P. Feynman 
+The feeling of awed wonder that science can give us is one of the highest experiences 
+of which the human psyche is capable. It is a deep aesthetic passion to rank with the 
+finest that music and poetry can deliver. &mdash;
+Richard Dawkins in Unweaving the Rainbow, 1998.
 </blockquote>
 
 <p><br clear="all"/></p>
@@ -219,7 +218,7 @@ If you think you understand quantum mechanics, you don't understand quantum mech
 &mdash; Richard P. Feynman 
 </blockquote>
 
-<p><br clear="all"/></p>
+<p></p>
 
 The code pertaining to the demos in this section is available under the 
 [quantum tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Quantum/)
@@ -503,6 +502,11 @@ This demo models the magnetization at various temperatures using a two-dimension
 
 <a name="relativity"></a>
 # Special relativity
+<p></p>
+<blockquote>
+We should make things as simple as possible, but not simpler. Albert Einstein
+</blockquote>
+<p></p>
 
 The code pertaining to the demos in this section is available under the 
 [relativity tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Relativity/)
