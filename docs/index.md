@@ -66,13 +66,13 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
   <a href="glowscript/NumpyMatplot3D.html">
     <img alt="Multivariate functions" src="./images/3d_plot.png" title="Click to animate"/>
   </a>&nbsp;&nbsp;&nbsp;
-  <figcaption>Plotting multivariate functions $F(x, y)$.</figcaption>
+  <figcaption>Plotting <a href="https://en.wikipedia.org/wiki/Function_of_several_real_variables">multivariate functions</a> $F(x, y)$.</figcaption>
 </figure>
 <figure style="float: right; width: 50%; text-align: center">
   <a href="glowscript/Complexfunctionplot.html">
     <img alt="Complex functions" src="./images/complex_function_plot.png" title="Click to animate"/>
   </a>
-  <figcaption>Plotting complex functions $F(z)$.</figcaption>
+  <figcaption>Plotting <a href="https://en.wikipedia.org/wiki/Complex_analysis">complex functions</a> $F(z)$.</figcaption>
 </figure>
 
 <p><br clear="all"></p>
