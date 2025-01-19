@@ -23,11 +23,12 @@ A not accurate to scale sun-earth-moon model, but very detailed and instructive 
 incoming energy from the sun (at a given latitude), as well as the variations in the length of
 the days per season. 
 
-<figure>
+<figure style="text-align: center">
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="glowscript/Daylightvariations.html">
     <img alt="Daylight variations" width="100%" height="100%" src="./images/daylight_variations.png" title="Click to animate"/>
   </a>
+  <figcaption>Visualizing the change in day length during the course of a year</figcaption>
 </figure>
 
 ###  Kepler's law &amp; the three-body problem
@@ -35,13 +36,13 @@ the days per season.
 
 <figure style="float: left; width: 50%; text-align: center">
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw">
-    <img alt="Kepler's laws" width="50%" height="50%" src="./images/keplers_law.png" title="Click to animate"/>
+    <img alt="Kepler's laws" src="./images/keplers_law.png" title="Click to animate"/>
   </a>
   <figcaption><a href="https://en.wikipedia.org/wiki/Kepler%27s_laws_of_planetary_motion">Kepler&apos;s laws of planetary motion</a></figcaption>
 </figure>
 <figure style="float: right; width: 50%; text-align: center">
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Threebody">
-    <img alt="Three body problem" width="40%" height="40%" src="./images/three_body.png" title="Click to animate"/>
+    <img alt="Three body problem" src="./images/three_body.png" title="Click to animate"/>
   </a>
   <figcaption><a href="https://en.wikipedia.org/wiki/Three-body_problem">The three-body problem</a></figcaption>
 </figure>
