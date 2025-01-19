@@ -136,7 +136,7 @@ $\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\c
 <figure class="right">
   <a href="glowscript/NumpyMatplot3D.html">
     <img alt="Mexican hat" width="48%" height="48%" src="./images/mexican_hat.png" title="Click to animate"/>
-  </a>&nbsp;&nb
+  </a>
 </figure>
 <figure class="left">
   <a href="glowscript/NumpyMatplot3D.html">
@@ -146,7 +146,7 @@ $\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\c
 <figure class="right">
   <a href="glowscript/NumpyMatplot3D.html">
     <img alt="Bubbles shape" width="48%" height="48%" src="./images/bubbles.png" title="Click to animate"/>
-  </a>&nbsp;&nbsp;&nbsp;
+  </a>
 </figure>
 
 </details>
