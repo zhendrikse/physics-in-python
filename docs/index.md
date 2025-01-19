@@ -30,6 +30,8 @@ the days per season.
   <figcaption>Visualizing the change in day length during the course of a year</figcaption>
 </figure>
 
+<p><br clear="all"></p>
+
 ###  Kepler's law &amp; the three-body problem
 <hr/>
 
