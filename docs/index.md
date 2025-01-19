@@ -82,7 +82,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 
 The formula for the above image is given by:
 
-$$\psi(x, y, t) = \sqrt{x^2+y^2}$$
+$$\psi(x, y, t) = \sin(\sqrt{x^2+y^2})$$
 
 <p>The following Python code was used to plot the graph belonging to this multivariate function:<br/></p>
 
