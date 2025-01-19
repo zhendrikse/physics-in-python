@@ -159,17 +159,16 @@ $$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\
 </figure>
 <figure style="float: right; width: 50%; text-align: center">
   <a href="glowscript/AtomicOrbitals.html">
-    <img alt="Spherical harmonics" src="./images/atomic_orbitals.png" title="Click to animate"/>
+    <img alt="Twisted torus" src="./images/twisted_torus.png" title="Click to animate"/>
   </a>
-  <figcaption>Applying polar coordinates to spherical harmonics, which form 
-              solutions for the wave functions of the Schr&#246;dinger equation for the hydrogen atom.</figcaption>
+  <figcaption>A twisted torus. For more geometrical shapes like this, visit my [Math Art gallery](geometry.html).</figcaption>
 </figure>
 
 <p><br clear="all"/></p>
 
 ### Image gallery depicting more mathematical objects
 
-&rArr; Make sure you also visit my [Math Art gallery](geometry.html) &lArr;
+&rArr; [Make sure you also visit my Math Art gallery](geometry.html) &lArr;
 
 <p></p>
 
@@ -210,7 +209,7 @@ on [glowscript.org](https://glowscript.org).
 ### Visualizing plane waves $\psi(x, t) = A \cdot e^{i(k x - \omega t)}$ &amp; spherical harmonics
 <hr/>
 
-<figure style="float: leftt; width: 50%; text-align: center">
+<figure style="float: left; width: 50%; text-align: center">
   <a href="glowscript/Planewave.html">
     <img alt="Complex wave" src="./images/plane_wave.png" title="Click to animate"/>
   </a>
