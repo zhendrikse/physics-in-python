@@ -8,7 +8,7 @@ The stage is too big for the drama. ― Richard P. Feynman
 
 <p><br clear="all"/></p>
 
-### Contents
+## Contents
 
 [Astrophysics](#astrophysics) &mdash; [Electromagnetism](#electromagnetism) &mdash;
 [Kinematics](#kinematics) &mdash; [Mathematics](#mathematics), with references to my 
