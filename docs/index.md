@@ -5,7 +5,7 @@ finest that music and poetry can deliver. &mdash;
 Richard Dawkins in Unweaving the Rainbow, 1998.
 </blockquote>
 
-<p><br clear="all"/></p>
+<p style="clear: both;"></p>
 
 ## Contents
 
@@ -35,7 +35,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
   It&apos;s main goal is visualizing the change in day length during the course of a year.</figcaption>
 </figure>
 
-<p><br clear="all"/></p>
+<p style="clear: both;"></p>
 
 ###  Kepler's law &amp; the three-body problem
 <hr/>
@@ -56,7 +56,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
   <figcaption>The well-known <a href="https://en.wikipedia.org/wiki/Three-body_problem">three-body problem</a>.</figcaption>
 </figure>
 
-<p><br clear="all"/></p>
+<p style="clear: both;"></p>
 
 <a name="mathematics"></a>
 # Mathematics
@@ -76,7 +76,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 ### Dynamic 3D-plots of multivariate and complex functions
 <hr/>
 
-<div style="position: absolute; bottom: 0; left: 0;">
+<div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
   <a href="glowscript/NumpyMatplot3D.html">
     <img alt="Multivariate functions" src="./images/3d_plot.png" title="Click to animate"/>
@@ -171,15 +171,15 @@ $$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\
   </a>
   <figcaption>Polar coordinates frequently simplify the tackling of rotationally symmetric problems.</figcaption>
 </figure>
-<figure style="float: right; width: 50%; text-align: center">
-  <a href="glowscript/AtomicOrbitals.html">
-    <img alt="Twisted torus" src="./images/twisted_torus.png" title="Click to animate"/>
+<figure style="float: right; width: 45%; text-align: center">
+  <a href="glowscript/shapes.html">
+    <img alt="Twisted torus" src="./images/geometry/twisted_torus.png" title="Click to animate"/>
   </a>
   <figcaption>A twisted torus. For more geometrical shapes like this, 
   visit my <a href="geometry.html">Math Art gallery</a>.</figcaption>
 </figure>
 
-<p><br clear="all"/></p>
+<p style="clear: both;"></p>
 
 
 <a name="nature"></a>
@@ -206,8 +206,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
   <figcaption>"There are holes in the sky. Where the rain gets in. But they're ever so small. 
   That's why the rain is thin" &mdash; Spike Milligan.</figcaption>
 </figure>
-
-<p><br clear="all"/></p>
+<p style="clear: both;"></p>
 
 
 <a name="quantum"></a>
@@ -240,8 +239,8 @@ on [glowscript.org](https://glowscript.org).
   </a>
   <figcaption>Spherical harmonics are solutions of the Schr&#246;dinger equation for the hydrogen atom.</figcaption>
 </figure>
+<p style="clear: both;"></p>
 
-<p><br clear="all"/></p>
 
 <details>
   <summary><a>&dArr; For a plane wave, we can easily derive the Schr&#246;dinger equation &uArr;</a></summary>
@@ -375,8 +374,7 @@ The quantum harmonic oscillator is visualized in a semi-classical way below.
   </a>
   <figcaption>Discover how a particle&apos;s velocity and the electric field strength influence one another.</figcaption>
 </figure>
-
-<p><br clear="all"/></p>
+<p style="clear: both;"></p>
 
 ### Rutherford scattering & charged particle in magnetic field
 <hr/>
@@ -394,8 +392,7 @@ The quantum harmonic oscillator is visualized in a semi-classical way below.
   </a>
   <figcaption>Playfully discover how a charged particle behaves in a magnetic field.</figcaption>
 </figure>
-
-<p><br clear="all"/></p>
+<p style="clear: both;"></p>
 
 
 <a name="electromagnetism"></a>
@@ -420,8 +417,7 @@ on [glowscript.org](https://glowscript.org).
   </a>
   <figcaption><a href="https://en.wikipedia.org/wiki/Electric_dipole_moment">Electric dipole moment.</a></figcaption>
 </figure>
-
-<p><br clear="all"/></p>
+<p style="clear: both;"></p>
 
 <details>
   <summary><a>&dArr; Background: electric fields around dipoles and point charges &dArr;</a></summary>
@@ -452,8 +448,7 @@ $$\vec{E} ( \vec{r} ) = -\dfrac {1} {4\pi\epsilon_0} \nabla \bigg( \dfrac{\vec{r
   </a>  
   <figcaption>Visualization of an electric field inside a series of charged rings.</figcaption>
 </figure>
-
-<p><br clear="all"/></p>
+<p style="clear: both;"></p>
 
 ### Charged disk and accompanying builder
 <hr/>
@@ -470,8 +465,7 @@ $$\vec{E} ( \vec{r} ) = -\dfrac {1} {4\pi\epsilon_0} \nabla \bigg( \dfrac{\vec{r
   </a>
   <figcaption>Build up an electric field yourself by incrementally adding a charged rings.</figcaption>
 </figure>
-
-<p><br clear="all"/></p>
+<p style="clear: both;"></p>
 
 ## Electromagnetic waves
 <hr/>
@@ -488,8 +482,8 @@ $$\vec{E} ( \vec{r} ) = -\dfrac {1} {4\pi\epsilon_0} \nabla \bigg( \dfrac{\vec{r
   </a>
   <figcaption>Electromagnetic waves propagating through empty space.</figcaption>
 </figure>
+<p style="clear: both;"></p>
 
-<p><br clear="all"/></p>
 
 
 <a name="thermodynamics"></a>
