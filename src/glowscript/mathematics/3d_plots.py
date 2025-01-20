@@ -254,7 +254,7 @@ class Plot3D:
         self._create_quads()
         self.render(0)
 
-    def reinitialize(self, xx, yy, zz, z_min=None, z_max=None):
+    def reinitialize(self, xx, yy, zz, show_xy, show_xz, show_yz, show_ticks, z_min=None, z_max=None):
         self._xx = xx
         self._yy = yy
         self._zz = zz
@@ -263,6 +263,10 @@ class Plot3D:
         self._hide_plot()  # Hide previous shizzle before creating new stuff
         self._hide_axis()  # Hide previous stizzle before creating new stuff
         self._axis = self._create_base()
+        self._axis.tick_marks_visibility_is(show_ticks)
+        self._axis.xy_mesh_visibility_is(show_xy)
+        self._axis.xz_mesh_visibility_is(show_xz)
+        self._axis.yz_mesh_visibility_is(show_yz)
         self._vertices, self._quads = [], []
         self._create_vertices()
         self._create_quads()
@@ -379,22 +383,6 @@ class Plot3D:
 
     def yz_mesh_visibility_is(self, visible):
         self._axis.yz_mesh_visibility_is(visible)
-
-
-def toggle_tick_marks(event):
-    plot.tick_marks_visibility_is(event.checked)
-
-
-def toggle_xz_mesh(event):
-    plot.xz_mesh_visibility_is(event.checked)
-
-
-def toggle_xy_mesh(event):
-    plot.xy_mesh_visibility_is(event.checked)
-
-
-def toggle_yz_mesh(event):
-    plot.yz_mesh_visibility_is(event.checked)
 
 
 def sine_sqrt():
@@ -674,27 +662,45 @@ def switch_function(event):
         animation.title = exponential_title + "\n"
 
     animation.range = 1.5 * np.len(xx)
-    plot.reinitialize(xx, yy, zz, z_min, z_max)
+    print(xy_checkbox.checked)
+    plot.reinitialize(xx, yy, zz, xy_checkbox.checked, xz_checkbox.checked, yz_checkbox.checked, tick_checkbox.checked,
+                      z_min, z_max)
     time = 0.5
     MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 
 def adjust_omega():
     plot.set_omega_to(omega_slider.value)
-    omega_slider_text.text = "{:1.2f}".format(omega_slider.value / pi, 2) + " * π"
+    omega_slider_text.text = "= sin({:1.2f}".format(omega_slider.value / pi, 2) + " π)"
+
+
+def toggle_tick_marks(event):
+    plot.tick_marks_visibility_is(event.checked)
+
+
+def toggle_xz_mesh(event):
+    plot.xz_mesh_visibility_is(event.checked)
+
+
+def toggle_xy_mesh(event):
+    plot.xy_mesh_visibility_is(event.checked)
+
+
+def toggle_yz_mesh(event):
+    plot.yz_mesh_visibility_is(event.checked)
 
 
 animation.append_to_caption("\n")
-_ = checkbox(text='YZ mesh ', bind=toggle_yz_mesh, checked=True)
-_ = checkbox(text='XZ mesh ', bind=toggle_xy_mesh, checked=True)
-_ = checkbox(text='XY mesh ', bind=toggle_xz_mesh, checked=True)
-_ = checkbox(text='Tick marks ', bind=toggle_tick_marks, checked=True)
+xy_checkbox = checkbox(text='XY mesh ', bind=toggle_xz_mesh, checked=True)
+xz_checkbox = checkbox(text='XZ mesh ', bind=toggle_xy_mesh, checked=True)
+yz_checkbox = checkbox(text='YZ mesh ', bind=toggle_yz_mesh, checked=True)
+tick_checkbox = checkbox(text='Tick marks ', bind=toggle_tick_marks, checked=True)
 animation.append_to_caption("\n\nHue offset  ")
 color_slider = slider(min=0, max=1, step=.01, value=0.5, bind=adjust_color)
 
-animation.append_to_caption("\n\nOmega = ")
+animation.append_to_caption("\nAnimation speed ")
 omega_slider = slider(min=0, max=3 * pi, value=0, bind=adjust_omega)
-omega_slider_text = wtext(text="1 * π")
+omega_slider_text = wtext(text="= 0")
 
 animation.append_to_caption("\n\n")
 ricker_button = radio(bind=switch_function, checked=True, text='Ricker wavelet', name='ricker')

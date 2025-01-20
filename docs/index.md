@@ -76,7 +76,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 ### Dynamic 3D-plots of multivariate and complex functions
 <hr/>
 
-<div style="vertical-align: bottom;">
+<div style="position: absolute; bottom: 0; left: 0;">
 <figure style="float: left; width: 50%; text-align: center">
   <a href="glowscript/NumpyMatplot3D.html">
     <img alt="Multivariate functions" src="./images/3d_plot.png" title="Click to animate"/>
