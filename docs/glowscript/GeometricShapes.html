@@ -56,7 +56,7 @@ async function __main__() {
     fontloading();
     await waitforfonts();
 
-    var version, print, arange, __name__, type, ρσ_ls, ricker_title, mexican_hat_title, spiral_title, torus_title, twisted_torus_title, sine_cosine_title, exponential_title, ripple_title, polynomial_title, cosine_of_abs_title, sine_sqrt_title, caption, animation, _GS_1, np, x_hat, y_hat, z_hat, base, xy_checkbox, xz_checkbox, yz_checkbox, tick_checkbox, color_slider, omega_slider, omega_slider_text, ricker_button, mexican_button, ripple_button, sin_sqrt_button, polynomial_button, sin_cos_button, abs_cos_button, exp_sin_button, time, dt, run, ρσ_unpack, xx, yy, zz, z_min, z_max, plot;
+    var version, print, arange, __name__, type, ρσ_ls, spiral_title, torus_title, twisted_torus_title, caption, animation, _GS_1, np, x_hat, y_hat, z_hat, base, xy_checkbox, xz_checkbox, yz_checkbox, tick_checkbox, color_slider, omega_slider, omega_slider_text, torus_button, twisted_torus_button, spiral_button, mobius_button, bubbles_button, arc_button, knot_button, time, dt, run, ρσ_unpack, xx, yy, zz, z_min, z_max, plot;
     version = ρσ_list_decorate([ "3.2", "glowscript" ]);
     Array.prototype['+'] = function(r) {return this.concat(r)}
     Array.prototype['*'] = function(r) {return __array_times_number(this, r)}
@@ -70,60 +70,44 @@ async function __main__() {
     strings();
     "6";
     (await get_library("https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js"));
-    "12";
-    ricker_title = "<a href=\"https://en.wikipedia.org/wiki/Ricker_wavelet\">Ricker / Mexican hat / Marr wavelet<\/a>\n\n$F(x,y) = \\dfrac{1}{\\pi\\sigma^4} \\bigg(1 - \\dfrac{1}{2} \\bigg( \\dfrac{x^2 + y^2}{\\sigma^2} \\bigg) \\bigg) e^{-\\dfrac{x^2+y^2}{2\\sigma^2}}$\n";
-    "14";
-    mexican_hat_title = "<h3>Polar coordinates for Mexican hat</h3>$\\begin{cases} x & = r\\cos(\\phi) \\\\ y & = r\\sin(\\phi)) \\\\ z & = (r^2 - 1)^2 \\end{cases}$";
-    "15";
-    spiral_title = "<h3>Polar coordinates for Dini&apos;s spiral</h3>$\\begin{pmatrix}x \\\\ y \\\\ z\\end{pmatrix}=\\begin{pmatrix} \\cos(\\theta)\\cdot\\sin(\\phi) \\\\  \\sin(\\theta)\\cdot\\sin(\\phi) \\\\ (\\cos(\\phi)+\\log(\\tan(\\phi/2)))) + 0.2\\theta \\end{pmatrix}\\text{, } \\begin{cases} 0 < \\theta < 12.4 \\\\ 0.1 < \\phi < 2\\end{cases}$";
-    "16";
+    "9";
+    spiral_title = "<h3>Polar coordinates for Dini&apos;s spiral<\/h3>$\\begin{pmatrix}x \\\\ y \\\\ z\\end{pmatrix}=\\begin{pmatrix} \\cos(\\theta)\\cdot\\sin(\\phi) \\\\  \\sin(\\theta)\\cdot\\sin(\\phi) \\\\ (\\cos(\\phi)+\\log(\\tan(\\phi/2)))) + 0.2\\theta \\end{pmatrix}\\text{, } \\begin{cases} 0 < \\theta < 12.4 \\\\ 0.1 < \\phi < 2\\end{cases}$";
+    "10";
     torus_title = "<h3>Polar coordinates for torus</h3>$\\begin{pmatrix}x \\\\ y \\\\ z\\end{pmatrix}=\\begin{pmatrix} (c + a \\cos(\\phi))\\cdot\\cos(\\theta) \\\\  (c + a \\cos(\\phi))\\cdot\\sin(\\theta) \\\\ a \\sin(\\phi) \\end{pmatrix}\\text{, } \\theta, \\phi \\in [-\\pi, \\pi]$";
-    "17";
+    "11";
     twisted_torus_title = "<h3>Polar coordinates for twisted torus</h3>$\\begin{pmatrix}x \\\\ y \\\\ z\\end{pmatrix}=\\begin{pmatrix} (3 + \\sin(\\phi) + \\cos(\\theta)) \\cdot \\cos(2\\phi) \\\\  (3 + \\sin(\\phi) + \\cos(\\theta))\\cdot\\sin(2\\phi) \\\\ \\sin(\\theta)+2\\cos(\\phi) \\end{pmatrix}\\text{, } \\theta, \\phi \\in [-\\pi, \\pi]\\text{, } \\theta, \\phi \\in [-\\pi, \\pi]$";
-    "18";
-    sine_cosine_title = "<h2>$F(x, y) = \\sin{(\\pi x)}\\cos{(\\pi y)}}$</h2>";
     "19";
-    exponential_title = "<h2>$F(x, y) = \\sin(x^2 + y^2) e^{ -x^2 - y^2}$</h2>";
-    "20";
-    ripple_title = "<h2>$F(x, y) =  \\sin\\big(3 (x^2 + y^2)\\big)$</h2";
-    "21";
-    polynomial_title = "<h2>$F(x, y) =  (yx^3 - xy^3)$</h2>";
-    "22";
-    cosine_of_abs_title = "<h2>F(x, y) = \\cos(|x| + |y|)$</h2>";
-    "23";
-    sine_sqrt_title = "<h2>$F(x, y) = \\sqrt{x^2+y^2}$</h2>";
-    "31";
     caption = "\n&#x2022; Source code can be found <a href=\"https://github.com/zhendrikse/physics-in-python/blob/main/src/glowscript/mathematics/3d_plots.py\">here</a>\n&#x2022; Inspired on <a href=\"https://www.glowscript.org/#/user/GlowScriptDemos/folder/Examples/program/Plot3D\">Plot3D</a> by adding the following features: \n  &#x2022; Numpy linspace and meshgrid syntax\n  &#x2022; Configurable base and mesh background\n  &#x2022; Non-uniform coloring\n\n";
-    "33";
-    animation = ρσ_interpolate_kwargs.call(this, canvas, [ρσ_desugar_kwargs({align: "top", width: 700, height: 700, center: vec(0, 5, 0), forward: vec(1["-u"]()["*"](.9), 1["-u"]()["*"](.5), 1["-u"]()["*"](.8)), title: ricker_title["+"]("\n"), range: 75})]);
-    "35";
+    "21";
+    animation = ρσ_interpolate_kwargs.call(this, canvas, [ρσ_desugar_kwargs({align: "top", width: 700, height: 700, center: vec(0, 5, 0), forward: vec(1["-u"]()["*"](.9), 1["-u"]()["*"](.5), 1["-u"]()["*"](.8)), title: twisted_torus_title["+"]("\n"), range: 150})]);
+    "23";
     MathJax.Hub.Queue(ρσ_list_decorate([ "Typeset", MathJax.Hub ]));
-    "38";
+    "26";
     function Numpy() {;
     }
     Numpy.prototype.__init__ = async function __init__() {
         var self = this;
-        "40";
+        "28";
         self.array = self._array;
-        "41";
+        "29";
         self.linspace = self._linspace;
-        "42";
+        "30";
         self.len = self._len;
-        "43";
+        "31";
         self.meshgrid = self._meshgrid;
-        "44";
+        "32";
         self.sqrt = self._sqrt;
-        "45";
+        "33";
         self.cos = self._cos;
-        "46";
+        "34";
         self.sin = self._sin;
-        "47";
+        "35";
         self.tan = self._tan;
-        "48";
+        "36";
         self.exp = self._exp;
-        "49";
+        "37";
         self.log = self._log;
-        "50";
+        "38";
         self.abs = self._abs;
     };
     if (!Numpy.prototype.__init__.__module__) Object.defineProperties(Numpy.prototype.__init__, {
@@ -205,7 +189,7 @@ async function __main__() {
     });
     Numpy.prototype._linspace = async function _linspace(start, stop, num) {
         var self = this;
-        "63";
+        "51";
         return (await self._array((function() {
             var ρσ_Iter = range(start, stop, stop["-"](1["*"](start))["/"](num["-"](1["*"](1)))), ρσ_Result = [], x;
             ρσ_Iter = ((typeof ρσ_Iter[Symbol.iterator] === "function") ? (ρσ_Iter instanceof Map ? ρσ_Iter.keys() : ρσ_Iter) : Object.keys(ρσ_Iter));
@@ -224,7 +208,7 @@ async function __main__() {
     Numpy.prototype._meshgrid = async function _meshgrid(linspace_1, linspace_2) {
         var self = this;
         var ρσ_ls, xx, temp, j, i, yy;
-        "66";
+        "54";
         xx = nj.stack((function() {
             var ρσ_Iter = range(linspace_1.shape), ρσ_Result = [], _;
             ρσ_Iter = ((typeof ρσ_Iter[Symbol.iterator] === "function") ? (ρσ_Iter instanceof Map ? ρσ_Iter.keys() : ρσ_Iter) : Object.keys(ρσ_Iter));
@@ -235,25 +219,25 @@ async function __main__() {
             ρσ_Result = ρσ_list_constructor(ρσ_Result);
             return ρσ_Result;
         })());
-        "67";
+        "55";
         temp = ρσ_list_decorate([]);
-        "68";
+        "56";
         var ρσ_Iter1 = range(ρσ_getitem(linspace_2.shape, 0));
         ρσ_Iter1 = ((typeof ρσ_Iter1[Symbol.iterator] === "function") ? (ρσ_Iter1 instanceof Map ? ρσ_Iter1.keys() : ρσ_Iter1) : Object.keys(ρσ_Iter1));
         for (var ρσ_Index1 of ρσ_Iter1) {
             i = ρσ_Index1;
-            "69";
+            "57";
             var ρσ_Iter2 = range(ρσ_getitem(linspace_2.shape, 0));
             ρσ_Iter2 = ((typeof ρσ_Iter2[Symbol.iterator] === "function") ? (ρσ_Iter2 instanceof Map ? ρσ_Iter2.keys() : ρσ_Iter2) : Object.keys(ρσ_Iter2));
             for (var ρσ_Index2 of ρσ_Iter2) {
                 j = ρσ_Index2;
-                "70";
+                "58";
                 temp.append(linspace_2.get(i));
             }
         }
-        "71";
+        "59";
         yy = nj.array(temp).reshape(ρσ_getitem(linspace_2.shape, 0), ρσ_getitem(linspace_2.shape, 0));
-        "72";
+        "60";
         return [xx, yy];
     };
     if (!Numpy.prototype._meshgrid.__argnames__) Object.defineProperties(Numpy.prototype._meshgrid, {
@@ -280,29 +264,29 @@ async function __main__() {
 
 
 
-    "75";
+    "63";
     _GS_1 = new Numpy;
     (await _GS_1.__init__());
     np = _GS_1;
-    "77";
+    "65";
     x_hat = vec(1, 0, 0);
-    "78";
+    "66";
     y_hat = vec(0, 1, 0);
-    "79";
+    "67";
     z_hat = vec(0, 0, 1);
-    "80";
+    "68";
     base = ρσ_list_decorate([ x_hat, y_hat, z_hat ]);
-    "83";
+    "71";
     function Base() {;
     }
     Base.prototype.__init__ = async function __init__(xx, yy, zz, axis_color, tick_marks_color, num_tick_marks) {
         var self = this;
         var ρσ_ls, base_, scale, delta_, i, ρσ_unpack;
-        "85";
+        "73";
         base_ = ρσ_list_decorate([ (await np.linspace(0, (await np.len(xx)), num_tick_marks["+"](1))), (await np.linspace(0, (await np.len(yy)), num_tick_marks["+"](1))), (await np.linspace(0, (await np.len(zz)), num_tick_marks["+"](1))) ]);
-        "88";
+        "76";
         scale = .01["*"](ρσ_getitem(base_, 0).get(1["-u"]()["*"](1))["-"](1["*"](ρσ_getitem(base_, 0).get(0))));
-        "89";
+        "77";
         delta_ = (function() {
             var ρσ_Iter = base_, ρσ_Result = [], i;
             ρσ_Iter = ((typeof ρσ_Iter[Symbol.iterator] === "function") ? (ρσ_Iter instanceof Map ? ρσ_Iter.keys() : ρσ_Iter) : Object.keys(ρσ_Iter));
@@ -313,15 +297,15 @@ async function __main__() {
             ρσ_Result = ρσ_list_constructor(ρσ_Result);
             return ρσ_Result;
         })();
-        "90";
+        "78";
         ρσ_unpack = [ρσ_list_decorate([]), ρσ_list_decorate([]), ρσ_list_decorate([]), ρσ_list_decorate([])];
         self._tick_marks = ρσ_unpack[0];
         self._xy_mesh = ρσ_unpack[1];
         self._xz_mesh = ρσ_unpack[2];
         self._yz_mesh = ρσ_unpack[3];
-        "91";
+        "79";
         (await self._make_tick_marks(base_, xx, yy, zz, delta_, tick_marks_color, axis_color, scale, num_tick_marks));
-        "92";
+        "80";
         (await self._make_mesh(base_, delta_, scale));
     };
     if (!Base.prototype.__init__.__argnames__) Object.defineProperties(Base.prototype.__init__, {
@@ -333,7 +317,7 @@ async function __main__() {
     Base.prototype._make_mesh = async function _make_mesh(base_, delta_, scale) {
         var self = this;
         var ρσ_ls, range_, i, pos_x_y, pos_x_z, pos_y_z, pos, j;
-        "95";
+        "83";
         range_ = (function() {
             var ρσ_Iter = base_, ρσ_Result = [], i;
             ρσ_Iter = ((typeof ρσ_Iter[Symbol.iterator] === "function") ? (ρσ_Iter instanceof Map ? ρσ_Iter.keys() : ρσ_Iter) : Object.keys(ρσ_Iter));
@@ -344,46 +328,46 @@ async function __main__() {
             ρσ_Result = ρσ_list_constructor(ρσ_Result);
             return ρσ_Result;
         })();
-        "96";
+        "84";
         var ρσ_Iter3 = range((await np.len(ρσ_getitem(base_, 0))));
         ρσ_Iter3 = ((typeof ρσ_Iter3[Symbol.iterator] === "function") ? (ρσ_Iter3 instanceof Map ? ρσ_Iter3.keys() : ρσ_Iter3) : Object.keys(ρσ_Iter3));
         for (var ρσ_Index3 of ρσ_Iter3) {
             j = ρσ_Index3;
-            "97";
+            "85";
             pos_x_y = x_hat["*"](ρσ_getitem(base_, 0).get(0))["+"](y_hat["*"](ρσ_getitem(base_, 1).get(0)));
-            "98";
+            "86";
             pos_x_z = x_hat["*"](ρσ_getitem(base_, 0).get(0))["+"](z_hat["*"](ρσ_getitem(base_, 2).get(0)));
-            "99";
+            "87";
             pos_y_z = y_hat["*"](ρσ_getitem(base_, 1).get(0))["+"](z_hat["*"](ρσ_getitem(base_, 2).get(0)));
-            "100";
+            "88";
             self._xy_mesh=self._xy_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pos_x_y["+"](x_hat["*"](j)["*"](ρσ_getitem(delta_, 0))), axis: y_hat["*"](ρσ_getitem(range_, 1))})]) ]));
-            "101";
+            "89";
             self._xy_mesh=self._xy_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pos_x_y["+"](y_hat["*"](j)["*"](ρσ_getitem(delta_, 1))), axis: x_hat["*"](ρσ_getitem(range_, 0))})]) ]));
-            "102";
+            "90";
             self._xz_mesh=self._xz_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pos_x_z["+"](x_hat["*"](j)["*"](ρσ_getitem(delta_, 0))), axis: z_hat["*"](ρσ_getitem(range_, 2))})]) ]));
-            "103";
+            "91";
             self._xz_mesh=self._xz_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pos_x_z["+"](z_hat["*"](j)["*"](ρσ_getitem(delta_, 2))), axis: x_hat["*"](ρσ_getitem(range_, 0))})]) ]));
-            "104";
+            "92";
             self._yz_mesh=self._yz_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pos_y_z["+"](y_hat["*"](j)["*"](ρσ_getitem(delta_, 1))), axis: z_hat["*"](ρσ_getitem(range_, 2))})]) ]));
-            "105";
+            "93";
             self._yz_mesh=self._yz_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pos_y_z["+"](z_hat["*"](j)["*"](ρσ_getitem(delta_, 2))), axis: y_hat["*"](ρσ_getitem(range_, 1))})]) ]));
-            "107";
+            "95";
             pos = ρσ_getitem(base_, 1).get(0)["+"](.5["*"](ρσ_getitem(range_, 1)))["*"](y_hat)["+"](ρσ_getitem(base_, 2).get(0)["+"](.5["*"](ρσ_getitem(range_, 2)))["*"](z_hat));
-            "108";
+            "96";
             self._yz_mesh=self._yz_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({pos: pos, length: scale, width: ρσ_getitem(range_, 2), height: ρσ_getitem(range_, 1), opacity: .15, visible: false})]) ]));
-            "109";
+            "97";
             pos = ρσ_getitem(base_, 0).get(0)["+"](.5["*"](ρσ_getitem(range_, 0)))["*"](x_hat)["+"](ρσ_getitem(base_, 1).get(0)["+"](.5["*"](ρσ_getitem(range_, 1)))["*"](y_hat));
-            "110";
+            "98";
             self._xy_mesh=self._xy_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({pos: pos, length: ρσ_getitem(range_, 0), width: scale, height: ρσ_getitem(range_, 1), opacity: .15, visible: false})]) ]));
-            "111";
+            "99";
             pos = ρσ_getitem(base_, 0).get(0)["+"](.5["*"](ρσ_getitem(range_, 0)))["*"](x_hat)["+"](ρσ_getitem(base_, 2).get(0)["+"](.5["*"](ρσ_getitem(range_, 2)))["*"](z_hat));
-            "112";
+            "100";
             self._xz_mesh=self._xz_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({pos: pos, length: ρσ_getitem(range_, 0), width: ρσ_getitem(range_, 2), height: scale, opacity: .15, visible: false})]) ]));
-            "114";
+            "102";
             (await self._set_mesh_properties(self._xy_mesh, scale));
-            "115";
+            "103";
             (await self._set_mesh_properties(self._xz_mesh, scale));
-            "116";
+            "104";
             (await self._set_mesh_properties(self._yz_mesh, scale));
         }
     };
@@ -394,16 +378,16 @@ async function __main__() {
     Base.prototype._set_mesh_properties = async function _set_mesh_properties(mesh, scale) {
         var self = this;
         var ρσ_ls, item_;
-        "119";
+        "107";
         var ρσ_Iter4 = mesh;
         ρσ_Iter4 = ((typeof ρσ_Iter4[Symbol.iterator] === "function") ? (ρσ_Iter4 instanceof Map ? ρσ_Iter4.keys() : ρσ_Iter4) : Object.keys(ρσ_Iter4));
         for (var ρσ_Index4 of ρσ_Iter4) {
             item_ = ρσ_Index4;
-            "120";
+            "108";
             item_.color = color.gray(.5);
-            "121";
+            "109";
             item_.radius = scale["*"](.5);
-            "122";
+            "110";
             item_.visible = false;
         }
     };
@@ -414,79 +398,79 @@ async function __main__() {
     Base.prototype._make_tick_marks = async function _make_tick_marks(base_, xx, yy, zz, delta_, tick_marks_color, axis_color, scale, num_tick_marks) {
         var self = this;
         var ρσ_ls, increment, start_value, label_text, pos, x_label, i, y_label, z_label, l_y, l_z, l_x, c_x, c_y, c_z;
-        "125";
+        "113";
         increment = xx.get(1["-u"]()["*"](1), 1["-u"]()["*"](1))["-"](1["*"](xx.get(0, 0)))["/"](num_tick_marks);
-        "126";
+        "114";
         start_value = xx.get(0, 0);
-        "127";
+        "115";
         var ρσ_Iter5 = range(1, (await np.len(ρσ_getitem(base_, 2))), 2);
         ρσ_Iter5 = ((typeof ρσ_Iter5[Symbol.iterator] === "function") ? (ρσ_Iter5 instanceof Map ? ρσ_Iter5.keys() : ρσ_Iter5) : Object.keys(ρσ_Iter5));
         for (var ρσ_Index5 of ρσ_Iter5) {
             i = ρσ_Index5;
-            "128";
+            "116";
             label_text = "{:1.2f}".format(start_value["+"](i["*"](increment)), 2);
-            "129";
+            "117";
             pos = z_hat["*"](ρσ_getitem(base_, 2).get(i))["+"](x_hat["*"](ρσ_getitem(base_, 0).get(1["-u"]()["*"](1))["+"](5["*"](scale))));
-            "130";
+            "118";
             x_label = ρσ_interpolate_kwargs.call(this, text, [ρσ_desugar_kwargs({pos: pos, text: label_text, height: 5["*"](scale), billboard: true, color: tick_marks_color})]);
-            "131";
+            "119";
             self._tick_marks.append(x_label);
         }
-        "133";
+        "121";
         increment = yy.get(1["-u"]()["*"](1), 1["-u"]()["*"](1))["-"](1["*"](yy.get(0, 0)))["/"](num_tick_marks);
-        "134";
+        "122";
         start_value = yy.get(0, 0);
-        "135";
+        "123";
         var ρσ_Iter6 = range(0, (await np.len(ρσ_getitem(base_, 0))), 2);
         ρσ_Iter6 = ((typeof ρσ_Iter6[Symbol.iterator] === "function") ? (ρσ_Iter6 instanceof Map ? ρσ_Iter6.keys() : ρσ_Iter6) : Object.keys(ρσ_Iter6));
         for (var ρσ_Index6 of ρσ_Iter6) {
             i = ρσ_Index6;
-            "136";
+            "124";
             label_text = "{:1.2f}".format(start_value["+"](i["*"](increment)), 2);
-            "137";
+            "125";
             pos = x_hat["*"](ρσ_getitem(base_, 0).get(i))["+"](z_hat["*"](ρσ_getitem(base_, 2).get(1["-u"]()["*"](1))["+"](15["*"](scale))));
-            "138";
+            "126";
             y_label = ρσ_interpolate_kwargs.call(this, text, [ρσ_desugar_kwargs({pos: pos, text: label_text, height: 5["*"](scale), billboard: true, color: tick_marks_color})]);
-            "139";
+            "127";
             self._tick_marks.append(y_label);
         }
-        "141";
+        "129";
         increment = zz.get(1["-u"]()["*"](1), 1["-u"]()["*"](1))["-"](1["*"](zz.get(0, 0)))["/"](num_tick_marks);
-        "142";
+        "130";
         start_value = zz.get(0, 0);
-        "143";
+        "131";
         var ρσ_Iter7 = range(1, (await np.len(ρσ_getitem(base_, 1))), 2);
         ρσ_Iter7 = ((typeof ρσ_Iter7[Symbol.iterator] === "function") ? (ρσ_Iter7 instanceof Map ? ρσ_Iter7.keys() : ρσ_Iter7) : Object.keys(ρσ_Iter7));
         for (var ρσ_Index7 of ρσ_Iter7) {
             i = ρσ_Index7;
-            "144";
+            "132";
             label_text = "{:1.2f}".format(start_value["+"](i["*"](increment)), 2);
-            "145";
+            "133";
             pos = y_hat["*"](ρσ_getitem(base_, 1).get(i))["+"](z_hat["*"](ρσ_getitem(base_, 2).get(1["-u"]()["*"](1))["+"](15["*"](scale))));
-            "146";
+            "134";
             z_label = ρσ_interpolate_kwargs.call(this, text, [ρσ_desugar_kwargs({pos: pos, text: label_text, height: 5["*"](scale), billboard: true, color: tick_marks_color})]);
-            "147";
+            "135";
             self._tick_marks.append(z_label);
         }
-        "149";
+        "137";
         pos = x_hat["*"](ρσ_getitem(base_, 0).get(1["-u"]()["*"](1))["+"](2["*"](ρσ_getitem(delta_, 0))))["-"](1["*"](vec(0, scale, 1["-u"]()["*"](30))));
-        "150";
+        "138";
         l_y = ρσ_interpolate_kwargs.call(this, text, [ρσ_desugar_kwargs({pos: pos, text: "Y-axis", color: axis_color, height: scale["*"](4), billboard: true, emissive: true})]);
-        "151";
+        "139";
         pos = z_hat["*"](ρσ_getitem(base_, 2).get(1["-u"]()["*"](1))["+"](2["*"](ρσ_getitem(delta_, 2))))["+"](y_hat["*"](.625)["*"](ρσ_getitem(base_, 1).get(1["-u"]()["*"](1))));
-        "152";
+        "140";
         l_z = ρσ_interpolate_kwargs.call(this, text, [ρσ_desugar_kwargs({pos: pos, text: "Z-axis", color: axis_color, height: scale["*"](4), billboard: true, emissive: true})]);
-        "153";
+        "141";
         pos = x_hat["*"](ρσ_getitem(base_, 0).get(1["-u"]()["*"](1))["/"](2))["+"](z_hat["*"](ρσ_getitem(base_, 2).get(1["-u"]()["*"](1))["+"](3["*"](ρσ_getitem(delta_, 2)))));
-        "154";
+        "142";
         l_x = ρσ_interpolate_kwargs.call(this, text, [ρσ_desugar_kwargs({pos: pos, text: "X-axis", color: axis_color, height: scale["*"](4), billboard: true, emissive: true})]);
-        "155";
+        "143";
         c_x = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: x_hat["*"](ρσ_getitem(base_, 0).get(0)), axis: x_hat["*"](ρσ_getitem(base_, 0).get(1["-u"]()["*"](1))["-"](1["*"](ρσ_getitem(base_, 0).get(0)))), color: axis_color, radius: scale})]);
-        "156";
+        "144";
         c_y = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: z_hat["*"](ρσ_getitem(base_, 2).get(0)), axis: z_hat["*"](ρσ_getitem(base_, 2).get(1["-u"]()["*"](1))["-"](1["*"](ρσ_getitem(base_, 2).get(0)))), color: axis_color, radius: scale})]);
-        "157";
+        "145";
         c_z = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: y_hat["*"](ρσ_getitem(base_, 1).get(0)), axis: y_hat["*"](ρσ_getitem(base_, 1).get(1["-u"]()["*"](1))["-"](1["*"](ρσ_getitem(base_, 1).get(0)))), color: axis_color, radius: scale})]);
-        "158";
+        "146";
         self._tick_marks=self._tick_marks["+"](ρσ_list_decorate([ c_x, c_y, c_z, l_x, l_y, l_z ]));
     };
     if (!Base.prototype._make_tick_marks.__argnames__) Object.defineProperties(Base.prototype._make_tick_marks, {
@@ -496,12 +480,12 @@ async function __main__() {
     Base.prototype.tick_marks_visibility_is = async function tick_marks_visibility_is(visible) {
         var self = this;
         var ρσ_ls, tick_mark;
-        "161";
+        "149";
         var ρσ_Iter8 = self._tick_marks;
         ρσ_Iter8 = ((typeof ρσ_Iter8[Symbol.iterator] === "function") ? (ρσ_Iter8 instanceof Map ? ρσ_Iter8.keys() : ρσ_Iter8) : Object.keys(ρσ_Iter8));
         for (var ρσ_Index8 of ρσ_Iter8) {
             tick_mark = ρσ_Index8;
-            "162";
+            "150";
             tick_mark.visible = visible;
         }
     };
@@ -512,12 +496,12 @@ async function __main__() {
     Base.prototype.xy_mesh_visibility_is = async function xy_mesh_visibility_is(visible) {
         var self = this;
         var ρσ_ls, i;
-        "165";
+        "153";
         var ρσ_Iter9 = range(len(self._xy_mesh));
         ρσ_Iter9 = ((typeof ρσ_Iter9[Symbol.iterator] === "function") ? (ρσ_Iter9 instanceof Map ? ρσ_Iter9.keys() : ρσ_Iter9) : Object.keys(ρσ_Iter9));
         for (var ρσ_Index9 of ρσ_Iter9) {
             i = ρσ_Index9;
-            "166";
+            "154";
             ρσ_getitem(self._xy_mesh, i).visible = visible;
         }
     };
@@ -528,12 +512,12 @@ async function __main__() {
     Base.prototype.xz_mesh_visibility_is = async function xz_mesh_visibility_is(visible) {
         var self = this;
         var ρσ_ls, i;
-        "169";
+        "157";
         var ρσ_Iter10 = range(len(self._xz_mesh));
         ρσ_Iter10 = ((typeof ρσ_Iter10[Symbol.iterator] === "function") ? (ρσ_Iter10 instanceof Map ? ρσ_Iter10.keys() : ρσ_Iter10) : Object.keys(ρσ_Iter10));
         for (var ρσ_Index10 of ρσ_Iter10) {
             i = ρσ_Index10;
-            "170";
+            "158";
             ρσ_getitem(self._xz_mesh, i).visible = visible;
         }
     };
@@ -544,12 +528,12 @@ async function __main__() {
     Base.prototype.yz_mesh_visibility_is = async function yz_mesh_visibility_is(visible) {
         var self = this;
         var ρσ_ls, i;
-        "173";
+        "161";
         var ρσ_Iter11 = range(len(self._xz_mesh));
         ρσ_Iter11 = ((typeof ρσ_Iter11[Symbol.iterator] === "function") ? (ρσ_Iter11 instanceof Map ? ρσ_Iter11.keys() : ρσ_Iter11) : Object.keys(ρσ_Iter11));
         for (var ρσ_Index11 of ρσ_Iter11) {
             i = ρσ_Index11;
-            "174";
+            "162";
             ρσ_getitem(self._yz_mesh, i).visible = visible;
         }
     };
@@ -573,7 +557,7 @@ async function __main__() {
 
 
 
-    "177";
+    "165";
     function Plot3D() {;
     }
     Plot3D.prototype.__init__ = async function __init__() {
@@ -604,38 +588,38 @@ async function __main__() {
             num_tick_marks = ρσ_kwargs_obj.num_tick_marks;
         }
         var ρσ_ls, ρσ_unpack;
-        "217";
+        "205";
         self._xx = xx;
-        "218";
+        "206";
         self._yy = yy;
-        "219";
+        "207";
         self._zz = zz;
-        "221";
+        "209";
         ρσ_unpack = (await self._z_min_and_z_max(z_min, z_max));
 ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
         self._z_min = ρσ_unpack[0];
         self._z_max = ρσ_unpack[1];
-        "222";
+        "210";
         self._hue_offset = .5;
-        "223";
+        "211";
         self._omega = 0;
-        "224";
+        "212";
         self._axis_color = axis_color;
-        "225";
+        "213";
         self._tick_marks_color = tick_marks_color;
-        "226";
+        "214";
         self._num_tick_marks = num_tick_marks;
-        "227";
+        "215";
         self._axis = (await self._create_base());
-        "228";
+        "216";
         ρσ_unpack = [ρσ_list_decorate([]), ρσ_list_decorate([])];
         self._vertices = ρσ_unpack[0];
         self._quads = ρσ_unpack[1];
-        "229";
+        "217";
         (await self._create_vertices());
-        "230";
+        "218";
         (await self._create_quads());
-        "231";
+        "219";
         (await self.render(0));
     };
     if (!Plot3D.prototype.__init__.__defaults__) Object.defineProperties(Plot3D.prototype.__init__, {
@@ -666,40 +650,40 @@ async function __main__() {
             z_max = ρσ_kwargs_obj.z_max;
         }
         var ρσ_ls, ρσ_unpack;
-        "234";
+        "222";
         self._xx = xx;
-        "235";
+        "223";
         self._yy = yy;
-        "236";
+        "224";
         self._zz = zz;
-        "238";
+        "226";
         ρσ_unpack = (await self._z_min_and_z_max(z_min, z_max));
 ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
         self._z_min = ρσ_unpack[0];
         self._z_max = ρσ_unpack[1];
-        "239";
+        "227";
         (await self._hide_plot());
-        "240";
+        "228";
         (await self._hide_axis());
-        "241";
+        "229";
         self._axis = (await self._create_base());
-        "242";
+        "230";
         (await self._axis.tick_marks_visibility_is(show_ticks));
-        "243";
+        "231";
         (await self._axis.xy_mesh_visibility_is(show_xy));
-        "244";
+        "232";
         (await self._axis.xz_mesh_visibility_is(show_xz));
-        "245";
+        "233";
         (await self._axis.yz_mesh_visibility_is(show_yz));
-        "246";
+        "234";
         ρσ_unpack = [ρσ_list_decorate([]), ρσ_list_decorate([])];
         self._vertices = ρσ_unpack[0];
         self._quads = ρσ_unpack[1];
-        "247";
+        "235";
         (await self._create_vertices());
-        "248";
+        "236";
         (await self._create_quads());
-        "249";
+        "237";
         (await self.render(0));
     };
     if (!Plot3D.prototype.reinitialize.__defaults__) Object.defineProperties(Plot3D.prototype.reinitialize, {
@@ -710,12 +694,12 @@ async function __main__() {
     });
     Plot3D.prototype._z_min_and_z_max = async function _z_min_and_z_max(z_min, z_max) {
         var self = this;
-        "254";
+        "242";
         if (z_min && z_max) {
-            "255";
+            "243";
             return [z_min, z_max];
         }
-        "257";
+        "245";
         return [self._zz.flatten().min(), self._zz.flatten().max()];
     };
     if (!Plot3D.prototype._z_min_and_z_max.__argnames__) Object.defineProperties(Plot3D.prototype._z_min_and_z_max, {
@@ -724,13 +708,13 @@ async function __main__() {
     });
     Plot3D.prototype._hide_axis = async function _hide_axis() {
         var self = this;
-        "260";
+        "248";
         (await self._axis.tick_marks_visibility_is(false));
-        "261";
+        "249";
         (await self._axis.xy_mesh_visibility_is(false));
-        "262";
+        "250";
         (await self._axis.xz_mesh_visibility_is(false));
-        "263";
+        "251";
         (await self._axis.yz_mesh_visibility_is(false));
     };
     if (!Plot3D.prototype._hide_axis.__module__) Object.defineProperties(Plot3D.prototype._hide_axis, {
@@ -739,20 +723,20 @@ async function __main__() {
     Plot3D.prototype._hide_plot = async function _hide_plot() {
         var self = this;
         var ρσ_ls, quad_, vertex_;
-        "266";
+        "254";
         var ρσ_Iter12 = self._quads;
         ρσ_Iter12 = ((typeof ρσ_Iter12[Symbol.iterator] === "function") ? (ρσ_Iter12 instanceof Map ? ρσ_Iter12.keys() : ρσ_Iter12) : Object.keys(ρσ_Iter12));
         for (var ρσ_Index12 of ρσ_Iter12) {
             quad_ = ρσ_Index12;
-            "267";
+            "255";
             quad_.visible = false;
         }
-        "268";
+        "256";
         var ρσ_Iter13 = self._vertices;
         ρσ_Iter13 = ((typeof ρσ_Iter13[Symbol.iterator] === "function") ? (ρσ_Iter13 instanceof Map ? ρσ_Iter13.keys() : ρσ_Iter13) : Object.keys(ρσ_Iter13));
         for (var ρσ_Index13 of ρσ_Iter13) {
             vertex_ = ρσ_Index13;
-            "269";
+            "257";
             vertex_.visible = false;
         }
     };
@@ -762,30 +746,30 @@ async function __main__() {
     Plot3D.prototype._create_base = async function _create_base() {
         var self = this;
         var ρσ_ls, ρσ_unpack, x_min, x_max, y_min, y_max, xx, yy, zz, _GS_1, axis;
-        "272";
+        "260";
         ρσ_unpack = (await self._ranges());
 ρσ_unpack = ρσ_unpack_asarray(4, ρσ_unpack);
         x_min = ρσ_unpack[0];
         x_max = ρσ_unpack[1];
         y_min = ρσ_unpack[2];
         y_max = ρσ_unpack[3];
-        "273";
+        "261";
         xx = (await np.linspace(x_min, x_max, (await np.len(self._xx))));
-        "274";
+        "262";
         yy = (await np.linspace(y_min, y_max, (await np.len(self._yy))));
-        "275";
+        "263";
         zz = (await np.linspace(self._z_min, self._z_max, (await np.len(self._zz))));
-        "276";
+        "264";
         _GS_1 = new Base;
         (await _GS_1.__init__(xx, yy, zz, self._axis_color, self._tick_marks_color, self._num_tick_marks));
         axis = _GS_1;
-        "277";
+        "265";
         (await axis.xy_mesh_visibility_is(true));
-        "278";
+        "266";
         (await axis.xz_mesh_visibility_is(true));
-        "279";
+        "267";
         (await axis.yz_mesh_visibility_is(true));
-        "280";
+        "268";
         return axis;
     };
     if (!Plot3D.prototype._create_base.__module__) Object.defineProperties(Plot3D.prototype._create_base, {
@@ -794,15 +778,15 @@ async function __main__() {
     Plot3D.prototype._ranges = async function _ranges() {
         var self = this;
         var ρσ_ls, x_min, x_max, y_min, y_max;
-        "283";
+        "271";
         x_min = self._xx.flatten().min();
-        "284";
+        "272";
         x_max = self._xx.flatten().max();
-        "285";
+        "273";
         y_min = self._yy.flatten().min();
-        "286";
+        "274";
         y_max = self._yy.flatten().max();
-        "287";
+        "275";
         return [x_min, x_max, y_min, y_max];
     };
     if (!Plot3D.prototype._ranges.__module__) Object.defineProperties(Plot3D.prototype._ranges, {
@@ -811,32 +795,32 @@ async function __main__() {
     Plot3D.prototype._create_vertices = async function _create_vertices() {
         var self = this;
         var ρσ_ls, ρσ_unpack, x_min, x_max, y_min, y_max, range_x, range_y, x_, y_, y, x;
-        "290";
+        "278";
         ρσ_unpack = (await self._ranges());
 ρσ_unpack = ρσ_unpack_asarray(4, ρσ_unpack);
         x_min = ρσ_unpack[0];
         x_max = ρσ_unpack[1];
         y_min = ρσ_unpack[2];
         y_max = ρσ_unpack[3];
-        "291";
+        "279";
         range_x = x_max["-"](1["*"](x_min));
-        "292";
+        "280";
         range_y = y_max["-"](1["*"](y_min));
-        "294";
+        "282";
         var ρσ_Iter14 = range((await np.len(self._xx)));
         ρσ_Iter14 = ((typeof ρσ_Iter14[Symbol.iterator] === "function") ? (ρσ_Iter14 instanceof Map ? ρσ_Iter14.keys() : ρσ_Iter14) : Object.keys(ρσ_Iter14));
         for (var ρσ_Index14 of ρσ_Iter14) {
             x = ρσ_Index14;
-            "295";
+            "283";
             var ρσ_Iter15 = range((await np.len(self._yy)));
             ρσ_Iter15 = ((typeof ρσ_Iter15[Symbol.iterator] === "function") ? (ρσ_Iter15 instanceof Map ? ρσ_Iter15.keys() : ρσ_Iter15) : Object.keys(ρσ_Iter15));
             for (var ρσ_Index15 of ρσ_Iter15) {
                 y = ρσ_Index15;
-                "296";
+                "284";
                 x_ = self._xx.get(x, y)["-"](1["*"](x_min))["*"]((await np.len(self._xx)))["/"](range_x);
-                "297";
+                "285";
                 y_ = self._yy.get(x, y)["-"](1["*"](y_min))["*"]((await np.len(self._yy)))["/"](range_y);
-                "298";
+                "286";
                 self._vertices.append(ρσ_interpolate_kwargs.call(this, vertex, [ρσ_desugar_kwargs({pos: vec(x_, 0, y_), normal: vec(0, 1, 0)})]));
             }
         }
@@ -847,25 +831,25 @@ async function __main__() {
     Plot3D.prototype._create_quads = async function _create_quads() {
         var self = this;
         var ρσ_ls, v0, v1, v2, v3, y, x;
-        "302";
+        "290";
         var ρσ_Iter16 = range((await np.len(self._xx))["-"](1["*"](2)));
         ρσ_Iter16 = ((typeof ρσ_Iter16[Symbol.iterator] === "function") ? (ρσ_Iter16 instanceof Map ? ρσ_Iter16.keys() : ρσ_Iter16) : Object.keys(ρσ_Iter16));
         for (var ρσ_Index16 of ρσ_Iter16) {
             x = ρσ_Index16;
-            "303";
+            "291";
             var ρσ_Iter17 = range((await np.len(self._yy))["-"](1["*"](2)));
             ρσ_Iter17 = ((typeof ρσ_Iter17[Symbol.iterator] === "function") ? (ρσ_Iter17 instanceof Map ? ρσ_Iter17.keys() : ρσ_Iter17) : Object.keys(ρσ_Iter17));
             for (var ρσ_Index17 of ρσ_Iter17) {
                 y = ρσ_Index17;
-                "304";
+                "292";
                 v0 = (await self._get_vertex(x, y));
-                "305";
+                "293";
                 v1 = (await self._get_vertex(x["+"](1), y));
-                "306";
+                "294";
                 v2 = (await self._get_vertex(x["+"](1), y["+"](1)));
-                "307";
+                "295";
                 v3 = (await self._get_vertex(x, y["+"](1)));
-                "308";
+                "296";
                 self._quads.append(ρσ_interpolate_kwargs.call(this, quad, [ρσ_desugar_kwargs({vs: ρσ_list_decorate([ v0, v1, v2, v3 ])})]));
             }
         }
@@ -876,13 +860,13 @@ async function __main__() {
     Plot3D.prototype._set_vertex_normal_for = async function _set_vertex_normal_for(x, y) {
         var self = this;
         var ρσ_ls, vertex_, vec_1, vec_2;
-        "312";
+        "300";
         vertex_ = (await self._get_vertex(x, y));
-        "313";
+        "301";
         vec_1 = (await self._get_vertex(x, y["+"](1))).pos["-"](1["*"](vertex_.pos));
-        "314";
+        "302";
         vec_2 = (await self._get_vertex(x["+"](1), y)).pos["-"](1["*"](vertex_.pos));
-        "315";
+        "303";
         vertex_.normal = cross(vec_1, vec_2);
     };
     if (!Plot3D.prototype._set_vertex_normal_for.__argnames__) Object.defineProperties(Plot3D.prototype._set_vertex_normal_for, {
@@ -892,17 +876,17 @@ async function __main__() {
     Plot3D.prototype._make_normals = async function _make_normals() {
         var self = this;
         var ρσ_ls, y, x;
-        "320";
+        "308";
         var ρσ_Iter18 = range((await np.len(self._xx))["-"](1["*"](2)));
         ρσ_Iter18 = ((typeof ρσ_Iter18[Symbol.iterator] === "function") ? (ρσ_Iter18 instanceof Map ? ρσ_Iter18.keys() : ρσ_Iter18) : Object.keys(ρσ_Iter18));
         for (var ρσ_Index18 of ρσ_Iter18) {
             x = ρσ_Index18;
-            "321";
+            "309";
             var ρσ_Iter19 = range((await np.len(self._yy))["-"](1["*"](2)));
             ρσ_Iter19 = ((typeof ρσ_Iter19[Symbol.iterator] === "function") ? (ρσ_Iter19 instanceof Map ? ρσ_Iter19.keys() : ρσ_Iter19) : Object.keys(ρσ_Iter19));
             for (var ρσ_Index19 of ρσ_Iter19) {
                 y = ρσ_Index19;
-                "322";
+                "310";
                 (await self._set_vertex_normal_for(x, y));
             }
         }
@@ -913,9 +897,9 @@ async function __main__() {
     Plot3D.prototype._value_to_plot = async function _value_to_plot(x, y, t, range_z) {
         var self = this;
         var ρσ_ls, f_x_y;
-        "325";
+        "313";
         f_x_y = self._zz.get(x, y)["*"](cos(self._omega["*"](t))["+"](1))["*"](.5);
-        "326";
+        "314";
         return (await np.len(self._xx))["/"](range_z)["*"](f_x_y["-"](1["*"](self._z_min)));
     };
     if (!Plot3D.prototype._value_to_plot.__argnames__) Object.defineProperties(Plot3D.prototype._value_to_plot, {
@@ -925,13 +909,13 @@ async function __main__() {
     Plot3D.prototype._update_vertex = async function _update_vertex(x, y, t, range_z) {
         var self = this;
         var ρσ_ls, value, color_;
-        "329";
+        "317";
         value = (await self._value_to_plot(x, y, t, range_z));
-        "330";
+        "318";
         (await self._get_vertex(x, y)).pos.y = value;
-        "331";
+        "319";
         color_ = abs(value)["/"]((await np.len(self._zz)))["+"](self._hue_offset);
-        "332";
+        "320";
         (await self._get_vertex(x, y)).color = color.hsv_to_rgb(vec(color_, color_, 1));
     };
     if (!Plot3D.prototype._update_vertex.__argnames__) Object.defineProperties(Plot3D.prototype._update_vertex, {
@@ -941,23 +925,23 @@ async function __main__() {
     Plot3D.prototype.render = async function render(t) {
         var self = this;
         var ρσ_ls, range_z, y, x;
-        "335";
+        "323";
         range_z = self._z_max["-"](1["*"](self._z_min));
-        "336";
+        "324";
         var ρσ_Iter20 = range((await np.len(self._xx)));
         ρσ_Iter20 = ((typeof ρσ_Iter20[Symbol.iterator] === "function") ? (ρσ_Iter20 instanceof Map ? ρσ_Iter20.keys() : ρσ_Iter20) : Object.keys(ρσ_Iter20));
         for (var ρσ_Index20 of ρσ_Iter20) {
             x = ρσ_Index20;
-            "337";
+            "325";
             var ρσ_Iter21 = range((await np.len(self._yy)));
             ρσ_Iter21 = ((typeof ρσ_Iter21[Symbol.iterator] === "function") ? (ρσ_Iter21 instanceof Map ? ρσ_Iter21.keys() : ρσ_Iter21) : Object.keys(ρσ_Iter21));
             for (var ρσ_Index21 of ρσ_Iter21) {
                 y = ρσ_Index21;
-                "338";
+                "326";
                 (await self._update_vertex(x, y, t, range_z));
             }
         }
-        "340";
+        "328";
         (await self._make_normals());
     };
     if (!Plot3D.prototype.render.__argnames__) Object.defineProperties(Plot3D.prototype.render, {
@@ -966,7 +950,7 @@ async function __main__() {
     });
     Plot3D.prototype.set_omega_to = async function set_omega_to(omega) {
         var self = this;
-        "343";
+        "331";
         self._omega = omega;
     };
     if (!Plot3D.prototype.set_omega_to.__argnames__) Object.defineProperties(Plot3D.prototype.set_omega_to, {
@@ -975,7 +959,7 @@ async function __main__() {
     });
     Plot3D.prototype.hue_offset_is = async function hue_offset_is(hue_offset) {
         var self = this;
-        "346";
+        "334";
         self._hue_offset = hue_offset;
     };
     if (!Plot3D.prototype.hue_offset_is.__argnames__) Object.defineProperties(Plot3D.prototype.hue_offset_is, {
@@ -984,7 +968,7 @@ async function __main__() {
     });
     Plot3D.prototype._get_vertex = async function _get_vertex(x, y) {
         var self = this;
-        "349";
+        "337";
         return ρσ_getitem(self._vertices, x["*"]((await np.len(self._xx)))["+"](y));
     };
     if (!Plot3D.prototype._get_vertex.__argnames__) Object.defineProperties(Plot3D.prototype._get_vertex, {
@@ -993,7 +977,7 @@ async function __main__() {
     });
     Plot3D.prototype.tick_marks_visibility_is = async function tick_marks_visibility_is(visible) {
         var self = this;
-        "352";
+        "340";
         (await self._axis.tick_marks_visibility_is(visible));
     };
     if (!Plot3D.prototype.tick_marks_visibility_is.__argnames__) Object.defineProperties(Plot3D.prototype.tick_marks_visibility_is, {
@@ -1002,7 +986,7 @@ async function __main__() {
     });
     Plot3D.prototype.xy_mesh_visibility_is = async function xy_mesh_visibility_is(visible) {
         var self = this;
-        "355";
+        "343";
         (await self._axis.xy_mesh_visibility_is(visible));
     };
     if (!Plot3D.prototype.xy_mesh_visibility_is.__argnames__) Object.defineProperties(Plot3D.prototype.xy_mesh_visibility_is, {
@@ -1011,7 +995,7 @@ async function __main__() {
     });
     Plot3D.prototype.xz_mesh_visibility_is = async function xz_mesh_visibility_is(visible) {
         var self = this;
-        "358";
+        "346";
         (await self._axis.xz_mesh_visibility_is(visible));
     };
     if (!Plot3D.prototype.xz_mesh_visibility_is.__argnames__) Object.defineProperties(Plot3D.prototype.xz_mesh_visibility_is, {
@@ -1020,7 +1004,7 @@ async function __main__() {
     });
     Plot3D.prototype.yz_mesh_visibility_is = async function yz_mesh_visibility_is(visible) {
         var self = this;
-        "361";
+        "349";
         (await self._axis.yz_mesh_visibility_is(visible));
     };
     if (!Plot3D.prototype.yz_mesh_visibility_is.__argnames__) Object.defineProperties(Plot3D.prototype.yz_mesh_visibility_is, {
@@ -1056,270 +1040,241 @@ async function __main__() {
 
 
 
-    "363";
-    async function sine_sqrt() {
-        var ρσ_ls, resolution, x, y, ρσ_unpack, xx, yy, x_2_plus_y_2, zz, z_min, z_max;
-        "364";
-        resolution = 50;
-        "365";
-        x = y = (await np.linspace(1["-u"]()["*"](2)["*"](pi), 2["*"](pi), resolution));
+    "352";
+    async function torus() {
+        var ρσ_ls, resolution, c, a, xx, yy, ρσ_unpack, U, V, X, Y, Z;
+        "355";
+        resolution = 75;
+        "356";
+        c = 3;
+        "357";
+        a = 1;
+        "358";
+        xx = yy = (await np.linspace(1["-u"]()["*"](pi), 1.05["*"](pi), resolution));
+        "359";
+        ρσ_unpack = (await np.meshgrid(xx, yy));
+ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
+        U = ρσ_unpack[0];
+        V = ρσ_unpack[1];
+        "360";
+        X = (await np.cos(V)).multiply(a).add(c).multiply((await np.cos(U)));
+        "361";
+        Y = (await np.cos(V)).multiply(a).add(c).multiply((await np.sin(U)));
+        "362";
+        Z = (await np.sin(V)).multiply(a);
+        "363";
+        return [X, Y, Z, 1["-u"]()["*"](2), 2];
+    };
+    if (!torus.__module__) Object.defineProperties(torus, {
+        __module__ : {value: null}
+    });
+
+    "365";
+    async function knot() {
+        var ρσ_ls, resolution, theta, phi, ρσ_unpack, xx, yy, zz;
         "366";
-        ρσ_unpack = (await np.meshgrid(x, y));
-ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
-        xx = ρσ_unpack[0];
-        yy = ρσ_unpack[1];
-        "367";
-        x_2_plus_y_2 = xx.multiply(xx).add(yy.multiply(yy));
-        "368";
-        zz = (await np.sin((await np.sqrt(x_2_plus_y_2)))).multiply(5);
-        "370";
-        z_min = 1["-u"]()["*"](9);
-        "371";
-        z_max = 9;
-        "372";
-        return [xx, yy, zz, z_min, z_max];
-    };
-    if (!sine_sqrt.__module__) Object.defineProperties(sine_sqrt, {
-        __module__ : {value: null}
-    });
-
-    "374";
-    async function mexican_hat() {
-        var ρσ_ls, r, p, ρσ_unpack, R, P, Z, X, Y;
-        "376";
-        r = (await np.linspace(0, 1.25, 50));
-        "377";
-        p = (await np.linspace(1["-u"]()["*"](pi), 1.05["*"](pi), 50));
-        "378";
-        ρσ_unpack = (await np.meshgrid(r, p));
-ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
-        R = ρσ_unpack[0];
-        P = ρσ_unpack[1];
-        "379";
-        Z = R.multiply(R).subtract(1).multiply(R.multiply(R).subtract(1));
-        "380";
-        ρσ_unpack = [(await np.cos(P)).multiply(R), (await np.sin(P)).multiply(R)];
-        X = ρσ_unpack[0];
-        Y = ρσ_unpack[1];
-        "382";
-        return [X, Y, Z, null, null];
-    };
-    if (!mexican_hat.__module__) Object.defineProperties(mexican_hat, {
-        __module__ : {value: null}
-    });
-
-    "385";
-    async function ricker() {
-        var ρσ_ls, resolution, x, y, ρσ_unpack, xx, yy, sigma, sigma_2, x_2_plus_y_2, x_2_plus_y_2_div_sigma_2, factor_1, factor_2, zz, z_min, z_max;
-        "386";
         resolution = 50;
-        "388";
-        x = y = (await np.linspace(1["-u"]()["*"](1.25), 1.25, resolution));
-        "389";
-        ρσ_unpack = (await np.meshgrid(x, y));
+        "368";
+        theta = (await np.linspace(1["-u"]()["*"](pi), pi, resolution));
+        "369";
+        phi = (await np.linspace(0, 2.1["*"](pi), resolution));
+        "370";
+        ρσ_unpack = (await np.meshgrid(theta, phi));
 ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
-        xx = ρσ_unpack[0];
-        yy = ρσ_unpack[1];
-        "391";
-        sigma = .7;
-        "392";
-        sigma_2 = sigma["*"](sigma);
-        "393";
-        x_2_plus_y_2 = xx.multiply(xx).add(yy.multiply(yy));
-        "394";
-        x_2_plus_y_2_div_sigma_2 = x_2_plus_y_2.divide(1["-u"]()["*"](.5)["*"](sigma_2));
-        "395";
-        factor_1 = 1["/"](pi["*"](sigma_2)["*"](sigma_2));
-        "396";
-        factor_2 = x_2_plus_y_2_div_sigma_2.add(1);
-        "397";
-        zz = (await np.exp(x_2_plus_y_2_div_sigma_2)).multiply(factor_2).multiply(factor_1);
-        "399";
-        z_min = 1["-u"]()["*"](.25);
-        "400";
-        z_max = 2;
-        "401";
-        return [xx, yy, zz, z_min, z_max];
+        theta = ρσ_unpack[0];
+        phi = ρσ_unpack[1];
+        "372";
+        xx = (await np.cos(theta));
+        "373";
+        yy = (await np.sin(theta)).add((await np.cos(phi)));
+        "374";
+        zz = (await np.sin(phi));
+        "376";
+        return [xx, yy, zz, null, null];
     };
-    if (!ricker.__module__) Object.defineProperties(ricker, {
+    if (!knot.__module__) Object.defineProperties(knot, {
+        __module__ : {value: null}
+    });
+
+    "378";
+    async function arc() {
+        var ρσ_ls, resolution, theta, phi, ρσ_unpack, xx, yy, zz;
+        "379";
+        resolution = 50;
+        "381";
+        theta = (await np.linspace(0, 1.05["*"](pi), resolution));
+        "382";
+        phi = (await np.linspace(0, pi, resolution));
+        "383";
+        ρσ_unpack = (await np.meshgrid(theta, phi));
+ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
+        theta = ρσ_unpack[0];
+        phi = ρσ_unpack[1];
+        "385";
+        xx = (await np.cos(theta));
+        "386";
+        yy = (await np.sin(theta)).add((await np.cos(phi)));
+        "387";
+        zz = (await np.sin(phi));
+        "389";
+        return [xx, yy, zz, null, null];
+    };
+    if (!arc.__module__) Object.defineProperties(arc, {
+        __module__ : {value: null}
+    });
+
+    "391";
+    async function bubbles() {
+        var ρσ_ls, resolution, theta, phi, ρσ_unpack, xx, yy, zz;
+        "392";
+        resolution = 75;
+        "394";
+        theta = (await np.linspace(0, 1.02["*"](pi), resolution));
+        "395";
+        phi = (await np.linspace(0, 2.02["*"](pi), resolution));
+        "396";
+        ρσ_unpack = (await np.meshgrid(theta, phi));
+ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
+        theta = ρσ_unpack[0];
+        phi = ρσ_unpack[1];
+        "398";
+        xx = (await np.cos(theta)).multiply((await np.sin(phi.multiply(2))));
+        "399";
+        yy = (await np.sin(theta)).multiply((await np.sin(phi.multiply(2))));
+        "400";
+        zz = (await np.sin(phi));
+        "402";
+        return [xx, yy, zz, 1["-u"]()["*"](1), 1.1];
+    };
+    if (!bubbles.__module__) Object.defineProperties(bubbles, {
         __module__ : {value: null}
     });
 
     "404";
-    async function cosine_of_abs() {
-        var ρσ_ls, resolution, x, y, ρσ_unpack, xx, yy, zz, z_min, z_max;
+    async function mobius_strip() {
+        var ρσ_ls, resolution, theta, phi, ρσ_unpack, factor, xx, yy, zz;
         "405";
-        resolution = 75;
-        "406";
-        x = y = (await np.linspace(1["-u"]()["*"](2)["*"](pi), 2["*"](pi), resolution));
-        "407";
-        ρσ_unpack = (await np.meshgrid(x, y));
-ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
-        xx = ρσ_unpack[0];
-        yy = ρσ_unpack[1];
-        "408";
-        zz = (await np.cos((await np.abs(xx)).add((await np.abs(yy)))));
-        "410";
-        z_min = 1["-u"]()["*"](2.5);
-        "411";
-        z_max = 2.5;
-        "412";
-        return [xx, yy, zz, z_min, z_max];
-    };
-    if (!cosine_of_abs.__module__) Object.defineProperties(cosine_of_abs, {
-        __module__ : {value: null}
-    });
-
-    "415";
-    async function polynomial() {
-        var ρσ_ls, resolution, x, y, ρσ_unpack, xx, yy, uu, zz, z_min, z_max;
-        "416";
-        resolution = 50;
-        "417";
-        x = y = (await np.linspace(1["-u"]()["*"](1.75), 1.75, resolution));
-        "418";
-        ρσ_unpack = (await np.meshgrid(x, y));
-ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
-        xx = ρσ_unpack[0];
-        yy = ρσ_unpack[1];
-        "420";
-        uu = yy.multiply(yy).multiply(yy).multiply(xx);
-        "421";
-        zz = yy.multiply(xx).multiply(xx).multiply(xx).subtract(uu);
-        "423";
-        z_min = z_max = null;
-        "424";
-        return [xx, yy, zz, z_min, z_max];
-    };
-    if (!polynomial.__module__) Object.defineProperties(polynomial, {
-        __module__ : {value: null}
-    });
-
-    "427";
-    async function exp_sine() {
-        var ρσ_ls, resolution, x, y, ρσ_unpack, xx, yy, x_2_plus_y_2, sin_x_2_plus_y_2, exp_min_x_2_plus_y_2, zz, z_min, z_max;
-        "428";
         resolution = 100;
+        "407";
+        theta = (await np.linspace(1["-u"]()["*"](pi), 1.03["*"](pi), resolution));
+        "408";
+        phi = (await np.linspace(1["-u"]()["*"](1), 1, resolution));
+        "409";
+        ρσ_unpack = (await np.meshgrid(theta, phi));
+ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
+        theta = ρσ_unpack[0];
+        phi = ρσ_unpack[1];
+        "411";
+        factor = (await np.cos(theta.multiply(.5))).multiply(phi.multiply(.5)).add(1);
+        "412";
+        xx = factor.multiply((await np.cos(theta)));
+        "413";
+        yy = factor.multiply((await np.sin(theta)));
+        "414";
+        zz = (await np.sin(theta.multiply(.5))).multiply(phi.multiply(.5));
+        "415";
+        return [xx, yy, zz, 1["-u"]()["*"](.5), 1];
+    };
+    if (!mobius_strip.__module__) Object.defineProperties(mobius_strip, {
+        __module__ : {value: null}
+    });
+
+    "417";
+    async function twisted_torus() {
+        var ρσ_ls, resolution, theta, phi, ρσ_unpack, factor, xx, yy, zz;
+        "418";
+        resolution = 100;
+        "420";
+        theta = (await np.linspace(1["-u"]()["*"](pi), pi["*"](1.05), resolution));
+        "421";
+        phi = (await np.linspace(1["-u"]()["*"](pi), pi["*"](1.03), resolution));
+        "422";
+        ρσ_unpack = (await np.meshgrid(theta, phi));
+ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
+        theta = ρσ_unpack[0];
+        phi = ρσ_unpack[1];
+        "424";
+        factor = (await np.sin(phi)).add((await np.cos(theta))).add(3);
+        "425";
+        xx = (await np.cos(phi.multiply(2))).multiply(factor);
+        "426";
+        yy = (await np.sin(phi.multiply(2))).multiply(factor);
+        "427";
+        zz = (await np.sin(theta)).add((await np.cos(phi)).multiply(2));
         "429";
-        x = y = (await np.linspace(1["-u"]()["*"](pi), pi, resolution));
-        "430";
-        ρσ_unpack = (await np.meshgrid(x, y));
-ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
-        xx = ρσ_unpack[0];
-        yy = ρσ_unpack[1];
+        return [xx, yy, zz, null, null];
+    };
+    if (!twisted_torus.__module__) Object.defineProperties(twisted_torus, {
+        __module__ : {value: null}
+    });
+
+    "431";
+    async function dinis_spiral() {
+        var ρσ_ls, resolution, u, v, ρσ_unpack, xx, yy, term, zz;
         "432";
-        x_2_plus_y_2 = xx.multiply(xx).add(yy.multiply(yy));
-        "433";
-        sin_x_2_plus_y_2 = (await np.sin(x_2_plus_y_2)).multiply(10);
+        resolution = 100;
         "434";
-        exp_min_x_2_plus_y_2 = (await np.exp(x_2_plus_y_2.multiply(1["-u"]()["*"](1))));
+        u = (await np.linspace(0, 12.4, resolution));
         "435";
-        zz = sin_x_2_plus_y_2.multiply(exp_min_x_2_plus_y_2);
-        "437";
-        z_min = 1["-u"]()["*"](.5);
+        v = (await np.linspace(.1, 2, resolution));
+        "436";
+        ρσ_unpack = (await np.meshgrid(u, v));
+ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
+        u = ρσ_unpack[0];
+        v = ρσ_unpack[1];
         "438";
-        z_max = 5;
+        xx = (await np.cos(u)).multiply((await np.sin(v)));
         "439";
-        return [xx, yy, zz, z_min, z_max];
-    };
-    if (!exp_sine.__module__) Object.defineProperties(exp_sine, {
-        __module__ : {value: null}
-    });
-
-    "442";
-    async function sine_cosine() {
-        var ρσ_ls, resolution, x, y, ρσ_unpack, xx, yy, zz, z_min, z_max;
+        yy = (await np.sin(u)).multiply((await np.sin(v)));
+        "440";
+        term = (await np.log((await np.tan(v.multiply(.5))))).add((await np.cos(v)));
+        "441";
+        zz = u.multiply(.2).add(term);
         "443";
-        resolution = 50;
-        "444";
-        x = y = (await np.linspace(1["-u"]()["*"](2)["*"](pi)["/"](3), 2["*"](pi)["/"](3), resolution));
-        "445";
-        ρσ_unpack = (await np.meshgrid(x, y));
-ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
-        xx = ρσ_unpack[0];
-        yy = ρσ_unpack[1];
-        "446";
-        zz = (await np.sin(xx.multiply(pi))).multiply((await np.cos(yy.multiply(pi))));
-        "448";
-        z_min = 1["-u"]()["*"](2.5);
-        "449";
-        z_max = 2.5;
-        "450";
-        return [xx, yy, zz, z_min, z_max];
+        return [xx, yy, zz, 1["-u"]()["*"](2), 3];
     };
-    if (!sine_cosine.__module__) Object.defineProperties(sine_cosine, {
+    if (!dinis_spiral.__module__) Object.defineProperties(dinis_spiral, {
         __module__ : {value: null}
     });
 
-    "453";
-    async function ripple() {
-        var ρσ_ls, resolution, x, y, ρσ_unpack, xx, yy, x_2_plus_y_2, zz, z_min, z_max;
-        "454";
-        resolution = 125;
-        "455";
-        x = y = (await np.linspace(1["-u"]()["*"](4)["*"](pi)["/"](3), 4["*"](pi)["/"](3), resolution));
-        "456";
-        ρσ_unpack = (await np.meshgrid(x, y));
-ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
-        xx = ρσ_unpack[0];
-        yy = ρσ_unpack[1];
-        "458";
-        x_2_plus_y_2 = xx.multiply(xx).add(yy.multiply(yy));
-        "459";
-        zz = (await np.sin(x_2_plus_y_2.multiply(.75))).multiply(5);
-        "461";
-        z_min = 1["-u"]()["*"](20);
-        "462";
-        z_max = 20;
-        "463";
-        return [xx, yy, zz, z_min, z_max];
-    };
-    if (!ripple.__module__) Object.defineProperties(ripple, {
-        __module__ : {value: null}
-    });
-
-    "466";
+    "445";
     async function adjust_color() {
-        "467";
+        "446";
         (await plot.hue_offset_is(color_slider.value));
     };
     if (!adjust_color.__module__) Object.defineProperties(adjust_color, {
         __module__ : {value: null}
     });
 
-    "469";
+    "448";
     async function sync_radio_buttons(event) {
-        "470";
-        if ((event.name !== "ricker" && (typeof event.name !== "object" || ρσ_not_equals(event.name, "ricker")))) {
-            ricker_button.checked = false;
+        "449";
+        if ((event.name !== "torus" && (typeof event.name !== "object" || ρσ_not_equals(event.name, "torus")))) {
+            torus_button.checked = false;
         }
-        "471";
-        if ((event.name !== "mexican_hat" && (typeof event.name !== "object" || ρσ_not_equals(event.name, "mexican_hat")))) {
-            mexican_button.checked = false;
+        "450";
+        if ((event.name !== "twisted_torus" && (typeof event.name !== "object" || ρσ_not_equals(event.name, "twisted_torus")))) {
+            twisted_torus_button.checked = false;
         }
-        "472";
-        if ((event.name !== "ripple" && (typeof event.name !== "object" || ρσ_not_equals(event.name, "ripple")))) {
-            ripple_button.checked = false;
+        "451";
+        if ((event.name !== "spiral" && (typeof event.name !== "object" || ρσ_not_equals(event.name, "spiral")))) {
+            spiral_button.checked = false;
         }
-        "473";
-        if ((event.name !== "polynomial" && (typeof event.name !== "object" || ρσ_not_equals(event.name, "polynomial")))) {
-            polynomial_button.checked = false;
+        "452";
+        if ((event.name !== "mobius" && (typeof event.name !== "object" || ρσ_not_equals(event.name, "mobius")))) {
+            mobius_button.checked = false;
         }
-        "474";
-        if ((event.name !== "sin_cos" && (typeof event.name !== "object" || ρσ_not_equals(event.name, "sin_cos")))) {
-            sin_cos_button.checked = false;
+        "453";
+        if ((event.name !== "bubbles" && (typeof event.name !== "object" || ρσ_not_equals(event.name, "bubbles")))) {
+            bubbles_button.checked = false;
         }
-        "475";
-        if ((event.name !== "abs_cos" && (typeof event.name !== "object" || ρσ_not_equals(event.name, "abs_cos")))) {
-            abs_cos_button.checked = false;
+        "454";
+        if ((event.name !== "knot" && (typeof event.name !== "object" || ρσ_not_equals(event.name, "knot")))) {
+            knot_button.checked = false;
         }
-        "476";
-        if ((event.name !== "exp_sin" && (typeof event.name !== "object" || ρσ_not_equals(event.name, "exp_sin")))) {
-            exp_sin_button.checked = false;
-        }
-        "477";
-        if ((event.name !== "sin_sqrt" && (typeof event.name !== "object" || ρσ_not_equals(event.name, "sin_sqrt")))) {
-            sin_sqrt_button.checked = false;
+        "455";
+        if ((event.name !== "arc" && (typeof event.name !== "object" || ρσ_not_equals(event.name, "arc")))) {
+            arc_button.checked = false;
         }
     };
     if (!sync_radio_buttons.__argnames__) Object.defineProperties(sync_radio_buttons, {
@@ -1327,122 +1282,110 @@ async function __main__() {
         __module__ : {value: null}
     });
 
-    "479";
+    "457";
     async function switch_function(event) {
         var ρσ_ls, ρσ_unpack, xx, yy, zz, z_min, z_max, time;
-        "480";
+        "458";
         (await sync_radio_buttons(event));
-        "481";
+        "459";
         ρσ_unpack = [null, null, null, null, null];
         xx = ρσ_unpack[0];
         yy = ρσ_unpack[1];
         zz = ρσ_unpack[2];
         z_min = ρσ_unpack[3];
         z_max = ρσ_unpack[4];
-        "483";
-        if ((event.name === "mexican_hat" || typeof event.name === "object" && ρσ_equals(event.name, "mexican_hat"))) {
-            "484";
-            ρσ_unpack = (await mexican_hat());
+        "461";
+        if ((event.name === "torus" || typeof event.name === "object" && ρσ_equals(event.name, "torus"))) {
+            "462";
+            ρσ_unpack = (await torus());
 ρσ_unpack = ρσ_unpack_asarray(5, ρσ_unpack);
             xx = ρσ_unpack[0];
             yy = ρσ_unpack[1];
             zz = ρσ_unpack[2];
             z_min = ρσ_unpack[3];
             z_max = ρσ_unpack[4];
-            "485";
-            animation.title = mexican_hat_title["+"]("\n\n");
-            "486";
-        } else if ((event.name === "ricker" || typeof event.name === "object" && ρσ_equals(event.name, "ricker"))) {
-            "487";
-            ρσ_unpack = (await ricker());
+            "463";
+            animation.title = torus_title["+"]("\n");
+            "464";
+        } else if ((event.name === "twisted_torus" || typeof event.name === "object" && ρσ_equals(event.name, "twisted_torus"))) {
+            "465";
+            ρσ_unpack = (await twisted_torus());
 ρσ_unpack = ρσ_unpack_asarray(5, ρσ_unpack);
             xx = ρσ_unpack[0];
             yy = ρσ_unpack[1];
             zz = ρσ_unpack[2];
             z_min = ρσ_unpack[3];
             z_max = ρσ_unpack[4];
-            "488";
-            animation.title = ricker_title["+"]("\n");
-            "489";
-        } else if ((event.name === "ripple" || typeof event.name === "object" && ρσ_equals(event.name, "ripple"))) {
-            "490";
-            ρσ_unpack = (await ripple());
+            "466";
+            animation.title = twisted_torus_title["+"]("\n");
+            "467";
+        } else if ((event.name === "spiral" || typeof event.name === "object" && ρσ_equals(event.name, "spiral"))) {
+            "468";
+            ρσ_unpack = (await dinis_spiral());
 ρσ_unpack = ρσ_unpack_asarray(5, ρσ_unpack);
             xx = ρσ_unpack[0];
             yy = ρσ_unpack[1];
             zz = ρσ_unpack[2];
             z_min = ρσ_unpack[3];
             z_max = ρσ_unpack[4];
-            "491";
-            animation.title = ripple_title["+"]("\n\n");
-            "492";
-        } else if ((event.name === "sin_sqrt" || typeof event.name === "object" && ρσ_equals(event.name, "sin_sqrt"))) {
-            "493";
-            ρσ_unpack = (await sine_sqrt());
+            "469";
+            animation.title = spiral_title["+"]("\n\n");
+            "470";
+        } else if ((event.name === "mobius" || typeof event.name === "object" && ρσ_equals(event.name, "mobius"))) {
+            "471";
+            ρσ_unpack = (await mobius_strip());
 ρσ_unpack = ρσ_unpack_asarray(5, ρσ_unpack);
             xx = ρσ_unpack[0];
             yy = ρσ_unpack[1];
             zz = ρσ_unpack[2];
             z_min = ρσ_unpack[3];
             z_max = ρσ_unpack[4];
-            "494";
-            animation.title = sine_sqrt_title["+"]("\n");
-            "495";
-        } else if ((event.name === "polynomial" || typeof event.name === "object" && ρσ_equals(event.name, "polynomial"))) {
-            "496";
-            ρσ_unpack = (await polynomial());
+            "472";
+            animation.title = twisted_torus_title["+"]("\n");
+            "473";
+        } else if ((event.name === "bubbles" || typeof event.name === "object" && ρσ_equals(event.name, "bubbles"))) {
+            "474";
+            ρσ_unpack = (await bubbles());
 ρσ_unpack = ρσ_unpack_asarray(5, ρσ_unpack);
             xx = ρσ_unpack[0];
             yy = ρσ_unpack[1];
             zz = ρσ_unpack[2];
             z_min = ρσ_unpack[3];
             z_max = ρσ_unpack[4];
-            "497";
-            animation.title = polynomial_title["+"]("\n");
-            "498";
-        } else if ((event.name === "sin_cos" || typeof event.name === "object" && ρσ_equals(event.name, "sin_cos"))) {
-            "499";
-            ρσ_unpack = (await sine_cosine());
+            "475";
+            animation.title = twisted_torus_title["+"]("\n");
+            "476";
+        } else if ((event.name === "arc" || typeof event.name === "object" && ρσ_equals(event.name, "arc"))) {
+            "477";
+            ρσ_unpack = (await arc());
 ρσ_unpack = ρσ_unpack_asarray(5, ρσ_unpack);
             xx = ρσ_unpack[0];
             yy = ρσ_unpack[1];
             zz = ρσ_unpack[2];
             z_min = ρσ_unpack[3];
             z_max = ρσ_unpack[4];
-            "500";
-            animation.title = sine_cosine_title["+"]("\n");
-            "501";
-        } else if ((event.name === "abs_cos" || typeof event.name === "object" && ρσ_equals(event.name, "abs_cos"))) {
-            "502";
-            ρσ_unpack = (await cosine_of_abs());
+            "478";
+            animation.title = twisted_torus_title["+"]("\n");
+            "479";
+        } else if ((event.name === "knot" || typeof event.name === "object" && ρσ_equals(event.name, "knot"))) {
+            "480";
+            ρσ_unpack = (await knot());
 ρσ_unpack = ρσ_unpack_asarray(5, ρσ_unpack);
             xx = ρσ_unpack[0];
             yy = ρσ_unpack[1];
             zz = ρσ_unpack[2];
             z_min = ρσ_unpack[3];
             z_max = ρσ_unpack[4];
-            "503";
-            animation.title = cosine_of_abs_title["+"]("\n");
-            "504";
-        } else if ((event.name === "exp_sin" || typeof event.name === "object" && ρσ_equals(event.name, "exp_sin"))) {
-            "505";
-            ρσ_unpack = (await exp_sine());
-ρσ_unpack = ρσ_unpack_asarray(5, ρσ_unpack);
-            xx = ρσ_unpack[0];
-            yy = ρσ_unpack[1];
-            zz = ρσ_unpack[2];
-            z_min = ρσ_unpack[3];
-            z_max = ρσ_unpack[4];
-            "506";
-            animation.title = exponential_title["+"]("\n");
+            "481";
+            animation.title = twisted_torus_title["+"]("\n");
         }
-        "508";
-        animation.range = 1.5["*"]((await np.len(xx)));
-        "509";
+        "483";
         (await plot.reinitialize(xx, yy, zz, xy_checkbox.checked, xz_checkbox.checked, yz_checkbox.checked, tick_checkbox.checked, z_min, z_max));
-        "510";
+        "484";
+        animation.range = 1.5["*"]((await np.len(xx)));
+        "485";
         time = .5;
-        "511";
+        "486";
         MathJax.Hub.Queue(ρσ_list_decorate([ "Typeset", MathJax.Hub ]));
     };
     if (!switch_function.__argnames__) Object.defineProperties(switch_function, {
@@ -1450,20 +1393,20 @@ async function __main__() {
         __module__ : {value: null}
     });
 
-    "514";
+    "489";
     async function adjust_omega() {
-        "515";
+        "490";
         (await plot.set_omega_to(omega_slider.value));
-        "516";
+        "491";
         omega_slider_text.text = "= sin({:1.2f}".format(omega_slider.value["/"](pi), 2)["+"](" π)");
     };
     if (!adjust_omega.__module__) Object.defineProperties(adjust_omega, {
         __module__ : {value: null}
     });
 
-    "518";
+    "493";
     async function toggle_tick_marks(event) {
-        "519";
+        "494";
         (await plot.tick_marks_visibility_is(event.checked));
     };
     if (!toggle_tick_marks.__argnames__) Object.defineProperties(toggle_tick_marks, {
@@ -1471,9 +1414,9 @@ async function __main__() {
         __module__ : {value: null}
     });
 
-    "521";
+    "496";
     async function toggle_xz_mesh(event) {
-        "522";
+        "497";
         (await plot.xz_mesh_visibility_is(event.checked));
     };
     if (!toggle_xz_mesh.__argnames__) Object.defineProperties(toggle_xz_mesh, {
@@ -1481,9 +1424,9 @@ async function __main__() {
         __module__ : {value: null}
     });
 
-    "524";
+    "499";
     async function toggle_xy_mesh(event) {
-        "525";
+        "500";
         (await plot.xy_mesh_visibility_is(event.checked));
     };
     if (!toggle_xy_mesh.__argnames__) Object.defineProperties(toggle_xy_mesh, {
@@ -1491,9 +1434,9 @@ async function __main__() {
         __module__ : {value: null}
     });
 
-    "527";
+    "502";
     async function toggle_yz_mesh(event) {
-        "528";
+        "503";
         (await plot.yz_mesh_visibility_is(event.checked));
     };
     if (!toggle_yz_mesh.__argnames__) Object.defineProperties(toggle_yz_mesh, {
@@ -1501,69 +1444,63 @@ async function __main__() {
         __module__ : {value: null}
     });
 
-    "531";
+    "506";
     animation.append_to_caption("\n");
-    "532";
+    "507";
     xy_checkbox = ρσ_interpolate_kwargs.call(this, checkbox, [ρσ_desugar_kwargs({text: "XY mesh ", bind: toggle_xz_mesh, checked: true})]);
-    "533";
+    "508";
     xz_checkbox = ρσ_interpolate_kwargs.call(this, checkbox, [ρσ_desugar_kwargs({text: "XZ mesh ", bind: toggle_xy_mesh, checked: true})]);
-    "534";
+    "509";
     yz_checkbox = ρσ_interpolate_kwargs.call(this, checkbox, [ρσ_desugar_kwargs({text: "YZ mesh ", bind: toggle_yz_mesh, checked: true})]);
-    "535";
+    "510";
     tick_checkbox = ρσ_interpolate_kwargs.call(this, checkbox, [ρσ_desugar_kwargs({text: "Tick marks ", bind: toggle_tick_marks, checked: true})]);
-    "536";
+    "511";
     animation.append_to_caption("\n\nHue offset  ");
-    "537";
+    "512";
     color_slider = ρσ_interpolate_kwargs.call(this, slider, [ρσ_desugar_kwargs({min: 0, max: 1, step: .01, value: .5, bind: adjust_color})]);
-    "539";
+    "514";
     animation.append_to_caption("\nAnimation speed ");
-    "540";
+    "515";
     omega_slider = ρσ_interpolate_kwargs.call(this, slider, [ρσ_desugar_kwargs({min: 0, max: 3["*"](pi), value: 0, bind: adjust_omega})]);
-    "541";
+    "516";
     omega_slider_text = ρσ_interpolate_kwargs.call(this, wtext, [ρσ_desugar_kwargs({text: "= 0"})]);
-    "543";
+    "518";
     animation.append_to_caption("\n\n");
-    "544";
-    ricker_button = ρσ_interpolate_kwargs.call(this, radio, [ρσ_desugar_kwargs({bind: switch_function, checked: true, text: "Ricker wavelet", name: "ricker"})]);
-    "545";
-    mexican_button = ρσ_interpolate_kwargs.call(this, radio, [ρσ_desugar_kwargs({bind: switch_function, text: "Mexican hat", name: "mexican_hat"})]);
-    "546";
-    ripple_button = ρσ_interpolate_kwargs.call(this, radio, [ρσ_desugar_kwargs({bind: switch_function, text: "Ripple", name: "ripple"})]);
-    "547";
-    animation.append_to_caption("\n\n");
-    "548";
-    sin_sqrt_button = ρσ_interpolate_kwargs.call(this, radio, [ρσ_desugar_kwargs({bind: switch_function, text: "F=sin(sqrt(x*x+y*y)) ", name: "sin_sqrt"})]);
-    "549";
-    polynomial_button = ρσ_interpolate_kwargs.call(this, radio, [ρσ_desugar_kwargs({bind: switch_function, text: "F=y*y*y*x-y*x*x*x ", name: "polynomial"})]);
-    "550";
-    sin_cos_button = ρσ_interpolate_kwargs.call(this, radio, [ρσ_desugar_kwargs({bind: switch_function, text: "F=sin(x)*cos(y) ", name: "sin_cos"})]);
-    "551";
-    animation.append_to_caption("\n\n");
-    "552";
-    abs_cos_button = ρσ_interpolate_kwargs.call(this, radio, [ρσ_desugar_kwargs({bind: switch_function, text: "F=cos(abs(x)+abs(y)) ", name: "abs_cos"})]);
-    "553";
-    exp_sin_button = ρσ_interpolate_kwargs.call(this, radio, [ρσ_desugar_kwargs({bind: switch_function, text: "F=(x*x+y*y)exp(sin(-x*x-y*y)) ", name: "exp_sin"})]);
-    "556";
+    "519";
+    torus_button = ρσ_interpolate_kwargs.call(this, radio, [ρσ_desugar_kwargs({bind: switch_function, text: "Torus", name: "torus"})]);
+    "520";
+    twisted_torus_button = ρσ_interpolate_kwargs.call(this, radio, [ρσ_desugar_kwargs({bind: switch_function, text: "Twisted torus", name: "twisted_torus", checked: true})]);
+    "521";
+    spiral_button = ρσ_interpolate_kwargs.call(this, radio, [ρσ_desugar_kwargs({bind: switch_function, text: "Spiral", name: "spiral"})]);
+    "522";
+    mobius_button = ρσ_interpolate_kwargs.call(this, radio, [ρσ_desugar_kwargs({bind: switch_function, text: "Mobius strip ", name: "mobius"})]);
+    "523";
+    bubbles_button = ρσ_interpolate_kwargs.call(this, radio, [ρσ_desugar_kwargs({bind: switch_function, text: "Bubbles ", name: "bubbles"})]);
+    "524";
+    arc_button = ρσ_interpolate_kwargs.call(this, radio, [ρσ_desugar_kwargs({bind: switch_function, text: "Arc ", name: "arc"})]);
+    "525";
+    knot_button = ρσ_interpolate_kwargs.call(this, radio, [ρσ_desugar_kwargs({bind: switch_function, text: "Knot ", name: "knot"})]);
+    "528";
     animation.append_to_caption("\n"["+"](caption)["+"]("\n"));
-    "558";
+    "530";
     async function on_key_press(key) {
-        "559";
+        "531";
         if ((key === "b" || typeof key === "object" && ρσ_equals(key, "b"))) {
-            "560";
+            "532";
             animation.background = ((animation.background === color.black || typeof animation.background === "object" && ρσ_equals(animation.background, color.black))) ? color.white : color.black;
-            "561";
+            "533";
         }
         if ((key === "s" || typeof key === "object" && ρσ_equals(key, "s"))) {
-            "562";
+            "534";
             (await animation.capture("3d_complex_function_plot"));
-            "563";
+            "535";
         }
         if ((key === "v" || typeof key === "object" && ρσ_equals(key, "v"))) {
-            "564";
+            "536";
             print("scene.center="["+"](str(animation.center)));
-            "565";
+            "537";
             print("scene.forward="["+"](str(animation.forward)));
-            "566";
+            "538";
             print("scene.range="["+"](str(animation.range)));
         }
     };
@@ -1572,12 +1509,12 @@ async function __main__() {
         __module__ : {value: null}
     });
 
-    "569";
+    "541";
     async function key_pressed(event) {
         var ρσ_ls, key;
-        "570";
+        "542";
         key = event.key;
-        "571";
+        "543";
         (await on_key_press(key));
     };
     if (!key_pressed.__argnames__) Object.defineProperties(key_pressed, {
@@ -1585,12 +1522,12 @@ async function __main__() {
         __module__ : {value: null}
     });
 
-    "574";
+    "546";
     animation.bind("keydown", key_pressed);
-    "577";
+    "549";
     async function running(ev) {
-        "578";
-        "579";
+        "550";
+        "551";
         run = !run;
     };
     if (!running.__argnames__) Object.defineProperties(running, {
@@ -1598,37 +1535,37 @@ async function __main__() {
         __module__ : {value: null}
     });
 
-    "582";
+    "554";
     animation.bind("mousedown", running);
-    "583";
+    "555";
     MathJax.Hub.Queue(ρσ_list_decorate([ "Typeset", MathJax.Hub ]));
-    "585";
+    "557";
     time = 0;
-    "586";
+    "558";
     dt = .02;
-    "587";
+    "559";
     run = true;
-    "588";
-    ρσ_unpack = (await ricker());
+    "560";
+    ρσ_unpack = (await twisted_torus());
 ρσ_unpack = ρσ_unpack_asarray(5, ρσ_unpack);
     xx = ρσ_unpack[0];
     yy = ρσ_unpack[1];
     zz = ρσ_unpack[2];
     z_min = ρσ_unpack[3];
     z_max = ρσ_unpack[4];
-    "589";
+    "561";
     _GS_1 = new Plot3D;
     (await _GS_1.__init__(xx, yy, zz, z_min, z_max));
     plot = _GS_1;
-    "590";
+    "562";
     while (true) {
-        "591";
+        "563";
         (await rate(30));
-        "592";
+        "564";
         (await plot.render(time));
-        "593";
+        "565";
         if (run) {
-            "594";
+            "566";
             time=time["+"](dt);
         }
     }

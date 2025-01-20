@@ -2,7 +2,8 @@
 The feeling of awed wonder that science can give us is one of the highest experiences 
 of which the human psyche is capable. It is a deep aesthetic passion to rank with the 
 finest that music and poetry can deliver. &mdash;
-Richard Dawkins in Unweaving the Rainbow, 1998.
+<a href="https://en.wikipedia.org/wiki/Richard_Dawkins">Richard Dawkins</a> in 
+<a href="https://en.wikipedia.org/wiki/Unweaving_the_Rainbow">Unweaving the Rainbow</a>, 1998.
 </blockquote>
 
 <p style="clear: both;"></p>
@@ -65,7 +66,8 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 <p></p>
 <blockquote>
 Mathematics directs the flow of the universe, lurks behind its shapes and curves, 
-holds the reins of everything from tiny atoms to the biggest stars. &mdash; Edward Frenkel
+holds the reins of everything from tiny atoms to the biggest stars. &mdash; 
+<a href="https://en.wikipedia.org/wiki/Edward_Frenkel">Edward Frenkel</a>
 </blockquote>
 
 <p></p>
@@ -174,7 +176,7 @@ $$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\
   <figcaption>Polar coordinates frequently simplify the tackling of rotationally symmetric problems.</figcaption>
 </figure>
 <figure style="float: right; width: 45%; text-align: center">
-  <a href="glowscript/shapes.html">
+  <a href="glowscript/GeometricShapes.html">
     <img alt="Twisted torus" src="./images/geometry/twisted_torus.png" title="Click to animate"/>
   </a>
   <figcaption>A twisted torus. For more geometrical shapes like this, 

@@ -6,21 +6,9 @@ from vpython import *
 get_library('https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js')
 # get_library("https://cdnjs.cloudflare.com/ajax/libs/mathjs/14.0.1/math.js")
 
-ricker_title = """<a href="https://en.wikipedia.org/wiki/Ricker_wavelet">Ricker / Mexican hat / Marr wavelet</a>
-
-$F(x,y) = \dfrac{1}{\pi\sigma^4} \\bigg(1 - \dfrac{1}{2} \\bigg( \dfrac{x^2 + y^2}{\sigma^2} \\bigg) \\bigg) e^{-\\dfrac{x^2+y^2}{2\sigma^2}}$
-"""
-
-mexican_hat_title = "<h3>Polar coordinates for Mexican hat</h3>$\\begin{cases} x & = r\\cos(\\phi) \\\\ y & = r\\sin(\\phi)) \\\\ z & = (r^2 - 1)^2 \\end{cases}$"
 spiral_title = "<h3>Polar coordinates for Dini&apos;s spiral</h3>$\\begin{pmatrix}x \\\\ y \\\\ z\\end{pmatrix}=\\begin{pmatrix} \\cos(\\theta)\cdot\\sin(\\phi) \\\\  \\sin(\\theta)\\cdot\\sin(\\phi) \\\\ (\\cos(\\phi)+\\log(\\tan(\\phi/2)))) + 0.2\\theta \\end{pmatrix}\\text{, } \\begin{cases} 0 < \\theta < 12.4 \\\\ 0.1 < \\phi < 2\\end{cases}$"
 torus_title = "<h3>Polar coordinates for torus</h3>$\\begin{pmatrix}x \\\\ y \\\\ z\\end{pmatrix}=\\begin{pmatrix} (c + a \\cos(\\phi))\cdot\\cos(\\theta) \\\\  (c + a \\cos(\\phi))\cdot\\sin(\\theta) \\\\ a \\sin(\\phi) \\end{pmatrix}\\text{, } \\theta, \\phi \\in [-\\pi, \\pi]$"
 twisted_torus_title = "<h3>Polar coordinates for twisted torus</h3>$\\begin{pmatrix}x \\\\ y \\\\ z\\end{pmatrix}=\\begin{pmatrix} (3 + \\sin(\\phi) + \\cos(\\theta)) \cdot \\cos(2\\phi) \\\\  (3 + \\sin(\\phi) + \\cos(\\theta))\cdot\\sin(2\\phi) \\\\ \\sin(\\theta)+2\\cos(\\phi) \\end{pmatrix}\\text{, } \\theta, \\phi \\in [-\\pi, \\pi]\\text{, } \\theta, \\phi \\in [-\\pi, \\pi]$"
-sine_cosine_title = "<h2>$F(x, y) = \\sin{(\pi x)}\\cos{(\pi y)}}$</h2>"
-exponential_title = "<h2>$F(x, y) = \\sin(x^2 + y^2) e^{ -x^2 - y^2}$</h2>"
-ripple_title = "<h2>$F(x, y) =  \\sin\\big(3 (x^2 + y^2)\\big)$</h2"
-polynomial_title = "<h2>$F(x, y) =  (yx^3 - xy^3)$</h2>"
-cosine_of_abs_title = "<h2>F(x, y) = \\cos(|x| + |y|)$</h2>"
-sine_sqrt_title = "<h2>$F(x, y) = \\sqrt{x^2+y^2}$</h2>"
 caption = """
 &#x2022; Source code can be found <a href="https://github.com/zhendrikse/physics-in-python/blob/main/src/glowscript/mathematics/3d_plots.py">here</a>
 &#x2022; Inspired on <a href="https://www.glowscript.org/#/user/GlowScriptDemos/folder/Examples/program/Plot3D">Plot3D</a> by adding the following features: 
@@ -31,7 +19,7 @@ caption = """
 """
 
 animation = canvas(align="top", width=700, height=700, center=vec(0, 5, 0),
-                   forward=vec(-0.9, -0.5, -.8), title=ricker_title + "\n", range=75)
+                   forward=vec(-0.9, -0.5, -.8), title=twisted_torus_title + "\n", range=150)
 MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 
@@ -385,108 +373,104 @@ class Plot3D:
         self._axis.yz_mesh_visibility_is(visible)
 
 
-def sine_sqrt():
-    resolution = 50
-    x = y = np.linspace(-2 * pi, 2 * pi, resolution)
-    xx, yy = np.meshgrid(x, y)
-    x_2_plus_y_2 = xx.multiply(xx).add(yy.multiply(yy))
-    zz = np.sin(np.sqrt(x_2_plus_y_2)).multiply(5)
+def torus():
+    # https://www.mattiagiuri.com/2020/11/20/plotting-a-torus-with-python/
 
-    z_min = -9
-    z_max = 9
-    return xx, yy, zz, z_min, z_max
-
-
-def mexican_hat():
-    # https://matplotlib.org/stable/gallery/mplot3d/surface3d_radial.html#sphx-glr-gallery-mplot3d-surface3d-radial-py
-    r = np.linspace(0, 1.25, 50)
-    p = np.linspace(-pi, 1.05 * pi, 50)
-    R, P = np.meshgrid(r, p)
-    Z = R.multiply(R).subtract(1).multiply(R.multiply(R).subtract(1))
-    X, Y = np.cos(P).multiply(R), np.sin(P).multiply(R)
-
-    return X, Y, Z, None, None
-
-
-def ricker():
-    resolution = 50
-
-    x = y = np.linspace(-1.25, 1.25, resolution)
-    xx, yy = np.meshgrid(x, y)
-
-    sigma = .7
-    sigma_2 = sigma * sigma
-    x_2_plus_y_2 = xx.multiply(xx).add(yy.multiply(yy))
-    x_2_plus_y_2_div_sigma_2 = x_2_plus_y_2.divide(-0.5 * sigma_2)
-    factor_1 = 1 / (pi * sigma_2 * sigma_2)
-    factor_2 = x_2_plus_y_2_div_sigma_2.add(1)
-    zz = np.exp(x_2_plus_y_2_div_sigma_2).multiply(factor_2).multiply(factor_1)
-
-    z_min = -.25
-    z_max = 2
-    return xx, yy, zz, z_min, z_max
-
-
-def cosine_of_abs():
     resolution = 75
-    x = y = np.linspace(-2 * pi, 2 * pi, resolution)
-    xx, yy = np.meshgrid(x, y)
-    zz = np.cos(np.abs(xx).add(np.abs(yy)))
+    c = 3
+    a = 1
+    xx = yy = np.linspace(-pi, 1.05 * pi, resolution)
+    U, V = np.meshgrid(xx, yy)
+    X = (np.cos(V).multiply(a).add(c)).multiply(np.cos(U))
+    Y = (np.cos(V).multiply(a).add(c)).multiply(np.sin(U))
+    Z = np.sin(V).multiply(a)
+    return X, Y, Z, -2, 2
 
-    z_min = -2.5
-    z_max = 2.5
-    return xx, yy, zz, z_min, z_max
 
-
-def polynomial():
+def knot():
     resolution = 50
-    x = y = np.linspace(-1.75, 1.75, resolution)
-    xx, yy = np.meshgrid(x, y)
 
-    uu = yy.multiply(yy).multiply(yy).multiply(xx)
-    zz = yy.multiply(xx).multiply(xx).multiply(xx).subtract(uu)
+    theta = np.linspace(-pi, pi, resolution)
+    phi = np.linspace(0, 2.1 * pi, resolution)
+    theta, phi = np.meshgrid(theta, phi)
 
-    z_min = z_max = None
-    return xx, yy, zz, z_min, z_max
+    xx = np.cos(theta)
+    yy = np.sin(theta).add(np.cos(phi))
+    zz = np.sin(phi)
+
+    return xx, yy, zz, None, None
 
 
-def exp_sine():
+def arc():
+    resolution = 50
+
+    theta = np.linspace(0, 1.05 * pi, resolution)
+    phi = np.linspace(0, pi, resolution)
+    theta, phi = np.meshgrid(theta, phi)
+
+    xx = np.cos(theta)
+    yy = np.sin(theta).add(np.cos(phi))
+    zz = np.sin(phi)
+
+    return xx, yy, zz, None, None
+
+
+def bubbles():
+    resolution = 75
+
+    theta = np.linspace(0, 1.02 * pi, resolution)
+    phi = np.linspace(0, 2.02 * pi, resolution)
+    theta, phi = np.meshgrid(theta, phi)
+
+    xx = np.cos(theta).multiply(np.sin(phi.multiply(2)))
+    yy = np.sin(theta).multiply(np.sin(phi.multiply(2)))
+    zz = np.sin(phi)
+
+    return xx, yy, zz, -1, 1.1
+
+
+def mobius_strip():
     resolution = 100
-    x = y = np.linspace(-pi, pi, resolution)
-    xx, yy = np.meshgrid(x, y)
 
-    x_2_plus_y_2 = xx.multiply(xx).add(yy.multiply(yy))
-    sin_x_2_plus_y_2 = np.sin(x_2_plus_y_2).multiply(10)
-    exp_min_x_2_plus_y_2 = np.exp(x_2_plus_y_2.multiply(-1))
-    zz = sin_x_2_plus_y_2.multiply(exp_min_x_2_plus_y_2)
+    theta = np.linspace(-pi, 1.03 * pi, resolution)
+    phi = np.linspace(-1, 1, resolution)
+    theta, phi = np.meshgrid(theta, phi)
 
-    z_min = -.5
-    z_max = 5
-    return xx, yy, zz, z_min, z_max
-
-
-def sine_cosine():
-    resolution = 50
-    x = y = np.linspace(-2 * pi / 3, 2 * pi / 3., resolution)
-    xx, yy = np.meshgrid(x, y)
-    zz = np.sin(xx.multiply(pi)).multiply(np.cos(yy.multiply(pi)))
-
-    z_min = -2.5
-    z_max = 2.5
-    return xx, yy, zz, z_min, z_max
+    factor = np.cos(theta.multiply(.5)).multiply(phi.multiply(.5)).add(1)
+    xx = factor.multiply(np.cos(theta))
+    yy = factor.multiply(np.sin(theta))
+    zz = np.sin(theta.multiply(.5)).multiply(phi.multiply(.5))
+    return xx, yy, zz, -0.5, 1
 
 
-def ripple():
-    resolution = 125
-    x = y = np.linspace(-4 * pi / 3, 4 * pi / 3, resolution)
-    xx, yy = np.meshgrid(x, y)
+def twisted_torus():
+    resolution = 100
 
-    x_2_plus_y_2 = xx.multiply(xx).add(yy.multiply(yy))
-    zz = np.sin(x_2_plus_y_2.multiply(.75)).multiply(5)
+    theta = np.linspace(-pi, pi * 1.05, resolution)
+    phi = np.linspace(-pi, pi * 1.03, resolution)
+    theta, phi = np.meshgrid(theta, phi)
 
-    z_min = -20
-    z_max = 20
-    return xx, yy, zz, z_min, z_max
+    factor = np.sin(phi).add(np.cos(theta)).add(3)
+    xx = np.cos(phi.multiply(2)).multiply(factor)
+    yy = np.sin(phi.multiply(2)).multiply(factor)
+    zz = np.sin(theta).add(np.cos(phi).multiply(2))
+
+    return xx, yy, zz, None, None
+
+
+def dinis_spiral():
+    resolution = 100
+
+    u = np.linspace(0, 12.4, resolution)
+    v = np.linspace(0.1, 2, resolution)
+    u, v = np.meshgrid(u, v)
+
+    xx = np.cos(u).multiply(np.sin(v))
+    yy = np.sin(u).multiply(np.sin(v))
+    term = np.log(np.tan(v.multiply(0.5))).add(np.cos(v))
+    zz = u.multiply(0.2).add(term)
+
+    return xx, yy, zz, -2, 3
 
 
 def adjust_color():
@@ -494,48 +478,44 @@ def adjust_color():
 
 
 def sync_radio_buttons(event):
-    if event.name != "ricker": ricker_button.checked = False
-    if event.name != "mexican_hat": mexican_button.checked = False
-    if event.name != "ripple": ripple_button.checked = False
-    if event.name != "polynomial": polynomial_button.checked = False
-    if event.name != "sin_cos": sin_cos_button.checked = False
-    if event.name != "abs_cos": abs_cos_button.checked = False
-    if event.name != "exp_sin": exp_sin_button.checked = False
-    if event.name != "sin_sqrt": sin_sqrt_button.checked = False
+    if event.name != "torus": torus_button.checked = False
+    if event.name != "twisted_torus": twisted_torus_button.checked = False
+    if event.name != "spiral": spiral_button.checked = False
+    if event.name != "mobius": mobius_button.checked = False
+    if event.name != "bubbles": bubbles_button.checked = False
+    if event.name != "knot": knot_button.checked = False
+    if event.name != "arc": arc_button.checked = False
 
 
 def switch_function(event):
     sync_radio_buttons(event)
     xx, yy, zz, z_min, z_max = None, None, None, None, None
 
-    if event.name == "mexican_hat":
-        xx, yy, zz, z_min, z_max = mexican_hat()
-        animation.title = mexican_hat_title + "\n\n"
-    elif event.name == "ricker":
-        xx, yy, zz, z_min, z_max = ricker()
-        animation.title = ricker_title + "\n"
-    elif event.name == "ripple":
-        xx, yy, zz, z_min, z_max = ripple()
-        animation.title = ripple_title + "\n\n"
-    elif event.name == "sin_sqrt":
-        xx, yy, zz, z_min, z_max = sine_sqrt()
-        animation.title = sine_sqrt_title + "\n"
-    elif event.name == "polynomial":
-        xx, yy, zz, z_min, z_max = polynomial()
-        animation.title = polynomial_title + "\n"
-    elif event.name == "sin_cos":
-        xx, yy, zz, z_min, z_max = sine_cosine()
-        animation.title = sine_cosine_title + "\n"
-    elif event.name == "abs_cos":
-        xx, yy, zz, z_min, z_max = cosine_of_abs()
-        animation.title = cosine_of_abs_title + "\n"
-    elif event.name == "exp_sin":
-        xx, yy, zz, z_min, z_max = exp_sine()
-        animation.title = exponential_title + "\n"
+    if event.name == "torus":
+        xx, yy, zz, z_min, z_max = torus()
+        animation.title = torus_title + "\n"
+    elif event.name == "twisted_torus":
+        xx, yy, zz, z_min, z_max = twisted_torus()
+        animation.title = twisted_torus_title + "\n"
+    elif event.name == "spiral":
+        xx, yy, zz, z_min, z_max = dinis_spiral()
+        animation.title = spiral_title + "\n\n"
+    elif event.name == "mobius":
+        xx, yy, zz, z_min, z_max = mobius_strip()
+        animation.title = twisted_torus_title + "\n"
+    elif event.name == "bubbles":
+        xx, yy, zz, z_min, z_max = bubbles()
+        animation.title = twisted_torus_title + "\n"
+    elif event.name == "arc":
+        xx, yy, zz, z_min, z_max = arc()
+        animation.title = twisted_torus_title + "\n"
+    elif event.name == "knot":
+        xx, yy, zz, z_min, z_max = knot()
+        animation.title = twisted_torus_title + "\n"
 
-    animation.range = 1.5 * np.len(xx)
     plot.reinitialize(xx, yy, zz, xy_checkbox.checked, xz_checkbox.checked, yz_checkbox.checked, tick_checkbox.checked,
                       z_min, z_max)
+    animation.range = 1.5 * np.len(xx)
     time = 0.5
     MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
@@ -574,16 +554,13 @@ omega_slider = slider(min=0, max=3 * pi, value=0, bind=adjust_omega)
 omega_slider_text = wtext(text="= 0")
 
 animation.append_to_caption("\n\n")
-ricker_button = radio(bind=switch_function, checked=True, text='Ricker wavelet', name='ricker')
-mexican_button = radio(bind=switch_function, text='Mexican hat', name='mexican_hat')
-ripple_button = radio(bind=switch_function, text="Ripple", name="ripple")
-animation.append_to_caption("\n\n")
-sin_sqrt_button = radio(bind=switch_function, text="F=sin(sqrt(x*x+y*y)) ", name="sin_sqrt")
-polynomial_button = radio(bind=switch_function, text="F=y*y*y*x-y*x*x*x ", name="polynomial")
-sin_cos_button = radio(bind=switch_function, text="F=sin(x)*cos(y) ", name="sin_cos")
-animation.append_to_caption("\n\n")
-abs_cos_button = radio(bind=switch_function, text="F=cos(abs(x)+abs(y)) ", name="abs_cos")
-exp_sin_button = radio(bind=switch_function, text="F=(x*x+y*y)exp(sin(-x*x-y*y)) ", name="exp_sin")
+torus_button = radio(bind=switch_function, text="Torus", name="torus")
+twisted_torus_button = radio(bind=switch_function, text="Twisted torus", name="twisted_torus", checked=True)
+spiral_button = radio(bind=switch_function, text="Spiral", name="spiral")
+mobius_button = radio(bind=switch_function, text="Mobius strip ", name="mobius")
+bubbles_button = radio(bind=switch_function, text="Bubbles ", name="bubbles")
+arc_button = radio(bind=switch_function, text="Arc ", name="arc")
+knot_button = radio(bind=switch_function, text="Knot ", name="knot")
 
 animation.append_to_caption("\n" + caption + "\n")
 
@@ -618,7 +595,7 @@ MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 time = 0
 dt = 0.02
 run = True
-xx, yy, zz, z_min, z_max = ricker()
+xx, yy, zz, z_min, z_max = twisted_torus()
 plot = Plot3D(xx, yy, zz, z_min, z_max)
 while True:
     rate(30)
