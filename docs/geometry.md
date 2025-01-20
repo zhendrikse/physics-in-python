@@ -63,4 +63,4 @@ in a dark labyrinth. &mdash;
 
 - [Geometry, Surfaces, Curves, Polyhedra](https://paulbourke.net/geometry/) on 
   [Paul Bourke](https://paulbourke.net/geometry/)&apos; web site
-- 
+- [Parametric plots](https://doc.sagemath.org/html/en/reference/plot3d/sage/plot/plot3d/parametric_plot3d.html)
