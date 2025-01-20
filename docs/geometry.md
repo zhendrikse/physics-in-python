@@ -10,6 +10,7 @@ in a dark labyrinth. Galileo (1623).
 
 # Welcome to my math art gallery 
 
+<div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
   <a href="glowscript/Shapes.html">
     <img alt="Dini&apos;s spiral" src="./images/geometry/dini_spiral.png" title="Click to animate"/>
@@ -18,12 +19,14 @@ in a dark labyrinth. Galileo (1623).
 </figure>
 <figure style="float: right; width: 50%; text-align: center">
   <a href="glowscript/shapes.html">
-    <img alt="Bubbles shape" src="./images/bubbles.png" title="Click to animate"/>
+    <img alt="Bubbles shape" src="./images/geometry/bubbles.png" title="Click to animate"/>
   </a>
   <figcaption>Lemniscate of Gerono, defined by $x4 - x2 + y2 + z2 = 0$.</figcaption>
 </figure>
+</div>
 <p style="clear: both;"></p>
 
+<div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
   <a href="glowscript/Shapes.html">
     <img alt="Torus" src="./images/geometry/torus.png" title="Click to animate"/>
@@ -36,8 +39,10 @@ in a dark labyrinth. Galileo (1623).
   </a>
   <figcaption>A twisted torus.</figcaption>
 </figure>
+</div>
 <p style="clear: both;"></p>
 
+<div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
   <a href="glowscript/Shapes.html">
     <img alt="Dented object" src="./images/geometry/dented_object.png" title="Click to animate"/>
@@ -50,6 +55,7 @@ in a dark labyrinth. Galileo (1623).
   </a>
   <figcaption>The well-known Möbius strip.</figcaption>
 </figure>
+</div>
 <p style="clear: both;"></p>
 
 # References

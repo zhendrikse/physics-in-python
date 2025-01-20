@@ -40,6 +40,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 ###  Kepler's law &amp; the three-body problem
 <hr/>
 
+<div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw">
     <img alt="Kepler's laws" src="./images/keplers_law.png" title="Click to animate"/>
@@ -55,7 +56,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
   </a>
   <figcaption>The well-known <a href="https://en.wikipedia.org/wiki/Three-body_problem">three-body problem</a>.</figcaption>
 </figure>
-
+</div>
 <p style="clear: both;"></p>
 
 <a name="mathematics"></a>
@@ -165,6 +166,7 @@ $$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\
 ### Polar coordinates &amp; [geometrical shapes](geometry.html)
 <hr/>
 
+<div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">
     <img alt="Polar coordinates" src="./images/polar_coordinates.png" title="Click to animate"/>
@@ -178,7 +180,7 @@ $$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\
   <figcaption>A twisted torus. For more geometrical shapes like this, 
   visit my <a href="geometry.html">Math Art gallery</a>.</figcaption>
 </figure>
-
+</div>
 <p style="clear: both;"></p>
 
 
@@ -192,6 +194,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 ### Flocking birds &amp; falling raindrops
 <hr/>
 
+<div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
   <a href="glowscript/Flockingbirds.html">
     <img alt="Flocking birds" src="./images/flocking_birds.png" title="Click to animate"/>
@@ -206,6 +209,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
   <figcaption>"There are holes in the sky. Where the rain gets in. But they're ever so small. 
   That's why the rain is thin" &mdash; Spike Milligan.</figcaption>
 </figure>
+</div>
 <p style="clear: both;"></p>
 
 
@@ -227,6 +231,7 @@ on [glowscript.org](https://glowscript.org).
 ### Visualizing plane waves $\psi(x, t) = A \cdot e^{i(k x - \omega t)}$ &amp; spherical harmonics
 <hr/>
 
+<div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
   <a href="glowscript/Planewave.html">
     <img alt="Complex wave" src="./images/plane_wave.png" title="Click to animate"/>
@@ -239,6 +244,7 @@ on [glowscript.org](https://glowscript.org).
   </a>
   <figcaption>Spherical harmonics are solutions of the Schr&#246;dinger equation for the hydrogen atom.</figcaption>
 </figure>
+</div>
 <p style="clear: both;"></p>
 
 
@@ -362,6 +368,7 @@ The quantum harmonic oscillator is visualized in a semi-classical way below.
 ### Charged particle moving in two electric fields
 <hr />
 
+<div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedring">
     <img alt="Electron spinning around charged ring" src="./images/electron_and_charged_ring.png" title="Click to animate"/>
@@ -374,11 +381,13 @@ The quantum harmonic oscillator is visualized in a semi-classical way below.
   </a>
   <figcaption>Discover how a particle&apos;s velocity and the electric field strength influence one another.</figcaption>
 </figure>
+</div>
 <p style="clear: both;"></p>
 
 ### Rutherford scattering & charged particle in magnetic field
 <hr/>
 
+<div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
   <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Rutherfordscattering">
     <img alt="Rutherford scattering" src="./images/rutherford_scattering.png" title="Click to animate"/>
@@ -392,6 +401,7 @@ The quantum harmonic oscillator is visualized in a semi-classical way below.
   </a>
   <figcaption>Playfully discover how a charged particle behaves in a magnetic field.</figcaption>
 </figure>
+</div>
 <p style="clear: both;"></p>
 
 
@@ -405,6 +415,7 @@ on [glowscript.org](https://glowscript.org).
 ### Electric fields of dipoles and point charges
 <hr/>
 
+<div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Pointchargefield">
     <img alt="Electric field of point charge" src="./images/point_charge.png" title="Click to animate"/>
@@ -417,6 +428,7 @@ on [glowscript.org](https://glowscript.org).
   </a>
   <figcaption><a href="https://en.wikipedia.org/wiki/Electric_dipole_moment">Electric dipole moment.</a></figcaption>
 </figure>
+</div>
 <p style="clear: both;"></p>
 
 <details>
@@ -436,6 +448,7 @@ $$\vec{E} ( \vec{r} ) = -\dfrac {1} {4\pi\epsilon_0} \nabla \bigg( \dfrac{\vec{r
 ### Electric and magnetic fields
 <hr/>
 
+<div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Faradayslaw">
     <img alt="Faraday's law" src="./images/faradays_law.png" title="Click to animate"/>
@@ -448,11 +461,13 @@ $$\vec{E} ( \vec{r} ) = -\dfrac {1} {4\pi\epsilon_0} \nabla \bigg( \dfrac{\vec{r
   </a>  
   <figcaption>Visualization of an electric field inside a series of charged rings.</figcaption>
 </figure>
+</div>
 <p style="clear: both;"></p>
 
 ### Charged disk and accompanying builder
 <hr/>
 
+<div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargeddisk">
     <img alt="Charged disk" src="./images/charged_disk.png" title="Click to animate"/>
@@ -465,11 +480,13 @@ $$\vec{E} ( \vec{r} ) = -\dfrac {1} {4\pi\epsilon_0} \nabla \bigg( \dfrac{\vec{r
   </a>
   <figcaption>Build up an electric field yourself by incrementally adding a charged rings.</figcaption>
 </figure>
+</div>
 <p style="clear: both;"></p>
 
 ## Electromagnetic waves
 <hr/>
 
+<div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Antenna">
     <img alt="Antenna" src="./images/antenna.png" title="Click to animate"/>
@@ -482,9 +499,8 @@ $$\vec{E} ( \vec{r} ) = -\dfrac {1} {4\pi\epsilon_0} \nabla \bigg( \dfrac{\vec{r
   </a>
   <figcaption>Electromagnetic waves propagating through empty space.</figcaption>
 </figure>
+</div>
 <p style="clear: both;"></p>
-
-
 
 <a name="thermodynamics"></a>
 # Thermodynamics
