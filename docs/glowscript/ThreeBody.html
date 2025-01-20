@@ -1,0 +1,211 @@
+<div id="glowscript" class="glowscript">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css" rel="stylesheet" />
+<link type="text/css" href="https://www.glowscript.org/css/ide.css" rel="stylesheet" />
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+// START JAVASCRIPT
+;(function() {;
+var ρσ_modules = {};
+ρσ_modules.pythonize = {};
+
+(function(){
+    function strings() {
+        var string_funcs, exclude, name;
+        string_funcs = set("capitalize strip lstrip rstrip islower isupper isspace lower upper swapcase center count endswith startswith find rfind index rindex format join ljust rjust partition rpartition replace split rsplit splitlines zfill".split(" "));
+        if (!arguments.length) {
+            exclude = (function(){
+                var s = ρσ_set();
+                s.jsset.add("split");
+                s.jsset.add("replace");
+                return s;
+            })();
+        } else if (arguments[0]) {
+            exclude = Array.prototype.slice.call(arguments);
+        } else {
+            exclude = null;
+        }
+        if (exclude) {
+            string_funcs = string_funcs.difference(set(exclude));
+        }
+        var ρσ_Iter0 = string_funcs;
+        ρσ_Iter0 = ((typeof ρσ_Iter0[Symbol.iterator] === "function") ? (ρσ_Iter0 instanceof Map ? ρσ_Iter0.keys() : ρσ_Iter0) : Object.keys(ρσ_Iter0));
+        for (var ρσ_Index0 of ρσ_Iter0) {
+            name = ρσ_Index0;
+            (ρσ_expr_temp = String.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name] = (ρσ_expr_temp = ρσ_str.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name];
+        }
+    };
+    if (!strings.__module__) Object.defineProperties(strings, {
+        __module__ : {value: "pythonize"}
+    });
+
+    ρσ_modules.pythonize.strings = strings;
+})();
+async function __main__() {
+"use strict";
+    var display = canvas;
+    var scene = canvas();
+
+    var version, print, arange, __name__, type, ρσ_ls, caption, title, animation, G, astronomical_unit, mass, rA, rB, vA, _GS_1, sphere_A, sphere_B, sphere_C, force_BA, force_CB, force_AC, t;
+    version = ρσ_list_decorate([ "3.2", "glowscript" ]);
+    Array.prototype['+'] = function(r) {return this.concat(r)}
+    Array.prototype['*'] = function(r) {return __array_times_number(this, r)}
+    window.__GSlang = "vpython";
+    print = GSprint;
+    arange = range;
+    __name__ = "__main__";
+    type = pytype;
+    var strings = ρσ_modules.pythonize.strings;
+
+    strings();
+    "10";
+    caption = "\n&#x2022; Based on original by <a href=\"https://trinket.io/glowscript/9ece3648f0\">Rhett Allain<\/a>\n&#x2022; Belongs to <a href=\"https://www.youtube.com/watch?v=Ye2wIV8-SB8\">this video</a> \n&#x2022; Refactored by <a href=\"https://github.com/zhendrikse/\">Zeger Hendrikse</a> in this <a href=\"https://github.com/zhendrikse/physics-in-python/\">GitHub repository</a>\n\n";
+    "12";
+    title = "<h3>Click mouse to start animation</h3>";
+    "14";
+    animation = ρσ_interpolate_kwargs.call(this, canvas, [ρσ_desugar_kwargs({title: title, width: "800", height: "600", caption: caption})]);
+    "16";
+    G = 6.67e-11;
+    "17";
+    astronomical_unit = 149e9;
+    "19";
+    function CelestialObject() {;
+    }
+    CelestialObject.prototype.__init__ = async function __init__() {
+        var self = this;
+        var position = ( 0 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true) ? undefined : arguments[0];
+        var velocity = ( 1 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true) ? undefined : arguments[1];
+        var mass = ( 2 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true) ? undefined : arguments[2];
+        var radius = ( 3 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true) ? undefined : arguments[3];
+        var color = (arguments[4] === undefined || ( 4 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true)) ? __init__.__defaults__.color : arguments[4];
+        var make_trail = (arguments[5] === undefined || ( 5 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true)) ? __init__.__defaults__.make_trail : arguments[5];
+        var ρσ_kwargs_obj = arguments[arguments.length["-"](1)];
+        if (ρσ_kwargs_obj === null || typeof ρσ_kwargs_obj !== "object" || ρσ_kwargs_obj [ρσ_kwargs_symbol] !== true) ρσ_kwargs_obj = {};
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "color")){
+            color = ρσ_kwargs_obj.color;
+        }
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "make_trail")){
+            make_trail = ρσ_kwargs_obj.make_trail;
+        }
+        "21";
+        self._sphere = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: position, v: velocity, mass: mass, radius: radius, color: color, make_trail: make_trail})]);
+    };
+    if (!CelestialObject.prototype.__init__.__defaults__) Object.defineProperties(CelestialObject.prototype.__init__, {
+        __defaults__ : {value: {color:color.yellow, make_trail:true}},
+        __handles_kwarg_interpolation__ : {value: true},
+        __argnames__ : {value: ["position", "velocity", "mass", "radius", "color", "make_trail"]},
+        __module__ : {value: null}
+    });
+    CelestialObject.__argnames__ = CelestialObject.prototype.__init__.__argnames__;
+    CelestialObject.__handles_kwarg_interpolation__ = CelestialObject.prototype.__init__.__handles_kwarg_interpolation__;
+    CelestialObject.prototype.momentum = async function momentum() {
+        var self = this;
+        "24";
+        return self._sphere.mass["*"](self._sphere.v);
+    };
+    if (!CelestialObject.prototype.momentum.__module__) Object.defineProperties(CelestialObject.prototype.momentum, {
+        __module__ : {value: null}
+    });
+    CelestialObject.prototype.distance_to = async function distance_to(other) {
+        var self = this;
+        "27";
+        return other._sphere.pos["-"](1["*"](self._sphere.pos));
+    };
+    if (!CelestialObject.prototype.distance_to.__argnames__) Object.defineProperties(CelestialObject.prototype.distance_to, {
+        __argnames__ : {value: ["other"]},
+        __module__ : {value: null}
+    });
+    CelestialObject.prototype.force_between = async function force_between(other) {
+        var self = this;
+        var ρσ_ls, radius, force_magnitude, force_vector;
+        "30";
+        radius = (await self.distance_to(other));
+        "31";
+        force_magnitude = G["*"](self._sphere.mass)["*"](other._sphere.mass)["/"](Math.pow(mag(radius), 2));
+        "32";
+        force_vector = force_magnitude["*"](norm(radius));
+        "33";
+        return force_vector;
+    };
+    if (!CelestialObject.prototype.force_between.__argnames__) Object.defineProperties(CelestialObject.prototype.force_between, {
+        __argnames__ : {value: ["other"]},
+        __module__ : {value: null}
+    });
+    CelestialObject.prototype.move = async function move(force, dt) {
+        var self = this;
+        "36";
+        self._sphere.v=self._sphere.v["+"](force["/"](self._sphere.mass)["*"](dt));
+        "37";
+        self._sphere.pos=self._sphere.pos["+"](self._sphere.v["*"](dt));
+    };
+    if (!CelestialObject.prototype.move.__argnames__) Object.defineProperties(CelestialObject.prototype.move, {
+        __argnames__ : {value: ["force", "dt"]},
+        __module__ : {value: null}
+    });
+    CelestialObject.prototype.__repr__ = async function __repr__() {
+                return "<"["+"](__name__)["+"](".")["+"](this.constructor.name)["+"](" #")["+"](this.ρσ_object_id)["+"](">");
+    };
+    CelestialObject.prototype.__str__ = async function __str__() {
+        return this.__repr__();
+    };
+    Object.defineProperty(CelestialObject.prototype, "__bases__", {value: []});
+
+
+
+
+
+
+    "39";
+    mass = 1e30;
+    "40";
+    rA = .1["*"](astronomical_unit);
+    "41";
+    rB = rA["*"](1)["/"](.8);
+    "42";
+    vA = sqrt(G["*"](.8)["*"](mass)["*"](rA))["/"](rA["+"](rB));
+    "44";
+    _GS_1 = new CelestialObject;
+    (await _GS_1.__init__(vector(rA, 0, 0), vector(0, vA, 0), mass, 19e8));
+    sphere_A = _GS_1;
+    "45";
+    _GS_1 = new CelestialObject;
+    (await _GS_1.__init__(vector(1["-u"]()["*"](rB), 0, 0), vector(0, 1["-u"]()["*"](vA)["/"](.8), 0), .8["*"](mass), 19e8, color.cyan));
+    sphere_B = _GS_1;
+    "46";
+    _GS_1 = new CelestialObject;
+    (await _GS_1.__init__(vector(0, 0, rA), vector(0, 0, 0), .5["*"](mass), 19e8, color.magenta));
+    sphere_C = _GS_1;
+    "48";
+    (await animation.waitfor("click"));
+    "49";
+    for (var ρσ_Index1 = 0; ρσ_Index1["<"](1500["*"](5e3)); ρσ_Index1=ρσ_Index1["+"](5e3)) {
+        t = ρσ_Index1;
+        "50";
+        (await rate(100));
+        "52";
+        force_BA = (await sphere_A.force_between(sphere_B));
+        "53";
+        force_CB = (await sphere_B.force_between(sphere_C));
+        "54";
+        force_AC = (await sphere_C.force_between(sphere_A));
+        "56";
+        ρσ_interpolate_kwargs.call(sphere_A, sphere_A.move, [force_BA["-"](1["*"](force_AC))].concat([ρσ_desugar_kwargs({dt: 5e3})]));
+        "57";
+        ρσ_interpolate_kwargs.call(sphere_B, sphere_B.move, [1["-u"]()["*"](force_BA)["+"](force_CB)].concat([ρσ_desugar_kwargs({dt: 5e3})]));
+        "58";
+        ρσ_interpolate_kwargs.call(sphere_C, sphere_C.move, [1["-u"]()["*"](force_CB)["+"](force_AC)].concat([ρσ_desugar_kwargs({dt: 5e3})]));
+    }
+};
+if (!__main__.__module__) Object.defineProperties(__main__, {
+    __module__ : {value: null}
+});
+
+;$(function(){ window.__context = { glowscript_container: $("#glowscript").removeAttr("id") }; __main__() })})()
+// END JAVASCRIPT
+
+//--><!]]></script>
+</div>

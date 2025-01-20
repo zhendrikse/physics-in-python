@@ -1,0 +1,273 @@
+<div id="glowscript" class="glowscript">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css" rel="stylesheet" />
+<link type="text/css" href="https://www.glowscript.org/css/ide.css" rel="stylesheet" />
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+// START JAVASCRIPT
+;(function() {;
+var ρσ_modules = {};
+var colour;
+ρσ_modules.pythonize = {};
+
+(function(){
+    function strings() {
+        var string_funcs, exclude, name;
+        string_funcs = set("capitalize strip lstrip rstrip islower isupper isspace lower upper swapcase center count endswith startswith find rfind index rindex format join ljust rjust partition rpartition replace split rsplit splitlines zfill".split(" "));
+        if (!arguments.length) {
+            exclude = (function(){
+                var s = ρσ_set();
+                s.jsset.add("split");
+                s.jsset.add("replace");
+                return s;
+            })();
+        } else if (arguments[0]) {
+            exclude = Array.prototype.slice.call(arguments);
+        } else {
+            exclude = null;
+        }
+        if (exclude) {
+            string_funcs = string_funcs.difference(set(exclude));
+        }
+        var ρσ_Iter0 = string_funcs;
+        ρσ_Iter0 = ((typeof ρσ_Iter0[Symbol.iterator] === "function") ? (ρσ_Iter0 instanceof Map ? ρσ_Iter0.keys() : ρσ_Iter0) : Object.keys(ρσ_Iter0));
+        for (var ρσ_Index0 of ρσ_Iter0) {
+            name = ρσ_Index0;
+            (ρσ_expr_temp = String.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name] = (ρσ_expr_temp = ρσ_str.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name];
+        }
+    };
+    if (!strings.__module__) Object.defineProperties(strings, {
+        __module__ : {value: "pythonize"}
+    });
+
+    ρσ_modules.pythonize.strings = strings;
+})();
+async function __main__() {
+"use strict";
+    var display = canvas;
+    var scene = canvas();
+
+    function round(num, n=0) {return Number(num.toFixed(n))}
+
+    var version, print, arange, __name__, type, ρσ_ls, title, animation, sun, colour, dt, _GS_1, planet, _, obj;
+    version = ρσ_list_decorate([ "3.2", "glowscript" ]);
+    Array.prototype['+'] = function(r) {return this.concat(r)}
+    Array.prototype['*'] = function(r) {return __array_times_number(this, r)}
+    window.__GSlang = "vpython";
+    print = GSprint;
+    arange = range;
+    __name__ = "__main__";
+    type = pytype;
+    var strings = ρσ_modules.pythonize.strings;
+
+    strings();
+    "12";
+    title = "Kepler's law of equal areas\nPlots the orbit of a planet in an eccentric orbit to illustrate\nthe sweeping out of equal areas in equal times, with sun at focus.\nThe eccentricity of the orbit is random and determined by the \ninitial velocity. The program uses normalised units (G =1).\n\n&#x2022; Original by program by Peter Borcherds, University of Birmingham, England\n&#x2022; Refactored by <a href=\"https://github.com/zhendrikse/\">Zeger Hendrikse<\/a> in this <a href=\"https://github.com/zhendrikse/physics-in-python/\">GitHub repository</a>\n\n";
+    "16";
+    animation = ρσ_interpolate_kwargs.call(this, canvas, [ρσ_desugar_kwargs({title: title, width: 800, height: 600, range: 1, forward: vector(.0222862, .928369, 1["-u"]()["*"](.370991))})]);
+    "20";
+    function Planet() {;
+    }
+    Planet.prototype.__init__ = async function __init__() {
+        var self = this;
+        var scale = (arguments[0] === undefined || ( 0 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true)) ? __init__.__defaults__.scale : arguments[0];
+        var velocity = (arguments[1] === undefined || ( 1 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true)) ? __init__.__defaults__.velocity : arguments[1];
+        var ρσ_kwargs_obj = arguments[arguments.length["-"](1)];
+        if (ρσ_kwargs_obj === null || typeof ρσ_kwargs_obj !== "object" || ρσ_kwargs_obj [ρσ_kwargs_symbol] !== true) ρσ_kwargs_obj = {};
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "scale")){
+            scale = ρσ_kwargs_obj.scale;
+        }
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "velocity")){
+            velocity = ρσ_kwargs_obj.velocity;
+        }
+        var ρσ_ls, poss;
+        "22";
+        poss = vector(0, scale, 0);
+        "23";
+        self._velocity = velocity;
+        "24";
+        self._planet = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: poss, color: color.cyan, radius: .05})]);
+        "25";
+        self._last_position = poss;
+    };
+    if (!Planet.prototype.__init__.__defaults__) Object.defineProperties(Planet.prototype.__init__, {
+        __defaults__ : {value: {scale:1, velocity:1["-u"]()["*"](vector(.7["+"](.5["*"](random())), 0, 0))}},
+        __handles_kwarg_interpolation__ : {value: true},
+        __argnames__ : {value: ["scale", "velocity"]},
+        __module__ : {value: null}
+    });
+    Planet.__argnames__ = Planet.prototype.__init__.__argnames__;
+    Planet.__handles_kwarg_interpolation__ = Planet.prototype.__init__.__handles_kwarg_interpolation__;
+    Planet.prototype.month_step = async function month_step() {
+        var self = this;
+        var time = ( 0 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true) ? undefined : arguments[0];
+        var offset = (arguments[1] === undefined || ( 1 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true)) ? month_step.__defaults__.offset : arguments[1];
+        var whole = (arguments[2] === undefined || ( 2 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true)) ? month_step.__defaults__.whole : arguments[2];
+        var ρσ_kwargs_obj = arguments[arguments.length["-"](1)];
+        if (ρσ_kwargs_obj === null || typeof ρσ_kwargs_obj !== "object" || ρσ_kwargs_obj [ρσ_kwargs_symbol] !== true) ρσ_kwargs_obj = {};
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "offset")){
+            offset = ρσ_kwargs_obj.offset;
+        }
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "whole")){
+            whole = ρσ_kwargs_obj.whole;
+        }
+        var ρσ_ls, label_text;
+        "28";
+        "29";
+        if (whole) {
+            "30";
+            label_text = str(int(time["*"](2)["+"](dt)));
+            "32";
+        } else {
+            "33";
+            label_text = str("Period: ")["+"](str(round(time["*"](2), 2)))["+"](" \"months\"\n Initial speed: ")["+"](str(round((await self.speed()), 3)));
+            "35";
+            colour = color.white;
+        }
+        "36";
+        ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pos: (await self.pos()), text: label_text, color: colour, xoffset: offset["*"]((await self.pos()).x), yoffset: offset["*"]((await self.pos()).y)})]);
+        "38";
+        return vector(.5["*"](1["+"](random())), random(), random());
+    };
+    if (!Planet.prototype.month_step.__defaults__) Object.defineProperties(Planet.prototype.month_step, {
+        __defaults__ : {value: {offset:20, whole:1}},
+        __handles_kwarg_interpolation__ : {value: true},
+        __argnames__ : {value: ["time", "offset", "whole"]},
+        __module__ : {value: null}
+    });
+    Planet.prototype.revolve_one_period = async function revolve_one_period() {
+        var self = this;
+        var ρσ_ls, steps, step, time;
+        "41";
+        steps = 20;
+        "42";
+        step = 0;
+        "43";
+        time = 0;
+        "44";
+        "45";
+        while (!((self._last_position.x[">"](ρσ_cond_temp = 0) && ρσ_cond_temp[">"]((await self.pos()).x)))) {
+            "47";
+            (await rate(steps["*"](2)));
+            "48";
+            time=time["+"](dt);
+            "49";
+            (await planet.update());
+            "51";
+            step=step["+"](1);
+            "52";
+            if ((step === steps || typeof step === "object" && ρσ_equals(step, steps))) {
+                "53";
+                step = 0;
+                "54";
+                colour = (await self.month_step(time));
+                "55";
+                ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({pos: ρσ_list_decorate([ sun.pos, (await self.pos()) ]), color: color.white})]);
+                "56";
+                continue;
+            }
+            "59";
+            ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({pos: ρσ_list_decorate([ sun.pos, (await self.pos()) ]), color: colour})]);
+        }
+        "61";
+        (await planet.month_step(time, 50, 0));
+    };
+    if (!Planet.prototype.revolve_one_period.__module__) Object.defineProperties(Planet.prototype.revolve_one_period, {
+        __module__ : {value: null}
+    });
+    Planet.prototype.update = async function update() {
+        var self = this;
+        var ρσ_ls, denominator;
+        "64";
+        self._last_position = vector(self._planet.pos);
+        "66";
+        ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({pos: ρσ_list_decorate([ self._last_position, self._planet.pos ]), color: color.red})]);
+        "68";
+        denominator = Math.pow(mag(self._planet.pos), 3);
+        "69";
+        self._velocity=self._velocity["-"](self._planet.pos["*"](dt)["/"](denominator));
+        "70";
+        self._planet.pos=self._planet.pos["+"](self._velocity["*"](dt));
+    };
+    if (!Planet.prototype.update.__module__) Object.defineProperties(Planet.prototype.update, {
+        __module__ : {value: null}
+    });
+    Planet.prototype.pos = async function pos() {
+        var self = this;
+        "73";
+        return self._planet.pos;
+    };
+    if (!Planet.prototype.pos.__module__) Object.defineProperties(Planet.prototype.pos, {
+        __module__ : {value: null}
+    });
+    Planet.prototype.speed = async function speed() {
+        var self = this;
+        "76";
+        return mag(self._velocity);
+    };
+    if (!Planet.prototype.speed.__module__) Object.defineProperties(Planet.prototype.speed, {
+        __module__ : {value: null}
+    });
+    Planet.prototype.__repr__ = async function __repr__() {
+                return "<"["+"](__name__)["+"](".")["+"](this.constructor.name)["+"](" #")["+"](this.ρσ_object_id)["+"](">");
+    };
+    Planet.prototype.__str__ = async function __str__() {
+        return this.__repr__();
+    };
+    Object.defineProperty(Planet.prototype, "__bases__", {value: []});
+
+
+
+
+
+
+
+    "79";
+    sun = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({color: color.yellow, radius: .1, texture: "http://i.imgur.com/yoEzbtg.jpg"})]);
+    "80";
+    colour = color.white;
+    "82";
+    dt = .025;
+    "83";
+    while (true) {
+        "84";
+        _GS_1 = new Planet;
+        ρσ_interpolate_kwargs.call(_GS_1, _GS_1.__init__, [ρσ_desugar_kwargs({velocity: 1["-u"]()["*"](vector(.7["+"](.5["*"](random())), 0, 0))})]);
+        planet = _GS_1;
+        "85";
+        colour = (await planet.month_step(0));
+        "86";
+        ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({pos: ρσ_list_decorate([ sun.pos, (await planet.pos()) ]), color: colour})]);
+        "88";
+        (await planet.revolve_one_period());
+        "90";
+        ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pos: vector(2.5, 1["-u"]()["*"](2.5), 0), text: "Click for another orbit"})]);
+        "91";
+        _ = (await animation.waitfor("click"));
+        "93";
+        var ρσ_Iter1 = animation.objects;
+        ρσ_Iter1 = ((typeof ρσ_Iter1[Symbol.iterator] === "function") ? (ρσ_Iter1 instanceof Map ? ρσ_Iter1.keys() : ρσ_Iter1) : Object.keys(ρσ_Iter1));
+        for (var ρσ_Index1 of ρσ_Iter1) {
+            obj = ρσ_Index1;
+            "94";
+            if (obj === sun || obj === planet) {
+                continue;
+            }
+            "95";
+            obj.visible = 0;
+        }
+    }
+};
+if (!__main__.__module__) Object.defineProperties(__main__, {
+    __module__ : {value: null}
+});
+
+;$(function(){ window.__context = { glowscript_container: $("#glowscript").removeAttr("id") }; __main__() })})()
+// END JAVASCRIPT
+
+//--><!]]></script>
+</div>

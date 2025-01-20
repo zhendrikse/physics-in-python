@@ -15,6 +15,7 @@ sine_z_title = "<h2>$\\psi(z,t) = \\sin{(z)}" + title_end
 log_z_title = "<h2>$\\psi(z,t) = \\log{(z)}" + title_end
 exp_z_title = "<h2>$\\psi(z,t) = e^{-z^2}" + title_end
 sqrt_z_title = "<h2>$\\psi(z,t) = \\sqrt{z}" + title_end
+z_plus_one_over_z_title = "<h2>$\\psi(z,t) = \\dfrac{1}[2}\\left(z = \\dfrac{1}{z}\\right)" + title_end
 
 caption = """
 &#x2022; Source code can be found <a href="https://github.com/zhendrikse/physics-in-python/blob/main/src/glowscript/mathematics/complex_function_plots.py">here</a>
@@ -348,6 +349,18 @@ def toggle_yz_mesh(event):
     plot.yz_mesh_visibility_is(event.checked)
 
 
+def z_plus_one_over_z():
+    xx, yy = np.meshgrid(np.linspace(-2, 2, 50), np.linspace(-2, 2, 50))
+    zz = np.linspace(0, 8, 50)
+
+    def f(z, t):
+        value = math.multiply(math.complex(.5, 0), math.add(z, math.divide(math.complex(1, 0), z)))
+        phase = math.complex(cos(t), sin(t))
+        return math.multiply(value, phase)
+
+    return xx, yy, zz, f
+
+
 def z_squared():
     xx, yy = np.meshgrid(np.linspace(-2, 2, 50), np.linspace(-2, 2, 50))
     zz = np.linspace(0, 8, 50)
@@ -462,18 +475,22 @@ def switch_function(event):
         animation.range = 150
         animation.title = z_plus_1_divided_by_z_min_1_title + "\n"
     elif event.index == 4:
+        xx, yy, zz, f = z_plus_one_over_z()
+        animation.range = 80
+        animation.title = z_plus_one_over_z_title + "\n"
+    elif event.index == 5:
         xx, yy, zz, f = sine_z()
         animation.range = 75
         animation.title = sine_z_title + "\n"
-    elif event.index == 5:
+    elif event.index == 6:
         xx, yy, zz, f = log_z()
         animation.range = 75
         animation.title = log_z_title + "\n"
-    elif event.index == 6:
+    elif event.index == 7:
         xx, yy, zz, f = exp_z()
         animation.range = 85
         animation.title = exp_z_title + "\n"
-    elif event.index == 7:
+    elif event.index == 8:
         xx, yy, zz, f = sqrt_z()
         animation.range = 75
         animation.title = sqrt_z_title + "\n"
@@ -487,8 +504,16 @@ def adjust_omega():
     omega_slider_text.text = str(round(omega_slider.value / pi, 2)) + " * π"
 
 
-wave_choices = ["f(z,t) = z * z + 2", "f(z,t) = |z| * |z|", "f(z,t) = z * z * z + 2", "f(z,t) = z + 1 / z - 1",
-                "f(z,t) = sin(z)", "f(z,t) = log(z)", "f(z,t) = exp(-z * z)", "f(z,t) = sqrt(z)"]
+wave_choices = [
+    "f(z,t) = z * z + 2",
+    "f(z,t) = |z| * |z|",
+    "f(z,t) = z * z * z + 2",
+    "f(z,t) = z + 1 / z - 1",
+    "f(z,t) = .5 * (z + 1/z)",
+    "f(z,t) = sin(z)",
+    "f(z,t) = log(z)",
+    "f(z,t) = exp(-z * z)",
+    "f(z,t) = sqrt(z)"]
 _ = menu(choices=wave_choices, bind=switch_function)
 animation.append_to_caption("  ")
 _ = checkbox(text='YZ mesh', bind=toggle_yz_mesh, checked=True)

@@ -13,7 +13,7 @@ initial velocity. The program uses normalised units (G =1).
 
 from vpython import *
 
-animation = canvas(title=title, width=1000, height=1000, range=3.2, forward=vector(0.0222862, 0.928369, -0.370991))
+animation = canvas(title=title, width=800, height=600, range=1, forward=vector(0.0222862, 0.928369, -0.370991))
 
 # Default velocity gives a satisfactory range of eccentricities
 # velocity = -vector(0.984,0,0)   # gives period of 12.0 "months"
@@ -93,4 +93,4 @@ while True:
     for obj in animation.objects:
         if obj is sun or obj is planet: continue
         obj.visible = 0  # clear the screen to do it again
-        obj.delete()
+        #obj.delete()

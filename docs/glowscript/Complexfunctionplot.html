@@ -56,7 +56,7 @@ async function __main__() {
     fontloading();
     await waitforfonts();
 
-    var version, print, arange, __name__, type, ρσ_ls, title_end, z_2_title, z_abs_squared_title, z_cubed_title, z_plus_1_divided_by_z_min_1_title, sine_z_title, log_z_title, exp_z_title, sqrt_z_title, caption, animation, _GS_1, np, x_hat, y_hat, z_hat, base, wave_choices, _, omega_slider, omega_slider_text, time, dt, run, plot;
+    var version, print, arange, __name__, type, ρσ_ls, title_end, z_2_title, z_abs_squared_title, z_cubed_title, z_plus_1_divided_by_z_min_1_title, sine_z_title, log_z_title, exp_z_title, sqrt_z_title, z_plus_one_over_z_title, caption, animation, _GS_1, np, x_hat, y_hat, z_hat, base, wave_choices, _, omega_slider, omega_slider_text, time, dt, run, plot;
     version = ρσ_list_decorate([ "3.2", "glowscript" ]);
     Array.prototype['+'] = function(r) {return this.concat(r)}
     Array.prototype['*'] = function(r) {return __array_times_number(this, r)}
@@ -90,22 +90,24 @@ async function __main__() {
     exp_z_title = "<h2>$\\psi(z,t) = e^{-z^2}"["+"](title_end);
     "17";
     sqrt_z_title = "<h2>$\\psi(z,t) = \\sqrt{z}"["+"](title_end);
-    "27";
-    caption = "\n&#x2022; Source code can be found <a href=\"https://github.com/zhendrikse/physics-in-python/blob/main/src/glowscript/mathematics/complex_function_plots.py\">here</a>\n&#x2022; Inspired on <a href=\"https://www.glowscript.org/#/user/GlowScriptDemos/folder/Examples/program/Plot3D\">Plot3D</a> by adding the following features: \n  &#x2022; Numpy linspace and meshgrid syntax\n  &#x2022; Configurable base and mesh background\n  &#x2022; Non-uniform coloring\n  &#x2022; Complex numbers and functions\n\n";
+    "18";
+    z_plus_one_over_z_title = "<h2>$\\psi(z,t) = \\dfrac{1}[2}\\left(z = \\dfrac{1}{z}\\right)"["+"](title_end);
     "28";
+    caption = "\n&#x2022; Source code can be found <a href=\"https://github.com/zhendrikse/physics-in-python/blob/main/src/glowscript/mathematics/complex_function_plots.py\">here</a>\n&#x2022; Inspired on <a href=\"https://www.glowscript.org/#/user/GlowScriptDemos/folder/Examples/program/Plot3D\">Plot3D</a> by adding the following features: \n  &#x2022; Numpy linspace and meshgrid syntax\n  &#x2022; Configurable base and mesh background\n  &#x2022; Non-uniform coloring\n  &#x2022; Complex numbers and functions\n\n";
+    "29";
     animation = ρσ_interpolate_kwargs.call(this, canvas, [ρσ_desugar_kwargs({align: "top", width: 600, height: 600, center: vec(0, 5, 0), forward: vec(1["-u"]()["*"](.9), 1["-u"]()["*"](.5), 1["-u"]()["*"](.8)), title: z_2_title["+"]("\n"), range: 75})]);
-    "31";
+    "32";
     function Numpy() {;
     }
     Numpy.prototype.__init__ = async function __init__() {
         var self = this;
-        "33";
-        self.array = self._array;
         "34";
-        self.linspace = self._linspace;
+        self.array = self._array;
         "35";
-        self.len = self._len;
+        self.linspace = self._linspace;
         "36";
+        self.len = self._len;
+        "37";
         self.meshgrid = self._meshgrid;
     };
     if (!Numpy.prototype.__init__.__module__) Object.defineProperties(Numpy.prototype.__init__, {
@@ -115,7 +117,7 @@ async function __main__() {
     Numpy.__handles_kwarg_interpolation__ = Numpy.prototype.__init__.__handles_kwarg_interpolation__;
     Numpy.prototype._len = async function _len(numpy_array) {
         var self = this;
-        "39";
+        "40";
         return ρσ_getitem(numpy_array.shape, 0);
     };
     if (!Numpy.prototype._len.__argnames__) Object.defineProperties(Numpy.prototype._len, {
@@ -124,7 +126,7 @@ async function __main__() {
     });
     Numpy.prototype._array = async function _array(an_array) {
         var self = this;
-        "42";
+        "43";
         return nj.array(an_array);
     };
     if (!Numpy.prototype._array.__argnames__) Object.defineProperties(Numpy.prototype._array, {
@@ -133,7 +135,7 @@ async function __main__() {
     });
     Numpy.prototype._linspace = async function _linspace(start, stop, num) {
         var self = this;
-        "45";
+        "46";
         return (await self._array((function() {
             var ρσ_Iter = range(start, stop, stop["-"](1["*"](start))["/"](num["-"](1["*"](1)))), ρσ_Result = [], x;
             ρσ_Iter = ((typeof ρσ_Iter[Symbol.iterator] === "function") ? (ρσ_Iter instanceof Map ? ρσ_Iter.keys() : ρσ_Iter) : Object.keys(ρσ_Iter));
@@ -152,7 +154,7 @@ async function __main__() {
     Numpy.prototype._meshgrid = async function _meshgrid(linspace_1, linspace_2) {
         var self = this;
         var ρσ_ls, xx, temp, j, i, yy;
-        "48";
+        "49";
         xx = nj.stack((function() {
             var ρσ_Iter = range(linspace_1.shape), ρσ_Result = [], _;
             ρσ_Iter = ((typeof ρσ_Iter[Symbol.iterator] === "function") ? (ρσ_Iter instanceof Map ? ρσ_Iter.keys() : ρσ_Iter) : Object.keys(ρσ_Iter));
@@ -163,25 +165,25 @@ async function __main__() {
             ρσ_Result = ρσ_list_constructor(ρσ_Result);
             return ρσ_Result;
         })());
-        "49";
-        temp = ρσ_list_decorate([]);
         "50";
+        temp = ρσ_list_decorate([]);
+        "51";
         var ρσ_Iter1 = range(ρσ_getitem(linspace_2.shape, 0));
         ρσ_Iter1 = ((typeof ρσ_Iter1[Symbol.iterator] === "function") ? (ρσ_Iter1 instanceof Map ? ρσ_Iter1.keys() : ρσ_Iter1) : Object.keys(ρσ_Iter1));
         for (var ρσ_Index1 of ρσ_Iter1) {
             i = ρσ_Index1;
-            "51";
+            "52";
             var ρσ_Iter2 = range(ρσ_getitem(linspace_2.shape, 0));
             ρσ_Iter2 = ((typeof ρσ_Iter2[Symbol.iterator] === "function") ? (ρσ_Iter2 instanceof Map ? ρσ_Iter2.keys() : ρσ_Iter2) : Object.keys(ρσ_Iter2));
             for (var ρσ_Index2 of ρσ_Iter2) {
                 j = ρσ_Index2;
-                "52";
+                "53";
                 temp.append(linspace_2.get(i));
             }
         }
-        "53";
-        yy = nj.array(temp).reshape(ρσ_getitem(linspace_2.shape, 0), ρσ_getitem(linspace_2.shape, 0));
         "54";
+        yy = nj.array(temp).reshape(ρσ_getitem(linspace_2.shape, 0), ρσ_getitem(linspace_2.shape, 0));
+        "55";
         return [xx, yy];
     };
     if (!Numpy.prototype._meshgrid.__argnames__) Object.defineProperties(Numpy.prototype._meshgrid, {
@@ -201,29 +203,29 @@ async function __main__() {
 
 
 
-    "57";
+    "58";
     _GS_1 = new Numpy;
     (await _GS_1.__init__());
     np = _GS_1;
-    "59";
-    x_hat = vec(1, 0, 0);
     "60";
-    y_hat = vec(0, 1, 0);
+    x_hat = vec(1, 0, 0);
     "61";
-    z_hat = vec(0, 0, 1);
+    y_hat = vec(0, 1, 0);
     "62";
+    z_hat = vec(0, 0, 1);
+    "63";
     base = ρσ_list_decorate([ x_hat, y_hat, z_hat ]);
-    "66";
+    "67";
     function Base() {;
     }
     Base.prototype.__init__ = async function __init__(xx, yy, zz, axis_color, tick_marks_color, num_tick_marks) {
         var self = this;
         var ρσ_ls, base_, scale, delta_, i, ρσ_unpack;
-        "68";
+        "69";
         base_ = ρσ_list_decorate([ (await np.linspace(0, (await np.len(xx)), num_tick_marks["+"](1))), (await np.linspace(0, (await np.len(yy)), num_tick_marks["+"](1))), (await np.linspace(0, (await np.len(zz)), num_tick_marks["+"](1))) ]);
-        "71";
-        scale = .01["*"](ρσ_getitem(base_, 0).get(1["-u"]()["*"](1))["-"](1["*"](ρσ_getitem(base_, 0).get(0))));
         "72";
+        scale = .01["*"](ρσ_getitem(base_, 0).get(1["-u"]()["*"](1))["-"](1["*"](ρσ_getitem(base_, 0).get(0))));
+        "73";
         delta_ = (function() {
             var ρσ_Iter = base_, ρσ_Result = [], i;
             ρσ_Iter = ((typeof ρσ_Iter[Symbol.iterator] === "function") ? (ρσ_Iter instanceof Map ? ρσ_Iter.keys() : ρσ_Iter) : Object.keys(ρσ_Iter));
@@ -234,15 +236,15 @@ async function __main__() {
             ρσ_Result = ρσ_list_constructor(ρσ_Result);
             return ρσ_Result;
         })();
-        "73";
+        "74";
         ρσ_unpack = [ρσ_list_decorate([]), ρσ_list_decorate([]), ρσ_list_decorate([]), ρσ_list_decorate([])];
         self._tick_marks = ρσ_unpack[0];
         self._xy_mesh = ρσ_unpack[1];
         self._xz_mesh = ρσ_unpack[2];
         self._yz_mesh = ρσ_unpack[3];
-        "74";
-        (await self._make_tick_marks(base_, xx, yy, zz, delta_, tick_marks_color, axis_color, scale, num_tick_marks));
         "75";
+        (await self._make_tick_marks(base_, xx, yy, zz, delta_, tick_marks_color, axis_color, scale, num_tick_marks));
+        "76";
         (await self._make_mesh(base_, delta_, scale));
     };
     if (!Base.prototype.__init__.__argnames__) Object.defineProperties(Base.prototype.__init__, {
@@ -254,7 +256,7 @@ async function __main__() {
     Base.prototype._make_mesh = async function _make_mesh(base_, delta_, scale) {
         var self = this;
         var ρσ_ls, range_, i, pos_x_y, pos_x_z, pos_y_z, pos, j;
-        "78";
+        "79";
         range_ = (function() {
             var ρσ_Iter = base_, ρσ_Result = [], i;
             ρσ_Iter = ((typeof ρσ_Iter[Symbol.iterator] === "function") ? (ρσ_Iter instanceof Map ? ρσ_Iter.keys() : ρσ_Iter) : Object.keys(ρσ_Iter));
@@ -265,46 +267,46 @@ async function __main__() {
             ρσ_Result = ρσ_list_constructor(ρσ_Result);
             return ρσ_Result;
         })();
-        "79";
+        "80";
         var ρσ_Iter3 = range((await np.len(ρσ_getitem(base_, 0))));
         ρσ_Iter3 = ((typeof ρσ_Iter3[Symbol.iterator] === "function") ? (ρσ_Iter3 instanceof Map ? ρσ_Iter3.keys() : ρσ_Iter3) : Object.keys(ρσ_Iter3));
         for (var ρσ_Index3 of ρσ_Iter3) {
             j = ρσ_Index3;
-            "80";
-            pos_x_y = x_hat["*"](ρσ_getitem(base_, 0).get(0))["+"](y_hat["*"](ρσ_getitem(base_, 1).get(0)));
             "81";
-            pos_x_z = x_hat["*"](ρσ_getitem(base_, 0).get(0))["+"](z_hat["*"](ρσ_getitem(base_, 2).get(0)));
+            pos_x_y = x_hat["*"](ρσ_getitem(base_, 0).get(0))["+"](y_hat["*"](ρσ_getitem(base_, 1).get(0)));
             "82";
-            pos_y_z = y_hat["*"](ρσ_getitem(base_, 1).get(0))["+"](z_hat["*"](ρσ_getitem(base_, 2).get(0)));
+            pos_x_z = x_hat["*"](ρσ_getitem(base_, 0).get(0))["+"](z_hat["*"](ρσ_getitem(base_, 2).get(0)));
             "83";
-            self._xy_mesh=self._xy_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pos_x_y["+"](x_hat["*"](j)["*"](ρσ_getitem(delta_, 0))), axis: y_hat["*"](ρσ_getitem(range_, 1))})]) ]));
+            pos_y_z = y_hat["*"](ρσ_getitem(base_, 1).get(0))["+"](z_hat["*"](ρσ_getitem(base_, 2).get(0)));
             "84";
-            self._xy_mesh=self._xy_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pos_x_y["+"](y_hat["*"](j)["*"](ρσ_getitem(delta_, 1))), axis: x_hat["*"](ρσ_getitem(range_, 0))})]) ]));
+            self._xy_mesh=self._xy_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pos_x_y["+"](x_hat["*"](j)["*"](ρσ_getitem(delta_, 0))), axis: y_hat["*"](ρσ_getitem(range_, 1))})]) ]));
             "85";
-            self._xz_mesh=self._xz_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pos_x_z["+"](x_hat["*"](j)["*"](ρσ_getitem(delta_, 0))), axis: z_hat["*"](ρσ_getitem(range_, 2))})]) ]));
+            self._xy_mesh=self._xy_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pos_x_y["+"](y_hat["*"](j)["*"](ρσ_getitem(delta_, 1))), axis: x_hat["*"](ρσ_getitem(range_, 0))})]) ]));
             "86";
-            self._xz_mesh=self._xz_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pos_x_z["+"](z_hat["*"](j)["*"](ρσ_getitem(delta_, 2))), axis: x_hat["*"](ρσ_getitem(range_, 0))})]) ]));
+            self._xz_mesh=self._xz_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pos_x_z["+"](x_hat["*"](j)["*"](ρσ_getitem(delta_, 0))), axis: z_hat["*"](ρσ_getitem(range_, 2))})]) ]));
             "87";
-            self._yz_mesh=self._yz_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pos_y_z["+"](y_hat["*"](j)["*"](ρσ_getitem(delta_, 1))), axis: z_hat["*"](ρσ_getitem(range_, 2))})]) ]));
+            self._xz_mesh=self._xz_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pos_x_z["+"](z_hat["*"](j)["*"](ρσ_getitem(delta_, 2))), axis: x_hat["*"](ρσ_getitem(range_, 0))})]) ]));
             "88";
+            self._yz_mesh=self._yz_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pos_y_z["+"](y_hat["*"](j)["*"](ρσ_getitem(delta_, 1))), axis: z_hat["*"](ρσ_getitem(range_, 2))})]) ]));
+            "89";
             self._yz_mesh=self._yz_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: pos_y_z["+"](z_hat["*"](j)["*"](ρσ_getitem(delta_, 2))), axis: y_hat["*"](ρσ_getitem(range_, 1))})]) ]));
-            "90";
-            pos = ρσ_getitem(base_, 1).get(0)["+"](.5["*"](ρσ_getitem(range_, 1)))["*"](y_hat)["+"](ρσ_getitem(base_, 2).get(0)["+"](.5["*"](ρσ_getitem(range_, 2)))["*"](z_hat));
             "91";
-            self._yz_mesh=self._yz_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({pos: pos, length: scale, width: ρσ_getitem(range_, 2), height: ρσ_getitem(range_, 1), opacity: .15, visible: false})]) ]));
+            pos = ρσ_getitem(base_, 1).get(0)["+"](.5["*"](ρσ_getitem(range_, 1)))["*"](y_hat)["+"](ρσ_getitem(base_, 2).get(0)["+"](.5["*"](ρσ_getitem(range_, 2)))["*"](z_hat));
             "92";
-            pos = ρσ_getitem(base_, 0).get(0)["+"](.5["*"](ρσ_getitem(range_, 0)))["*"](x_hat)["+"](ρσ_getitem(base_, 1).get(0)["+"](.5["*"](ρσ_getitem(range_, 1)))["*"](y_hat));
+            self._yz_mesh=self._yz_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({pos: pos, length: scale, width: ρσ_getitem(range_, 2), height: ρσ_getitem(range_, 1), opacity: .15, visible: false})]) ]));
             "93";
-            self._xy_mesh=self._xy_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({pos: pos, length: ρσ_getitem(range_, 0), width: scale, height: ρσ_getitem(range_, 1), opacity: .15, visible: false})]) ]));
+            pos = ρσ_getitem(base_, 0).get(0)["+"](.5["*"](ρσ_getitem(range_, 0)))["*"](x_hat)["+"](ρσ_getitem(base_, 1).get(0)["+"](.5["*"](ρσ_getitem(range_, 1)))["*"](y_hat));
             "94";
-            pos = ρσ_getitem(base_, 0).get(0)["+"](.5["*"](ρσ_getitem(range_, 0)))["*"](x_hat)["+"](ρσ_getitem(base_, 2).get(0)["+"](.5["*"](ρσ_getitem(range_, 2)))["*"](z_hat));
+            self._xy_mesh=self._xy_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({pos: pos, length: ρσ_getitem(range_, 0), width: scale, height: ρσ_getitem(range_, 1), opacity: .15, visible: false})]) ]));
             "95";
+            pos = ρσ_getitem(base_, 0).get(0)["+"](.5["*"](ρσ_getitem(range_, 0)))["*"](x_hat)["+"](ρσ_getitem(base_, 2).get(0)["+"](.5["*"](ρσ_getitem(range_, 2)))["*"](z_hat));
+            "96";
             self._xz_mesh=self._xz_mesh["+"](ρσ_list_decorate([ ρσ_interpolate_kwargs.call(this, box, [ρσ_desugar_kwargs({pos: pos, length: ρσ_getitem(range_, 0), width: ρσ_getitem(range_, 2), height: scale, opacity: .15, visible: false})]) ]));
-            "97";
-            (await self._set_mesh_properties(self._xy_mesh, scale));
             "98";
-            (await self._set_mesh_properties(self._xz_mesh, scale));
+            (await self._set_mesh_properties(self._xy_mesh, scale));
             "99";
+            (await self._set_mesh_properties(self._xz_mesh, scale));
+            "100";
             (await self._set_mesh_properties(self._yz_mesh, scale));
         }
     };
@@ -315,16 +317,16 @@ async function __main__() {
     Base.prototype._set_mesh_properties = async function _set_mesh_properties(mesh, scale) {
         var self = this;
         var ρσ_ls, item_;
-        "102";
+        "103";
         var ρσ_Iter4 = mesh;
         ρσ_Iter4 = ((typeof ρσ_Iter4[Symbol.iterator] === "function") ? (ρσ_Iter4 instanceof Map ? ρσ_Iter4.keys() : ρσ_Iter4) : Object.keys(ρσ_Iter4));
         for (var ρσ_Index4 of ρσ_Iter4) {
             item_ = ρσ_Index4;
-            "103";
-            item_.color = color.gray(.5);
             "104";
-            item_.radius = scale["*"](.5);
+            item_.color = color.gray(.5);
             "105";
+            item_.radius = scale["*"](.5);
+            "106";
             item_.visible = false;
         }
     };
@@ -335,79 +337,79 @@ async function __main__() {
     Base.prototype._make_tick_marks = async function _make_tick_marks(base_, xx, yy, zz, delta_, tick_marks_color, axis_color, scale, num_tick_marks) {
         var self = this;
         var ρσ_ls, increment, start_value, label_text, pos, x_label, i, y_label, z_label, l_y, l_z, l_x, c_x, c_y, c_z;
-        "108";
-        increment = xx.get(1["-u"]()["*"](1), 1["-u"]()["*"](1))["-"](1["*"](xx.get(0, 0)))["/"](num_tick_marks);
         "109";
-        start_value = xx.get(0, 0);
+        increment = xx.get(1["-u"]()["*"](1), 1["-u"]()["*"](1))["-"](1["*"](xx.get(0, 0)))["/"](num_tick_marks);
         "110";
+        start_value = xx.get(0, 0);
+        "111";
         var ρσ_Iter5 = range(1, (await np.len(ρσ_getitem(base_, 2))), 2);
         ρσ_Iter5 = ((typeof ρσ_Iter5[Symbol.iterator] === "function") ? (ρσ_Iter5 instanceof Map ? ρσ_Iter5.keys() : ρσ_Iter5) : Object.keys(ρσ_Iter5));
         for (var ρσ_Index5 of ρσ_Iter5) {
             i = ρσ_Index5;
-            "111";
-            label_text = "{:1.2f}".format(start_value["+"](i["*"](increment)), 2);
             "112";
-            pos = z_hat["*"](ρσ_getitem(base_, 2).get(i))["+"](x_hat["*"](ρσ_getitem(base_, 0).get(1["-u"]()["*"](1))["+"](5["*"](scale))));
+            label_text = "{:1.2f}".format(start_value["+"](i["*"](increment)), 2);
             "113";
-            x_label = ρσ_interpolate_kwargs.call(this, text, [ρσ_desugar_kwargs({pos: pos, text: label_text, height: 5["*"](scale), billboard: true, color: tick_marks_color})]);
+            pos = z_hat["*"](ρσ_getitem(base_, 2).get(i))["+"](x_hat["*"](ρσ_getitem(base_, 0).get(1["-u"]()["*"](1))["+"](5["*"](scale))));
             "114";
+            x_label = ρσ_interpolate_kwargs.call(this, text, [ρσ_desugar_kwargs({pos: pos, text: label_text, height: 5["*"](scale), billboard: true, color: tick_marks_color})]);
+            "115";
             self._tick_marks.append(x_label);
         }
-        "116";
-        increment = yy.get(1["-u"]()["*"](1), 1["-u"]()["*"](1))["-"](1["*"](yy.get(0, 0)))["/"](num_tick_marks);
         "117";
-        start_value = yy.get(0, 0);
+        increment = yy.get(1["-u"]()["*"](1), 1["-u"]()["*"](1))["-"](1["*"](yy.get(0, 0)))["/"](num_tick_marks);
         "118";
+        start_value = yy.get(0, 0);
+        "119";
         var ρσ_Iter6 = range(0, (await np.len(ρσ_getitem(base_, 0))), 2);
         ρσ_Iter6 = ((typeof ρσ_Iter6[Symbol.iterator] === "function") ? (ρσ_Iter6 instanceof Map ? ρσ_Iter6.keys() : ρσ_Iter6) : Object.keys(ρσ_Iter6));
         for (var ρσ_Index6 of ρσ_Iter6) {
             i = ρσ_Index6;
-            "119";
-            label_text = "{:1.2f}".format(start_value["+"](i["*"](increment)), 2);
             "120";
-            pos = x_hat["*"](ρσ_getitem(base_, 0).get(i))["+"](z_hat["*"](ρσ_getitem(base_, 2).get(1["-u"]()["*"](1))["+"](15["*"](scale))));
+            label_text = "{:1.2f}".format(start_value["+"](i["*"](increment)), 2);
             "121";
-            y_label = ρσ_interpolate_kwargs.call(this, text, [ρσ_desugar_kwargs({pos: pos, text: label_text, height: 5["*"](scale), billboard: true, color: tick_marks_color})]);
+            pos = x_hat["*"](ρσ_getitem(base_, 0).get(i))["+"](z_hat["*"](ρσ_getitem(base_, 2).get(1["-u"]()["*"](1))["+"](15["*"](scale))));
             "122";
+            y_label = ρσ_interpolate_kwargs.call(this, text, [ρσ_desugar_kwargs({pos: pos, text: label_text, height: 5["*"](scale), billboard: true, color: tick_marks_color})]);
+            "123";
             self._tick_marks.append(y_label);
         }
-        "124";
-        increment = zz.get(1["-u"]()["*"](1), 1["-u"]()["*"](1))["-"](1["*"](zz.get(0, 0)))["/"](num_tick_marks);
         "125";
-        start_value = zz.get(0, 0);
+        increment = zz.get(1["-u"]()["*"](1), 1["-u"]()["*"](1))["-"](1["*"](zz.get(0, 0)))["/"](num_tick_marks);
         "126";
+        start_value = zz.get(0, 0);
+        "127";
         var ρσ_Iter7 = range(1, (await np.len(ρσ_getitem(base_, 1))), 2);
         ρσ_Iter7 = ((typeof ρσ_Iter7[Symbol.iterator] === "function") ? (ρσ_Iter7 instanceof Map ? ρσ_Iter7.keys() : ρσ_Iter7) : Object.keys(ρσ_Iter7));
         for (var ρσ_Index7 of ρσ_Iter7) {
             i = ρσ_Index7;
-            "127";
-            label_text = "{:1.2f}".format(start_value["+"](i["*"](increment)), 2);
             "128";
-            pos = y_hat["*"](ρσ_getitem(base_, 1).get(i))["+"](z_hat["*"](ρσ_getitem(base_, 2).get(1["-u"]()["*"](1))["+"](15["*"](scale))));
+            label_text = "{:1.2f}".format(start_value["+"](i["*"](increment)), 2);
             "129";
-            z_label = ρσ_interpolate_kwargs.call(this, text, [ρσ_desugar_kwargs({pos: pos, text: label_text, height: 5["*"](scale), billboard: true, color: tick_marks_color})]);
+            pos = y_hat["*"](ρσ_getitem(base_, 1).get(i))["+"](z_hat["*"](ρσ_getitem(base_, 2).get(1["-u"]()["*"](1))["+"](15["*"](scale))));
             "130";
+            z_label = ρσ_interpolate_kwargs.call(this, text, [ρσ_desugar_kwargs({pos: pos, text: label_text, height: 5["*"](scale), billboard: true, color: tick_marks_color})]);
+            "131";
             self._tick_marks.append(z_label);
         }
-        "132";
-        pos = x_hat["*"](ρσ_getitem(base_, 0).get(1["-u"]()["*"](1))["+"](2["*"](ρσ_getitem(delta_, 0))))["-"](1["*"](vec(0, scale, 1["-u"]()["*"](30))));
         "133";
-        l_y = ρσ_interpolate_kwargs.call(this, text, [ρσ_desugar_kwargs({pos: pos, text: "Y-axis", color: axis_color, height: scale["*"](4), billboard: true, emissive: true})]);
+        pos = x_hat["*"](ρσ_getitem(base_, 0).get(1["-u"]()["*"](1))["+"](2["*"](ρσ_getitem(delta_, 0))))["-"](1["*"](vec(0, scale, 1["-u"]()["*"](30))));
         "134";
-        pos = z_hat["*"](ρσ_getitem(base_, 2).get(1["-u"]()["*"](1))["+"](2["*"](ρσ_getitem(delta_, 2))))["+"](y_hat["*"](.625)["*"](ρσ_getitem(base_, 1).get(1["-u"]()["*"](1))));
+        l_y = ρσ_interpolate_kwargs.call(this, text, [ρσ_desugar_kwargs({pos: pos, text: "Y-axis", color: axis_color, height: scale["*"](4), billboard: true, emissive: true})]);
         "135";
-        l_z = ρσ_interpolate_kwargs.call(this, text, [ρσ_desugar_kwargs({pos: pos, text: "Z-axis", color: axis_color, height: scale["*"](4), billboard: true, emissive: true})]);
+        pos = z_hat["*"](ρσ_getitem(base_, 2).get(1["-u"]()["*"](1))["+"](2["*"](ρσ_getitem(delta_, 2))))["+"](y_hat["*"](.625)["*"](ρσ_getitem(base_, 1).get(1["-u"]()["*"](1))));
         "136";
-        pos = x_hat["*"](ρσ_getitem(base_, 0).get(1["-u"]()["*"](1))["/"](2))["+"](z_hat["*"](ρσ_getitem(base_, 2).get(1["-u"]()["*"](1))["+"](3["*"](ρσ_getitem(delta_, 2)))));
+        l_z = ρσ_interpolate_kwargs.call(this, text, [ρσ_desugar_kwargs({pos: pos, text: "Z-axis", color: axis_color, height: scale["*"](4), billboard: true, emissive: true})]);
         "137";
-        l_x = ρσ_interpolate_kwargs.call(this, text, [ρσ_desugar_kwargs({pos: pos, text: "X-axis", color: axis_color, height: scale["*"](4), billboard: true, emissive: true})]);
+        pos = x_hat["*"](ρσ_getitem(base_, 0).get(1["-u"]()["*"](1))["/"](2))["+"](z_hat["*"](ρσ_getitem(base_, 2).get(1["-u"]()["*"](1))["+"](3["*"](ρσ_getitem(delta_, 2)))));
         "138";
-        c_x = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: x_hat["*"](ρσ_getitem(base_, 0).get(0)), axis: x_hat["*"](ρσ_getitem(base_, 0).get(1["-u"]()["*"](1))["-"](1["*"](ρσ_getitem(base_, 0).get(0)))), color: axis_color, radius: scale})]);
+        l_x = ρσ_interpolate_kwargs.call(this, text, [ρσ_desugar_kwargs({pos: pos, text: "X-axis", color: axis_color, height: scale["*"](4), billboard: true, emissive: true})]);
         "139";
-        c_y = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: z_hat["*"](ρσ_getitem(base_, 2).get(0)), axis: z_hat["*"](ρσ_getitem(base_, 2).get(1["-u"]()["*"](1))["-"](1["*"](ρσ_getitem(base_, 2).get(0)))), color: axis_color, radius: scale})]);
+        c_x = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: x_hat["*"](ρσ_getitem(base_, 0).get(0)), axis: x_hat["*"](ρσ_getitem(base_, 0).get(1["-u"]()["*"](1))["-"](1["*"](ρσ_getitem(base_, 0).get(0)))), color: axis_color, radius: scale})]);
         "140";
-        c_z = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: y_hat["*"](ρσ_getitem(base_, 1).get(0)), axis: y_hat["*"](ρσ_getitem(base_, 1).get(1["-u"]()["*"](1))["-"](1["*"](ρσ_getitem(base_, 1).get(0)))), color: axis_color, radius: scale})]);
+        c_y = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: z_hat["*"](ρσ_getitem(base_, 2).get(0)), axis: z_hat["*"](ρσ_getitem(base_, 2).get(1["-u"]()["*"](1))["-"](1["*"](ρσ_getitem(base_, 2).get(0)))), color: axis_color, radius: scale})]);
         "141";
+        c_z = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: y_hat["*"](ρσ_getitem(base_, 1).get(0)), axis: y_hat["*"](ρσ_getitem(base_, 1).get(1["-u"]()["*"](1))["-"](1["*"](ρσ_getitem(base_, 1).get(0)))), color: axis_color, radius: scale})]);
+        "142";
         self._tick_marks=self._tick_marks["+"](ρσ_list_decorate([ c_x, c_y, c_z, l_x, l_y, l_z ]));
     };
     if (!Base.prototype._make_tick_marks.__argnames__) Object.defineProperties(Base.prototype._make_tick_marks, {
@@ -417,12 +419,12 @@ async function __main__() {
     Base.prototype.tick_marks_visibility_is = async function tick_marks_visibility_is(visible) {
         var self = this;
         var ρσ_ls, tick_mark;
-        "144";
+        "145";
         var ρσ_Iter8 = self._tick_marks;
         ρσ_Iter8 = ((typeof ρσ_Iter8[Symbol.iterator] === "function") ? (ρσ_Iter8 instanceof Map ? ρσ_Iter8.keys() : ρσ_Iter8) : Object.keys(ρσ_Iter8));
         for (var ρσ_Index8 of ρσ_Iter8) {
             tick_mark = ρσ_Index8;
-            "145";
+            "146";
             tick_mark.visible = visible;
         }
     };
@@ -433,12 +435,12 @@ async function __main__() {
     Base.prototype.xy_mesh_visibility_is = async function xy_mesh_visibility_is(visible) {
         var self = this;
         var ρσ_ls, i;
-        "148";
+        "149";
         var ρσ_Iter9 = range(len(self._xy_mesh));
         ρσ_Iter9 = ((typeof ρσ_Iter9[Symbol.iterator] === "function") ? (ρσ_Iter9 instanceof Map ? ρσ_Iter9.keys() : ρσ_Iter9) : Object.keys(ρσ_Iter9));
         for (var ρσ_Index9 of ρσ_Iter9) {
             i = ρσ_Index9;
-            "149";
+            "150";
             ρσ_getitem(self._xy_mesh, i).visible = visible;
         }
     };
@@ -449,12 +451,12 @@ async function __main__() {
     Base.prototype.xz_mesh_visibility_is = async function xz_mesh_visibility_is(visible) {
         var self = this;
         var ρσ_ls, i;
-        "152";
+        "153";
         var ρσ_Iter10 = range(len(self._xz_mesh));
         ρσ_Iter10 = ((typeof ρσ_Iter10[Symbol.iterator] === "function") ? (ρσ_Iter10 instanceof Map ? ρσ_Iter10.keys() : ρσ_Iter10) : Object.keys(ρσ_Iter10));
         for (var ρσ_Index10 of ρσ_Iter10) {
             i = ρσ_Index10;
-            "153";
+            "154";
             ρσ_getitem(self._xz_mesh, i).visible = visible;
         }
     };
@@ -465,12 +467,12 @@ async function __main__() {
     Base.prototype.yz_mesh_visibility_is = async function yz_mesh_visibility_is(visible) {
         var self = this;
         var ρσ_ls, i;
-        "156";
+        "157";
         var ρσ_Iter11 = range(len(self._xz_mesh));
         ρσ_Iter11 = ((typeof ρσ_Iter11[Symbol.iterator] === "function") ? (ρσ_Iter11 instanceof Map ? ρσ_Iter11.keys() : ρσ_Iter11) : Object.keys(ρσ_Iter11));
         for (var ρσ_Index11 of ρσ_Iter11) {
             i = ρσ_Index11;
-            "157";
+            "158";
             ρσ_getitem(self._yz_mesh, i).visible = visible;
         }
     };
@@ -494,7 +496,7 @@ async function __main__() {
 
 
 
-    "160";
+    "161";
     function Plot3D() {;
     }
     Plot3D.prototype.__init__ = async function __init__() {
@@ -518,33 +520,33 @@ async function __main__() {
             num_tick_marks = ρσ_kwargs_obj.num_tick_marks;
         }
         var ρσ_ls, ρσ_unpack;
-        "199";
-        self._f = f;
         "200";
-        self._xx = xx;
+        self._f = f;
         "201";
-        self._yy = yy;
+        self._xx = xx;
         "202";
-        self._zz = zz;
+        self._yy = yy;
         "203";
-        self._omega = 2["*"](pi);
+        self._zz = zz;
         "204";
-        self._axis_color = axis_color;
+        self._omega = 2["*"](pi);
         "205";
-        self._tick_marks_color = tick_marks_color;
+        self._axis_color = axis_color;
         "206";
-        self._num_tick_marks = num_tick_marks;
+        self._tick_marks_color = tick_marks_color;
         "207";
+        self._num_tick_marks = num_tick_marks;
+        "208";
         ρσ_unpack = [ρσ_list_decorate([]), ρσ_list_decorate([])];
         self._vertices = ρσ_unpack[0];
         self._quads = ρσ_unpack[1];
-        "208";
-        (await self._create_vertices());
         "209";
-        (await self._create_quads());
+        (await self._create_vertices());
         "210";
-        self._axis = (await self._create_base());
+        (await self._create_quads());
         "211";
+        self._axis = (await self._create_base());
+        "212";
         (await self.render(0));
     };
     if (!Plot3D.prototype.__init__.__defaults__) Object.defineProperties(Plot3D.prototype.__init__, {
@@ -558,29 +560,29 @@ async function __main__() {
     Plot3D.prototype.reinitialize = async function reinitialize(xx, yy, zz, f) {
         var self = this;
         var ρσ_ls, ρσ_unpack;
-        "214";
-        self._f = f;
         "215";
-        self._xx = xx;
+        self._f = f;
         "216";
-        self._yy = yy;
+        self._xx = xx;
         "217";
-        self._zz = zz;
+        self._yy = yy;
         "218";
-        (await self._hide_plot());
+        self._zz = zz;
         "219";
-        (await self._hide_axis());
+        (await self._hide_plot());
         "220";
+        (await self._hide_axis());
+        "221";
         ρσ_unpack = [ρσ_list_decorate([]), ρσ_list_decorate([])];
         self._vertices = ρσ_unpack[0];
         self._quads = ρσ_unpack[1];
-        "221";
-        (await self._create_vertices());
         "222";
-        (await self._create_quads());
+        (await self._create_vertices());
         "223";
-        self._axis = (await self._create_base());
+        (await self._create_quads());
         "224";
+        self._axis = (await self._create_base());
+        "225";
         (await self.render(0));
     };
     if (!Plot3D.prototype.reinitialize.__argnames__) Object.defineProperties(Plot3D.prototype.reinitialize, {
@@ -589,13 +591,13 @@ async function __main__() {
     });
     Plot3D.prototype._hide_axis = async function _hide_axis() {
         var self = this;
-        "227";
-        (await self._axis.tick_marks_visibility_is(false));
         "228";
-        (await self._axis.xy_mesh_visibility_is(false));
+        (await self._axis.tick_marks_visibility_is(false));
         "229";
-        (await self._axis.xz_mesh_visibility_is(false));
+        (await self._axis.xy_mesh_visibility_is(false));
         "230";
+        (await self._axis.xz_mesh_visibility_is(false));
+        "231";
         (await self._axis.yz_mesh_visibility_is(false));
     };
     if (!Plot3D.prototype._hide_axis.__module__) Object.defineProperties(Plot3D.prototype._hide_axis, {
@@ -604,20 +606,20 @@ async function __main__() {
     Plot3D.prototype._hide_plot = async function _hide_plot() {
         var self = this;
         var ρσ_ls, quad_, vertex_;
-        "233";
+        "234";
         var ρσ_Iter12 = self._quads;
         ρσ_Iter12 = ((typeof ρσ_Iter12[Symbol.iterator] === "function") ? (ρσ_Iter12 instanceof Map ? ρσ_Iter12.keys() : ρσ_Iter12) : Object.keys(ρσ_Iter12));
         for (var ρσ_Index12 of ρσ_Iter12) {
             quad_ = ρσ_Index12;
-            "234";
+            "235";
             quad_.visible = false;
         }
-        "235";
+        "236";
         var ρσ_Iter13 = self._vertices;
         ρσ_Iter13 = ((typeof ρσ_Iter13[Symbol.iterator] === "function") ? (ρσ_Iter13 instanceof Map ? ρσ_Iter13.keys() : ρσ_Iter13) : Object.keys(ρσ_Iter13));
         for (var ρσ_Index13 of ρσ_Iter13) {
             vertex_ = ρσ_Index13;
-            "236";
+            "237";
             vertex_.visible = false;
         }
     };
@@ -627,17 +629,17 @@ async function __main__() {
     Plot3D.prototype._create_base = async function _create_base() {
         var self = this;
         var ρσ_ls, _GS_1, axis;
-        "239";
+        "240";
         _GS_1 = new Base;
         (await _GS_1.__init__(self._xx, self._yy, self._zz, self._axis_color, self._tick_marks_color, self._num_tick_marks));
         axis = _GS_1;
-        "240";
-        (await axis.xy_mesh_visibility_is(true));
         "241";
-        (await axis.xz_mesh_visibility_is(true));
+        (await axis.xy_mesh_visibility_is(true));
         "242";
-        (await axis.yz_mesh_visibility_is(true));
+        (await axis.xz_mesh_visibility_is(true));
         "243";
+        (await axis.yz_mesh_visibility_is(true));
+        "244";
         return axis;
     };
     if (!Plot3D.prototype._create_base.__module__) Object.defineProperties(Plot3D.prototype._create_base, {
@@ -646,15 +648,15 @@ async function __main__() {
     Plot3D.prototype._ranges = async function _ranges() {
         var self = this;
         var ρσ_ls, x_min, x_max, y_min, y_max;
-        "246";
-        x_min = self._xx.flatten().min();
         "247";
-        x_max = self._xx.flatten().max();
+        x_min = self._xx.flatten().min();
         "248";
-        y_min = self._yy.flatten().min();
+        x_max = self._xx.flatten().max();
         "249";
-        y_max = self._yy.flatten().max();
+        y_min = self._yy.flatten().min();
         "250";
+        y_max = self._yy.flatten().max();
+        "251";
         return [x_min, x_max, y_min, y_max];
     };
     if (!Plot3D.prototype._ranges.__module__) Object.defineProperties(Plot3D.prototype._ranges, {
@@ -663,32 +665,32 @@ async function __main__() {
     Plot3D.prototype._create_vertices = async function _create_vertices() {
         var self = this;
         var ρσ_ls, ρσ_unpack, x_min, x_max, y_min, y_max, range_x, range_y, x_, y_, y, x;
-        "253";
+        "254";
         ρσ_unpack = (await self._ranges());
 ρσ_unpack = ρσ_unpack_asarray(4, ρσ_unpack);
         x_min = ρσ_unpack[0];
         x_max = ρσ_unpack[1];
         y_min = ρσ_unpack[2];
         y_max = ρσ_unpack[3];
-        "254";
-        range_x = x_max["-"](1["*"](x_min));
         "255";
+        range_x = x_max["-"](1["*"](x_min));
+        "256";
         range_y = y_max["-"](1["*"](y_min));
-        "257";
+        "258";
         var ρσ_Iter14 = range((await np.len(self._xx)));
         ρσ_Iter14 = ((typeof ρσ_Iter14[Symbol.iterator] === "function") ? (ρσ_Iter14 instanceof Map ? ρσ_Iter14.keys() : ρσ_Iter14) : Object.keys(ρσ_Iter14));
         for (var ρσ_Index14 of ρσ_Iter14) {
             x = ρσ_Index14;
-            "258";
+            "259";
             var ρσ_Iter15 = range((await np.len(self._yy)));
             ρσ_Iter15 = ((typeof ρσ_Iter15[Symbol.iterator] === "function") ? (ρσ_Iter15 instanceof Map ? ρσ_Iter15.keys() : ρσ_Iter15) : Object.keys(ρσ_Iter15));
             for (var ρσ_Index15 of ρσ_Iter15) {
                 y = ρσ_Index15;
-                "259";
-                x_ = self._xx.get(x, y)["-"](1["*"](x_min))["*"]((await np.len(self._xx)))["/"](range_x);
                 "260";
-                y_ = self._yy.get(x, y)["-"](1["*"](y_min))["*"]((await np.len(self._yy)))["/"](range_y);
+                x_ = self._xx.get(x, y)["-"](1["*"](x_min))["*"]((await np.len(self._xx)))["/"](range_x);
                 "261";
+                y_ = self._yy.get(x, y)["-"](1["*"](y_min))["*"]((await np.len(self._yy)))["/"](range_y);
+                "262";
                 self._vertices.append(ρσ_interpolate_kwargs.call(this, vertex, [ρσ_desugar_kwargs({pos: vec(x_, 0, y_), normal: vec(0, 1, 0)})]));
             }
         }
@@ -699,13 +701,13 @@ async function __main__() {
     Plot3D.prototype._color_for = async function _color_for(complex_num) {
         var self = this;
         var ρσ_ls, phase;
-        "264";
-        phase = atan2(complex_num.im, complex_num.re);
         "265";
-        phase=phase["+"]((phase["<"](0)) ? 2["*"](pi) : 0);
+        phase = atan2(complex_num.im, complex_num.re);
         "266";
-        phase=phase["/"](2["*"](pi));
+        phase=phase["+"]((phase["<"](0)) ? 2["*"](pi) : 0);
         "267";
+        phase=phase["/"](2["*"](pi));
+        "268";
         return color.hsv_to_rgb(vec(phase, 1, 1.25));
     };
     if (!Plot3D.prototype._color_for.__argnames__) Object.defineProperties(Plot3D.prototype._color_for, {
@@ -715,25 +717,25 @@ async function __main__() {
     Plot3D.prototype._create_quads = async function _create_quads() {
         var self = this;
         var ρσ_ls, v0, v1, v2, v3, y, x;
-        "271";
+        "272";
         var ρσ_Iter16 = range((await np.len(self._xx))["-"](1["*"](2)));
         ρσ_Iter16 = ((typeof ρσ_Iter16[Symbol.iterator] === "function") ? (ρσ_Iter16 instanceof Map ? ρσ_Iter16.keys() : ρσ_Iter16) : Object.keys(ρσ_Iter16));
         for (var ρσ_Index16 of ρσ_Iter16) {
             x = ρσ_Index16;
-            "272";
+            "273";
             var ρσ_Iter17 = range((await np.len(self._yy))["-"](1["*"](2)));
             ρσ_Iter17 = ((typeof ρσ_Iter17[Symbol.iterator] === "function") ? (ρσ_Iter17 instanceof Map ? ρσ_Iter17.keys() : ρσ_Iter17) : Object.keys(ρσ_Iter17));
             for (var ρσ_Index17 of ρσ_Iter17) {
                 y = ρσ_Index17;
-                "273";
-                v0 = (await self._get_vertex(x, y));
                 "274";
-                v1 = (await self._get_vertex(x["+"](1), y));
+                v0 = (await self._get_vertex(x, y));
                 "275";
-                v2 = (await self._get_vertex(x["+"](1), y["+"](1)));
+                v1 = (await self._get_vertex(x["+"](1), y));
                 "276";
-                v3 = (await self._get_vertex(x, y["+"](1)));
+                v2 = (await self._get_vertex(x["+"](1), y["+"](1)));
                 "277";
+                v3 = (await self._get_vertex(x, y["+"](1)));
+                "278";
                 self._quads.append(ρσ_interpolate_kwargs.call(this, quad, [ρσ_desugar_kwargs({vs: ρσ_list_decorate([ v0, v1, v2, v3 ])})]));
             }
         }
@@ -744,13 +746,13 @@ async function __main__() {
     Plot3D.prototype._set_vertex_normal_for = async function _set_vertex_normal_for(x, y) {
         var self = this;
         var ρσ_ls, vertex_, vec_1, vec_2;
-        "281";
-        vertex_ = (await self._get_vertex(x, y));
         "282";
-        vec_1 = (await self._get_vertex(x, y["+"](1))).pos["-"](1["*"](vertex_.pos));
+        vertex_ = (await self._get_vertex(x, y));
         "283";
-        vec_2 = (await self._get_vertex(x["+"](1), y)).pos["-"](1["*"](vertex_.pos));
+        vec_1 = (await self._get_vertex(x, y["+"](1))).pos["-"](1["*"](vertex_.pos));
         "284";
+        vec_2 = (await self._get_vertex(x["+"](1), y)).pos["-"](1["*"](vertex_.pos));
+        "285";
         vertex_.normal = cross(vec_1, vec_2);
     };
     if (!Plot3D.prototype._set_vertex_normal_for.__argnames__) Object.defineProperties(Plot3D.prototype._set_vertex_normal_for, {
@@ -760,17 +762,17 @@ async function __main__() {
     Plot3D.prototype._make_normals = async function _make_normals() {
         var self = this;
         var ρσ_ls, y, x;
-        "289";
+        "290";
         var ρσ_Iter18 = range((await np.len(self._xx))["-"](1["*"](2)));
         ρσ_Iter18 = ((typeof ρσ_Iter18[Symbol.iterator] === "function") ? (ρσ_Iter18 instanceof Map ? ρσ_Iter18.keys() : ρσ_Iter18) : Object.keys(ρσ_Iter18));
         for (var ρσ_Index18 of ρσ_Iter18) {
             x = ρσ_Index18;
-            "290";
+            "291";
             var ρσ_Iter19 = range((await np.len(self._yy))["-"](1["*"](2)));
             ρσ_Iter19 = ((typeof ρσ_Iter19[Symbol.iterator] === "function") ? (ρσ_Iter19 instanceof Map ? ρσ_Iter19.keys() : ρσ_Iter19) : Object.keys(ρσ_Iter19));
             for (var ρσ_Index19 of ρσ_Iter19) {
                 y = ρσ_Index19;
-                "291";
+                "292";
                 (await self._set_vertex_normal_for(x, y));
             }
         }
@@ -780,7 +782,7 @@ async function __main__() {
     });
     Plot3D.prototype.set_omega_to = async function set_omega_to(omega) {
         var self = this;
-        "294";
+        "295";
         self._omega = omega;
     };
     if (!Plot3D.prototype.set_omega_to.__argnames__) Object.defineProperties(Plot3D.prototype.set_omega_to, {
@@ -790,13 +792,13 @@ async function __main__() {
     Plot3D.prototype._update_vertex = async function _update_vertex(x, y, t, range_z) {
         var self = this;
         var ρσ_ls, f_z, value;
-        "297";
+        "298";
         f_z = (await self._f(math.complex(self._xx.get(x, y), self._yy.get(x, y)), self._omega["*"](t)));
-        "299";
-        value = (await np.len(self._zz))["/"](range_z)["*"](f_z.abs()["-"](1["*"](self._zz.get(0))));
         "300";
-        (await self._get_vertex(x, y)).pos.y = value;
+        value = (await np.len(self._zz))["/"](range_z)["*"](f_z.abs()["-"](1["*"](self._zz.get(0))));
         "301";
+        (await self._get_vertex(x, y)).pos.y = value;
+        "302";
         (await self._get_vertex(x, y)).color = (await self._color_for(f_z));
     };
     if (!Plot3D.prototype._update_vertex.__argnames__) Object.defineProperties(Plot3D.prototype._update_vertex, {
@@ -806,27 +808,27 @@ async function __main__() {
     Plot3D.prototype.render = async function render(t) {
         var self = this;
         var ρσ_ls, ρσ_unpack, z_min, z_max, range_z, y, x;
-        "304";
+        "305";
         ρσ_unpack = [self._zz.flatten().min(), self._zz.flatten().max()];
         z_min = ρσ_unpack[0];
         z_max = ρσ_unpack[1];
-        "305";
-        range_z = z_max["-"](1["*"](z_min))["*"](1.1);
         "306";
+        range_z = z_max["-"](1["*"](z_min))["*"](1.1);
+        "307";
         var ρσ_Iter20 = range((await np.len(self._xx)));
         ρσ_Iter20 = ((typeof ρσ_Iter20[Symbol.iterator] === "function") ? (ρσ_Iter20 instanceof Map ? ρσ_Iter20.keys() : ρσ_Iter20) : Object.keys(ρσ_Iter20));
         for (var ρσ_Index20 of ρσ_Iter20) {
             x = ρσ_Index20;
-            "307";
+            "308";
             var ρσ_Iter21 = range((await np.len(self._yy)));
             ρσ_Iter21 = ((typeof ρσ_Iter21[Symbol.iterator] === "function") ? (ρσ_Iter21 instanceof Map ? ρσ_Iter21.keys() : ρσ_Iter21) : Object.keys(ρσ_Iter21));
             for (var ρσ_Index21 of ρσ_Iter21) {
                 y = ρσ_Index21;
-                "308";
+                "309";
                 (await self._update_vertex(x, y, t, range_z));
             }
         }
-        "310";
+        "311";
         (await self._make_normals());
     };
     if (!Plot3D.prototype.render.__argnames__) Object.defineProperties(Plot3D.prototype.render, {
@@ -835,7 +837,7 @@ async function __main__() {
     });
     Plot3D.prototype._get_vertex = async function _get_vertex(x, y) {
         var self = this;
-        "313";
+        "314";
         return ρσ_getitem(self._vertices, x["*"]((await np.len(self._xx)))["+"](y));
     };
     if (!Plot3D.prototype._get_vertex.__argnames__) Object.defineProperties(Plot3D.prototype._get_vertex, {
@@ -844,7 +846,7 @@ async function __main__() {
     });
     Plot3D.prototype.tick_marks_visibility_is = async function tick_marks_visibility_is(visible) {
         var self = this;
-        "316";
+        "317";
         (await self._axis.tick_marks_visibility_is(visible));
     };
     if (!Plot3D.prototype.tick_marks_visibility_is.__argnames__) Object.defineProperties(Plot3D.prototype.tick_marks_visibility_is, {
@@ -853,7 +855,7 @@ async function __main__() {
     });
     Plot3D.prototype.xy_mesh_visibility_is = async function xy_mesh_visibility_is(visible) {
         var self = this;
-        "319";
+        "320";
         (await self._axis.xy_mesh_visibility_is(visible));
     };
     if (!Plot3D.prototype.xy_mesh_visibility_is.__argnames__) Object.defineProperties(Plot3D.prototype.xy_mesh_visibility_is, {
@@ -862,7 +864,7 @@ async function __main__() {
     });
     Plot3D.prototype.xz_mesh_visibility_is = async function xz_mesh_visibility_is(visible) {
         var self = this;
-        "322";
+        "323";
         (await self._axis.xz_mesh_visibility_is(visible));
     };
     if (!Plot3D.prototype.xz_mesh_visibility_is.__argnames__) Object.defineProperties(Plot3D.prototype.xz_mesh_visibility_is, {
@@ -871,7 +873,7 @@ async function __main__() {
     });
     Plot3D.prototype.yz_mesh_visibility_is = async function yz_mesh_visibility_is(visible) {
         var self = this;
-        "325";
+        "326";
         (await self._axis.yz_mesh_visibility_is(visible));
     };
     if (!Plot3D.prototype.yz_mesh_visibility_is.__argnames__) Object.defineProperties(Plot3D.prototype.yz_mesh_visibility_is, {
@@ -905,9 +907,9 @@ async function __main__() {
 
 
 
-    "328";
+    "329";
     async function toggle_tick_marks(event) {
-        "329";
+        "330";
         (await plot.tick_marks_visibility_is(event.checked));
     };
     if (!toggle_tick_marks.__argnames__) Object.defineProperties(toggle_tick_marks, {
@@ -915,9 +917,9 @@ async function __main__() {
         __module__ : {value: null}
     });
 
-    "332";
+    "333";
     async function toggle_xz_mesh(event) {
-        "333";
+        "334";
         (await plot.xz_mesh_visibility_is(event.checked));
     };
     if (!toggle_xz_mesh.__argnames__) Object.defineProperties(toggle_xz_mesh, {
@@ -925,9 +927,9 @@ async function __main__() {
         __module__ : {value: null}
     });
 
-    "336";
+    "337";
     async function toggle_xy_mesh(event) {
-        "337";
+        "338";
         (await plot.xy_mesh_visibility_is(event.checked));
     };
     if (!toggle_xy_mesh.__argnames__) Object.defineProperties(toggle_xy_mesh, {
@@ -935,9 +937,9 @@ async function __main__() {
         __module__ : {value: null}
     });
 
-    "340";
+    "341";
     async function toggle_yz_mesh(event) {
-        "341";
+        "342";
         (await plot.yz_mesh_visibility_is(event.checked));
     };
     if (!toggle_yz_mesh.__argnames__) Object.defineProperties(toggle_yz_mesh, {
@@ -945,24 +947,24 @@ async function __main__() {
         __module__ : {value: null}
     });
 
-    "343";
-    async function z_squared() {
+    "344";
+    async function z_plus_one_over_z() {
         var ρσ_ls, ρσ_unpack, xx, yy, zz;
-        "344";
+        "345";
         ρσ_unpack = (await np.meshgrid((await np.linspace(1["-u"]()["*"](2), 2, 50)), (await np.linspace(1["-u"]()["*"](2), 2, 50))));
 ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
         xx = ρσ_unpack[0];
         yy = ρσ_unpack[1];
-        "345";
+        "346";
         zz = (await np.linspace(0, 8, 50));
-        "347";
+        "348";
         async function f(z, t) {
             var ρσ_ls, value, phase;
-            "348";
-            value = math.add(math.multiply(z, z), math.complex(2, 0));
             "349";
-            phase = math.complex(cos(t), sin(t));
+            value = math.multiply(math.complex(.5, 0), math.add(z, math.divide(math.complex(1, 0), z)));
             "350";
+            phase = math.complex(cos(t), sin(t));
+            "351";
             return math.multiply(value, phase);
         };
         if (!f.__argnames__) Object.defineProperties(f, {
@@ -970,60 +972,60 @@ async function __main__() {
             __module__ : {value: null}
         });
 
-        "352";
+        "353";
+        return [xx, yy, zz, f];
+    };
+    if (!z_plus_one_over_z.__module__) Object.defineProperties(z_plus_one_over_z, {
+        __module__ : {value: null}
+    });
+
+    "355";
+    async function z_squared() {
+        var ρσ_ls, ρσ_unpack, xx, yy, zz;
+        "356";
+        ρσ_unpack = (await np.meshgrid((await np.linspace(1["-u"]()["*"](2), 2, 50)), (await np.linspace(1["-u"]()["*"](2), 2, 50))));
+ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
+        xx = ρσ_unpack[0];
+        yy = ρσ_unpack[1];
+        "357";
+        zz = (await np.linspace(0, 8, 50));
+        "359";
+        async function f(z, t) {
+            var ρσ_ls, value, phase;
+            "360";
+            value = math.add(math.multiply(z, z), math.complex(2, 0));
+            "361";
+            phase = math.complex(cos(t), sin(t));
+            "362";
+            return math.multiply(value, phase);
+        };
+        if (!f.__argnames__) Object.defineProperties(f, {
+            __argnames__ : {value: ["z", "t"]},
+            __module__ : {value: null}
+        });
+
+        "364";
         return [xx, yy, zz, f];
     };
     if (!z_squared.__module__) Object.defineProperties(z_squared, {
         __module__ : {value: null}
     });
 
-    "354";
+    "366";
     async function z_abs_squared() {
         var ρσ_ls, ρσ_unpack, xx, yy, zz;
-        "355";
+        "367";
         ρσ_unpack = (await np.meshgrid((await np.linspace(1["-u"]()["*"](3), 3, 50)), (await np.linspace(1["-u"]()["*"](3), 3, 50))));
 ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
         xx = ρσ_unpack[0];
         yy = ρσ_unpack[1];
-        "356";
-        zz = (await np.linspace(0, 15, 50));
-        "358";
-        async function f(z, t) {
-            var ρσ_ls, value, phase;
-            "359";
-            value = math.multiply(z, math.conj(z));
-            "360";
-            phase = math.complex(cos(t), sin(t));
-            "361";
-            return math.multiply(value, phase);
-        };
-        if (!f.__argnames__) Object.defineProperties(f, {
-            __argnames__ : {value: ["z", "t"]},
-            __module__ : {value: null}
-        });
-
-        "363";
-        return [xx, yy, zz, f];
-    };
-    if (!z_abs_squared.__module__) Object.defineProperties(z_abs_squared, {
-        __module__ : {value: null}
-    });
-
-    "366";
-    async function z_cubed() {
-        var ρσ_ls, ρσ_unpack, xx, yy, zz;
-        "367";
-        ρσ_unpack = (await np.meshgrid((await np.linspace(1["-u"]()["*"](2), 2, 50)), (await np.linspace(1["-u"]()["*"](2), 2, 50))));
-ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
-        xx = ρσ_unpack[0];
-        yy = ρσ_unpack[1];
         "368";
-        zz = (await np.linspace(0, 24, 50));
+        zz = (await np.linspace(0, 15, 50));
         "370";
         async function f(z, t) {
             var ρσ_ls, value, phase;
             "371";
-            value = math.add(math.multiply(math.multiply(z, z), z), math.complex(2, 0));
+            value = math.multiply(z, math.conj(z));
             "372";
             phase = math.complex(cos(t), sin(t));
             "373";
@@ -1037,27 +1039,25 @@ async function __main__() {
         "375";
         return [xx, yy, zz, f];
     };
-    if (!z_cubed.__module__) Object.defineProperties(z_cubed, {
+    if (!z_abs_squared.__module__) Object.defineProperties(z_abs_squared, {
         __module__ : {value: null}
     });
 
-    "377";
-    async function z_plus_1_divided_by_z_min_1() {
+    "378";
+    async function z_cubed() {
         var ρσ_ls, ρσ_unpack, xx, yy, zz;
-        "378";
-        ρσ_unpack = (await np.meshgrid((await np.linspace(1["-u"]()["*"](3), 3, 100)), (await np.linspace(1["-u"]()["*"](3), 3, 100))));
+        "379";
+        ρσ_unpack = (await np.meshgrid((await np.linspace(1["-u"]()["*"](2), 2, 50)), (await np.linspace(1["-u"]()["*"](2), 2, 50))));
 ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
         xx = ρσ_unpack[0];
         yy = ρσ_unpack[1];
-        "379";
-        zz = (await np.linspace(0, 50, 100));
-        "381";
+        "380";
+        zz = (await np.linspace(0, 24, 50));
+        "382";
         async function f(z, t) {
             var ρσ_ls, value, phase;
-            "382";
-            value = math.add(math.complex(1, 0), z);
             "383";
-            value = math.divide(value, math.add(math.complex(1["-u"]()["*"](1), 0), z));
+            value = math.add(math.multiply(math.multiply(z, z), z), math.complex(2, 0));
             "384";
             phase = math.complex(cos(t), sin(t));
             "385";
@@ -1071,26 +1071,60 @@ async function __main__() {
         "387";
         return [xx, yy, zz, f];
     };
-    if (!z_plus_1_divided_by_z_min_1.__module__) Object.defineProperties(z_plus_1_divided_by_z_min_1, {
+    if (!z_cubed.__module__) Object.defineProperties(z_cubed, {
         __module__ : {value: null}
     });
 
     "389";
-    async function log_z() {
+    async function z_plus_1_divided_by_z_min_1() {
         var ρσ_ls, ρσ_unpack, xx, yy, zz;
         "390";
-        ρσ_unpack = (await np.meshgrid((await np.linspace(1["-u"]()["*"](3), 3, 50)), (await np.linspace(1["-u"]()["*"](3), 3, 50))));
+        ρσ_unpack = (await np.meshgrid((await np.linspace(1["-u"]()["*"](3), 3, 100)), (await np.linspace(1["-u"]()["*"](3), 3, 100))));
 ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
         xx = ρσ_unpack[0];
         yy = ρσ_unpack[1];
         "391";
-        zz = (await np.linspace(0, 3, 50));
+        zz = (await np.linspace(0, 50, 100));
         "393";
         async function f(z, t) {
-            var ρσ_ls, phase;
+            var ρσ_ls, value, phase;
             "394";
-            phase = math.complex(cos(t), sin(t));
+            value = math.add(math.complex(1, 0), z);
             "395";
+            value = math.divide(value, math.add(math.complex(1["-u"]()["*"](1), 0), z));
+            "396";
+            phase = math.complex(cos(t), sin(t));
+            "397";
+            return math.multiply(value, phase);
+        };
+        if (!f.__argnames__) Object.defineProperties(f, {
+            __argnames__ : {value: ["z", "t"]},
+            __module__ : {value: null}
+        });
+
+        "399";
+        return [xx, yy, zz, f];
+    };
+    if (!z_plus_1_divided_by_z_min_1.__module__) Object.defineProperties(z_plus_1_divided_by_z_min_1, {
+        __module__ : {value: null}
+    });
+
+    "401";
+    async function log_z() {
+        var ρσ_ls, ρσ_unpack, xx, yy, zz;
+        "402";
+        ρσ_unpack = (await np.meshgrid((await np.linspace(1["-u"]()["*"](3), 3, 50)), (await np.linspace(1["-u"]()["*"](3), 3, 50))));
+ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
+        xx = ρσ_unpack[0];
+        yy = ρσ_unpack[1];
+        "403";
+        zz = (await np.linspace(0, 3, 50));
+        "405";
+        async function f(z, t) {
+            var ρσ_ls, phase;
+            "406";
+            phase = math.complex(cos(t), sin(t));
+            "407";
             return math.multiply(math.log(z), phase);
         };
         if (!f.__argnames__) Object.defineProperties(f, {
@@ -1098,29 +1132,29 @@ async function __main__() {
             __module__ : {value: null}
         });
 
-        "397";
+        "409";
         return [xx, yy, zz, f];
     };
     if (!log_z.__module__) Object.defineProperties(log_z, {
         __module__ : {value: null}
     });
 
-    "399";
+    "411";
     async function sine_z() {
         var ρσ_ls, ρσ_unpack, xx, yy, zz;
-        "400";
+        "412";
         ρσ_unpack = (await np.meshgrid((await np.linspace(1["-u"]()["*"](2), 2, 50)), (await np.linspace(1["-u"]()["*"](2), 2, 50))));
 ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
         xx = ρσ_unpack[0];
         yy = ρσ_unpack[1];
-        "401";
+        "413";
         zz = (await np.linspace(0, 4, 50));
-        "403";
+        "415";
         async function f(z, t) {
             var ρσ_ls, phase;
-            "404";
+            "416";
             phase = math.complex(cos(t), sin(t));
-            "405";
+            "417";
             return math.multiply(math.sin(z), phase);
         };
         if (!f.__argnames__) Object.defineProperties(f, {
@@ -1128,29 +1162,29 @@ async function __main__() {
             __module__ : {value: null}
         });
 
-        "407";
+        "419";
         return [xx, yy, zz, f];
     };
     if (!sine_z.__module__) Object.defineProperties(sine_z, {
         __module__ : {value: null}
     });
 
-    "409";
+    "421";
     async function exp_z() {
         var ρσ_ls, ρσ_unpack, xx, yy, zz;
-        "410";
+        "422";
         ρσ_unpack = (await np.meshgrid((await np.linspace(1["-u"]()["*"](2), 2, 50)), (await np.linspace(1["-u"]()["*"](2), 2, 50))));
 ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
         xx = ρσ_unpack[0];
         yy = ρσ_unpack[1];
-        "411";
+        "423";
         zz = (await np.linspace(0, 40, 50));
-        "413";
+        "425";
         async function f(z, t) {
             var ρσ_ls, phase;
-            "414";
+            "426";
             phase = math.complex(cos(t), sin(t));
-            "415";
+            "427";
             return math.multiply(math.exp(math.multiply(math.complex(1["-u"]()["*"](1), 0), math.multiply(z, z))), phase);
         };
         if (!f.__argnames__) Object.defineProperties(f, {
@@ -1158,29 +1192,29 @@ async function __main__() {
             __module__ : {value: null}
         });
 
-        "417";
+        "429";
         return [xx, yy, zz, f];
     };
     if (!exp_z.__module__) Object.defineProperties(exp_z, {
         __module__ : {value: null}
     });
 
-    "419";
+    "431";
     async function sqrt_z() {
         var ρσ_ls, ρσ_unpack, xx, yy, zz;
-        "420";
+        "432";
         ρσ_unpack = (await np.meshgrid((await np.linspace(1["-u"]()["*"](1), 1, 50)), (await np.linspace(1["-u"]()["*"](1), 1, 50))));
 ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
         xx = ρσ_unpack[0];
         yy = ρσ_unpack[1];
-        "421";
+        "433";
         zz = (await np.linspace(0, 1.5, 50));
-        "423";
+        "435";
         async function f(z, t) {
             var ρσ_ls, phase;
-            "424";
+            "436";
             phase = math.complex(cos(t), sin(t));
-            "425";
+            "437";
             return math.multiply(math.sqrt(z), phase);
         };
         if (!f.__argnames__) Object.defineProperties(f, {
@@ -1188,93 +1222,54 @@ async function __main__() {
             __module__ : {value: null}
         });
 
-        "427";
+        "439";
         return [xx, yy, zz, f];
     };
     if (!sqrt_z.__module__) Object.defineProperties(sqrt_z, {
         __module__ : {value: null}
     });
 
-    "429";
+    "441";
     async function switch_function(event) {
         var ρσ_ls, ρσ_unpack, xx, yy, zz, f;
-        "430";
+        "442";
         ρσ_unpack = [null, null, null, null];
         xx = ρσ_unpack[0];
         yy = ρσ_unpack[1];
         zz = ρσ_unpack[2];
         f = ρσ_unpack[3];
-        "431";
+        "443";
         if (event.index["<"](0)) {
             return;
         } else if ((event.index === 0 || typeof event.index === "object" && ρσ_equals(event.index, 0))) {
-            "433";
+            "445";
             ρσ_unpack = (await z_squared());
 ρσ_unpack = ρσ_unpack_asarray(4, ρσ_unpack);
             xx = ρσ_unpack[0];
             yy = ρσ_unpack[1];
             zz = ρσ_unpack[2];
             f = ρσ_unpack[3];
-            "434";
+            "446";
             animation.title = z_2_title["+"]("\n");
-            "435";
+            "447";
             animation.range = 75;
-            "436";
+            "448";
         } else if ((event.index === 1 || typeof event.index === "object" && ρσ_equals(event.index, 1))) {
-            "437";
+            "449";
             ρσ_unpack = (await z_abs_squared());
 ρσ_unpack = ρσ_unpack_asarray(4, ρσ_unpack);
             xx = ρσ_unpack[0];
             yy = ρσ_unpack[1];
             zz = ρσ_unpack[2];
             f = ρσ_unpack[3];
-            "438";
-            animation.title = z_abs_squared_title["+"]("\n");
-            "439";
-            animation.range = 75;
-            "440";
-        } else if ((event.index === 2 || typeof event.index === "object" && ρσ_equals(event.index, 2))) {
-            "441";
-            ρσ_unpack = (await z_cubed());
-ρσ_unpack = ρσ_unpack_asarray(4, ρσ_unpack);
-            xx = ρσ_unpack[0];
-            yy = ρσ_unpack[1];
-            zz = ρσ_unpack[2];
-            f = ρσ_unpack[3];
-            "442";
-            animation.range = 75;
-            "443";
-            animation.title = z_cubed_title["+"]("\n\n");
-            "444";
-        } else if ((event.index === 3 || typeof event.index === "object" && ρσ_equals(event.index, 3))) {
-            "445";
-            ρσ_unpack = (await z_plus_1_divided_by_z_min_1());
-ρσ_unpack = ρσ_unpack_asarray(4, ρσ_unpack);
-            xx = ρσ_unpack[0];
-            yy = ρσ_unpack[1];
-            zz = ρσ_unpack[2];
-            f = ρσ_unpack[3];
-            "446";
-            animation.range = 150;
-            "447";
-            animation.title = z_plus_1_divided_by_z_min_1_title["+"]("\n");
-            "448";
-        } else if ((event.index === 4 || typeof event.index === "object" && ρσ_equals(event.index, 4))) {
-            "449";
-            ρσ_unpack = (await sine_z());
-ρσ_unpack = ρσ_unpack_asarray(4, ρσ_unpack);
-            xx = ρσ_unpack[0];
-            yy = ρσ_unpack[1];
-            zz = ρσ_unpack[2];
-            f = ρσ_unpack[3];
             "450";
-            animation.range = 75;
+            animation.title = z_abs_squared_title["+"]("\n");
             "451";
-            animation.title = sine_z_title["+"]("\n");
+            animation.range = 75;
             "452";
-        } else if ((event.index === 5 || typeof event.index === "object" && ρσ_equals(event.index, 5))) {
+        } else if ((event.index === 2 || typeof event.index === "object" && ρσ_equals(event.index, 2))) {
             "453";
-            ρσ_unpack = (await log_z());
+            ρσ_unpack = (await z_cubed());
 ρσ_unpack = ρσ_unpack_asarray(4, ρσ_unpack);
             xx = ρσ_unpack[0];
             yy = ρσ_unpack[1];
@@ -1283,37 +1278,89 @@ async function __main__() {
             "454";
             animation.range = 75;
             "455";
-            animation.title = log_z_title["+"]("\n");
+            animation.title = z_cubed_title["+"]("\n\n");
             "456";
-        } else if ((event.index === 6 || typeof event.index === "object" && ρσ_equals(event.index, 6))) {
+        } else if ((event.index === 3 || typeof event.index === "object" && ρσ_equals(event.index, 3))) {
             "457";
-            ρσ_unpack = (await exp_z());
+            ρσ_unpack = (await z_plus_1_divided_by_z_min_1());
 ρσ_unpack = ρσ_unpack_asarray(4, ρσ_unpack);
             xx = ρσ_unpack[0];
             yy = ρσ_unpack[1];
             zz = ρσ_unpack[2];
             f = ρσ_unpack[3];
             "458";
-            animation.range = 85;
+            animation.range = 150;
             "459";
-            animation.title = exp_z_title["+"]("\n");
+            animation.title = z_plus_1_divided_by_z_min_1_title["+"]("\n");
             "460";
-        } else if ((event.index === 7 || typeof event.index === "object" && ρσ_equals(event.index, 7))) {
+        } else if ((event.index === 4 || typeof event.index === "object" && ρσ_equals(event.index, 4))) {
             "461";
-            ρσ_unpack = (await sqrt_z());
+            ρσ_unpack = (await z_plus_one_over_z());
 ρσ_unpack = ρσ_unpack_asarray(4, ρσ_unpack);
             xx = ρσ_unpack[0];
             yy = ρσ_unpack[1];
             zz = ρσ_unpack[2];
             f = ρσ_unpack[3];
             "462";
-            animation.range = 75;
+            animation.range = 80;
             "463";
+            animation.title = z_plus_one_over_z_title["+"]("\n");
+            "464";
+        } else if ((event.index === 5 || typeof event.index === "object" && ρσ_equals(event.index, 5))) {
+            "465";
+            ρσ_unpack = (await sine_z());
+ρσ_unpack = ρσ_unpack_asarray(4, ρσ_unpack);
+            xx = ρσ_unpack[0];
+            yy = ρσ_unpack[1];
+            zz = ρσ_unpack[2];
+            f = ρσ_unpack[3];
+            "466";
+            animation.range = 75;
+            "467";
+            animation.title = sine_z_title["+"]("\n");
+            "468";
+        } else if ((event.index === 6 || typeof event.index === "object" && ρσ_equals(event.index, 6))) {
+            "469";
+            ρσ_unpack = (await log_z());
+ρσ_unpack = ρσ_unpack_asarray(4, ρσ_unpack);
+            xx = ρσ_unpack[0];
+            yy = ρσ_unpack[1];
+            zz = ρσ_unpack[2];
+            f = ρσ_unpack[3];
+            "470";
+            animation.range = 75;
+            "471";
+            animation.title = log_z_title["+"]("\n");
+            "472";
+        } else if ((event.index === 7 || typeof event.index === "object" && ρσ_equals(event.index, 7))) {
+            "473";
+            ρσ_unpack = (await exp_z());
+ρσ_unpack = ρσ_unpack_asarray(4, ρσ_unpack);
+            xx = ρσ_unpack[0];
+            yy = ρσ_unpack[1];
+            zz = ρσ_unpack[2];
+            f = ρσ_unpack[3];
+            "474";
+            animation.range = 85;
+            "475";
+            animation.title = exp_z_title["+"]("\n");
+            "476";
+        } else if ((event.index === 8 || typeof event.index === "object" && ρσ_equals(event.index, 8))) {
+            "477";
+            ρσ_unpack = (await sqrt_z());
+ρσ_unpack = ρσ_unpack_asarray(4, ρσ_unpack);
+            xx = ρσ_unpack[0];
+            yy = ρσ_unpack[1];
+            zz = ρσ_unpack[2];
+            f = ρσ_unpack[3];
+            "478";
+            animation.range = 75;
+            "479";
             animation.title = sqrt_z_title["+"]("\n");
         }
-        "465";
+        "481";
         (await plot.reinitialize(xx, yy, zz, f));
-        "466";
+        "482";
         MathJax.Hub.Queue(ρσ_list_decorate([ "Typeset", MathJax.Hub ]));
     };
     if (!switch_function.__argnames__) Object.defineProperties(switch_function, {
@@ -1321,60 +1368,60 @@ async function __main__() {
         __module__ : {value: null}
     });
 
-    "468";
+    "484";
     async function adjust_omega() {
-        "469";
+        "485";
         (await plot.set_omega_to(omega_slider.value));
-        "470";
+        "486";
         omega_slider_text.text = str(round(omega_slider.value["/"](pi), 2))["+"](" * π");
     };
     if (!adjust_omega.__module__) Object.defineProperties(adjust_omega, {
         __module__ : {value: null}
     });
 
-    "472";
-    wave_choices = ρσ_list_decorate([ "f(z,t) = z * z + 2", "f(z,t) = |z| * |z|", "f(z,t) = z * z * z + 2", "f(z,t) = z + 1 / z - 1", "f(z,t) = sin(z)", "f(z,t) = log(z)", "f(z,t) = exp(-z * z)", "f(z,t) = sqrt(z)" ]);
-    "473";
+    "488";
+    wave_choices = ρσ_list_decorate([ "f(z,t) = z * z + 2", "f(z,t) = |z| * |z|", "f(z,t) = z * z * z + 2", "f(z,t) = z + 1 / z - 1", "f(z,t) = .5 * (z + 1/z)", "f(z,t) = sin(z)", "f(z,t) = log(z)", "f(z,t) = exp(-z * z)", "f(z,t) = sqrt(z)" ]);
+    "498";
     _ = ρσ_interpolate_kwargs.call(this, menu, [ρσ_desugar_kwargs({choices: wave_choices, bind: switch_function})]);
-    "474";
+    "499";
     animation.append_to_caption("  ");
-    "475";
+    "500";
     _ = ρσ_interpolate_kwargs.call(this, checkbox, [ρσ_desugar_kwargs({text: "YZ mesh", bind: toggle_yz_mesh, checked: true})]);
-    "476";
+    "501";
     _ = ρσ_interpolate_kwargs.call(this, checkbox, [ρσ_desugar_kwargs({text: "XZ mesh", bind: toggle_xz_mesh, checked: true})]);
-    "477";
+    "502";
     _ = ρσ_interpolate_kwargs.call(this, checkbox, [ρσ_desugar_kwargs({text: "XY mesh", bind: toggle_xy_mesh, checked: true})]);
-    "478";
+    "503";
     _ = ρσ_interpolate_kwargs.call(this, checkbox, [ρσ_desugar_kwargs({text: "Tick marks", bind: toggle_tick_marks, checked: true})]);
-    "480";
+    "505";
     animation.append_to_caption("\n\n");
-    "481";
+    "506";
     omega_slider = ρσ_interpolate_kwargs.call(this, slider, [ρσ_desugar_kwargs({min: 0, max: 6["*"](pi), value: 2["*"](pi), bind: adjust_omega})]);
-    "482";
+    "507";
     animation.append_to_caption("Omega = ");
-    "483";
+    "508";
     omega_slider_text = ρσ_interpolate_kwargs.call(this, wtext, [ρσ_desugar_kwargs({text: "2 * π"})]);
-    "484";
+    "509";
     animation.append_to_caption("\n\n"["+"](caption)["+"]("\n"));
-    "486";
+    "511";
     async function on_key_press(key) {
-        "487";
+        "512";
         if ((key === "b" || typeof key === "object" && ρσ_equals(key, "b"))) {
-            "488";
+            "513";
             animation.background = ((animation.background === color.black || typeof animation.background === "object" && ρσ_equals(animation.background, color.black))) ? color.white : color.black;
-            "489";
+            "514";
         }
         if ((key === "s" || typeof key === "object" && ρσ_equals(key, "s"))) {
-            "490";
+            "515";
             (await animation.capture("3d_complex_function_plot"));
-            "491";
+            "516";
         }
         if ((key === "v" || typeof key === "object" && ρσ_equals(key, "v"))) {
-            "492";
+            "517";
             print("scene.center="["+"](str(animation.center)));
-            "493";
+            "518";
             print("scene.forward="["+"](str(animation.forward)));
-            "494";
+            "519";
             print("scene.range="["+"](str(animation.range)));
         }
     };
@@ -1383,12 +1430,12 @@ async function __main__() {
         __module__ : {value: null}
     });
 
-    "496";
+    "521";
     async function key_pressed(event) {
         var ρσ_ls, key;
-        "497";
+        "522";
         key = event.key;
-        "498";
+        "523";
         (await on_key_press(key));
     };
     if (!key_pressed.__argnames__) Object.defineProperties(key_pressed, {
@@ -1396,12 +1443,12 @@ async function __main__() {
         __module__ : {value: null}
     });
 
-    "501";
+    "526";
     animation.bind("keydown", key_pressed);
-    "503";
+    "528";
     async function running(ev) {
-        "504";
-        "505";
+        "529";
+        "530";
         run = !run;
     };
     if (!running.__argnames__) Object.defineProperties(running, {
@@ -1409,29 +1456,29 @@ async function __main__() {
         __module__ : {value: null}
     });
 
-    "510";
+    "535";
     animation.bind("mousedown", running);
-    "511";
+    "536";
     MathJax.Hub.Queue(ρσ_list_decorate([ "Typeset", MathJax.Hub ]));
-    "513";
+    "538";
     time = 0;
-    "514";
+    "539";
     dt = .01;
-    "515";
+    "540";
     run = true;
-    "516";
+    "541";
     _GS_1 = new Plot3D;
     (await _GS_1.__init__(ρσ_getitem((await z_squared()), 0), ρσ_getitem((await z_squared()), 1), ρσ_getitem((await z_squared()), 2), ρσ_getitem((await z_squared()), 3)));
     plot = _GS_1;
-    "517";
+    "542";
     while (true) {
-        "518";
+        "543";
         (await rate(1["/"](dt)));
-        "519";
+        "544";
         if (run) {
-            "520";
+            "545";
             (await plot.render(time));
-            "521";
+            "546";
             time=time["+"](dt);
         }
     }

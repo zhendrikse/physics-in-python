@@ -29,7 +29,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 <hr/>
 
 <figure style="float: center; text-align: center;">
-  <a href="glowscript/Daylightvariations.html">
+  <a href="glowscript/DaylightVariations.html">
     <img alt="Daylight variations" width="100%" height="100%" src="./images/daylight_variations.png" title="Click to animate"/>
   </a>
   <figcaption>A not accurate to scale sun-earth-moon model, but very detailed and instructive!
@@ -43,7 +43,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 
 <div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Keplerslaw">
+  <a href="glowscript/KeplersLaw.html">
     <img alt="Kepler's laws" src="./images/keplers_law.png" title="Click to animate"/>
   </a>
   <figcaption><a href="https://en.wikipedia.org/wiki/Kepler%27s_laws_of_planetary_motion">Kepler&apos;s laws</a>
@@ -52,7 +52,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
   </figcaption>
 </figure>
 <figure style="float: right; width: 50%; text-align: center">
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/program/Threebody">
+  <a href="glowscript/ThreeBody.html">
     <img alt="Three body problem" src="./images/three_body.png" title="Click to animate"/>
   </a>
   <figcaption>The well-known <a href="https://en.wikipedia.org/wiki/Three-body_problem">three-body problem</a>.</figcaption>
@@ -170,7 +170,7 @@ $$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\
 
 <div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/program/Polarcoordinates">
+  <a href="glowscript/PolarCoordinates">
     <img alt="Polar coordinates" src="./images/polar_coordinates.png" title="Click to animate"/>
   </a>
   <figcaption>Polar coordinates frequently simplify the tackling of rotationally symmetric problems.</figcaption>
