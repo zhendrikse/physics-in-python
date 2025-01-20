@@ -263,7 +263,7 @@ $$(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x,
 
 In three-dimensional space this is then generalized to:
 
-$$i\bar\dfrac{\partial}{\partial t}\Psi(\vec{r}, t) = \left(\dfrac{\har^2}{2m}\nabla^2 + V(\vec{r, t}\right)\Psi(\vec{r}, t)$$
+$$i\hbar\dfrac{\partial}{\partial t}\Psi(\vec{r}, t) = \left(-\frac{\hbar^2}{2m}\nabla^2 + V(\vec{r, t}\right)\Psi(\vec{r}, t)$$
 </details>
 
 <p><br/></p>
