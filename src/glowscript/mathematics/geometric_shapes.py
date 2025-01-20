@@ -1,4 +1,4 @@
-#Web VPython 3.2
+# Web VPython 3.2
 
 from vpython import *
 
@@ -79,111 +79,6 @@ class Numpy:
 
 np = Numpy()
 
-x_hat = vec(1, 0, 0)
-y_hat = vec(0, 1, 0)
-z_hat = vec(0, 0, 1)
-base = [x_hat, y_hat, z_hat]
-
-
-class Base:
-    def __init__(self, xx, yy, zz, axis_color, tick_marks_color, num_tick_marks):
-        base_ = [np.linspace(0, np.len(xx), num_tick_marks + 1),
-                 np.linspace(0, np.len(yy), num_tick_marks + 1),
-                 np.linspace(0, np.len(zz), num_tick_marks + 1)]
-        scale = .01 * (base_[0].get(-1) - base_[0].get(0))
-        delta_ = [i.get(1) - i.get(0) for i in base_]
-        self._tick_marks, self._xy_mesh, self._xz_mesh, self._yz_mesh = [], [], [], []
-        self._make_tick_marks(base_, xx, yy, zz, delta_, tick_marks_color, axis_color, scale, num_tick_marks)
-        self._make_mesh(base_, delta_, scale)
-
-    def _make_mesh(self, base_, delta_, scale):
-        range_ = [i.get(-1) - i.get(0) for i in base_]
-        for j in range(np.len(base_[0])):
-            pos_x_y = x_hat * base_[0].get(0) + y_hat * base_[1].get(0)
-            pos_x_z = x_hat * base_[0].get(0) + z_hat * base_[2].get(0)
-            pos_y_z = y_hat * base_[1].get(0) + z_hat * base_[2].get(0)
-            self._xy_mesh += [cylinder(pos=pos_x_y + x_hat * j * delta_[0], axis=y_hat * range_[1])]
-            self._xy_mesh += [cylinder(pos=pos_x_y + y_hat * j * delta_[1], axis=x_hat * range_[0])]
-            self._xz_mesh += [cylinder(pos=pos_x_z + x_hat * j * delta_[0], axis=z_hat * range_[2])]
-            self._xz_mesh += [cylinder(pos=pos_x_z + z_hat * j * delta_[2], axis=x_hat * range_[0])]
-            self._yz_mesh += [cylinder(pos=pos_y_z + y_hat * j * delta_[1], axis=z_hat * range_[2])]
-            self._yz_mesh += [cylinder(pos=pos_y_z + z_hat * j * delta_[2], axis=y_hat * range_[1])]
-
-            pos = (base_[1].get(0) + .5 * range_[1]) * y_hat + (base_[2].get(0) + .5 * range_[2]) * z_hat
-            self._yz_mesh += [
-                box(pos=pos, length=scale, width=range_[2], height=range_[1], opacity=0.15, visible=False)]
-            pos = (base_[0].get(0) + .5 * range_[0]) * x_hat + (base_[1].get(0) + .5 * range_[1]) * y_hat
-            self._xy_mesh += [
-                box(pos=pos, length=range_[0], width=scale, height=range_[1], opacity=0.15, visible=False)]
-            pos = (base_[0].get(0) + .5 * range_[0]) * x_hat + (base_[2].get(0) + .5 * range_[2]) * z_hat
-            self._xz_mesh += [
-                box(pos=pos, length=range_[0], width=range_[2], height=scale, opacity=0.15, visible=False)]
-
-            self._set_mesh_properties(self._xy_mesh, scale)
-            self._set_mesh_properties(self._xz_mesh, scale)
-            self._set_mesh_properties(self._yz_mesh, scale)
-
-    def _set_mesh_properties(self, mesh, scale):
-        for item_ in mesh:
-            item_.color = color.gray(.5)
-            item_.radius = scale * .5
-            item_.visible = False
-
-    def _make_tick_marks(self, base_, xx, yy, zz, delta_, tick_marks_color, axis_color, scale, num_tick_marks):
-        increment = (xx.get(-1, -1) - xx.get(0, 0)) / num_tick_marks
-        start_value = xx.get(0, 0)
-        for i in range(1, np.len(base_[2]), 2):
-            label_text = '{:1.2f}'.format(start_value + i * increment, 2)
-            pos = z_hat * base_[2].get(i) + x_hat * (base_[0].get(-1) + 5 * scale)
-            x_label = text(pos=pos, text=label_text, height=5 * scale, billboard=True, color=tick_marks_color)
-            self._tick_marks.append(x_label)
-
-        increment = (yy.get(-1, -1) - yy.get(0, 0)) / num_tick_marks
-        start_value = yy.get(0, 0)
-        for i in range(0, np.len(base_[0]), 2):
-            label_text = '{:1.2f}'.format(start_value + i * increment, 2)
-            pos = x_hat * base_[0].get(i) + z_hat * (base_[2].get(-1) + 15 * scale)
-            y_label = text(pos=pos, text=label_text, height=5 * scale, billboard=True, color=tick_marks_color)
-            self._tick_marks.append(y_label)
-
-        increment = (zz.get(-1, -1) - zz.get(0, 0)) / num_tick_marks
-        start_value = zz.get(0, 0)
-        for i in range(1, np.len(base_[1]), 2):
-            label_text = '{:1.2f}'.format(start_value + i * increment, 2)
-            pos = y_hat * base_[1].get(i) + z_hat * (base_[2].get(-1) + 15 * scale)
-            z_label = text(pos=pos, text=label_text, height=5 * scale, billboard=True, color=tick_marks_color)
-            self._tick_marks.append(z_label)
-
-        pos = x_hat * (base_[0].get(-1) + 2 * delta_[0]) - vec(0, scale, -30)
-        l_y = text(pos=pos, text="Y-axis", color=axis_color, height=scale * 4, billboard=True, emissive=True)
-        pos = z_hat * (base_[2].get(-1) + 2 * delta_[2]) + y_hat * (.625 * base_[1].get(-1))
-        l_z = text(pos=pos, text="Z-axis", color=axis_color, height=scale * 4, billboard=True, emissive=True)
-        pos = x_hat * (base_[0].get(-1) / 2) + z_hat * (base_[2].get(-1) + 3 * delta_[2])
-        l_x = text(pos=pos, text="X-axis", color=axis_color, height=scale * 4, billboard=True, emissive=True)
-        c_x = cylinder(pos=x_hat * base_[0].get(0), axis=x_hat * (base_[0].get(-1) - base_[0].get(0)), color=axis_color,
-                       radius=scale)
-        c_y = cylinder(pos=z_hat * base_[2].get(0), axis=z_hat * (base_[2].get(-1) - base_[2].get(0)), color=axis_color,
-                       radius=scale)
-        c_z = cylinder(pos=y_hat * base_[1].get(0), axis=y_hat * (base_[1].get(-1) - base_[1].get(0)), color=axis_color,
-                       radius=scale)
-        self._tick_marks += [c_x, c_y, c_z, l_x, l_y, l_z]
-
-    def tick_marks_visibility_is(self, visible):
-        for tick_mark in self._tick_marks:
-            tick_mark.visible = visible
-
-    def xy_mesh_visibility_is(self, visible):
-        for i in range(len(self._xy_mesh)):
-            self._xy_mesh[i].visible = visible
-
-    def xz_mesh_visibility_is(self, visible):
-        for i in range(len(self._xz_mesh)):
-            self._xz_mesh[i].visible = visible
-
-    def yz_mesh_visibility_is(self, visible):
-        for i in range(len(self._xz_mesh)):
-            self._yz_mesh[i].visible = visible
-
 
 class Plot3D:
     """
@@ -224,8 +119,7 @@ class Plot3D:
         Render the plot with a new time.
     """
 
-    def __init__(self, xx, yy, zz, z_min=None, z_max=None, axis_color=color.yellow, tick_marks_color=vec(0.4, 0.8, 0.4),
-                 num_tick_marks=10):
+    def __init__(self, xx, yy, zz, z_min=None, z_max=None):
         self._xx = xx
         self._yy = yy
         self._zz = zz
@@ -233,28 +127,18 @@ class Plot3D:
         self._z_min, self._z_max = self._z_min_and_z_max(z_min, z_max)
         self._hue_offset = 0.5
         self._omega = 0
-        self._axis_color = axis_color
-        self._tick_marks_color = tick_marks_color
-        self._num_tick_marks = num_tick_marks
-        self._axis = self._create_base()
         self._vertices, self._quads = [], []
         self._create_vertices()
         self._create_quads()
         self.render(0)
 
-    def reinitialize(self, xx, yy, zz, show_xy, show_xz, show_yz, show_ticks, z_min=None, z_max=None):
+    def reinitialize(self, xx, yy, zz, z_min=None, z_max=None):
         self._xx = xx
         self._yy = yy
         self._zz = zz
 
         self._z_min, self._z_max = self._z_min_and_z_max(z_min, z_max)
         self._hide_plot()  # Hide previous shizzle before creating new stuff
-        self._hide_axis()  # Hide previous stizzle before creating new stuff
-        self._axis = self._create_base()
-        self._axis.tick_marks_visibility_is(show_ticks)
-        self._axis.xy_mesh_visibility_is(show_xy)
-        self._axis.xz_mesh_visibility_is(show_xz)
-        self._axis.yz_mesh_visibility_is(show_yz)
         self._vertices, self._quads = [], []
         self._create_vertices()
         self._create_quads()
@@ -268,28 +152,11 @@ class Plot3D:
 
         return self._zz.flatten().min(), self._zz.flatten().max()
 
-    def _hide_axis(self):
-        self._axis.tick_marks_visibility_is(False)
-        self._axis.xy_mesh_visibility_is(False)
-        self._axis.xz_mesh_visibility_is(False)
-        self._axis.yz_mesh_visibility_is(False)
-
     def _hide_plot(self):
         for quad_ in self._quads:
             quad_.visible = False
         for vertex_ in self._vertices:
             vertex_.visible = False
-
-    def _create_base(self):
-        x_min, x_max, y_min, y_max = self._ranges()
-        xx = np.linspace(x_min, x_max, np.len(self._xx))
-        yy = np.linspace(y_min, y_max, np.len(self._yy))
-        zz = np.linspace(self._z_min, self._z_max, np.len(self._zz))
-        axis = Base(xx, yy, zz, self._axis_color, self._tick_marks_color, self._num_tick_marks)
-        axis.xy_mesh_visibility_is(True)
-        axis.xz_mesh_visibility_is(True)
-        axis.yz_mesh_visibility_is(True)
-        return axis
 
     def _ranges(self):
         x_min = self._xx.flatten().min()
@@ -359,18 +226,6 @@ class Plot3D:
 
     def _get_vertex(self, x, y):
         return self._vertices[x * np.len(self._xx) + y]
-
-    def tick_marks_visibility_is(self, visible):
-        self._axis.tick_marks_visibility_is(visible)
-
-    def xy_mesh_visibility_is(self, visible):
-        self._axis.xy_mesh_visibility_is(visible)
-
-    def xz_mesh_visibility_is(self, visible):
-        self._axis.xz_mesh_visibility_is(visible)
-
-    def yz_mesh_visibility_is(self, visible):
-        self._axis.yz_mesh_visibility_is(visible)
 
 
 def torus():
@@ -513,8 +368,7 @@ def switch_function(event):
         xx, yy, zz, z_min, z_max = knot()
         animation.title = twisted_torus_title + "\n"
 
-    plot.reinitialize(xx, yy, zz, xy_checkbox.checked, xz_checkbox.checked, yz_checkbox.checked, tick_checkbox.checked,
-                      z_min, z_max)
+    plot.reinitialize(xx, yy, zz, z_min, z_max)
     animation.range = 1.5 * np.len(xx)
     time = 0.5
     MathJax.Hub.Queue(["Typeset", MathJax.Hub])
@@ -525,31 +379,10 @@ def adjust_omega():
     omega_slider_text.text = "= sin({:1.2f}".format(omega_slider.value / pi, 2) + " π)"
 
 
-def toggle_tick_marks(event):
-    plot.tick_marks_visibility_is(event.checked)
-
-
-def toggle_xz_mesh(event):
-    plot.xz_mesh_visibility_is(event.checked)
-
-
-def toggle_xy_mesh(event):
-    plot.xy_mesh_visibility_is(event.checked)
-
-
-def toggle_yz_mesh(event):
-    plot.yz_mesh_visibility_is(event.checked)
-
-
-animation.append_to_caption("\n")
-xy_checkbox = checkbox(text='XY mesh ', bind=toggle_xz_mesh, checked=True)
-xz_checkbox = checkbox(text='XZ mesh ', bind=toggle_xy_mesh, checked=True)
-yz_checkbox = checkbox(text='YZ mesh ', bind=toggle_yz_mesh, checked=True)
-tick_checkbox = checkbox(text='Tick marks ', bind=toggle_tick_marks, checked=True)
-animation.append_to_caption("\n\nHue offset  ")
+animation.append_to_caption("\nHue offset  ")
 color_slider = slider(min=0, max=1, step=.01, value=0.5, bind=adjust_color)
 
-animation.append_to_caption("\nAnimation speed ")
+animation.append_to_caption("\n\nAnimation speed ")
 omega_slider = slider(min=0, max=3 * pi, value=0, bind=adjust_omega)
 omega_slider_text = wtext(text="= 0")
 
