@@ -3,7 +3,8 @@ Philosophy is written in this grand book &mdash; I mean universe &mdash; which s
 but which cannot be understood unless one first learns to comprehend the language in which it is written. 
 It is written in the language of mathematics, and its characters are triangles, circles and other geometric figures, 
 without which it is humanly impossible to understand a single word of it; without these, one is wandering about 
-in a dark labyrinth. Galileo (1623).
+in a dark labyrinth. &mdash; 
+<a href="https://en.wikipedia.org/wiki/Galileo_Galilei">Galileo Galilei</a> (1623).
 </blockquote>
 
 <p><br clear="all"/></p>

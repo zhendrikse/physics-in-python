@@ -221,7 +221,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 
 <blockquote>
 If you think you understand quantum mechanics, you don't understand quantum mechanics.
-&mdash; Richard P. Feynman 
+&mdash; <a href="https://en.wikipedia.org/wiki/Richard_Feynman">Richard P. Feynman</a> 
 </blockquote>
 
 <p></p>
