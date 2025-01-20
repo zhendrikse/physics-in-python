@@ -96,7 +96,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 
 The formula for the above image is given by:
 
-$$\psi(x, y, t) = \sin(\sqrt{x^2+y^2})$$
+$$\psi(x, y, t) = \sin\left(\sqrt{x^2+y^2}\right)$$
 
 <p>The following Python code was used to plot the graph belonging to this multivariate function:<br/></p>
 
@@ -261,6 +261,9 @@ From this we arrive at the <a href="https://en.wikipedia.org/wiki/Schr%C3%B6ding
 
 $$(KE + PE)\Psi(x,,t) = E\Psi(x,t) = -i\hbar \dfrac{\partial}{\partial t}\Psi(x, t) = -\dfrac{\hbar^2}{2m}\dfrac{\partial^2}{\partial x^2} \Psi(x,t) + V(x)\Psi(x,t)$$
 
+In three-dimensional space this is then generalized to:
+
+$$i\bar\dfrac{\partial}{\partial t}\Psi(\vec{r}, t) = \left(\dfrac{\har^2}{2m}\nabla^2 + V(\vec{r, t}\right)\Psi(\vec{r}, t)$$
 </details>
 
 <p><br/></p>
@@ -504,7 +507,7 @@ This demo models the magnetization at various temperatures using a two-dimension
 # Special relativity
 <p></p>
 <blockquote>
-We should make things as simple as possible, but not simpler. Albert Einstein
+We should make things as simple as possible, but not simpler. &mdash; Albert Einstein
 </blockquote>
 <p></p>
 
