@@ -10,7 +10,7 @@ spiral_title = "<h3>Polar coordinates for Dini&apos;s spiral</h3>$\\begin{pmatri
 torus_title = "<h3>Polar coordinates for torus</h3>$\\begin{pmatrix}x \\\\ y \\\\ z\\end{pmatrix}=\\begin{pmatrix} (c + a \\cos(\\phi))\cdot\\cos(\\theta) \\\\  (c + a \\cos(\\phi))\cdot\\sin(\\theta) \\\\ a \\sin(\\phi) \\end{pmatrix}\\text{, } \\theta, \\phi \\in [-\\pi, \\pi]$"
 twisted_torus_title = "<h3>Polar coordinates for twisted torus</h3>$\\begin{pmatrix}x \\\\ y \\\\ z\\end{pmatrix}=\\begin{pmatrix} (3 + \\sin(\\phi) + \\cos(\\theta)) \cdot \\cos(2\\phi) \\\\  (3 + \\sin(\\phi) + \\cos(\\theta))\cdot\\sin(2\\phi) \\\\ \\sin(\\theta)+2\\cos(\\phi) \\end{pmatrix}\\text{, } \\theta, \\phi \\in [-\\pi, \\pi]\\text{, } \\theta, \\phi \\in [-\\pi, \\pi]$"
 caption = """
-&#x2022; Source code can be found <a href="https://github.com/zhendrikse/physics-in-python/blob/main/src/glowscript/mathematics/3d_plots.py">here</a>
+&#x2022; Source code can be found <a href="https://github.com/zhendrikse/physics-in-python/blob/main/src/glowscript/mathematics/geometric_shapes.py">here</a>
 &#x2022; Inspired on <a href="https://www.glowscript.org/#/user/GlowScriptDemos/folder/Examples/program/Plot3D">Plot3D</a> by adding the following features: 
   &#x2022; Numpy linspace and meshgrid syntax
   &#x2022; Configurable base and mesh background
