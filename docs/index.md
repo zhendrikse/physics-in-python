@@ -561,14 +561,14 @@ on [glowscript.org](https://glowscript.org).
 <hr/>
 
 <div style="display: flex; align-items: flex-end;">
-<figure style="float: left; width: 60%; text-align: center">
+<figure style="float: left; width: 50%; text-align: center">
     <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Relativity/program/Lightcone">
       <img alt="Light cone" src="./images/lightcone.png" title="Click to animate"/>
     </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <figcaption>A three-dimensional lightcone is animated by simultaneously 
     sending off both a photon and a spaceship from the origin.</figcaption>
 </figure>
-<figure style="float: right; width: 40%; text-align: center">
+<figure style="float: right; width: 50%; text-align: center">
     <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Relativity/program/Relativisticproton">
       <img alt="Relativistic proton" src="./images/relativistic_proton.png" title="Click to animate"/>
     </a>
@@ -620,11 +620,14 @@ You may be surprised though to find out what happens when you drop such a simple
 ### The $N$-body coupled oscillator with adjustable $N$
 <hr/>
 
-<figure>
+<figure style="float: center; text-align: center;">
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/N-bodycoupledoscillator">
-    <img alt="N-body coupled oscillator" width="40%" height="40%" src="./images/n_body_coupled_oscillator.png" title="Click to animate"/>
+    <img alt="N-body coupled oscillator" src="./images/n_body_coupled_oscillator.png" title="Click to animate"/>
   </a>
+  <figcaption>Discover what happens by changing the number of bodies.</figcaption>
 </figure>
+
+<p style="clear: both;"></p>
 
 
 ### Newton&apos;s pendulum and cannonball
