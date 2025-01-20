@@ -16,7 +16,13 @@ in a dark labyrinth. &mdash;
   <a href="glowscript/GeometricShapes.html">
     <img alt="Dini&apos;s spiral" src="./images/geometry/dini_spiral.png" title="Click to animate"/>
   </a>
-  <figcaption>Dini&apos;s spiral, Dini&apos;s surface, or twisted pseudo-sphere, which is characterized by a surface of constant (negative) curvature and is named after Ulisse Dini.</figcaption>
+  <figcaption>
+    <details>
+      <summary>Dini&apos;s spiral, Dini&apos;s surface, or twisted pseudo-sphere.</summary>
+      Dini&apos;s spiral is characterized by a surface of constant (negative) curvature 
+      and is named after Ulisse Dini.
+    </details>
+  </figcaption>
 </figure>
 <figure style="float: right; width: 50%; text-align: center">
   <a href="glowscript/GeometricShapes.html">
