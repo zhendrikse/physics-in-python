@@ -22,7 +22,7 @@ in a dark labyrinth. &mdash;
   <a href="glowscript/GeometricShapes.html">
     <img alt="Bubbles shape" src="./images/geometry/bubbles.png" title="Click to animate"/>
   </a>
-  <figcaption>Lemniscate of Gerono, defined by $x4 - x2 + y2 + z2 = 0$.</figcaption>
+  <figcaption>Lemniscate of Gerono, defined by $x^4 - x^2 + y^2 + z^2 = 0$.</figcaption>
 </figure>
 </div>
 <p style="clear: both;"></p>
