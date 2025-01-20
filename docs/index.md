@@ -198,7 +198,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
   <figcaption>Simulation of a flock of birds: "Eagles commonly fly alone. They are crows, daws, 
   and starlings that flock together" &mdash; John Webster </figcaption>
 </figure>
-<figure style="float: right; width: 50%; text-align: center">
+<figure style="float: right; width: 45%; text-align: center">
   <a href="glowscript/Raindrops.html">
     <img alt="Raindrops" src="./images/raindrops.png" title="Click to animate"/>
   </a>
@@ -361,28 +361,40 @@ The quantum harmonic oscillator is visualized in a semi-classical way below.
 
 ### Charged particle moving in two electric fields
 <hr />
-The following demos show the movement of an electron in two different electric fields. 
 
-<figure>
+<figure style="float: left; width: 50%; text-align: center">
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedring">
-    <img alt="Electron spinning around charged ring" width="45%" height="45%" src="./images/electron_and_charged_ring.png" title="Click to animate"/>
+    <img alt="Electron spinning around charged ring" src="./images/electron_and_charged_ring.png" title="Click to animate"/>
   </a>
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Movingcharge">
-    <img alt="Particle in electric field" width="45%" height="45%" src="./images/particle_in_electric_field.png" title="Click to animate"/>
-  </a>
+  <figcaption>If the atomic nucleus were a charged ring, as opposed to a point, then ...</figcaption>
 </figure>
+<figure style="float: right; width: 50%; text-align: center">
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Movingcharge">
+    <img alt="Particle in electric field" src="./images/particle_in_electric_field.png" title="Click to animate"/>
+  </a>
+  <figcaption>Discover how a particle&apos;s velocity and the electric field strength influence one another.</figcaption>
+</figure>
+
+<p><br clear="all"/></p>
 
 ### Rutherford scattering & charged particle in magnetic field
 <hr/>
 
-<figure>
+<figure style="float: left; width: 50%; text-align: center">
   <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Rutherfordscattering">
-    <img alt="Rutherford scattering" width="45%" height="45%" src="./images/rutherford_scattering.png" title="Click to animate"/>
+    <img alt="Rutherford scattering" src="./images/rutherford_scattering.png" title="Click to animate"/>
   </a>
-  <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Helicalmotion">
-    <img alt="Helical motion" width="50%" height="50%" src="./images/helical_motion.png" title="Click to animate"/>
-  </a>
+  <figcaption><a href="https://en.wikipedia.org/wiki/Rutherford_scattering_experiments#Rutherford_scattering">Rutherford scattering</a>,
+  which lead to the first atomic model with a nucleus and electrons spinning around it.</figcaption>
 </figure>
+<figure style="float: right; width: 50%; text-align: center">
+  <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Helicalmotion">
+    <img alt="Helical motion" src="./images/helical_motion.png" title="Click to animate"/>
+  </a>
+  <figcaption>Playfully discover how a charged particle behaves in a magnetic field.</figcaption>
+</figure>
+
+<p><br clear="all"/></p>
 
 
 <a name="electromagnetism"></a>
@@ -394,6 +406,21 @@ on [glowscript.org](https://glowscript.org).
 
 ### Electric fields of dipoles and point charges
 <hr/>
+
+<figure style="float: left; width: 50%; text-align: center">
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Pointchargefield">
+    <img alt="Electric field of point charge" src="./images/point_charge.png" title="Click to animate"/>
+  </a>
+  <figcaption><a href="https://en.wikipedia.org/wiki/Electric_dipole_moment">Electric field around a point charge.</a></figcaption>
+</figure>
+<figure style="float: right; width: 50%; text-align: center">
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Electricdipolefield">
+    <img alt="Electric field of a dipole" src="./images/dipole_field.png" title="Click to animate"/>
+  </a>
+  <figcaption><a href="https://en.wikipedia.org/wiki/Electric_dipole_moment">Electric dipole moment.</a></figcaption>
+</figure>
+
+<p><br clear="all"/></p>
 
 <details>
   <summary><a>&dArr; Background: electric fields around dipoles and point charges &dArr;</a></summary>
@@ -407,60 +434,62 @@ and for point charges by
 $$\vec{E} ( \vec{r} ) = -\dfrac {1} {4\pi\epsilon_0} \nabla \bigg( \dfrac{\vec{r}  \cdot \vec{p}} {r^3} \bigg), \text{ where } \vec{p} = +q(\vec{r_{+}}) + -q(\vec{r_{-})}$$
 </details>
 
-<figure>
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Pointchargefield">
-    <img alt="Electric field of point charge" width="45%" height="45%" src="./images/point_charge.png" title="Click to animate"/>
-  </a>
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Electricdipolefield">
-    <img alt="Electric field of a dipole" width="40%" height="40%" src="./images/dipole_field.png" title="Click to animate"/>
-  </a>
-</figure>
-
+<p></p>
 
 ### Electric and magnetic fields
 <hr/>
 
-Visualization of Faraday's law by running an electric current (of electric charges) through a wire and of
-an electric field inside a series of charged rings.
-
-<figure>
+<figure style="float: left; width: 50%; text-align: center">
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Faradayslaw">
-    <img alt="Faraday's law" width="45%" height="45%" src="./images/faradays_law.png" title="Click to animate"/>
+    <img alt="Faraday's law" src="./images/faradays_law.png" title="Click to animate"/>
   </a>
+  <figcaption>Visualization of Faraday's law by running an electric current (of electric charges) through a wire.</figcaption>
+</figure>
+<figure style="float: right; width: 50%; text-align: center">
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargedrings">
-    <img alt="Charged rings" width="45%" height="45%" src="./images/charged_rings.png" title="Click to animate"/>
+    <img alt="Charged rings" src="./images/charged_rings.png" title="Click to animate"/>
   </a>  
+  <figcaption>Visualization of an electric field inside a series of charged rings.</figcaption>
 </figure>
 
+<p><br clear="all"/></p>
 
 ### Charged disk and accompanying builder
 <hr/>
 
-Two rather simple demos that show the electric field around a disk. The builder allows a step-by-step
-set-up of the disk by adding a charged ring at each mouse click.
-
-<figure>
+<figure style="float: left; width: 50%; text-align: center">
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargeddisk">
-    <img alt="Charged disk" width="30%" height="30%" src="./images/charged_disk.png" title="Click to animate"/>
+    <img alt="Charged disk" src="./images/charged_disk.png" title="Click to animate"/>
   </a>
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargeddiskbuilder">
-    <img alt="Charged disk builder" width="40%" height="40%" src="./images/charged_disk_builder.png" title="Click to animate"/>
-  </a>
+  <figcaption>Visualization of the electric field around a disk.</figcaption>
 </figure>
+<figure style="float: right; width: 50%; text-align: center">
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Chargeddiskbuilder">
+    <img alt="Charged disk builder" src="./images/charged_disk_builder.png" title="Click to animate"/>
+  </a>
+  <figcaption>Build up an electric field yourself by incrementally adding a charged rings.</figcaption>
+</figure>
+
+<p><br clear="all"/></p>
 
 ## Electromagnetic waves
 <hr/>
 
-Both of the two dynamic simulations below visualize the propagation of electromagnetic waves. 
-
-<figure>
+<figure style="float: left; width: 50%; text-align: center">
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Antenna">
-    <img alt="Antenna" width="45%" height="45%" src="./images/antenna.png" title="Click to animate"/>
+    <img alt="Antenna" src="./images/antenna.png" title="Click to animate"/>
   </a>
-  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Electromagneticwave">
-    <img alt="Electromagnetic waves" width="50%" height="50%" src="./images/electromagnetic_wave.png" title="Click to animate"/>
-  </a>
+  <figcaption>Electromagnetic waves propagating from an antenna.</figcaption>
 </figure>
+<figure style="float: right; width: 50%; text-align: center">
+  <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/program/Electromagneticwave">
+    <img alt="Electromagnetic waves" src="./images/electromagnetic_wave.png" title="Click to animate"/>
+  </a>
+  <figcaption>Electromagnetic waves propagating through empty space.</figcaption>
+</figure>
+
+<p><br clear="all"/></p>
+
 
 <a name="thermodynamics"></a>
 # Thermodynamics
