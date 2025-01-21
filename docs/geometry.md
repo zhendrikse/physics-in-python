@@ -37,7 +37,7 @@ that I have written in VPython.
   <a href="glowscript/GeometricShapes.html">
     <img alt="Double torus" src="./images/geometry/double_torus.png" title="Click to animate"/>
   </a>
-  <figcaption>A torus.</figcaption>
+  <figcaption>Double torus.</figcaption>
 </figure>
 <figure style="float: right; width: 50%; text-align: center">
   <a href="glowscript/GeometricShapes.html">

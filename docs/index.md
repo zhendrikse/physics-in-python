@@ -175,12 +175,12 @@ $$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\
   </a>
   <figcaption>Polar coordinates frequently simplify the tackling of rotationally symmetric problems.</figcaption>
 </figure>
-<figure style="float: right; width: 45%; text-align: center">
+<figure style="float: right; width: 50%; text-align: center">
   <a href="glowscript/GeometricShapes.html">
-    <img alt="Twisted torus" src="./images/geometry/twisted_torus.png" title="Click to animate"/>
+    <img alt="Klein&aps;s bottle" src="./images/geometry/klein_bottle.png" title="Click to animate"/>
   </a>
-  <figcaption>A twisted torus. For more geometrical shapes like this, 
-  visit my <a href="geometry.html">Math Art gallery</a>.</figcaption>
+  <figcaption><a href="https://en.wikipedia.org/wiki/Klein_bottle">Klein&apos;s bottle</a>.
+  For more geometrical shapes like this, visit my <a href="geometry.html">Math Art gallery</a>.</figcaption>
 </figure>
 </div>
 <p style="clear: both;"></p>
