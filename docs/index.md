@@ -168,6 +168,12 @@ $$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\
 ### Polar coordinates &amp; [geometrical shapes](geometry.html)
 <hr/>
 
+The use of polar coordinates not only enables us to much more easily solve spherically symmetric problems in 
+both physics and mathematics, it also provides us a way to parameterize complex geometrical shapes, such
+as [Klein&apos;s bottle](https://en.wikipedia.org/wiki/Klein_bottle). 
+Get enchanted by visiting the [Math Art Gallery](geometry.html)! 
+
+
 <div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
   <a href="glowscript/PolarCoordinates">
