@@ -188,7 +188,7 @@ Get further enchanted in my [Math Art Gallery](geometry.html)!
     <img alt="Möbius strip" src="./images/geometry/mobius_strip.png" title="Click to animate"/>
   </a>
   <figcaption>The well-known <a href="https://en.wikipedia.org/wiki/M%C3%B6bius_strip">Möbius strip</a>.
-  For more geometrical shapes like this, visit my <a href="geometry.html">Math Art gallery</a>.</figcaption>
+  For more geometrical shapes like this, visit my <a href="geometry.html">Math Art Gallery</a>.</figcaption>
 </figure>
 </div>
 <p style="clear: both;"></p>

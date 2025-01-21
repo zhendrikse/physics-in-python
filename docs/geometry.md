@@ -9,7 +9,7 @@ in a dark labyrinth. &mdash;
 
 <p><br clear="all"/></p>
 
-# Welcome to my math art gallery 
+# Welcome to my Math Art Gallery 
 
 All geometric shapes below were created with basically the same plotting software 
 that I have written in VPython.

@@ -85,7 +85,7 @@ async function __main__() {
     "16";
     dented_title = "<h3>Parametrization for dented surface</h3>$\\begin{pmatrix}x \\\\ y \\\\ z\\end{pmatrix}=\\begin{pmatrix} \\cos(\\theta) \\\\  \\sin(\\theta)+\\cos(\\phi) \\\\ 3\\sin(\\phi) \\end{pmatrix}\\text{, } \\begin{cases} \\theta \\in [-\\pi, \\pi] \\\\ \\phi \\in [0, 2\\pi] \\end{cases}$";
     "17";
-    conchoid_title = "<h3>Paul Bourke&apos;s parametrization for conchoid</h3>$\\begin{pmatrix}x \\\\ y \\\\ z\\end{pmatrix}=\\begin{pmatrix} a\\left(1-\\dfrac{\\theta}{2\\pi}\\right)\\cos(n\\theta)(1+\\cos(\\phi))+c\\cos(n\\theta) \\\\  a\\left(1-\\dfrac{\\theta}{2\\pi}\\right)\\sin(n\\theta)(1+\\cos(\\phi))+c\\sin(n\\theta) \\\\ b\\dfrac{\\theta}{2\\pi}+a\\left(1-\\frac{\\theta}{2\\pi}\right)\\sin(\\phi) \\end{pmatrix}\\text{, } \\begin{cases} \\theta \\in [0, 2\\pi] \\\\ \\phi \\in [0, 2\\pi] \\end{cases}$";
+    conchoid_title = "<h3>Paul Bourke&apos;s parametrization for conchoid</h3>$\\begin{pmatrix}x \\\\ y \\\\ z\\end{pmatrix}=\\begin{pmatrix} a\\left(1-\\dfrac{\\theta}{2\\pi}\\right)\\cos(n\\theta)(1+\\cos(\\phi))+c\\cos(n\\theta) \\\\  a\\left(1-\\dfrac{\\theta}{2\\pi}\\right)\\sin(n\\theta)(1+\\cos(\\phi))+c\\sin(n\\theta) \\\\ b\\dfrac{\\theta}{2\\pi}+a\\left(1-\\frac{\\theta}{2\\pi}\\right)\\sin(\\phi) \\end{pmatrix}\\text{, } \\begin{cases} \\theta \\in [0, 2\\pi] \\\\ \\phi \\in [0, 2\\pi] \\end{cases}$";
     "26";
     caption = "\n&#x2022; Source code can be found <a href=\"https://github.com/zhendrikse/physics-in-python/blob/main/src/glowscript/mathematics/geometric_shapes.py\">here</a>\n&#x2022; Inspired on <a href=\"https://www.glowscript.org/#/user/GlowScriptDemos/folder/Examples/program/Plot3D\">Plot3D</a> by adding the following features: \n  &#x2022; Numpy linspace and meshgrid syntax\n  &#x2022; Multiple subplots per figure\n  &#x2022; Non-uniform coloring\n\n";
     "28";
@@ -745,9 +745,9 @@ async function __main__() {
         }
         var ρσ_ls, theta, phi, ρσ_unpack, xx, yy, zz;
         "226";
-        theta = (await np.linspace(1["-u"]()["*"](pi), pi, resolution));
+        theta = (await np.linspace(1["-u"]()["*"](pi), pi["+"](.2), resolution));
         "227";
-        phi = (await np.linspace(0, 2.1["*"](pi), resolution));
+        phi = (await np.linspace(0, 2["*"](pi)["+"](.2), resolution));
         "228";
         ρσ_unpack = (await np.meshgrid(theta, phi));
 ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
