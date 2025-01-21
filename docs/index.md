@@ -20,7 +20,7 @@ finest that music and poetry can deliver. &mdash;
 
 <a name="astrophysics"></a>
 # Astrophysics
-<div style="border-top: 2px solid white"></div>
+<div style="border-top: 2px dashed #999999"><br/></div>
 
 The code pertaining to the demos in this section is also available under the 
 [astrophysics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/)
@@ -64,16 +64,13 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 
 <a name="mathematics"></a>
 # Mathematics
-<div style="border-top: 2px solid white"></div>
+<div style="border-top: 2px dashed #999999"><br/></div>
 
-<p></p>
 <blockquote>
 Mathematics directs the flow of the universe, lurks behind its shapes and curves, 
 holds the reins of everything from tiny atoms to the biggest stars. &mdash; 
 <a href="https://en.wikipedia.org/wiki/Edward_Frenkel">Edward Frenkel</a>
 </blockquote>
-
-<p></p>
 
 The code pertaining to the demos in this section is available under the 
 [mathematics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Math/)
@@ -198,6 +195,7 @@ Get further enchanted in my [Math Art Gallery](geometry.html)!
 
 <a name="nature"></a>
 # Nature models
+<div style="border-top: 2px dashed #999999"><br/></div>
 
 The code pertaining to the demos in this section is available under the 
 [miscellaneous tab](https://www.glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/)
@@ -227,7 +225,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 
 <a name="quantum"></a>
 # Particle and quantum physics
-<p></p>
+<div style="border-top: 2px dashed #999999"><br/></div>
 
 <blockquote>
 If you think you understand quantum mechanics, you don't understand quantum mechanics.
