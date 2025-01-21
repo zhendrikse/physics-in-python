@@ -20,7 +20,7 @@ finest that music and poetry can deliver. &mdash;
 
 <a name="astrophysics"></a>
 # Astrophysics
-<div style="border-top: 2px dashed #999999"><br/></div>
+<div style="border-top: 2px solid #999999"><br/></div>
 
 The code pertaining to the demos in this section is also available under the 
 [astrophysics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/)
@@ -64,13 +64,14 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 
 <a name="mathematics"></a>
 # Mathematics
-<div style="border-top: 2px dashed #999999"><br/></div>
+<div style="border-top: 2px solid #999999"><br/></div>
 
 <blockquote>
 Mathematics directs the flow of the universe, lurks behind its shapes and curves, 
 holds the reins of everything from tiny atoms to the biggest stars. &mdash; 
 <a href="https://en.wikipedia.org/wiki/Edward_Frenkel">Edward Frenkel</a>
-</blockquote>
+</blockquote><br/>
+
 
 The code pertaining to the demos in this section is available under the 
 [mathematics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Math/)
@@ -195,7 +196,7 @@ Get further enchanted in my [Math Art Gallery](geometry.html)!
 
 <a name="nature"></a>
 # Nature models
-<div style="border-top: 2px dashed #999999"><br/></div>
+<div style="border-top: 2px solid #999999"><br/></div>
 
 The code pertaining to the demos in this section is available under the 
 [miscellaneous tab](https://www.glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/)
@@ -225,14 +226,13 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 
 <a name="quantum"></a>
 # Particle and quantum physics
-<div style="border-top: 2px dashed #999999"><br/></div>
+<div style="border-top: 2px solid #999999"><br/></div>
 
 <blockquote>
 If you think you understand quantum mechanics, you don't understand quantum mechanics.
 &mdash; <a href="https://en.wikipedia.org/wiki/Richard_Feynman">Richard P. Feynman</a> 
-</blockquote>
+</blockquote><br/>
 
-<p></p>
 
 The code pertaining to the demos in this section is available under the 
 [quantum tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Quantum/)
@@ -514,6 +514,7 @@ $$\vec{E} ( \vec{r} ) = -\dfrac {1} {4\pi\epsilon_0} \nabla \bigg( \dfrac{\vec{r
 
 <a name="thermodynamics"></a>
 # Thermodynamics
+<div style="border-top: 2px solid #999999"><br/></div>
 
 The code pertaining to the demos in this section is available under the 
 [thermodynamics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/)
@@ -545,6 +546,7 @@ This demo models the magnetization at various temperatures using a two-dimension
 
 <a name="waves"></a>
 # Waves
+<div style="border-top: 2px solid #999999"><br/></div>
 
 ### Doppler effect
 <hr/>
@@ -555,11 +557,11 @@ This demo models the magnetization at various temperatures using a two-dimension
 
 <a name="relativity"></a>
 # Special relativity
-<p></p>
+<div style="border-top: 2px solid #999999"><br/></div>
+
 <blockquote>
 We should make things as simple as possible, but not simpler. &mdash; Albert Einstein
-</blockquote>
-<p></p>
+</blockquote><br/>
 
 The code pertaining to the demos in this section is available under the 
 [relativity tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Relativity/)
@@ -598,6 +600,7 @@ the so-called Galilean transformation.
 
 <a name="kinematics"></a>
 # Kinematics
+<div style="border-top: 2px solid #999999"><br/></div>
 
 The code pertaining to the demos in this section is available under the 
 [kinematics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/)
@@ -708,6 +711,7 @@ You may be surprised though to find out what happens when you drop such a simple
 
 <a name="references"></a>
 # Acknowledgements
+<div style="border-top: 2px solid #999999"><br/></div>
 
 - [Ruth Chabay and Bruce Sherwood](https://www.aapt.org/aboutaapt/Chabay_Sherwood_2014-Halliday-Resnick-Award.cfm)
 - [Rhett Allain](https://en.wikipedia.org/wiki/Rhett_Allain)
@@ -715,6 +719,7 @@ You may be surprised though to find out what happens when you drop such a simple
 - [Steve Spicklemire](https://github.com/sspickle)
 
 # References
+<div style="border-top: 2px solid #999999"><br/></div>
 
 - Check this out &rarr; [QMsolve: A module for solving and visualizing the Schrödinger equation](https://github.com/quantum-visualizations/qmsolve)
 - [MyScript](https://webdemo.myscript.com/): enter text, equations, or diagrams by hand, and effortlessly convert 
