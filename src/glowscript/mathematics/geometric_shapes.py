@@ -6,9 +6,16 @@ from vpython import *
 get_library('https://cdn.jsdelivr.net/gh/nicolaspanel/numjs@0.15.1/dist/numjs.min.js')
 # get_library("https://cdnjs.cloudflare.com/ajax/libs/mathjs/14.0.1/math.js")
 
-spiral_title = "<h3>Polar coordinates for Dini&apos;s spiral</h3>$\\begin{pmatrix}x \\\\ y \\\\ z\\end{pmatrix}=\\begin{pmatrix} \\cos(\\theta)\cdot\\sin(\\phi) \\\\  \\sin(\\theta)\\cdot\\sin(\\phi) \\\\ (\\cos(\\phi)+\\log(\\tan(\\phi/2)))) + 0.2\\theta \\end{pmatrix}\\text{, } \\begin{cases} 0 < \\theta < 12.4 \\\\ 0.1 < \\phi < 2\\end{cases}$"
-torus_title = "<h3>Polar coordinates for torus</h3>$\\begin{pmatrix}x \\\\ y \\\\ z\\end{pmatrix}=\\begin{pmatrix} (c + a \\cos(\\phi))\cdot\\cos(\\theta) \\\\  (c + a \\cos(\\phi))\cdot\\sin(\\theta) \\\\ a \\sin(\\phi) \\end{pmatrix}\\text{, } \\theta, \\phi \\in [-\\pi, \\pi]$"
-twisted_torus_title = "<h3>Polar coordinates for twisted torus</h3>$\\begin{pmatrix}x \\\\ y \\\\ z\\end{pmatrix}=\\begin{pmatrix} (3 + \\sin(\\phi) + \\cos(\\theta)) \cdot \\cos(2\\phi) \\\\  (3 + \\sin(\\phi) + \\cos(\\theta))\cdot\\sin(2\\phi) \\\\ \\sin(\\theta)+2\\cos(\\phi) \\end{pmatrix}\\text{, } \\theta, \\phi \\in [-\\pi, \\pi]\\text{, } \\theta, \\phi \\in [-\\pi, \\pi]$"
+spiral_title = "<h3>Parametrization for Dini&apos;s spiral</h3>$\\begin{pmatrix}x \\\\ y \\\\ z\\end{pmatrix}=\\begin{pmatrix} \\cos(\\theta)\cdot\\sin(\\phi) \\\\  \\sin(\\theta)\\cdot\\sin(\\phi) \\\\  \\cos(\\phi)+\\log(\\tan(\\phi/2))) + 0.2\\theta \\end{pmatrix}\\text{, } \\begin{cases} \\theta \\in [0, 12.4] \\\\ \\phi \\in [0.1, 2] \\end{cases}$"
+torus_title = "<h3>Parametrization for torus</h3>$\\begin{pmatrix}x \\\\ y \\\\ z\\end{pmatrix}=\\begin{pmatrix} (c + a \\cos(\\phi))\cdot\\cos(\\theta) \\\\  (c + a \\cos(\\phi))\cdot\\sin(\\theta) \\\\ a \\sin(\\phi) \\end{pmatrix}\\text{, } \\begin{cases} \\theta \\in [-\\pi, \\pi] \\\\ \\phi \\in [-\\pi, \\pi] \\end{cases}$"
+twisted_torus_title = "<h3>Parametrization for twisted torus</h3>$\\begin{pmatrix}x \\\\ y \\\\ z\\end{pmatrix}=\\begin{pmatrix} (3 + \\sin(\\phi) + \\cos(\\theta)) \cdot \\cos(2\\phi) \\\\  (3 + \\sin(\\phi) + \\cos(\\theta))\cdot\\sin(2\\phi) \\\\ \\sin(\\theta)+2\\cos(\\phi) \\end{pmatrix}\\text{, } \\begin{cases} \\theta \\in [-\\pi, \\pi] \\\\ \\phi \\in [-\\pi, \\pi] \\end{cases}$"
+mobius_title = "<h3>Parametrization for Möbius strip</h3>$\\begin{pmatrix}x \\\\ y \\\\ z\\end{pmatrix}=\\begin{pmatrix} \\cos(\\theta)(1+\\phi\\cos(\\theta/2)) \\\\  \\sin(\\theta)(1+\\phi\\cos(\\theta/2)) \\\\ 0.2\\phi\\sin(\\theta/2) \\end{pmatrix}\\text{, } \\begin{cases} \\theta \\in [0, 4\\pi + 0.5] \\\\ \\phi \\in [0, 0.3] \\end{cases}$"
+bubbles_title = "<h3>Parametrization for bubbles</h3>$\\begin{pmatrix}x \\\\ y \\\\ z\\end{pmatrix}=\\begin{pmatrix} \\cos(\\theta)\\sin(2\\phi) \\\\  \\sin(\\theta)\\sin(2\\phi) \\\\ \\sin(\\phi) \\end{pmatrix}\\text{, } \\begin{cases} \\theta \\in [0, 2\\pi] \\\\ \\phi \\in [0, 2\\pi] \\end{cases}$"
+trefoil_knot_title = "<h3>Parametrization for trefoil knot</a></h3>$\\begin{pmatrix}x \\\\ y \\\\ z\\end{pmatrix}=\\begin{pmatrix} (4(1+0.25\\sin(3\\phi))+\\cos(\\theta))\\cos(2\\phi) \\\\  \\sin(\\theta)(1+\\phi\\cos(\\theta/2)) \\\\ 0.2\\phi\\sin(\\theta/2) \\end{pmatrix}\\text{, } \\begin{cases} \\theta \\in [0, 4\\pi + 0.5] \\\\ \\phi \\in [0, 0.3] \\end{cases}$"
+arc_title = "<h3>Parametrization for arc</h3>$\\begin{pmatrix}x \\\\ y \\\\ z\\end{pmatrix}=\\begin{pmatrix} \\cos(\\theta) \\\\  \\sin(\\theta)+\\cos(\\phi) \\\\ 3\\sin(\\phi) \\end{pmatrix}\\text{, } \\begin{cases} \\theta \\in [0, \\pi] \\\\ \\phi \\in [0, \\pi] \\end{cases}$"
+dented_title = "<h3>Parametrization for dented surface</h3>$\\begin{pmatrix}x \\\\ y \\\\ z\\end{pmatrix}=\\begin{pmatrix} \\cos(\\theta) \\\\  \\sin(\\theta)+\\cos(\\phi) \\\\ 3\\sin(\\phi) \\end{pmatrix}\\text{, } \\begin{cases} \\theta \\in [-\\pi, \\pi] \\\\ \\phi \\in [0, 2\\pi] \\end{cases}$"
+conchoid_title = "<h3>Paul Bourke&apos;s parametrization for conchoid</h3>$\\begin{pmatrix}x \\\\ y \\\\ z\\end{pmatrix}=\\begin{pmatrix} a\\left(1-\\dfrac{\\theta}{2\\pi}\\right)\\cos(n\\theta)(1+\\cos(\\phi))+c\\cos(n\\theta) \\\\  a\\left(1-\\dfrac{\\theta}{2\\pi}\\right)\\sin(n\\theta)(1+\\cos(\\phi))+c\\sin(n\\theta) \\\\ b\\dfrac{\\theta}{2\\pi}+a\left(1-\\frac{\\theta}{2\\pi}\right)\\sin(\\phi) \\end{pmatrix}\\text{, } \\begin{cases} \\theta \\in [0, 2\\pi] \\\\ \\phi \\in [0, 2\\pi] \\end{cases}$"
+
 caption = """
 &#x2022; Source code can be found <a href="https://github.com/zhendrikse/physics-in-python/blob/main/src/glowscript/mathematics/geometric_shapes.py">here</a>
 &#x2022; Inspired on <a href="https://www.glowscript.org/#/user/GlowScriptDemos/folder/Examples/program/Plot3D">Plot3D</a> by adding the following features: 
@@ -19,8 +26,7 @@ caption = """
 """
 
 animation = canvas(align="top", width=700, height=700, center=vec(0, 5, 0),
-                   forward=vec(-0.9, -0.5, -.8), title=twisted_torus_title + "\n", range=150)
-MathJax.Hub.Queue(["Typeset", MathJax.Hub])
+                   forward=vec(-0.9, -0.5, -.8), title=trefoil_knot_title + "\n\n")
 
 
 class Numpy:
@@ -80,25 +86,17 @@ class Numpy:
 np = Numpy()
 
 
+# This class is only meant to be used from within the Figure class.
 class SubPlot:
-    def __init__(self, xx, yy, zz, z_min=None, z_max=None):
+    def __init__(self, xx, yy, zz):
         self._xx, self._yy, self._zz = xx, yy, zz
-
-        self._z_min, self._z_max = self._z_min_and_z_max(z_min, z_max)
-        self._hue_offset = 0.5
+        self._hue_offset = 1
+        self._hue_gradient = .5
         self._omega = 0
         self._vertices, self._quads = [], []
         self._create_vertices()
         self._create_quads()
         self.render(0)
-
-    def _z_min_and_z_max(self, z_min, z_max):
-        # Has user has already defined the boundaries for us?
-        # Otherwise, we fall back to automatic boundary creation
-        if z_min and z_max:
-            return z_min, z_max
-
-        return self._zz.flatten().min(), self._zz.flatten().max()
 
     def hide_plot(self):
         for quad_ in self._quads:
@@ -106,29 +104,28 @@ class SubPlot:
         for vertex_ in self._vertices:
             vertex_.visible = False
 
-    def _ranges(self):
-        return self._xx.flatten().min(), self._xx.flatten().max(), self._yy.flatten().min(), self._yy.flatten().max()
+    def _create_vertex(self, x, y):
+        x_ = self._xx.get(x, y) * np.len(self._xx)
+        y_ = self._yy.get(x, y) * np.len(self._yy)
+        self._vertices.append(vertex(pos=vec(x_, 0, y_), normal=vec(0, 1, 0)))
 
     def _create_vertices(self):
-        x_min, x_max, y_min, y_max = self._ranges()
-        range_x = x_max - x_min
-        range_y = y_max - y_min
-
         for x in range(np.len(self._xx)):
             for y in range(np.len(self._yy)):
-                x_ = (self._xx.get(x, y) - x_min) * np.len(self._xx) / range_x
-                y_ = (self._yy.get(x, y) - y_min) * np.len(self._yy) / range_y
-                self._vertices.append(vertex(pos=vec(x_, 0, y_), normal=vec(0, 1, 0)))
+                self._create_vertex(x, y)
+
+    def _create_quad(self, x, y):
+        v0 = self._get_vertex(x, y)
+        v1 = self._get_vertex(x + 1, y)
+        v2 = self._get_vertex(x + 1, y + 1)
+        v3 = self._get_vertex(x, y + 1)
+        self._quads.append(quad(vs=[v0, v1, v2, v3]))
 
     # Create the quad objects, based on the vertex objects already created.
     def _create_quads(self):
         for x in range(np.len(self._xx) - 2):
             for y in range(np.len(self._yy) - 2):
-                v0 = self._get_vertex(x, y)
-                v1 = self._get_vertex(x + 1, y)
-                v2 = self._get_vertex(x + 1, y + 1)
-                v3 = self._get_vertex(x, y + 1)
-                self._quads.append(quad(vs=[v0, v1, v2, v3]))
+                self._create_quad(x, y)
 
     def _set_vertex_normal_for(self, x, y):
         # if x == np.len(self._xx) - 1 or y == np.len(self._yy) - 1: return
@@ -145,16 +142,15 @@ class SubPlot:
                 self._set_vertex_normal_for(x, y)
 
     def _update_vertex(self, x, y, value):
-        color_ = abs(value) / np.len(self._zz) + self._hue_offset
+        hue = self._hue_gradient * abs(value / 300) + self._hue_offset
         self._get_vertex(x, y).pos.y = value
-        self._get_vertex(x, y).color = color.hsv_to_rgb(vec(color_, color_, 1))
+        self._get_vertex(x, y).color = color.hsv_to_rgb(vec(hue, 1.25, 1))
 
     def _update_vertices(self, t):
-        range_z = self._z_max - self._z_min
         for x in range(np.len(self._xx)):
             for y in range(np.len(self._yy)):
                 f_x_y = self._zz.get(x, y) * (cos(self._omega * t) + 1) * .5
-                value = (np.len(self._xx) / range_z) * (f_x_y - self._z_min)
+                value = np.len(self._zz) * f_x_y
                 self._update_vertex(x, y, value)
 
     def render(self, t):
@@ -164,8 +160,11 @@ class SubPlot:
     def set_omega_to(self, omega):
         self._omega = omega
 
-    def hue_offset_is(self, hue_offset):
-        self._hue_offset = hue_offset
+    def set_hue_offset_to(self, offset):
+        self._hue_offset = offset
+
+    def set_hue_gradient_to(self, gradient):
+        self._hue_gradient = gradient
 
     def _get_vertex(self, x, y):
         return self._vertices[x * np.len(self._xx) + y]
@@ -179,16 +178,6 @@ class Figure:
     labeled z. This is done to mimic fairly standard practive for plotting
     the z value of a function of x and y.
 
-    A plot is typically made like so:
-
-    resolution = 75
-    x = y = np.linspace(-2 * pi, 2 * pi, resolution)
-    xx, yy = np.meshgrid(x, y)
-    zz = np.cos(np.abs(xx).add(np.abs(yy)))
-    figure = Figure()
-    figure.add_subplot(xx, yy, zz)
-
-
     Attributes
     ----------
     xx : array
@@ -199,11 +188,6 @@ class Figure:
         the np.meshgrid() function
     zz : array
         Numpy array containing the function values
-    z_min: float
-        Optional minimum z-axis boundary
-    z_max: float
-        Optional maximum z-axis boundary
-
 
     Methods
     -------
@@ -213,7 +197,8 @@ class Figure:
 
     def __init__(self):
         self._subplots = []
-        self._hue_offset = 0.5
+        self._hue_offset = 1
+        self._hue_gradient = .5
         self._omega = 0
 
     def render(self, t):
@@ -225,10 +210,15 @@ class Figure:
         for subplot in self._subplots:
             subplot.set_omega_to(omega)
 
-    def hue_offset_is(self, hue_offset):
-        self._hue_offset = hue_offset
+    def set_hue_offset_to(self, offset):
+        self._hue_offset = offset
         for subplot in self._subplots:
-            subplot.hue_offset_is(hue_offset)
+            subplot.set_hue_offset_to(offset)
+
+    def set_hue_gradient_to(self, gradient):
+        self._hue_gradient = gradient
+        for subplot in self._subplots:
+            subplot.set_hue_gradient_to(gradient)
 
     def reset(self):
         for subplot in self._subplots:
@@ -236,56 +226,77 @@ class Figure:
 
         self._subplots = []
 
-    def add_subplot(self, xx, yy, zz, z_min=None, z_max=None):
-        subplot = SubPlot(xx, yy, zz, z_min, z_max)
+    def add_subplot(self, xx, yy, zz):
+        subplot = SubPlot(xx, yy, zz)
         subplot.set_omega_to(self._omega)
-        subplot.hue_offset_is(self._hue_offset)
+        subplot.set_hue_offset_to(self._hue_offset)
+        subplot.set_hue_gradient_to(self._hue_gradient)
         self._subplots.append(subplot)
 
 
-def torus(a=1, c=3):
-    # https://www.mattiagiuri.com/2020/11/20/plotting-a-torus-with-python/
-
-    resolution = 50
+# https://www.mattiagiuri.com/2020/11/20/plotting-a-torus-with-python/
+def torus(a=.7, c=2, resolution=50):
     xx = yy = np.linspace(-pi, 1.05 * pi, resolution)
     U, V = np.meshgrid(xx, yy)
     X = (np.cos(V).multiply(a).add(c)).multiply(np.cos(U))
     Y = (np.cos(V).multiply(a).add(c)).multiply(np.sin(U))
     Z = np.sin(V).multiply(a)
-    return X, Y, Z, -2, 2
+    return X, Y, Z
 
 
-def knot():
-    resolution = 50
-
+def dented(resolution=50):
     theta = np.linspace(-pi, pi, resolution)
     phi = np.linspace(0, 2.1 * pi, resolution)
     theta, phi = np.meshgrid(theta, phi)
 
     xx = np.cos(theta)
     yy = np.sin(theta).add(np.cos(phi))
-    zz = np.sin(phi)
+    zz = np.sin(phi).multiply(1.5)
 
-    return xx, yy, zz, None, None
+    return xx, yy, zz
 
 
-def arc():
-    resolution = 50
+def trefoil_knot(resolution=100):
+    theta = phi = np.linspace(-pi, pi + .1, resolution)
+    theta, phi = np.meshgrid(theta, phi)
 
+    factor = np.sin(phi.multiply(3)).multiply(0.25).add(1).multiply(4).add(np.cos(theta))
+    xx = factor.multiply(np.cos(phi.multiply(2)))
+    yy = factor.multiply(np.sin(phi.multiply(2)))
+    zz = np.sin(theta).add(np.cos(phi.multiply(3)).multiply(2))
+
+    return xx, yy, zz
+
+
+def conchoid(resolution=75, num_spirals=3, r_final=2, height=6.5, r_inner=.5):
+    theta = phi = np.linspace(0, 2 * pi + .2, resolution)
+    theta, phi = np.meshgrid(theta, phi)
+
+    factor_1 = np.cos(phi).add(1)
+    factor_2 = theta.divide(-2 * pi).add(1).multiply(r_final).multiply(np.cos(theta.multiply(num_spirals)))
+
+    xx = factor_1.multiply(factor_2).add(np.cos(theta.multiply(num_spirals)).multiply(r_inner))
+    factor_2 = theta.divide(-2 * pi).add(1).multiply(r_final).multiply(np.sin(theta.multiply(num_spirals)))
+    yy = factor_1.multiply(factor_2).add(np.sin(theta.multiply(num_spirals)).multiply(r_inner))
+    term = np.sin(phi).multiply(r_final).multiply(theta.divide(-2 * pi).add(1))
+    zz = theta.multiply(height / (2 * pi)).add(term)
+
+    return xx, yy, zz
+
+
+def arc(resolution=50):
     theta = np.linspace(0, 1.05 * pi, resolution)
     phi = np.linspace(0, pi, resolution)
     theta, phi = np.meshgrid(theta, phi)
 
     xx = np.cos(theta)
     yy = np.sin(theta).add(np.cos(phi))
-    zz = np.sin(phi)
+    zz = np.sin(phi).multiply(3)
 
-    return xx, yy, zz, None, None
+    return xx, yy, zz
 
 
-def bubbles():
-    resolution = 75
-
+def bubbles(resolution=75):
     theta = np.linspace(0, 1.02 * pi, resolution)
     phi = np.linspace(0, 2.02 * pi, resolution)
     theta, phi = np.meshgrid(theta, phi)
@@ -294,12 +305,10 @@ def bubbles():
     yy = np.sin(theta).multiply(np.sin(phi.multiply(2)))
     zz = np.sin(phi)
 
-    return xx, yy, zz, -1, 1.1
+    return xx, yy, zz
 
 
-def mobius_strip():
-    resolution = 100
-
+def mobius_strip(resolution=100):
     theta = np.linspace(-pi, 1.03 * pi, resolution)
     phi = np.linspace(-1, 1, resolution)
     theta, phi = np.meshgrid(theta, phi)
@@ -308,12 +317,10 @@ def mobius_strip():
     xx = factor.multiply(np.cos(theta))
     yy = factor.multiply(np.sin(theta))
     zz = np.sin(theta.multiply(.5)).multiply(phi.multiply(.5))
-    return xx, yy, zz, -0.5, 1
+    return xx, yy, zz
 
 
-def twisted_torus():
-    resolution = 100
-
+def twisted_torus(resolution=100):
     theta = np.linspace(-pi, pi * 1.05, resolution)
     phi = np.linspace(-pi, pi * 1.03, resolution)
     theta, phi = np.meshgrid(theta, phi)
@@ -323,12 +330,10 @@ def twisted_torus():
     yy = np.sin(phi.multiply(2)).multiply(factor)
     zz = np.sin(theta).add(np.cos(phi).multiply(2))
 
-    return xx, yy, zz, None, None
+    return xx, yy, zz
 
 
-def dinis_spiral():
-    resolution = 100
-
+def dinis_spiral(resolution=100):
     u = np.linspace(0, 12.4, resolution)
     v = np.linspace(0.1, 2, resolution)
     u, v = np.meshgrid(u, v)
@@ -338,11 +343,7 @@ def dinis_spiral():
     term = np.log(np.tan(v.multiply(0.5))).add(np.cos(v))
     zz = u.multiply(0.2).add(term)
 
-    return xx, yy, zz, -2, 3
-
-
-def adjust_color():
-    figure.hue_offset_is(color_slider.value)
+    return xx, yy, zz
 
 
 def sync_radio_buttons(event):
@@ -351,39 +352,47 @@ def sync_radio_buttons(event):
     if event.name != "spiral": spiral_button.checked = False
     if event.name != "mobius": mobius_button.checked = False
     if event.name != "bubbles": bubbles_button.checked = False
-    if event.name != "knot": knot_button.checked = False
+    if event.name != "dented": dented_button.checked = False
+    if event.name != "trefoil_knot": trefoil_knot_button.checked = False
     if event.name != "arc": arc_button.checked = False
+    if event.name != "conchoid": conchoid_button.checked = False
 
 
 def switch_function(event):
     sync_radio_buttons(event)
-    xx, yy, zz, z_min, z_max = None, None, None, None, None
+    xx, yy, zz, title = None, None, None, None
 
     if event.name == "torus":
-        xx, yy, zz, z_min, z_max = torus()
-        animation.title = torus_title + "\n"
+        xx, yy, zz = torus()
+        title = torus_title
     elif event.name == "twisted_torus":
-        xx, yy, zz, z_min, z_max = twisted_torus()
-        animation.title = twisted_torus_title + "\n"
+        xx, yy, zz = twisted_torus()
+        title = twisted_torus_title
     elif event.name == "spiral":
-        xx, yy, zz, z_min, z_max = dinis_spiral()
-        animation.title = spiral_title + "\n\n"
+        xx, yy, zz = dinis_spiral()
+        title = spiral_title
     elif event.name == "mobius":
-        xx, yy, zz, z_min, z_max = mobius_strip()
-        animation.title = twisted_torus_title + "\n"
+        xx, yy, zz = mobius_strip()
+        title = mobius_title
     elif event.name == "bubbles":
-        xx, yy, zz, z_min, z_max = bubbles()
-        animation.title = twisted_torus_title + "\n"
+        xx, yy, zz = bubbles()
+        title = bubbles_title
     elif event.name == "arc":
-        xx, yy, zz, z_min, z_max = arc()
-        animation.title = twisted_torus_title + "\n"
-    elif event.name == "knot":
-        xx, yy, zz, z_min, z_max = knot()
-        animation.title = twisted_torus_title + "\n"
+        xx, yy, zz = arc()
+        title = arc_title
+    elif event.name == "dented":
+        xx, yy, zz = dented()
+        title = dented_title
+    elif event.name == "trefoil_knot":
+        xx, yy, zz = trefoil_knot()
+        title = trefoil_knot_title
+    elif event.name == "conchoid":
+        xx, yy, zz = conchoid()
+        title = conchoid_title
 
+    animation.title = title + "\n\n"
     figure.reset()
-    figure.add_subplot(xx, yy, zz, z_min, z_max)
-    animation.range = 1.5 * np.len(xx)
+    figure.add_subplot(xx, yy, zz)
     MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 
@@ -392,8 +401,19 @@ def adjust_omega():
     omega_slider_text.text = "= sin({:1.2f}".format(omega_slider.value / pi, 2) + " π)"
 
 
+def adjust_gradient():
+    figure.set_hue_gradient_to(gradient_slider.value)
+
+
+def adjust_offset():
+    figure.set_hue_offset_to(offset_slider.value)
+
+
 animation.append_to_caption("\nHue offset  ")
-color_slider = slider(min=0, max=1, step=.01, value=0.5, bind=adjust_color)
+offset_slider = slider(min=0, max=2, value=1, bind=adjust_offset)
+
+animation.append_to_caption("\n\nHue gradient  ")
+gradient_slider = slider(min=0, max=5, value=.5, bind=adjust_gradient)
 
 animation.append_to_caption("\n\nAnimation speed ")
 omega_slider = slider(min=0, max=3 * pi, value=0, bind=adjust_omega)
@@ -401,12 +421,15 @@ omega_slider_text = wtext(text="= 0")
 
 animation.append_to_caption("\n\n")
 torus_button = radio(bind=switch_function, text="Torus", name="torus")
-twisted_torus_button = radio(bind=switch_function, text="Twisted torus", name="twisted_torus", checked=True)
+twisted_torus_button = radio(bind=switch_function, text="Twisted torus", name="twisted_torus")
 spiral_button = radio(bind=switch_function, text="Spiral", name="spiral")
 mobius_button = radio(bind=switch_function, text="Mobius strip ", name="mobius")
 bubbles_button = radio(bind=switch_function, text="Bubbles ", name="bubbles")
 arc_button = radio(bind=switch_function, text="Arc ", name="arc")
-knot_button = radio(bind=switch_function, text="Knot ", name="knot")
+dented_button = radio(bind=switch_function, text="Dented surface ", name="dented")
+animation.append_to_caption("\n\n")
+trefoil_knot_button = radio(bind=switch_function, text="Trefoil Knot ", name="trefoil_knot", checked=True)
+conchoid_button = radio(bind=switch_function, text="Conchoid ", name="conchoid")
 
 animation.append_to_caption("\n" + caption + "\n")
 
@@ -438,19 +461,16 @@ def running(ev):
 animation.bind('mousedown', running)
 MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
+xx, yy, zz = trefoil_knot()
+figure = Figure()
+figure.add_subplot(xx, yy, zz)
+
 time = 0
 dt = 0.02
 run = True
-xx, yy, zz, z_min, z_max = twisted_torus()
-
-figure = Figure()
-figure.add_subplot(xx, yy, zz, z_min, z_max)
-
 while True:
     rate(30)
     figure.render(time)
     if run:
         time += dt
-
-
 

@@ -1,0 +1,630 @@
+<div id="glowscript" class="glowscript">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" href="https://www.glowscript.org/css/redmond/2.1/jquery-ui.custom.css" rel="stylesheet" />
+<link type="text/css" href="https://www.glowscript.org/css/ide.css" rel="stylesheet" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/lib/jquery/2.1/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/glow.3.2.min.js"></script>
+<script type="text/javascript" src="https://www.glowscript.org/package/RSrun.3.2.min.js"></script>
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+// START JAVASCRIPT
+;(function() {;
+var ρσ_modules = {};
+var ground_state_weight, first_state_weight, second_state_weight, third_state_weight;
+ρσ_modules.pythonize = {};
+
+(function(){
+    function strings() {
+        var string_funcs, exclude, name;
+        string_funcs = set("capitalize strip lstrip rstrip islower isupper isspace lower upper swapcase center count endswith startswith find rfind index rindex format join ljust rjust partition rpartition replace split rsplit splitlines zfill".split(" "));
+        if (!arguments.length) {
+            exclude = (function(){
+                var s = ρσ_set();
+                s.jsset.add("split");
+                s.jsset.add("replace");
+                return s;
+            })();
+        } else if (arguments[0]) {
+            exclude = Array.prototype.slice.call(arguments);
+        } else {
+            exclude = null;
+        }
+        if (exclude) {
+            string_funcs = string_funcs.difference(set(exclude));
+        }
+        var ρσ_Iter0 = string_funcs;
+        ρσ_Iter0 = ((typeof ρσ_Iter0[Symbol.iterator] === "function") ? (ρσ_Iter0 instanceof Map ? ρσ_Iter0.keys() : ρσ_Iter0) : Object.keys(ρσ_Iter0));
+        for (var ρσ_Index0 of ρσ_Iter0) {
+            name = ρσ_Index0;
+            (ρσ_expr_temp = String.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name] = (ρσ_expr_temp = ρσ_str.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name];
+        }
+    };
+    if (!strings.__module__) Object.defineProperties(strings, {
+        __module__ : {value: "pythonize"}
+    });
+
+    ρσ_modules.pythonize.strings = strings;
+})();
+
+async function __main__() {
+"use strict";
+    var display = canvas;
+    var scene = canvas();
+
+    function round(num, n=0) {return Number(num.toFixed(n))}
+    var box, compound, cone, curve, ellipsoid, extrusion, helix, points, pyramid, ring, sphere, simple_sphere, group, vector, sleep, update, paths, shapes, vertex, triangle, quad, distant_light, local_light, attach_trail, attach_arrow, attach_light, tan, asin, acos, atan, atan2, exp, log, pow, factorial, combin, button, radio, text, download, radians, degrees, get_library, read_local_file
+    var version, print, arange, __name__, type, ρσ_ls, title, background_info, animation, ground_state_weight, first_state_weight, second_state_weight, third_state_weight, _, ground_state_slider, ground_state_text, first_state_slider, first_state_text, second_state_slider, second_state_text, third_state_slider, third_state_text, frequency, L, left, right, info, _GS_1, psi, wave, t, dt, gd, gr;
+    version = ρσ_list_decorate([ "3.2", "glowscript" ]);
+    Array.prototype['+'] = function(r) {return this.concat(r)}
+    Array.prototype['*'] = function(r) {return __array_times_number(this, r)}
+    window.__GSlang = "vpython";
+    print = GSprint;
+    arange = range;
+    __name__ = "__main__";
+    type = pytype;
+    var strings = ρσ_modules.pythonize.strings;
+
+    strings();
+    "12";
+    title = "Visualization of particle confined by an infinite square well\n\n&#x2022; From <a href=\"https://www.amazon.com/Visualizing-Quantum-Mechanics-Python-Spicklemire/dp/1032569247\">Visualizing Quantum Mechanics with Python<\/a>\n&#x2022; Modified by <a href=\"https://github.com/zhendrikse/\">Zeger Hendrikse</a>, located in this <a href=\"https://github.com/zhendrikse/physics-in-python/\">GitHub repository</a>\n&#x2022; The motion and $x$-axis represent the parameters $t$ and $x$ respectively\n&#x2022; The $y$ and $z$-axis represent the real and imaginary parts of $\\Psi$ respectively\n";
+    "47";
+    background_info = "\n<b>Background</b>: particle in a box, i.e. confined by an infinite square well\n\nAlthough the one-dimensional particle-in-a-box problem does not correspond to any\nreal-world system, it illustrates quite well some (fundamental) \nquantum mechanical features nonetheless.\n\nThe box is modeled by an infinite square well, so that the particle cannot escape \nbeyond the boundaries of the box.\n\nInside the box, the potential energy $V$ is zero (or constant). Substituting this together with the\nformula for the plane wave $\\psi(x,t) = Ae^{ik x}e^{-i\\omega t}$ into the Schrödinger equation, we get:\n\n$\\dfrac{\\partial^2\\psi}{\\partial x^2} + \\dfrac{8\\pi^2m}{h^2}(E - 0)\\psi=0 \\Rightarrow \\bigg(\\dfrac{-h^2}{8\\pi^2m}\\bigg)\\dfrac{\\partial^2\\psi}{\\partial x^2}=E\\psi$\n\nWhich function does give itself (times $E$) when differentiated twice <em>and</em> is zero at both boundaries of the box?\n\n$\\psi = A\\sin(ax) \\Rightarrow \\dfrac{h^2a^2}{8\\pi^2m}\\psi=E\\psi \\Rightarrow E=\\dfrac{h^2a^2}{8\\pi^2m}$\n\nTo get $a$, we note that the wave function equals zero at the box boundaries:\n\n$\\psi=A\\sin(ax) = 0 \\Rightarrow a=\\dfrac{n\\pi}{L} \\Rightarrow \\psi_n = A\\sin\\bigg(\\dfrac{n\\pi x}{L}\\bigg) \\Rightarrow E_n=\\dfrac{h^2n^2}{8mL^2}$\n\nNormalizing the wave function results in an expression for $A$:\n\n$\\int_0^L \\psi \\cdot  \\psi dx = 1 \\Rightarrow A^2 \\int_0^L\\sin^2\\bigg(\\dfrac{n\\pi x}{L}\\bigg) dx=1 \\Rightarrow A^2\\bigg(\\dfrac{L}{2}\\bigg)=1 \\Rightarrow A=\\sqrt{\\dfrac{2}{L}}$\n\nSo summarizing, we have\n\n$E=\\dfrac{h^2a^2}{8\\pi^2m} \\text{ and } \\psi_n=\\sqrt{\\dfrac{2}{L}}\\sin(nkx), \\text{where } k=\\dfrac{\\pi}{L}$\n\nThese energy eigenstates (and superpositions thereof) are used in the visualization software.\n\n";
+    "49";
+    animation = ρσ_interpolate_kwargs.call(this, canvas, [ρσ_desugar_kwargs({width: 600, height: 300, align: "top", title: title, range: 6, center: vec(10, 0, 0)})]);
+    "50";
+    MathJax.Hub.Queue(ρσ_list_decorate([ "Typeset", MathJax.Hub ]));
+    "55";
+    function Complex() {;
+    }
+    Complex.prototype.__init__ = async function __init__(real, imaginary) {
+        var self = this;
+        "57";
+        self._real = real;
+        "58";
+        self._imaginary = imaginary;
+    };
+    if (!Complex.prototype.__init__.__argnames__) Object.defineProperties(Complex.prototype.__init__, {
+        __argnames__ : {value: ["real", "imaginary"]},
+        __module__ : {value: null}
+    });
+    Complex.__argnames__ = Complex.prototype.__init__.__argnames__;
+    Complex.__handles_kwarg_interpolation__ = Complex.prototype.__init__.__handles_kwarg_interpolation__;
+    Complex.prototype.multiplied_by = async function multiplied_by(factor) {
+        var self = this;
+        var ρσ_ls, real, imaginary, _GS_1;
+        "61";
+        real = self._real["*"](factor._real)["-"](1["*"](self._imaginary)["*"](factor._imaginary));
+        "62";
+        imaginary = self._imaginary["*"](factor._real)["+"](self._real["*"](factor._imaginary));
+        "63";
+        _GS_1 = new Complex;
+        (await _GS_1.__init__(real, imaginary));
+        return _GS_1;
+    };
+    if (!Complex.prototype.multiplied_by.__argnames__) Object.defineProperties(Complex.prototype.multiplied_by, {
+        __argnames__ : {value: ["factor"]},
+        __module__ : {value: null}
+    });
+    Complex.prototype.real = async function real() {
+        var self = this;
+        "66";
+        return self._real;
+    };
+    if (!Complex.prototype.real.__module__) Object.defineProperties(Complex.prototype.real, {
+        __module__ : {value: null}
+    });
+    Complex.prototype.imaginary = async function imaginary() {
+        var self = this;
+        "69";
+        return self._imaginary;
+    };
+    if (!Complex.prototype.imaginary.__module__) Object.defineProperties(Complex.prototype.imaginary, {
+        __module__ : {value: null}
+    });
+    Complex.prototype.__repr__ = async function __repr__() {
+                return "<"["+"](__name__)["+"](".")["+"](this.constructor.name)["+"](" #")["+"](this.ρσ_object_id)["+"](">");
+    };
+    Complex.prototype.__str__ = async function __str__() {
+        return this.__repr__();
+    };
+    Object.defineProperty(Complex.prototype, "__bases__", {value: []});
+
+
+
+
+
+    "72";
+    async function numpy_linspace(start, end, total) {
+        "73";
+        return range(start, end, end["-"](1["*"](start))["/"](total));
+    };
+    if (!numpy_linspace.__argnames__) Object.defineProperties(numpy_linspace, {
+        __argnames__ : {value: ["start", "end", "total"]},
+        __module__ : {value: null}
+    });
+
+    "76";
+    function Wave() {;
+    }
+    Wave.prototype.__init__ = async function __init__(psi, linspace) {
+        var self = this;
+        var ρσ_ls, xval;
+        "78";
+        self._x = linspace;
+        "79";
+        self._arrows = (function() {
+            var ρσ_Iter = linspace, ρσ_Result = [], xval;
+            ρσ_Iter = ((typeof ρσ_Iter[Symbol.iterator] === "function") ? (ρσ_Iter instanceof Map ? ρσ_Iter.keys() : ρσ_Iter) : Object.keys(ρσ_Iter));
+            for (var ρσ_Index of ρσ_Iter) {
+                xval = ρσ_Index;
+                ρσ_Result.push(ρσ_interpolate_kwargs.call(this, arrow, [ρσ_desugar_kwargs({pos: vec(xval, 0, 0), axis: vec(0, 1, 0), shaftwidth: .01["*"](L), color: color.red})]));
+            }
+            ρσ_Result = ρσ_list_constructor(ρσ_Result);
+            return ρσ_Result;
+        })();
+        "81";
+        self._psi = psi;
+    };
+    if (!Wave.prototype.__init__.__argnames__) Object.defineProperties(Wave.prototype.__init__, {
+        __argnames__ : {value: ["psi", "linspace"]},
+        __module__ : {value: null}
+    });
+    Wave.__argnames__ = Wave.prototype.__init__.__argnames__;
+    Wave.__handles_kwarg_interpolation__ = Wave.prototype.__init__.__handles_kwarg_interpolation__;
+    Wave.prototype._get_psi_values = async function _get_psi_values(t) {
+        var self = this;
+        var ρσ_ls, ρσ_unpack, psi_values, phase_values, psi_value, phase, xval;
+        "84";
+        ρσ_unpack = [ρσ_list_decorate([]), ρσ_list_decorate([])];
+        psi_values = ρσ_unpack[0];
+        phase_values = ρσ_unpack[1];
+        "85";
+        var ρσ_Iter1 = self._x;
+        ρσ_Iter1 = ((typeof ρσ_Iter1[Symbol.iterator] === "function") ? (ρσ_Iter1 instanceof Map ? ρσ_Iter1.keys() : ρσ_Iter1) : Object.keys(ρσ_Iter1));
+        for (var ρσ_Index1 of ρσ_Iter1) {
+            xval = ρσ_Index1;
+            "86";
+            ρσ_unpack = (await self._psi.value_at(xval, t));
+ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
+            psi_value = ρσ_unpack[0];
+            phase = ρσ_unpack[1];
+            "87";
+            psi_values.append(psi_value);
+            "88";
+            phase_values.append(phase);
+        }
+        "89";
+        return [psi_values, phase_values];
+    };
+    if (!Wave.prototype._get_psi_values.__argnames__) Object.defineProperties(Wave.prototype._get_psi_values, {
+        __argnames__ : {value: ["t"]},
+        __module__ : {value: null}
+    });
+    Wave.prototype._psi_squared = async function _psi_squared(psi_values) {
+        var self = this;
+        var ρσ_ls, abs_psi, psi_squared, value;
+        "92";
+        abs_psi = ρσ_list_decorate([]);
+        "93";
+        var ρσ_Iter2 = psi_values;
+        ρσ_Iter2 = ((typeof ρσ_Iter2[Symbol.iterator] === "function") ? (ρσ_Iter2 instanceof Map ? ρσ_Iter2.keys() : ρσ_Iter2) : Object.keys(ρσ_Iter2));
+        for (var ρσ_Index2 of ρσ_Iter2) {
+            value = ρσ_Index2;
+            "94";
+            psi_squared = (await value.real())["*"]((await value.real()))["+"]((await value.imaginary())["*"]((await value.imaginary())));
+            "95";
+            abs_psi.append(psi_squared);
+        }
+        "97";
+        return abs_psi;
+    };
+    if (!Wave.prototype._psi_squared.__argnames__) Object.defineProperties(Wave.prototype._psi_squared, {
+        __argnames__ : {value: ["psi_values"]},
+        __module__ : {value: null}
+    });
+    Wave.prototype.update_for = async function update_for(t) {
+        var self = this;
+        var ρσ_ls, ρσ_unpack, psi_values, phase_values, abs_psi, sum_psi, scale, psi_value, phase, cycles, cphase, colour, count;
+        "100";
+        ρσ_unpack = (await self._get_psi_values(t));
+ρσ_unpack = ρσ_unpack_asarray(2, ρσ_unpack);
+        psi_values = ρσ_unpack[0];
+        phase_values = ρσ_unpack[1];
+        "101";
+        abs_psi = (await self._psi_squared(psi_values));
+        "102";
+        sum_psi = (await sum(abs_psi));
+        "104";
+        scale = 1.5["*"](L)["/"](sum_psi);
+        "105";
+        var ρσ_Iter3 = range(len(psi_values));
+        ρσ_Iter3 = ((typeof ρσ_Iter3[Symbol.iterator] === "function") ? (ρσ_Iter3 instanceof Map ? ρσ_Iter3.keys() : ρσ_Iter3) : Object.keys(ρσ_Iter3));
+        for (var ρσ_Index3 of ρσ_Iter3) {
+            count = ρσ_Index3;
+            "106";
+            ρσ_unpack = [ρσ_getitem(psi_values, count), ρσ_getitem(phase_values, count)];
+            psi_value = ρσ_unpack[0];
+            phase = ρσ_unpack[1];
+            "107";
+            cycles = phase["/"](2["*"](pi));
+            "108";
+            cycles=cycles["-"](floor(cycles));
+            "109";
+            cphase = 2["*"](pi)["*"](cycles);
+            "110";
+            colour = color.hsv_to_rgb(vec(1["-"](1["*"](cphase)["/"](2["*"](pi))), 1, 1));
+            "112";
+            ρσ_getitem(self._arrows, count).axis = scale["*"](vec(0, (await psi_value.real()), (await psi_value.imaginary())))["*"](3);
+            "113";
+            ρσ_getitem(self._arrows, count).color = colour;
+        }
+        "115";
+        return (await sum((function() {
+            var ρσ_Iter = range(len(self._x)), ρσ_Result = [], i;
+            ρσ_Iter = ((typeof ρσ_Iter[Symbol.iterator] === "function") ? (ρσ_Iter instanceof Map ? ρσ_Iter.keys() : ρσ_Iter) : Object.keys(ρσ_Iter));
+            for (var ρσ_Index of ρσ_Iter) {
+                i = ρσ_Index;
+                ρσ_Result.push(ρσ_getitem(abs_psi, i)["/"](sum_psi)["*"](ρσ_getitem(self._x, i)));
+            }
+            ρσ_Result = ρσ_list_constructor(ρσ_Result);
+            return ρσ_Result;
+        })()));
+    };
+    if (!Wave.prototype.update_for.__argnames__) Object.defineProperties(Wave.prototype.update_for, {
+        __argnames__ : {value: ["t"]},
+        __module__ : {value: null}
+    });
+    Wave.prototype.set_linspace_to = async function set_linspace_to(linspace) {
+        var self = this;
+        var ρσ_ls, count, xval;
+        "118";
+        count = 0;
+        "119";
+        var ρσ_Iter4 = linspace;
+        ρσ_Iter4 = ((typeof ρσ_Iter4[Symbol.iterator] === "function") ? (ρσ_Iter4 instanceof Map ? ρσ_Iter4.keys() : ρσ_Iter4) : Object.keys(ρσ_Iter4));
+        for (var ρσ_Index4 of ρσ_Iter4) {
+            xval = ρσ_Index4;
+            "120";
+            ρσ_getitem(self._arrows, count).pos = vec(xval, 0, 0);
+            "121";
+            count=count["+"](1);
+        }
+        "122";
+        self._x = linspace;
+    };
+    if (!Wave.prototype.set_linspace_to.__argnames__) Object.defineProperties(Wave.prototype.set_linspace_to, {
+        __argnames__ : {value: ["linspace"]},
+        __module__ : {value: null}
+    });
+    Wave.prototype.__repr__ = async function __repr__() {
+                return "<"["+"](__name__)["+"](".")["+"](this.constructor.name)["+"](" #")["+"](this.ρσ_object_id)["+"](">");
+    };
+    Wave.prototype.__str__ = async function __str__() {
+        return this.__repr__();
+    };
+    Object.defineProperty(Wave.prototype, "__bases__", {value: []});
+
+
+
+
+
+
+    "125";
+    function Psi() {;
+    }
+    Psi.prototype.__init__ = async function __init__(k, omega, wave_function) {
+        var self = this;
+        "127";
+        self._k = k;
+        "128";
+        self._omega = omega;
+        "129";
+        self._psi = wave_function;
+    };
+    if (!Psi.prototype.__init__.__argnames__) Object.defineProperties(Psi.prototype.__init__, {
+        __argnames__ : {value: ["k", "omega", "wave_function"]},
+        __module__ : {value: null}
+    });
+    Psi.__argnames__ = Psi.prototype.__init__.__argnames__;
+    Psi.__handles_kwarg_interpolation__ = Psi.prototype.__init__.__handles_kwarg_interpolation__;
+    Psi.prototype.value_at = async function value_at(x, t) {
+        var self = this;
+        var ρσ_ls, k, omega, phase;
+        "132";
+        k = self._k;
+        "133";
+        omega = self._omega;
+        "134";
+        phase = k["*"](x)["-"](1["*"](omega)["*"](t));
+        "135";
+        return [(await self._psi(k, x, omega, t)), phase];
+    };
+    if (!Psi.prototype.value_at.__argnames__) Object.defineProperties(Psi.prototype.value_at, {
+        __argnames__ : {value: ["x", "t"]},
+        __module__ : {value: null}
+    });
+    Psi.prototype.set_wave_function_to = async function set_wave_function_to(new_wave_function, with_k) {
+        var self = this;
+        "138";
+        self._psi = new_wave_function;
+        "139";
+        self._k = with_k;
+    };
+    if (!Psi.prototype.set_wave_function_to.__argnames__) Object.defineProperties(Psi.prototype.set_wave_function_to, {
+        __argnames__ : {value: ["new_wave_function", "with_k"]},
+        __module__ : {value: null}
+    });
+    Psi.prototype.__repr__ = async function __repr__() {
+                return "<"["+"](__name__)["+"](".")["+"](this.constructor.name)["+"](" #")["+"](this.ρσ_object_id)["+"](">");
+    };
+    Psi.prototype.__str__ = async function __str__() {
+        return this.__repr__();
+    };
+    Object.defineProperty(Psi.prototype, "__bases__", {value: []});
+
+
+
+
+    "142";
+    async function phase(omega, t) {
+        var ρσ_ls, _GS_1;
+        "143";
+        _GS_1 = new Complex;
+        (await _GS_1.__init__(sin(omega["*"](t)), cos(omega["*"](t))));
+        return _GS_1;
+    };
+    if (!phase.__argnames__) Object.defineProperties(phase, {
+        __argnames__ : {value: ["omega", "t"]},
+        __module__ : {value: null}
+    });
+
+    "146";
+    async function third_excited_state(k, x, omega, t) {
+        var ρσ_ls, _GS_1;
+        "147";
+        _GS_1 = new Complex;
+        (await _GS_1.__init__(sin(4["*"](k)["*"](x)), 0));
+        return (await _GS_1.multiplied_by((await phase(1["-u"]()["*"](16)["*"](omega), t))));
+    };
+    if (!third_excited_state.__argnames__) Object.defineProperties(third_excited_state, {
+        __argnames__ : {value: ["k", "x", "omega", "t"]},
+        __module__ : {value: null}
+    });
+
+    "150";
+    async function second_excited_state(k, x, omega, t) {
+        var ρσ_ls, _GS_1;
+        "151";
+        _GS_1 = new Complex;
+        (await _GS_1.__init__(sin(3["*"](k)["*"](x)), 0));
+        return (await _GS_1.multiplied_by((await phase(1["-u"]()["*"](9)["*"](omega), t))));
+    };
+    if (!second_excited_state.__argnames__) Object.defineProperties(second_excited_state, {
+        __argnames__ : {value: ["k", "x", "omega", "t"]},
+        __module__ : {value: null}
+    });
+
+    "154";
+    async function first_excited_state(k, x, omega, t) {
+        var ρσ_ls, _GS_1;
+        "155";
+        _GS_1 = new Complex;
+        (await _GS_1.__init__(sin(2["*"](k)["*"](x)), 0));
+        return (await _GS_1.multiplied_by((await phase(1["-u"]()["*"](4)["*"](omega), t))));
+    };
+    if (!first_excited_state.__argnames__) Object.defineProperties(first_excited_state, {
+        __argnames__ : {value: ["k", "x", "omega", "t"]},
+        __module__ : {value: null}
+    });
+
+    "158";
+    async function ground_state(k, x, omega, t) {
+        var ρσ_ls, _GS_1;
+        "159";
+        _GS_1 = new Complex;
+        (await _GS_1.__init__(sin(k["*"](x)), 0));
+        return (await _GS_1.multiplied_by((await phase(1["-u"]()["*"](1)["*"](omega), t))));
+    };
+    if (!ground_state.__argnames__) Object.defineProperties(ground_state, {
+        __argnames__ : {value: ["k", "x", "omega", "t"]},
+        __module__ : {value: null}
+    });
+
+    "162";
+    async function superposition(k, x, omega, t) {
+        var ρσ_ls, real, imaginary, _GS_1;
+        "163";
+        real = ground_state_weight["*"]((await (await ground_state(k, x, omega, t)).real()));
+        "164";
+        imaginary = ground_state_weight["*"]((await (await ground_state(k, x, omega, t)).imaginary()));
+        "165";
+        real=real["+"](first_state_weight["*"]((await (await first_excited_state(k, x, omega, t)).real())));
+        "166";
+        imaginary=imaginary["+"](first_state_weight["*"]((await (await first_excited_state(k, x, omega, t)).imaginary())));
+        "167";
+        real=real["+"](second_state_weight["*"]((await (await second_excited_state(k, x, omega, t)).real())));
+        "168";
+        imaginary=imaginary["+"](second_state_weight["*"]((await (await second_excited_state(k, x, omega, t)).imaginary())));
+        "169";
+        real=real["+"](third_state_weight["*"]((await (await third_excited_state(k, x, omega, t)).real())));
+        "170";
+        imaginary=imaginary["+"](third_state_weight["*"]((await (await third_excited_state(k, x, omega, t)).imaginary())));
+        "171";
+        _GS_1 = new Complex;
+        (await _GS_1.__init__(real, imaginary));
+        return _GS_1;
+    };
+    if (!superposition.__argnames__) Object.defineProperties(superposition, {
+        __argnames__ : {value: ["k", "x", "omega", "t"]},
+        __module__ : {value: null}
+    });
+
+    "174";
+    ground_state_weight = 1;
+    "177";
+    async function set_ground_state_weight() {
+        "178";
+        "179";
+        ground_state_weight = ground_state_slider.value;
+        "180";
+        ground_state_text.text = "contribution = "["+"](str(ground_state_weight));
+    };
+    if (!set_ground_state_weight.__module__) Object.defineProperties(set_ground_state_weight, {
+        __module__ : {value: null}
+    });
+
+    "183";
+    first_state_weight = 1;
+    "186";
+    async function set_first_state_weight() {
+        "187";
+        "188";
+        first_state_weight = first_state_slider.value;
+        "189";
+        first_state_text.text = "contribution = "["+"](str(first_state_weight));
+    };
+    if (!set_first_state_weight.__module__) Object.defineProperties(set_first_state_weight, {
+        __module__ : {value: null}
+    });
+
+    "192";
+    second_state_weight = 0;
+    "195";
+    async function set_second_state_weight() {
+        "196";
+        "197";
+        second_state_weight = second_state_slider.value;
+        "198";
+        second_state_text.text = "contribution = "["+"](str(second_state_weight));
+    };
+    if (!set_second_state_weight.__module__) Object.defineProperties(set_second_state_weight, {
+        __module__ : {value: null}
+    });
+
+    "201";
+    third_state_weight = 0;
+    "204";
+    async function set_third_state_weight() {
+        "205";
+        "206";
+        third_state_weight = third_state_slider.value;
+        "207";
+        third_state_text.text = "contribution = "["+"](str(third_state_weight));
+    };
+    if (!set_third_state_weight.__module__) Object.defineProperties(set_third_state_weight, {
+        __module__ : {value: null}
+    });
+
+    "210";
+    async function toggle_info(event) {
+        "211";
+        if (event.checked) {
+            "213";
+            animation.caption = background_info;
+            "214";
+            MathJax.Hub.Queue(ρσ_list_decorate([ "Typeset", MathJax.Hub ]));
+            "215";
+        } else {
+            "217";
+            animation.caption = "";
+            "218";
+            MathJax.Hub.Queue(ρσ_list_decorate([ "Typeset", MathJax.Hub ]));
+        }
+    };
+    if (!toggle_info.__argnames__) Object.defineProperties(toggle_info, {
+        __argnames__ : {value: ["event"]},
+        __module__ : {value: null}
+    });
+
+    "221";
+    _ = ρσ_interpolate_kwargs.call(this, checkbox, [ρσ_desugar_kwargs({pos: animation.title_anchor, text: "Show more background information in the caption", bind: toggle_info, checked: false})]);
+    "223";
+    animation.append_to_title("\n\n$\\Psi = \\sin(kx)e^{-i\\omega t}$");
+    "224";
+    ground_state_slider = ρσ_interpolate_kwargs.call(this, slider, [ρσ_desugar_kwargs({pos: animation.title_anchor, text: "Ground state", value: 1, min: 0, max: 1, bind: set_ground_state_weight})]);
+    "226";
+    ground_state_text = ρσ_interpolate_kwargs.call(this, wtext, [ρσ_desugar_kwargs({pos: animation.title_anchor, text: "contribution = 1"})]);
+    "228";
+    animation.append_to_title("\n\n$\\Psi = \\sin(2kx)e^{-4i\\omega t}$");
+    "229";
+    first_state_slider = ρσ_interpolate_kwargs.call(this, slider, [ρσ_desugar_kwargs({pos: animation.title_anchor, text: "First excited state", value: 1, min: 0, max: 1, bind: set_first_state_weight})]);
+    "231";
+    first_state_text = ρσ_interpolate_kwargs.call(this, wtext, [ρσ_desugar_kwargs({pos: animation.title_anchor, text: "contribution = 1"})]);
+    "233";
+    animation.append_to_title("\n\n$\\Psi = \\sin(3kx)e^{-9i\\omega t}$");
+    "234";
+    second_state_slider = ρσ_interpolate_kwargs.call(this, slider, [ρσ_desugar_kwargs({pos: animation.title_anchor, text: "Second excited state", value: 0, min: 0, max: 1, bind: set_second_state_weight})]);
+    "236";
+    second_state_text = ρσ_interpolate_kwargs.call(this, wtext, [ρσ_desugar_kwargs({pos: animation.title_anchor, text: "contribution = 0"})]);
+    "238";
+    animation.append_to_title("\n\n$\\Psi = \\sin(4kx)e^{-16i\\omega t}$");
+    "239";
+    third_state_slider = ρσ_interpolate_kwargs.call(this, slider, [ρσ_desugar_kwargs({pos: animation.title_anchor, text: "Third excited state", value: 0, min: 0, max: 1, bind: set_third_state_weight})]);
+    "241";
+    third_state_text = ρσ_interpolate_kwargs.call(this, wtext, [ρσ_desugar_kwargs({pos: animation.title_anchor, text: "contribution = 0"})]);
+    "243";
+    animation.append_to_title("\n\n");
+    "244";
+    animation.append_to_caption("\n\n");
+    "246";
+    frequency = 2;
+    "247";
+    L = 20;
+    "249";
+    left = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: vec(1["-u"]()["*"](.5), 1["-u"]()["*"](3), 0), axis: vec(0, 6, 0), radius: .1, color: color.yellow})]);
+    "250";
+    right = ρσ_interpolate_kwargs.call(this, cylinder, [ρσ_desugar_kwargs({pos: vec(L, 1["-u"]()["*"](3), 0), axis: vec(0, 6, 0), radius: .1, color: color.yellow})]);
+    "251";
+    info = ρσ_interpolate_kwargs.call(this, label, [ρσ_desugar_kwargs({pos: vec(L["/"](2), 3, 0), text: "Click mouse to restart", box: false, color: color.yellow, visible: false})]);
+    "253";
+    _GS_1 = new Psi;
+    ρσ_interpolate_kwargs.call(_GS_1, _GS_1.__init__, [ρσ_desugar_kwargs({k: pi["/"](L), omega: 2["*"](pi)["/"](frequency), wave_function: superposition})]);
+    psi = _GS_1;
+    "254";
+    _GS_1 = new Wave;
+    (await _GS_1.__init__(psi, (await numpy_linspace(0, L, 40))));
+    wave = _GS_1;
+    "256";
+    t = 0;
+    "257";
+    dt = .002;
+    "258";
+    while (true) {
+        "259";
+        gd = ρσ_interpolate_kwargs.call(this, graph, [ρσ_desugar_kwargs({title: "Probability finding the particle at x", xtitle: "t", ytitle: "<x>", width: 640, height: 300})]);
+        "260";
+        gr = ρσ_interpolate_kwargs.call(this, gcurve, [ρσ_desugar_kwargs({color: color.red})]);
+        "262";
+        while (t["<"](10)) {
+            "263";
+            (await rate(100));
+            "264";
+            gr.plot(t, (await wave.update_for(t)));
+            "265";
+            t=t["+"](dt);
+        }
+        "267";
+        info.visible = true;
+        "268";
+        (await animation.waitfor("click"));
+        "269";
+        info.visible = false;
+        "270";
+        gr.remove();
+        "271";
+        gd.remove();
+        "272";
+        t = 0;
+    }
+};
+if (!__main__.__module__) Object.defineProperties(__main__, {
+    __module__ : {value: null}
+});
+
+;$(function(){ window.__context = { glowscript_container: $("#glowscript").removeAttr("id") }; __main__() })})()
+// END JAVASCRIPT
+
+//--><!]]></script>
+</div>

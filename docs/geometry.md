@@ -48,6 +48,7 @@ that I have written in VPython.
 </div>
 <p style="clear: both;"></p>
 
+<a name="non_orientables"></a>
 ## Non-orientable surfaces
 
 <div style="display: flex; align-items: flex-end;">

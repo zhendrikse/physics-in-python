@@ -55,7 +55,8 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
   <a href="glowscript/ThreeBody.html">
     <img alt="Three body problem" src="./images/three_body.png" title="Click to animate"/>
   </a>
-  <figcaption>The well-known <a href="https://en.wikipedia.org/wiki/Three-body_problem">three-body problem</a>.</figcaption>
+  <figcaption>The well-known <a href="https://en.wikipedia.org/wiki/Three-body_problem">three-body problem</a>,
+  for which there exists no analytical solution, hence numerical methods to the rescue!</figcaption>
 </figure>
 </div>
 <p style="clear: both;"></p>
@@ -170,8 +171,8 @@ $$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\
 
 Polar coordinates not only enable us to much more easily solve spherically symmetric problems in 
 both physics and mathematics, they also provide us a way to parameterize complex geometrical shapes, such
-as the [Möbius strip](https://en.wikipedia.org/wiki/M%C3%B6bius_strip) and 
-[Klein&apos;s bottle](https://en.wikipedia.org/wiki/Klein_bottle). 
+as the [Möbius strip](geomettry#non_orientables) and 
+[Klein&apos;s bottle](geometry#non_orientables). 
 Get further enchanted in my [Math Art Gallery](geometry.html)! 
 
 
