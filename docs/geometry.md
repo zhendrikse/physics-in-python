@@ -11,6 +11,9 @@ in a dark labyrinth. &mdash;
 
 # Welcome to my math art gallery 
 
+All geometric shapes below were created with basically the same plotting software 
+that I have written in VPython.
+
 ## Toroids
 
 <div style="display: flex; align-items: flex-end;">
@@ -52,13 +55,13 @@ in a dark labyrinth. &mdash;
   <a href="glowscript/GeometricShapes.html">
     <img alt="Möbius strip" src="./images/geometry/mobius_strip.png" title="Click to animate"/>
   </a>
-  <figcaption>The well-known Möbius strip.</figcaption>
+  <figcaption>The well-known <a href="https://en.wikipedia.org/wiki/M%C3%B6bius_strip">Möbius strip.</a></figcaption>
 </figure>
 <figure style="float: right; width: 50%; text-align: center">
   <a href="glowscript/GeometricShapes.html">
     <img alt="Klein&aps;s bottle" src="./images/geometry/klein_bottle.png" title="Click to animate"/>
   </a>
-  <figcaption>A twisted torus.</figcaption>
+  <figcaption><a href="https://en.wikipedia.org/wiki/Klein_bottle">Klein&aps;s bottle</a>.</figcaption>
 </figure>
 </div>
 <p style="clear: both;"></p>
