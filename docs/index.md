@@ -27,7 +27,8 @@ The code pertaining to the demos in this section is also available under the
 on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 
 ### Daylight variations &mdash; sun-earth-moon model
-<hr/>
+<div style="border-top: 1px solid #999999"><br/></div>
+
 
 <figure style="float: center; text-align: center;">
   <a href="glowscript/DaylightVariations.html">
@@ -40,7 +41,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 <p style="clear: both;"></p>
 
 ###  Kepler's law &amp; the three-body problem
-<hr/>
+<div style="border-top: 1px solid #999999"><br/></div>
 
 <div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
@@ -78,7 +79,7 @@ The code pertaining to the demos in this section is available under the
 on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 
 ### Dynamic 3D-plots of multivariate and complex functions
-<hr/>
+<div style="border-top: 1px solid #999999"><br/></div>
 
 <div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
@@ -167,7 +168,7 @@ $$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\
 <p></p>
 
 ### Polar coordinates &amp; [geometrical shapes](geometry.html)
-<hr/>
+<div style="border-top: 1px solid #999999"><br/></div>
 
 Polar coordinates not only enable us to much more easily solve spherically symmetric problems in 
 both physics and mathematics, they also provide us a way to parameterize complex geometrical shapes, such
@@ -203,7 +204,7 @@ The code pertaining to the demos in this section is available under the
 on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 
 ### Flocking birds &amp; falling raindrops
-<hr/>
+<div style="border-top: 1px solid #999999"><br/></div>
 
 <div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
