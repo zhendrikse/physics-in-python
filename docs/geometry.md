@@ -11,6 +11,60 @@ in a dark labyrinth. &mdash;
 
 # Welcome to my math art gallery 
 
+## Toroids
+
+<div style="display: flex; align-items: flex-end;">
+<figure style="float: left; width: 50%; text-align: center">
+  <a href="glowscript/GeometricShapes.html">
+    <img alt="Torus" src="./images/geometry/torus.png" title="Click to animate"/>
+  </a>
+  <figcaption>A torus.</figcaption>
+</figure>
+<figure style="float: right; width: 50%; text-align: center">
+  <a href="glowscript/GeometricShapes.html">
+    <img alt="Twisted torus" src="./images/geometry/twisted_torus.png" title="Click to animate"/>
+  </a>
+  <figcaption>A twisted torus.</figcaption>
+</figure>
+</div>
+<p style="clear: both;"></p>
+
+<div style="display: flex; align-items: flex-end;">
+<figure style="float: left; width: 50%; text-align: center">
+  <a href="glowscript/GeometricShapes.html">
+    <img alt="Double torus" src="./images/geometry/double_torus.png" title="Click to animate"/>
+  </a>
+  <figcaption>A torus.</figcaption>
+</figure>
+<figure style="float: right; width: 50%; text-align: center">
+  <a href="glowscript/GeometricShapes.html">
+    <img alt="Twisted torus" src="./images/geometry/twisted_torus.png" title="Click to animate"/>
+  </a>
+  <figcaption>A twisted torus.</figcaption>
+</figure>
+</div>
+<p style="clear: both;"></p>
+
+## Non-orientable surfaces
+
+<div style="display: flex; align-items: flex-end;">
+<figure style="float: right; width: 50%; text-align: center">
+  <a href="glowscript/GeometricShapes.html">
+    <img alt="Möbius strip" src="./images/geometry/mobius_strip.png" title="Click to animate"/>
+  </a>
+  <figcaption>The well-known Möbius strip.</figcaption>
+</figure>
+<figure style="float: right; width: 50%; text-align: center">
+  <a href="glowscript/GeometricShapes.html">
+    <img alt="Klein&aps;s bottle" src="./images/geometry/klein_bottle.png" title="Click to animate"/>
+  </a>
+  <figcaption>A twisted torus.</figcaption>
+</figure>
+</div>
+<p style="clear: both;"></p>
+
+## Spirals
+
 <div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
   <a href="glowscript/GeometricShapes.html">
@@ -33,22 +87,7 @@ in a dark labyrinth. &mdash;
   and is named after Ulisse Dini.
 </details>
 
-
-<div style="display: flex; align-items: flex-end;">
-<figure style="float: left; width: 50%; text-align: center">
-  <a href="glowscript/GeometricShapes.html">
-    <img alt="Torus" src="./images/geometry/torus.png" title="Click to animate"/>
-  </a>
-  <figcaption>A torus.</figcaption>
-</figure>
-<figure style="float: right; width: 50%; text-align: center">
-  <a href="glowscript/GeometricShapes.html">
-    <img alt="Twisted torus" src="./images/geometry/twisted_torus.png" title="Click to animate"/>
-  </a>
-  <figcaption>A twisted torus.</figcaption>
-</figure>
-</div>
-<p style="clear: both;"></p>
+## Miscellaneous
 
 <div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
@@ -59,9 +98,9 @@ in a dark labyrinth. &mdash;
 </figure>
 <figure style="float: right; width: 50%; text-align: center">
   <a href="glowscript/GeometricShapes.html">
-    <img alt="Möbius strip" src="./images/geometry/mobius_strip.png" title="Click to animate"/>
+    <img alt="Arc shape" src="./images/geometry/arc.png" title="Click to animate"/>
   </a>
-  <figcaption>The well-known Möbius strip.</figcaption>
+  <figcaption>Arc.</figcaption>
 </figure>
 </div>
 <p style="clear: both;"></p>
