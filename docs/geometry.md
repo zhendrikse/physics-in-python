@@ -61,7 +61,7 @@ that I have written in VPython.
   <a href="glowscript/GeometricShapes.html">
     <img alt="Klein&aps;s bottle" src="./images/geometry/klein_bottle.png" title="Click to animate"/>
   </a>
-  <figcaption><a href="https://en.wikipedia.org/wiki/Klein_bottle">Klein&aps;s bottle</a>.</figcaption>
+  <figcaption><a href="https://en.wikipedia.org/wiki/Klein_bottle">Klein&apos;s bottle</a>.</figcaption>
 </figure>
 </div>
 <p style="clear: both;"></p>
