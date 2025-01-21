@@ -20,6 +20,7 @@ finest that music and poetry can deliver. &mdash;
 
 <a name="astrophysics"></a>
 # Astrophysics
+<div style="border-top: 2px solid white"></div>
 
 The code pertaining to the demos in this section is also available under the 
 [astrophysics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/)
@@ -63,6 +64,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 
 <a name="mathematics"></a>
 # Mathematics
+<div style="border-top: 2px solid white"></div>
 
 <p></p>
 <blockquote>

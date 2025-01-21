@@ -15,6 +15,7 @@ All geometric shapes below were created with basically the same plotting softwar
 that I have written in VPython.
 
 ## Toroids
+<div style="border-top: 2px solid white"></div>
 
 <div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
@@ -50,6 +51,7 @@ that I have written in VPython.
 
 <a name="non_orientables"></a>
 ## Non-orientable surfaces
+<div style="border-top: 2px solid white"></div>
 
 <div style="display: flex; align-items: flex-end;">
 <figure style="float: right; width: 50%; text-align: center">
@@ -68,6 +70,7 @@ that I have written in VPython.
 <p style="clear: both;"></p>
 
 ## Spirals
+<div style="border-top: 2px solid white"></div>
 
 <div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
@@ -92,6 +95,7 @@ that I have written in VPython.
 </details>
 
 ## Miscellaneous
+<div style="border-top: 2px solid white"></div>
 
 <div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
