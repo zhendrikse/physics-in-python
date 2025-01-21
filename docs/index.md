@@ -168,10 +168,11 @@ $$\begin{pmatrix} x \\ y \\ z\end{pmatrix}=\begin{pmatrix} (c + a \cos(v))\cdot\
 ### Polar coordinates &amp; [geometrical shapes](geometry.html)
 <hr/>
 
-The use of polar coordinates not only enables us to much more easily solve spherically symmetric problems in 
-both physics and mathematics, it also provides us a way to parameterize complex geometrical shapes, such
-as [Klein&apos;s bottle](https://en.wikipedia.org/wiki/Klein_bottle). 
-Get enchanted by visiting the [Math Art Gallery](geometry.html)! 
+Polar coordinates not only enable us to much more easily solve spherically symmetric problems in 
+both physics and mathematics, they also provide us a way to parameterize complex geometrical shapes, such
+as the [Möbius strip](https://en.wikipedia.org/wiki/M%C3%B6bius_strip) and 
+[Klein&apos;s bottle](https://en.wikipedia.org/wiki/Klein_bottle). 
+Get further enchanted in my [Math Art Gallery](geometry.html)! 
 
 
 <div style="display: flex; align-items: flex-end;">
@@ -183,9 +184,9 @@ Get enchanted by visiting the [Math Art Gallery](geometry.html)!
 </figure>
 <figure style="float: right; width: 50%; text-align: center">
   <a href="glowscript/GeometricShapes.html">
-    <img alt="Klein&aps;s bottle" src="./images/geometry/klein_bottle.png" title="Click to animate"/>
+    <img alt="Möbius strip" src="./images/geometry/mobius_strip.png" title="Click to animate"/>
   </a>
-  <figcaption><a href="https://en.wikipedia.org/wiki/Klein_bottle">Klein&apos;s bottle</a>.
+  <figcaption>The well-known <a href="https://en.wikipedia.org/wiki/M%C3%B6bius_strip">Möbius strip</a>.
   For more geometrical shapes like this, visit my <a href="geometry.html">Math Art gallery</a>.</figcaption>
 </figure>
 </div>
