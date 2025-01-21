@@ -417,6 +417,7 @@ The quantum harmonic oscillator is visualized in a semi-classical way below.
 
 <a name="electromagnetism"></a>
 # Electromagnetism
+<div style="border-top: 2px solid #999999"><br/></div>
 
 The code pertaining to the demos in this section is available under the 
 [electromagnetism tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/)

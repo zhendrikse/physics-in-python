@@ -114,6 +114,7 @@ that I have written in VPython.
 <p style="clear: both;"></p>
 
 # References
+<div style="border-top: 2px solid #999999"><br/></div>
 
 - [Geometry, Surfaces, Curves, Polyhedra](https://paulbourke.net/geometry/) on 
   [Paul Bourke](https://paulbourke.net/geometry/)&apos; web site
