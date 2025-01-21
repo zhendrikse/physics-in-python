@@ -20,7 +20,7 @@ finest that music and poetry can deliver. &mdash;
 
 <a name="astrophysics"></a>
 # Astrophysics
-<div style="border-top: 2px solid #999999"><br/></div>
+<div style="border-top: 2px solid #cccccc"><br/></div>
 
 The code pertaining to the demos in this section is also available under the 
 [astrophysics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Astrophysics/)
@@ -65,7 +65,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 
 <a name="mathematics"></a>
 # Mathematics
-<div style="border-top: 2px solid #999999"><br/></div>
+<div style="border-top: 2px solid #cccccc"><br/></div>
 
 <blockquote>
 Mathematics directs the flow of the universe, lurks behind its shapes and curves, 
@@ -197,7 +197,7 @@ Get further enchanted in my [Math Art Gallery](geometry.html)!
 
 <a name="nature"></a>
 # Nature models
-<div style="border-top: 2px solid #999999"><br/></div>
+<div style="border-top: 2px solid #cccccc"><br/></div>
 
 The code pertaining to the demos in this section is available under the 
 [miscellaneous tab](https://www.glowscript.org/#/user/zeger.hendrikse/folder/MyPrograms/)
@@ -227,7 +227,7 @@ on [glowscript.org](https://glowscript.org/#/user/zeger.hendrikse/).
 
 <a name="quantum"></a>
 # Particle and quantum physics
-<div style="border-top: 2px solid #999999"><br/></div>
+<div style="border-top: 2px solid #cccccc"><br/></div>
 
 <blockquote>
 If you think you understand quantum mechanics, you don't understand quantum mechanics.
@@ -240,7 +240,7 @@ The code pertaining to the demos in this section is available under the
 on [glowscript.org](https://glowscript.org).
 
 ### Visualizing plane waves $\psi(x, t) = A \cdot e^{i(k x - \omega t)}$ &amp; spherical harmonics
-<hr/>
+<div style="border-top: 1px solid #999999"><br/></div>
 
 <div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
@@ -319,7 +319,8 @@ seen in the mathematics section on this page:
 <p><br clear="all"/></p>
 
 ### One-dimensional quantum particle bound by an infinite square well
-<hr/>
+<div style="border-top: 1px solid #999999"><br/></div>
+
 <figure>
   <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Infinitesquarewell">
     <img alt="Complex wave" width="50%" height="50%" src="./images/infinite_square_well.png" title="Click to animate"/>
@@ -366,7 +367,7 @@ These energy eigenstates (and superpositions thereof) are used in the visualizat
 <p></p>
 
 ### The quantum harmonic oscillator
-<hr/>
+<div style="border-top: 1px solid #999999"><br/></div>
 
 The quantum harmonic oscillator is visualized in a semi-classical way below.
 
@@ -377,7 +378,7 @@ The quantum harmonic oscillator is visualized in a semi-classical way below.
 </figure>
 
 ### Charged particle moving in two electric fields
-<hr />
+<div style="border-top: 1px solid #999999"><br/></div>
 
 <div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
@@ -396,7 +397,7 @@ The quantum harmonic oscillator is visualized in a semi-classical way below.
 <p style="clear: both;"></p>
 
 ### Rutherford scattering & charged particle in magnetic field
-<hr/>
+<div style="border-top: 1px solid #999999"><br/></div>
 
 <div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
@@ -418,14 +419,14 @@ The quantum harmonic oscillator is visualized in a semi-classical way below.
 
 <a name="electromagnetism"></a>
 # Electromagnetism
-<div style="border-top: 2px solid #999999"><br/></div>
+<div style="border-top: 2px solid #cccccc"><br/></div>
 
 The code pertaining to the demos in this section is available under the 
 [electromagnetism tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Electromagnetism/)
 on [glowscript.org](https://glowscript.org).
 
 ### Electric fields of dipoles and point charges
-<hr/>
+<div style="border-top: 1px solid #999999"><br/></div>
 
 <div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
@@ -458,7 +459,7 @@ $$\vec{E} ( \vec{r} ) = -\dfrac {1} {4\pi\epsilon_0} \nabla \bigg( \dfrac{\vec{r
 <p></p>
 
 ### Electric and magnetic fields
-<hr/>
+<div style="border-top: 1px solid #999999"><br/></div>
 
 <div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
@@ -477,7 +478,7 @@ $$\vec{E} ( \vec{r} ) = -\dfrac {1} {4\pi\epsilon_0} \nabla \bigg( \dfrac{\vec{r
 <p style="clear: both;"></p>
 
 ### Charged disk and accompanying builder
-<hr/>
+<div style="border-top: 1px solid #999999"><br/></div>
 
 <div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
@@ -496,7 +497,7 @@ $$\vec{E} ( \vec{r} ) = -\dfrac {1} {4\pi\epsilon_0} \nabla \bigg( \dfrac{\vec{r
 <p style="clear: both;"></p>
 
 ## Electromagnetic waves
-<hr/>
+<div style="border-top: 1px solid #999999"><br/></div>
 
 <div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
@@ -516,14 +517,14 @@ $$\vec{E} ( \vec{r} ) = -\dfrac {1} {4\pi\epsilon_0} \nabla \bigg( \dfrac{\vec{r
 
 <a name="thermodynamics"></a>
 # Thermodynamics
-<div style="border-top: 2px solid #999999"><br/></div>
+<div style="border-top: 2px solid #cccccc"><br/></div>
 
 The code pertaining to the demos in this section is available under the 
 [thermodynamics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/)
 on [glowscript.org](https://glowscript.org).
 
 ### Boltzmann gas &amp; cubic symmetry planes
-<hr/>
+<div style="border-top: 1px solid #999999"><br/></div>
 
 <figure>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Thermodynamics/program/Hardspheregas">
@@ -535,7 +536,7 @@ on [glowscript.org](https://glowscript.org).
 </figure>
 
 ### Two-dimensional Ising spin model
-<hr/>
+<div style="border-top: 1px solid #999999"><br/></div>
 
 This demo models the magnetization at various temperatures using a two-dimensional Ising spin lattice.
 
@@ -548,10 +549,10 @@ This demo models the magnetization at various temperatures using a two-dimension
 
 <a name="waves"></a>
 # Waves
-<div style="border-top: 2px solid #999999"><br/></div>
+<div style="border-top: 2px solid #cccccc"><br/></div>
 
 ### Doppler effect
-<hr/>
+<div style="border-top: 1px solid #999999"><br/></div>
 
 <a href="https://www.glowscript.org/#/user/zeger.hendrikse/folder/Quantum/program/Dopplereffect">
   <img alt="Doppler effect" width="50%" height="50%" src="./images/doppler_effect.png" title="Click to animate"/>
@@ -559,7 +560,7 @@ This demo models the magnetization at various temperatures using a two-dimension
 
 <a name="relativity"></a>
 # Special relativity
-<div style="border-top: 2px solid #999999"><br/></div>
+<div style="border-top: 2px solid #cccccc"><br/></div>
 
 <blockquote>
 We should make things as simple as possible, but not simpler. &mdash; Albert Einstein
@@ -570,7 +571,7 @@ The code pertaining to the demos in this section is available under the
 on [glowscript.org](https://glowscript.org).
 
 ### Lightcone animation and electric field of a fast moving proton
-<hr/>
+<div style="border-top: 1px solid #999999"><br/></div>
 
 <div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
@@ -591,7 +592,7 @@ on [glowscript.org](https://glowscript.org).
 
 
 ### Galilean transformation of relative motions in Euclidean plane
-<hr/>
+<div style="border-top: 1px solid #999999"><br/></div>
 
 Before diving into (special) relativity, let's first get acquainted with 
 the so-called Galilean transformation.
@@ -602,14 +603,14 @@ the so-called Galilean transformation.
 
 <a name="kinematics"></a>
 # Kinematics
-<div style="border-top: 2px solid #999999"><br/></div>
+<div style="border-top: 2px solid #cccccc"><br/></div>
 
 The code pertaining to the demos in this section is available under the 
 [kinematics tab](https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/)
 on [glowscript.org](https://glowscript.org).
 
 ### Fun with springs
-<hr/>
+<div style="border-top: 1px solid #999999"><br/></div>
 
 The applications of a simple harmonic oscillator are almost endless. 
 You may be surprised though to find out what happens when you drop such a simple harmonic oscillator!! 
@@ -631,7 +632,7 @@ You may be surprised though to find out what happens when you drop such a simple
 
 
 ### The $N$-body coupled oscillator with adjustable $N$
-<hr/>
+<div style="border-top: 1px solid #999999"><br/></div>
 
 <figure style="float: center; text-align: center;">
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/N-bodycoupledoscillator">
@@ -644,7 +645,7 @@ You may be surprised though to find out what happens when you drop such a simple
 
 
 ### Newton&apos;s pendulum and cannonball
-<hr/>
+<div style="border-top: 1px solid #999999"><br/></div>
 
 <div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 50%; text-align: center">
@@ -663,7 +664,7 @@ You may be surprised though to find out what happens when you drop such a simple
 <p style="clear: both;"></p>
 
 ### Model of chain drop from table
-<hr/>
+<div style="border-top: 1px solid #999999"><br/></div>
 
 <figure>
   <a href="https://glowscript.org/#/user/zeger.hendrikse/folder/Kinematics/program/Chainfromtable">
@@ -673,7 +674,7 @@ You may be surprised though to find out what happens when you drop such a simple
 
 
 ### Ball on sliding ramp &amp; ball hitting block
-<hr/>
+<div style="border-top: 1px solid #999999"><br/></div>
 
 <div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 60%; text-align: center">
@@ -693,7 +694,7 @@ You may be surprised though to find out what happens when you drop such a simple
 
 
 ### Water sprinkler and floating block
-<hr/>
+<div style="border-top: 1px solid #999999"><br/></div>
 
 <div style="display: flex; align-items: flex-end;">
 <figure style="float: left; width: 60%; text-align: center">
@@ -713,7 +714,7 @@ You may be surprised though to find out what happens when you drop such a simple
 
 <a name="references"></a>
 # Acknowledgements
-<div style="border-top: 2px solid #999999"><br/></div>
+<div style="border-top: 2px solid #cccccc"><br/></div>
 
 - [Ruth Chabay and Bruce Sherwood](https://www.aapt.org/aboutaapt/Chabay_Sherwood_2014-Halliday-Resnick-Award.cfm)
 - [Rhett Allain](https://en.wikipedia.org/wiki/Rhett_Allain)
@@ -721,7 +722,7 @@ You may be surprised though to find out what happens when you drop such a simple
 - [Steve Spicklemire](https://github.com/sspickle)
 
 # References
-<div style="border-top: 2px solid #999999"><br/></div>
+<div style="border-top: 2px solid #cccccc"><br/></div>
 
 - Check this out &rarr; [QMsolve: A module for solving and visualizing the Schrödinger equation](https://github.com/quantum-visualizations/qmsolve)
 - [MyScript](https://webdemo.myscript.com/): enter text, equations, or diagrams by hand, and effortlessly convert 
