@@ -1,9 +1,0 @@
-markdown: kramdown
-
-remote_theme: pages-themes/midnight@v0.2.0
-title: Visualizing physics and mathematics
-description: A site dedicated to the beauty of physics and mathematics
-show_downloads: false
-
-plugins:
-- jekyll-remote-theme # add this line to the plugins list if you already have one
