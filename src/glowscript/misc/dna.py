@@ -1,11 +1,11 @@
-# Web VPython 3.2
+#Web VPython 3.2
 
 from vpython import canvas, vector, color, cos, sin, cylinder, sphere, pi, rate, slider
 
 title_text ="""Simulation of a DNA molecule
 
 &#x2022; <a href="https://trinket.io/glowscript/7ba54885924b">Original idea and code</a> by Francisco Adeil Gomes Araujo
-&#x2022; Refactored by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a> 
+&#x2022; Refactored by <a href="https://github.com/zhendrikse/">Zeger Hendrikse</a> to <a href="https://github.com/zhendrikse/physics-in-python/blob/main/src/glowscript/misc/dna.py">dna.py</a> 
 
 """
 
