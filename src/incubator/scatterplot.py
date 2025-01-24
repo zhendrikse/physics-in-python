@@ -1,15 +1,14 @@
 from vpython import *
-import numpy
-
-SIZE = 10
+import numpy as np
 
 #
 # https://www.researchgate.net/publication/253329352_Python_Data_Plotting_and_Visualisation_Extravaganza
 #
-class PointCloud(object):
-    def __init__(self):
+class PointCloud:
+    def __init__(self, x_coords, y_coords, z_coords):
         self.iterator = None
-        self.balls = numpy.zeros([SIZE] * 3, dtype=object)
+        SIZE = len(x_coords)
+        self.balls = np.zeros([SIZE] * 3, dtype=object)
 
         for x in range(SIZE):
             for y in range(SIZE):
@@ -18,13 +17,13 @@ class PointCloud(object):
                     new_sphere = sphere(pos=coords, radius=0.25, color=coords / (SIZE - 1))
                     self.balls[x, y, z] = new_sphere
 
-    def update_balls(self):
-        for x in range(SIZE):
-            for y in range(SIZE):
-                for z in range(SIZE):
-                    offset = numpy.random.normal(loc=0.0, scale=0.01, size=3) * 5
-                    pos = self.balls[x, y, z].pos
-                    self.balls[x, y, z].pos = pos + vec(offset[0], offset[1], offset[2])
+    # def update_balls(self):
+    #     for x in range(SIZE):
+    #         for y in range(SIZE):
+    #             for z in range(SIZE):
+    #                 offset = np.random.normal(loc=0.0, scale=0.01, size=3) * 5
+    #                 pos = self.balls[x, y, z].pos
+    #                 self.balls[x, y, z].pos = pos + vec(offset[0], offset[1], offset[2])
 
 
     def run(self):
@@ -33,7 +32,7 @@ class PointCloud(object):
 
 
 #import matplotlib.pyplot as plt
-import numpy as np  # Probability of 1s
+#import numpy as np  # Probability of 1s
 
 
 def prob_1s(x, y, z):
@@ -42,9 +41,9 @@ def prob_1s(x, y, z):
     return np.square(np.exp(-r) / np.sqrt(np.pi))  # Random coordinates
 
 
-x = np.linspace(0, 1, 30)
-y = np.linspace(0, 1, 30)
-z = np.linspace(0, 1, 30)
+x = np.linspace(0, 1, 10)
+y = np.linspace(0, 1, 10)
+z = np.linspace(0, 1, 10)
 elements = []
 probability = []
 for ix in x:
@@ -56,12 +55,15 @@ for ix in x:
 
 # Ensure sum of probability is 1
 probability = probability / sum(probability)  # Getting electron coordinates based on probabiliy
-coord = np.random.choice(elements, size=100000, replace=True, p=probability)
+coord = np.random.choice(elements, size=10*10*10, replace=True, p=probability)
 elem_mat = [i.split(',') for i in coord]
 elem_mat = np.matrix(elem_mat)
-x_coords = [float(i.item()[1:]) for i in elem_mat[:, 0]]
-y_coords = [float(i.item()) for i in elem_mat[:, 1]]
-z_coords = [float(i.item()[0:-1]) for i in elem_mat[:, 2]]  # Plotting
+#x_coords = [float(i.item()[1:]) for i in elem_mat[:, 0]]
+#y_coords = [float(i.item()) for i in elem_mat[:, 1]]
+#z_coords = [float(i.item()[0:-1]) for i in elem_mat[:, 2]]  # Plotting
+x_coords = [i.item()[1:] for i in elem_mat[:, 0]]
+y_coords = [i.item() for i in elem_mat[:, 1]]
+z_coords = [i.item()[0:-1] for i in elem_mat[:, 2]]  # Plotting
 
 
 # fig = plt.figure(figsize=(10, 10))
@@ -71,9 +73,7 @@ z_coords = [float(i.item()[0:-1]) for i in elem_mat[:, 2]]  # Plotting
 # plt.show()
 
 
-
-
-point_cloud = PointCloud()
+point_cloud = PointCloud(x_coords, y_coords, z_coords)
 point_cloud.run()
 
 while True:

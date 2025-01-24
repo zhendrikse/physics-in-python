@@ -10,7 +10,7 @@ mu = G * 1.989e30
 dt = 10000
 
 #w = window(width=1000, height=800, menus=False)
-disp = canvas(x=5, y=5, width=600, height=750, forward=vector(0, 3, 1), range=1.5 * UA, title='Celestial Mechanics Simulator')
+disp = canvas(x=5, y=5, width=800, height=600, forward=vector(0, 3, 1), range=1.5 * UA, title='Celestial Mechanics Simulator')
 
 
 class Planet(sphere):
@@ -44,55 +44,50 @@ class Planet(sphere):
         self.p = vector(0, 0, 0)
         Planet.List.append(self)
 
-    def SetPlanet(self, mass, excentricity, major_semiaxis):
+    def set_planet(self, mass, eccentricity, major_semiaxis):
         self.mass = mass
-        self.excentricity = excentricity
+        self.eccentricity = eccentricity
         self.major_semiaxis = major_semiaxis
-        self.aphelion = (1 + self.excentricity) * self.major_semiaxis
+        self.aphelion = (1 + self.eccentricity) * self.major_semiaxis
         self.pos = rotate(vector(self.aphelion, 0, 0), angle=2 * pi * random(), axis=vector(0, 0, 1))
         speed = sqrt(2 * mu * (1 / self.aphelion - 1 / (2 * self.major_semiaxis)))
         v = speed * cross(self.pos, vector(0, 0, 1)) / self.aphelion
         self.p = v * self.mass
 
 
-def ShowSolarSystem(event):
+def show_solar_system(event):
     global SolarSystemObjects, CurrentPlanets, Asteroid_Belt, SSOCheckBoxes
     if event.checked:
-        for planet in SolarSystemObjects:
-            planet.visible = True
-            if planet.name != "Asteroid belt":
-                if TrailsCheckBox.GetValue():
-                    planet.make_trail = True
-                if planet not in CurrentPlanets:
-                    CurrentPlanets.append(planet)
-            checkbox = SSOCheckBoxes[planet.name]
-            checkbox.SetValue(True)
-            checkbox.Enable(False)
+        for planet_ in SolarSystemObjects:
+            planet_.visible = True
+            if planet_.name != "Asteroid belt":
+                if TrailsCheckBox.checked:
+                    planet_.make_trail = True
+                if planet_ not in CurrentPlanets:
+                    CurrentPlanets.append(planet_)
+            checkbox = SSOCheckBoxes[planet_.name]
+            checkbox.checked = True
+            checkbox.disabled = True
     else:
-        newplanetlist = []
-        for planet in SolarSystemObjects:
-            if planet in CurrentPlanets:
-                planet.make_trail = False
-                planet.visible = False
-                CurrentPlanets.pop(CurrentPlanets.index(planet))
+        for planet_ in SolarSystemObjects:
+            if planet_ in CurrentPlanets:
+                planet_.make_trail = False
+                planet_.visible = False
+                CurrentPlanets.pop(CurrentPlanets.index(planet_))
             else:
-                planet.visible = False
-            checkbox = SSOCheckBoxes[planet.name]
-            checkbox.SetValue(False)
-            checkbox.Enable(True)
+                planet_.visible = False
+            checkbox = SSOCheckBoxes[planet_.name]
+            checkbox.checked = False
+            checkbox.disabled = False
 
 
-def ChangeRadius(evt):
-    if RadiusCheckBox.GetValue():
-        for planet in Planet.List:
-            planet.radius = planet.real_radius
-    else:
-        for planet in Planet.List:
-            planet.radius = planet.virtual_radius
+def change_radius(evt):
+    for planet_ in Planet.List:
+        planet_.radius = planet_.real_radius if RadiusCheckBox.checked else planet_.virtual_radius
 
 
 show_planet_trails = True
-def ChangeTrails(event):
+def change_trails(event):
     global show_planet_trails
     if event.checked:
         for a_planet in CurrentPlanets:
@@ -100,6 +95,7 @@ def ChangeTrails(event):
     else:
         for a_planet in CurrentPlanets:
             a_planet.make_trail = False
+            a_planet.clear_trail()
 
 
 def set_simulation_speed(evt):
@@ -110,8 +106,8 @@ def set_simulation_speed(evt):
 ## Creating Planets #############################
 def CreatePlanet(evt):
     global CreateButton
-    CreateButton.Enable(False)
-    CreateButton.Unbind(wx.EVT_BUTTON)
+    CreateButton.disabled = True
+    #CreateButton.Unbind(wx.EVT_BUTTON)
     disp.bind('mousedown', Preparados)
 
 
@@ -206,22 +202,22 @@ def StopShip(evt):
 drag_pos = None  # no object picked yet
 
 
-def MovePlanet(evt):
+def move_planet(evt):
     global MoveButton
-    MoveButton.SetLabel("Stop")
-    MoveButton.Bind(wx.EVT_BUTTON, StopMoving)
-    disp.bind('mousedown', PickPlanet)
+    MoveButton.text="Stop"
+    MoveButton.bind=stop_moving
+    disp.bind('mousedown', pick_planet)
 
 
-def PickPlanet(evt):
+def pick_planet(evt):
     global drag_pos
     planet = evt.pick
     drag_pos = planet.pos
-    disp.bind('mousemove', MovingPlanet, planet)
-    disp.bind('mouseup', DropPlanet)
+    disp.bind('mousemove', moving_planet, planet)
+    disp.bind('mouseup', drop_planet)
 
 
-def MovingPlanet(evt, obj):
+def moving_planet(evt, obj):
     global drag_pos
     new_pos = disp.mouse.project(normal=(0, 0, 1))
     if new_pos != drag_pos:
@@ -229,30 +225,37 @@ def MovingPlanet(evt, obj):
         drag_pos = new_pos
 
 
-def DropPlanet(evt):
-    disp.unbind('mousemove', MovingPlanet)
-    disp.unbind('mouseup', DropPlanet)
+def drop_planet(evt):
+    disp.unbind('mousemove', moving_planet)
+    disp.unbind('mouseup', drop_planet)
 
 
-def StopMoving(evt):
-    MoveButton.SetLabel("Move planets")
-    MoveButton.Bind(wx.EVT_BUTTON, MovePlanet)
-    disp.unbind('mousedown', PickPlanet)
+def stop_moving(evt):
+    MoveButton.text="Move planets"
+    MoveButton.bind=move_planet
+    disp.unbind('mousedown', pick_planet)
 
 
 #################################################
 
 def ShowPlanet(event):
     planet_name = event.text
+    #print(event.text)
+    #print(event.checked)
+    planet = Earth
+    for planet_ in Planet.List:
+        if planet_.name == planet_name:
+            planet = planet_
     global SolarSystemObjects, SSOCheckBoxes
     if event.checked:
         planet.visible = True
         if planet_name != 'Asteroid belt':
             CurrentPlanets.append(planet)
-            if show_planet_trails:
+            if TrailsCheckBox.checked:
                 planet.make_trail = True
     else:
         planet.visible = False
+        planet.make_trail = False
         if planet_name != 'Asteroid belt':
             CurrentPlanets.pop(CurrentPlanets.index(planet))
             planet.make_trail = False
@@ -260,24 +263,24 @@ def ShowPlanet(event):
 
 ## Default Objects (Solar System) ###############
 # Sun
-Sun = Planet(name="Sun", real_radius=6.96e8, virtual_radius=10e9, mass=1.989e30, color=vec(1, 1, 0))
+Sun = Planet(name="Sun", real_radius=6.96e8, virtual_radius=10e9, mass=1.989e30, color=vec(1, 1, 0), texture="https://i.imgur.com/yoEzbtg.jpg")
 # Planets
-Mercury = Planet(name="Mercury", real_radius=2.4397e6, virtual_radius=2e9, color=vec(0.7, 0.7, 0.7))
-Mercury.SetPlanet(mass=3.302e23, major_semiaxis=0.387098 * UA, excentricity=0.20563069)
-Venus = Planet(name="Venus", real_radius=6.0518e6, virtual_radius=5e9, color=vec(1, 0.8, 0))
-Venus.SetPlanet(mass=4.869e24, major_semiaxis=0.723327 * UA, excentricity=0.00677323)
-Earth = Planet(name="Earth", real_radius=6.3710e6, virtual_radius=6e9, material=textures.earth)
-Earth.SetPlanet(mass=5.98e24, major_semiaxis=149598261e3, excentricity=0.01671123)
-Mars = Planet(name="Mars", real_radius=3.3895e6, virtual_radius=4e9, color=vec(0.8, 0, 0))
-Mars.SetPlanet(mass=6.4185e23, major_semiaxis=1.523679 * UA, excentricity=0.093315)
-Jupiter = Planet(name="Jupiter", real_radius=69.911e6, virtual_radius=15e10, color=vec(0.8, 0.6, 0))
-Jupiter.SetPlanet(mass=1.899e27, major_semiaxis=5.204267 * UA, excentricity=0.04839266)
-Saturn = Planet(name="Saturn", real_radius=58.232e6, virtual_radius=12e10, color=vec(0.6, 0.5, 0))
-Saturn.SetPlanet(mass=5.688e26, major_semiaxis=9.5820172 * UA, excentricity=0.05415060)
-Uranus = Planet(name="Uranus", real_radius=25.362e6, virtual_radius=10e10, color=vec(0.6, 0.6, 1))
-Uranus.SetPlanet(mass=8.686e25, major_semiaxis=19.22941195 * UA, excentricity=0.044405586)
-Neptune = Planet(name="Neptune", real_radius=24.622e6, virtual_radius=10e10, color=vec(0, 0, 0.8))
-Neptune.SetPlanet(mass=1.024e26, major_semiaxis=30.10366151 * UA, excentricity=0.00858587)
+Mercury = Planet(name="Mercury", real_radius=2.4397e6, virtual_radius=2e9, color=vec(0.7, 0.7, 0.7), texture="https://i.imgur.com/SLgVbwD.jpeg")
+Mercury.set_planet(mass=3.302e23, major_semiaxis=0.387098 * UA, eccentricity=0.20563069)
+Venus = Planet(name="Venus", real_radius=6.0518e6, virtual_radius=5e9, color=vec(1, 0.8, 0), texture="https://i.imgur.com/YuK3CzJ.jpeg")
+Venus.set_planet(mass=4.869e24, major_semiaxis=0.723327 * UA, eccentricity=0.00677323)
+Earth = Planet(name="Earth", real_radius=6.3710e6, virtual_radius=6e9, texture=textures.earth)
+Earth.set_planet(mass=5.98e24, major_semiaxis=149598261e3, eccentricity=0.01671123)
+Mars = Planet(name="Mars", real_radius=3.3895e6, virtual_radius=4e9, color=vec(0.8, 0, 0), texture="https://i.imgur.com/Mwsa16j.jpeg")
+Mars.set_planet(mass=6.4185e23, major_semiaxis=1.523679 * UA, eccentricity=0.093315)
+Jupiter = Planet(name="Jupiter", real_radius=69.911e6, virtual_radius=15e10, color=vec(0.8, 0.6, 0), texture="https://i.imgur.com/KbVscNb.jpeg")
+Jupiter.set_planet(mass=1.899e27, major_semiaxis=5.204267 * UA, eccentricity=0.04839266)
+Saturn = Planet(name="Saturn", real_radius=58.232e6, virtual_radius=12e10, color=vec(0.6, 0.5, 0), texture="https://i.imgur.com/r9h0U9E.jpeg")
+Saturn.set_planet(mass=5.688e26, major_semiaxis=9.5820172 * UA, eccentricity=0.05415060)
+Uranus = Planet(name="Uranus", real_radius=25.362e6, virtual_radius=10e10, color=vec(0.6, 0.6, 1), texture="https://i.imgur.com/2kZNvFw.jpeg")
+Uranus.set_planet(mass=8.686e25, major_semiaxis=19.22941195 * UA, eccentricity=0.044405586)
+Neptune = Planet(name="Neptune", real_radius=24.622e6, virtual_radius=10e10, color=vec(0, 0, 0.8), texture="https://i.imgur.com/lyLpoMk.jpeg")
+Neptune.set_planet(mass=1.024e26, major_semiaxis=30.10366151 * UA, eccentricity=0.00858587)
 
 # TODO ASTEROID BELT
 # Asteroid_Belt
@@ -301,31 +304,26 @@ for planet in Planet.List:
 # p = w.panel
 disp.append_to_caption("\nSimulation speed\n")
 speed_slider = slider(bind=set_simulation_speed, min=-50000, max=200000, value=dt)
-#
-# MoveButton = wx.Button(p, label="Move planets", pos=(650, 90))
-# MoveButton.Bind(wx.EVT_BUTTON, MovePlanet)
+disp.append_to_caption("\n\n")
+MoveButton = button(text="Move planets", name="MoveButton", bind=move_planet)
 
-# ShipButton = wx.Button(p, label="New ship", pos=(750, 90))
-# ShipButton.Bind(wx.EVT_BUTTON, CreateShip)
-#
-# OptionsText = wx.StaticText(p, label='Options:', pos=(650, 140))
-# RadiusCheckBox = wx.CheckBox(p, label='Use real radius of planets', pos=(650, 170))
-# RadiusCheckBox.Bind(wx.EVT_CHECKBOX, ChangeRadius)
-# RadiusCheckBox.SetValue(False)
+ShipButton = button(text="New ship",bind=CreateShip)
 
-TrailsCheckBox = checkbox(text="View planet trails", checked=True, bind=ChangeTrails)
-# TrailsCheckBox = wx.CheckBox(p, label='View planet trails', pos=(650, 200))
-# TrailsCheckBox.Bind(wx.EVT_CHECKBOX, ChangeTrails)
-# TrailsCheckBox.SetValue(True)
+OptionsText = wtext(text='\n\nOptions:')
+disp.append_to_caption("\n")
+RadiusCheckBox = checkbox(text='Use real radius of planets', checked=False, bind=change_radius)
 
-_ = checkbox(bind=ShowSolarSystem, text="Show solar system")
-# SSCheckBox = wx.CheckBox(p, label='Show Solar System', pos=(650, 230))
-# SSCheckBox.Bind(wx.EVT_CHECKBOX, ShowSolarSystem)
+TrailsCheckBox = checkbox(text="View planet trails", checked=True, bind=change_trails)
+
+disp.append_to_caption("\n\n")
+_ = checkbox(bind=show_solar_system, text="Show solar system")
+
 
 SSOCheckBoxes = {}
 ShowPlanetFunctions = {}
 for i in range(len(SolarSystemObjects)):
     planet = SolarSystemObjects[i]
+    disp.append_to_caption("\n\t")
     SSOCheckBoxes[planet.name] = checkbox(text=planet.name, bind=ShowPlanet)
 # SSOCheckBoxes = {}
 # ShowPlanetFunctions = {}
@@ -334,7 +332,7 @@ for i in range(len(SolarSystemObjects)):
 #     SSOCheckBoxes[planet.name] = wx.CheckBox(p, label=planet.name, pos=(650 + 30, 260 + 30 * i))
 #     exec
 #     "SSOCheckBoxes[planet.name].Bind(wx.EVT_CHECKBOX,lambda evt: ShowPlanet(evt,SolarSystemObjects[" + str(i) + "]))"
-# SSOCheckBoxes['Earth'].SetValue(True)
+SSOCheckBoxes['Earth'].checked = True
 #
 # wx.StaticText(p, label="Add new planet:", pos=(650, 550))
 # wx.StaticLine(p, size=(200, 2), pos=(750, 557))
@@ -347,8 +345,8 @@ for i in range(len(SolarSystemObjects)):
 # wx.StaticText(p, label="Virtual radius:", pos=(650 + 30, 550 + 30 * 3))
 # VRTC = wx.TextCtrl(p, value='6e9', pos=(650 + 150, 550 + 30 * 3), size=(100, 20))
 #
-# CreateButton = wx.Button(p, label="Create a planet", pos=(850, 700))
-# CreateButton.Bind(wx.EVT_BUTTON, CreatePlanet)
+disp.append_to_caption("\n\n")
+CreateButton = button(text="Create a planet", bind=CreatePlanet)
 
 # Simulation
 while True:
@@ -357,10 +355,10 @@ while True:
     # gravitational effect
     for planet1, planet2 in combinations(CurrentPlanets, 2):
         dist = planet1.pos - planet2.pos
-        #if mag(dist) != 0:
-        force = -G * planet1.mass * planet2.mass * dist / mag(dist) ** 3
-        planet1.p = planet1.p + force * dt
-        planet2.p = planet2.p - force * dt
+        if mag(dist) != 0:
+            force = -G * planet1.mass * planet2.mass * dist / mag(dist) ** 3
+            planet1.p = planet1.p + force * dt
+            planet2.p = planet2.p - force * dt
 
     # movement
     for planet in CurrentPlanets:

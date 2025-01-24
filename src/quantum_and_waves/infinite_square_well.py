@@ -115,13 +115,6 @@ class Wave:
 
         return sum([abs_psi[i] / sum_psi * self._x[i] for i in range(len(self._x))])
 
-    def set_linspace_to(self, linspace):
-        count = 0
-        for xval in linspace:
-            self._arrows[count].pos = vec(xval, 0, 0)
-            count += 1
-        self._x = linspace
-
 
 class Psi:
     def __init__(self, k, omega, wave_function):
