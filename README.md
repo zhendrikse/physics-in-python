@@ -11,6 +11,6 @@ All animations can be viewed on [my glowscript.org](https://glowscript.org/#/use
 - [**`src`**](src) &rarr; contains the sources
 - [**`test`**](test) &rarr; the tests of the components in the generic toolbox.
 
-# The applications page [*has moved*](https://zhendrikse.github.io/physics-in-python/index.html)
+# The applications page [*has moved*](https://www.hendrikse.name/science/)
 
-The page that was originally here, [**has moved**](https://zhendrikse.github.io/physics-in-python/index.html).
+The page that was originally here, [**has moved**](https://www.hendrikse.name/science/).
