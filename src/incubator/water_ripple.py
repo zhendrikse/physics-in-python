@@ -36,17 +36,20 @@ u = numpy.zeros([Nt, len(x_vec), len(y_vec)])
 u[0, Nx // 2, Ny // 2] = numpy.sin(0) # disturbance at t = 0
 u[1, Nx // 2, Ny // 2] = numpy.sin(1/10) # disturbance at t = 1
 
-for t in range(1, Nt-1):
-    #print(t/Nt)
-    c_squared = c * c
-    dt_squared = dt * dt
-    dx_squared = dx * dx
-    dy_squared = dy * dy
+c_squared = c * c
+dt_squared = dt * dt
+dx_squared = dx * dx
+dy_squared = dy * dy
+
+for t in range(1, 100):
     for x in range(1, Nx-1):
         for y in range(1, Ny-1):
-            if t < 100:
-                u[t, Nx // 2, Ny // 2] = numpy.sin(t / 10)
+            u[t, Nx // 2, Ny // 2] = numpy.sin(t / 10)
 
+
+for t in range(100, Nt-1):
+    for x in range(1, Nx-1):
+        for y in range(1, Ny-1):
             u[t+1, x, y] = c_squared * dt_squared * ( ((u[t, x+1, y] - 2*u[t, x, y] + u[t, x-1, y])/dx_squared) + ((u[t, x, y+1] - 2*u[t, x, y] + u[t, x, y-1])/dy_squared) ) + 2*u[t, x, y] - u[t-1, x, y]
 
 fig = pyplot.figure()

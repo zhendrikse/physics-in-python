@@ -5,6 +5,7 @@
 
 from vpython import *
 from random import random, uniform
+from numpy import *
 
 def Reflection(p, pos):
     scale = mag(p)
@@ -30,7 +31,7 @@ dt = 1E-5
 scene = canvas(title="Gas", width=win, height=win, x=0, y=0)
 scene.background = color.yellow
 
-ring(pos=(0, 0, 0), color=color.green, axis=(0, 0, 1), radius=RingRadius, opacity=.4, thickness=RingThickness)
+ring(pos=vec(0, 0, 0), color=color.green, axis=vec(0, 0, 1), radius=RingRadius, opacity=.4, thickness=RingThickness)
 
 dv = 10.
 
@@ -46,14 +47,14 @@ mass = Matom * r ** 3 / Ratom ** 3
 pavg = sqrt(2. * mass * 1.5 * k * T)  # average kinetic energy p**2/(2mass) = (3/2)kT
 
 for i in range(Natoms):
-    alpha = 2 * pi * random()
+    alpha = 2 * pi * random.random()
     x = RingRadius * cos(alpha) * .9
     y = RingRadius * sin(alpha) * .9
     z = 0
     ##    print x,y,z
-    Atoms = Atoms + [sphere(pos=(x, y, z), radius=r, color=colors[i % 9])]
-    theta = pi * random()
-    phi = 2 * pi * random()
+    Atoms = Atoms + [sphere(pos=vec(x, y, z), radius=r, color=colors[i % 9])]
+    theta = pi * random.random()
+    phi = 2 * pi * random.random()
     px = pavg * sin(theta) * cos(phi)
     py = pavg * sin(theta) * sin(phi)
     pz = pavg * cos(theta)
@@ -72,6 +73,7 @@ radius = array(rlist)
 r = pos - pos[:, newaxis]  # all pairs of atom-to-atom vectors
 
 ds = (p / m) * (dt / 2.)
+print(ds)
 if 'False' not in less_equal(mag(ds), radius):
     pos = pos + (p / mass) * (dt / 2.)  # initial half-step
 

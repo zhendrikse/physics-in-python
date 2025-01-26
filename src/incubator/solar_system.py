@@ -10,7 +10,7 @@ mu = G * 1.989e30
 dt = 10000
 
 #w = window(width=1000, height=800, menus=False)
-disp = canvas(x=5, y=5, width=800, height=600, forward=vector(0, 3, 1), range=1.5 * UA, title='Celestial Mechanics Simulator')
+display = canvas(x=5, y=5, width=800, height=600, background=vector(0.1, 0.1, 0.1), forward=vector(0, 3, 1), range=1.5 * UA, title='Celestial Mechanics Simulator')
 
 
 class Planet(sphere):
@@ -104,11 +104,11 @@ def set_simulation_speed(evt):
 
 
 ## Creating Planets #############################
-def CreatePlanet(evt):
+def create_planet(evt):
     global CreateButton
     CreateButton.disabled = True
     #CreateButton.Unbind(wx.EVT_BUTTON)
-    disp.bind('mousedown', Preparados)
+    display.bind('mousedown', Preparados)
 
 
 def Preparados(evt):
@@ -121,8 +121,8 @@ def Preparados(evt):
     NewPlanet = Planet(pos=posicion_inicial, mass=mass, real_radius=real_radius, virtual_radius=virtual_radius,
                        color=(1, 0, 1))
     v = arrow(pos=NewPlanet.pos, axis=(0, 0, 0))
-    disp.bind('mousemove', Listos)
-    disp.bind('mouseup', YA)
+    display.bind('mousemove', Listos)
+    display.bind('mouseup', YA)
 
 
 def Listos(evt):
@@ -139,10 +139,10 @@ def YA(evt):
         NewPlanet.make_trail = False
     CurrentPlanets.append(NewPlanet)
     CreateButton.Enable(True)
-    CreateButton.Bind(wx.EVT_BUTTON, CreatePlanet)
-    disp.unbind('mousedown', Preparados)
-    disp.unbind('mousemove', Listos)
-    disp.unbind('mouseup', YA)
+    CreateButton.Bind(wx.EVT_BUTTON, create_planet)
+    display.unbind('mousedown', Preparados)
+    display.unbind('mousemove', Listos)
+    display.unbind('mouseup', YA)
 
 
 #################################################
@@ -154,26 +154,26 @@ HoldShip = 0
 
 def CreateShip(evt):
     global Ship, HoldShip, Earth, ShipButton, desv
-    ShipButton.Bind(wx.EVT_BUTTON, StopShip)
-    ShipButton.SetLabel("Stop")
+    ShipButton.bind = StopShip
+    ShipButton.text = "Stop"
     direccion_arbitraria = vector(random(), random(), random())
     desv = direccion_arbitraria / mag(direccion_arbitraria) * Earth.radius
     posicion_inicial = Earth.pos + desv
     Ship = Planet(name='Ship', mass=1000, pos=posicion_inicial, color=color.green, virtual_radius=4e9)
     HoldShip = 1
     Ship.p = Earth.p / Earth.mass * Ship.mass
-    disp.bind('mousedown', GrabArrow)
+    display.bind('mousedown', GrabArrow)
 
 
 def GrabArrow(evt):
     drag_pos = evt.project(normal=(0, 0, 1))
     v = arrow(pos=drag_pos, axis=(0, 0, 0))
-    disp.bind('mousemove', DragArrow, v)
-    disp.bind('mouseup', DropArrow, v)
+    display.bind('mousemove', DragArrow, v)
+    display.bind('mouseup', DropArrow, v)
 
 
 def DragArrow(evt, obj):
-    new_pos = disp.mouse.project(normal=(0, 0, 1))
+    new_pos = display.mouse.project(normal=(0, 0, 1))
     obj.axis = new_pos - obj.pos
 
 
@@ -186,14 +186,14 @@ def DropArrow(evt, obj):
     if HoldShip:
         CurrentPlanets.append(Ship)
         HoldShip = 0
-    disp.unbind('mousemove', DragArrow)
-    disp.unbind('mouseup', DropArrow)
+    display.unbind('mousemove', DragArrow)
+    display.unbind('mouseup', DropArrow)
 
 
 def StopShip(evt):
     ShipButton.Bind(wx.EVT_BUTTON, CreateShip)
     ShipButton.SetLabel("New Ship")
-    disp.unbind('mousedown', GrabArrow)
+    display.unbind('mousedown', GrabArrow)
 
 
 #################################################
@@ -206,34 +206,34 @@ def move_planet(evt):
     global MoveButton
     MoveButton.text="Stop"
     MoveButton.bind=stop_moving
-    disp.bind('mousedown', pick_planet)
+    display.bind('mousedown', pick_planet)
 
 
 def pick_planet(evt):
     global drag_pos
     planet = evt.pick
     drag_pos = planet.pos
-    disp.bind('mousemove', moving_planet, planet)
-    disp.bind('mouseup', drop_planet)
+    display.bind('mousemove', moving_planet, planet)
+    display.bind('mouseup', drop_planet)
 
 
 def moving_planet(evt, obj):
     global drag_pos
-    new_pos = disp.mouse.project(normal=(0, 0, 1))
+    new_pos = display.mouse.project(normal=(0, 0, 1))
     if new_pos != drag_pos:
         obj.pos += new_pos - drag_pos
         drag_pos = new_pos
 
 
 def drop_planet(evt):
-    disp.unbind('mousemove', moving_planet)
-    disp.unbind('mouseup', drop_planet)
+    display.unbind('mousemove', moving_planet)
+    display.unbind('mouseup', drop_planet)
 
 
 def stop_moving(evt):
     MoveButton.text="Move planets"
     MoveButton.bind=move_planet
-    disp.unbind('mousedown', pick_planet)
+    display.unbind('mousedown', pick_planet)
 
 
 #################################################
@@ -302,20 +302,20 @@ for planet in Planet.List:
 
 # TODO USER INTERACTION
 # p = w.panel
-disp.append_to_caption("\nSimulation speed\n")
+display.append_to_caption("\nSimulation speed\n")
 speed_slider = slider(bind=set_simulation_speed, min=-50000, max=200000, value=dt)
-disp.append_to_caption("\n\n")
+display.append_to_caption("\n\n")
 MoveButton = button(text="Move planets", name="MoveButton", bind=move_planet)
 
 ShipButton = button(text="New ship",bind=CreateShip)
 
 OptionsText = wtext(text='\n\nOptions:')
-disp.append_to_caption("\n")
+display.append_to_caption("\n")
 RadiusCheckBox = checkbox(text='Use real radius of planets', checked=False, bind=change_radius)
 
 TrailsCheckBox = checkbox(text="View planet trails", checked=True, bind=change_trails)
 
-disp.append_to_caption("\n\n")
+display.append_to_caption("\n\n")
 _ = checkbox(bind=show_solar_system, text="Show solar system")
 
 
@@ -323,7 +323,7 @@ SSOCheckBoxes = {}
 ShowPlanetFunctions = {}
 for i in range(len(SolarSystemObjects)):
     planet = SolarSystemObjects[i]
-    disp.append_to_caption("\n\t")
+    display.append_to_caption("\n\t")
     SSOCheckBoxes[planet.name] = checkbox(text=planet.name, bind=ShowPlanet)
 # SSOCheckBoxes = {}
 # ShowPlanetFunctions = {}
@@ -345,8 +345,8 @@ SSOCheckBoxes['Earth'].checked = True
 # wx.StaticText(p, label="Virtual radius:", pos=(650 + 30, 550 + 30 * 3))
 # VRTC = wx.TextCtrl(p, value='6e9', pos=(650 + 150, 550 + 30 * 3), size=(100, 20))
 #
-disp.append_to_caption("\n\n")
-CreateButton = button(text="Create a planet", bind=CreatePlanet)
+display.append_to_caption("\n\n")
+CreateButton = button(text="Create a planet", bind=create_planet)
 
 # Simulation
 while True:
