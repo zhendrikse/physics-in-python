@@ -27,23 +27,19 @@ class NumpyWrapper:
 
         return x, y, z
 
+    @staticmethod
+    def _convert_back_to_python_array(numpy_array):
+        result = []
+        for x in range(numpy_array.shape[0]):
+            temp = []
+            for y in range(numpy_array.shape[1]):
+                temp += [numpy_array[x, y]]
+            result += [temp]
+        return result
+
     def _convert_back_to_python_arrays(self):
-        xx = []
-        for x in range(self._x.shape[0]):
-            temp = []
-            for y in range(self._x.shape[1]):
-                temp += [self._x[x, y]]
-            xx += [temp]
-        self._x = xx
-
-        yy = []
-        for x in range(self._y.shape[0]):
-            temp = []
-            for y in range(self._y.shape[1]):
-                temp += [self._y[x, y]]
-            yy += [temp]
-
-        self._y = yy
+        self._x = self._convert_back_to_python_array(self._x)
+        self._y = self._convert_back_to_python_array(self._y)
 
     def get_x_y(self):
         return self._x, self._y
@@ -161,6 +157,18 @@ class SubPlot:
         self._shininess = shininess
 
 class MultivariateFunctionPlot(SubPlot):
+    def __init__(self, x, y, f_x_y_t):
+        super().__init__(x, y, f_x_y_t)
+
+    def _update_vertices(self, t):
+        for x in range(len(self._xx)):
+            for y in range(len(self._yy[0])):
+                x_ = self._xx[x][y]
+                y_ = self._yy[x][y]
+                value = len(self._xx) * self._zz(x_, y_, self._omega * t)
+                self._update_vertex(x, y, value)
+
+class FiniteDifferencePlot(SubPlot):
     def __init__(self, x, y, f_x_y_t):
         super().__init__(x, y, f_x_y_t)
 
