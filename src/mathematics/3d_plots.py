@@ -6,10 +6,25 @@ import numpy as np
 animation = canvas()
 
 class NumpyWrapper:
-    def __init__(self, start, stop, resolution):
+    def __init__(self, start_1, stop_1, start_2, stop_2, resolution):
         self._resolution = resolution
-        x = y = np.linspace(start, stop, resolution)
+        x = np.linspace(start_1, stop_1, resolution)
+        y = np.linspace(start_2, stop_2, resolution)
         self._x, self._y = np.meshgrid(x, y)
+
+    def get_plot_data(self, f_x, f_y, f_z):
+        x, y, z = [], [], []
+        for i in range(len(self._x)):
+            x_, y_, z_ = [], [], []
+            for j in range(len(self._y[0])):
+                x_ += [f_x(self._x, self._y, i, j)]
+                y_ += [f_y(self._x, self._y, i, j)]
+                z_ += [f_z(self._x, self._y, i, j)]
+            x += [x_]
+            y += [y_]
+            z += [z_]
+
+        return x, y, z
 
     @staticmethod
     def _convert_back_to_python_array(numpy_array):
@@ -112,9 +127,9 @@ class SubPlot:
 
     def _update_vertices(self, t):
         for x in range(len(self._xx)):
-            for y in range(len(self._yy[1])):
-                f_x_y = self._zz.get(x, y) * (cos(self._omega * t) + 1) * .5
-                value = self._zz.shape[0] * f_x_y
+            for y in range(len(self._yy[0])):
+                value = self._zz[x][y] * (cos(self._omega * t) + 1) * .5
+                value *= len(self._zz)
                 self._update_vertex(x, y, value)
 
     def _get_vertex(self, x, y):
@@ -148,7 +163,7 @@ class MultivariateFunctionPlot(SubPlot):
             for y in range(len(self._yy[0])):
                 x_ = self._xx[x][y]
                 y_ = self._yy[x][y]
-                value = len(self._xx) * self._f_x_y_t(x_, y_, self._omega * t)
+                value = len(self._xx) * self._zz(x_, y_, self._omega * t)
                 self._update_vertex(x, y, value)
 
 class Figure:
@@ -267,39 +282,26 @@ shininess_slider = slider(min=0, max=1, step=0.01, value=0.6, bind=adjust_shinin
 animation.append_to_caption("\n\n")
 
 
-
-# resolution = 50
-# theta = np.linspace(0, 1.05 * pi, resolution)
-# phi = np.linspace(0, pi, resolution)
-# theta, phi = np.meshgrid(theta, phi)
-
-# x = np.cos(theta)
-# y = np.sin(theta).add(np.cos(phi))
-# z = np.sin(phi).multiply(3)
-theta, phi = NumpyWrapper(0, pi, 50).get_x_y()
-x, y, z = [], [], []
-for x in range(len(theta)):
-    x_, y_, z_ = [], [], []
-    for y in range(len(phi[0])):
-        x_ += [cos(theta[x][y])]
-        y_ += [sin(theta[x][y]) + cos(phi[x][y])]
-        z_ += [3 * sin(phi[x][y])]
-    x += [x_]
-    y += [y_]
-    z += [z_]
-
-figure = Figure()
-figure.add_subplot(MultivariateFunctionPlot(xx, yy, zz))
-
-# xx, yy = NumpyWrapper(-2 * pi, 2 * pi, 50).get_x_y()
+# def f_x(theta, phi, i, j):
+#     return cos(theta[i][j])
+#
+# def f_y(theta, phi, i, j):
+#     return sin(theta[i][j]) + cos(phi[i][j])
+#
+# def f_z(theta, phi, i, j):
+#     return 3 * sin(phi[i][j])
+#
+# x, y, z = NumpyWrapper(0, pi, 0, pi, 50).get_plot_data(f_x, f_y, f_z)
 # figure = Figure()
-#
-# def f_x_y_t(x, y, t):
-#     return sin(sqrt(x * x + y * y)) * (cos(t) + 1)
-#
-# figure.add_subplot(MultivariateFunctionPlot(xx, yy, f_x_y_t))
+# figure.add_subplot(SubPlot(x, y, z))
 
+xx, yy = NumpyWrapper(-2 * pi, 2 * pi, -2 * pi, 2 * pi, 50).get_x_y()
+figure = Figure()
 
+def f_x_y_t(x, y, t):
+    return sin(sqrt(x * x + y * y)) * (cos(t) + 1)
+
+figure.add_subplot(MultivariateFunctionPlot(xx, yy, f_x_y_t))
 
 dt = 0.01
 time = 0
