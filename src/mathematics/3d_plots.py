@@ -11,6 +11,7 @@ class NumpyWrapper:
         x = np.linspace(start_1, stop_1, resolution)
         y = np.linspace(start_2, stop_2, resolution)
         self._x, self._y = np.meshgrid(x, y)
+        self._convert_back_to_python_arrays()
 
     def get_plot_data(self, f_x, f_y, f_z):
         x, y, z = [], [], []
@@ -26,21 +27,26 @@ class NumpyWrapper:
 
         return x, y, z
 
-    @staticmethod
-    def _convert_back_to_python_array(numpy_array):
-        result = []
-        for x in range(numpy_array.shape[0]):
+    def _convert_back_to_python_arrays(self):
+        xx = []
+        for x in range(self._x.shape[0]):
             temp = []
-            for y in range(numpy_array.shape[1]):
-                temp += [numpy_array[x, y]]
-            result += [temp]
+            for y in range(self._x.shape[1]):
+                temp += [self._x[x, y]]
+            xx += [temp]
+        self._x = xx
 
-        return result
+        yy = []
+        for x in range(self._y.shape[0]):
+            temp = []
+            for y in range(self._y.shape[1]):
+                temp += [self._y[x, y]]
+            yy += [temp]
+
+        self._y = yy
 
     def get_x_y(self):
-        x = self._convert_back_to_python_array(self._x)
-        y = self._convert_back_to_python_array(self._y)
-        return x, y
+        return self._x, self._y
 
 # This class is only meant to be used from within the Figure class.
 class SubPlot:
