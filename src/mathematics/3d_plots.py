@@ -6,9 +6,9 @@ import numpy as np
 animation = canvas()
 
 class NumpyWrapper:
-    def __init__(self, resolution, start, stop):
+    def __init__(self, start, stop, resolution):
         self._resolution = resolution
-        x = y = np.linspace(-2 * pi, 2 * pi, resolution)
+        x = y = np.linspace(start, stop, resolution)
         self._x, self._y = np.meshgrid(x, y)
 
     @staticmethod
@@ -29,8 +29,8 @@ class NumpyWrapper:
 
 # This class is only meant to be used from within the Figure class.
 class SubPlot:
-    def __init__(self, xx, yy, f_x_y_t):
-        self._xx, self._yy, self._f_x_y_t = xx, yy, f_x_y_t
+    def __init__(self, xx, yy, zz):
+        self._xx, self._yy, self._zz = xx, yy, zz
         self._hue_offset = .2
         self._opacity = 1
         self._shininess = 0.6
@@ -140,8 +140,8 @@ class SubPlot:
         self._shininess = shininess
 
 class MultivariateFunctionPlot(SubPlot):
-    def __init__(self, xx, yy, f_x_y_t):
-        super().__init__(xx, yy, f_x_y_t)
+    def __init__(self, x, y, f_x_y_t):
+        super().__init__(x, y, f_x_y_t)
 
     def _update_vertices(self, t):
         for x in range(len(self._xx)):
@@ -276,15 +276,30 @@ animation.append_to_caption("\n\n")
 # x = np.cos(theta)
 # y = np.sin(theta).add(np.cos(phi))
 # z = np.sin(phi).multiply(3)
-
-xx, yy = NumpyWrapper(50, -pi, pi).get_x_y()
-
-def f_x_y_t(x, y, t):
-    return sin(sqrt(x * x + y * y)) * (cos(t) + 1)
-
+theta, phi = NumpyWrapper(0, pi, 50).get_x_y()
+x, y, z = [], [], []
+for x in range(len(theta)):
+    x_, y_, z_ = [], [], []
+    for y in range(len(phi[0])):
+        x_ += [cos(theta[x][y])]
+        y_ += [sin(theta[x][y]) + cos(phi[x][y])]
+        z_ += [3 * sin(phi[x][y])]
+    x += [x_]
+    y += [y_]
+    z += [z_]
 
 figure = Figure()
-figure.add_subplot(MultivariateFunctionPlot(xx, yy, f_x_y_t))
+figure.add_subplot(MultivariateFunctionPlot(xx, yy, zz))
+
+# xx, yy = NumpyWrapper(-2 * pi, 2 * pi, 50).get_x_y()
+# figure = Figure()
+#
+# def f_x_y_t(x, y, t):
+#     return sin(sqrt(x * x + y * y)) * (cos(t) + 1)
+#
+# figure.add_subplot(MultivariateFunctionPlot(xx, yy, f_x_y_t))
+
+
 
 dt = 0.01
 time = 0
