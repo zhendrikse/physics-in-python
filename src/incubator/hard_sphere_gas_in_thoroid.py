@@ -58,32 +58,33 @@ for i in range(Natoms):
     px = pavg * sin(theta) * cos(phi)
     py = pavg * sin(theta) * sin(phi)
     pz = pavg * cos(theta)
-    poslist.append((x, y, z))
-    plist.append((px, py, pz))
+    poslist.append(vec(x, y, z))
+    plist.append(vec(px, py, pz))
     mlist.append(mass)
     rlist.append(r)
 
 pos = array(poslist)
 
 poscircle = pos
-p = array(plist)
-m = array(mlist)
-m.shape = (Natoms, 1)  # Numeric Python: (1 by Natoms) vs. (Natoms by 1)
+positions = array(plist)
+masses = array(mlist)
+
+masses.shape = (Natoms, 1)  # Numeric Python: (1 by Natoms) vs. (Natoms by 1)
 radius = array(rlist)
 r = pos - pos[:, newaxis]  # all pairs of atom-to-atom vectors
 
-ds = (p / m) * (dt / 2.)
+ds = (positions / masses) * (dt / 2.)
 print(ds)
 if 'False' not in less_equal(mag(ds), radius):
-    pos = pos + (p / mass) * (dt / 2.)  # initial half-step
+    pos = pos + (positions / mass) * (dt / 2.)  # initial half-step
 
 while 1:
     rate(100)
 
     # Update all positions
-    ds = (p / m) * (dt / 2.)
+    ds = (positions / masses) * (dt / 2.)
     if 'False' not in less_equal(mag(ds), radius):
-        pos = pos + (p / m) * dt
+        pos = pos + (positions / masses) * dt
 
     r = pos - pos[:, newaxis]  # all pairs of atom-to-atom vectors
     rmag = sqrt(sum(square(r), -1))  # atom-to-atom scalar distances
@@ -93,11 +94,11 @@ while 1:
     for ij in hitlist:
         i, j = divmod(ij, Natoms)  # decode atom pair
         hitlist.remove(j * Natoms + i)  # remove symmetric j,i pair from list
-        ptot = p[i] + p[j]
-        mi = m[i, 0]
-        mj = m[j, 0]
-        vi = p[i] / mi
-        vj = p[j] / mj
+        ptot = positions[i] + positions[j]
+        mi = masses[i, 0]
+        mj = masses[j, 0]
+        vi = positions[i] / mi
+        vj = positions[j] / mj
         ri = Atoms[i].radius
         rj = Atoms[j].radius
         a = mag(vj - vi) ** 2
@@ -107,18 +108,18 @@ while 1:
         d = b ** 2 - 4. * a * c
         if d < 0: continue  # something wrong; ignore this rare case
         deltat = (-b + sqrt(d)) / (2. * a)  # t-deltat is when they made contact
-        pos[i] = pos[i] - (p[i] / mi) * deltat  # back up to contact configuration
-        pos[j] = pos[j] - (p[j] / mj) * deltat
+        pos[i] = pos[i] - (positions[i] / mi) * deltat  # back up to contact configuration
+        pos[j] = pos[j] - (positions[j] / mj) * deltat
         mtot = mi + mj
-        pcmi = p[i] - ptot * mi / mtot  # transform momenta to cm frame
-        pcmj = p[j] - ptot * mj / mtot
+        pcmi = positions[i] - ptot * mi / mtot  # transform momenta to cm frame
+        pcmj = positions[j] - ptot * mj / mtot
         rrel = norm(pos[j] - pos[i])
         pcmi = pcmi - 2 * dot(pcmi, rrel) * rrel  # bounce in cm frame
         pcmj = pcmj - 2 * dot(pcmj, rrel) * rrel
-        p[i] = pcmi + ptot * mi / mtot  # transform momenta back to lab frame
-        p[j] = pcmj + ptot * mj / mtot
-        pos[i] = pos[i] + (p[i] / mi) * deltat  # move forward deltat in time
-        pos[j] = pos[j] + (p[j] / mj) * deltat
+        positions[i] = pcmi + ptot * mi / mtot  # transform momenta back to lab frame
+        positions[j] = pcmj + ptot * mj / mtot
+        pos[i] = pos[i] + (positions[i] / mi) * deltat  # move forward deltat in time
+        pos[j] = pos[j] + (positions[j] / mj) * deltat
 
     ##   Bounce off the boundary of the torus,
     ##   then update positions of display objects
@@ -128,8 +129,8 @@ while 1:
     outside = greater_equal(mag(poscircle - pos), RingThickness - 2 * Ratom)
 
     for k in range(len(outside)):
-        if outside[k] == 1 and dot(p[k], pos[k] - poscircle[k]) > 0:
-            p[k] = Reflection(p[k], pos[k] - poscircle[k])
+        if outside[k] == 1 and dot(positions[k], pos[k] - poscircle[k]) > 0:
+            positions[k] = Reflection(positions[k], pos[k] - poscircle[k])
 
     for i in range(Natoms):
         Atoms[i].pos = pos[i]
