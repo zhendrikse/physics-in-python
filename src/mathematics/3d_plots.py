@@ -45,9 +45,9 @@ class NumpyWrapper:
         return self._x, self._y
 
 # This class is only meant to be used from within the Figure class.
-class SubPlot:
-    def __init__(self, xx, yy, zz):
-        self._xx, self._yy, self._zz = xx, yy, zz
+class FiniteDifferencePlot:
+    def __init__(self, xx, yy, f_z_y_t):
+        self._xx, self._yy, self._f_x_y_t = xx, yy, f_x_y_t
         self._hue_offset = .2
         self._opacity = 1
         self._shininess = 0.6
@@ -130,8 +130,9 @@ class SubPlot:
     def _update_vertices(self, t):
         for x in range(len(self._xx)):
             for y in range(len(self._yy[0])):
-                value = self._zz[x][y] * (cos(self._omega * t) + 1) * .5
-                value *= len(self._zz)
+                x_ = self._xx[x][y]
+                y_ = self._yy[x][y]
+                value = len(self._xx) * self._f_x_y_t(x_, y_, self._omega * t)
                 self._update_vertex(x, y, value)
 
     def _get_vertex(self, x, y):
@@ -155,30 +156,6 @@ class SubPlot:
 
     def set_shininess_to(self, shininess):
         self._shininess = shininess
-
-class MultivariateFunctionPlot(SubPlot):
-    def __init__(self, x, y, f_x_y_t):
-        super().__init__(x, y, f_x_y_t)
-
-    def _update_vertices(self, t):
-        for x in range(len(self._xx)):
-            for y in range(len(self._yy[0])):
-                x_ = self._xx[x][y]
-                y_ = self._yy[x][y]
-                value = len(self._xx) * self._zz(x_, y_, self._omega * t)
-                self._update_vertex(x, y, value)
-
-class FiniteDifferencePlot(SubPlot):
-    def __init__(self, x, y, f_x_y_t):
-        super().__init__(x, y, f_x_y_t)
-
-    def _update_vertices(self, t):
-        for x in range(len(self._xx)):
-            for y in range(len(self._yy[0])):
-                x_ = self._xx[x][y]
-                y_ = self._yy[x][y]
-                value = len(self._xx) * self._zz(x_, y_, self._omega * t)
-                self._update_vertex(x, y, value)
 
 class Figure:
     """
@@ -315,7 +292,7 @@ figure = Figure()
 def f_x_y_t(x, y, t):
     return sin(sqrt(x * x + y * y)) * (cos(t) + 1)
 
-figure.add_subplot(MultivariateFunctionPlot(xx, yy, f_x_y_t))
+figure.add_subplot(FiniteDifferencePlot(xx, yy, f_x_y_t))
 
 dt = 0.01
 time = 0
