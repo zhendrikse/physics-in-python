@@ -1,4 +1,3 @@
-# Web VPython 3.2
 
 from vpython import *
 
@@ -17,11 +16,11 @@ animation = canvas(forward=vector(-2.8, 0, -2.8), center=vector(Lx / 2, Ly / 2, 
 
 
 class Wave:
-    def __init__(self, x, y, obstacle):
-        self._x, self._y, self._obstacle = x, y, obstacle
+    def __init__(self, x, y):
+        self._x, self._y = x, y
         self._hue = 2.55
         self._radius = 0.03
-        self._disturbance_magnitude = 0.3
+        self._disturbance_magnitude = 0.2
         self._time = 0
         self._initialize_wave_data()
         self._old, self._new, self._surface = [], [], []
@@ -32,11 +31,10 @@ class Wave:
         for i in range(len(self._x)):
             droplets_row = []
             for j in range(len(self._y)):
-                show = False if self._obstacle.contains_coordinates(i, j) else True
                 colour = color.hsv_to_rgb(vec(self._hue, 1, 1))
                 position = vector(self._x[i], self._y[j], 0)
                 droplets_row.append(
-                    sphere(pos=position, visible=show, radius=self._radius, color=colour))
+                    sphere(pos=position, radius=self._radius, color=colour))
             self._surface.append(droplets_row)
 
     def _initialize_wave_data(self):
@@ -50,7 +48,6 @@ class Wave:
         # Calculate new values
         for i in range(1, len(self._x) - 1):
             for j in range(1, len(self._y) - 1):
-                if self._obstacle.contains_coordinates(i, j): continue
                 self._new[i][j] = (2 * now[i][j].pos.z - self._old[i][j] +
                                    r * (now[i + 1][j].pos.z + now[i - 1][j].pos.z + now[i][j + 1].pos.z + now[i][
                             j - 1].pos.z - 4 * now[i][j].pos.z))
@@ -64,8 +61,8 @@ class Wave:
 
         if abs(self._time - 0.25) < dt:
             # introducing a disturbance
-            x = len(self._x) - 2 if self._obstacle.is_present() else len(self._x) // 2
-            y = len(self._y) - 2 if self._obstacle.is_present() else len(self._y) // 2
+            x = len(self._x) // 2
+            y = len(self._y) // 2
             self._surface[x][y].pos.z += self._disturbance_magnitude
 
         self._time += dt
@@ -94,37 +91,6 @@ class Wave:
                 self._surface[i][j].visible = False
                 # self._surface[i][j].delete()
         self._init_droplets()
-
-
-class Obstacle:
-    def __init__(self, x, y, is_present=True):
-        self._obstacle = [[False for j in range(len(y))] for i in range(len(x))]
-        self._is_present = is_present
-        if is_present:
-            self._make_obstacle(x, y)
-
-    def _make_obstacle(self, x, y):
-        for i in range(len(x) // 3, 2 * len(x) // 3):
-            for j in range(len(y) // 3, 2 * len(y) // 3):
-                self._obstacle[i][j] = True
-
-        # Create a green rectangle for the obstacle region
-        obstacle_width = (2 * len(x) // 3 - len(x) // 3) * dx
-        obstacle_height = (2 * len(y) // 3 - len(y) // 3) * dy
-        obstacle_center_x = (len(x) // 3 + (2 * len(x) // 3 - len(x) // 3) / 2) * dx
-        obstacle_center_y = (len(y) // 3 + (2 * len(y) // 3 - len(y) // 3) / 2) * dy
-        # The visuals
-        obstacle_box = box(pos=vector(obstacle_center_x, obstacle_center_y, 0),
-                           size=vector(obstacle_width, obstacle_height, 1),
-                           color=color.green,
-                           opacity=0.8)
-
-    def contains_coordinates(self, i, j):
-        return self._obstacle[i][j]
-
-    def is_present(self):
-        return self._is_present
-
 
 class Pool:
     def __init__(self, Lx, Ly, dx, dy):
@@ -163,9 +129,9 @@ animation.append_to_caption("hue offset = ")
 hue_offset_text = wtext(text="0.0")
 
 animation.append_to_caption("\n\n")
-disturbance_slider = slider(min=0.1, max=1, value=.3, bind=adjust_disturbance)
+disturbance_slider = slider(min=0.1, max=1, value=.2, bind=adjust_disturbance)
 animation.append_to_caption("disturbance magnitude = ")
-disturbance_text = wtext(text="0.3")
+disturbance_text = wtext(text="0.2")
 
 popup = text(text="Click mouse to start", pos=vec(-Lx, 0, 0), billboard=True, color=color.yellow, height=.3)
 animation_duration = 4
@@ -175,8 +141,8 @@ clock = wtext(text="{:1.2f}".format(animation_duration, 2))
 
 x_range = arange(0, Lx + dx, dx)
 y_range = arange(0, Ly + dy, dy)
-obstacle = Obstacle(x_range, y_range, True)
-wave = Wave(x_range, y_range, obstacle)
+
+wave = Wave(x_range, y_range)
 pool = Pool(Lx, Ly, dx, dy)
 
 # The Time-loop
