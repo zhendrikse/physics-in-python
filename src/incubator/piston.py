@@ -18,7 +18,7 @@ amplitude = 3 * Llength
 freq = 4000
 
 # create molecules / atoms
-atoms = []
+atoms = [None for i in range(num)]
 speed = 550  # initial speeds in m/s
 
 atomR = Tlength / 200  # visual radius of atoms
@@ -37,12 +37,8 @@ c = curve()
 graphAxis = curve(color=color.red)
 graphLabel = label(text='Density', box=False, height=11)
 
-running = True
-pause = button(text='Pause', bind=flipRunning)
-
-
 def flipRunning():
-    nonlocal running
+    global running
     if (running == True):
         running = False
         pause.text = 'Resume'
@@ -51,8 +47,11 @@ def flipRunning():
         pause.text = 'Pause'
 
 
+running = True
+pause = button(text='Pause', bind=flipRunning)
+
 def setFrequency():
-    nonlocal freq
+    global freq
     freq = freqSlider.value
 
 
@@ -61,7 +60,7 @@ freqSlider = slider(min=0, max=30000, value=4000, bind=setFrequency)
 
 
 def setAmplitude():
-    nonlocal amplitude
+    global amplitude
     amplitude = amplitudeSlider.value
 
 
@@ -75,24 +74,24 @@ scene.append_to_caption('\n\nGraph bins\n')
 binSlider = slider(min=2, max=100, value=50, bind=bin)
 
 
-def bin():
-    numBins = binSlider
+# def bin():
+#     numBins = int(binSlider.value)
 
 
 scene.range = 25 * Llength
 
-freqText = label(text='Freq: ' + freq + " Hz", pos=vec(3 * Tradius, Tradius, 0), box=False, align='left')
-ampText = label(text='Amplitude: ' + amplitude * 100 + ' cm', pos=vec(3 * Tradius, -Tradius, 0), box=False,
+freqText = label(text='Freq: ' + str(freq) + " Hz", pos=vec(3 * Tradius, Tradius, 0), box=False, align='left')
+ampText = label(text='Amplitude: ' + str(amplitude * 100) + ' cm', pos=vec(3 * Tradius, -Tradius, 0), box=False,
                 align='left')
 
 while True:
 
     rate(1 / dt)
 
-    if (!running): continue
+    if not running: continue
 
-    freqText.text = 'Freq: ' + freq + ' Hz'
-    ampText.text = 'Amplitude: ' + round(1000 * amplitude) / 10 + ' cm'
+    freqText.text = 'Freq: ' + str(freq) + ' Hz'
+    ampText.text = 'Amplitude: ' + str(round(1000 * amplitude) / 10) + ' cm'
 
     lid.pos.y = (Tlength / 2 - Llength - amplitude) + amplitude * sin(2 * pi * time * freq)
     lid.vel = vec(0, 2 * pi * freq * amplitude * cos(2 * pi * time * freq), 0)
@@ -138,8 +137,8 @@ while True:
         # update positions
         atoms[i].pos = atoms[i].pos + atoms[i].vel * dt
 
-    positionBin = []
-    numBins = binSlider.value
+    numBins = int(binSlider.value)
+    positionBin = [0 for j in range(numBins)]
     average = 0
     seg = Tlength / numBins
     c.clear()

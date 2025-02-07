@@ -1,3 +1,4 @@
+
 # Web VPython 3.2
 
 from vpython import *
@@ -387,7 +388,7 @@ def adjust_offset():
     hue_offset_text.text = "{:1.2f}".format(offset_slider.value, 2)
 
 
-Lx, Ly = 4, 4  # TODO: non-square!!
+Lx, Ly = 2, 2  # TODO: non-square!!
 
 
 animation.append_to_caption("\n")

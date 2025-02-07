@@ -56,7 +56,7 @@ deltat = 1e-11  # time step units are s
 # ------------------------------------------------------------------------------------
 
 # while the car's x-position is between -4.5 m and 4.5 m
-while  car.pos.x > -4.5 and car.pos.x < 4.5 :
+while -4.5 < car.pos.x < 4.5:
  
     # Required to make animation visible / refresh smoothly (keeps program from running faster
     #    than 1000 frames/s)
