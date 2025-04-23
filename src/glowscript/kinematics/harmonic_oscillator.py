@@ -103,12 +103,12 @@ curve_right = gcurve(color=color.red)
 oscillator = Oscillator()
 oscillator.compress_by(0.75)
 
-scene.title = title
+animation.title = title
 
 t = 0
 dt = 0.01
 while True:
-  scene.waitfor("click")
+  animation.waitfor("click")
   for i in arange(0, 10 / dt):
     t += dt
     rate(1 / dt)

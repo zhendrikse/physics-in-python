@@ -22,7 +22,7 @@ bmdist.plot(pos=xybm)
 #seed()
 
     
-scene = display(title='Vpython-demo',x=0, y=0, width=1200, height=800,center=vec(0,0,0), background=color.black)
+animation = display(title='Vpython-demo', x=0, y=0, width=1200, height=800, center=vec(0, 0, 0), background=color.black)
 
 phig=(3-sqrt(5))*pi
 #Magic numbers: 2, 8, 20, 28, 50, 82, and 126

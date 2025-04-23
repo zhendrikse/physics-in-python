@@ -68,8 +68,8 @@ class Sprinkler:
 
     def _let_out_new_droplet(self):
         radius = 0.04 * self._length
-        self._water_beams[0].add(Droplet(self._endpoint_positions()[0], self._endpoint_velocities()[0], radius))
-        self._water_beams[1].add(Droplet(self._endpoint_positions()[1], self._endpoint_velocities()[1], radius))
+        self._water_beams[0].add(Droplet(self._endpoint_positions()[0], self._endpoint_velocities()[0], radius),, 0
+        self._water_beams[1].add(Droplet(self._endpoint_positions()[1], self._endpoint_velocities()[1], radius),, 0
 
     def _endpoint_positions(self):
         r = (self._length / 2) * vector(cos(self._theta), sin(self._theta), 0)

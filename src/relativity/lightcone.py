@@ -37,22 +37,22 @@ def pause_animation():
 
 def on_key_press(event):
     if event.key == " ":
-        scene.background = color.white if scene.background == color.black else color.black
+        animation.background = color.white if animation.background == color.black else color.black
     if event.key == "t":
         axis.toggle_xy_mesh()
     if event.key == 's':
-        scene.capture("lightcone_animation")
+        animation.capture("lightcone_animation")
     if event.key == 'v':
-        print("scene.center=" + str(scene.center))
-        print("scene.forward=" + str(scene.forward))
-        print("scene.range=" + str(scene.range))
+        print("scene.center=" + str(animation.center))
+        print("scene.forward=" + str(animation.forward))
+        print("scene.range=" + str(animation.range))
 
 
-scene.bind("keydown", on_key_press)
-scene.bind("click", on_mouse_click)
-scene.title = title
-scene.forward = vec(-0.25, -0.48, -0.83)
-scene.range = 14
+animation.bind("keydown", on_key_press)
+animation.bind("click", on_mouse_click)
+animation.title = title
+animation.forward = vec(-0.25, -0.48, -0.83)
+animation.range = 14
 
 height = 0
 while height <= 11:

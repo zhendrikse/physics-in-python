@@ -21,26 +21,26 @@ for n in range(c):
 camera = vector(0, 0, 0)  # for generality; need not be at origin
 
 # Place center of scene at a distance R from the camera:
-scene.center = camera + vector(0, 0, -R)
+animation.center = camera + vector(0, 0, -R)
 # Point the camera:
-scene.forward = scene.center - camera
+animation.forward = animation.center - camera
 # scene.fov is "field of view" in radians. R times the tangent
 #  of half the field of view is half of the width of the scene:
-scene.range = R * tan(scene.fov / 2)
-scene.userspin = False
+animation.range = R * tan(animation.fov / 2)
+animation.userspin = False
 
 lastpos = None
 
 def process_mouse_click(down):
     if down:  # and scene.mouse.pos != lastpos:
-        lastpos = scene.mouse.pos
+        lastpos = animation.mouse.pos
         lastpos.y = 0  # force mouse position to have y=0
         # (lastpos-camera) is a vector parallel to screen.
         # (lastpos-camera) cross norm(forward) is a vector in the +y direction,
         #   and this y component of the cross product is proportional to
         #   how far to the right the mouse is (if mouse is to left, this y
         #   component is negative)
-        rotation = cross((lastpos - camera), norm(scene.forward))
+        rotation = cross((lastpos - camera), norm(animation.forward))
         # If the mouse is to the right, y component is positive, and we need to
         #   turn the view toward the right, which means rotating the forward
         #   vector toward the right, about the +y axis, which requires a
@@ -49,10 +49,10 @@ def process_mouse_click(down):
         #   chosen experimentally as giving an appropriate sensitivity to how
         #   far to the right (or left) the mouse is. Bigger mouse displacement
         #   makes the rotation faster.
-        scene.forward = scene.forward.rotate(angle=-rotation.y / 100, axis=vec(0, 1, 0))
+        animation.forward = animation.forward.rotate(angle=-rotation.y / 100, axis=vec(0, 1, 0))
         # Move the center of the scene to be a distance R from the camera,
         #   in the direction of forward.
-        scene.center = camera + R * norm(scene.forward)
+        animation.center = camera + R * norm(animation.forward)
 
 def on_mouse_up():
     process_mouse_click(False)
@@ -60,8 +60,8 @@ def on_mouse_up():
 def on_mouse_down():
     process_mouse_click(True)
 
-scene.bind('mousedown', on_mouse_down)
-scene.bind('mouseup', on_mouse_up)
+animation.bind('mousedown', on_mouse_down)
+animation.bind('mouseup', on_mouse_up)
 
 while 1:
     rate(100)

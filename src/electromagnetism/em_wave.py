@@ -2,7 +2,7 @@ from vpython import vec, color, pi, rate, scene, curve, label, vector, arrow
 
 from src.toolbox.wave import ElectromagneticWave
 
-scene.ambient = vec(.4, .4, .4)
+animation.ambient = vec(.4, .4, .4)
 
 waves_separation = 4.
 step_range = 20
@@ -105,7 +105,7 @@ fi = 0
 while True:
     rate(1 / dt)
 
-    mouse_x = int(scene.mouse.pos.x)
+    mouse_x = int(animation.mouse.pos.x)
     move_frame_to(mouse_x)
 
     for wave in waves._waves:

@@ -396,7 +396,7 @@ def maze(pos=(0,0), rows=8, columns=8, cell_size=30):
                 walls.append(Wall(c, c - dy))
             else:
                 walls.append(Wall(c - dx, c))
-    scene.center = pos + (columns / 2 - 1) * dx + (rows / 2 - 1) * dy
+    animation.center = pos + (columns / 2 - 1) * dx + (rows / 2 - 1) * dy
     return walls
 
 if __name__ == '__main__':

@@ -12,9 +12,9 @@ gamma = 2*(m*k)**0.5
 
 ############################################################################################
 
-scene = canvas(width=1000, height=600, background=vec(0, 0.6, 0.6), align='left')
-scene.camera.pos = vec(-35, 80, 90)
-scene.camera.axis = vec(25, -60, -90)
+animation = canvas(width=1000, height=600, background=vec(0, 0.6, 0.6), align='left')
+animation.camera.pos = vec(-35, 80, 90)
+animation.camera.axis = vec(25, -60, -90)
 
 ############################################################################################
 
@@ -105,7 +105,7 @@ def Restart():
 
     spring.pos = vec(0, 33, 0)
     spring.v = vec(0, 0, 0)
-    spring.a = vec(0, -35 * k0 / m0, 0)
+    spring.atom = vec(0, -35 * k0 / m0, 0)
     spring.axis = vec(0, 37, 0)
 
 def set_spring_constant():
@@ -126,26 +126,26 @@ def update_critical_text_value(k_tmp, m_tmp, gamma_tmp):
 
 ############################################################################################
 
-scene.append_to_caption('      ')
+animation.append_to_caption('      ')
 b1 = button(text="Run", bind=Run, background=color.cyan)
 
-scene.append_to_caption('      ')
+animation.append_to_caption('      ')
 b2 = button(text="Restart", bind=Restart, background=color.cyan)
 
-scene.append_to_caption('\n\n      k =     ')
+animation.append_to_caption('\n\n      k =     ')
 input_spring_constant = winput(bind=set_spring_constant, type='numeric')
 
-scene.append_to_caption('\n\n      m =     ')
+animation.append_to_caption('\n\n      m =     ')
 input_mass = winput(bind=set_mass, type='numeric')
 
-scene.append_to_caption('\n\n      &Gamma; =     ')
+animation.append_to_caption('\n\n      &Gamma; =     ')
 input_gamma = winput(bind=set_gamma, type='numeric')
 
-scene.append_to_caption('\n\n      (for critical damping &Gamma; = ')
+animation.append_to_caption('\n\n      (for critical damping &Gamma; = ')
 txt1 = wtext(text=2*(k*m)**0.5)
-scene.append_to_caption(')')
+animation.append_to_caption(')')
 
-scene.append_to_caption('<i>\n\n(Please press enter after setting each parameter to confirm the setting,\n otherwise it will run on default parameter)</i>')
+animation.append_to_caption('<i>\n\n(Please press enter after setting each parameter to confirm the setting,\n otherwise it will run on default parameter)</i>')
 
 ############################################################################################
 g1 = graph(title='Position', xtitle='t', ytitle='position', align='right', width=500, height=300)
@@ -163,13 +163,13 @@ while True:
         k0, m0, gamma0 = InputParameters.obtain(input_spring_constant.number, input_mass.number, input_gamma.number).as_tuplet()
 
         rate(300)
-        block[restart_counter].a.y = -k0*block[restart_counter].pos.y/m0 - block[restart_counter].v.y*gamma0/m0
-        block[restart_counter].v.y += block[restart_counter].a.y * dt
+        block[restart_counter].atom.y = -k0 * block[restart_counter].pos.y / m0 - block[restart_counter].v.y * gamma0 / m0
+        block[restart_counter].v.y += block[restart_counter].atom.y * dt
         block[restart_counter].pos.y += block[restart_counter].v.y * dt
 
-        spring.a.y = -k0*spring.pos.y/m0 - spring.v.y*gamma0/m0
+        spring.atom.y = -k0 * spring.pos.y / m0 - spring.v.y * gamma0 / m0
 
-        spring.v.y += spring.a.y*dt
+        spring.v.y += spring.atom.y * dt
         spring.pos.y += spring.v.y*dt
         spring.axis.y -= spring.v.y*dt
 

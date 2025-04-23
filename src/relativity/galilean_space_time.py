@@ -6,11 +6,11 @@ from src.toolbox.axis import x_hat, z_hat, Base
 
 animation_time = 30  # seconds
 
-scene = canvas(width="800", height="600")
-scene.title = "Relative motion"
-scene.center = vec(0, 0, -5)
-scene.forward = vec(-1, -0.45, -0.04)
-scene.range = 12.5
+animation = canvas(width="800", height="600")
+animation.title = "Relative motion"
+animation.center = vec(0, 0, -5)
+animation.forward = vec(-1, -0.45, -0.04)
+animation.range = 12.5
 
 green_car = Car(pos=vec(-animation_time / 2, 1, -5), velocity=vec(1, 0, 0), scale=0.25)
 red_car = Car(pos=vec(animation_time / 2, 1, 5), colour=color.red, scale=0.25)
@@ -47,11 +47,11 @@ def select_car_in(my_scene):
 
 
 def on_mouse_click():
-    select_car_in(scene)
+    select_car_in(animation)
 
 
-scene.bind('click', on_mouse_click)
-scene.waitfor("click")
+animation.bind('click', on_mouse_click)
+animation.waitfor("click")
 
 timer = Timer(position=vec(0, 5, 0))
 dt = 0.01

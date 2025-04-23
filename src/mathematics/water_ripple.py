@@ -108,7 +108,7 @@ class SubPlot:
         """
         Further work to focus on this area of the normal calculations
         """
-        vertex_.normal = cross(vec_1, vec_2)
+        vertex_.gauss = cross(vec_1, vec_2)
 
     #        normal_total_ += cross(vec_1, vec_2)
     #        vertex_.normal = normal_total_/2

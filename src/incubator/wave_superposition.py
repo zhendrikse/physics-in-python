@@ -19,9 +19,9 @@ Rob Salgado (salgado@physics.syr.edu)
 # x=arange(0,10,0.1)
 # c=curve(x=x,y=eval(eqn))
 
-scene.autoscale = 0
-scene.range = (12, 12, 12)
-scene.title = "Wave Superposition"
+animation.autoscale = 0
+animation.range = (12, 12, 12)
+animation.title = "Wave Superposition"
 
 t = 0
 

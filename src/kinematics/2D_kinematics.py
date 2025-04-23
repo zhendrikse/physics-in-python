@@ -61,7 +61,7 @@ b2colory = vec(0, .75, 1)
 #
 # setup main scene
 #
-scene = canvas(
+animation = canvas(
     title="2-dimensional kinematics", align="right",
     width="900", height=600,
     x=250, y=0,
@@ -72,10 +72,10 @@ scene = canvas(
 )
 ##scene.lights = [vector(0,0.,0.3) ]; scene.ambient = 0.7
 # scene.lights = [vector(0, 0., 0.3)]
-scene.ambient = 0.7 * vec(1, 1, 1)
+animation.ambient = 0.7 * vec(1, 1, 1)
 
-scene.forward = vector(0.0, 0, -10.)
-scene.fov = 1e-14  # pseudo-orthogonal
+animation.forward = vector(0.0, 0, -10.)
+animation.fov = 1e-14  # pseudo-orthogonal
 
 sphere(radius=0.1)
 
@@ -114,7 +114,7 @@ block2 = box(pos=pos2_init, axis=track.axis,
 block.vel = vel_init
 block2.vel = vel2_init
 
-scene.center = block.pos - vector(0, 1, 0)  # keep block in view
+animation.center = block.pos - vector(0, 1, 0)  # keep block in view
 
 #
 # kinematic graphs
@@ -162,17 +162,17 @@ count_tick = 100  # for ticks at 1-second intervals
 count_subtick = count_tick / 5  # for ticks at 0.2-second intervals
 dt = 1. / count_tick
 
-scene.waitfor("click")
+animation.waitfor("click")
 
 
 # let's allow the user to change the camera view point
 def changeView():  # define a new function by name
-    chosenObject = scene.mouse.pick  # find out which object the user clicked on
+    chosenObject = animation.mouse.pick  # find out which object the user clicked on
     if not chosenObject is None:  # if it is a real object that they clicked on ...
-        scene.camera.follow(chosenObject)  # .. then have the camera follow that object
+        animation.camera.follow(chosenObject)  # .. then have the camera follow that object
 
 
-scene.bind("mousedown", changeView)  # allow mouse clicks to call the changeView function
+animation.bind("mousedown", changeView)  # allow mouse clicks to call the changeView function
 
 while time <= 2 * vel_init.y / g + .2:  # run for 10 seconds
     rate(50)
@@ -224,14 +224,14 @@ while time <= 2 * vel_init.y / g + .2:  # run for 10 seconds
         vely_Plot.plot(pos=(time, block.vel.y))
         vel2y_Plot.plot(pos=(time, block2.vel.y))
 
-    scene.center = block.pos - vector(0, 1, 0)  # keep block in view
+    animation.center = block.pos - vector(0, 1, 0)  # keep block in view
 
     time = time + dt
     counter += 1
 
-print("scene.center=", scene.center)
-print("scene.forward=", scene.forward)
-print("scene.range=", scene.range)
+print("scene.center=", animation.center)
+print("scene.forward=", animation.forward)
+print("scene.range=", animation.range)
 # Now... WHEN AN OBJECT IS PICKED,
 # TRANSLATE THE scene.center TO THE OBJECT'S POSITION
 # while 1:

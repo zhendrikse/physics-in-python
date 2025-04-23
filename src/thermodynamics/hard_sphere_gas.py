@@ -220,9 +220,9 @@ gg = graph(width=500, height=0.4 * 500, xmax=3000, align='left',
 
 theoretical_curve = gcurve(color=color.blue, width=2)
 dv = 10
-for v in range(0, 3001 + dv, dv):  # theoretical prediction
-    theoretical_curve.plot(v, (velocity_binning / dv) * total_number_of_atoms * 4 * pi * ((mass / (2 * pi * k * T)) ** 1.5) * exp(
-        -0.5 * mass * (v ** 2) / (k * T)) * (v ** 2) * dv)
+for velocity_source in range(0, 3001 + dv, dv):  # theoretical prediction
+    theoretical_curve.plot(velocity_source, (velocity_binning / dv) * total_number_of_atoms * 4 * pi * ((mass / (2 * pi * k * T)) ** 1.5) * exp(
+        -0.5 * mass * (velocity_source ** 2) / (k * T)) * (velocity_source ** 2) * dv)
 
 accum = []
 for i in range(int(3000 / velocity_binning)):

@@ -68,8 +68,8 @@ scene2.userspin = 0
 scene2.userzoom = 0
 scene2.autoscale = 0
 
-scene = display(title="E-Field Builder (Rob Salgado)", x=100, y=100)
-scene.select()
+animation = display(title="E-Field Builder (Rob Salgado)", x=100, y=100)
+animation.select()
 
 scale = 0.2
 step = 1.
@@ -84,8 +84,8 @@ for x in arange(-S, S, step):
             vec = arrow(pos=(x, y, z), axis=(0, 0, 0))
             Efield.append(vec)
 
-scene.autoscale = 0
-scene.range = (5, 5, 5)
+animation.autoscale = 0
+animation.range = (5, 5, 5)
 
 
 def getEFieldAt(p):
@@ -134,9 +134,9 @@ while 1:
             modeQ.mode = (modeQ.mode + 1) % 3
         update2()
 
-    if scene.mouse.clicked:
-        m = scene.mouse.getclick()
-        newPick = scene.mouse.pick
+    if animation.mouse.clicked:
+        m = animation.mouse.getclick()
+        newPick = animation.mouse.pick
         if newPick == None:
             newChg = sphere(pos=m.pos, radius=abs(setQ.Q) / 5, color=setQ.color, Q=setQ.Q)
             if setQ.Q == 0:
@@ -168,5 +168,5 @@ while 1:
                 update2()
     elif (drag % 2) == 1:
         if n != None:
-            n.pos = scene.mouse.pos
+            n.pos = animation.mouse.pos
             getField()

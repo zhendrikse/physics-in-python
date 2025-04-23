@@ -50,7 +50,7 @@ def restart():
     wedge.with_new_parameters(theta_tmp, friction_tmp, M_tmp, m_tmp)
     ball.v = vec(0, 0, 0)
     ball.pos = vec(1.5 / sin(radians(theta_tmp)), 10, 5)
-    ball.a = wedge.acceleration_ball(m_tmp)
+    ball.atom = wedge.acceleration_ball(m_tmp)
 
 
 def get_parameter_values():
@@ -67,7 +67,7 @@ def new_parameter_value():
     theta_tmp, friction_tmp, M_tmp, m_tmp = get_parameter_values()
     wedge.with_new_parameters(theta_tmp, friction_tmp, M_tmp, m_tmp)
     ball.pos.x = 1.5 / sin(radians(theta_tmp))
-    ball.a = wedge.acceleration_ball(m_tmp)
+    ball.atom = wedge.acceleration_ball(m_tmp)
 
 
 set_scene()

@@ -28,8 +28,8 @@ new = [1, 1, 0]
 k = 1.4E-23  # Boltzmann constant
 T = 300.  # around room temperature
 dt = 1E-5
-scene = canvas(title="Gas", width=win, height=win, x=0, y=0)
-scene.background = color.yellow
+animation = canvas(title="Gas", width=win, height=win, x=0, y=0)
+animation.background = color.yellow
 
 ring(pos=vec(0, 0, 0), color=color.green, axis=vec(0, 0, 1), radius=RingRadius, opacity=.4, thickness=RingThickness)
 

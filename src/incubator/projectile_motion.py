@@ -6,8 +6,8 @@ from vpython import *  # import graphing features (which grabs the general visua
 
 # set up the main display window
 setrange = 250
-scene = canvas(width=1050, height=550, x=0, y=100, background=color.white, fov=0.001, range=setrange)
-scene.exit = False
+animation = canvas(width=1050, height=550, x=0, y=100, background=color.white, fov=0.001, range=setrange)
+animation.exit = False
 
 # initialize the three possible balls
 grav = vector(0, -9.8, 0)  # Earth gravity

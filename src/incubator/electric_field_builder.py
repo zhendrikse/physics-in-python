@@ -48,8 +48,8 @@ scene2.visible = 1
 # scene2.userzoom = 0
 # scene2.autoscale = 0
 
-scene = canvas(title="E-Field Builder (Rob Salgado)", x=100, y=100)
-scene.select()
+animation = canvas(title="E-Field Builder (Rob Salgado)", x=100, y=100)
+animation.select()
 
 scale = 0.2
 step = 1.
@@ -64,8 +64,8 @@ for x in arange(-S, S, step):
             e_vec = arrow(pos=vector(x, y, z), axis=vector(0, 0, 0))
             Efield.append(e_vec)
 
-scene.autoscale = 0
-scene.range = (5, 5, 5)
+animation.autoscale = 0
+animation.range = (5, 5, 5)
 
 
 def getEFieldAt(p):

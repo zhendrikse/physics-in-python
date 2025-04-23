@@ -19,15 +19,15 @@ title="""Relativistic electric field around a moving proton
 c = 3e8
 c2 = c ** 2
 
-v = 0.99 * c  ## speed of moving frame
-v2 = v ** 2
+velocity_source = 0.99 * c  ## speed of moving frame
+v2 = velocity_source ** 2
 
 kel = 9e9
 kmag = 1e-7
 gamma = 1 / sqrt(1 - (v2 / c2))
 
 proton = sphere(radius=1e-12, color=color.red)
-proton.v = vector(-v, 0, 0)
+proton.v = vector(-velocity_source, 0, 0)
 proton.q = 1.6e-19
 
 R = 1e-11
@@ -61,17 +61,17 @@ for pt in observer_location_2:
     arr2.append(aa)
 
 def toggle_background():
-    scene.background = color.white if scene.background is color.black else color.black
+    animation.background = color.white if animation.background is color.black else color.black
 
 def on_key_press(event):
     if event.key == " ":
         toggle_background()
     if event.key == 's':
-        scene.capture("electric_field_of_charged_disk")
+        animation.capture("electric_field_of_charged_disk")
     if event.key == 'v':
-        print("scene.center=" + str(scene.center))
-        print("scene.forward=" + str(scene.forward))
-        print("scene.range=" + str(scene.range))
+        print("scene.center=" + str(animation.center))
+        print("scene.forward=" + str(animation.forward))
+        print("scene.range=" + str(animation.range))
 
 def on_mouse_click():
     for ee in arr2:
@@ -79,14 +79,14 @@ def on_mouse_click():
 
 
 #scene.autoscale = 0
-scene.title=title
-scene.background = color.black
-scene.bind("keydown", on_key_press)
-scene.bind("click", on_mouse_click)
-scene.forward=vector(-2.40482, -0.795294, -4.537)
-scene.range=5.2e-11
-scene.width = scene.height = 1000
-scene.x = scene.y = 0
+animation.title=title
+animation.background = color.black
+animation.bind("keydown", on_key_press)
+animation.bind("click", on_mouse_click)
+animation.forward=vector(-2.40482, -0.795294, -4.537)
+animation.range=5.2e-11
+animation.width = animation.height = 1000
+animation.x = animation.y = 0
 
 while 1:
     rate(50)

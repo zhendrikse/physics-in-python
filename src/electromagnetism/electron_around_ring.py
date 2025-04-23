@@ -21,7 +21,7 @@ def on_key_press(event):
                         y_range=range(-4, 4, 2),
                         z_range=range(-9, 9, 4))
 
-scene.bind('keydown', on_key_press)
+animation.bind('keydown', on_key_press)
 
 dt = 1e-18  # time step
 while True:
