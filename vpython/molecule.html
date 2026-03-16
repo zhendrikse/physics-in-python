@@ -1,0 +1,219 @@
+<!-- https://discourse.threejs.org/t/how-to-update-the-endpoints-of-a-cylinder/49853/2 -->
+<script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.175.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.175.0/examples/jsm/"
+      }
+    }
+</script>
+
+<canvas id="myCanvas" width="600" height="600" style="border: none;"></canvas><br/>
+
+<script type="module">
+    import * as THREE from "three";
+    import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+    const vector = THREE.Vector3;
+
+    console.clear( );
+
+    const canvas = document.getElementById('myCanvas');
+    canvas.focus();
+    const canvasWidth = canvas.getAttribute('width');
+    const canvasHeight = canvas.getAttribute('height');
+
+    const scene = new THREE.Scene();
+
+    const size = 0.001;
+    const camera = new THREE.PerspectiveCamera( size * 100, canvasWidth/canvasHeight, 1, size * 100000 );
+    camera.position.set( 0, 0, 10 );
+    camera.updateProjectionMatrix();
+    camera.lookAt( scene.position );
+
+    const renderer = new THREE.WebGLRenderer( {antialias: true, canvas: canvas} );
+    renderer.setSize( canvasWidth, canvasHeight );
+    //renderer.setAnimationLoop( animationLoop );
+
+    const controls = new OrbitControls( camera, canvas );
+    // controls.enableDamping = true;
+    // controls.autoRotate = true;
+
+    // const ambientLight = new THREE.AmbientLight( 'white', 1 );
+    // scene.add( ambientLight );
+
+    let light = new THREE.DirectionalLight(0xffffff, .75);
+    light.position.set(1, 2, 3).setLength(1);
+    scene.add(light, new THREE.AmbientLight(0xffffff, .5));
+
+    // Simulation constants
+    //const size = 31E-12;
+    const k_bond = 18600.0;
+    //const d = 2.5 * size;
+    const N = 20;
+    const one_third = 1. / 3.;
+    const L = ((24.4E-3 / 6E23) * N) ** one_third / 50; // 2L is the length of the cubic container box, the numer is made up
+    const mass = 14E-3 / 6E23; // Average mass of O and C
+    const k = 1.38E-23;
+    const T = 298.0;
+
+    //
+    // Class definitions
+    //
+    class Atom {
+        constructor(positionVector, initialVelocity, mass, radius=0.1, colour=new THREE.Color(0xffffff), opacity=1) {
+            const geometry = new THREE.SphereGeometry(radius);
+            const material = new THREE.MeshStandardMaterial({ color: colour, opacity: opacity });
+            this.mesh = new THREE.Mesh(geometry, material);
+            this.mesh.position.set(positionVector.x, positionVector.y, positionVector.z);
+            this.velocity = new vector().random().multiplyScalar(initialVelocity);
+            this.mass = mass;
+            this.atomRadius = radius;
+            scene.add(this.mesh);
+        }
+
+        moveTo(newPositionVector) {
+            this.mesh.position.copy(newPositionVector);
+        }
+
+        radius() {
+            return this.atomRadius;
+        }
+
+        pos() {
+            return new vector().copy(this.mesh.position);
+        }
+
+        velocity() {
+            return new vector().copy(this.mesh.velocity);
+        }
+
+        positionVectorTo(other) {
+            return new vector().copy(other.mesh.position).sub(this.mesh.position);
+        }
+
+        distanceToSquared(other) {
+            return this.mesh.position.distanceToSquared(other.mesh.position);
+        }
+
+        distanceTo(other) {
+            return this.mesh.position.distanceTo(other.mesh.position);
+        }
+
+        check_box_bounce(boxLength) {
+            if (Math.abs(this.mesh.position.x) >= boxLength - size && this.mesh.position.x * this.velocity.x >= 0)
+                this.velocity.x = -this.velocity.x
+            if (Math.abs(this.mesh.position.y) >= boxLength - size && this.mesh.position.y * this.velocity.y >= 0)
+                this.velocity.y = -this.velocity.y
+            if (Math.abs(this.mesh.position.z) >= boxLength - size && this.mesh.position.z * this.velocity.z >= 0)
+                this.velocity.z = -this.velocity.z
+        }
+
+        time_lapse(bond_force, dt) {
+            const acceleration = bond_force.devideScalar(self._mass)
+            this.velocity.add(acceleration.multiplyScalar(dt));
+            this.mesh.position.add(this.velocity().multiplyScalar(dt));
+        }
+    }
+
+    class Bond {
+        constructor(atom1, atom2, colour=new THREE.Color(0xface8d)) {
+            this.atom1 = atom1;
+            this.atom2 = atom2;
+
+            const geometry = new THREE.CylinderGeometry(atom1.radius() * .5, atom2.radius() * .5, 1)
+                .rotateX(-Math.PI / 2);
+            const material = new THREE.MeshLambertMaterial({color: colour});
+            this.mesh = new THREE.Mesh(geometry, material);
+            this.update();
+            scene.add(this.mesh);
+        }
+
+        update() {
+            this.mesh.position.copy(this.atom1.pos().add(this.atom2.pos()).divideScalar(2));
+            this.mesh.scale.z = this.atom1.distanceTo(this.atom2);
+            this.mesh.lookAt(this.atom2.pos());
+        }
+    }
+
+    class CarbonMonoxide {
+        constructor(oxygenMass=16, carbonMass=12, initialVelocity=Math.sqrt(3 * k * T / mass), radius=size, boxLength=.01) {
+            const pos = new vector(Math.random() - .5, Math.random() - .5, Math.random() - .5).multiplyScalar(boxLength);
+            const axis = new vector(2.5 * radius, 0, 0);
+            this.oxygen = new Atom(pos, initialVelocity, oxygenMass / 6E23, radius, new THREE.Color(0xff0000));
+            this.carbon = new Atom(axis.add(pos), initialVelocity, carbonMass / 6E23, radius, new THREE.Color(0x0000ff));
+
+            this.bond = new Bond(this.oxygen, this.carbon);
+            this.bondConstant = k_bond
+        }
+
+        check_box_bounce() {
+            this.carbon.check_box_bounce();
+            this.oxygen.check_box_bounce();
+        }
+
+        bond_force_on_oxygen() {
+            return this.bondConstant * (mag(self._bond.axis) - d) * norm(self._bond.axis)
+        }
+    }
+
+     // https://discourse.threejs.org/t/how-to-update-the-endpoints-of-a-cylinder/49853/3
+     //let camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 1, 1000);
+     //camera.position.set(3, 5, 8);
+     //let renderer = new THREE.WebGLRenderer({
+     //antialias: true
+     //});
+     //renderer.setSize(innerWidth, innerHeight);
+     //renderer.setClearColor(0x404040);
+    // document.body.appendChild(renderer.domElement);
+     //window.addEventListener("resize", event => {
+     //camera.aspect = innerWidth / innerHeight;
+     //camera.updateProjectionMatrix();
+     //renderer.setSize(innerWidth, innerHeight);
+     //})
+
+     //let controls = new OrbitControls(camera, renderer.domElement);
+     //controls.enableDamping = true;
+
+     //let light = new THREE.DirectionalLight(0xffffff, 0.5);
+     //light.position.set(1, 2, 3).setLength(150);
+     //scene.add(light, new THREE.AmbientLight(0xffffff, 0.5));
+
+     //let grid = new THREE.GridHelper();
+     //scene.add(grid);
+
+
+
+     const molecule = new CarbonMonoxide();
+
+     let clock = new THREE.Clock();
+
+     renderer.setAnimationLoop((_) => {
+         let t = clock.getElapsedTime();
+         controls.update();
+
+         let pStart = new vector();
+         let pEnd = new vector();
+         pStart.set(0.31 * Math.cos(t), 0.27 * Math.sin(t), 0.14 * Math.cos(t)).multiplyScalar(.01);
+         pEnd.set(0.45 * Math.cos(t + Math.PI * 0.5), 0.23 * Math.sin(t), 0.1 * Math.cos(t)).multiplyScalar(.02);
+         molecule.oxygen.moveTo(pStart);
+         molecule.carbon.moveTo(pEnd);
+         molecule.bond.update();
+
+
+         renderer.render(scene, camera);
+     });
+
+
+    /**
+
+
+    const molecule = new CarbonMonoxide();
+    //molecule.oxygen.mesh.position.copy(new vector(0, 4, 0));
+    //molecule.bond.update();
+
+    function animationLoop() {
+        renderer.render( scene, camera );
+    }
+     */
+
+</script>
