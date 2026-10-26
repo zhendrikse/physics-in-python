@@ -37,14 +37,14 @@ electric_field_colors = [color.blue, (0.5, 0.5, 1), color.green]
 electric_field_colors[1] = dimmed_colors_electric_field[color_scheme]
 faraday_color = electric_field_colors[2]
 
-scene = canvas(title=title, width=800, height=600, x=0, y=0)
-scene.background = background_color[color_scheme]
-scene.background = color.black;
+animation = canvas(title=title, width=800, height=600, x=0, y=0)
+animation.background = background_color[color_scheme]
+animation.background = color.black;
 electric_field_colors = [color.blue, vector(0, 0, .4), color.green]
-scene.caption = "\\( \\Phi_B = \\iint_{\\Sigma(t)} \\vec{B}(t) \\cdot d\\vec{A} \\),\n where \\(d\\vec{A}\\) is an element of area vector of the moving surface Σ(t), and \\(\\vec{B}\\) is the magnetic field."
+animation.caption = "\\( \\Phi_B = \\iint_{\\Sigma(t)} \\vec{B}(t) \\cdot d\\vec{A} \\),\n where \\(d\\vec{A}\\) is an element of area vector of the moving surface Σ(t), and \\(\\vec{B}\\) is the magnetic field."
 # MathJax.Hub.Queue(["Typeset", MathJax.Hub])
-scene.forward = vector(-0.75, -0.10, -0.65)
-scene.range = 2.5
+animation.forward = vector(-0.75, -0.10, -0.65)
+animation.range = 2.5
 # scene.ambient = color.gray(0.4)
 
 showFaraday = 0
@@ -146,9 +146,9 @@ def toggle_show_fields(show=0):
 
 
 def toggle_color_scheme(color_scheme=0):
-    scene.background = background_color[color_scheme]
+    animation.background = background_color[color_scheme]
     electric_field_colors[1] = dimmed_colors_electric_field[color_scheme]
-    scene.background = background_color[color_scheme]
+    animation.background = background_color[color_scheme]
 
     for i in range(N, len(electric_field_vectors)):
         electric_field_vectors[i].color = electric_field_colors[dimFields]
@@ -184,7 +184,7 @@ class KeyboardEventProcessor:
 
     def on_key_press(self, key):
         if key == 's':
-            scene.capture("faradays_law")
+            animation.capture("faradays_law")
         if key == 'f':
             toggle_show_faraday(keyboard_event_processor.toggle_show_faraday())
         if key == 'd':
@@ -192,9 +192,9 @@ class KeyboardEventProcessor:
         if key == 'n':
             toggle_color_scheme(keyboard_event_processor.toggle_color_schemes())
         if key == 'v':
-            print("scene.center=" + str(scene.center))
-            print("scene.forward=" + str(scene.forward))
-            print("scene.range=" + str(scene.range))
+            print("scene.center=" + str(animation.center))
+            print("scene.forward=" + str(animation.forward))
+            print("scene.range=" + str(animation.range))
             print("t=" + str(t) + "\n")
         if key == ' ':
             pause_animation()
@@ -208,8 +208,8 @@ def key_pressed(event):
     keyboard_event_processor.on_key_press(key)
 
 
-scene.bind('keydown', key_pressed)
-scene.bind('click', zoom_in_on(scene))
+animation.bind('keydown', key_pressed)
+animation.bind('click', zoom_in_on(animation))
 
 t = 9.50
 dt = 1

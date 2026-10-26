@@ -67,7 +67,7 @@ b2colory = vector(0, .75, 1)
 #
 # setup main scene
 #
-scene = canvas(
+animation = canvas(
     title="2-dimensional kinematics (circular motion - polar)",
     width=500, height=600,
     x=250, y=0,
@@ -117,7 +117,7 @@ block2 = box(pos=vector(0.01, 0, 0), axis=track.axis,
 block.vel = vel_init
 block2.vel = vel2_init
 
-scene.center = block.pos  # keep block in view
+animation.center = block.pos  # keep block in view
 
 #
 # kinematic graphs
@@ -156,7 +156,7 @@ dt = 1. / count_tick
 def on_mouse_click():
     pass
 
-scene.bind('click', on_mouse_click)
+animation.bind('click', on_mouse_click)
 
 while time <= 2 * PI * mag(pos2_init) / mag(vel2_init):  # run for 10 seconds
     rate(50)
@@ -200,7 +200,7 @@ while time <= 2 * PI * mag(pos2_init) / mag(vel2_init):  # run for 10 seconds
         acc_Plot.plot(pos=(time, mag(block.acc)))
         acc2_Plot.plot(pos=(time, mag(block2.acc)))
 
-    scene.center = block.pos  # keep block in view
+    animation.center = block.pos  # keep block in view
 
     time = time + dt
     counter += 1

@@ -20,7 +20,7 @@ inc1 = vector(2.5, 0, 0)
 inc2 = vector(0, 2.5, 0)
 ######################################################
 
-scene = canvas(background=color.white)
+animation = canvas(background=color.white)
 plane = box(pos=vector(0, 0, 0), length=2.5 * mag(inc1), width=0.1, height=2.5 * mag(inc1))
 plane.color = color.green
 plane.opacity = 0.2

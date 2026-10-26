@@ -9,7 +9,7 @@ Rob Salgado (salgado@physics.syr.edu)
 Magnetic Field vectors are red.
 """
 
-scene = canvas(
+animation = canvas(
     width=800, height=600,
     x=0, y=0,
     title="GAUSS: No Radial-B's")
@@ -18,11 +18,11 @@ scene = canvas(
 colorBackground = [color.black, color.white]
 colorScheme = 0
 
-scene.background = colorBackground[colorScheme]
+animation.background = colorBackground[colorScheme]
 
 #scene.range = (2.5, 2.5, 2.5)
-scene.range=2.5
-scene.forward = vec(-0.162765, 0.013403, -0.986574)
+animation.range=2.5
+animation.forward = vec(-0.162765, 0.013403, -0.986574)
 
 # based on
 #
@@ -104,8 +104,8 @@ for i in arange(0, N):
     A = arrow(pos=2 * p[i], axis=E * p[i], shaftwidth=0.04, fixedwidth=1, color=color.red)
     box(pos=2 * p[i] + A.axis / 4., axis=A.axis, length=mag(A.axis) / 2., height=0.04, width=0.04, color=color.red)
 
-A = ring(pos=(scene.camera.pos + scene.center) / 2., axis=scene.camera.pos - scene.center, color=color.magenta)
-A2 = cylinder(pos=A.pos, axis=cross(scene.up, A.axis), radius=0.1, color=color.magenta)
+A = ring(pos=(animation.camera.pos + animation.center) / 2., axis=animation.camera.pos - animation.center, color=color.magenta)
+A2 = cylinder(pos=A.pos, axis=cross(animation.up, A.axis), radius=0.1, color=color.magenta)
 
 # Now... WHEN AN OBJECT IS PICKED,
 # TRANSLATE THE scene.center TO THE OBJECT'S POSITION
@@ -132,10 +132,10 @@ while 1:
     # else:
     A.visible = 0
     A2.visible = 0
-    cam = scene.camera.pos
-    ctr = scene.center
-    up = scene.up
-    A.pos = scene.forward / 2.  # (cam+ctr)/2.
+    cam = animation.camera.pos
+    ctr = animation.center
+    up = animation.up
+    A.pos = animation.forward / 2.  # (cam+ctr)/2.
     A.radius = mag(cam - ctr) / 3.;
     A.thickness = A.radius / 10.
     A.axis = A.pos  # cam-ctr

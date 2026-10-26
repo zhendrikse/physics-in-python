@@ -152,12 +152,12 @@ class Car:
 
 animation_time = 15  # seconds
 
-scene = canvas(width="800", height="600")
-scene.title = "Relative motion: click on car to change perspective!"
-scene.center = vec(0, 0, 0)
-scene.forward = vec(0, -0.35, -1)
-scene.range = 11
-scene.caption = "Galilean transformation \\(  \\begin{pmatrix} x' \\\\ t'\\end{pmatrix} = \\begin{pmatrix} 1 & -v \\\\ 0 & 1 \\end{pmatrix} \\begin{pmatrix} x \\\\ t \\end{pmatrix} \\)"
+animation = canvas(width="800", height="600")
+animation.title = "Relative motion: click on car to change perspective!"
+animation.center = vec(0, 0, 0)
+animation.forward = vec(0, -0.35, -1)
+animation.range = 11
+animation.caption = "Galilean transformation \\(  \\begin{pmatrix} x' \\\\ t'\\end{pmatrix} = \\begin{pmatrix} 1 & -v \\\\ 0 & 1 \\end{pmatrix} \\begin{pmatrix} x \\\\ t \\end{pmatrix} \\)"
 #MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
 green_car = Car(position=vec(-10, 0, -5), velocity=vec(1, 0, 0))
@@ -188,14 +188,14 @@ def select_car_in(my_scene):
     my_scene.camera.follow(selected_object)
     if selected_object.color == color.green:
         # scene.forward = vec(-0.00101513, -0.770739, 0.637151)
-        scene.range = 17
+        animation.range = 17
         green_car.hide_label()
         red_car.show_label()
         axis_green_car.show_unit_vectors()
         axis_red_car.hide_unit_vectors()
     elif selected_object.color == color.red:
         # scene.forward = vec(0.00813912, -0.581035, -0.813838)
-        scene.range = 11
+        animation.range = 11
         red_car.hide_label()
         green_car.show_label()
         axis_red_car.show_unit_vectors()
@@ -203,9 +203,9 @@ def select_car_in(my_scene):
 
 
 def on_mouse_click():
-    select_car_in(scene)
+    select_car_in(animation)
 
-scene.bind('click', on_mouse_click)
+animation.bind('click', on_mouse_click)
 
 timer = Timer(position=vec(0, 5, 0))
 dt = 0.01
@@ -227,7 +227,7 @@ while True:
         t += dt
 
     label(pos=vec(0, 7, 0), text="Click mouse to restart", color=color.yellow)
-    scene.waitfor('click')
+    animation.waitfor('click')
     green_car.reset()
     red_car.reset()
     axis_green_car.reorient_with(green_car)

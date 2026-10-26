@@ -18,11 +18,11 @@ def lorentz_transform_of(time, velocity, position):
 
 animation_time = 15  # seconds
 
-scene = canvas(width="800", height="600")
-scene.title = "Relative motion"
-scene.center = vec(0, 0, 0)
-scene.forward = vec(0, -0.35, -1)
-scene.range = 11
+animation = canvas(width="800", height="600")
+animation.title = "Relative motion"
+animation.center = vec(0, 0, 0)
+animation.forward = vec(0, -0.35, -1)
+animation.range = 11
 
 green_car = Car(position=vec(-animation_time, 0, -5), velocity=vec(0.95*c, 0, 0))
 red_car = Car(position=vec(0, 0, 5), colour=color.red)
@@ -58,14 +58,14 @@ def select_car_in(my_scene):
     my_scene.camera.follow(selected_object)
     if selected_object.color == color.green:
         # scene.forward = vec(-0.00101513, -0.770739, 0.637151)
-        scene.range = 17
+        animation.range = 17
         green_car.hide_label()
         red_car.show_label()
         axis_green_car.show_unit_vectors()
         axis_red_car.hide_unit_vectors()
     elif selected_object.color == color.red:
         # scene.forward = vec(0.00813912, -0.581035, -0.813838)
-        scene.range = 11
+        animation.range = 11
         red_car.hide_label()
         green_car.show_label()
         axis_red_car.show_unit_vectors()
@@ -73,10 +73,10 @@ def select_car_in(my_scene):
 
 
 def on_mouse_click():
-    select_car_in(scene)
+    select_car_in(animation)
 
 
-scene.bind('click', on_mouse_click)
+animation.bind('click', on_mouse_click)
 
 dt = 0.01
 t = 0
@@ -100,4 +100,4 @@ while green_car.position.x <= 10:
     t += dt
 
 
-scene.waitfor('click')
+animation.waitfor('click')

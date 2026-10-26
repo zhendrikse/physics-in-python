@@ -21,10 +21,10 @@
 from __future__ import division, print_function
 from vpython import *
 
-scene.title = 'Rigid body rotations simulator'
-scene.height = 500
-scene.width = 800
-scene.center = vector(0, 0, 0)
+animation.title = 'Rigid body rotations simulator'
+animation.height = 500
+animation.width = 800
+animation.center = vector(0, 0, 0)
 
 omegamax = 2.0
 
@@ -202,16 +202,16 @@ def reset():
     print(omega_s)
 
 
-scene.append_to_caption("\n")
+animation.append_to_caption("\n")
 button_pause = button(height=20, width=40, text='Pause', bind=lambda: set_pause(1))
 button_resume = button(height=20, width=40, text='Resume', bind=lambda: set_pause(0))
 button_reset = button(height=20, width=40, text='Reset', bind=reset)
 
-scene.append_to_caption("\n")
+animation.append_to_caption("\n")
 slider_omega1_0 = slider(text="Omega 1", bind=set_omega1_0, max=slider_max, value = omega1_0 * slider_max / omegamax)#, width=5, length=50, axis=vec(1, 0, 0))
 slider_omega2_0 = slider(text="Omega 2", bind=set_omega2_0, max=slider_max, value = omega2_0 * slider_max / omegamax)#, width=5, length=50, axis=vec(1, 0, 0))
 slider_omega3_0 = slider(text="Omega 3", bind=set_omega3_0, max=slider_max, value = omega3_0 * slider_max / omegamax)#, width=5, length=50, axis=vec(1, 0, 0))
-scene.append_to_caption("\n")
+animation.append_to_caption("\n")
 slider_speed = slider(text="Speed", bind=set_speed, max=slider_max, value = speed * slider_max / speed_max)#, width=5, length=50, axis=vec(1, 0, 0),)
 
 ##---------------------------------------------------------------------

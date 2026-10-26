@@ -26,8 +26,8 @@ def reset():
 ##    restoreview()
 def click():
     # return 1 if click in main window
-    if scene.mouse.pick:
-        m = scene.mouse.pick
+    if animation.mouse.pick:
+        m = animation.mouse.pick
         return m.click
     else:
         return 0
@@ -84,10 +84,10 @@ theory = gcurve(color=color.green)
 observation = gvbars(delta=deltav, color=color.red) #bins=arange(0., 3000., deltav), accumulate=1, average=1, color=color.red)
 
 dv = 10.
-for v in arange(0., 3001. + dv, dv):  # theoretical prediction
-    theory.plot(pos=(v,
+for velocity_source in arange(0., 3001. + dv, dv):  # theoretical prediction
+    theory.plot(pos=(velocity_source,
                      (deltav / dv) * Natoms * 4. * pi * ((Matom / (2. * pi * k * T)) ** 1.5)
-                     * exp((-0.5 * Matom * v ** 2) / (k * T)) * v ** 2 * dv))
+                     * exp((-0.5 * Matom * velocity_source ** 2) / (k * T)) * velocity_source ** 2 * dv))
 
 ###########################################
 # Set up Histogram Plot for x-velocity
@@ -203,8 +203,8 @@ scene2.autoscale = 0
 ###########################################
 # Set up Display of Atoms
 ###########################################
-scene = canvas(title="Ideal Gas", width=win, height=win, x=0, y=0,
-                range=L, center=vec(L / 2., L / 2., L / 2.))
+animation = canvas(title="Ideal Gas", width=win, height=win, x=0, y=0,
+                   range=L, center=vec(L / 2., L / 2., L / 2.))
 ##########################################
 # Create the Box
 ##########################################
@@ -327,7 +327,7 @@ while 1:
         ##        if nsteps==ntest: p=-p
         ##        if nsteps==2*ntest:pause(state=1)
 
-        v = p / m
+        velocity_source = p / m
         #print(v)
         ## TODO
         ## TODO
@@ -347,11 +347,11 @@ while 1:
             lw = -1
             for l in range(3):
                 dt = 2.e99
-                if v[k, l] > 0.:
-                    dt = (Lmax - pos[k, l]) / v[k, l]
+                if velocity_source[k, l] > 0.:
+                    dt = (Lmax - pos[k, l]) / velocity_source[k, l]
                     lw = l
-                if v[k, l] < 0.:
-                    dt = (Lmin - pos[k, l]) / v[k, l]
+                if velocity_source[k, l] < 0.:
+                    dt = (Lmin - pos[k, l]) / velocity_source[k, l]
                     lw = l + 3
                 if dt < dtwall:
                     dtwall = dt
@@ -371,7 +371,7 @@ while 1:
         for i in range(Natoms - 1):
             for j in range(i + 1, Natoms):
                 dr = pos[j] - pos[i]
-                dv = v[j] - v[i]
+                dv = velocity_source[j] - velocity_source[i]
                 rrellist.append(dr)
                 vrellist.append(dv)
                 dminlist.append(radius[j] + radius[i])  ##closest allowable distance
@@ -404,7 +404,7 @@ while 1:
 
         if dtatom < dtwall:
             tcoll += dtatom
-            pos += v * dtatom
+            pos += velocity_source * dtatom
             ##figure out which two atoms are colliding
             N = Natoms
             im = imin
@@ -419,7 +419,7 @@ while 1:
                     im = im - N
                     iz = iz + 1
             ##update distance traveled by molecules
-            vmag = np.sqrt(np.add.reduce(v * v, -1))  ##array of speeds
+            vmag = np.sqrt(np.add.reduce(velocity_source * velocity_source, -1))  ##array of speeds
             ##            print larray,vmag*dtatom
             larray += vmag * dtatom  ##once in a while this line gives an error. Why?
             observationfp.plot(data=collarray)
@@ -432,17 +432,17 @@ while 1:
             deltap = 2 * m[i] * m[j] * dotrv[imin] * rrel[imin] / (m[i] + m[j]) / rmag[imin] ** 2
             p[i] = p[i] + deltap
             p[j] = p[j] - deltap
-            v = p / m
+            velocity_source = p / m
 
         if dtwall <= dtatom:
-            pos += v * dtwall
+            pos += velocity_source * dtwall
             tcoll += dtwall
             ##update distance traveled by molecules
-            vmag = np.sqrt(np.add.reduce(v * v, -1))  ##array of speeds
+            vmag = np.sqrt(np.add.reduce(velocity_source * velocity_source, -1))  ##array of speeds
             ##            print larray,vmag*dtwall
             larray = larray + vmag * dtwall
             if nwall == 0:
-                impulseR += 2. * m[kwall] * v[kwall, nwall]
+                impulseR += 2. * m[kwall] * velocity_source[kwall, nwall]
                 press = impulseR[0] / tcoll / L ** 2
                 ##print 'press',press
                 #######################################
@@ -452,8 +452,8 @@ while 1:
                 update2()
 
             ##  reverse the normal velocity
-            v[kwall, lwall] = -v[kwall, lwall]
-            p = v * m
+            velocity_source[kwall, lwall] = -velocity_source[kwall, lwall]
+            p = velocity_source * m
         nsteps += 1
         Earray = np.add.reduce(p * p, -1) / mrow / 2.
 

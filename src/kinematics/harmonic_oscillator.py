@@ -5,7 +5,7 @@ from src.toolbox.harmonic_oscillator import HarmonicOscillator
 def set_scene():
     _ = graph(title="Harmonic oscillator", xtitle="Time", ytitle="Amplitude")
     # scene = canvas(width=500, height=300, align='left')
-    scene.title="Click mouse button to start"
+    animation.title= "Click mouse button to start"
     # scene.camera.pos = vector(150, 75, 120)
     # scene.camera.axis = vector(-115, -150, -190)
 
@@ -19,7 +19,7 @@ oscillator.compress_by(0.75)
 t = 0
 dt = 0.01
 while True:
-  scene.waitfor("click")
+  animation.waitfor("click")
   for i in arange(0, 10 / dt):
     t += dt
     rate(1/dt)

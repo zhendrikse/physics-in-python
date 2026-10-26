@@ -8,7 +8,7 @@ v2.80 2010-03-22 Rob Salgado
 Magnetic Field vectors are cyan.
 """
 
-scene = canvas(
+animation = canvas(
     width=800, height=600,
     x=0, y=0,
     title=title)
@@ -16,7 +16,7 @@ scene = canvas(
 colorBackground = [color.black, color.white]
 colorScheme = 0
 
-scene.background = colorBackground[colorScheme]
+animation.background = colorBackground[colorScheme]
 
 colorBdimmed = [vec(0.4, 0, 0), vec(1, 0.5, 0.5)]
 
@@ -35,7 +35,7 @@ ddtcolor = [Bcolor[2 + colorScheme], Ecolor[2 + colorScheme]]  # for Ampere and 
 Bcolor[1] = colorBdimmed[colorScheme]
 
 #scene.autoscale = 1
-scene.range = 2.5
+animation.range = 2.5
 #scene.forward = vec(-0.162765, 0.013403, -0.986574)
 
 # based on
@@ -117,8 +117,8 @@ for i in arange(0, N):
     A = arrow(pos=2 * p[i], axis=E * p[i], shaftwidth=0.04, fixedwidth=1, color=Bcolor[0])
     box(pos=2 * p[i] + A.axis / 4., axis=A.axis, length=mag(A.axis) / 2., height=0.04, width=0.04, color=Bcolor[0])
 
-A = ring(pos=(scene.mouse.pos + scene.center) / 2., axis=scene.mouse.pos - scene.center, color=colorNO)
-A2 = cylinder(pos=A.pos, axis=cross(scene.up, A.axis), radius=0.5, color=colorNO)
+A = ring(pos=(animation.mouse.pos + animation.center) / 2., axis=animation.mouse.pos - animation.center, color=colorNO)
+A2 = cylinder(pos=A.pos, axis=cross(animation.up, A.axis), radius=0.5, color=colorNO)
 
 #scene.autoscale = 1
 
@@ -148,7 +148,7 @@ def keyInput(evt):
 
 
 # scene.bind('keydown click', keyInput)
-scene.bind('keydown', keyInput)
+animation.bind('keydown', keyInput)
 
 ##########################################################################################################
 ##########################################################################################################
@@ -179,10 +179,10 @@ while 1:
     else:
         A.visible = 0
         A2.visible = 0
-        cam = scene.mouse.pos  # camera
-        ctr = scene.center
-        up = scene.up
-        A.pos = scene.forward / 2.  # (cam+ctr)/2.
+        cam = animation.mouse.pos  # camera
+        ctr = animation.center
+        up = animation.up
+        A.pos = animation.forward / 2.  # (cam+ctr)/2.
         A.radius = mag(cam - ctr) / 3.;
         A.thickness = A.radius / 10.
         A.axis = A.pos  # cam-ctr

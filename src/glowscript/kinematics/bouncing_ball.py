@@ -220,13 +220,13 @@ axis = Base(length=40)
 axis.hide_tick_labels()
 axis.show_xz_mesh()
 
-scene.title = "Click mouse button to drop ball"
-scene.forward = vec(-0.359679, -0.505533, -0.784262)
-scene.range = 25
+animation.title = "Click mouse button to drop ball"
+animation.forward = vec(-0.359679, -0.505533, -0.784262)
+animation.range = 25
 
 t = 0
 dt = 0.01
-scene.waitfor('click')
+animation.waitfor('click')
 while ball.position().x < 20:
     rate(2 / dt)
     timer.update(t / 2)

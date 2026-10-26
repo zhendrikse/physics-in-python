@@ -18,13 +18,13 @@ from vpython import *
 observer_location = 0
 tlen = 20
 speed = 1.5
-framerate = 35
-tmax = 10
+frame_rate = 35
+theta_max = 10
 globstep = 0.1
 
 # Constants
 t = 0
-dt = 1 / framerate
+dt = 1 / frame_rate
 
 
 # Wave class
@@ -113,11 +113,11 @@ def sine(x):
 
 
 # 3d Scene
-scene = canvas(title='Pulse',
-               width=1024, height=600, x=0, y=0,
-               center=vector(observer_location, 0, 0), background=vector(0, 0, 0))
+animation = canvas(title='Pulse',
+                   width=1024, height=600, x=0, y=0,
+                   center=vector(observer_location, 0, 0), background=vector(0, 0, 0))
 # scene.autoscale = 0
-scene.userspin = 0
+animation.userspin = 0
 # scene.range = (10,7,1)
 obs = curve(pos=[vec(observer_location, 1.5, 0), vec(observer_location, -1.5, 0)], color=color.yellow, radius=0.03)
 
@@ -205,10 +205,10 @@ while 1:
         else:
             wave2 = wave(wf2.text, -pi, pi, globstep, (7, 0), 0)
         # Motion Loop
-        while t < tmax:
+        while t < theta_max:
             my_scene.interact()
             if ss.go == 1:
-                rate(framerate)
+                rate(frame_rate)
                 t += dt
                 wave1.pos = (wave1.pos[0] + speed * dt, wave1.pos[1])
                 wave2.pos = (wave2.pos[0] - speed * dt, wave2.pos[1])
@@ -217,4 +217,4 @@ while 1:
                 ss.go = 0
                 ss.text = "Start"
             if what_is_this_variable.stp == 1:
-                t = tmax
+                t = theta_max

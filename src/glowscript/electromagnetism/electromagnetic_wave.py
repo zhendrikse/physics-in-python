@@ -90,17 +90,17 @@ In other words, the pattern of the magnetic field moves to the RIGHT.
               (c)alculus   (v)erbose  (n) color-scheme (z) fontSize
 [-- ---scroll up to read--- --]"""
 
-scene = display(
+animation = display(
     width=1000, height=700,
     x=0, y=0,
     title="EM Wave v3.00 (Rob Salgado)")
 # scene.caption = "\\( \\bigg ( v^2\\nabla^2 - \\frac {\partial^2}{{\partial t}^2} \\bigg) \\vec{E} = 0, \\bigg ( v^2\\nabla^2 - \\frac {\partial^2}{{\partial t}^2} \\bigg) \\vec{B} = 0, v=\\dfrac {1} {\\sqrt {\mu \epsilon}} \\)\n where \\( v \\) is the speed of light (i.e. phase velocity) in a medium with permeability μ, and permittivity ε"
 # MathJax.Hub.Queue(["Typeset", MathJax.Hub])
 
-scene.autoscale = 0
-scene.range = 10
-scene.forward = vec(-1.0, -1.250, -4)  # modified below
-scene.newzoom = 1
+animation.autoscale = 0
+animation.range = 10
+animation.forward = vec(-1.0, -1.250, -4)  # modified below
+animation.newzoom = 1
 
 # scene.forward=vec(-3.401075,-1.172172,-2.370908) ; scene.range=16 #for plane wave introduction *perspective
 
@@ -108,17 +108,17 @@ scene.newzoom = 1
 
 # zzzzscene.forward=vec(-1.720152,-2.383154,-3.150263) ; scene.range=10  #for detailed view
 
-scene.forward = vec(-1.720152, -2.383154, -3.150263);
-scene.range = 20  # for detailed view
+animation.forward = vec(-1.720152, -2.383154, -3.150263);
+animation.range = 20  # for detailed view
 
 # scene.forward=vec(1.11515, -2.41683, -3.38791); scene.range=17  #detail, with Gauss in view
 
 
-scene.forward = vec(2.2012, -2.3109, -2.89429);
-scene.range = 20
+animation.forward = vec(2.2012, -2.3109, -2.89429);
+animation.range = 20
 
-scene.forward = vec(2.2012, -2.3109, -2.89429);
-scene.range = 10  # detail for Ampere and Faraday
+animation.forward = vec(2.2012, -2.3109, -2.89429);
+animation.range = 10  # detail for Ampere and Faraday
 INITIALrange = 10
 INITIALforward = vec(2.2012, -2.3109, -2.89429)  # see below
 
@@ -139,8 +139,8 @@ Gcolor_boundary = [color.white, color.black]  # GAUSS
 Frontcolor = [vec(0.5, 0.5, 0.5), vec(0.6, 1, 1)]
 
 ambient = [0.3, 0.7]
-scene.ambient = vec(.4, .4, .4)
-scene.background = colorBackground[colorScheme]
+animation.ambient = vec(.4, .4, .4)
+animation.background = colorBackground[colorScheme]
 
 EField = []
 EField2 = []
@@ -158,7 +158,7 @@ k = 2 * pi / wavelength
 
 t = 0
 t = 1
-trun = 1
+run_toggle = 1
 fi = 0 + wavelength / 2
 
 prefixAmpere = ["", "Ampere says\n", "Ampere:\nCurly-Bs say\n", ""]
@@ -419,7 +419,7 @@ def keyInput(evt):
     global colorScheme, gaussSurface, Gcolor_boundary
     global scene, colorBackground, Ecolor, Bcolor
     global frontFrame, front, front2, Frontcolor
-    global trun, highlightfield
+    global run_toggle, highlightfield
 
     if 1:  # evt.event== 'click': #CLICK TOGGLE PAUSE
 
@@ -571,10 +571,10 @@ def keyInput(evt):
 
 
 # scene.bind('keydown click', keyInput)
-scene.bind('keydown', keyInput)
+animation.bind('keydown', keyInput)
 
-scene.range = INITIALrange
-scene.forward = INITIALforward
+animation.range = INITIALrange
+animation.forward = INITIALforward
 
 ##########################################################################################################
 ##########################################################################################################
@@ -585,7 +585,7 @@ fi = 0
 while 1:
     rate(60)
 
-    newfi = int(scene.mouse.pos.x)
+    newfi = int(animation.mouse.pos.x)
     newfi = max(min(newfi, S - 2), -(S - 2))
 
     phase = k * (newfi - S) - omega * t
@@ -722,7 +722,7 @@ while 1:
         dEdt.pos = vector(newfi, EField[S + newfi].axis.y, 0)
     dEdtlabel.pos = EField[S + newfi].pos + EField[S + newfi].axis
 
-    if trun > 0:
+    if run_toggle > 0:
         t += 0.1
 
 

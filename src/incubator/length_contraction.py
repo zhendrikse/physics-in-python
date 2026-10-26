@@ -1,16 +1,18 @@
 ### SETUP ELEMENTS FOR GRAPHING, SIMULATION, VISUALIZATION, TIMING
 # ------------------------------------------------------------------------
 
+#https://github.com/gcschmit/vpython-physics/blob/master/special%20relativity/lengthContraction.py
+
 from vpython import scene, color, box, vector,sqrt, rate, curve
 
 from toolbox.physics_timer import PhysTimer
 from toolbox.physics_axis import PhysAxis
 
 # Set window title
-scene.title = "Length Contraction"
+animation.title = "Length Contraction"
 
 # Make scene background black
-scene.background=color.black
+animation.background=color.black
 
 # Define scene objects
 track = box(pos =vector(0,-1.5,0), size=vector(10,.1,.1),color = color.green) # units are in meters

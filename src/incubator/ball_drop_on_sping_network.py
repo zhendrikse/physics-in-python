@@ -49,27 +49,27 @@ g = 10  # N/kg
 time = 0
 dt = 0.0002
 
-scene.range = X * space / 2.0
+animation.range = X * space / 2.0
 
 pull = False
 chosenObject = None
 
-scene.bind("mousedown", down)
-scene.bind("mousemove", move)
-scene.bind("mouseup", up)
+animation.bind("mousedown", down)
+animation.bind("mousemove", move)
+animation.bind("mouseup", up)
 
 
 def down():
     nonlocal pull, chosenObject
-    chosenObject = scene.mouse.pick()
-    chosenObject.pos = scene.mouse.pos
+    chosenObject = animation.mouse.pick()
+    chosenObject.pos = animation.mouse.pos
     pull = True
 
 
 def move():
     nonlocal pull, chosenObject
     if (pull == True):  # mouse button is down
-        chosenObject.pos = scene.mouse.pos
+        chosenObject.pos = animation.mouse.pos
 
 
 def up():
